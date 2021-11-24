@@ -92,7 +92,7 @@
                                                     </td>
 
                                                     <td>
-                                                        {{$bus->date_depart->depart_at}}
+                                                        {{ $bus->date_depart->depart_at->format('d-m-y') }}
                                                     </td>
                                                     
                                                     <td>
@@ -276,7 +276,7 @@
                                                                     @foreach($itineraires as $itineraire)
                                                                             <optgroup label="{{$itineraire->name}}">
                                                                                 @foreach($itineraire->date_departs as $date)
-                                                                                    <option value="{{ $date->id }}"> {{ $date->depart_at }}</option>
+                                                                                    <option value="{{ $date->id }}"> {{ $date->depart_at->format('d-m-y') }}</option>
                                                                                 @endforeach
                                                                             </optgroup>
                                                                         @endforeach
@@ -478,7 +478,7 @@
                                                                @foreach($itineraires as $itineraire)
                                                                     <optgroup label="{{$itineraire->name}}">
                                                                         @foreach($itineraire->date_departs as $date)
-                                                                            <option value="{{ $date->id }}"> {{ $date->depart_at }}</option>
+                                                                            <option value="{{ $date->id }}"> {{ $date->depart_at->format('d-m-y') }}</option>
                                                                         @endforeach
                                                                     </optgroup>
                                                                 @endforeach

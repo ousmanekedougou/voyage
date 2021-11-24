@@ -132,17 +132,26 @@ class AgenceController extends Controller
         define('DESACTIVEAGENCE',0);
         define('ACTIVEAGENCE',1);
         $update_agence = User::where('id',$id)->first();
+        $agence_agents = User::where('user_id',$update_agence->id)->get();
         if ($request->is_active == 1) {
             $update_agence->is_active = DESACTIVEAGENCE;
             $update_agence->confirmation_token = str_replace('/','',Hash::make(Str::random(40)));
             $update_agence->user_id = Auth::user()->id;
             $update_agence->save();
+            foreach ($agence_agents as $agent) {
+                $agent->is_active = DESACTIVEAGENCE;
+                $agent->save();
+            }
             return back()->with('success','Cette agence a ete desactiver');
         }else{
             $update_agence->is_active = ACTIVEAGENCE;
             $update_agence->confirmation_token = null;
             $update_agence->user_id = Auth::user()->id;
             $update_agence->save();
+            foreach ($agence_agents as $agent) {
+                $agent->is_active = ACTIVEAGENCE;
+                $agent->save();
+            }
             return back()->with('success','Cette agence a ete activer');
         }
     }

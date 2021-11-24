@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Bus;
 use App\Models\Admin\Itineraire;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -24,6 +25,9 @@ class BusController extends Controller
     {
         $itineraires = Itineraire::where('user_id',Auth::user()->id)->where('siege_id',Auth::user()->siege_id)->orderBy('id','ASC')->get();
         $buses = Bus::where('user_id',Auth::user()->id)->where('siege_id',Auth::user()->siege_id)->orderBy('id','ASC')->get();
+        foreach ($buses as $b) {
+            // Bus::where($b->date_depart->depart_at,'<=',Carbon::yesterday())->delete();
+        }
         return view('admin.bus.index',compact('buses','itineraires'));
     }
 

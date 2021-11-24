@@ -35,6 +35,7 @@ class CreateUsersTable extends Migration
             $table->integer('siege_id')->nullable();
             $table->string('confirmation_token')->unique()->nullable();
              $table->string('image_agence')->nullable();
+             $table->string('agence_name')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

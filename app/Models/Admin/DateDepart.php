@@ -11,14 +11,16 @@ class DateDepart extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['date_depart','heure_rv','heure_dep'];
+    protected $fillable = ['depart_at','heure_rv','heure_dep'];
 
-    protected $dates = ['date_depart'];
+    protected $dates = ['depart_at'];
+
+    public function buses(){
+        return $this->hasMany(Bus::class);
+    }
     
     public function itineraire(){
         return $this->belongsTo(Itineraire::class);
     }
-    public function buses(){
-        return $this->hasMany(Bus::class);
-    }
+   
 }

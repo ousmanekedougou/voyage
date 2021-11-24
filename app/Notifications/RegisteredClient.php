@@ -43,7 +43,7 @@ class RegisteredClient extends Notification
            return (new MailMessage)
         ->success()
         ->subject('Inscription sur voyager.com')
-            ->line('Votre inscription a bien ete enregistre,
+            ->line($notifiable->name.'</br> Votre inscription a bien ete enregistre.</br>
             Pour payer votre billet en ligne clickez sur le button suivant.')
             ->action('Payer mon billet', url("/paiment/{$notifiable->id}/" . urlencode($notifiable->confirmation_token)))
             ->line('Vous pouvez ignorer si cet email n\'est pas pour vous !');

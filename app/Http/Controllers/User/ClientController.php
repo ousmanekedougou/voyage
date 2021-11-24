@@ -85,7 +85,7 @@ class ClientController extends Controller
                 $add_client->agence = $request->agence_name;
                 $add_client->save();
                 $add_client->notify(new RegisteredClient());
-                return back()->with(
+                    return back()->with(
                     [
                         "success" => "Salut $add_client->name votre instcription sur $add_client->agence a bien ete enregistre.
                         <br/> Veuillez ouvrire votre compte gmail pour pouvoir payer votre billet",

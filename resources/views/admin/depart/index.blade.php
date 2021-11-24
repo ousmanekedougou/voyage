@@ -27,7 +27,7 @@
                             </div>
                         </div>
                         <!-- end page title -->
-                        @foreach($itineraires as $itineraire)
+                        @foreach(itineraire_all() as $itineraire)
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">

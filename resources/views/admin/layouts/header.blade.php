@@ -6,19 +6,23 @@
                         @if(Auth::user()->is_admin == 3)
                             <a href="{{ route('admin.home') }}" class="logo logo-dark">
                                 <span class="logo-sm">
+                                    {{Auth::user()->agence_name}}
                                     <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" height="22">
                                 </span>
                                 <span class="logo-lg">
+                                    {{Auth::user()->agence_name}}
                                     <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" height="17">
                                 </span>
                             </a>
 
                             <a href="{{ route('admin.home') }}" class="logo logo-light">
                                 <span class="logo-sm">
+                                    <span class="text-bold text-uppercase text-white">{{Auth::user()->agence_name}}</span>
                                     <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" height="22">
                                 </span>
                                 <span class="logo-lg">
-                                    <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" height="19">
+                                     <span class="text-bold text-uppercase text-white" style="font-size: 14px;margin-left:-25px;">{{Auth::user()->agence_name}}</span>
+                                    <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" style="width: 50px;height:50px;border-radius:100%;">
                                 </span>
                             </a>
                         @elseif(Auth::user()->is_admin == 2)

@@ -150,7 +150,7 @@
                                                                 <optgroup label="{{$itineraire->name}}">
                                                                     @foreach($itineraire->date_departs as $date)
                                                                         @if($date->buses->count() >= 1)
-                                                                            <option value="{{ $date->id }}"> le {{$date->depart_at}}</option>
+                                                                            <option value="{{ $date->id }}"> le {{$date->depart_at->format('d-m-y')}}</option>
                                                                         @endif
                                                                     @endforeach
                                                                 </optgroup>

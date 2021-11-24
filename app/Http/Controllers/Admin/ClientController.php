@@ -106,7 +106,7 @@ class ClientController extends Controller
             return view('admin.client.search')->with(['clients' => $clients,
                 'itineraires' => $itineraires,
                 'buses' => $buses,
-                'error',"Il $nombre resultat(s) pour la recherche $search"        
+                'error',"Il y'a $nombre resultat(s) pour la recherche $search"        
                 ]);
         }else{
             return back()->with('error',"Il n'y a pas de resultat pour la recherche $search");
@@ -134,43 +134,46 @@ class ClientController extends Controller
         // $buse = Bus::where('id',$request->bus)->first();
         $date = DateDepart::where('id',$request->date)->first();
         $buse = Bus::where('date_depart_id',$date->id)->where('plein',0)->first();
-        $clients = Client::where('bus_id',$buse->id)->get();
-         $info_email = Client::where('registered_at',$buse->date_depart->depart_at)->where('email',$request->email)->first();
-        $info_phone = Client::where('registered_at',$buse->date_depart->depart_at)->where('phone',$request->phone)->first();
-        $info_cni = Client::where('registered_at',$buse->date_depart->depart_at)->where('cni',$request->cni)->first();
-        if ($info_email == true) {
-            return back()->with('error','Cette adresse email est utiliser pour cette date');
-        }elseif ($info_phone == true) {
-            return back()->with('error','Ce numero de telephone est utiliser pour cette date');
-        }elseif ($info_cni == true) {
-            return back()->with('error','Ce numero de CNI est utiliser pour cette date');
-        }else {
-            if ($clients->count() < $buse->place) {
-                $pl = $buse->inscrit;
-                $buse->inscrit = $pl + 1;
-                $buse->save();
-                
-                $add_client = new Client();
-                $add_client->name = $request->name;
-                $add_client->email = $request->email;
-                $add_client->phone = $request->phone;
-                $add_client->cni = $request->cni;
-                $add_client->ville_id = $request->ville;
-                $add_client->bus_id = $buse->id;
-                $add_client->position = $buse->inscrit;
-                $add_client->registered_at = $buse->date_depart->depart_at;
-                $add_client->confirmation_token = str_replace('/','',Hash::make(Str::random(40)));
-                $add_client->agence = $buse->siege->user->name;
-                $add_client->save();
-                $add_client->notify(new RegisteredClient());
-                return back()->with('success','Votre client a ete bien ete ajoute');
-            }else if ($clients->count() == $buse->place){
-                $bus_plein = Bus::where('id',$buse->id)->first();
-                $bus_plein->plein = 1;
-                $bus_plein->save();
-                return back()->with('error','Ce bus est pelin');
+        if ($buse) {
+            $clients = Client::where('bus_id',$buse->id)->get();
+            $info_email = Client::where('registered_at',$buse->date_depart->depart_at)->where('email',$request->email)->first();
+            $info_phone = Client::where('registered_at',$buse->date_depart->depart_at)->where('phone',$request->phone)->first();
+            $info_cni = Client::where('registered_at',$buse->date_depart->depart_at)->where('cni',$request->cni)->first();
+            if ($info_email == true) {
+                return back()->with('error','Cette adresse email est utiliser pour cette date');
+            }elseif ($info_phone == true) {
+                return back()->with('error','Ce numero de telephone est utiliser pour cette date');
+            }elseif ($info_cni == true) {
+                return back()->with('error','Ce numero de CNI est utiliser pour cette date');
+            }else {
+                if ($clients->count() < $buse->place) {
+                    $buse->inscrit =  + 1;
+                    $buse->save();
+                    
+                    $add_client = new Client();
+                    $add_client->name = $request->name;
+                    $add_client->email = $request->email;
+                    $add_client->phone = $request->phone;
+                    $add_client->cni = $request->cni;
+                    $add_client->ville_id = $request->ville;
+                    $add_client->bus_id = $buse->id;
+                    $add_client->position = $buse->inscrit;
+                    $add_client->registered_at = $buse->date_depart->depart_at;
+                    $add_client->confirmation_token = str_replace('/','',Hash::make(Str::random(40)));
+                    $add_client->agence = Auth::user()->agence_name;
+                    $add_client->save();
+                    // $add_client->notify(new RegisteredClient());
+                    return back()->with('success','Votre client a ete bien ete ajoute');
+                }else if ($clients->count() == $buse->place){
+                    $bus_plein = Bus::where('id',$buse->id)->first();
+                    $bus_plein->plein = 1;
+                    $bus_plein->save();
+                    return back()->with('error','Ce bus est pelin');
+                }
             }
-        }
+         }else{
+             return back()->with('error','Ce bus est plein');
+         }
     }
 
     /**

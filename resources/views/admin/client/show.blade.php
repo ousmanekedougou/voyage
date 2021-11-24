@@ -3,6 +3,13 @@
 @section('headsection')
     <link href="{{asset('admin/assets/libs/admin-resources/rwd-table/rwd-table.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('admin/assets/libs/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
+     {{-- <style>
+        .invoice-container{
+            padding: 2mm;
+            margin: 0 auto;
+            width: 58mm;
+        }
+    </style> --}}
 @endsection
 
 @section('main-content')
@@ -136,6 +143,7 @@
                                                     @endif -->
 
                                                     <a href="javascript:void(0);" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-primary" data-bs-target="#staticBackdrop-{{$client->id}}"><i class="bx bx-edit mt-1 font-size-18"></i></a>
+                                                    <a href="javascript:void(0);" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-primary" data-bs-target="" onclick="PrintReceiptContent('iprimerTiker-{{ $client->id }}')"><i class="fa fa-print mt-1 font-size-18"></i></a>
                                                     <a href="javascript:void(0);" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-danger" data-bs-target="#subscribeModalclient-{{ $client->id }}"><i class="mdi mdi-delete font-size-18"></i></a>
                                                     <div class="modal modal-xs fade" id="subscribeModalclient-{{ $client->id }}" tabindex="-1" aria-labelledby="subscribeModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered">
@@ -371,7 +379,7 @@
                                                             <optgroup label="{{$itineraire->name}}">
                                                                 @foreach($itineraire->date_departs as $date)
                                                                     @if($date->buses->count() >= 1)
-                                                                        <option value="{{ $date->id }}"> le {{$date->depart_at}}</option>
+                                                                        <option value="{{ $date->id }}"> le {{$date->depart_at->format('d-m-y')}}</option>
                                                                     @endif
                                                                 @endforeach
                                                             </optgroup>
@@ -581,7 +589,7 @@
                                                             <optgroup label="{{$itineraire->name}}">
                                                                 @foreach($itineraire->date_departs as $date)
                                                                 @if($date->buses->count() >= 1)
-                                                                    <option value="{{ $date->id }}"> le {{$date->depart_at}}</option>
+                                                                    <option value="{{ $date->id }}"> le {{$date->depart_at->format('d-m-y')}}</option>
                                                                 @endif
                                                                 @endforeach
                                                             </optgroup>
@@ -640,6 +648,110 @@
     </div>
     <!-- Fin du modal de l'ajout -->
 
+
+
+     <!-- Static Backdrop Modal de l'ajout -->
+     @foreach($clients as $clienTiker)
+        <div class="modal fade" id="iprimerTiker-{{ $clienTiker->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+                <div class="modal-content ">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                        <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-xl-4 col-sm-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="media">
+                                                    <div class="avatar-md me-4">
+                                                        <span class="avatar-title rounded-circle bg-light text-danger font-size-16">
+                                                            <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" height="30">
+                                                        </span>
+                                                    </div>
+
+                                                    <div class="media-body overflow-hidden">
+                                                        <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">{{ $clienTiker->name}}</a></h5>
+                                                        <p class="text-muted mb-1">{{ $clienTiker->email }}</p>
+                                                        <p class="text-muted mb-4">{{ $clienTiker->phone }}</p>
+                                                    
+                                                        <div class="avatar-group">
+                                                            <div class="avatar-group-item">
+                                                                <a href="javascript: void(0);" class="d-inline-block">
+                                                                    <img src="assets/images/users/avatar-4.jpg" alt=""
+                                                                        class="rounded-circle avatar-xs">
+                                                                </a>
+                                                            </div>
+                                                            <div class="avatar-group-item">
+                                                                <a href="javascript: void(0);" class="d-inline-block">
+                                                                    <img src="assets/images/users/avatar-5.jpg" alt=""
+                                                                        class="rounded-circle avatar-xs">
+                                                                </a>
+                                                            </div>
+                                                            <div class="avatar-group-item">
+                                                                <a href="javascript: void(0);" class="d-inline-block">
+                                                                    <div class="avatar-xs">
+                                                                        <span
+                                                                            class="avatar-title rounded-circle bg-success text-white font-size-16">
+                                                                            A
+                                                                        </span>
+                                                                    </div>
+                                                                </a>
+                                                            </div>
+                                                            <div class="avatar-group-item">
+                                                                <a href="javascript: void(0);" class="d-inline-block">
+                                                                    <img src="assets/images/users/avatar-2.jpg" alt=""
+                                                                        class="rounded-circle avatar-xs">
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="px-4 py-3 border-top">
+                                                <ul class="list-inline mb-0">
+                                                    <li class="list-inline-item me-3">
+                                                        <span class="badge bg-success"><i class="bx bxs-check-circle me-1"></i>
+                                                        </span>
+                                                        
+                                                    </li>
+                                                    <li class="list-inline-item me-3">
+                                                        <!-- <a href=""><i class="bx bx-edit me-1"></i></a> -->
+                                                    </li>
+                                                    <li class="list-inline-item me-3">
+                                                        <a href="" data-bs-toggle="modal" data-bs-target="#"><i class="bx bx-show me-1"></i></a>
+                                                    </li>
+                                                    <li class="list-inline-item me-3">
+                                                        <a href="" data-bs-toggle="modal" data-bs-target="#"><i class="bx bxs-file-txt me-1"></i></a>
+                                                    </li>
+                                                    <li class="list-inline-item me-3">
+                                                        <!-- <a href=""><i class="bx bx-block me-1"></i></a> -->
+                                                        <div class="form-check form-switch mb-3" dir="ltr">
+                                                            <input class="form-check-input" type="checkbox"
+                                                                id="SwitchCheckSizesm">
+                                                            <label class="form-check-label" for="SwitchCheckSizesm"></label>
+                                                        </div>
+                                                    </li>
+                                                    <li class="list-inline-item me-3">
+                                                        <a href="" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-danger" data-bs-target="#"><i class="bx bx-trash me-1 text-danger"></i></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+    <!-- Fin du modal de l'ajout -->
+
+
+
+
 @endsection
 
 
@@ -649,4 +761,22 @@
     <script src="{{asset('admin/assets/libs/select2/js/select2.min.js')}}"></script>
     <!-- Init js -->
     <script src="{{asset('admin/assets/js/pages/table-responsive.init.js')}}"></script>
+
+
+    <!-- Print section script -->
+    <script>
+        function PrintReceiptContent(el){
+            var data = '<input type="button" id="printPageButton" class="printPageButton" style="display:block; width:100%; border:none; background-color:#008BBB;color:white; padding:14px 28px;font-size:16px;cursor:pointor;text-align:center;" value="Imprimer" onClick="window.print()">';
+            data += document.getElementById(el).innerHTML;
+            myReceipt = window.open("" , "myWin" , "left=500, top=130, width=400, height=400");
+                myReceipt.screnX = 0;
+                myReceipt.screnY = 0;
+                myReceipt.document.write(data);
+                myReceipt.document.title = "Imprimer votre ticker";
+            myReceipt.focus();
+            setTimeout(() => {
+                myReceipt.close();
+            },10000);
+        }
+    </script>
 @endsection

@@ -43,15 +43,15 @@ class PaymentTicker extends Notification
         return (new MailMessage)
         ->success()
         ->subject('Ticker de voyage')
-                    ->line('Salut '.$notifiable->name. 'vous venez de paye votre ticker de voyage sur '.$notifiable->agence)
-                    ->line(
-                        
-                        'Place ' .$notifiable->position.
-                        'Date du voyage ' .$notifiable->registered_at
-                     
-                     )
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+        ->line( $notifiable->name. ' vous venez de paye votre ticker de voyage sur '.$notifiable->agence)
+        ->line(
+            
+            'Place :' .$notifiable->position.
+            '</br> Date du voyage :' .$notifiable->registered_at
+            
+            )
+        ->action('Notification Action', url('/'))
+        ->line('Merci d\'utiliser notre application!');
     }
 
     /**

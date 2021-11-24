@@ -75,6 +75,7 @@ class AgentController extends Controller
         $add_agent->siege_id = $request->siege;
         $add_agent->user_id = Auth::user()->id;
         $add_agent->image_agence = Auth::user()->logo;
+        $add_agent->agence_name = Auth::user()->name;
         $add_agent->save();
         $add_agent->notify(new RegisteredUser());
         return back()->with('success','Votre agence a bien ete creer');

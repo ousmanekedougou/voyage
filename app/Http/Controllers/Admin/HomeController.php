@@ -39,7 +39,9 @@ class HomeController extends Controller
             foreach ($itineraire->date_departs as $iti_date) {
                $delete_bus = Bus::where('itineraire_id',$iti_date->itineraire_id)->get();
                foreach ($delete_bus as $bus_delete) {
-                    // Bus::where($bus_delete->date_depart->depart_at,'<=',Carbon::yesterday())->delete();
+                   if ($bus_delete->date_depart->depart_at < Carbon::yesterday()) {
+                    Bus::where('id',$bus_delete->id)->delete();
+                   }
                }
             }
             DateDepart::where('itineraire_id',$itineraire->id)->where('depart_at','<',Carbon::yesterday())->delete();
