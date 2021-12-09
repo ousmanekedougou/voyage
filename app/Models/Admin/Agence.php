@@ -2,12 +2,14 @@
 
 namespace App\Models\Admin;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 class Agence extends Model
 {
-    use HasFactory,Notifiable;
+    use HasFactory, Notifiable ,Authenticatable;
        protected $fillable = [
         'name',
         'email',
@@ -26,4 +28,13 @@ class Agence extends Model
         'slug',
         'confirmation_token'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function agents(){
+        return $this->hasMany(Agent::class);
+    }
 }

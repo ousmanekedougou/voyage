@@ -1,0 +1,22 @@
+ @media only screen and (max-width:700px) {
+     .row_pricipal{
+         padding-top: 20px;
+     }
+     .card_show{
+         width: 100%;
+     }
+     .card_hide{
+         visibility: hidden;
+         opacity: 0;
+         width: 0px;
+         height: 0px;
+     }
+
+     .button-items{
+         display: flex;
+         text-align: center;
+     }
+     .button-items a{
+         font-size: 10px;
+     }
+ }

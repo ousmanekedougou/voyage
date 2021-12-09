@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Admin\Agence;
 use App\Models\Admin\Bus;
 use App\Models\Admin\Siege;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -64,5 +65,10 @@ class User extends Authenticatable
     public function siege()
     {
         return $this->belongsTo(Siege::class);
+    }
+
+    public function agences()
+    {
+        return $this->hasMany(Agence::class);
     }
 }

@@ -71,21 +71,21 @@
     <section class="section hero-section bg-ico-hero" style="margin-top:-50px;" id="home">
         <div class="bg-overlay bg-primary"></div>
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-5">
+            <div class="row align-items-center row_pricipal">
+                <div class="col-lg-5 card_show">
                     <div class="text-white-50">
                         <h1 class="text-white font-weight-semibold mb-3 hero-title" style="margin-left:17px;">Yombalal Toucki Thi Biir Rewmi</h1>
                         <p class="font-size-20" style="margin-left:17px;">
                             Le secteur du tourisme a fort à faire dans une conjoncture économique pleine de défis. Pour vous démarquer, en tant qu’agence de voyages.
                         </p>
 
-                        <div class="button-items mt-4 text-center">
+                        <div class="button-items mt-4 text-center ">
                             <a href="{{ route('agence.create') }}" class="btn btn-success">Creer votre compte agence</a>
                             <a href="{{ route('agence.index') }}" class="btn btn-light">Nos agences de transport</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-8 col-sm-10 ms-lg-auto">
+                <div class="col-lg-6 col-md-8 col-sm-10 ms-lg-auto card_hide">
                    
                     <div class="overflow-hidden mb-0 mt-3 mt-lg-0">
                          <img src="{{ asset('user/assets/images/sn2.jpg') }}" style="width: 100%;"  alt="" srcset="">
@@ -133,7 +133,7 @@
     <!-- hero section end -->
 
 
-    {{--
+    
     <!-- currency price section start -->
     <section class="section bg-white p-0">
         <div class="container">
@@ -150,8 +150,8 @@
                                         </span>
                                     </div>
                                     <div class="media-body">
-                                        <p class="text-muted">Bitcoin</p>
-                                        <h5>$ 9134.39</h5>
+                                        <h4 class="text-bold text-uppercase">Pays de présence </h4>
+                                        <h6>Senegal</h6>
                                         <p class="text-muted text-truncate mb-0">+ 0.0012.23 ( 0.2 % ) <i
                                                 class="mdi mdi-arrow-up ms-1 text-success"></i></p>
                                     </div>
@@ -170,8 +170,8 @@
                                         </span>
                                     </div>
                                     <div class="media-body">
-                                        <p class="text-muted">Ethereum</p>
-                                        <h5>$ 245.44</h5>
+                                        <h4 class="text-bold text-uppercase">Agences Clients </h4>
+                                        <h6>8</h6>
                                         <p class="text-muted text-truncate mb-0">- 004.12 ( 0.1 % ) <i
                                                 class="mdi mdi-arrow-down ms-1 text-danger"></i></p>
                                     </div>
@@ -190,8 +190,8 @@
                                         </span>
                                     </div>
                                     <div class="media-body">
-                                        <p class="text-muted">Litecoin</p>
-                                        <h5>$ 63.61</h5>
+                                        <h4 class="text-bold text-uppercase">Transactions par jour </h4>
+                                        <h6>+ 50 0000</h6>
                                         <p class="text-muted text-truncate mb-0">+ 0.0001.12 ( 0.1 % ) <i
                                                 class="mdi mdi-arrow-up ms-1 text-success"></i></p>
                                     </div>
@@ -206,7 +206,7 @@
         <!-- end container -->
     </section>
     <!-- currency price section end -->
-    --}}
+    
 
   
 
@@ -221,79 +221,85 @@
                     </div>
                 </div>
             </div>
-            <div class="row align-items-center">
-                <div class="col-lg-5">
-
+            <div class="row align-items-center p-3">
+                <div class="col-lg-6">
                     <div class="text-muted">
-                        <h4>C'est quoi Voyager</h4>
-                        <p>If several languages coalesce, the grammar of the resulting that of the individual new common
+                        <h4>C'est quoi TouKi</h4>
+                        <p class="fs-5">If several languages coalesce, the grammar of the resulting that of the individual new common
                             language will be more simple and regular than the existing.</p>
                         <p class="mb-4">It would be necessary to have uniform pronunciation.</p>
 
                         <div class="button-items">
-                            <a href="{{ route('setting.index') }}" class="btn btn-success">Comment ça marche ?</a>
+                            <!-- <a href="{{ route('setting.index') }}" class="btn btn-success">Comment ça marche ?</a> -->
                             <!-- <a href="{{ route('agence.index') }}" class="btn btn-outline-primary">Nos agences</a> -->
-                        </div>
-
-                        <div class="row mt-4">
-                            <div class="col-lg-4 col-6">
-                                <div class="mt-4">
-                                    <h4>$ 6.2 M</h4>
-                                    <p>Invest amount</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-6">
-                                <div class="mt-4">
-                                    <h4>16245</h4>
-                                    <p>Users</p>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
+                 <div class="col-lg-6">
+                    <div class="text-muted">
+                        <h4>C'est quoi TouKi</h4>
+                        <p class="fs-5">If several languages coalesce, the grammar of the resulting that of the individual new common
+                            language will be more simple and regular than the existing.</p>
+                        <p class="mb-4">It would be necessary to have uniform pronunciation.</p>
 
-                <div class="col-lg-6 ms-auto">
-                    <div class="mt-4 mt-lg-0">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="card border">
-                                    <div class="card-body">
-                                        <div class="mb-3">
-                                            <i class="mdi mdi-bitcoin h2 text-success"></i>
-                                        </div>
-                                        <h5>Lending</h5>
-                                        <p class="text-muted mb-0">At vero eos et accusamus et iusto blanditiis</p>
-
-                                    </div>
-                                    <div class="card-footer bg-transparent border-top text-center">
-                                        <a href="#" class="text-primary">Learn more</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="card border">
-                                    <div class="card-body">
-                                        <div class="mb-3">
-                                            <i class="mdi mdi-wallet-outline h2 text-success"></i>
-                                        </div>
-                                        <h5>Wallet</h5>
-                                        <p class="text-muted mb-0">Quis autem vel eum iure reprehenderit</p>
-
-                                    </div>
-                                    <div class="card-footer bg-transparent border-top text-center">
-                                        <a href="#" class="text-primary">Learn more</a>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="button-items">
+                            <!-- <a href="{{ route('setting.index') }}" class="btn btn-success">Comment ça marche ?</a> -->
+                            <!-- <a href="{{ route('agence.index') }}" class="btn btn-outline-primary">Nos agences</a> -->
                         </div>
                     </div>
                 </div>
             </div>
+            
             <!-- end row -->
         </div>
         <!-- end container -->
     </section>
     <!-- about section end -->
+
+    <section class="section pt-4" id="about">
+        <div class="container">
+            <div class="row align-items-center">
+                <h2 class="text-center text-primary text-uppercase">Pourquoi TouKi ?</h2>
+                <p class="text-mueted text-center fs-4">
+                     Nous sommes convaincus que le digital est un facteur de croissance et de survie pour toutes entreprises quels que soient la taille et le secteur, c’est pourquoi nous nous engageons à vous accompagner à maximiser votre performance et vos résultats grâce à la digitalisation. 
+                </p>
+                <div class="row align-items-center mt-4">
+                    <div class="col-sm-6">
+                        <div class="card border">
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <i class="mdi mdi-bitcoin h2 text-success"></i>
+                                </div>
+                                <h5>Une Relation de proximité</h5>
+                                <p class="text-muted mb-0 fs-5">Vous êtes notre priorité ! </p>
+                                <p class="text-muted mb-0 fs-5"> Votre Business est le nôtre. Nous sommes constamment disponibles et à votre entière écoute ! </p>
+
+                            </div>
+                            <div class="card-footer bg-transparent border-top text-center">
+                                <a href="#" class="text-primary">Learn more</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card border">
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <i class="mdi mdi-wallet-outline h2 text-success"></i>
+                                </div>
+                                <h5>Service personnalisé</h5>
+                                <p class="text-muted mb-0 fs-5">Vous êtes unique !</p>
+                                <p class="text-muted mb-0 fs-5">Vous apporter la Solution à votre problème, de manière personnalisée constitue ce qui nous importe le plus ! </p>
+
+                            </div>
+                            <div class="card-footer bg-transparent border-top text-center">
+                                <a href="#" class="text-primary">Learn more</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
   
 

@@ -16,27 +16,27 @@
             <div class="collapse navbar-collapse" id="topnav-menu-content">
                 <ul class="navbar-nav ms-auto" id="topnav-menu">
                     <li class="nav-item">
-                        <a class="nav-link {{ set_active_roote('index') }}" href="/">Acceuil</a>
+                        <a class="nav-link {{ set_active_roote('index') }}" href="/"><i class="fa fa-home"></i> Acceuil</a>
                     </li>
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a class="nav-link {{ set_active_roote('about.index') }}" href="{{ route('about.index') }}">A propos</a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link {{ set_active_roote('agence.index') }}" href="{{ route('agence.index') }}"><i class="fa fa-building"></i> Nos agences</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ set_active_roote('agence.index') }}" href="{{ route('agence.index') }}">Nos agences</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link {{ set_active_roote('setting.index') }}" href="{{ route('setting.index') }}">Comment ça Marche ?</a>
+                        <a class="nav-link {{ set_active_roote('setting.index') }}" href="{{ route('setting.index') }}"><i class="fa fa-cog"></i> Comment ça Marche ?</a>
                     </li>
 
                      <li class="nav-item">
-                        <a class="nav-link {{ set_active_roote('contact.index') }}" href="{{ route('contact.index') }}">Contact</a>
+                        <a class="nav-link {{ set_active_roote('contact.index') }}" href="{{ route('contact.index') }}"><i class="fa fa-at"></i> Contact</a>
                     </li>
 
                 </ul>
 
                 <div class="my-2 ms-lg-2">
-                    <!-- <a href="{{ route('agence.create') }}" class="btn btn-outline-success w-xs {{ set_active_roote('agence.create') }}">Creer votre compte agence</a> -->
-                    <a href="{{ route('login') }}" class="btn btn-outline-success w-xs {{ set_active_roote('login') }}">Se Connecter</a>
+                    <a href="{{ route('agence.create') }}" class="btn btn-outline-info w-xs {{ set_active_roote('agence.create') }}"><i class="fa fa-user-plus"></i> Creer votre compte agence</a>
+                    <a href="{{ route('login') }}" class="btn btn-outline-success w-xs {{ set_active_roote('login') }}"><i class="fa fa-sign-in-alt"></i> Se Connecter</a>
                 </div>
             </div>
         </div>

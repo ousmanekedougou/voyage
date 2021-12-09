@@ -15,7 +15,7 @@ class CreateAgencesTable extends Migration
     {
         Schema::create('agences', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('phone')->unique()->nullable();
@@ -26,14 +26,15 @@ class CreateAgencesTable extends Migration
             $table->integer('status')->default(0);
             $table->string('password');
             $table->boolean('is_active')->default(0);
-            $table->integer('is_admin')->default(0);
+            $table->integer('is_admin')->default(1);
             $table->string('slug')->unique();
             $table->string('facture')->nullable();
             $table->string('amount')->nullable();
             $table->dateTime('payment_at')->nullable();
-            $table->integer('user_id');
-            $table->integer('siege_id')->nullable();
+            $table->integer('user_id')->nullable();
             $table->string('confirmation_token')->unique()->nullable();
+             $table->string('image')->nullable();
+             $table->string('agence_name')->nullable();
             $table->timestamps();
         });
     }

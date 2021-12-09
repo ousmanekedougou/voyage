@@ -17,13 +17,18 @@ class CreateAgentsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('phone')->unique();
-            $table->integer('siege_id');
+            $table->timestamp('email_verified_at')->nullable();
+            $table->string('phone')->unique()->nullable();
+            $table->string('adress')->nullable();
+            $table->integer('status')->default(0);
             $table->string('password');
+            $table->boolean('is_active')->default(0);
+            $table->integer('is_admin')->default(1);
             $table->string('slug')->unique();
-            $table->string('confirmation_token')->nullable();
-            $table->string('image')->nullable();
-            $table->string('image_agence')->nullable();
+            $table->integer('agence_id')->nullable();
+            $table->integer('siege_id')->nullable();
+            $table->string('confirmation_token')->unique()->nullable();
+             $table->string('image')->nullable();
             $table->timestamps();
         });
     }
