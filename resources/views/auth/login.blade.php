@@ -10,7 +10,8 @@
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />
         <!-- App favicon -->
-        <link rel="shortcut icon" href="{{asset('user/assets/images/favicon.ico')}}">
+        <!-- <link rel="shortcut icon" href="{{asset('user/assets/images/favicon.ico')}}"> -->
+        <link rel="shortcut icon" href="{{ asset('user/assets/images/bus.png') }}">
 
         <!-- Bootstrap Css -->
         <link href="{{asset('user/assets/css/bootstrap.min.css')}}" id="bootstrap-style" rel="stylesheet" type="text/css" />
@@ -31,8 +32,8 @@
                                 <div class="row">
                                     <div class="col-7">
                                         <div class="text-primary p-4">
-                                            <h5 class="text-primary">Welcome Back !</h5>
-                                            <p>Sign in to continue to Skote.</p>
+                                            <h5 class="text-primary">Content de vous revoir !</h5>
+                                            <p>Connectez-vous pour continuer vers TouKi.</p>
                                         </div>
                                     </div>
                                     <div class="col-5 align-self-end">
@@ -42,7 +43,7 @@
                             </div>
                             <div class="card-body pt-0"> 
                                 <div class="auth-logo">
-                                    <a href="" class="auth-logo-light">
+                                    <a href="/" class="auth-logo-light">
                                         <div class="avatar-md profile-user-wid mb-4">
                                             <span class="avatar-title rounded-circle bg-light">
                                                 <img src="{{asset('user/assets/images/logo-light.svg')}}" alt="" class="rounded-circle" height="34">
@@ -50,7 +51,7 @@
                                         </div>
                                     </a>
 
-                                    <a href="" class="auth-logo-dark">
+                                    <a href="/" class="auth-logo-dark">
                                         <div class="avatar-md profile-user-wid mb-4">
                                             <span class="avatar-title rounded-circle bg-light">
                                                 <img src="{{asset('user/assets/images/logo.svg')}}" alt="" class="rounded-circle" height="34">

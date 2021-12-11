@@ -4,7 +4,7 @@
 
      <!-- hero section start -->
     <section class="section hero-section bg-ico-hero" style="margin-top:-50px;" id="home">
-        <div class="bg-overlay bg-primary"></div>
+        <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-5">
@@ -90,17 +90,17 @@
                                 <div class="nav flex-column nav-pills" role="tablist">
                                     <a class="nav-link active" id="v-pills-gen-ques-tab" data-bs-toggle="pill"
                                         href="#v-pills-gen-ques" role="tab">
-                                        <i class="bx bx-help-circle nav-icon d-block mb-2"></i>
+                                        <i class="bx bx bx-user nav-icon d-block mb-2"></i>
                                         <p class="font-weight-bold mb-0">Clients</p>
                                     </a>
                                     <a class="nav-link" id="v-pills-token-sale-tab" data-bs-toggle="pill"
                                         href="#v-pills-token-sale" role="tab">
-                                        <i class="bx bx-receipt nav-icon d-block mb-2"></i>
+                                        <i class="fa fa-user-tie nav-icon d-block mb-2"></i>
                                         <p class="font-weight-bold mb-0">Agents</p>
                                     </a>
                                     <a class="nav-link" id="v-pills-roadmap-tab" data-bs-toggle="pill"
                                         href="#v-pills-roadmap" role="tab">
-                                        <i class="bx bx-timer d-block nav-icon mb-2"></i>
+                                        <i class="bx bx-building d-block nav-icon mb-2"></i>
                                         <p class="font-weight-bold mb-0">Agences</p>
                                     </a>
                                 </div>

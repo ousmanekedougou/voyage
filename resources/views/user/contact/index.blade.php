@@ -6,7 +6,7 @@
 
  <!-- Features start -->
       <section class="section hero-section bg-ico-hero" id="home" style="margin-top:-70px;">
-        <div class="bg-overlay bg-primary"></div>
+        <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
             <!-- <div class="row">
                 <div class="col-lg-12">
@@ -49,63 +49,50 @@
     <section class="section pt-4 bg-white" id="about">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <div class="text-muted">
-                        <h4>Nous contacter</h4>
-                        <p>Vous souhaitez des renseignements complémentaires, une demande de devis ou prendre un rendez-vous, n’hésitez pas à nous contacter</p>
-                            
-                        <!-- <div class="button-items">
-                            <a href="#" class="btn btn-success">Read More</a>
-                            <a href="#" class="btn btn-outline-primary">How It work</a>
-                        </div> -->
+                <div class="text-muted">
+                    <h4 class="text-center">Nous contacter</h4>
+                    <p class=" text-center">Vous souhaitez des renseignements complémentaires, une demande de devis ou prendre un rendez-vous, n’hésitez pas à nous contacter</p>
+                        
+                    <!-- <div class="button-items">
+                        <a href="#" class="btn btn-success">Read More</a>
+                        <a href="#" class="btn btn-outline-primary">How It work</a>
+                    </div> -->
 
-                        <div class="row mt-4 text-center">
-                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                                <div class="mt-4">
-                                    <div class="avatar-xs me-3" style="margin-left:70px;">
-                                        <span 
-                                            class="avatar-title  rounded-circle bg-white bg-soft text-primary" style="font-size: 4em;">
-                                            <i class="mdi mdi-email"></i>
-                                        </span>
-                                    </div>
-                                    <p class="mt-2">email@gmail.com</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                                <div class="mt-4">
-                                    <div class="avatar-xs me-3" style="margin-left:70px;">
-                                        <span 
-                                            class="avatar-title  rounded-circle bg-white bg-soft text-success" style="font-size: 4em;">
-                                            <i class="mdi mdi-phone"></i>
-                                        </span>
-                                    </div>
-                                    <p class="mt-2">+221 77000000</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                                <div class="mt-4">
-                                    <div class="avatar-xs me-3" style="margin-left:70px;">
-                                        <span 
-                                            class="avatar-title  rounded-circle bg-white bg-soft text-info" style="font-size: 4em;">
-                                            <i class="mdi mdi-email"></i>
-                                        </span>
-                                    </div>
-                                    <p class="mt-2">Kedougou</p>
-                                </div>
-                            </div>
+                    <div class="row mt-4 text-center">
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                   
+                                <p class=""> <span class="avatar-title rounded-circle bg-white bg-soft text-primary fs-1" style="font-size: 6em;">
+                                        <i class="mdi mdi-email"></i>
+                                    </span> email@gmail.com</p>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                   
+                                <p class=""> <span class="avatar-title rounded-circle bg-white bg-soft text-primary fs-1" style="font-size: 6em;">
+                                        <i class="mdi mdi-phone"></i> 
+                                        <!-- mdi-cellphone-android -->
+                                    </span> 339876456 / 339098752</p>
+                        </div>
+                       <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                   
+                                <p class=""> <span class="avatar-title rounded-circle bg-white bg-soft text-primary fs-1" style="font-size: 6em;">
+                                        <i class="mdi mdi-map-marker"></i>
+                                    </span> Kedougou</p>
                         </div>
                     </div>
                 </div>
+            </div>
+            <!-- end row -->
 
-                <div class="col-lg-6 ms-auto">
-                    <div class="mt-4 mt-lg-0">
-                        <div class="row">
-                            <div class="card">
-                                <div class="card-body">
+            <div class="row align-items-center">
+                <div class="mt-4 mt-lg-0">
+                        <div class="card">
+                            <div class="card-body">
 
-                                    <form class="custom-validation" action="{{ route('contact.store') }}" method="POST">
-                                        @csrf
-                                        <div class="mb-3">
+                                <form  class="custom-validation" action="{{ route('contact.store') }}" method="POST">
+                                    @csrf
+                                    <div class="row align-items-center">
+
+                                        <div class="col-lg-6 mb-3">
                                             <label class="form-label">Prenom et Nom</label>
                                             <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name"
                                                 placeholder="Prenom et Nom" />
@@ -116,7 +103,7 @@
                                             @enderror
                                         </div>
 
-                                        <div class="mb-3">
+                                        <div class="col-lg-6 mb-3">
                                             <label class="form-label">E-Mail </label>
                                             <div>
                                                 <input type="email" id="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" parsley-type="email"
@@ -128,11 +115,13 @@
                                                     @enderror
                                             </div>
                                         </div>
-                                
+                                    </div>
+                            
+                                    <div class="col-lg-12 col-sm-12">
                                         <div class="mb-3">
                                             <label class="form-label">Message</label>
                                             <div>
-                                                <textarea required id="msg" class="form-control @error('msg') is-invalid @enderror" name="msg" value="{{ old('msg') }}" autocomplete="msg" class="form-control" rows="3"></textarea>
+                                                <textarea required id="msg" class="form-control @error('msg') is-invalid @enderror" name="msg" value="{{ old('msg') }}" autocomplete="msg" class="form-control" rows="5"></textarea>
                                                     @error('msg')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -140,20 +129,19 @@
                                                     @enderror
                                             </div>
                                         </div>
-                                        <div class="d-flex flex-wrap gap-2">
-                                            <button type="submit" class="btn btn-primary waves-effect waves-light">
-                                                Envoyer
-                                            </button>
-                                            <button type="reset" class="btn btn-secondary waves-effect">
-                                                Anuller
-                                            </button>
-                                        </div>
-                                    </form>
+                                    </div>
+                                    <div class="d-flex flex-wrap gap-2 col-lg-12">
+                                        <button type="submit" class="btn btn-primary waves-effect waves-light btn-block">
+                                            Envoyer
+                                        </button>
+                                        <button type="reset" class="btn btn-secondary waves-effect btn-block">
+                                            Anuller
+                                        </button>
+                                    </div>
+                                </form>
 
-                                </div>
                             </div>
                         </div>
-                    </div>
                 </div>
             </div>
             <!-- end row -->

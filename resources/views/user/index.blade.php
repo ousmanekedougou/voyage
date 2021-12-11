@@ -69,7 +69,7 @@
 
   <!-- hero section start -->
     <section class="section hero-section bg-ico-hero" style="margin-top:-50px;" id="home">
-        <div class="bg-overlay bg-primary"></div>
+        <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
             <div class="row align-items-center row_pricipal">
                 <div class="col-lg-5 card_show">
@@ -88,7 +88,7 @@
                 <div class="col-lg-6 col-md-8 col-sm-10 ms-lg-auto card_hide">
                    
                     <div class="overflow-hidden mb-0 mt-3 mt-lg-0">
-                         <img src="{{ asset('user/assets/images/sn2.jpg') }}" style="width: 100%;"  alt="" srcset="">
+                         <img src="{{ asset('user/assets/images/sn.jpg') }}" style="width: 100%;"  alt="" srcset="">
                         <!-- <div class="card-header text-center">
                             <h5 class="mb-0">ICO Countdown time</h5>
                         </div>
@@ -211,7 +211,7 @@
   
 
   <!-- about section start -->
-    <section class="section pt-4 bg-white" id="about">
+    <section class="section pt-4" id="about">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -224,27 +224,35 @@
             <div class="row align-items-center p-3">
                 <div class="col-lg-6">
                     <div class="text-muted">
-                        <h4>C'est quoi TouKi</h4>
-                        <p class="fs-5">If several languages coalesce, the grammar of the resulting that of the individual new common
-                            language will be more simple and regular than the existing.</p>
-                        <p class="mb-4">It would be necessary to have uniform pronunciation.</p>
+                        <div class="card border">
+                            <div class="card-body">
+                                <h4>C'est quoi TouKi</h4>
+                                <p class="fs-5">If several languages coalesce, the grammar of the resulting that of the individual new common
+                                    language will be more simple and regular than the existing.</p>
+                                <p class="mb-4">It would be necessary to have uniform pronunciation.</p>
 
-                        <div class="button-items">
-                            <!-- <a href="{{ route('setting.index') }}" class="btn btn-success">Comment ça marche ?</a> -->
-                            <!-- <a href="{{ route('agence.index') }}" class="btn btn-outline-primary">Nos agences</a> -->
+                                <div class="button-items">
+                                    <!-- <a href="{{ route('setting.index') }}" class="btn btn-success">Comment ça marche ?</a> -->
+                                    <!-- <a href="{{ route('agence.index') }}" class="btn btn-outline-primary">Nos agences</a> -->
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                  <div class="col-lg-6">
                     <div class="text-muted">
-                        <h4>C'est quoi TouKi</h4>
-                        <p class="fs-5">If several languages coalesce, the grammar of the resulting that of the individual new common
-                            language will be more simple and regular than the existing.</p>
-                        <p class="mb-4">It would be necessary to have uniform pronunciation.</p>
+                       <div class="card border">
+                            <div class="card-body">
+                                <h4>C'est quoi TouKi</h4>
+                                <p class="fs-5">If several languages coalesce, the grammar of the resulting that of the individual new common
+                                    language will be more simple and regular than the existing.</p>
+                                <p class="mb-4">It would be necessary to have uniform pronunciation.</p>
 
-                        <div class="button-items">
-                            <!-- <a href="{{ route('setting.index') }}" class="btn btn-success">Comment ça marche ?</a> -->
-                            <!-- <a href="{{ route('agence.index') }}" class="btn btn-outline-primary">Nos agences</a> -->
+                                <div class="button-items">
+                                    <!-- <a href="{{ route('setting.index') }}" class="btn btn-success">Comment ça marche ?</a> -->
+                                    <!-- <a href="{{ route('agence.index') }}" class="btn btn-outline-primary">Nos agences</a> -->
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
