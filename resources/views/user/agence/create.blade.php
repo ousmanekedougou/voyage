@@ -6,7 +6,7 @@
 
     <!-- Features start -->
      <section class="section hero-section bg-ico-hero " style="padding: 60px;" id="home" style="margin-top: -10px;">
-     <div class="bg-overlay bg-primary"></div>
+     <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
             <!-- <div class="row">
                 <div class="col-lg-12">

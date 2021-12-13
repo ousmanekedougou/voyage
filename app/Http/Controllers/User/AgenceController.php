@@ -66,7 +66,7 @@ class AgenceController extends Controller
         if($sieges->count() > 0){
             return view('user.agence.show',compact('sieges','agence','buses'));
         }else {
-            return back()->with('error','Cette agence n\'a pas de siege');
+            return back()->with('error',"L'agence $agence->name n'a pas encore de siège");
         }
     }
 }

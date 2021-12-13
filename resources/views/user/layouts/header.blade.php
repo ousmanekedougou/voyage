@@ -113,7 +113,7 @@
             <div class="modal fade" id="subscribeModal" tabindex="-1" aria-labelledby="subscribeModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
+                    <div class="modal-content bg-warning">
                         <div class="modal-header border-bottom-0">
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
@@ -121,29 +121,18 @@
                             <div class="text-center mb-4">
 
                                 <div class="avatar-md mx-auto mb-4">
-                                    <div class="avatar-title bg-light rounded-circle text-danger h1">
-                                        <i class="mdi mdi-email-open"></i>
+                                    <div class="avatar-title bg-white rounded-circle text-warning h1">
+                                        <i class="fa fa-exclamation-triangle"></i>
                                     </div>
                                 </div>
 
 
                                 <div class="row justify-content-center">
                                     <div class="col-xl-10">
-                                        <h4 class="text-primary">Message d'erreure</h4>
-                                        <p class="text-danger font-size-14 mb-4" style="text-align: left;">
+                                        <h4 class="text-white">chères Clients</h4>
+                                        <p class="text-white font-size-20 mb-4" style="text-align: left;">
                                             {!! session('error') !!}
                                         </p>
-
-                                        <div class="input-group bg-light rounded">
-                                            <input type="email" class="form-control bg-transparent border-0"
-                                                placeholder="Enter Email address" aria-label="Recipient's username"
-                                                aria-describedby="button-addon2">
-
-                                            <button class="btn btn-primary" type="button" id="button-addon2">
-                                                <i class="bx bxs-paper-plane"></i>
-                                            </button>
-
-                                        </div>
 
                                     </div>
                                 </div>

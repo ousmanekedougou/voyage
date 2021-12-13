@@ -22,7 +22,7 @@
                                     <img src="{{asset('admin/assets/images/profile-img.png')}}" alt="" class="img-fluid">
                                 </div>
                                 <div class="col-sm-6 ">
-                                    <div class="text-primary p-3">
+                                    <div class="text-primary p-3 siege_show_text">
                                         <h1 class="text-primary">{{$agence->name}}</h1>
                                         <p>{{$agence->slogan}}</p>
                                     </div>
