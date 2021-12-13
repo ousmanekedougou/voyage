@@ -70,8 +70,8 @@
                             <li><a href="{{ route('admin.historique.index') }}" key="t-products"> <i class="fa fa-folder-open"></i> Historiques</a></li>
                                
                        
-                            <li class="menu-title" key="t-menu"></li>
-                             <li><a href="{{ route('admin.client.index') }}" key="t-products" class="btn btn-primary"> <i class="fa fa-user-plus"></i> Ajouter un client</a></li>
+                         
+                            <li><a data-bs-toggle="modal" data-bs-target="#FooterstaticBackdrop" key="t-products" class="btn btn-primary"> <i class="fa fa-user-plus"></i> Ajouter un client</a></li>
                             <li class="menu-title" key="t-menu"></li>
                             <li class="menu-title" key="t-menu"> <i class="fa fa-user-check"></i> Liste de vos clients</li>
                             @foreach(itineraire_all() as $itineraire)

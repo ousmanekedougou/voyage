@@ -24,17 +24,7 @@ class HomeController extends Controller
         return view('user.index',compact('agences'));
     }
 
-    public function show($slug)
-    {
-        $buses  = Bus::orderBy('id','ASC')->get();
-        $agence = User::where('slug',$slug)->first();
-        $sieges = Siege::where('user_id',$agence->id)->get();
-        if($sieges->count() > 0){
-            return view('user.agence.show',compact('sieges','agence','buses'));
-        }else {
-            return back()->with('error','Cette agence n\'a pas de siege');
-        }
-    }
+   
 
      public function store(Request $request)
     {

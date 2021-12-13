@@ -376,6 +376,8 @@
 			</div>
 		@endif--}}
 
+        @include('flashy::message')
+
        
 
          

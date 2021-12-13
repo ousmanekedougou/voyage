@@ -1,16 +1,47 @@
 @extends('user.layouts.app',['title' => 'Siege'])
 
+@section('headSection')
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+	<link rel="stylesheet" href="{{asset('user/assets/build/css/intlTelInput.css')}}">
+  	<link rel="stylesheet" href="{{asset('user/assets/build/css/demo.css')}}">
+@endsection
+
 @section('main-content')
 
     <!-- about section start -->
-    <section class="section hero-section bg-ico-hero" style="margin-top: -30px;">
-         <div class="bg-overlay bg-primary"></div>
+    <section class="section hero-section bg-ico-hero agance_show" >
+         <!-- <div class="bg-overlay bg-primary"></div> -->
          <div class="container">
+             <div class="row">
+                 <div class="col-sm-2"></div>
+                 <div class="col-sm-8">
+                    <div class="card overflow-hidden">
+                        <div class="bg-primary bg-soft">
+                            <div class="row">
+                                <div class="col-sm-3 align-self-end">
+                                    <img src="{{asset('admin/assets/images/profile-img.png')}}" alt="" class="img-fluid">
+                                </div>
+                                <div class="col-sm-6 ">
+                                    <div class="text-primary p-3">
+                                        <h1 class="text-primary">{{$agence->name}}</h1>
+                                        <p>{{$agence->slogan}}</p>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3 align-self-end text-center card_gif">
+                                    <img src="{{asset('user/assets/images/buse.gif')}}" alt="" class="img-fluid">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                 </div>
+                 <div class="col-sm-2"></div>
+             </div>
+            
+
             <div class="row mb-5">
                 <div class="col-lg-12">
                     <div class="text-center mb-5">
-                        <div class="small-title text-white">About us</div>
-                        <h4 class="text-white">{{$agence->name}}</h4>
+                        <h2 class="text-white">Nos Sieges</h2>
                     </div>
                 </div>
             </div>
@@ -29,8 +60,8 @@
                                     </div>
                                     <div class="media-body">
                                         <p class="text-muted">Siege de {{$siege->name}}</p>
-                                        <p class="text-muted text-truncate mb-0">
-                                            <span> <i class="bx bx-envelope ms-1 text-success"></i> {{$siege->email}} </span> |
+                                        <p class="text-muted text-truncate mb-0 siege_info">
+                                            <span> <i class="bx bx-envelope ms-1 text-success"></i> {{$siege->email}} </span> <i class="slash">|</i>
                                             <span> <i class="bx bx-phone ms-1 text-success"></i> {{$siege->phone}}</span>
                                         </p>
                                         <p class="text-muted text-truncate mb-0 mt-3">
@@ -63,7 +94,7 @@
                     </div>
                         <div class="modal-body">
                             <p>
-                                <form class="custom-validation" action="{{ route('client.store') }}" method="POST" enctype="multipart/form-data">
+                                <form class="custom-validation" action="{{ route('client.store') }}" method="POST" enctype="multipart/form-data" name="myform" onsubmit="return validation()">
                                     @csrf
                                     <input type="hidden" name="agence_name" value="{{ $agence->name }}">
                                     <div class="row">
@@ -92,11 +123,12 @@
                                                 </div>
                                             </div>
 
-                                            <div class="mb-3">
+                                            <div class="mb-3" >
                                                 <label class="form-label">Votre numero de telephone</label>
                                                 <div>
                                                     <input data-parsley-type="number" type="number" id="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" autocomplete="phone"
-                                                        required placeholder="Numero de telephone" />
+                                                        required placeholder="Numero de telephone"  />
+                                                        <input type="hidden" name="indicatif" id="indicatif">
                                                         @error('phone')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
@@ -210,4 +242,44 @@
     @endforeach
     <!-- Fin du modal de l'ajout -->
 
+@endsection
+
+@section('footerSection')
+<script src=" {{ asset('js/app.js') }} "></script>
+  <script src="{{asset('user/assets/build/js/intlTelInput.js')}}"></script>
+  <script>
+    var input = document.querySelector("#phone");
+    window.intlTelInput(input, {
+      utilsScript: "user/assets/build/js/utils.js",
+    });
+</script>
+
+<script>
+	function validation(){
+		var phone = document.forms["myform"]["phone"];
+		var get_num_1 = String(phone.value).charAt(0);
+		var get_num_2 = String(phone.value).charAt(1);
+		var get_num_final = get_num_1+''+get_num_2;
+		var first_num = Number(get_num_final);
+		if (isNaN(phone.value)) {
+			alert('Votre numero de telephone est invalide');
+			return false;
+		}else if(phone.value.length != 9){
+			alert('Votre numero de telphone doit etre de 9 caracter exp: 77xxxxxxx');
+			return false;
+		}else if(first_num != 77 & first_num != 78 & first_num != 76 & first_num != 70 & first_num != 75  ){
+			alert('Votre numero de telphone doit commencer par un (77 ou 78 ou 76 ou 70 ou 75)')
+			return false;
+		}
+        var cni = document.forms["myform"]["cni"];
+		if (isNaN(cni.value)) {
+			alert('Votre numero numero de piece est invalide');
+			return false;
+		}else if(cni.value.length != 13){
+			alert('Votre numero de piece doit etre de 13 carractere');
+			return false;
+		}
+		return true;
+	}
+</script>
 @endsection

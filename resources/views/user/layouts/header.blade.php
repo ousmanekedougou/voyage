@@ -3,7 +3,7 @@
         <div class="container">
             <a class="navbar-logo" href="/">
                 <h3 height="19" class="logo logo-dark">Toucki</h3>
-                <h3  height="19" class="logo logo-light text-white">Toucki</h3>
+                <h3  height="19" class="logo logo-light text-dark">Toucki</h3>
                 <!-- <img src="{{asset('admin/assets/images/logo-dark.png')}}" alt="" height="19" class="logo logo-dark">
                 <img src="{{asset('admin/assets/images/logo-light.png')}}" alt="" height="19" class="logo logo-light"> -->
             </a>
@@ -57,6 +57,7 @@
             </div>
         @endif
         --}}
+        {{--
 		@if(session('success'))
 
             <!-- subscribeModal -->
@@ -105,7 +106,7 @@
             <!-- end modal -->
            
 		@endif
-
+        --}}
         @if(session('error'))
 
             <!-- subscribeModal -->
@@ -155,6 +156,7 @@
            
 		@endif
 
+   
 
        
 

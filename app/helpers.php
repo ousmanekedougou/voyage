@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Admin\Bus;
 use App\Models\Admin\Itineraire;
 use App\Models\Admin\Part;
 use App\Models\Admin\Siege;
@@ -40,6 +41,14 @@ if(! function_exists('itineraire_all')){
     {
         $itineraire_all = Itineraire::where('user_id',Auth::user()->id)->where('siege_id',Auth::user()->siege_id)->orderBy('id','ASC')->get();
         return $itineraire_all;
+    }
+}
+
+if(! function_exists('buse_all')){
+    function buse_all()
+    {
+        $buse_all = Bus::where('user_id',Auth::user()->id)->where('siege_id',Auth::user()->siege_id)->orderBy('id','ASC')->get();
+        return $buse_all;
     }
 }
 

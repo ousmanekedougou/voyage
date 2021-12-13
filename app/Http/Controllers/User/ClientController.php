@@ -71,12 +71,30 @@ class ClientController extends Controller
                 $pl = $buse->inscrit;
                 $buse->inscrit = $pl + 1;
                 $buse->save();
+
+                $phoneFinale = '';
+                $phoneComplet = '221'.$request->phone;
+                if (strlen($request->phone) == 13 ) {
+                    $phoneFinale = $request->phone;
+                }elseif (strlen($request->phone) == 9) {
+                    $phoneFinale = $phoneComplet;
+                }else {
+                    return back()->with('error','votre numero de telephone est invalid');
+                }
+
+                $cni_final = '';
+
+                if (strlen($request->cni == 13)) {
+                    $cni_final = $request->cni;
+                }else{
+                    return back()->with('error','votre numero de piece est invalide');
+                }
                 
                 $add_client = new Client();
                 $add_client->name = $request->name;
                 $add_client->email = $request->email;
-                $add_client->phone = $request->phone;
-                $add_client->cni = $request->cni;
+                $add_client->phone = $phoneFinale;
+                $add_client->cni = $cni_final;
                 $add_client->ville_id = $request->ville;
                 $add_client->bus_id = $buse->id;
                 $add_client->position = $buse->inscrit;

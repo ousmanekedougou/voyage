@@ -505,7 +505,7 @@
                 </div>
                     <div class="modal-body">
                         <p>
-                            <form class="custom-validation" action="{{ route('admin.client.store') }}" method="POST" enctype="multipart/form-data">
+                            <form class="custom-validation" action="{{ route('admin.client.store') }}" method="POST" enctype="multipart/form-data" name="myform" onsubmit="return validation()">
                                 @csrf
                                 <div class="row">
                                     <div class="col-xl-12">
@@ -761,6 +761,35 @@
     <script src="{{asset('admin/assets/libs/select2/js/select2.min.js')}}"></script>
     <!-- Init js -->
     <script src="{{asset('admin/assets/js/pages/table-responsive.init.js')}}"></script>
+
+    <script>
+	function validation(){
+		var phone = document.forms["myform"]["phone"];
+		var get_num_1 = String(phone.value).charAt(0);
+		var get_num_2 = String(phone.value).charAt(1);
+		var get_num_final = get_num_1+''+get_num_2;
+		var first_num = Number(get_num_final);
+		if (isNaN(phone.value)) {
+			alert('Votre numero de telephone est invalide');
+			return false;
+		}else if(phone.value.length != 9){
+			alert('Votre numero de telphone doit etre de 9 caracter exp: 77xxxxxxx');
+			return false;
+		}else if(first_num != 77 & first_num != 78 & first_num != 76 & first_num != 70 & first_num != 75  ){
+			alert('Votre numero de telphone doit commencer par un (77 ou 78 ou 76 ou 70 ou 75)')
+			return false;
+		}
+		var cni = document.forms["myform"]["cni"];
+		if (isNaN(cni.value)) {
+			alert('Votre numero numero de piece est invalide');
+			return false;
+		}else if(cni.value.length != 13){
+			alert('Votre numero de piece doit etre de 13 carractere');
+			return false;
+		}
+		return true;
+	}
+</script>
 
 
     <!-- Print section script -->

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Bus;
+use App\Models\Admin\Siege;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -54,5 +56,17 @@ class AgenceController extends Controller
         $add_agence->save();
         $add_agence->notify(new RegisteredUser());
         return back()->with('success','Votre agence a bien ete creer');
+    }
+
+      public function show($slug)
+    {
+        $buses  = Bus::orderBy('id','ASC')->get();
+        $agence = User::where('slug',$slug)->first();
+        $sieges = Siege::where('user_id',$agence->id)->get();
+        if($sieges->count() > 0){
+            return view('user.agence.show',compact('sieges','agence','buses'));
+        }else {
+            return back()->with('error','Cette agence n\'a pas de siege');
+        }
     }
 }

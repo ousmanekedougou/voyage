@@ -71,24 +71,24 @@
     <section class="section hero-section bg-ico-hero" style="margin-top:-50px;" id="home">
         <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
-            <div class="row align-items-center row_pricipal">
+            <div class="row align-items-center row_pricipal" >
                 <div class="col-lg-5 card_show">
                     <div class="text-white-50">
-                        <h1 class="text-white font-weight-semibold mb-3 hero-title" style="margin-left:17px;">Yombalal Toucki Thi Biir Rewmi</h1>
-                        <p class="font-size-20" style="margin-left:17px;">
+                        <h1 class="text-white font-weight-semibold mb-3 hero-title">Yombalal Toucki Thi Biir Rewmi</h1>
+                        <p class="font-size-20" >
                             Le secteur du tourisme a fort à faire dans une conjoncture économique pleine de défis. Pour vous démarquer, en tant qu’agence de voyages.
                         </p>
 
-                        <div class="button-items mt-4 text-center ">
+                        <div class="button-items mt-4 ">
                             <a href="{{ route('agence.create') }}" class="btn btn-success">Creer votre compte agence</a>
                             <a href="{{ route('agence.index') }}" class="btn btn-light">Nos agences de transport</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-8 col-sm-10 ms-lg-auto card_hide">
+                <div class="col-lg-6 col-md-8 col-sm-10 ms-lg-auto card_hide" >
                    
                     <div class="overflow-hidden mb-0 mt-3 mt-lg-0">
-                         <img src="{{ asset('user/assets/images/sn.jpg') }}" style="width: 100%;"  alt="" srcset="">
+                         <img src="{{ asset('user/assets/images/sn2.jpg') }}" style="width: 100%;"  alt="" srcset="">
                         <!-- <div class="card-header text-center">
                             <h5 class="mb-0">ICO Countdown time</h5>
                         </div>
@@ -308,6 +308,8 @@
             </div>
         </div>
     </section>
+
+    
 
   
 

@@ -21,12 +21,12 @@ Route::get('/', [App\Http\Controllers\User\HomeController::class, 'index'])->nam
 Route::get('/about', [App\Http\Controllers\User\AboutController::class, 'index'])->name('about.index');
 Route::get('/agence', [App\Http\Controllers\User\AgenceController::class, 'index'])->name('agence.index');
 Route::get('/agence/create', [App\Http\Controllers\User\AgenceController::class, 'create'])->name('agence.create');
+Route::get('/agence/show/{slug}', [App\Http\Controllers\User\AgenceController::class, 'show'])->name('agence.show');
 Route::post('/agence/store', [App\Http\Controllers\User\AgenceController::class, 'store'])->name('agence.store');
 Route::get('/setting', [App\Http\Controllers\User\SettingController::class, 'index'])->name('setting.index');
 Route::get('/contact', [App\Http\Controllers\User\ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact/store', [App\Http\Controllers\User\ContactController::class, 'store'])->name('contact.store');
 Route::post('/client', [App\Http\Controllers\User\ClientController::class, 'store'])->name('client.store');
-Route::get('/show/{slug}', [App\Http\Controllers\User\HomeController::class, 'show'])->name('show');
 Route::get('/store', [App\Http\Controllers\User\HomeController::class, 'store'])->name('store');
 
 Auth::routes();

@@ -1,8 +1,16 @@
+
+    .agance_show{
+         margin-top: -80px;
+     }
+     .siege_info{
+         margin-left: -35px;
+         margin-top: 5px;
+     }
  @media only screen and (max-width:700px) {
      .row_pricipal{
          padding-top: 20px;
      }
-     .card_show{
+     .row_pricipal .card_show{
          width: 100%;
      }
      .card_hide{
@@ -26,6 +34,25 @@
          font-size: 10px;
          margin-left: 5px;
      }
+     .agance_show{
+         margin-top: 10px;
+     }
+      .siege_info{
+         margin-left: 0px;
+     }
+     .siege_info span{
+         display: block;
+     }
+     .siege_info .slash{
+         visibility: hidden;
+         width: 0px;
+         height: 0px;
+     }
+     .card_gif{
+         visibility: hidden;
+         width: 0px;
+         height: 0px;
+     }
  }
 
  #topBtn{
@@ -42,3 +69,8 @@
      border-radius: 100%;
      display: none;
  }
+
+ /* .hero-section.bg-ico-hero{background-image:url(../images/crypto/gif1.gif);
+ background-size:cover;
+ background-position:center;
+ } */

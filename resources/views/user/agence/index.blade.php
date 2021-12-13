@@ -109,7 +109,7 @@
                         <div class="px-4 py-3 border-top">
                             <ul class="list-inline mb-0">
                                 <li class="list-inline-item me-3">
-                                    <a href="{{ route('show',$agence->slug) }}" class="btn btn-outline-success btn-xs"><i class="bx bx-show me-1"></i>Voire nos sieges</a>
+                                    <a href="{{ route('agence.show',$agence->slug) }}" class="btn btn-outline-success btn-xs"><i class="bx bx-show me-1"></i>Voire nos sieges</a>
                                 </li>
                                 <li class="list-inline-item me-3">
                                     <a href="" class="btn btn-outline-primary btn-xs"><i class="bx bx-file me-1"></i>A propos</a>
