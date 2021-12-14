@@ -8,7 +8,6 @@ use App\Models\Admin\DateDepart;
 use App\Models\Admin\Itineraire;
 use App\Models\User\Client;
 use App\Notifications\PaymentTicker;
-use App\Notifications\RegisteredClient;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
@@ -16,6 +15,7 @@ use DateTime;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Laracasts\Flash\Flash;
+use Illuminate\Support\Facades\Notification;
 class ClientController extends Controller
 {
     /**
@@ -40,17 +40,22 @@ class ClientController extends Controller
         define('ACTIVE',1);
         $user = Client::where('id',$id)->where('confirmation_token',$token)->first();
         if ($user) {
-            $user->update([
-                'confirmation_token' => null,
-                'amount' =>  $user->ville->amount,
-                'payment_at' => new DateTime()
-            ]);
+                if ($user->registered_at >= Carbon::today()) {
+                    $user->update([
+                    'confirmation_token' => null,
+                    'amount' =>  $user->ville->amount,
+                    'payment_at' => new DateTime()
+                ]);
 
-            $user->notify(new PaymentTicker());
+                Notification::route('mail','ousmanelaravel@mail.com')
+                    ->notify(new PaymentTicker($user));
+                return redirect('http://localhost:8000')->with('success',"Salut votre billet a ete payer avec succes.<br>Veuillez ouvrire votre comptre gmail pour voir votre ticker electronique et ses instruction");
+            }else{
+                return redirect('http://localhost:8000')->with('error',"Cette date de voyage est passer");
+            }
 
-            return redirect('http://localhost:8000')->with('success',"Salut $user->name votre billet a ete payer avec succes.<br>Veuillez ouvrire votre comptre gmail pour voir votre ticker electronique et ses instruction");
         }else {
-            return redirect('http://localhost:8000')->with('error',"Salut $user->name ce lien ne semble plus valide.<br>Veillez contacter l'agence de transport dont vous etes inscrit");
+            return redirect('http://localhost:8000')->with('error',"Salut chere clien il semble que ce ticker a deja ete payer");
         }
     }
 
@@ -64,6 +69,8 @@ class ClientController extends Controller
                     'amount' =>  $user->ville->amount,
                     'payment_at' => new DateTime()
                 ]);
+                Notification::route('mail',Auth::user()->siege->email)
+                ->notify(new PaymentTicker($user));
                 return back()->with('success','Votre billet a ete payer');
             }elseif ($user->amount == $user->ville->amount) {
                 $user->update([
@@ -177,9 +184,11 @@ class ClientController extends Controller
                     $add_client->ville_id = $request->ville;
                     $add_client->bus_id = $buse->id;
                     $add_client->position = $buse->inscrit;
-                    $add_client->registered_at = $buse->date_depart->depart_at;
+                    $add_client->registered_at = $buse->date_depart->depart_at->format('d-m-y');
+                    $add_client->heure = $buse->date_depart->depart_time;
                     $add_client->confirmation_token = str_replace('/','',Hash::make(Str::random(40)));
                     $add_client->agence = Auth::user()->agence_name;
+                    $add_client->agence_logo = Auth::user()->image_agence;
                     $add_client->save();
                     // $add_client->notify(new RegisteredClient());
                     return back()->with('success','Votre client a ete bien ete ajoute');

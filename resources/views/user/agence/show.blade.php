@@ -138,7 +138,6 @@
                             <p>
                                 <form class="custom-validation" action="{{ route('client.store') }}" method="POST" enctype="multipart/form-data" name="myform" onsubmit="return validation()">
                                     @csrf
-                                    <input type="hidden" name="agence_name" value="{{ $agence->name }}">
                                     <div class="row">
                                         <div class="col-xl-12">
                                             <div class="mb-3">

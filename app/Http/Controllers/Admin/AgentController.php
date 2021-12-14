@@ -10,6 +10,8 @@ use Illuminate\Support\Str;
 use App\Notifications\RegisteredUser;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
+
 class AgentController extends Controller
 {
     /**
@@ -26,17 +28,17 @@ class AgentController extends Controller
        
     }
 
-    public function confirm($id , $token){
-        define('ACTIVE',1);
-        $user = User::where('id',$id)->where('confirmation_token',$token)->first();
-        if ($user) {
-            $user->update(['confirmation_token' => null , 'is_active' => ACTIVE]);
-            $this->guard()->login($user);
-            return redirect($this->redirectPath())->with('success','Votre compte a bien ete confirmer');
-        }else {
-            return redirect('/login')->with('error','Ce lien ne semble plus valide');
-        }
-    }
+    // public function confirm($id , $token){
+    //     define('ACTIVE',1);
+    //     $user = User::where('id',$id)->where('confirmation_token',$token)->first();
+    //     if ($user) {
+    //         $user->update(['confirmation_token' => null , 'is_active' => ACTIVE]);
+    //         $this->guard()->login($user);
+    //         return redirect($this->redirectPath())->with('success','Votre compte a bien ete confirmer');
+    //     }else {
+    //         return redirect('/login')->with('error','Ce lien ne semble plus valide');
+    //     }
+    // }
 
     /**
      * Show the form for creating a new resource.
@@ -57,7 +59,7 @@ class AgentController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'name' => 'required|string|max:255|unique:users',
+            'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'phone' => 'required|string|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
@@ -77,7 +79,8 @@ class AgentController extends Controller
         $add_agent->image_agence = Auth::user()->logo;
         $add_agent->agence_name = Auth::user()->name;
         $add_agent->save();
-        $add_agent->notify(new RegisteredUser());
+        Notification::route('mail',Auth::user()->email)
+                ->notify(new RegisteredUser($add_agent));
         return back()->with('success','Votre agence a bien ete creer');
     }
 
@@ -123,13 +126,13 @@ class AgentController extends Controller
             $update_agent->confirmation_token = str_replace('/','',Hash::make(Str::random(40)));
             $update_agent->image_agence = Auth::user()->logo;
             $update_agent->save();
-            return back()->with('success','Cette agence a ete desactiver');
+            return back()->with('success','Cette agent a ete desactiver');
         }else{
             $update_agent->is_active = ACTIVEAGENCE;
             $update_agent->confirmation_token = null;
             $update_agent->image_agence = Auth::user()->logo;
             $update_agent->save();
-            return back()->with('success','Cette agence a ete activer');
+            return back()->with('success','Cette agent a ete activer');
         }
     }
 

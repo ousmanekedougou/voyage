@@ -12,6 +12,7 @@ use App\Models\Admin\DateDepart;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 
 class ClientController extends Controller
 {
@@ -56,6 +57,7 @@ class ClientController extends Controller
         $date = DateDepart::where('id',$request->date)->first();
         // dd($date->itineraire_id);
         $buse = Bus::where('date_depart_id',$date->id)->where('itineraire_id',$date->itineraire_id)->where('plein',0)->first();
+        
         $clients = Client::where('bus_id',$buse->id)->get();
         $info_email = Client::where('registered_at',$buse->date_depart->depart_at)->where('email',$request->email)->first();
         $info_phone = Client::where('registered_at',$buse->date_depart->depart_at)->where('phone',$request->phone)->first();
@@ -98,11 +100,15 @@ class ClientController extends Controller
                 $add_client->ville_id = $request->ville;
                 $add_client->bus_id = $buse->id;
                 $add_client->position = $buse->inscrit;
-                $add_client->registered_at = $buse->date_depart->depart_at;
+                $add_client->registered_at = $buse->date_depart->depart_at->format('d-m-y');
+                $add_client->heure = $buse->date_depart->depart_time;
                 $add_client->confirmation_token = str_replace('/','',Hash::make(Str::random(40)));
-                $add_client->agence = $request->agence_name;
+                $add_client->agence = $buse->user->agence_name;
+                $add_client->agence_logo = $buse->user->image_agence;
                 $add_client->save();
-                $add_client->notify(new RegisteredClient());
+                
+                Notification::route('mail',$buse->siege->email)
+                ->notify(new RegisteredClient($add_client));
                     return back()->with(
                     [
                         "success" => "Salut $add_client->name votre instcription sur $add_client->agence a bien ete enregistre.

@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\User\Client;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -10,15 +11,15 @@ use Illuminate\Notifications\Notification;
 class PaymentTicker extends Notification
 {
     use Queueable;
-
+    public $client; 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Client $client)
     {
-        //
+        $this->client = $client;
     }
 
     /**
@@ -40,18 +41,7 @@ class PaymentTicker extends Notification
      */
     public function toMail($notifiable)
     { 
-        return (new MailMessage)
-        ->success()
-        ->subject('Ticker de voyage')
-        ->line( $notifiable->name. ' vous venez de paye votre ticker de voyage sur '.$notifiable->agence)
-        ->line(
-            
-            'Place :' .$notifiable->position.
-            '</br> Date du voyage :' .$notifiable->registered_at
-            
-            )
-        ->action('Notification Action', url('/'))
-        ->line('Merci d\'utiliser notre application!');
+       return (new MailMessage)->view('user.notification.paymentClient',['client' => $this->client]);
     }
 
     /**

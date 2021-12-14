@@ -13,6 +13,9 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
+
 class RegisterController extends Controller
 {
     /*
@@ -64,7 +67,8 @@ class RegisterController extends Controller
 
         event(new Registered($user = $this->create($request->all())));
 
-        $user->notify(new RegisteredUser());
+        Notification::route('mail',Auth::user()->email)
+                ->notify(new RegisteredUser($user));
 
         return back()->with('success','Ce compte a bien ete creer');
     }

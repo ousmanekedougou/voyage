@@ -23,12 +23,14 @@ class CreateClientsTable extends Migration
             $table->integer('position')->nullable();
             $table->integer('amount')->nullable();
             $table->dateTime('registered_at')->nullable();
+            $table->time('heure')->nullable();
             $table->dateTime('payment_at')->nullable();
             $table->string('cni')->nullable();
             $table->integer('remboursement')->nullable();
             $table->integer('voyage_status')->default(0);
             $table->dateTime('confirmation_token')->nullable();
-            $table->string('agence');
+            $table->string('agence')->nullable();
+            $table->string('agence_logo')->nullable();
             $table->timestamps();
         });
     }

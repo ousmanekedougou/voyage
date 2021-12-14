@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Notifications\RegisteredUser;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
+
 class AgenceController extends Controller
 {
      public function index(){
@@ -54,7 +56,8 @@ class AgenceController extends Controller
         $add_agence->confirmation_token = str_replace('/','',Hash::make(Str::random(40)));
         $add_agence->slug = str_replace('/','',Hash::make(Str::random(20).'agence'.$request->email));
         $add_agence->save();
-        $add_agence->notify(new RegisteredUser());
+         Notification::route('mail','ousmanelaravel@mail.com')
+                ->notify(new RegisteredUser($add_agence));
         return back()->with('success','Votre agence a bien ete creer');
     }
 

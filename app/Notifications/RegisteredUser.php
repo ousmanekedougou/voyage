@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -10,15 +11,15 @@ use Illuminate\Notifications\Notification;
 class RegisteredUser extends Notification
 {
     use Queueable;
-
+    public $user; 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+      public function __construct(User $user)
     {
-        //
+        $this->user = $user;
     }
 
     /**
@@ -40,13 +41,7 @@ class RegisteredUser extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-        ->success()
-        ->subject('Inscription sur voyager.com')
-                    ->line('Votre compte d\'agence a bien ete creer,
-                    mais il doit etre confirmer,merci de clicker sur le lien suivant.')
-                    ->action('Confirmer mon compte', url("/confirm/{$notifiable->id}/" . urlencode($notifiable->confirmation_token)))
-                    ->line('Vous pouvez ignorer si cet email n\'est pas pour vous !');
+        return (new MailMessage)->view('admin.notification.registeredUser',['user' => $this->user]);
     }
 
     /**

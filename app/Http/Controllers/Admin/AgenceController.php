@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Notifications\RegisteredUser;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class AgenceController extends Controller
 {
@@ -73,8 +74,8 @@ class AgenceController extends Controller
             'slogan' => 'required|string',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
         ]);
-        // dd($request->all());
-         $imageName = '';
+
+        $imageName = '';
         $add_agence = new User();
           if($request->hasFile('image'))
         {
@@ -94,7 +95,8 @@ class AgenceController extends Controller
         $add_agence->slug = str_replace('/','',Hash::make(Str::random(20).'agence'.$request->email));
         $add_agence->user_id = Auth::user()->id;
         $add_agence->save();
-        $add_agence->notify(new RegisteredUser());
+        Notification::route('mail',Auth::user()->email)
+                ->notify(new RegisteredUser($add_agence));
         return back()->with('success','Votre agence a bien ete creer');
     }
 
