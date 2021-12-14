@@ -2,8 +2,8 @@
         
         <div class="container">
             <a class="navbar-logo" href="/">
-                <h3 height="19" class="logo logo-dark">Toucki</h3>
-                <h3  height="19" class="logo logo-light text-dark">Toucki</h3>
+                <h3 height="19" class="logo logo-dark">TouCKi</h3>
+                <h3  height="19" class="logo logo-light text-dark">TouCKi</h3>
                 <!-- <img src="{{asset('admin/assets/images/logo-dark.png')}}" alt="" height="19" class="logo logo-dark">
                 <img src="{{asset('admin/assets/images/logo-light.png')}}" alt="" height="19" class="logo logo-light"> -->
             </a>
@@ -57,7 +57,7 @@
             </div>
         @endif
         --}}
-        {{--
+        
 		@if(session('success'))
 
             <!-- subscribeModal -->
@@ -73,28 +73,17 @@
 
                                 <div class="avatar-md mx-auto mb-4">
                                     <div class="avatar-title bg-light rounded-circle text-primary h1">
-                                        <i class="mdi mdi-email-open"></i>
+                                        <i class="fa fa-user-plus"></i>
                                     </div>
                                 </div>
 
 
                                 <div class="row justify-content-center">
                                     <div class="col-xl-10">
-                                        <h4 class="text-primary">Message d'inscription</h4>
-                                        <p class="text-muted font-size-14 mb-4" style="text-align: left;">
+                                        <h4 class="text-success">Message d'inscription</h4>
+                                        <p class="text-success font-size-14 mb-4 text-left">
                                             {!! session('success') !!}
                                         </p>
-
-                                        <div class="input-group bg-light rounded">
-                                            <input type="email" class="form-control bg-transparent border-0"
-                                                placeholder="Enter Email address" aria-label="Recipient's username"
-                                                aria-describedby="button-addon2">
-
-                                            <button class="btn btn-primary" type="button" id="button-addon2">
-                                                <i class="bx bxs-paper-plane"></i>
-                                            </button>
-
-                                        </div>
 
                                     </div>
                                 </div>
@@ -106,7 +95,7 @@
             <!-- end modal -->
            
 		@endif
-        --}}
+        
         @if(session('error'))
 
             <!-- subscribeModal -->

@@ -31,8 +31,8 @@
 
                                 <div class="media-body overflow-hidden">
                                     <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">{{ $agence->name }}</a></h5>
-                                    <p class="text-muted mb-1"> <i class="bx bx-envelope me-1"></i> {{ $agence->email }}</p>
-                                    <p class="text-muted mb-1"> <i class="bx bx-mobile me-1"></i> {{ $agence->phone }}</p>
+                                    <p class="text-muted mb-1"> <i class="bx bx-envelope me-1"> {{ $agence->email }}</i> </p>
+                                    <p class="text-muted mb-1"> <i class="bx bx-mobile me-1"> {{ $agence->phone }}</i> </p>
                                 </div>
                             </div>
                         </div>

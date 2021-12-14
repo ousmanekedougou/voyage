@@ -205,7 +205,7 @@ class ClientController extends Controller
     {
         $itineraires  = Itineraire::where('user_id',Auth::user()->id)->where('siege_id',Auth::user()->siege_id)->orderBy('id','ASC')->get();
         $buses  = Bus::where('user_id',Auth::user()->id)->where('siege_id',Auth::user()->siege_id)->orderBy('id','ASC')->get();
-        $clients = Client::where('bus_id',$id)->orderBy('id','ASC')->get();
+        $clients = Client::where('bus_id',$id)->orderBy('id','ASC')->paginate(10);
         return view('admin.client.show',compact('clients','itineraires','buses'));
     }
 

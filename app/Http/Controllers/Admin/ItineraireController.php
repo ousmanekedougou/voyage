@@ -24,7 +24,7 @@ class ItineraireController extends Controller
     public function index()
     {
         $villes = Ville::all();
-        $itineraires = Itineraire::where('user_id',Auth::user()->id)->orderBy('id','ASC')->get();
+        $itineraires = Itineraire::where('user_id',Auth::user()->id)->orderBy('id','ASC')->paginate(5);
         return view('admin.itineraire.index',compact('itineraires','villes'));
     }
 

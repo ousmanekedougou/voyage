@@ -49,6 +49,7 @@
                 <div class="row">
                     @foreach($sieges as $siege)
                     <div class="col-md-4">
+                        {{--
                         <div class="card">
                             <div class="card-body">
                                 <div class="media">
@@ -61,8 +62,8 @@
                                     <div class="media-body">
                                         <p class="text-muted">Siege de {{$siege->name}}</p>
                                         <p class="text-muted text-truncate mb-0 siege_info">
-                                            <span> <i class="bx bx-envelope ms-1 text-success"></i> {{$siege->email}} </span> <i class="slash">|</i>
-                                            <span> <i class="bx bx-phone ms-1 text-success"></i> {{$siege->phone}}</span>
+                                            <span> <i class="bx bx-envelope ms-1"> {{$siege->email}}</i>  </span> <i class="slash">|</i>
+                                            <span> <i class="bx bx-phone ms-1"> {{$siege->phone}}</i> </span>
                                         </p>
                                         <p class="text-muted text-truncate mb-0 mt-3">
                                             <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$siege->id}}" class="btn btn-outline-primary btn-xs"> <i
@@ -72,6 +73,47 @@
                                         </p>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                        --}}
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="text-lg-center">
+                                            <div
+                                                class="avatar-sm me-3 mx-lg-auto mb-3 mt-1 float-start float-lg-none">
+                                                <span
+                                                    class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-16">
+                                                    @if($siege->image == '')
+                                                     <i class="mdi mdi-bus"></i>
+                                                     @else
+                                                    <img src="{{Storage::url($siege->image)}}" alt="" style="width:100%;">
+                                                    @endif
+                                                </span>
+                                            </div>
+                                            <h5 class="mb-1 font-size-10 text-uppercase siege_show_title"> Siege de {{ $siege->name }}</h5>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-8">
+                                        <div>
+                                            <h6 class="text-truncate "><i class="fa fa-mobile"> {{$siege->phone}}</i></h6>
+                                            <p class="mb-4 mb-lg-5 d-flex"><i class="fa fa-envelope" style="font-size: 11px;"> {{$siege->email}}</i></p>
+                                            <ul class="list-inline mb-0">
+                                                <li class="list-inline-item me-3">
+                                                     <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$siege->id}}" class="badge bg-primary btn-xs"> <i
+                                                            class="fa fa-user-plus"> S'isncrire</i> </a>
+                                                </li>
+                                                 <li class="list-inline-item me-3">
+                                                   <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$siege->id}}" class="badge bg-info btn-xs"> <i
+                                                            class="fa fa-user-plus"> Contacter</i> </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>

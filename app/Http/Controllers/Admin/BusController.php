@@ -24,10 +24,7 @@ class BusController extends Controller
     public function index()
     {
         $itineraires = Itineraire::where('user_id',Auth::user()->id)->where('siege_id',Auth::user()->siege_id)->orderBy('id','ASC')->get();
-        $buses = Bus::where('user_id',Auth::user()->id)->where('siege_id',Auth::user()->siege_id)->orderBy('id','ASC')->get();
-        foreach ($buses as $b) {
-            // Bus::where($b->date_depart->depart_at,'<=',Carbon::yesterday())->delete();
-        }
+        $buses = Bus::where('user_id',Auth::user()->id)->where('siege_id',Auth::user()->siege_id)->orderBy('id','ASC')->paginate(5);
         return view('admin.bus.index',compact('buses','itineraires'));
     }
 

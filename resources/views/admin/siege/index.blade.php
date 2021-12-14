@@ -54,33 +54,11 @@
                                                 </td>
                                                 <td>{{$siege->phone}}</td>
                                                 <td><span class="badge bg-success">{{$siege->adress}}</span></td>
-                                                <td>
+                                                <td class="text-center">
                                                     <div class="avatar-group">
-                                                        <div class="avatar-group-item">
-                                                            <a href="javascript: void(0);" class="d-inline-block">
-                                                                <img src="assets/images/users/avatar-4.jpg" alt=""
-                                                                    class="rounded-circle avatar-xs">
-                                                            </a>
-                                                        </div>
-                                                        <div class="avatar-group-item">
-                                                            <a href="javascript: void(0);" class="d-inline-block">
-                                                                <img src="assets/images/users/avatar-5.jpg" alt=""
-                                                                    class="rounded-circle avatar-xs">
-                                                            </a>
-                                                        </div>
-                                                        <div class="avatar-group-item">
-                                                            <a href="javascript: void(0);" class="d-inline-block">
-                                                                <div class="avatar-xs">
-                                                                    <span
-                                                                        class="avatar-title rounded-circle bg-success text-white font-size-16">
-                                                                        A
-                                                                    </span>
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                                        <div class="avatar-group-item">
-                                                            <a href="javascript: void(0);" class="d-inline-block">
-                                                                <img src="assets/images/users/avatar-2.jpg" alt=""
+                                                        <div class="text-center">
+                                                            <a href="{{ route('admin.agent.show',$siege->id) }}" class="d-inline-block">
+                                                                <img src="{{asset('admin/assets/images/users/avatar-2.jpg')}}" alt=""
                                                                     class="rounded-circle avatar-xs">
                                                             </a>
                                                         </div>

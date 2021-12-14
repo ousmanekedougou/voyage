@@ -82,13 +82,13 @@ class ClientController extends Controller
                     return back()->with('error','votre numero de telephone est invalid');
                 }
 
-                $cni_final = '';
+                $cni_final = $request->cni;
 
-                if (strlen($request->cni == 13)) {
-                    $cni_final = $request->cni;
-                }else{
-                    return back()->with('error','votre numero de piece est invalide');
-                }
+                // if (strlen($request->cni == 13)) {
+                //     $cni_final = $request->cni;
+                // }else{
+                //     return back()->with('error','votre numero de piece est invalide');
+                // }
                 
                 $add_client = new Client();
                 $add_client->name = $request->name;

@@ -39,19 +39,17 @@
                                                                 class="avatar-sm me-3 mx-lg-auto mb-3 mt-1 float-start float-lg-none">
                                                                 <span
                                                                     class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-16">
-                                                                    M
+                                                                    <img src="{{Storage::url($agent->image)}}" alt="" style="width:100%;">
                                                                 </span>
                                                             </div>
-                                                            <!-- <h5 class="mb-1 font-size-10">{{ $agent->name }}</h5> -->
-                                                            <a href="#" class="text-muted">{{$agent->phone}}</a>
+                                                            <h5 class="mb-1 font-size-10">{{ $agent->name }}</h5>
                                                         </div>
                                                     </div>
 
                                                     <div class="col-lg-8">
                                                         <div>
-                                                            <h5 class="text-truncate ">{{$agent->name}}</h5>
-                                                            <a href="invoices-detail.html"
-                                                                class="d-block text-primary mb-4 mb-lg-5">{{$agent->email}}</a>
+                                                            <h6 class="text-truncate "><i class="fa fa-mobile"> {{$agent->phone}}</i></h6>
+                                                            <p class="mb-4 mb-lg-5 d-flex"><i class="fa fa-envelope"> {{$agent->email}}</i></p>
                                                             <ul class="list-inline mb-0">
                                                                 <li class="list-inline-item me-3">
                                                                     @if($agent->is_active == 1)
