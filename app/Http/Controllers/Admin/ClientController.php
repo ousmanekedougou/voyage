@@ -40,7 +40,7 @@ class ClientController extends Controller
         define('ACTIVE',1);
         $user = Client::where('id',$id)->where('confirmation_token',$token)->first();
         if ($user) {
-                if ($user->registered_at >= Carbon::today()) {
+                if ($user->registered_at >= Carbon::today()->format('d-m-y')) {
                     $user->update([
                     'confirmation_token' => null,
                     'amount' =>  $user->ville->amount,

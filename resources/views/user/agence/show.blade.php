@@ -222,8 +222,10 @@
                                                             @foreach($siege->itineraires as $itineraire)
                                                                 <optgroup label="{{$itineraire->name}}">
                                                                     @foreach($itineraire->date_departs as $date)
-                                                                        @if($date->buses->count() >= 1)
-                                                                            <option value="{{ $date->id }}"> le {{$date->depart_at->format('d-m-y')}}</option>
+                                                                        @if($date->depart_at >= carbon_today())
+                                                                            @if($date->buses->count() >= 1)
+                                                                                <option value="{{ $date->id }}"> le {{$date->depart_at->format('d-m-y')}}</option>
+                                                                            @endif
                                                                         @endif
                                                                     @endforeach
                                                                 </optgroup>
