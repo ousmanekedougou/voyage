@@ -39,25 +39,32 @@
         width: 140%;
     }
     .place,.rendez_vous,.phone{
-        width: 40%;
+        width: 30%;
         text-align: center;
     }
     .info_tiker .place{
         text-align: left;
     }
     .nb_info{
-        width: 180%;
+        width: 100%;
     }
     .nb_info .nb{
         width: 100%;
-        font-size: 7px;
+        font-size: 11px;
     }
     .date_depart{
         text-align: center;
         font-weight: bold;
     }
-    .tr_border{
-        border-bottom:1px solid black ;
+    .div_border{
+        display: flex;
+    }
+    .content-block{
+         width: 30%;
+    }
+    .content-block2{
+        width: 70%;
+        text-align: right;
     }
 </style>
 
@@ -86,7 +93,7 @@
                                             <table class="main" width="100%" cellpadding="0" cellspacing="0" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; border-radius: 7px; background-color: #fff; color: #495057; margin: 0;" bgcolor="#fff">
                                                 <div class="tr_col">
                                                    <div class="col-left">
-                                                       <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSH_lEEQtzmAMFgpO7fEYL5tR96h46b1zkgKA&usqp=CAU" alt="" srcset="">
+                                                       <img src="http://localhost:8000{{$image}}" alt="" srcset="">
                                                    </div>
                                                    <div class="col-rigth">
                                                        <h1>{{$client->agence}}</h1>
@@ -98,49 +105,49 @@
                                                     <td class="content-wrap" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 20px;" valign="top">
                                                         <p class="date_depart">Date Depart : {{$client->registered_at}}</p>
                                                         <table width="100%" cellpadding="0" cellspacing="0" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"> 
-                                                            <tr class="tr_border" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
-                                                                <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
+                                                            <div class="div_border" style="display: flex; font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                                <div class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
                                                                     Prenom & Nom
-                                                                </td>
-                                                                <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
+                                                                </div>
+                                                                <div class="content-block2" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
                                                                     {{$client->name}}
-                                                                </td>
-                                                            </tr>
-                                                            <tr class="tr_border" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
-                                                                <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
+                                                                </div>
+                                                            </div>
+                                                            <div class="div_border" style="display: flex;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                                <div class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
                                                                     Voyage pour
-                                                                </td>
-                                                                <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
+                                                                </div>
+                                                                <div class="content-block2" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
                                                                     {{$client->ville->name}}
-                                                                </td>
-                                                            </tr>
-                                                            <tr class="tr_border" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
-                                                                <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
+                                                                </div>
+                                                            </div>
+                                                            <div class="div_border" style="display: flex;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                                <div class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
                                                                     Tarif
-                                                                </td>
-                                                                <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
+                                                                </div>
+                                                                <div class="content-block2" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
                                                                     {{$client->ville->amount}} f
-                                                                </td>
-                                                            </tr>
+                                                                </div>
+                                                            </div>
 
-                                                            <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
-                                                                <td class="content-block info_tiker">
+                                                            <div style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                                <div class=" info_tiker">
                                                                     <span class="place">Place : {{$client->position}}</span>
                                                                     <span class="rende_vous">RV : {{$client->heure}}</span>
                                                                     <span class="phone">Tel : 778909876</span>
-                                                                </td>
-                                                            </tr>
-                                                            <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
-                                                                <td class="nb_info">
+                                                                </div>
+                                                            </div>
+                                                            <div style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                                <div class="nb_info">
                                                                     <p class="nb">Nous portons a votre connaissance qu'auccun rembourssement n,est admin après le depart du vehicule</p>
-                                                                </td>
-                                                            </tr>
+                                                                </div>
+                                                            </div>
 
-                                                            <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
-                                                                <td class="content-block" style="text-align: center;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0;" valign="top">
-                                                                    © <script>document.write(new Date().getFullYear())</script> TouCKi
-                                                                </td>
-                                                            </tr>
+                                                            <div style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                                <div class="" style="text-align: center;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0;" valign="top">
+                                                                    © <script>document.write(new Date().getFullYear())</script> <span style="font-weight: 900;">TouCKi</span>
+                                                                </div>
+                                                            </div>
                                                         </table>
                                                     </td>
                                                 </tr>

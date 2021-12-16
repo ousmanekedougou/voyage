@@ -7,6 +7,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Storage;
 
 class PaymentTicker extends Notification
 {
@@ -41,7 +42,12 @@ class PaymentTicker extends Notification
      */
     public function toMail($notifiable)
     { 
-       return (new MailMessage)->view('user.notification.paymentClient',['client' => $this->client]);
+        $image = Storage::url($this->client->agence_logo); 
+        // dd($image);
+       return (new MailMessage)->view('user.notification.paymentClient',[
+            'client' => $this->client,
+            'image' => $image
+           ]);
     }
 
     /**

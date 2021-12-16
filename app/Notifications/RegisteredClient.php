@@ -7,6 +7,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Storage;
 
 class RegisteredClient extends Notification
 {
@@ -41,7 +42,11 @@ class RegisteredClient extends Notification
      */
     public function toMail($notifiable)
     {
-           return (new MailMessage)->view('user.notification.registeredClient',['client' => $this->client]);
+            $image = Storage::url($this->client->agence_logo); 
+           return (new MailMessage)->view('user.notification.registeredClient',[
+               'client' => $this->client,
+               'image' => $image
+               ]);
     }
 
     /**

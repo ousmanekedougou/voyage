@@ -100,8 +100,9 @@ class ClientController extends Controller
                 $add_client->ville_id = $request->ville;
                 $add_client->bus_id = $buse->id;
                 $add_client->position = $buse->inscrit;
-                $add_client->registered_at = $buse->date_depart->depart_at->format('d-m-y');
-                $add_client->heure = $buse->date_depart->depart_time;
+                $add_client->registered_at = $buse->date_depart->depart_at->format('Y/m/d');
+                // dd($add_client->registered_at);
+                $add_client->heure = $buse->date_depart->rendez_vous;
                 $add_client->confirmation_token = str_replace('/','',Hash::make(Str::random(40)));
                 $add_client->agence = $buse->user->agence_name;
                 $add_client->agence_logo = $buse->user->image_agence;
