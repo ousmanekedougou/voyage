@@ -111,7 +111,7 @@
                                         <div class="tab-content">
                                             <div class="tab-pane fade show active" id="v-pills-gen-ques"
                                                 role="tabpanel">
-                                                <h4 class="card-title mb-4">General Questions</h4>
+                                                <h4 class="card-title mb-4">Questions générales</h4>
 
                                                 <div>
                                                     <div id="gen-ques-accordion" class="accordion custom-accordion">
@@ -142,7 +142,7 @@
                                                                 class="accordion-list collapsed"
                                                                 data-bs-toggle="collapse" aria-expanded="false"
                                                                 aria-controls="general-collapseTwo">
-                                                                <div>Why do we use it ?</div>
+                                                                <div>Pourquoi l'utilisons-nous ?</div>
                                                                 <i class="mdi mdi-minus accor-plus-icon"></i>
                                                             </a>
                                                             <div id="general-collapseTwo" class="collapse"
@@ -163,7 +163,7 @@
                                                                 class="accordion-list collapsed"
                                                                 data-bs-toggle="collapse" aria-expanded="false"
                                                                 aria-controls="general-collapseThree">
-                                                                <div>Where does it come from ?</div>
+                                                                <div>D'où est ce que ça vient ?</div>
                                                                 <i class="mdi mdi-minus accor-plus-icon"></i>
                                                             </a>
                                                             <div id="general-collapseThree" class="collapse"
@@ -183,7 +183,7 @@
                                                                 class="accordion-list collapsed"
                                                                 data-bs-toggle="collapse" aria-expanded="false"
                                                                 aria-controls="general-collapseFour">
-                                                                <div>Where can I get some ?</div>
+                                                                <div>Où puis-je m'en procurer ?</div>
                                                                 <i class="mdi mdi-minus accor-plus-icon"></i>
                                                             </a>
                                                             <div id="general-collapseFour" class="collapse"

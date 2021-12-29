@@ -40,7 +40,7 @@ class ClientController extends Controller
         define('ACTIVE',1);
         $user = Client::where('id',$id)->where('confirmation_token',$token)->first();
         if ($user) {
-                if ($user->registered_at >= Carbon::today()->format('d-m-y')) {
+                if ($user->registered_at >= Carbon::today()) {
                     $user->update([
                     'confirmation_token' => null,
                     'amount' =>  $user->ville->amount,
@@ -72,18 +72,6 @@ class ClientController extends Controller
                 Notification::route('mail',Auth::user()->siege->email)
                 ->notify(new PaymentTicker($user));
                 return back()->with('success','Votre billet a ete payer');
-            }elseif ($user->amount == $user->ville->amount) {
-                $user->update([
-                    'amount' =>  2,
-                    'voyage_status' => 2
-                ]);
-                return back()->with('success','Votre client a bien ete rembourser');
-            }elseif ($user->amount == 2) {
-                $user->update([
-                    'amount' => $user->ville->amount,
-                    'voyage_status' => 0
-                ]);
-                return back()->with('success','Le remboursement de ce client a ete anuller');
             }
         }
         else {
@@ -157,7 +145,7 @@ class ClientController extends Controller
                     $pl = $buse->inscrit;
                     $buse->inscrit = $pl + 1;
                     $buse->save();
-
+                    
                     $phoneFinale = '';
                     $phoneComplet = '221'.$request->phone;
                     if (strlen($request->phone) == 13 ) {
@@ -168,23 +156,25 @@ class ClientController extends Controller
                         return back()->with('error','votre numero de telephone est invalid');
                     }
 
-                     $cni_final = '';
+                    //  $cni_final = '';
 
-                    if (strlen($request->cni == 13)) {
-                        $cni_final = $request->cni;
-                    }else{
-                        return back()->with('error','votre numero de piece est invalide');
-                    }
+                    // if (strlen($request->cni == 13)) {
+                    //     $cni_final = $request->cni;
+                    // }else{
+                    //     return back()->with('error','votre numero de piece est invalide');
+                    // }
+
+                    // dd($phoneFinale);
                     
                     $add_client = new Client();
                     $add_client->name = $request->name;
                     $add_client->email = $request->email;
                     $add_client->phone = $phoneFinale;
-                    $add_client->cni = $cni_final;
+                    $add_client->cni = $request->cni;
                     $add_client->ville_id = $request->ville;
                     $add_client->bus_id = $buse->id;
                     $add_client->position = $buse->inscrit;
-                    $add_client->registered_at = $buse->date_depart->depart_at->format('d-m-y');
+                    $add_client->registered_at = $buse->date_depart->depart_at;
                     $add_client->heure = $buse->date_depart->rendez_vous;
                     $add_client->confirmation_token = str_replace('/','',Hash::make(Str::random(40)));
                     $add_client->agence = Auth::user()->agence_name;
@@ -289,9 +279,18 @@ class ClientController extends Controller
 
     public function presence(Request $request ,$id){
         $client_present = Client::where('id',$id)->first();
-        $client_present->voyage_status = $request->presence;
-        $client_present->save();
-        return back()->with('success','Votre client a ete attibuer');
+        if ($client_present->amount == $client_present->ville->amount) {
+            $client_present->voyage_status = $request->presence;
+            $client_present->save();
+            return back()->with('success','Votre client a ete attribuer');
+        }else {
+            return back()->with('error','Vous ne pouvez pas modifier un client qui n\'a pas payer son ticker');
+        }
+    }
+
+    public function ticker(Request $request , $id){
+        $client_ticker = Client::where('id',$id)->first();
+        return view('admin.print.index',compact('client_ticker')); 
     }
 
     /**

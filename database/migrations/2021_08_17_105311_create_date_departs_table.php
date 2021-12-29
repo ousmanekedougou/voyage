@@ -15,7 +15,7 @@ class CreateDateDepartsTable extends Migration
     {
         Schema::create('date_departs', function (Blueprint $table) {
             $table->id();
-             $table->date('depart_at');
+            $table->date('depart_at');
             $table->time('depart_time');
             $table->time('rendez_vous');
             $table->integer('itineraire_id');

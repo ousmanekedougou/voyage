@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Admin\Bus;
+use App\Models\Admin\Historical;
 use App\Models\Admin\Itineraire;
 use App\Models\Admin\Part;
 use App\Models\Admin\Siege;
@@ -82,6 +83,13 @@ if (! function_exists('part')) {
         define('ACTIVE',1);
         $part = Part::where('is_active',ACTIVE)->get();
         return $part;
+    }
+}
+
+if (! function_exists('historical')) {
+    function historical(){
+        $historical = Historical::all();
+        return $historical;
     }
 }
 

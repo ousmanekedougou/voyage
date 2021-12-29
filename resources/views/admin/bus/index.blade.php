@@ -92,7 +92,7 @@
                                                     </td>
 
                                                     <td>
-                                                        {{ $bus->date_depart->depart_at->format('d-m-y') }}
+                                                        {{ $bus->date_depart->depart_at }}
                                                     </td>
                                                     
                                                     <td>
@@ -160,7 +160,7 @@
                         <div class="modal-dialog modal-md modal-dialog-centered" role="document">
                             <div class="modal-content ">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel">Ajouter un bus</h5>
+                                    <h5 class="modal-title" id="staticBackdropLabel">Modifier le bus {{$edit_bus->matricule}}</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                     <div class="modal-body">
@@ -206,7 +206,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="mb-3 row">
+                                                        {{--<div class="mb-3 row">
                                                             <label class="form-label">Selectionner un status</label>
                                                             <div class="col-md-12">
                                                                 <select class="form-select" class="form-control @error('status') is-invalid @enderror" name="status" required autocomplete="status" required>
@@ -228,7 +228,7 @@
                                                                 @enderror
                                                             </div>
                                                         </div>
-
+                                                        --}}
                                                         <div class="mb-3 row">
                                                             <label class="form-label">Selectionner un itineraire</label>
                                                             <div class="col-md-12">
@@ -255,7 +255,7 @@
                                                                     @foreach($itineraires as $itineraire)
                                                                             <optgroup label="{{$itineraire->name}}">
                                                                                 @foreach($itineraire->date_departs as $date)
-                                                                                    <option value="{{ $date->id }}"> {{ $date->depart_at->format('d-m-y') }}</option>
+                                                                                    <option value="{{ $date->id }}"> {{ $date->depart_at }}</option>
                                                                                 @endforeach
                                                                             </optgroup>
                                                                         @endforeach
@@ -286,61 +286,7 @@
                 @endforeach
                 <!-- Fin du modal de la modification -->
 
-                <!-- Modal de la suppression-->
-                @foreach($buses as $bus)
-                    <div class="modal fade orderEditbusModal-{{ $bus->id }}" tabindex="-1" role="dialog" aria-labelledby=orderdetailsModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header border-bottom-0">
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="text-center mb-4">
-                                        <div class="avatar-md mx-auto mb-4">
-                                            <div class="avatar-title bg-light rounded-circle text-primary h1">
-                                                <img src="{{ asset('admin/assets/images/users/profil.jpg') }}" alt="" class="img-thumbnail rounded-circle">
-                                            </div>
-                                        </div>
-
-                                        <div class="row justify-content-center">
-                                            <div class="col-xl-10">
-                                                <h4 class="text-primary">{{$bus->name}}</h4>
-                                                <p class="text-muted font-size-14 mb-4">
-                                                    @if($bus->isActive == 1)
-                                                        Ce compte est actif
-                                                    @else
-                                                        Ce compte est desactive
-                                                    @endif
-                                                </p>
-
-                                                <div class="input-group bg-white rounded">
-                                                        <form  id="update-form-{{$bus->id}}" method="post" action="{{ route('admin.bus.update',$bus->id) }}">
-                                                            <div class="form-check form-switch form-switch-lg mb-3" dir="ltr" style="width: 100%;">
-                                                                <input class="form-check-input" name="isActive" type="checkbox" id="SwitchCheckSizelg"
-                                                                @if($bus->isActive == 1)
-                                                                    checked
-                                                                @endif
-                                                                >
-                                                                <label class="form-check-label" for="SwitchCheckSizelg">Option d'activation du compte</label>
-                                                            </div>
-                                                            {{csrf_field()}}
-                                                            {{method_field('PUT')}}
-                                                        </form>
-                                                        <a  href="" onclick=" if(confirm('Etes Vous sure de que la commande a ete payer ?')){  event.preventDefault();document.getElementById('update-form-{{$bus->id}}').submit();
-                            
-                                                        }else{event.preventDefault();} " class="btn btn-success btn-block" style="width: 100%;"><i class="fas fa-credit-card me-2"></i>Enregistre la modification</a>
-                                                        
-                                                </div>
-                                                
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-                <!-- end modal de la suppression-->
+               
 
 
                  <!-- Static Backdrop Modal de la liste des ville -->
@@ -419,7 +365,7 @@
                                                 </div>
 
                                                
-
+                                                {{--
                                                 <div class="mb-3 row">
                                                     <label class="form-label">Selectionner un status</label>
                                                     <div class="col-md-12">
@@ -434,7 +380,7 @@
                                                         @enderror
                                                     </div>
                                                 </div>
-
+                                                --}}
                                                 <div class="mb-3 row">
                                                     <label class="form-label">Selectionner un itineraire</label>
                                                     <div class="col-md-12">
@@ -457,7 +403,7 @@
                                                                @foreach($itineraires as $itineraire)
                                                                     <optgroup label="{{$itineraire->name}}">
                                                                         @foreach($itineraire->date_departs as $date)
-                                                                            <option value="{{ $date->id }}"> {{ $date->depart_at->format('d-m-y') }}</option>
+                                                                            <option value="{{ $date->id }}"> {{ $date->depart_at }}</option>
                                                                         @endforeach
                                                                     </optgroup>
                                                                 @endforeach

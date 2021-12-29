@@ -53,14 +53,10 @@
                                             <th>#</th>
                                             <th>Prenom et nom</th>
                                             <th>Telephone</th>
-                                            <th>CNI</th>
-                                            <th>Itineraires</th>
-                                            <th>Voyage</th>
-                                            <th>Bus</th>
-                                            <th>Place</th>
+                                            <th>Destination</th>
                                             <th>Paiment</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
+                                            <th>Presence</th>
+                                            <th>Options</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -78,28 +74,8 @@
                                             <td>
                                                 <p class="mb-1">{{$client->phone}}</p>
                                             </td>
-
-                                            <td>
-                                                <p class="mb-1">{{$client->cni}}</p>
-                                            </td>
-
-                                            <td>
-                                                <p class="mb-1">{{$client->ville->itineraire->name}}</p>
-                                            </td>
                                             <td>
                                                 <p class="mb-1">{{$client->ville->name}}</p>
-                                            </td>
-                                            <td>
-                                                <p class="mb-1">{{$client->bus->matricule}}</p>
-                                            </td>
-                                                <td>
-                                                <p class="mb-1">
-                                                    @if($client->position == 1)
-                                                        {{$client->position}} ere
-                                                    @else
-                                                        {{$client->position}} em 
-                                                    @endif
-                                                </p>
                                             </td>
                                             <td>
                                                     <p class="mb-1">
@@ -107,11 +83,9 @@
                                                         <a href="" class="badge bg-primary font-size-12" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-danger" data-bs-target="#staticBackdroppaiment-{{ $client->id }}">
                                                             <i class="bx bx-money  me-1 text-white"> 0 f </i></a>
                                                     @elseif($client->amount == $client->ville->amount)
-                                                        <a href="" class="badge bg-success font-size-12" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-danger" data-bs-target="#staticBackdroppaiment-{{ $client->id }}"> 
+                                                        <a class="badge bg-success font-size-12 text-white" role="button"> 
                                                             {{ $client->amount }} f</i>
                                                         </a>
-                                                    @elseif($client->amount == 2)
-                                                        <a href="" class="badge bg-danger font-size-12" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-danger" data-bs-target="#staticBackdroppaiment-{{ $client->id }}"><i class="bx bx-money me-1"></i> Rembourse</a>
                                                     @endif
                                                 </p>
                                             </td>
@@ -143,7 +117,8 @@
                                                     @endif -->
 
                                                     <a href="javascript:void(0);" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-primary" data-bs-target="#staticBackdrop-{{$client->id}}"><i class="bx bx-edit mt-1 font-size-18"></i></a>
-                                                    <a href="javascript:void(0);" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-primary" data-bs-target="" onclick="PrintReceiptContent('iprimerTiker-{{ $client->id }}')"><i class="fa fa-print mt-1 font-size-18"></i></a>
+                                                    <a href="{{ route('admin.ticker',$client->id) }}" role="button"  class="text-primary"><i class="fa fa-print mt-1 font-size-18"></i></a>
+                                                    <a href="javascript:void(0);" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-suucess" data-bs-target="#subscribeModalagenceDetails-{{ $client->id }}"><i class="mdi mdi-eye font-size-18"></i></a>
                                                     <a href="javascript:void(0);" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-danger" data-bs-target="#subscribeModalclient-{{ $client->id }}"><i class="mdi mdi-delete font-size-18"></i></a>
                                                     <div class="modal modal-xs fade" id="subscribeModalclient-{{ $client->id }}" tabindex="-1" aria-labelledby="subscribeModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered">
@@ -154,21 +129,21 @@
                                                                 <div class="modal-body">
                                                                     <div class="text-center mb-4">
                                                                         <div class="avatar-md mx-auto mb-4">
-                                                                            <div class="avatar-title bg-warning rounded-circle text-white h1">
-                                                                                <i class="fa fa-exclamation-circle"></i>
+                                                                            <div class="avatar-title bg-danger rounded-circle text-white h1">
+                                                                                <i class="fa fa-trash"></i>
                                                                             </div>
                                                                         </div>
 
                                                                         <div class="row justify-content-center">
                                                                             <div class="col-xl-10">
-                                                                                <h4 class="text-danger">Attention !</h4>
+                                                                                <h4 class="text-danger text-uppercase">Attention !</h4>
                                                                                 <p class="text-muted font-size-14 mb-4">Etes vous sure de bien vouloire supprimer {{ $client->name }}</p>
 
                                                                                 <div class="input-group bg-white rounded text-center" style="text-align:center;">
                                                                                     <form method="post" action="{{ route('admin.client.destroy',$client->id) }}"  style="display:flex;text-align:center;width:100%;">
                                                                                         {{csrf_field()}}
                                                                                         {{method_field('delete')}}
-                                                                                        <button type="submit" class="btn btn-danger btn-xs" style="margin-left: 70px;margin-right:20px;"> Oui je veux bient </button> 
+                                                                                        <button type="submit" class="btn btn-danger btn-xs" style="margin-left: 70px;margin-right:20px;"> Oui je veux bien </button> 
                                                                                         <button type="button" class="btn btn-success btn-xs" data-bs-dismiss="modal" aria-label="Close"> x Anuller</button>
                                                                                     </form>
                                                                                 </div>
@@ -200,61 +175,65 @@
 
     <!-- Modal pour la presence du client -->
     @foreach($clients as $client_presence)
-        <div class="modal fade modal-xs modal-center" id="subscribeModalagence-{{$client_presence->id}}" data-bs-backdrop="static"
-            data-bs-keyboard="false" tabindex="-1" role="dialog"
-            aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">
-                                <span class="text-muted">Etse vous sure de modifier {{ $client_presence->name }}</span>
-                        </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                    </div>
-                    <form action="{{ route('admin.client.presence',$client_presence->id) }}" method="post" >
-                        <div class="modal-body">
-                            <p>
-                                <div class="mt-4 d-flex text-center">
-                                    <div style="margin-left: 30px;margin-right: 30px;">
-                                        <div class="form-check form-check-right">
-                                            <input class="form-check-input" type="radio" 
-                                                name="presence" value="1" id="formRadiosRight1presnce" 
-                                                    @if($client_presence->voyage_status == 1) checked @endif
-                                                >
-                                            <label class="form-check-label" for="formRadiosRight1presnce">
-                                                A voyager
-                                            </label>
-                                        </div>
-                                    </div>
 
-                                    <div style="margin-left: 30px;">
-                                        <div class="form-check form-check-right">
-                                            <input class="form-check-input" type="radio" 
-                                                name="presence" value="2" id="formRadiosRight2absence">
-                                            <label class="form-check-label" for="formRadiosRight2absence"
-                                                @if($client_presence->voyage_status == 2) checked @endif
-                                            >
-                                                Est absent
-                                            </label>
-                                        </div>
+        <div class="modal modal-xs fade" id="subscribeModalagence-{{ $client_presence->id }}" tabindex="-1" aria-labelledby="subscribeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header border-bottom-0">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="text-center mb-4">
+
+                            <div class="row justify-content-center">
+                                <div class="col-xl-10">
+                                    <h4 class="text-warning text-uppercase">Presence !</h4>
+                                    <p class="text-muted font-size-14 mb-1">Etes vous sure de bien vouloire modifier la presence de {{ $client_presence->name }}</p>
+                                    <p class="font-size-14 badge bg-warning text-white">Destination : {{$client_presence->ville->name}} | Somme : {{ $client_presence->ville->amount}} f</p>
+
+                                    <div class="input-group bg-white rounded text-center" style="text-align:center;">
+                                        <form method="post" action="{{ route('admin.client.presence',$client_presence->id) }}"  style="display:block;text-align:center;width:100%;">
+                                            {{csrf_field()}}
+                                            {{method_field('PUT')}}
+                                            <p class="text-muted font-size-14 mb-4">
+                                                <div class="d-flex text-center">
+                                                    <div style="margin-left: 30px;margin-right: 30px;">
+                                                        <div class="form-check form-check-left">
+                                                            <input class="form-check-input" type="radio" 
+                                                                name="presence" value="1" id="formRadiosRight1presnce" 
+                                                                    @if($client_presence->voyage_status == 1) checked @endif
+                                                                >
+                                                            <label class="form-check-label" for="formRadiosRight1presnce">
+                                                                A voyager
+                                                            </label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div style="margin-left: 30px;">
+                                                        <div class="form-check form-check-right">
+                                                            <input class="form-check-input" type="radio" 
+                                                                name="presence" value="2" id="formRadiosRight2absence">
+                                                            <label class="form-check-label" for="formRadiosRight2absence"
+                                                                @if($client_presence->voyage_status == 2) checked @endif
+                                                            >
+                                                                Est absent
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </p>
+
+                                            <button type="submit" class="btn btn-success btn-xs" style="margin-left: 70px;margin-right:20px;"> Oui je veux bien </button> 
+                                            <button type="button" class="btn btn-danger btn-xs" data-bs-dismiss="modal" aria-label="Close"> x Anuller</button>
+                                        </form>
                                     </div>
                                 </div>
-                            </p>
+                            </div>
                         </div>
-                        <div class="modal-footer" class="text-center">
-                            {{csrf_field()}}
-                            {{method_field('PUT')}}
-                                <input type="hidden" name="voyage_status" value="{{$client_presence->voyage_status}}">
-
-                            <button type="reset" class="btn btn-light"
-                                data-bs-dismiss="modal">Ferner</button>
-                            <button type="submit" class="btn btn-primary">Modifier </button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
-        </div>
+        </div> 
     @endforeach
     <!-- Fin du modal pour la presence du client -->
 
@@ -358,7 +337,7 @@
                                                             <optgroup label="{{$itineraire->name}}">
                                                                 @foreach($itineraire->date_departs as $date)
                                                                     @if($date->buses->count() >= 1)
-                                                                        <option value="{{ $date->id }}"> le {{$date->depart_at->format('d-m-y')}}</option>
+                                                                        <option value="{{ $date->id }}"> le {{$date->depart_at}}</option>
                                                                     @endif
                                                                 @endforeach
                                                             </optgroup>
@@ -422,54 +401,39 @@
 
         <!-- Static Backdrop Modal du paiment -->
     @foreach($clients as $client_tdy)
-    <div class="modal fade" id="staticBackdroppaiment-{{$client_tdy->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-md modal-dialog-centered" role="document">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">
-                            Avis du paiment du client {{ $client_tdy->name }}
-                        </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        @if($client_tdy->amount == Null)
-                            <h5 class="modal-title" id="staticBackdropLabel">Accepter le paiement du client {{ $client_tdy->name }}</h4>
-                        @elseif($client_tdy->amount == $client_tdy->ville->amount)
-                            <h5 class="modal-title" id="staticBackdropLabel">Remourser le client {{ $client_tdy->name }}</h4>
-                        @elseif($client_tdy->amount == 2)
-                            <h5 class="modal-title" id="staticBackdropLabel">Le client {{ $client_tdy->name }} a ete rembourser le {{ $client_tdy->updated_at }}</h4>
-                        @endif
-                    </div>
-                    <div class="modal-footer">
-                        <form action="{{ route('admin.payer',$client_tdy->id) }}" method="post">
-                            {{csrf_field()}}
-                            {{method_field('PUT')}}
-                                <input type="hidden" name="client_amount" value="{{$client_tdy->client_amount}}">
-                                <input type="hidden" name="confirmation_token" value="{{$client_tdy->confirmation_token}}">
+     <div class="modal modal-xs fade" id="staticBackdroppaiment-{{ $client_tdy->id }}" tabindex="-1" aria-labelledby="subscribeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
 
-                            <button type="reset" class="btn btn-light"
-                                data-bs-dismiss="modal">Ferner</button>
-                            @if($client_tdy->amount == Null)
-                            <button type="submit"
-                                class="btn btn-success">Valider le paiement
-                            </button>
-                            @elseif($client_tdy->amount == $client_tdy->ville->amount )
-                            <button type="submit"
-                                class="btn btn-primary">Valider le remboursement
-                                </button>
-                                @elseif($client_tdy->amount == 2 )
-                                <button type="submit"
-                                    class="btn btn-info">Anuller le remboursement
-                                </button>
-                            @endif
-                        </form>
+                        <div class="row justify-content-center">
+                            <div class="col-xl-10">
+                                <h4 class="text-danger text-uppercase">Attention !</h4>
+                                <p class="text-muted font-size-14 mb-4">Etes vous sure de bien vouloire valider le paiment de {{ $client_tdy->name }}</p>
+                                <p class="font-size-14 mb-4 badge bg-warning text-white">Destination : {{$client_tdy->ville->name}} | Somme : {{ $client_tdy->ville->amount}} f</p>
+
+                                <div class="input-group bg-white rounded text-center" style="text-align:center;">
+                                    <form method="post" action="{{ route('admin.payer',$client_tdy->id) }}"  style="display:flex;text-align:center;width:100%;">
+                                        {{csrf_field()}}
+                                        {{method_field('PUT')}}
+                                         <input type="hidden" name="client_amount" value="{{$client_tdy->client_amount}}">
+                                        <input type="hidden" name="confirmation_token" value="{{$client_tdy->confirmation_token}}">
+
+                                        <button type="submit" class="btn btn-success btn-xs" style="margin-left: 70px;margin-right:20px;"> Oui je veux bien </button> 
+                                        <button type="button" class="btn btn-danger btn-xs" data-bs-dismiss="modal" aria-label="Close"> x Anuller</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div> 
     @endforeach
     <!-- Fin du modal du paiment -->
 
@@ -568,7 +532,7 @@
                                                             <optgroup label="{{$itineraire->name}}">
                                                                 @foreach($itineraire->date_departs as $date)
                                                                 @if($date->buses->count() >= 1)
-                                                                    <option value="{{ $date->id }}"> le {{$date->depart_at->format('d-m-y')}}</option>
+                                                                    <option value="{{ $date->id }}"> le {{$date->depart_at}}</option>
                                                                 @endif
                                                                 @endforeach
                                                             </optgroup>
@@ -629,104 +593,190 @@
 
 
 
-     <!-- Static Backdrop Modal de l'ajout -->
-     @foreach($clients as $clienTiker)
-        <div class="modal fade" id="iprimerTiker-{{ $clienTiker->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-md modal-dialog-centered" role="document">
-                <div class="modal-content ">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel"></h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                        <div class="modal-body">
-                                <div class="row">
-                                    <div class="col-xl-4 col-sm-6">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="media">
-                                                    <div class="avatar-md me-4">
-                                                        <span class="avatar-title rounded-circle bg-light text-danger font-size-16">
-                                                            <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" height="30">
-                                                        </span>
-                                                    </div>
+   
 
-                                                    <div class="media-body overflow-hidden">
-                                                        <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">{{ $clienTiker->name}}</a></h5>
-                                                        <p class="text-muted mb-1">{{ $clienTiker->email }}</p>
-                                                        <p class="text-muted mb-4">{{ $clienTiker->phone }}</p>
-                                                    
-                                                        <div class="avatar-group">
-                                                            <div class="avatar-group-item">
-                                                                <a href="javascript: void(0);" class="d-inline-block">
-                                                                    <img src="assets/images/users/avatar-4.jpg" alt=""
-                                                                        class="rounded-circle avatar-xs">
-                                                                </a>
-                                                            </div>
-                                                            <div class="avatar-group-item">
-                                                                <a href="javascript: void(0);" class="d-inline-block">
-                                                                    <img src="assets/images/users/avatar-5.jpg" alt=""
-                                                                        class="rounded-circle avatar-xs">
-                                                                </a>
-                                                            </div>
-                                                            <div class="avatar-group-item">
-                                                                <a href="javascript: void(0);" class="d-inline-block">
-                                                                    <div class="avatar-xs">
-                                                                        <span
-                                                                            class="avatar-title rounded-circle bg-success text-white font-size-16">
-                                                                            A
-                                                                        </span>
-                                                                    </div>
-                                                                </a>
-                                                            </div>
-                                                            <div class="avatar-group-item">
-                                                                <a href="javascript: void(0);" class="d-inline-block">
-                                                                    <img src="assets/images/users/avatar-2.jpg" alt=""
-                                                                        class="rounded-circle avatar-xs">
-                                                                </a>
-                                                            </div>
-                                                        </div>
-                                                        
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="px-4 py-3 border-top">
-                                                <ul class="list-inline mb-0">
-                                                    <li class="list-inline-item me-3">
-                                                        <span class="badge bg-success"><i class="bx bxs-check-circle me-1"></i>
-                                                        </span>
-                                                        
-                                                    </li>
-                                                    <li class="list-inline-item me-3">
-                                                        <!-- <a href=""><i class="bx bx-edit me-1"></i></a> -->
-                                                    </li>
-                                                    <li class="list-inline-item me-3">
-                                                        <a href="" data-bs-toggle="modal" data-bs-target="#"><i class="bx bx-show me-1"></i></a>
-                                                    </li>
-                                                    <li class="list-inline-item me-3">
-                                                        <a href="" data-bs-toggle="modal" data-bs-target="#"><i class="bx bxs-file-txt me-1"></i></a>
-                                                    </li>
-                                                    <li class="list-inline-item me-3">
-                                                        <!-- <a href=""><i class="bx bx-block me-1"></i></a> -->
-                                                        <div class="form-check form-switch mb-3" dir="ltr">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                id="SwitchCheckSizesm">
-                                                            <label class="form-check-label" for="SwitchCheckSizesm"></label>
-                                                        </div>
-                                                    </li>
-                                                    <li class="list-inline-item me-3">
-                                                        <a href="" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-danger" data-bs-target="#"><i class="bx bx-trash me-1 text-danger"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
+
+    <!-- Modal pour la presence du client -->
+    @foreach($clients as $client_presence)
+        <div class="modal fade modal-xs modal-center" id="subscribeModalagenceDetails-{{$client_presence->id}}" data-bs-backdrop="static"
+            data-bs-keyboard="false" tabindex="-1" role="dialog"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">
+                                <span class="text-muted">Detail du client {{ $client_presence->name }}</span>
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="row">
+                            <table class="body-wrap"
+                                style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; background-color: transparent; margin: 0;">
+                                <tr
+                                    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                    <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;"
+                                        valign="top"></td>
+                                    <td class="container" width="600"
+                                        style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; display: block !important; max-width: 600px !important; clear: both !important; margin: 0 auto;"
+                                        valign="top">
+                                        <div class="content"
+                                            style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; max-width: 600px; display: block; margin: 0 auto;">
+                                            <table class="main" width="100%" cellpadding="0" cellspacing="0"
+                                                style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; border-radius: 3px;  margin: 0; border: none;">
+                                                <tr
+                                                    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                    <td class="content-wrap aligncenter"
+                                                        style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; color: #495057;background-color: #fff;"
+                                                        align="center" valign="top">
+                                                        <table width="100%" cellpadding="0" cellspacing="0"
+                                                            style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                            <tr
+                                                                style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                                <td class="content-block"
+                                                                    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;"
+                                                                    valign="top">
+                                                                    <h6 class="aligncenter"
+                                                                        style="font-family: 'Helvetica Neue',Helvetica,Arial,'Lucida Grande',sans-serif; box-sizing: border-box; font-size: 18px; color: #000; line-height: 1.2em; font-weight: 400; text-align: center; margin: 40px 0 0;"
+                                                                        align="center">Detail du client {{ $client_presence->name }}
+                                                                    </h6>
+                                                                </td>
+                                                            </tr>
+                                                            <tr
+                                                                style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                                <td class="content-block aligncenter"
+                                                                    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: center; margin: 0;"
+                                                                    align="center" valign="top">
+                                                                    <table class="invoice"
+                                                                        style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; text-align: left; width: 90%; margin: 10px auto;">
+                                                                        <tr
+                                                                            style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                                            <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;"
+                                                                                valign="top">
+                                                                                <br
+                                                                                    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif,;font-weight:bold; box-sizing: border-box; font-size: 14px; margin: 0;" />Destination : {{$client_presence->ville->name}}
+                                                                                <br
+                                                                                    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif,;font-weight:bold; box-sizing: border-box; font-size: 14px; margin: 0;" />Date de depart : {{$client_presence->registered_at}}
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr
+                                                                            style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                                            <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 5px 0;"
+                                                                                valign="top">
+                                                                                <table class="invoice-items"
+                                                                                    cellpadding="0" cellspacing="0"
+                                                                                    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; margin: 0;">
+                                                                                    <tr
+                                                                                        style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                                                        <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                                            valign="top">Email
+                                                                                        </td>
+                                                                                        <td class="alignright"
+                                                                                            style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                                            align="right" valign="top">
+                                                                                            {{$client_presence->email}}
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr
+                                                                                        style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                                                        <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                                            valign="top">Telephone
+                                                                                        </td>
+                                                                                        <td class="alignright"
+                                                                                            style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                                            align="right" valign="top">
+                                                                                            {{$client_presence->phone}}
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr
+                                                                                        style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                                                        <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                                            valign="top">CNI
+                                                                                        </td>
+                                                                                        <td class="alignright"
+                                                                                            style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                                            align="right" valign="top">
+                                                                                            {{$client_presence->cni}}
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr
+                                                                                        style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                                                        <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                                            valign="top">Presence
+                                                                                        </td>
+                                                                                        <td class="alignright"
+                                                                                            style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                                            align="right" valign="top">
+                                                                                            @if($client_presence->voyage_status == 1)
+                                                                                                A voyager
+                                                                                            @else
+                                                                                                N'a pas voyager
+                                                                                            @endif
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr
+                                                                                        style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                                                        <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                                            valign="top">Ticker
+                                                                                        </td>
+                                                                                        <td class="alignright"
+                                                                                            style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                                            align="right" valign="top">
+                                                                                            {{$client_presence->amount}} f
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr
+                                                                                        style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                                                        <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                                            valign="top">Bus
+                                                                                        </td>
+                                                                                        <td class="alignright"
+                                                                                            style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                                            align="right" valign="top">
+                                                                                            {{$client_presence->bus->matricule}} f
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                            <tr
+                                                                style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                                <td class="content-block aligncenter"
+                                                                    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: center; margin: 0; padding: 0 0 20px;"
+                                                                    align="center" valign="top">
+                                                                    @if($client_presence->voyage_status == 2 && $client_presence->amount == $client_presence->ville->amount)
+                                                                        <a class="badge bg-primary font-size-12" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-warning" data-bs-target="#staticBackdroppaiment-{{ $client_presence->id }}">
+                                                                        <i class="bx bx-money  me-1 text-white text-bold">Rembourser</i></a>
+                                                                    @endif
+                                                                </td>
+                                                            </tr>
+
+                                                            <tr
+                                                                style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                                <td class="content-block"
+                                                                    style="text-align: center;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0;"
+                                                                    valign="top">
+                                                                    © 2021 Skote
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         </div>
-                                    </div>
-                                </div>
-                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <!-- end table -->
+                    </div>
                 </div>
             </div>
         </div>
     @endforeach
-    <!-- Fin du modal de l'ajout -->
+    <!-- Fin du modal pour la presence du client -->
 
 
 
@@ -741,50 +791,10 @@
     <!-- Init js -->
     <script src="{{asset('admin/assets/js/pages/table-responsive.init.js')}}"></script>
 
-    <script>
-	function validation(){
-		var phone = document.forms["myform"]["phone"];
-		var get_num_1 = String(phone.value).charAt(0);
-		var get_num_2 = String(phone.value).charAt(1);
-		var get_num_final = get_num_1+''+get_num_2;
-		var first_num = Number(get_num_final);
-		if (isNaN(phone.value)) {
-			alert('Votre numero de telephone est invalide');
-			return false;
-		}else if(phone.value.length != 9){
-			alert('Votre numero de telphone doit etre de 9 caracter exp: 77xxxxxxx');
-			return false;
-		}else if(first_num != 77 & first_num != 78 & first_num != 76 & first_num != 70 & first_num != 75  ){
-			alert('Votre numero de telphone doit commencer par un (77 ou 78 ou 76 ou 70 ou 75)')
-			return false;
-		}
-		var cni = document.forms["myform"]["cni"];
-		if (isNaN(cni.value)) {
-			alert('Votre numero numero de piece est invalide');
-			return false;
-		}else if(cni.value.length != 13){
-			alert('Votre numero de piece doit etre de 13 carractere');
-			return false;
-		}
-		return true;
-	}
-</script>
+   
 
 
     <!-- Print section script -->
     <script>
-        function PrintReceiptContent(el){
-            var data = '<input type="button" id="printPageButton" class="printPageButton" style="display:block; width:100%; border:none; background-color:#008BBB;color:white; padding:14px 28px;font-size:16px;cursor:pointor;text-align:center;" value="Imprimer" onClick="window.print()">';
-            data += document.getElementById(el).innerHTML;
-            myReceipt = window.open("" , "myWin" , "left=500, top=130, width=400, height=400");
-                myReceipt.screnX = 0;
-                myReceipt.screnY = 0;
-                myReceipt.document.write(data);
-                myReceipt.document.title = "Imprimer votre ticker";
-            myReceipt.focus();
-            setTimeout(() => {
-                myReceipt.close();
-            },10000);
-        }
     </script>
 @endsection

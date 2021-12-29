@@ -48,10 +48,12 @@ Route::prefix('/admin')->name('admin.')->group(function()
     Route::resource('/ville', App\Http\Controllers\Admin\VilleController::class);
     Route::resource('/client', App\Http\Controllers\Admin\ClientController::class);
     Route::resource('/partenaire', App\Http\Controllers\Admin\PartController::class);
-    Route::get('/historique', [App\Http\Controllers\Admin\HistoriqueController::class,'index'])->name('historique.index');
+    Route::get('/historique/show/{id}', [App\Http\Controllers\Admin\HistoriqueController::class,'show'])->name('historique.show');
     Route::post('/historique/search', [App\Http\Controllers\Admin\HistoriqueController::class,'search'])->name('historique.search');
+    Route::put('/historique/rembourser/{id}', [App\Http\Controllers\Admin\HistoriqueController::class,'rembourser'])->name('historique.rembourser');
     Route::put('/client/presence/{id}', [App\Http\Controllers\Admin\ClientController::class,'presence'])->name('client.presence'); 
     Route::put('/client/payer/{id}', [App\Http\Controllers\Admin\ClientController::class, 'payer'])->name('payer');
+    Route::get('/client/ticker/{id}', [App\Http\Controllers\Admin\ClientController::class, 'ticker'])->name('ticker');
     Route::get('/profil/show/{slug}', [App\Http\Controllers\Admin\ProfilController::class,'show'])->name('profil.show'); 
     Route::put('/profil/update/{slug}', [App\Http\Controllers\Admin\ProfilController::class,'update'])->name('profil.update'); 
 });

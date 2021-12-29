@@ -37,7 +37,6 @@
                  <div class="col-sm-2"></div>
              </div>
             
-
             <div class="row mb-5">
                 <div class="col-lg-12">
                     <div class="text-center mb-5">
@@ -215,7 +214,7 @@
                                             </div>
                                         
                                             <div class="mb-3 row">
-                                                <label class="form-label">Selectionner une date de votre</label>
+                                                <label class="form-label">Selectionner une date de votre voyage</label>
                                                 <div class="col-md-12">
                                                     <select  class="form-control @error('date') is-invalid @enderror" name="date" required autocomplete="date" required>
                                                         
@@ -224,7 +223,7 @@
                                                                     @foreach($itineraire->date_departs as $date)
                                                                         @if($date->depart_at >= carbon_today())
                                                                             @if($date->buses->count() >= 1)
-                                                                                <option value="{{ $date->id }}"> le {{$date->depart_at->format('d-m-y')}}</option>
+                                                                                <option value="{{ $date->id }}"> le {{$date->depart_at}}</option>
                                                                             @endif
                                                                         @endif
                                                                     @endforeach

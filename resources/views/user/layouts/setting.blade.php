@@ -33,6 +33,9 @@
         <!-- App js -->
         <script src="{{asset('admin/assets/js/app.js')}}"></script>
 
+        <script src="{{asset('admin/assets/back/particles.js')}}"></script>
+        <script src="{{asset('admin/assets/back/app.js')}}"></script>
+
         @section('settingsection')
         
         @show

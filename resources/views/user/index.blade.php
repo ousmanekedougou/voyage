@@ -5,7 +5,7 @@
      <!-- hero section start -->
      {{--
     <section class="section hero-section bg-ico-hero" id="home">
-        <!-- <div class="bg-overlay bg-primary"></div> -->
+        <div class="bg-overlay bg-primary"></div>
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-5">
@@ -68,13 +68,13 @@
     <!-- hero section end -->
 
   <!-- hero section start -->
-    <section class="section hero-section bg-ico-hero" style="margin-top:-50px;" id="home">
+    <section class="section hero-section bg-ico-hero" style="margin-top:-50px;">
         <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
             <div class="row align-items-center row_pricipal" >
                 <div class="col-lg-5 card_show">
                     <div class="text-white-50">
-                        <h1 class="text-white font-weight-semibold mb-3 hero-title">Yombalal Toucki Thi Biir Rewmi</h1>
+                        <h2 class="text-white font-weight-semibold mb-3 ">Yombalal Toucki Thi Biir Rewmi</h2>
                         <p class="font-size-20" >
                             Le secteur du tourisme a fort à faire dans une conjoncture économique pleine de défis. Pour vous démarquer, en tant qu’agence de voyages.
                         </p>

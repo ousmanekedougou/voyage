@@ -13,8 +13,6 @@ class DateDepart extends Model
 
     protected $fillable = ['depart_at','heure_rv','heure_dep'];
 
-    protected $dates = ['depart_at'];
-
     public function buses(){
         return $this->hasMany(Bus::class);
     }

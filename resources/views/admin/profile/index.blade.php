@@ -13,14 +13,6 @@
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                             <h4 class="mb-sm-0 font-size-18">Votre Profile</h4>
-
-                            <div class="page-title-right">
-                                <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Contacts</a></li>
-                                    <li class="breadcrumb-item active">Profile</li>
-                                </ol>
-                            </div>
-
                         </div>
                     </div>
                 </div>
@@ -39,10 +31,10 @@
                                             @elseif($admin->is_admin == 2)
                                                 {{$admin->name}}
                                             @elseif($admin->is_admin == 3)
-                                               Nom de l'agence
+                                               {{$admin->agence_name}}
                                             @endif
                                             </h5>
-                                            <p>Cela semblera simplifié</p>
+                                            <!-- <p>Cela semblera simplifié</p> -->
                                         </div>
                                     </div>
                                     <div class="col-5 align-self-end">
@@ -114,8 +106,8 @@
                                                 <td>{{$admin->email}}</td>
                                             </tr>
                                             <tr>
-                                                <th scope="row">Location :</th>
-                                                <td>{{ $admin->adress }}</td>
+                                                <th scope="row">Siege :</th>
+                                                <td>{{ $admin->siege->name }}  ({{ $admin->siege->adress }})</td>
                                             </tr>
                                         </tbody>
                                     </table>

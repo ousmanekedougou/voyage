@@ -17,7 +17,7 @@
 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item"><a href="javascript: void(0);" class="btn btn-primary waves-effect waves-light text-white" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Ajouter une agence</a></li>
+                                        <li class="breadcrumb-item"><a href="javascript: void(0);" class="btn btn-primary waves-effect waves-light text-white" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Ajouter un siege</a></li>
                                         <!-- <li class="breadcrumb-item active">Projects List</li> -->
                                     </ol>
                                 </div>

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateClientsTable extends Migration
+class CreateHistoricalsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateClientsTable extends Migration
      */
     public function up()
     {
-        Schema::create('clients', function (Blueprint $table) {
+        Schema::create('historicals', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique()->nullable();
-            $table->string('phone')->unique();
-            $table->integer('ville_id');
-            $table->integer('bus_id');
+             $table->string('name');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('ville_name');
+            $table->string('bus_matricule');
             $table->integer('position')->nullable();
             $table->integer('amount')->nullable();
             $table->dateTime('registered_at')->nullable();
@@ -28,9 +28,10 @@ class CreateClientsTable extends Migration
             $table->string('cni')->nullable();
             $table->integer('remboursement')->nullable();
             $table->integer('voyage_status')->default(0);
-            $table->string('confirmation_token')->nullable();
+            $table->dateTime('confirmation_token')->nullable();
             $table->string('agence')->nullable();
             $table->string('agence_logo')->nullable();
+            $table->integer('siege_id');
             $table->timestamps();
         });
     }
@@ -42,6 +43,6 @@ class CreateClientsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clients');
+        Schema::dropIfExists('historicals');
     }
 }

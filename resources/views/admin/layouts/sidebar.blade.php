@@ -39,22 +39,21 @@
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
                                     <i class="bx bx-store"></i>
+                                    <span key="t-ecommerce">Sieges</span>
+                                </a>
+                                <ul class="sub-menu" aria-expanded="false">
+                                    <li><a href="{{ route('admin.siege.index') }}" key="t-products">Sieges</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                    <i class="bx bx-store"></i>
                                     <span key="t-ecommerce">Agents</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
                                     @foreach(all_siege() as $siege)
                                     <li><a href="{{ route('admin.agent.show',$siege->id) }}" key="t-products">{{$siege->name}}</a></li>
                                     @endforeach
-                                </ul>
-                            </li>
-
-                            <li>
-                                <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="bx bx-store"></i>
-                                    <span key="t-ecommerce">Sieges</span>
-                                </a>
-                                <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="{{ route('admin.siege.index') }}" key="t-products">Sieges</a></li>
                                 </ul>
                             </li>
                             <!-- Fin de la partie des agence -->
@@ -67,7 +66,7 @@
                             <li><a href="{{ route('admin.itineraire.index') }}" key="t-products"> <i class="fa fa-road"></i>Vos Itineraires</a></li>
                             <li><a href="{{ route('admin.depart.index') }}" key="t-products"> <i class="fa fa-clock"></i> Vos Dates</a></li>
                             <li><a href="{{ route('admin.bus.index') }}" key="t-products"><i class="fa fa-bus"></i>Vos Bus</a></li>
-                            <li><a href="{{ route('admin.historique.index') }}" key="t-products"> <i class="fa fa-folder-open"></i> Historiques</a></li>
+                            
                                
                        
                          
@@ -100,7 +99,7 @@
                                                     </a>
                                                     <ul class="sub-menu" aria-expanded="false">
                                                         @foreach($date->buses as $bus)
-                                                                <li><a href="{{route('admin.client.show',$bus->id)}}" key="t-products"> <i class="bx bxs-bus Bus"></i>   Bus  {{ $bus->number }} | {{ $bus->matricule }}</a></li>
+                                                            <li><a href="{{route('admin.client.show',$bus->id)}}" key="t-products"> <i class="bx bxs-bus Bus"></i>   Bus  {{ $bus->number }} | {{ $bus->matricule }}</a></li>
                                                         @endforeach
                                                     </ul>
                                                 </li>
@@ -109,6 +108,17 @@
                                     </ul>
                                 </li>
                             @endforeach
+                              <li>
+                                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                    <i class="fa fa-folder-open"></i>
+                                    <span key="t-ecommerce">Historiques</span>
+                                </a>
+                                <ul class="sub-menu" aria-expanded="false">
+                                    @foreach(historical() as $history)
+                                        <li><a href="{{route('admin.historique.show',$history->id)}}" key="t-products"> <i class="fa fa-clock"></i> {{ $history->registered_at }}</a></li>
+                                    @endforeach
+                                </ul>
+                            </li>
                         @endif
                     </ul>
                 </div>

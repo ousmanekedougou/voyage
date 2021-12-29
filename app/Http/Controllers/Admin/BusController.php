@@ -49,14 +49,13 @@ class BusController extends Controller
         $this->validate($request,[
             'matricule' => 'required|string|max:255|unique:buses',
             'place' => 'required|string',
-            'status' => 'required|numeric',
             'itineraire' => 'required|numeric',
         ]);
         $add_bus = new Bus();
         $add_bus->matricule = $request->matricule;
         $add_bus->number = $request->numero;
         $add_bus->place = $request->place;
-        $add_bus->status = $request->status;
+        $add_bus->status = 1;
         $add_bus->user_id = Auth::user()->id;
         $add_bus->siege_id = Auth::user()->siege_id;
         $add_bus->itineraire_id = $request->itineraire;
@@ -99,14 +98,13 @@ class BusController extends Controller
         $this->validate($request,[
             'matricule' => 'required|string',
             'place' => 'required|string',
-            'status' => 'required|numeric',
             'itineraire' => 'required|numeric',
         ]);
         $update_bus = Bus::where('id',$id)->first();
         $update_bus->number = $request->numero;
         $update_bus->place = $request->place;
         $update_bus->matricule = $request->matricule;
-        $update_bus->status = $request->status;
+        $update_bus->status = 1;
         $update_bus->user_id = Auth::user()->id;
         $update_bus->siege_id = Auth::user()->siege_id;
         $update_bus->itineraire_id = $request->itineraire;

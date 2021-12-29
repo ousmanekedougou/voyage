@@ -36,9 +36,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row p-3">
-                            <h6>Slogan</h6>
-                            <p class="text-muted text-left">{{ $agence->slogan }}</p>
+                        <div class="row p-0">
+                            <h6 class="text-center"> <i class="fa fa-blog badge bg-success"> Slogan</i></h6>
+                            <p class="text-muted text-center">{{ $agence->slogan }}</p>
                         </div>
                         <div class="px-4 py-3 border-top">
                             <ul class="list-inline mb-0">
