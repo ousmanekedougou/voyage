@@ -9,6 +9,8 @@ use App\Models\User\Client;
 use App\Notifications\RegisteredClient;
 use Illuminate\Support\Str;
 use App\Models\Admin\DateDepart;
+use App\Models\Admin\Siege;
+use App\Notifications\ContactSiegeEmail;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -143,9 +145,12 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request,$id)
     {
-        //
+        $siege = Siege::where('id',$id)->first();
+         Notification::route('mail',$request->email)
+                ->notify(new ContactSiegeEmail($siege->email,$request->name,$request->email,$request->sub,$request->sms));
+                return back()->with('success','Votre message a ete envoyer');
     }
 
     /**

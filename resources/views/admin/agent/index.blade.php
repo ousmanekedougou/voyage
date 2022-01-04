@@ -39,7 +39,7 @@
                                                                 class="avatar-sm me-3 mx-lg-auto mb-3 mt-1 float-start float-lg-none">
                                                                 <span
                                                                     class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-16">
-                                                                    <img src="{{Storage::url($agent->image)}}" alt="" style="width:100%;">
+                                                                    <img src="{{Storage::url($agent->logo)}}" alt="" style="width:100%;border-radius:100%;">
                                                                 </span>
                                                             </div>
                                                             <h5 class="mb-1 font-size-10">{{ $agent->name }}</h5>
@@ -49,7 +49,18 @@
                                                     <div class="col-lg-8">
                                                         <div>
                                                             <h6 class="text-truncate "><i class="fa fa-mobile"> {{$agent->phone}}</i></h6>
-                                                            <p class="mb-4 mb-lg-5 d-flex"><i class="fa fa-envelope"> {{$agent->email}}</i></p>
+                                                            <p class="d-flex"><i class="fa fa-envelope"> {{$agent->email}}</i></p>
+                                                            <p class=" d-flex">
+                                                                  <span class="badge bg-warning">
+                                                                @if($agent->role == 1)
+                                                                    Gestion Clients
+                                                                @elseif($agent->role == 2)
+                                                                    Gestion Bagages
+                                                                @elseif($agent->role == 3)
+                                                                    Gestion Colis
+                                                                @endif
+                                                            </span>
+                                                            </p>
                                                             <ul class="list-inline mb-0">
                                                                 <li class="list-inline-item me-3">
                                                                     @if($agent->is_active == 1)
@@ -58,7 +69,7 @@
                                                                     </span>
                                                                     @else
                                                                     <span class="badge bg-danger"><i class="bx bxs-x-square me-1"></i>
-                                                                            Desactive
+                                                                        Desactive
                                                                     </span>
                                                                     @endif
                                                                     
@@ -73,6 +84,7 @@
                                                                 </li>
                                                                 <li class="list-inline-item me-3">
                                                                     <a href="" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-danger" data-bs-target="#subscribeModalagence-{{ $agent->id }}"><i class="bx bx-trash me-1 text-danger"></i></a>
+                                                                    <a href="" style="margin-left: 8px;" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-warning" data-bs-target="#subscribeModalRole-{{ $agent->id }}"><i class="fa fa-pencil-ruler me-1 text-warning"></i></a>
                                                                 </li>
                                                             </ul>
                                                         </div>
@@ -132,47 +144,6 @@
                                 @endforeach
                             </div>
                     <!-- end row -->
-
-                    @foreach($siege->users as $agent)
-                    <!-- Modal pour la suppression de l'agent -->
-                        <div class="modal modal-md fade" id="subscribeModalagence-{{ $agent->id }}" tabindex="-1" aria-labelledby="subscribeModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header border-bottom-0">
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="text-center mb-4">
-                                            <div class="avatar-md mx-auto mb-4">
-                                                <div class="avatar-title bg-warning rounded-circle text-white h1">
-                                                    <i class="fa fa-exclamation-circle"></i>
-                                                </div>
-                                            </div>
-
-                                            <div class="row justify-content-center">
-                                                <div class="col-xl-10">
-                                                    <h4 class="text-danger">Attention !</h4>
-                                                    <p class="text-muted font-size-14 mb-4">Etes vous sure de bien vouloire supprimer {{$agent->name}}</p>
-
-                                                    <div class="input-group bg-white rounded text-center" style="text-align:center;">
-                                                        <form method="post" action="{{ route('admin.agent.destroy',$agent->id) }}"  style="display:flex;text-align:center;width:100%;">
-                                                            {{csrf_field()}}
-                                                            {{method_field('DELETE')}}
-                                                                <input type="hidden" name="delete" value="1">
-                                                            <button type="submit" class="btn btn-danger btn-xs" style="margin-left: 70px;margin-right:20px;"> Oui je veux bient </button> 
-                                                            <button type="button" class="btn btn-success btn-xs" data-bs-dismiss="modal" aria-label="Close"> x Anuller</button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    <!-- Fin du modal pour la suppression de l'agent -->
-                    @endforeach
-
                     <div class="row">
                         <div class="col-12">
                             <div class="text-center my-3">
@@ -186,6 +157,123 @@
                 </div> <!-- container-fluid -->
             </div>
             <!-- End Page-content -->
+
+
+                @foreach($siege->users as $agent)
+                <!-- Modal pour la suppression de l'agent -->
+                    <div class="modal modal-md fade" id="subscribeModalagence-{{ $agent->id }}" tabindex="-1" aria-labelledby="subscribeModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header border-bottom-0">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="text-center mb-4">
+                                        <div class="avatar-md mx-auto mb-4">
+                                            <div class="avatar-title bg-warning rounded-circle text-white h1">
+                                                <i class="fa fa-exclamation-circle"></i>
+                                            </div>
+                                        </div>
+
+                                        <div class="row justify-content-center">
+                                            <div class="col-xl-10">
+                                                <h4 class="text-danger">Attention !</h4>
+                                                <p class="text-muted font-size-14 mb-4">Etes vous sure de bien vouloire supprimer {{$agent->name}}</p>
+
+                                                <div class="input-group bg-white rounded text-center" style="text-align:center;">
+                                                    <form method="post" action="{{ route('admin.agent.destroy',$agent->id) }}"  style="display:flex;text-align:center;width:100%;">
+                                                        {{csrf_field()}}
+                                                        {{method_field('DELETE')}}
+                                                            <input type="hidden" name="delete" value="1">
+                                                        <button type="submit" class="btn btn-danger btn-xs" style="margin-left: 70px;margin-right:20px;"> Oui je veux bient </button> 
+                                                        <button type="button" class="btn btn-success btn-xs" data-bs-dismiss="modal" aria-label="Close"> x Anuller</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <!-- Fin du modal pour la suppression de l'agent -->
+                @endforeach
+
+
+             <!-- Modal pour la presence du client -->
+            @foreach($siege->users as $agent_role)
+                <div class="modal modal-xs fade" id="subscribeModalRole-{{ $agent_role->id }}" tabindex="-1" aria-labelledby="subscribeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header border-bottom-0">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="text-center mb-4">
+
+                                    <div class="row justify-content-center">
+                                        <div class="col-xl-10">
+                                            <h4 class="text-warning text-uppercase">Assigner un Role !</h4>
+                                            <p class="text-muted font-size-14 mb-1">Etes vous sure de bien vouloire assigner un role a {{ $agent_role->name }}</p>
+                                            <p class="font-size-14 badge bg-warning text-white">Destination :</p>
+
+                                            <div class="input-group bg-white rounded text-center" style="text-align:center;">
+                                                <form method="post" action="{{ route('admin.agent.edite',$agent_role->id) }}"  style="display:block;text-align:center;width:100%;">
+                                                    {{csrf_field()}}
+                                                    {{method_field('PUT')}}
+                                                    <p class="text-muted font-size-14 mb-4">
+                                                        <div class="d-flex text-center">
+                                                            <div style="margin-left: 30px;margin-right: 30px;">
+                                                                <div class="form-check form-check-left">
+                                                                    <input class="form-check-input" type="radio" 
+                                                                        name="role" value="1" id="formRadiosRight1client" 
+                                                                            @if($agent_role->role == 1) checked @endif
+                                                                        >
+                                                                    <label class="form-check-label" for="formRadiosRight1client">
+                                                                        Clients
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+
+                                                            <div style="margin-left: 30px;">
+                                                                <div class="form-check form-check-right">
+                                                                    <input class="form-check-input" type="radio" 
+                                                                        name="role" value="2" id="formRadiosRight2bagage"
+                                                                        @if($agent_role->role == 2) checked @endif
+                                                                        >
+                                                                    <label class="form-check-label" for="formRadiosRight2bagage">
+                                                                        Bagages
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+
+                                                            <div style="margin-left: 30px;">
+                                                                <div class="form-check form-check-right">
+                                                                    <input class="form-check-input" type="radio" 
+                                                                        name="role" value="3" id="formRadiosRight2colis"
+                                                                        @if($agent_role->role == 3) checked @endif
+                                                                        >
+                                                                    <label class="form-check-label" for="formRadiosRight2colis">
+                                                                        Colis
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </p>
+
+                                                    <button type="submit" class="btn btn-success btn-xs" style="margin-left: 70px;margin-right:20px;"> Oui je veux bien </button> 
+                                                    <button type="button" class="btn btn-danger btn-xs" data-bs-dismiss="modal" aria-label="Close"> x Anuller</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            @endforeach
+            <!-- Fin du modal pour la presence du client -->
 
              
 

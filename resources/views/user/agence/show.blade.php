@@ -105,7 +105,7 @@
                                                             class="fa fa-user-plus"> S'isncrire</i> </a>
                                                 </li>
                                                  <li class="list-inline-item me-3">
-                                                   <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$siege->id}}" class="badge bg-info btn-xs"> <i
+                                                   <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdropEmailAgence-{{$siege->id}}" class="badge bg-info btn-xs"> <i
                                                             class="fa fa-user-plus"> Contacter</i> </a>
                                                 </li>
                                             </ul>
@@ -269,6 +269,82 @@
                                         <div class="d-flex flex-wrap gap-2">
                                             <button type="submit" class="btn btn-primary waves-effect waves-light btn-block">
                                                 Enregistrer Ce Client
+                                            </button>
+                                            <button type="reset" class="btn btn-secondary waves-effect btn-block">
+                                                Anuller
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </p>
+                        </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+    <!-- Fin du modal de l'ajout -->
+
+
+      <!-- Static Backdrop Modal de l'ajout -->
+    @foreach($sieges as $siege)
+        <div class="modal fade" id="staticBackdropEmailAgence-{{$siege->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+                <div class="modal-content ">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Nous Contacter </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                        <div class="modal-body">
+                            <p>
+                                <form class="custom-validation" action="{{ route('client.edit',$siege->id) }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-xl-12">
+                                            <div class="mb-3">
+                                                <label class="form-label">Votre prenom et nom</label>
+                                                <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name"
+                                                    placeholder="" />
+                                                @error('name')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Votre email</label>
+                                                <input type="text" id="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email"
+                                                    placeholder="" />
+                                                @error('email')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Objet</label>
+                                                <input type="text" id="sub" class="form-control @error('sub') is-invalid @enderror" name="sub" value="{{ old('sub') }}" required autocomplete="sub"
+                                                    placeholder="" />
+                                                @error('sub')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-3">
+                                                <label class="form-label">Votre message</label>
+                                                <div>
+                                                    <textarea required id="sms" class="form-control @error('sms') is-invalid @enderror" name="sms" value="{{ old('sms') }}" autocomplete="sms" class="form-control" rows="3"></textarea>
+                                                        @error('sms')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex flex-wrap gap-2">
+                                            <button type="submit" class="btn btn-primary waves-effect waves-light btn-block">
+                                                Envoyer le message
                                             </button>
                                             <button type="reset" class="btn btn-secondary waves-effect btn-block">
                                                 Anuller

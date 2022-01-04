@@ -27,6 +27,7 @@ Route::get('/setting', [App\Http\Controllers\User\SettingController::class, 'ind
 Route::get('/contact', [App\Http\Controllers\User\ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact/store', [App\Http\Controllers\User\ContactController::class, 'store'])->name('contact.store');
 Route::post('/client', [App\Http\Controllers\User\ClientController::class, 'store'])->name('client.store');
+Route::post('/client/sendmail/{id}', [App\Http\Controllers\User\ClientController::class, 'edit'])->name('client.edit');
 Route::get('/store', [App\Http\Controllers\User\HomeController::class, 'store'])->name('store');
 
 Auth::routes();
@@ -42,6 +43,7 @@ Route::prefix('/admin')->name('admin.')->group(function()
     Route::resource('/agence', App\Http\Controllers\Admin\AgenceController::class);
     Route::resource('/siege', App\Http\Controllers\Admin\SiegeController::class);
     Route::resource('/agent', App\Http\Controllers\Admin\AgentController::class);
+    Route::put('/agent/edite/{id}', [App\Http\Controllers\Admin\AgentController::class,'edite'])->name('agent.edite');
     Route::resource('/bus', App\Http\Controllers\Admin\BusController::class);
     Route::resource('/itineraire', App\Http\Controllers\Admin\ItineraireController::class);
     Route::resource('/depart', App\Http\Controllers\Admin\DepartController::class);
@@ -55,5 +57,7 @@ Route::prefix('/admin')->name('admin.')->group(function()
     Route::put('/client/payer/{id}', [App\Http\Controllers\Admin\ClientController::class, 'payer'])->name('payer');
     Route::get('/client/ticker/{id}', [App\Http\Controllers\Admin\ClientController::class, 'ticker'])->name('ticker');
     Route::get('/profil/show/{slug}', [App\Http\Controllers\Admin\ProfilController::class,'show'])->name('profil.show'); 
-    Route::put('/profil/update/{slug}', [App\Http\Controllers\Admin\ProfilController::class,'update'])->name('profil.update'); 
+    Route::put('/profil/update/{slug}', [App\Http\Controllers\Admin\ProfilController::class,'update'])->name('profil.update');
+    Route::resource('/bagage', App\Http\Controllers\Admin\BagageController::class); 
+    Route::resource('/colis', App\Http\Controllers\Admin\ColiController::class); 
 });

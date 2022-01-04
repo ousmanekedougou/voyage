@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Auth;
 if(! function_exists('page_title')){
     function page_title($title)
     {
-        $base_title = 'Voyage';
+        $base_title = 'TouCki';
         if($title === ''){
             return  $base_title;
         }else{
@@ -88,7 +88,7 @@ if (! function_exists('part')) {
 
 if (! function_exists('historical')) {
     function historical(){
-        $historical = Historical::all();
+        $historical = Historical::where('siege_id',Auth::user()->siege->id)->get();
         return $historical;
     }
 }

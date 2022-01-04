@@ -47,7 +47,7 @@
                             </li>
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="bx bx-store"></i>
+                                    <i class="fa fa-users-cog"></i>
                                     <span key="t-ecommerce">Agents</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
@@ -62,63 +62,78 @@
                         @if(Auth::user()->is_admin == 3)
 
                          
-                        
-                            <li><a href="{{ route('admin.itineraire.index') }}" key="t-products"> <i class="fa fa-road"></i>Vos Itineraires</a></li>
-                            <li><a href="{{ route('admin.depart.index') }}" key="t-products"> <i class="fa fa-clock"></i> Vos Dates</a></li>
-                            <li><a href="{{ route('admin.bus.index') }}" key="t-products"><i class="fa fa-bus"></i>Vos Bus</a></li>
+                            @if(Auth::user()->role == 1)
+                                <li><a href="{{ route('admin.itineraire.index') }}" key="t-products"> <i class="fa fa-road"></i>Vos Itineraires</a></li>
+                                <li><a href="{{ route('admin.depart.index') }}" key="t-products"> <i class="fa fa-clock"></i> Vos Dates</a></li>
+                                <li><a href="{{ route('admin.bus.index') }}" key="t-products"><i class="fa fa-bus"></i>Vos Bus</a></li>
+                                
+                                <li><a data-bs-toggle="modal" data-bs-target="#FooterstaticBackdrop" key="t-products" class="btn btn-primary"> <i class="fa fa-user-plus"></i> Ajouter un client</a></li>
+                                <li class="menu-title" key="t-menu"></li>
+                                <li class="menu-title" key="t-menu"> <i class="fa fa-user-check"></i> Liste de vos clients</li>
+                                @foreach(itineraire_all() as $itineraire)
+                                    <li>
+                                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                            <i class="fa fa-road"></i>
+                                            <span key="t-email">{{$itineraire->name}}</span>
+                                        </a>
+                                    
+                                        <ul class="sub-menu" aria-expanded="false">
+                                            @foreach($itineraire->date_departs as $date)
+                                                
+                                                    <li>
+                                                        <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                                            <span key="" class="fa fa-clock">
+                                                                @if($date->depart_at == carbon_today())
+                                                                    liste du jour
+                                                                @elseif($date->depart_at == carbon_tomorrow())
+                                                                    liste de demain
+                                                                @elseif($date->depart_at > carbon_tomorrow())
+                                                                    Apres demain
+                                                                @else
+                                                                    {{ $date->depart_at }}
+                                                                @endif
+                                                            </span>
+                                                        </a>
+                                                        <ul class="sub-menu" aria-expanded="false">
+                                                            @foreach($date->buses as $bus)
+                                                                <li><a href="{{route('admin.client.show',$bus->id)}}" key="t-products"> <i class="bx bxs-bus Bus"></i>   Bus  {{ $bus->number }} | {{ $bus->matricule }}</a></li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </li>
+                                                
+                                            @endforeach
+                                        </ul>
+                                    </li>
+                                @endforeach
                             
-                               
-                       
-                         
-                            <li><a data-bs-toggle="modal" data-bs-target="#FooterstaticBackdrop" key="t-products" class="btn btn-primary"> <i class="fa fa-user-plus"></i> Ajouter un client</a></li>
-                            <li class="menu-title" key="t-menu"></li>
-                            <li class="menu-title" key="t-menu"> <i class="fa fa-user-check"></i> Liste de vos clients</li>
-                            @foreach(itineraire_all() as $itineraire)
                                 <li>
                                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                        <i class="fa fa-road"></i>
-                                        <span key="t-email">{{$itineraire->name}}</span>
+                                        <i class="fa fa-folder-open"></i>
+                                        <span key="t-ecommerce">Historiques</span>
                                     </a>
-                                   
                                     <ul class="sub-menu" aria-expanded="false">
-                                        @foreach($itineraire->date_departs as $date)
-                                            
-                                                <li>
-                                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                                        <span key="" class="fa fa-clock">
-                                                            @if($date->depart_at == carbon_today())
-                                                                liste du jour
-                                                            @elseif($date->depart_at == carbon_tomorrow())
-                                                                liste de demain
-                                                            @elseif($date->depart_at > carbon_tomorrow())
-                                                                Apres demain
-                                                            @else
-                                                                {{ $date->depart_at }}
-                                                            @endif
-                                                        </span>
-                                                    </a>
-                                                    <ul class="sub-menu" aria-expanded="false">
-                                                        @foreach($date->buses as $bus)
-                                                            <li><a href="{{route('admin.client.show',$bus->id)}}" key="t-products"> <i class="bx bxs-bus Bus"></i>   Bus  {{ $bus->number }} | {{ $bus->matricule }}</a></li>
-                                                        @endforeach
-                                                    </ul>
-                                                </li>
-                                            
+                                        @foreach(historical() as $history)
+                                            <li><a href="{{route('admin.historique.show',$history->siege_id)}}" key="t-products"> <i class="fa fa-clock"></i> {{ $history->registered_at }}</a></li>
                                         @endforeach
                                     </ul>
                                 </li>
-                            @endforeach
-                              <li>
+                            @endif
+                            @if(Auth::user()->role == 2 || Auth::user()->role == 3)
+                            <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="fa fa-folder-open"></i>
-                                    <span key="t-ecommerce">Historiques</span>
+                                    <i class="fa fa-store-alt"></i>
+                                    <span key="t-ecommerce">Bagages et Colis</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
-                                    @foreach(historical() as $history)
-                                        <li><a href="{{route('admin.historique.show',$history->id)}}" key="t-products"> <i class="fa fa-clock"></i> {{ $history->registered_at }}</a></li>
-                                    @endforeach
+                                        @if(Auth::user()->role == 2)
+                                        <li><a href="{{route('admin.bagage.index')}}" key="t-products"> <i class="fa fa-luggage-cart"></i>Bagages</a></li>
+                                        @endif
+                                        @if(Auth::user()->role == 3)
+                                        <li><a href="{{route('admin.colis.index')}}" key="t-products"> <i class="fa fa-suitcase-rolling"></i>Colis</a></li>
+                                        @endif
                                 </ul>
                             </li>
+                            @endif
                         @endif
                     </ul>
                 </div>

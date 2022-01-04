@@ -175,7 +175,6 @@
 
     <!-- Modal pour la presence du client -->
     @foreach($clients as $client_presence)
-
         <div class="modal modal-xs fade" id="subscribeModalagence-{{ $client_presence->id }}" tabindex="-1" aria-labelledby="subscribeModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -212,10 +211,10 @@
                                                     <div style="margin-left: 30px;">
                                                         <div class="form-check form-check-right">
                                                             <input class="form-check-input" type="radio" 
-                                                                name="presence" value="2" id="formRadiosRight2absence">
-                                                            <label class="form-check-label" for="formRadiosRight2absence"
+                                                                name="presence" value="2" id="formRadiosRight2absence"
                                                                 @if($client_presence->voyage_status == 2) checked @endif
-                                                            >
+                                                                >
+                                                            <label class="form-check-label" for="formRadiosRight2absence">
                                                                 Est absent
                                                             </label>
                                                         </div>
@@ -759,7 +758,7 @@
                                                                 <td class="content-block"
                                                                     style="text-align: center;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0;"
                                                                     valign="top">
-                                                                    © 2021 Skote
+                                                                    <script>document.write(new Date().getFullYear())</script> © TouCki
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -790,11 +789,4 @@
     <script src="{{asset('admin/assets/libs/select2/js/select2.min.js')}}"></script>
     <!-- Init js -->
     <script src="{{asset('admin/assets/js/pages/table-responsive.init.js')}}"></script>
-
-   
-
-
-    <!-- Print section script -->
-    <script>
-    </script>
 @endsection

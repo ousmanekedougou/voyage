@@ -128,6 +128,23 @@ class ProfilController extends Controller
                 $update_admin->adress = $request->adress;
                 $update_admin->save();
                 return back()->with('success','Vos informations ont bien ete mise a jour');
+           }elseif ($request->hidden == 5) {
+               $this->validate($request,[
+                    'name_agence' => 'required|string',
+                    'email_agence' => 'required|email|string',
+                    'image_agence' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
+                ]);
+                $image_agence = '';
+                 if($request->hasFile('image_agence'))
+                {
+                    $image_agence = $request->image_agence->store('public/Agence');
+                }
+                $update = User::Where('slug',Auth::user()->slug)->first();
+                $update->name_agence = $request->name_agence;
+                $update->email_agence = $request->email_agence;
+                $update->image_agence = $image_agence;
+                $update->save();
+                return back()->with('success','Vos informations ont bien ete mise a jour');
            }
     }
 

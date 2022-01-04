@@ -65,32 +65,43 @@ class AgenceController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'name' => 'required|string|max:255|unique:users',
+            'name' => 'required|string|max:255',
+            'name_agence' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
+            'email_agence' => 'required|string|email|max:255|unique:users',
             'phone' => 'required|string|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
             'registre_commerce' => 'required|string|max:255|unique:users',
             'adress' => 'required|string',
             'slogan' => 'required|string',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
+            'image_agence' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
         ]);
 
         $imageName = '';
+        $imageAgenceName = '';
         $add_agence = new User();
           if($request->hasFile('image'))
         {
             $imageName = $request->image->store('public/Agence');
         }
+          if($request->hasFile('image_agence'))
+        {
+            $imageAgenceName = $request->image_agence->store('public/Agence');
+        }
         define('AGENCE',2);
         $add_agence->name = $request->name;
+        $add_agence->name_agence = $request->name_agence;
         $add_agence->email = $request->email;
         $add_agence->phone = $request->phone;
         $add_agence->password = Hash::make($request->password);
         $add_agence->registre_commerce = $request->registre_commerce;
+        $add_agence->email_agence = $request->email_agence;
         $add_agence->adress = $request->adress;
         $add_agence->slogan = $request->slogan;
         $add_agence->is_admin = AGENCE;
         $add_agence->logo = $imageName;
+        $add_agence->image_agence = $imageAgenceName;
         $add_agence->confirmation_token = str_replace('/','',Hash::make(Str::random(40)));
         $add_agence->slug = str_replace('/','',Hash::make(Str::random(20).'agence'.$request->email));
         $add_agence->user_id = Auth::user()->id;

@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Bagage;
+use App\Models\Admin\BagageClient;
 use App\Models\User\Client;
 use Carbon\Carbon;
 use App\Models\Admin\Bus;
+use App\Models\Admin\ColiClient;
+use App\Models\Admin\Colie;
 use App\Models\Admin\DateDepart;
 use App\Models\Admin\Historical;
 use App\Models\Admin\Itineraire;
@@ -33,7 +37,7 @@ class HomeController extends Controller
         $buses = Bus::where('siege_id',Auth::user()->siege_id)->orderBy('id','ASC')->get();
         $itineraires = Itineraire::where('siege_id',Auth::user()->siege_id)->where('user_id',Auth::user()->id)->orderBy('id','ASC')->get();
         foreach ($buses as $buse) {
-            $client_historiques = Client::where('bus_id',$buse->id)->where('amount','>',0)->where('registered_at','<',Carbon::today()->format('Y-m-d'))->get();
+            $client_historiques = Client::where('bus_id',$buse->id)->where('amount','>',2)->where('registered_at','<',Carbon::today()->format('Y-m-d'))->get();
             foreach ($client_historiques as $client_hsto) {
                 $add_client_htsto = new Historical();
                 $add_client_htsto->name = $client_hsto->name;
@@ -53,9 +57,19 @@ class HomeController extends Controller
                 $add_client_htsto->siege_id = Auth::user()->siege_id;
                 $add_client_htsto->save();
             }
-            Client::where('bus_id',$buse->id)->where('registered_at','<',Carbon::today()->format('Y-m-d'))->where('amount',null)->delete();
+            Client::where('bus_id',$buse->id)->where('registered_at','<',Carbon::today()->format('Y-m-d'))->delete();
         }
+
+        Client::where('registered_at','<',Carbon::yesterday()->format('Y-m-d'))->delete();
+
+        Bagage::where('created_at','<',Carbon::yesterday())->delete();
         
+        BagageClient::where('created_at','<',Carbon::yesterday())->delete();
+
+        Colie::where('created_at','<',Carbon::yesterday())->delete();
+
+        ColiClient::where('created_at','<',Carbon::yesterday())->delete();
+
         $h = Historical::all();
         $date_today = Carbon::today();
         $dayOfweek = $date_today->dayOfWeek;

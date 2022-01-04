@@ -18,7 +18,7 @@ class BusController extends Controller
      */
      public function __construct()
     {
-        $this->middleware(['auth','isAgent']);
+        $this->middleware(['auth','isAgent','isClient']);
     }
 
     public function index()

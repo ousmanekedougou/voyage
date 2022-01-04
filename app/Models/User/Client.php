@@ -2,6 +2,7 @@
 
 namespace App\Models\User;
 
+use App\Models\Admin\Bagage;
 use App\Models\Admin\Bus;
 use App\Models\Admin\Ville;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,6 +15,10 @@ class Client extends Model
      public function bus()
     {
         return $this->belongsTo(Bus::class);
+    }
+
+    public function bagages(){
+      return $this->hasMany(Bagage::class);
     }
 
       public function ville()

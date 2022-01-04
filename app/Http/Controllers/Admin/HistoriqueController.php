@@ -11,6 +11,10 @@ use Illuminate\Http\Request;
 
 class HistoriqueController extends Controller
 {
+      public function __construct()
+    {
+        $this->middleware(['auth','isAgent','isClient']);
+    }
     // public function index(){
     //     $buses = Bus::where('siege_id',Auth::user()->siege_id)->orderBy('id','ASC')->get();
     //     foreach ($buses as $buse) {
@@ -38,7 +42,7 @@ class HistoriqueController extends Controller
     }
 
     public function show($id){
-        $clients = Historical::where('id',$id)->paginate(15);
+        $clients = Historical::where('siege_id',$id)->paginate(15);
         return view('admin.historique.show',compact('clients'));
     }
 

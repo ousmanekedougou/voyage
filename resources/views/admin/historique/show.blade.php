@@ -319,7 +319,7 @@
                                                                             <td class="content-block"
                                                                                 style="text-align: center;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0;"
                                                                                 valign="top">
-                                                                                © 2021 Skote
+                                                                                <script>document.write(new Date().getFullYear())</script> © TouCki
                                                                             </td>
                                                                         </tr>
                                                                     </table>

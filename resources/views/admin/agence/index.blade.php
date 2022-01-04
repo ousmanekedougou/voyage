@@ -34,13 +34,13 @@
                                         <div class="media">
                                             <div class="avatar-md me-4">
                                                 <span class="avatar-title rounded-circle bg-light text-danger font-size-16">
-                                                    <img src="{{Storage::url($agence->logo)}}" alt="" height="30">
+                                                    <img src="{{Storage::url($agence->image_agence)}}" alt="" height="30">
                                                 </span>
                                             </div>
 
                                             <div class="media-body overflow-hidden">
-                                                <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">{{ $agence->name }}</a></h5>
-                                                <p class="text-muted mb-1">{{ $agence->email }}</p>
+                                                <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">{{ $agence->name_agence }}</a></h5>
+                                                <p class="text-muted mb-1">{{ $agence->email_agence }}</p>
                                                 <p class="text-muted mb-4">{{ $agence->slogan }}</p>
                                                 {{--
                                                 <div class="avatar-group">
@@ -481,9 +481,9 @@
                                         <div class="row">
                                             <div class="col-xl-6">
                                                 <div class="mb-3">
-                                                    <label class="form-label">Nom de l'agence</label>
+                                                    <label class="form-label">Votre prenom et nom</label>
                                                     <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name"
-                                                        placeholder="Nom de l'agence" />
+                                                        placeholder="Votre prenom et nom" />
                                                     @error('name')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -492,10 +492,10 @@
                                                 </div>
 
                                                 <div class="mb-3">
-                                                    <label class="form-label">E-Mail de l'agence</label>
+                                                    <label class="form-label">Votre email</label>
                                                     <div>
                                                         <input type="email" id="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" parsley-type="email"
-                                                            placeholder="E-Mail de l'agence" />
+                                                            placeholder="Votre email" />
                                                             @error('email')
                                                                 <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
@@ -515,6 +515,16 @@
                                                                 </span>
                                                             @enderror
                                                     </div>
+                                                </div>
+                                                 <div class="mb-3">
+                                                    <label class="form-label">Votre image</label>
+                                                    <input type="file" class="form-control" required id="image" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" autocomplete="image"
+                                                        placeholder="Votre image" />
+                                                          @error('image')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
                                                 </div>
 
                                                 <div class="mb-3">
@@ -539,6 +549,29 @@
                                             </div>
                                             <div class="col-xl-6">
                                                  <div class="mb-3">
+                                                    <label class="form-label">Nom de l'agence</label>
+                                                    <input type="text" id="name_agence" class="form-control @error('name_agence') is-invalid @enderror" name="name_agence" value="{{ old('name_agence') }}" required autocomplete="name_agence"
+                                                        placeholder="Nom de l'agence" />
+                                                    @error('name_agence')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label class="form-label">E-mail de lagence</label>
+                                                    <div>
+                                                        <input type="email_agence" id="email_agence" class="form-control @error('email_agence') is-invalid @enderror" name="email_agence" value="{{ old('email_agence') }}" required autocomplete="email_agence" parsley-type="email_agence"
+                                                            placeholder="E-mail de lagence" />
+                                                            @error('email_agence')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
+                                                    </div>
+                                                </div>
+                                                 <div class="mb-3">
                                                     <label class="form-label">Adresse de l'agence</label>
                                                     <input type="text" class="form-control" required id="adress" class="form-control @error('adress') is-invalid @enderror" name="adress" value="{{ old('adress') }}" autocomplete="adress"
                                                         placeholder="Adresse de l'agence" />
@@ -562,9 +595,9 @@
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label">Logo de l'agence</label>
-                                                    <input type="file" class="form-control" required id="image" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" autocomplete="image"
+                                                    <input type="file" class="form-control" required id="image_agence" class="form-control @error('image_agence') is-invalid @enderror" name="image_agence" value="{{ old('image_agence') }}" autocomplete="image_agence"
                                                         placeholder="Logo de l'agence" />
-                                                          @error('image')
+                                                          @error('image_agence')
                                                                 <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
                                                                 </span>
@@ -614,10 +647,10 @@
                                             <div class="card">
                                                 <div class="card-body">
                                                     <div class="media">
-                                                        <img src="{{Storage::url($agence_edit->logo)}}" alt="" class="avatar-sm me-4">
+                                                        <img src="{{Storage::url($agence_edit->image_agence)}}" alt="" class="avatar-sm me-4">
 
                                                         <div class="media-body overflow-hidden">
-                                                            <h5 class="text-truncate font-size-15">{{$agence_edit->name}}</h5>
+                                                            <h5 class="text-truncate font-size-15">{{$agence_edit->name_agence}}</h5>
                                                             <p class="text-muted">{{$agence_edit->slogan}}</p>
                                                         </div>
                                                     </div>
@@ -630,7 +663,7 @@
                                                         For science, music, sport, etc,</p> -->
 
                                                     <div class="text-muted mt-4">
-                                                        <p><i class="bx bxs-envelope me-1 text-primary me-1"></i>{{$agence_edit->email}} </p>
+                                                        <p><i class="bx bxs-envelope me-1 text-primary me-1"></i>{{$agence_edit->email_agence}} </p>
                                                         <p><i class="bx bxs-mobile text-primary me-1"></i>{{$agence_edit->phone}}</p>
                                                         <p><i class="bx bx-map-pin text-primary me-1"></i> {{ $agence_edit->adress }}</p>
                                                         <p><i class="bx bx-fingerprint text-primary me-1"></i> {{ $agence_edit->registre_commerce }}</p>

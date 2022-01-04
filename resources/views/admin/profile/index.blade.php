@@ -29,9 +29,9 @@
                                             @if($admin->is_admin == 1)
                                                 Administrateur
                                             @elseif($admin->is_admin == 2)
-                                                {{$admin->name}}
+                                                {{$admin->name_agence}}
                                             @elseif($admin->is_admin == 3)
-                                               {{$admin->agence_name}}
+                                               {{$admin->name_agence}}
                                             @endif
                                             </h5>
                                             <!-- <p>Cela semblera simplifié</p> -->
@@ -105,10 +105,12 @@
                                                 <th scope="row">E-mail :</th>
                                                 <td>{{$admin->email}}</td>
                                             </tr>
+                                            @if(Auth::user()->is_Agent)
                                             <tr>
                                                 <th scope="row">Siege :</th>
                                                 <td>{{ $admin->siege->name }}  ({{ $admin->siege->adress }})</td>
                                             </tr>
+                                            @endif
                                         </tbody>
                                     </table>
                                 </div>
@@ -212,6 +214,57 @@
                                 </div>
                             </div>
                         </div>
+
+
+
+                             <!-- Les premiers informations -->
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title mb-4">Modifier les informations de l'agence</h4>
+                                <div class="table-responsive">
+                                    <form action="{{ route('admin.profil.update',Auth::guard('web')->user()->slug) }}" method="post" enctype="multipart/form-data">
+                                        {{csrf_field()}}
+                                        {{method_field('PUT')}}
+                                        <div class="modal-body">
+                                            <input type="hidden" name="hidden" value="5">
+                                            <div class="mb-3">
+                                                <label for="name_agence">Nom de l'agence * </label>
+                                                <input id="name_agence" name="name_agence" type="text" class="form-control @error('name_agence') is-invalid @enderror"  value="{{ old('name_agence') ?? $admin->name_agence }}" required autocomplete="name_agence">
+                                                @error('name_agence')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="manufacturerbrand">adresse email de votre agence * </label>
+                                                <input id="email_agence" name="email_agence" type="email_agence" class="form-control @error('email_agence') is-invalid @enderror" value="{{ old('email_agence') ?? $admin->email_agence }}" required autocomplete="email_agence">
+                                                @error('email_agence')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label for="manufacturerbrand">Image de l'agence * </label>
+                                                <input id="image_agence" name="image_agence" type="file" class="form-control @error('image_agence') is-invalid @enderror" value="{{ old('image_agence') }}"  autocomplete="image_agence" style="width: 100%;">
+                                                @error('image_agence')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary btn-block">Enregistre</button>
+                                            <button type="button" class="btn btn-secondary btn-block" data-bs-dismiss="modal">Fermer</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Fin des premiers information -->
                         @endif
                         <!-- Fin Des modification consernant agence -->
 

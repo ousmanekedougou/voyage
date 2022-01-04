@@ -25,7 +25,7 @@ class ClientController extends Controller
      */
      public function __construct()
     {
-        $this->middleware(['auth','isAgent'])->except('paiment');
+        $this->middleware(['auth','isAgent','isClient'])->except('paiment');
     }
     public function index()
     {
