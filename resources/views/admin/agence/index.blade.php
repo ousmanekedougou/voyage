@@ -97,9 +97,11 @@
                                             <li class="list-inline-item me-3">
                                                 <a href="" data-bs-toggle="modal" data-bs-target="#edit-agence-{{$agence->id}}"><i class="bx bx-show me-1"></i></a>
                                             </li>
-                                            <li class="list-inline-item me-3">
-                                                <a href="" data-bs-toggle="modal" data-bs-target="#exampleModalScrollable-{{$agence->id}}"><i class="bx bxs-file-txt me-1"></i></a>
-                                            </li>
+                                            @if(Auth::user()->is_admin == 0)
+                                                <li class="list-inline-item me-3">
+                                                    <a href="{{ route('admin.agence.show',$agence->id) }}"><i class="fa fa-file-invoice me-1"></i></a>
+                                                </li>
+                                            @endif
                                             <li class="list-inline-item me-3">
                                                 <!-- <a href=""><i class="bx bx-block me-1"></i></a> -->
                                                 <div class="form-check form-switch mb-3" dir="ltr">
@@ -115,348 +117,18 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Modal pour la suppression de l'agence -->
-                                <div class="modal modal-md fade" id="subscribeModalagence-{{ $agence->id }}" tabindex="-1" aria-labelledby="subscribeModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header border-bottom-0">
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="text-center mb-4">
-                                                    <div class="avatar-md mx-auto mb-4">
-                                                        <div class="avatar-title bg-warning rounded-circle text-white h1">
-                                                            <i class="fa fa-exclamation-circle"></i>
-                                                        </div>
-                                                    </div>
+                            
 
-                                                    <div class="row justify-content-center">
-                                                        <div class="col-xl-10">
-                                                            <h4 class="text-danger">Attention !</h4>
-                                                            <p class="text-muted font-size-14 mb-4">Etes vous sure de bien vouloire supprimer {{$agence->name}}</p>
+                            
 
-                                                            <div class="input-group bg-white rounded text-center" style="text-align:center;">
-                                                                <form method="post" action="{{ route('admin.agence.destroy',$agence->id) }}"  style="display:flex;text-align:center;width:100%;">
-                                                                    {{csrf_field()}}
-                                                                    {{method_field('DELETE')}}
-                                                                        <input type="hidden" name="delete" value="1">
-                                                                    <button type="submit" class="btn btn-danger btn-xs" style="margin-left: 70px;margin-right:20px;"> Oui je veux bient </button> 
-                                                                    <button type="button" class="btn btn-success btn-xs" data-bs-dismiss="modal" aria-label="Close"> x Anuller</button>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            <!-- Fin du modal pour la suppression de l'agence -->
-
-                            <!-- Modal pour la desactivation de l'agence -->
-                                <!-- Static Backdrop Modal -->
-                                <div class="modal fade modal-sm" id="staticBackdrop-{{$agence->id}}" data-bs-backdrop="static"
-                                    data-bs-keyboard="false" tabindex="-1" role="dialog"
-                                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="staticBackdropLabel">
-                                                    @if($agence->is_active == 1)
-                                                        <span class="text-danger">Desactivation d'agence</span>
-                                                    @else
-                                                        <span class="text-success">Activation d'agence</span>
-                                                    @endif
-                                                </h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                 @if($agence->is_active == 1)
-                                                    <p class="text-danger">Etse vous sure de desactiver {{ $agence->name }}</p>
-                                                @else
-                                                    <p class="text-primary">Etse vous sure d'activer {{ $agence->name }}</p>
-                                                @endif
-                                            </div>
-                                            <div class="modal-footer">
-                                                <form action="{{ route('admin.agence.update',$agence->id) }}" method="post">
-                                                    {{csrf_field()}}
-                                                    {{method_field('PUT')}}
-                                                        <input type="hidden" name="is_active" value="{{$agence->is_active}}">
-
-                                                    <button type="reset" class="btn btn-light"
-                                                        data-bs-dismiss="modal">Ferner</button>
-                                                    <button type="submit"
-                                                    @if($agence->is_active == 1)
-                                                        class="btn btn-danger">Desactiver
-                                                    @else
-                                                        class="btn btn-success">Activer
-                                                    @endif
-                                                        </button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            <!-- Fin du modal pour la desactivation de l'agence -->
-
-                            <!-- Modal de la facture -->
-                                <div class="modal fade" id="exampleModalScrollable-{{$agence->id}}" tabindex="-1" role="dialog"
-                                    aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-                                    <div class="modal-dialog modal-xl modal-dialog-scrollable">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalScrollableTitle">Scrollable
-                                                    Modal</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <p>
-                                                    <div class="row">
-                                                        <div class="col-lg-12">
-                                                            <div class="card">
-                                                                <div class="card-body">
-                                                                    <h4 class="card-title mb-4">Latest Transaction</h4>
-                                                                    <div class="table-responsive">
-                                                                        <table class="table align-middle table-nowrap mb-0">
-                                                                            <thead class="table-light">
-                                                                                <tr>
-                                                                                    <th style="width: 20px;">
-                                                                                        <div class="form-check font-size-16 align-middle">
-                                                                                            <input class="form-check-input" type="checkbox" id="transactionCheck01">
-                                                                                            <label class="form-check-label" for="transactionCheck01"></label>
-                                                                                        </div>
-                                                                                    </th>
-                                                                                    <th class="align-middle">Order ID</th>
-                                                                                    <th class="align-middle">Billing Name</th>
-                                                                                    <th class="align-middle">Date</th>
-                                                                                    <th class="align-middle">Total</th>
-                                                                                    <th class="align-middle">Payment Status</th>
-                                                                                    <th class="align-middle">Payment Method</th>
-                                                                                    <th class="align-middle">View Details</th>
-                                                                                </tr>
-                                                                            </thead>
-                                                                            <tbody>
-                                                                                <tr>
-                                                                                    <td>
-                                                                                        <div class="form-check font-size-16">
-                                                                                            <input class="form-check-input" type="checkbox" id="transactionCheck02">
-                                                                                            <label class="form-check-label" for="transactionCheck02"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td><a href="javascript: void(0);" class="text-body fw-bold">#SK2540</a> </td>
-                                                                                    <td>Neal Matthews</td>
-                                                                                    <td>
-                                                                                        07 Oct, 2019
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        $400
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <span class="badge badge-pill badge-soft-success font-size-11">Paid</span>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <i class="fab fa-cc-mastercard me-1"></i> Mastercard
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <!-- Button trigger modal -->
-                                                                                        <button type="button" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".transaction-detailModal">
-                                                                                            View Details
-                                                                                        </button>
-                                                                                    </td>
-                                                                                </tr>
-
-                                                                                <tr>
-                                                                                    <td>
-                                                                                        <div class="form-check font-size-16">
-                                                                                            <input class="form-check-input" type="checkbox" id="transactionCheck03">
-                                                                                            <label class="form-check-label" for="transactionCheck03"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td><a href="javascript: void(0);" class="text-body fw-bold">#SK2541</a> </td>
-                                                                                    <td>Jamal Burnett</td>
-                                                                                    <td>
-                                                                                        07 Oct, 2019
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        $380
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <span class="badge badge-pill badge-soft-danger font-size-11">Chargeback</span>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <i class="fab fa-cc-visa me-1"></i> Visa
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <!-- Button trigger modal -->
-                                                                                        <button type="button" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".transaction-detailModal">
-                                                                                            View Details
-                                                                                        </button>
-                                                                                    </td>
-                                                                                </tr>
-
-                                                                                <tr>
-                                                                                    <td>
-                                                                                        <div class="form-check font-size-16">
-                                                                                            <input class="form-check-input" type="checkbox" id="transactionCheck04">
-                                                                                            <label class="form-check-label" for="transactionCheck04"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td><a href="javascript: void(0);" class="text-body fw-bold">#SK2542</a> </td>
-                                                                                    <td>Juan Mitchell</td>
-                                                                                    <td>
-                                                                                        06 Oct, 2019
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        $384
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <span class="badge badge-pill badge-soft-success font-size-11">Paid</span>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <i class="fab fa-cc-paypal me-1"></i> Paypal
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <!-- Button trigger modal -->
-                                                                                        <button type="button" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".transaction-detailModal">
-                                                                                            View Details
-                                                                                        </button>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>
-                                                                                        <div class="form-check font-size-16">
-                                                                                            <input class="form-check-input" type="checkbox" id="transactionCheck05">
-                                                                                            <label class="form-check-label" for="transactionCheck05"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td><a href="javascript: void(0);" class="text-body fw-bold">#SK2543</a> </td>
-                                                                                    <td>Barry Dick</td>
-                                                                                    <td>
-                                                                                        05 Oct, 2019
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        $412
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <span class="badge badge-pill badge-soft-success font-size-11">Paid</span>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <i class="fab fa-cc-mastercard me-1"></i> Mastercard
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <!-- Button trigger modal -->
-                                                                                        <button type="button" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".transaction-detailModal">
-                                                                                            View Details
-                                                                                        </button>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>
-                                                                                        <div class="form-check font-size-16">
-                                                                                            <input class="form-check-input" type="checkbox" id="transactionCheck06">
-                                                                                            <label class="form-check-label" for="transactionCheck06"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td><a href="javascript: void(0);" class="text-body fw-bold">#SK2544</a> </td>
-                                                                                    <td>Ronald Taylor</td>
-                                                                                    <td>
-                                                                                        04 Oct, 2019
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        $404
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <span class="badge badge-pill badge-soft-warning font-size-11">Refund</span>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <i class="fab fa-cc-visa me-1"></i> Visa
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <!-- Button trigger modal -->
-                                                                                        <button type="button" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".transaction-detailModal">
-                                                                                            View Details
-                                                                                        </button>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td>
-                                                                                        <div class="form-check font-size-16">
-                                                                                            <input class="form-check-input" type="checkbox" id="transactionCheck07">
-                                                                                            <label class="form-check-label" for="transactionCheck07"></label>
-                                                                                        </div>
-                                                                                    </td>
-                                                                                    <td><a href="javascript: void(0);" class="text-body fw-bold">#SK2545</a> </td>
-                                                                                    <td>Jacob Hunter</td>
-                                                                                    <td>
-                                                                                        04 Oct, 2019
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        $392
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <span class="badge badge-pill badge-soft-success font-size-11">Paid</span>
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <i class="fab fa-cc-paypal me-1"></i> Paypal
-                                                                                    </td>
-                                                                                    <td>
-                                                                                        <!-- Button trigger modal -->
-                                                                                        <button type="button" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".transaction-detailModal">
-                                                                                            View Details
-                                                                                        </button>
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </div>
-                                                                    <!-- end table-responsive -->
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </p>
-                                                
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-light"
-                                                    data-bs-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Save changes</button>
-                                            </div>
-                                        </div><!-- /.modal-content -->
-                                    </div><!-- /.modal-dialog -->
-                                </div>
-                            <!-- fin du modal de la facture -->
+                            
                         @endforeach
                     </div>
                     <!-- end row -->
 
                     <div class="row">
                         <div class="col-lg-12">
-                            <ul class="pagination pagination-rounded justify-content-center mt-2 mb-5">
-                                <li class="page-item disabled">
-                                    <a href="#" class="page-link"><i class="mdi mdi-chevron-left"></i></a>
-                                </li>
-                                <li class="page-item">
-                                    <a href="#" class="page-link">1</a>
-                                </li>
-                                <li class="page-item active">
-                                    <a href="#" class="page-link">2</a>
-                                </li>
-                                <li class="page-item">
-                                    <a href="#" class="page-link">3</a>
-                                </li>
-                                <li class="page-item">
-                                    <a href="#" class="page-link">4</a>
-                                </li>
-                                <li class="page-item">
-                                    <a href="#" class="page-link">5</a>
-                                </li>
-                                <li class="page-item">
-                                    <a href="#" class="page-link"><i class="mdi mdi-chevron-right"></i></a>
-                                </li>
-                            </ul>
+                           {{$agences->links()}}
                         </div>
                     </div>
                     <!-- end row -->
@@ -697,6 +369,97 @@
                 </div>
             </div>
             @endforeach
+
+            @foreach($agences as $agence)
+            <!-- Modal pour la suppression de l'agence -->
+                <div class="modal modal-md fade" id="subscribeModalagence-{{ $agence->id }}" tabindex="-1" aria-labelledby="subscribeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header border-bottom-0">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="text-center mb-4">
+                                    <div class="avatar-md mx-auto mb-4">
+                                        <div class="avatar-title bg-warning rounded-circle text-white h1">
+                                            <i class="fa fa-exclamation-circle"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="row justify-content-center">
+                                        <div class="col-xl-10">
+                                            <h4 class="text-danger">Attention !</h4>
+                                            <p class="text-muted font-size-14 mb-4">Etes vous sure de bien vouloire supprimer {{$agence->name}}</p>
+
+                                            <div class="input-group bg-white rounded text-center" style="text-align:center;">
+                                                <form method="post" action="{{ route('admin.agence.destroy',$agence->id) }}"  style="display:flex;text-align:center;width:100%;">
+                                                    {{csrf_field()}}
+                                                    {{method_field('DELETE')}}
+                                                        <input type="hidden" name="delete" value="1">
+                                                    <button type="submit" class="btn btn-danger btn-xs" style="margin-left: 70px;margin-right:20px;"> Oui je veux bient </button> 
+                                                    <button type="button" class="btn btn-success btn-xs" data-bs-dismiss="modal" aria-label="Close"> x Anuller</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- Fin du modal pour la suppression de l'agence -->
+            @endforeach
+
+            @foreach($agences as $agence)
+            <!-- Modal pour la desactivation de l'agence -->
+                <!-- Static Backdrop Modal -->
+                <div class="modal fade modal-md" id="staticBackdrop-{{$agence->id}}" data-bs-backdrop="static"
+                    data-bs-keyboard="false" tabindex="-1" role="dialog"
+                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">
+                                    @if($agence->is_active == 1)
+                                        <span class="text-danger">Desactivation d'agence</span>
+                                    @else
+                                        <span class="text-success">Activation d'agence</span>
+                                    @endif
+                                </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                    @if($agence->is_active == 1)
+                                    <p class="text-danger">Etse vous sure de desactiver {{ $agence->name }}</p>
+                                @else
+                                    <p class="text-primary">Etse vous sure d'activer {{ $agence->name }}</p>
+                                @endif
+                            </div>
+                            <div class="modal-footer">
+                                <form action="{{ route('admin.agence.update',$agence->id) }}" method="post">
+                                    {{csrf_field()}}
+                                    {{method_field('PUT')}}
+                                        <input type="hidden" name="is_active" value="{{$agence->is_active}}">
+
+                                    <button type="reset" class="btn btn-light"
+                                        data-bs-dismiss="modal">Ferner</button>
+                                    <button type="submit"
+                                    @if($agence->is_active == 1)
+                                        class="btn btn-danger">Desactiver
+                                    @else
+                                        class="btn btn-success">Activer
+                                    @endif
+                                        </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- Fin du modal pour la desactivation de l'agence -->
+            @endforeach
+
+           
 
 
 

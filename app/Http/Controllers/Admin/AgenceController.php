@@ -27,7 +27,7 @@ class AgenceController extends Controller
 
       public function index()
     {
-        $agences = User::where('is_admin',2)->orderBy('id','DESC')->get();
+        $agences = User::where('is_admin',2)->orderBy('id','DESC')->paginate(10);
         return view('admin.agence.index',compact('agences'));
     }
 
@@ -119,7 +119,8 @@ class AgenceController extends Controller
      */
     public function show($id)
     {
-        //
+        $agence = User::where('id',$id)->first();
+        return view('admin.order.index',compact('agence'));
     }
 
     /**

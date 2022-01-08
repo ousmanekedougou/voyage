@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="{{ asset('user/assets/css/login2.css') }}" />
-  <title>Connexion</title>
+  <title>TouCki|Connexion</title>
 </head>
 
 <body>
@@ -14,28 +14,33 @@
       <div class="signin-signup">
         <form action="{{ route('login') }}" method="post" class="sign-in-form">
           @csrf
-          <h2 class="title">Se Connecter</h2>
+          <h2 class="title">Se Connécter</h2>
           <div class="input-field">
             <i class="fas fa-user"></i>
             <input class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus id="username" placeholder="Entrez votre adresse email" />
-            @error('email')
-                <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
+          </div>
+           <p style="width: 70%;font-size:11px;color:red;">
+              @error('email')
+                <span class="invalid-feedback" role="alert" style="width: 100%;">
+                    {{ $message }}
                 </span>
             @enderror
-          </div>
+           </p>
           <div class="input-field">
             <i class="fas fa-lock"></i>
             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Entrez votre mot de passe" aria-label="Password" aria-describedby="password-addon" />
-            @error('password')
-              <span class="invalid-feedback" role="alert">
-                  <strong>{{ $message }}</strong>
-              </span>
-            @enderror
           </div>
-          <input type="submit" value="Connexion" name="signin" class="btn solid" />
-          <p style="display: flex;justify-content: center;align-items: center;margin-top: 20px;"><a href="{{ route('password.request') }}" style="color: #4590ef;"> <i style="text-decoration: underline;" class="fas fa-unlock"> Mot de passe oublié?</i> </a></p>
+            @error('password')
+              <p style="width: 70%;font-size:11px;color:red;">
+                <span class="invalid-feedback" role="alert" >
+                  {{ $message }}
+              </span>
+              </p>
+            @enderror
+          <input type="submit" value="Connexion" name="signin" class="btn solid"/>
+          <p style="display: flex;justify-content: center;align-items: center;margin-top: 20px;"><a href="{{ route('password.request') }}" style="color: #4590ef;"> <i style="text-decoration: underline;margin-right:4px;" class="fas fa-unlock"></i> Mot de passe oublié? </a></p>
         </form>
+
         <form action="" class="sign-up-form" method="post">
           <h2 class="title">Sign up</h2>
           <div class="input-field">
@@ -62,16 +67,15 @@
     <div class="panels-container">
       <div class="panel left-panel">
         <div class="content">
-          <h3>New here ?</h3>
+          <h3>TouCki cii Sénégal</h3>
           <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
-            ex ratione. Aliquid!
+            Nous sommes convaincus que le digital est un facteur de croissance et de survie pour toutes entreprises quels que soient la taille et le secteur, c’est pourquoi nous nous engageons à vous accompagner à maximiser votre performance et vos résultats grâce à la digitalisation. 
           </p>
-          <button class="btn transparent" id="sign-up-btn">
-            Sign up
-          </button>
+          <!-- <button class="btn transparent" id="sign-up-btn">
+            Creer un compte agence
+          </button> -->
         </div>
-        <img src="{{asset('user/assets/images/log.svg')}}" class="image" alt="" />
+        <img src="{{asset('admin/assets/images/bus.svg')}}" class="image" alt="" />
       </div>
       <div class="panel right-panel">
         <div class="content">

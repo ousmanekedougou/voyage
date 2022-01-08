@@ -17,11 +17,15 @@ use App\Notifications\RegisteredClient;
 
 class HomeController extends Controller
 {
-    public function index()
-    {
-        define('Is_Admin',2);
-        $agences = User::where('is_admin',Is_Admin)->orderBy('id','ASC')->get();
-        return view('user.index',compact('agences'));
+    // public function index()
+    // {
+    //     define('Is_Admin',2);
+    //     $agences = User::where('is_admin',Is_Admin)->orderBy('id','ASC')->get();
+    //     return view('user.index',compact('agences'));
+    // }
+
+    public function index(){
+         return view('auth.login2');
     }
 
    

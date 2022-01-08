@@ -15,10 +15,10 @@
                                     <span key="t-blog">Administrateur</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="{{ route('admin.agence.index') }}" key="t-blog-list"> <i class="fas fa-r-project"></i> Agences</a></li>
+                                    <li><a href="{{ route('admin.agence.index') }}" key="t-blog-list"> <i class="fa fa-project-diagram"></i> Agences</a></li>
                                     @if(Auth::user()->is_admin == 0)
-                                    <li><a href="{{ route('admin.admin.index') }}" key="t-blog-list">Admins</a></li>
-                                    <li><a href="{{ route('admin.partenaire.index') }}" key="t-blog-list">Partenaires</a></li>
+                                        <li><a href="{{ route('admin.admin.index') }}" key="t-blog-list">Admins</a></li>
+                                        <li><a href="{{ route('admin.partenaire.index') }}" key="t-blog-list">Partenaires</a></li>
                                     @endif
                                 </ul>
                             </li>
