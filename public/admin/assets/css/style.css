@@ -69,26 +69,28 @@
          width: 0px;
          height: 0px;
      }
-      .bagage_show{
-            width: 100%;
-            margin-left:0px;
-        }
+    .bagage_show{
+        width: 100%;
+        margin-left:0px;
+    }
+
+    
      
  }
 
  #topBtn{
-     position: fixed;
-     bottom: 40px;
-     right: 40px;
-     font-size: 22px;
-     width: 50px;
-     height: 50px;
-     background-color: #e74c3c;
-     color: white;
-     border: none;
-     cursor: pointer;
-     border-radius: 100%;
-     display: none;
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    font-size: 22px;
+    width: 50px;
+    height: 50px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 100%;
+    display: none;
  }
 
  /* .hero-section.bg-ico-hero{background-image:url(../images/crypto/gif1.gif);

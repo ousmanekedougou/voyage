@@ -3,6 +3,7 @@
 @section('headsection')
     <link href="{{asset('admin/assets/libs/admin-resources/rwd-table/rwd-table.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('admin/assets/libs/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('admin/assets/css/table.css')}}" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('main-content')
@@ -40,7 +41,7 @@
                                         </div>
 
                                         <div class="table-responsive">
-                                            <table class="table align-middle table-nowrap">
+                                            <table class="table responsive-table align-middle table-nowrap">
                                                 <thead>
                                                     <tr>
                                                         <th>#</th>
@@ -649,4 +650,5 @@
     <script src="{{asset('admin/assets/libs/select2/js/select2.min.js')}}"></script>
     <!-- Init js -->
     <script src="{{asset('admin/assets/js/pages/table-responsive.init.js')}}"></script>
+    <script src="{{asset('admin/assets/js/table.js')}}"></script>
 @endsection

@@ -3,6 +3,7 @@
 @section('headsection')
     <link href="{{asset('admin/assets/libs/admin-resources/rwd-table/rwd-table.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('admin/assets/libs/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
+      <link href="{{asset('admin/assets/css/table.css')}}" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('main-content')
@@ -16,13 +17,6 @@
                                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                                     <h4 class="mb-sm-0 font-size-18">Historique de vos clients</h4>
 
-                                    <div class="page-title-right">
-                                        <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
-                                            <li class="breadcrumb-item active">Customers</li>
-                                        </ol>
-                                    </div>
-
                                 </div>
                             </div>
                         </div>
@@ -34,7 +28,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="row mb-2">
-                                            <div class="col-sm-4">
+                                            <div class="col-sm-4 ">
                                                 <div class="search-box me-2 mb-2 d-inline-block">
                                                     <div class="position-relative">
                                                         <a href="" onclick="
@@ -62,7 +56,7 @@
                                                 <div class="text-sm-end">
                                                     <div class="search-box me-2 mb-2 d-inline-block">
                                                         <div class="position-relative">
-                                                            <form action="{{ route('admin.historique.search') }}" method="post">
+                                                            <form id="search-form" action="{{ route('admin.historique.search') }}" method="post">
                                                                 @csrf
                                                                 <input type="hidden" name="hidden_date" value="2">
                                                                <input data-parsley-type="number" type="number" id="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" autocomplete="phone"
@@ -72,8 +66,12 @@
                                                                         <strong>{{ $message }}</strong>
                                                                     </span>
                                                                 @enderror
-                                                                <i class="bx bx-search-alt search-icon"></i>
                                                             </form>
+                                                                    <a href="" onclick="
+                                                                    event.preventDefault();document.getElementById('search-form').submit();
+                                                                    
+                                                                    "><i class="bx bx-search-alt search-icon"></i>
+                                                                </a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -81,10 +79,10 @@
                                         </div>
 
                                         <div class="table-responsive">
-                                            <table class="table align-middle table-nowrap">
+                                            <table class="table responsive-table align-middle table-nowrap">
                                                 <thead>
                                                     <tr>
-                                                        <th>#</th>
+                                                        <th>Num</th>
                                                         <th>Prenom et nom</th>
                                                         <th>Telephone</th>
                                                         <th>Ville</th>
@@ -98,12 +96,7 @@
                                                 @foreach($clients as $client)
                                                     <tr>
                                                         <td>
-                                                            <div class="form-check font-size-16">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    id="customerlistcheck08">
-                                                                <label class="form-check-label"
-                                                                    for="customerlistcheck08"></label>
-                                                            </div>
+                                                            {{$client->id}}
                                                         </td>
                                                         <td>{{$client->name}}</td>
                                                         <td>
@@ -395,4 +388,5 @@
     <script src="{{asset('admin/assets/libs/select2/js/select2.min.js')}}"></script>
     <!-- Init js -->
     <script src="{{asset('admin/assets/js/pages/table-responsive.init.js')}}"></script>
+     <script src="{{asset('admin/assets/js/table.js')}}"></script>
 @endsection

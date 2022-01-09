@@ -1,5 +1,5 @@
 
-
+        <button id="topBtn"> <i class="fas fa-arrow-up"></i> </button>
         <!-- Right bar overlay-->
         <div class="rightbar-overlay"></div>
 
@@ -21,6 +21,7 @@
         <script src="{{asset('admin/assets/libs/parsleyjs/parsley.min.js')}}"></script>
 
         <script src="{{asset('admin/assets/js/pages/form-validation.init.js')}}"></script>
+        
 
         <!-- App js -->
         <script src="{{asset('admin/assets/js/app.js')}}"></script>
@@ -67,6 +68,23 @@
             }
             return true;
         }
+    </script>
+
+      <script>
+        $(document).ready(function(){
+
+            $(window).scroll(function(){
+                if($(this).scrollTop() > 40) {
+                    $("#topBtn").fadeIn();
+                }else{
+                    $("#topBtn").fadeOut();
+                }
+            });
+
+            $("#topBtn").click(function(){
+                $('html ,body').animate({scrollTop : 0},2000);
+            });
+        });
     </script>
 
         @section('settingsection')

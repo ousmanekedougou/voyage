@@ -31,8 +31,11 @@ class HistoriqueController extends Controller
             }else {
                 return back();
             }
-        }elseif ($request->hidden_date == 2) {
-            if ($request->search != null) {
+        }
+        
+        if ($request->hidden_date == 2) {
+        // dd($request->phone);
+            if ($request->phone != null) {
                     $clients = Historical::where('siege_id',Auth::user()->siege_id)->where('phone',$request->phone)->paginate(15);
                     return view('admin.historique.show',compact('clients'));
             }else {

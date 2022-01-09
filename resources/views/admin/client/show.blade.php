@@ -3,6 +3,7 @@
 @section('headsection')
     <link href="{{asset('admin/assets/libs/admin-resources/rwd-table/rwd-table.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('admin/assets/libs/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('admin/assets/css/table.css')}}" rel="stylesheet" type="text/css" />
      {{-- <style>
         .invoice-container{
             padding: 2mm;
@@ -39,7 +40,7 @@
         
                                 <div class="col-sm-8">
                                     <div class="text-sm-end">
-                                        <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-primary text-white"
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-primary text-white button_ajout_client"
                                             class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i
                                                 class="mdi mdi-plus me-1"></i>Ajouter un client</button>
                                     </div>
@@ -47,10 +48,10 @@
                             </div>
 
                             <div class="table-responsive">
-                                <table class="table align-middle table-nowrap">
+                                <table class="table responsive-table align-middle table-nowrap">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
+                                            <th>Num</th>
                                             <th>Prenom et nom</th>
                                             <th>Telephone</th>
                                             <th>Destination</th>
@@ -63,12 +64,7 @@
                                     @foreach($clients as $client)
                                         <tr>
                                             <td>
-                                                <div class="form-check font-size-16">
-                                                    <input class="form-check-input" type="checkbox"
-                                                        id="customerlistcheck08">
-                                                    <label class="form-check-label"
-                                                        for="customerlistcheck08"></label>
-                                                </div>
+                                                {{$client->id}}
                                             </td>
                                             <td>{{$client->name}}</td>
                                             <td>
@@ -108,14 +104,7 @@
                                             </td>
                                             
                                             <td>
-                                                <div class="d-flex gap-3">
-                                                
-                                                    <!-- @if($client->amount == $client->ville->amount)
-                                                    Payer
-                                                    @else
-                                                        <a href="javascript:void(0);" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-primary" data-bs-target="#staticBackdroppaiment-{{$client->id}}"><i class="bx bx-money mt-1 font-size-18"></i></a>
-                                                    @endif -->
-
+                                                <div class="d-flex gap-3 div_button">
                                                     <a href="javascript:void(0);" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-primary" data-bs-target="#staticBackdrop-{{$client->id}}"><i class="bx bx-edit mt-1 font-size-18"></i></a>
                                                     <a href="{{ route('admin.ticker',$client->id) }}" role="button"  class="text-primary"><i class="fa fa-print mt-1 font-size-18"></i></a>
                                                     <a href="javascript:void(0);" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-suucess" data-bs-target="#subscribeModalagenceDetails-{{ $client->id }}"><i class="mdi mdi-eye font-size-18"></i></a>
@@ -154,7 +143,6 @@
                                                             </div>
                                                         </div>
                                                     </div> 
-                                                
                                                 </div>
                                             </td>
                                         </tr>
@@ -776,10 +764,6 @@
         </div>
     @endforeach
     <!-- Fin du modal pour la presence du client -->
-
-
-
-
 @endsection
 
 
@@ -789,4 +773,5 @@
     <script src="{{asset('admin/assets/libs/select2/js/select2.min.js')}}"></script>
     <!-- Init js -->
     <script src="{{asset('admin/assets/js/pages/table-responsive.init.js')}}"></script>
+    <script src="{{asset('admin/assets/js/table.js')}}"></script>
 @endsection

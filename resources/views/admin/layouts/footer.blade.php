@@ -11,8 +11,9 @@
                         </div>
                     </div>
                 </div>
+                
             </footer>
-
+            
             <!-- Static Backdrop Modal de l'ajout -->
             <div class="modal fade" id="FooterstaticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="FooterstaticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-md modal-dialog-centered" role="document">
@@ -165,10 +166,7 @@
             </div>
             <!-- Fin du modal de l'ajout -->
 
+           
+
             @section('footersection')
-
-      
-
-    
-
             @show
