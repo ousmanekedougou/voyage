@@ -3,61 +3,16 @@
 @section('main-content')
 
      <!-- hero section start -->
-    <section class="section hero-section bg-ico-hero" style="margin-top:-50px;" id="home">
+    <section class="section hero-section bg-ico-hero" id="home">
         <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-5">
+            <div class="row align-items-center" style="margin-top: -70px;">
+                <div class="col-lg-8">
                     <div class="text-white-50">
                         <h1 class="text-white font-weight-semibold mb-3 hero-title">Yombalal Toucki Thi Biir Rewmi</h1>
                         <p class="font-size-20">
                             Le secteur du tourisme a fort à faire dans une conjoncture économique pleine de défis. Pour vous démarquer, en tant qu’agence de voyages.
                         </p>
-
-                        <!-- <div class="button-items mt-4">
-                            <a href="{{ route('agence.create') }}" class="btn btn-success">Creer votre compte agence</a>
-                            <a href="{{ route('agence.index') }}" class="btn btn-light">Nos agences de transport</a>
-                        </div> -->
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-8 col-sm-10 ms-lg-auto">
-                   
-                    <div class="overflow-hidden mb-0 mt-3 mt-lg-0">
-                         <img src="{{ asset('user/assets/images/img-1.png') }}" style="width: 100%;"  alt="" srcset="">
-                        <!-- <div class="card-header text-center">
-                            <h5 class="mb-0">ICO Countdown time</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="text-center">
-
-                                <h5>Time left to Ico :</h5>
-                                <div class="mt-4">
-                                    <div data-countdown="2021/12/31" class="counter-number ico-countdown"></div>
-                                </div>
-
-                                <div class="mt-4">
-                                    <button type="button" class="btn btn-success w-md">Get Token</button>
-                                </div>
-
-                                <div class="mt-5">
-                                    <h4 class="font-weight-semibold">1 ETH = 2235 SKT</h4>
-                                    <div class="clearfix mt-4">
-                                        <h5 class="float-end font-size-14">5234.43</h5>
-                                    </div>
-                                    <div class="progress p-1 progress-xl softcap-progress">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 15%"
-                                            aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">
-                                            <div class="progress-label">15 %</div>
-                                        </div>
-                                        <div class="progress-bar progress-bar-striped progress-bar-animated"
-                                            role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0"
-                                            aria-valuemax="100">
-                                            <div class="progress-label">30 %</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
             </div>

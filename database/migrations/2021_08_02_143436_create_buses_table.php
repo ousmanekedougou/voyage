@@ -25,6 +25,8 @@ class CreateBusesTable extends Migration
             $table->integer('date_depart_id');
             $table->integer('inscrit')->nullable();
             $table->integer('number')->nullable();
+            $table->integer('montant')->nullable();
+            $table->integer('valider')->nullable();
             $table->timestamps();
         });
     }

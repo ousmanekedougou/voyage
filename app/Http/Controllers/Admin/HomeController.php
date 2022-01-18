@@ -12,6 +12,8 @@ use App\Models\Admin\Colie;
 use App\Models\Admin\DateDepart;
 use App\Models\Admin\Historical;
 use App\Models\Admin\Itineraire;
+use App\Models\Admin\Siege;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -69,16 +71,12 @@ class HomeController extends Controller
         Colie::where('created_at','<',Carbon::yesterday())->delete();
 
         ColiClient::where('created_at','<',Carbon::yesterday())->delete();
+        
 
-        $h = Historical::all();
         $date_today = Carbon::today();
         $dayOfweek = $date_today->dayOfWeek;
-        foreach ($h as $history) {
-            if ($dayOfweek == 1) {
-                if ($history->registered_at->dayOfWeek == $dayOfweek) {
-                    $history->delete();
-                }
-            }
+        if ($dayOfweek == 1) {
+            Historical::where('registered_at','<',Carbon::today())->where('siege_id',Auth::user()->siege_id)->delete();
         }
 
 
@@ -94,11 +92,24 @@ class HomeController extends Controller
             DateDepart::where('itineraire_id',$itineraire->id)->where('depart_at','<',Carbon::today())->delete();
         }
 
-        $client_today = Client::where('confirmation_token','!=',null)->where('amount',0)->where('registered_at',Carbon::today())->get();
-        $client_today_payer = Client::where('confirmation_token',null)->where('amount','>',0)->where('registered_at',Carbon::today())->get();
-        $client_total = Client::where('confirmation_token',null)->where('amount','>',0)->where('registered_at',Carbon::today())->sum('amount');
-        
-        return view('admin.home',compact('itineraires','client_today','client_today_payer','client_total'));
+
+        if (Auth::user()->is_admin == 3 && Auth::user()->role == 1) {
+            $user = User::where('id',Auth::user()->id)->first() ; 
+            return view('admin.home',compact('itineraires','user'));
+        }elseif (Auth::user()->is_admin == 2) {
+            $sieges = Siege::where('user_id',Auth::user()->id)->orderBy('id','DESC')->get(); 
+            return view('admin.siege.index',compact('sieges'));
+        }elseif (Auth::user()->is_admin == 0 || Auth::user()->is_admin == 1) {
+           $agences = User::where('is_admin',2)->orderBy('id','DESC')->paginate(10);
+            return view('admin.agence.index',compact('agences'));
+        }elseif (Auth::user()->is_admin == 3 && Auth::user()->role == 2) {
+            $clients = Bagage::paginate(15);
+            return view('admin.bagage.index',compact('clients'));
+        }elseif (Auth::user()->is_admin == 3 && Auth::user()->role == 3) {
+            $clients = Colie::paginate(15);
+            return view('admin.coli.index',compact('clients'));
+        }
+            // return view('admin.home',compact('itineraires','user'));
     }
     
 }

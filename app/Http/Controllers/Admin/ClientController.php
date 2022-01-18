@@ -42,12 +42,17 @@ class ClientController extends Controller
         if ($user) {
                 if ($user->registered_at >= Carbon::today()) {
                     $user->update([
-                    'confirmation_token' => null,
-                    'amount' =>  $user->ville->amount,
-                    'payment_at' => new DateTime()
-                ]);
+                        'confirmation_token' => null,
+                        'amount' =>  $user->ville->amount,
+                        'payment_at' => new DateTime()
+                    ]);
+                    $montant_bus = Bus::where('id',$user->bus_id)->where('plein',0)->first();
+                    $montan = $montant_bus->montant + $user->ville->amount;
+                    $montant_bus->montant = $montan;
+                    $montant_bus->valider = $montant_bus->valider + 1;
+                    $montant_bus->save();
 
-                Notification::route('mail','ousmanelaravel@mail.com')
+                Notification::route('mail',$user->bus->siege->email)
                     ->notify(new PaymentTicker($user));
                 return redirect('http://localhost:8000')->with('success',"Salut votre billet a ete payer avec succes.<br>Veuillez ouvrire votre comptre gmail pour voir votre ticker electronique et ses instruction");
             }else{
@@ -69,8 +74,15 @@ class ClientController extends Controller
                     'amount' =>  $user->ville->amount,
                     'payment_at' => new DateTime()
                 ]);
-                Notification::route('mail',Auth::user()->siege->email)
-                ->notify(new PaymentTicker($user));
+
+                $montant_bus = Bus::where('id',$user->bus_id)->where('plein',0)->first();
+                $montan = $montant_bus->montant + $user->ville->amount;
+                $montant_bus->montant = $montan;
+                $montant_bus->valider = $montant_bus->valider + 1;
+                $montant_bus->save();
+
+                // Notification::route('mail',Auth::user()->siege->email)
+                // ->notify(new PaymentTicker($user));
                 return back()->with('success','Votre billet a ete payer');
             }
         }
@@ -301,7 +313,28 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        Client::find($id)->delete();
+        $user = Client::where('id',$id)->first();
+        $montant_bus = Bus::where('id',$user->bus_id)->where('plein',0)->first();
+        if ($montant_bus->montant >= $user->ville->amount) {
+            $montan = $montant_bus->montant - $user->ville->amount;
+        }else {
+            $montan = $user->ville->amount - $montant_bus->montant;
+        }
+        $montant_bus->montant = $montan;
+
+        if ($montant_bus->inscrit >= 1) {
+            $montant_bus->inscrit = $montant_bus->inscrit - 1;
+        }else {
+            $montant_bus->inscrit = 0;
+        }
+
+        if ($montant_bus->valider >= 1) {
+            $montant_bus->valider = $montant_bus->valider - 1;
+        }else {
+            $montant_bus->valider = 0;
+        }
+        $montant_bus->save();
+        $user->delete();
         return back()->with('success','Votre client a ete supprimer');
     }
 }

@@ -11,9 +11,11 @@
         <link href="{{asset('admin/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
         <!-- App Css-->
         <link href="{{asset('admin/assets/css/app.min.css')}}"  rel="stylesheet" type="text/css" />
-
         <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet'>
+        
+         <link href="{{asset('admin/assets/css/style.css')}}"  rel="stylesheet" type="text/css" />
+         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
         @section('headsection')
         @show

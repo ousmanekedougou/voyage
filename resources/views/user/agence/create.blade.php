@@ -4,40 +4,22 @@
 
  
 
-    <!-- Features start -->
-     <section class="section hero-section bg-ico-hero " style="padding: 60px;" id="home" style="margin-top: -10px;">
-     <!-- <div class="bg-overlay bg-primary"></div> -->
+   <!-- hero section start -->
+    <section class="section hero-section bg-ico-hero">
+        <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
-            <!-- <div class="row">
-                <div class="col-lg-12">
-                    <div class="text-center mb-5">
-                        <div class="small-title">Features</div>
-                        <h4>Key features of the product</h4>
-                    </div>
-                </div>
-            </div> -->
-            <!-- end row -->
+            <div class="row align-items-center row_pricipal" style="margin-top: -70px;" >
+                <div class="col-lg-8 card_show">
+                    <div class="text-white-50">
+                        <h1 class="text-white font-weight-semibold mb-3 hero-title ">Creer votre agence de transport</h1>
+                        <p class="font-size-20 text-white" >
+                            <!-- Toutes les options de voyage sur une seule plateforme -->
+                        </p>
 
-            <div class="row align-items-center pt-4">
-                <div class="col-md-6 col-sm-8 col-lg-6 col-xs-12">
-                    <div style="padding:20px ;width:100%;" >
-                        <img src="{{asset('user/assets/images/crypto/features-img/img-1.png')}}" alt="" class="img-fluid mx-auto d-block">
-                    </div>
-                </div>
-                <div class="col-md-5 col-lg-6 col-xs-12 ms-auto ">
-                    <div class="mt-4 mt-md-auto">
-                        <div class="d-flex align-items-center mb-2">
-                            <!-- <div class="features-number font-weight-semibold display-4 me-3">01</div> -->
-                            <h4 class="mb-0 text-white">Create Agence</h4>
-                        </div>
-                        <p class="text-white">If several languages coalesce, the grammar of the resulting language is
-                            more simple and regular than of the individual will be more simple and regular than the
-                            existing.</p>
-                        <div class="text-wite mt-4">
-                            <p class="mb-2 text-white"><i class="mdi mdi-circle-medium text-success me-1"></i>Donec pede justo vel
-                                aliquet</p>
-                            <p class="text-white"><i class="mdi mdi-circle-medium text-success me-1"></i>Aenean et nisl sagittis</p>
-                        </div>
+                        <!-- <div class="button-items mt-4 ">
+                            <a href="{{ route('agence.create') }}" class="btn btn-success">Creer votre compte agence</a>
+                            <a href="{{ route('agence.index') }}" class="btn btn-light">Nos agences de transport</a>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -45,7 +27,7 @@
         </div>
         <!-- end container -->
     </section>
-    <!-- Features end -->
+    <!-- hero section end -->
 
 
         <section class="section bg-white" id="agence">

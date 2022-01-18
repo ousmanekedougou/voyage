@@ -3,44 +3,38 @@
 @section('headSection')
     <meta name="csrf-token" content="{{ csrf_token() }}">
 	<link rel="stylesheet" href="{{asset('user/assets/build/css/intlTelInput.css')}}">
-  	<link rel="stylesheet" href="{{asset('user/assets/build/css/demo.css')}}">
+  	<!-- <link rel="stylesheet" href="{{asset('user/assets/build/css/demo.css')}}"> -->
 @endsection
 
 @section('main-content')
 
+   <!-- hero section start -->
+    <section class="section hero-section bg-ico-hero"  id="home">
+        <!-- <div class="bg-overlay bg-primary"></div> -->
+        <div class="container">
+                <div class="row align-items-center row_pricipal" style="margin-top: -70px;" >
+                <div class="col-lg-8 card_show">
+                    <div class="text-white-50">
+                        <h1 class="text-white font-weight-semibold mb-3 hero-title ">Réservez vos billets de bus sur <span class="text-warning">{{$agence->name_agence}}</span> au meilleur prix</h1>
+                    
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>
+        <!-- end container -->
+    </section>
+    <!-- hero section end -->
+
     <!-- about section start -->
-    <section class="section hero-section bg-ico-hero agance_show" >
+    <section class="section" id="agence">
          <!-- <div class="bg-overlay bg-primary"></div> -->
          <div class="container">
              <div class="row">
-                 <div class="col-sm-2"></div>
-                 <div class="col-sm-8">
-                    <div class="card overflow-hidden">
-                        <div class="bg-primary bg-soft">
-                            <div class="row">
-                                <div class="col-sm-3 align-self-end">
-                                    <img src="{{asset('admin/assets/images/profile-img.png')}}" alt="" class="img-fluid">
-                                </div>
-                                <div class="col-sm-6 ">
-                                    <div class="text-primary p-3 siege_show_text">
-                                        <h1 class="text-primary">{{$agence->name}}</h1>
-                                        <p>{{$agence->slogan}}</p>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3 align-self-end text-center card_gif">
-                                    <img src="{{asset('user/assets/images/buse.gif')}}" alt="" class="img-fluid">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                 </div>
-                 <div class="col-sm-2"></div>
-             </div>
-            
-            <div class="row mb-5">
                 <div class="col-lg-12">
                     <div class="text-center mb-5">
-                        <h2 class="text-white">Nos Sieges</h2>
+                        <h4> {{$agence->slogan}}</h4>
                     </div>
                 </div>
             </div>
@@ -48,33 +42,6 @@
                 <div class="row">
                     @foreach($sieges as $siege)
                     <div class="col-md-4">
-                        {{--
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="media">
-                                    <div class="avatar-xs me-3">
-                                        <span
-                                            class="avatar-title rounded-circle bg-primary text-white font-size-18">
-                                            <i class="mdi mdi-bus"></i>
-                                        </span>
-                                    </div>
-                                    <div class="media-body">
-                                        <p class="text-muted">Siege de {{$siege->name}}</p>
-                                        <p class="text-muted text-truncate mb-0 siege_info">
-                                            <span> <i class="bx bx-envelope ms-1"> {{$siege->email}}</i>  </span> <i class="slash">|</i>
-                                            <span> <i class="bx bx-phone ms-1"> {{$siege->phone}}</i> </span>
-                                        </p>
-                                        <p class="text-muted text-truncate mb-0 mt-3">
-                                            <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$siege->id}}" class="btn btn-outline-primary btn-xs"> <i
-                                                            class="mdi mdi-plus me-1"></i> S'isncrire </a>
-                                             <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$siege->id}}" class="btn btn-outline-success btn-xs" style="margin-left: 8px;"> <i
-                                                            class="bx bx-envelope ms-1"></i> Contacter </a>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        --}}
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">

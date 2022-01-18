@@ -3,6 +3,7 @@
 @section('headsection')
    <!-- Responsive Table css -->
     <link href="{{asset('admin/assets/libs/admin-resources/rwd-table/rwd-table.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('admin/assets/css/table.css')}}" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('main-content')
@@ -15,14 +16,6 @@
                             <div class="col-12">
                                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                                     <h4 class="mb-sm-0 font-size-18">Itineraires des itineraire</h4>
-
-                                    <div class="page-title-right">
-                                        <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
-                                            <li class="breadcrumb-item active">Customers</li>
-                                        </ol>
-                                    </div>
-
                                 </div>
                             </div>
                         </div>
@@ -43,19 +36,19 @@
                                             </div>
                                             <div class="col-sm-8">
                                                 <div class="text-sm-end">
-                                                    <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-primary text-white"
-                                                        class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i
+                                                    <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-primary text-white button_ajout_client"
+                                                        class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2 "><i
                                                             class="mdi mdi-plus me-1"></i>Ajouter un itineraire</button>
                                                 </div>
                                             </div><!-- end col-->
                                         </div>
 
                                         <div class="table-responsive">
-                                            <table class="table align-middle table-nowrap">
+                                            <table class="table responsive-table align-middle table-nowrap">
                                                 <thead>
                                                     <tr>
-                                                        <th>#</th>
-                                                        <th>Nom de l'itinaire</th>
+                                                        <th>Num</th>
+                                                        <th>Itinaires</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
@@ -63,17 +56,12 @@
                                                 @foreach($itineraires as $itineraire)
                                                     <tr>
                                                         <td>
-                                                            <div class="form-check font-size-16">
-                                                                <input class="form-check-input" type="checkbox"
-                                                                    id="customerlistcheck08">
-                                                                <label class="form-check-label"
-                                                                    for="customerlistcheck08"></label>
-                                                            </div>
+                                                            {{$itineraire->id}}
                                                         </td>
                                                         <td>{{$itineraire->name}}</td>
                                                         
                                                         <td>
-                                                            <div class="d-flex gap-3">
+                                                            <div class="d-flex gap-3 div_button">
 
                                                                 <a href="javascript:void(0);" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-primary" data-bs-target="#staticBackdropprenicpaleVille-{{$itineraire->id}}"><i class="fas fa-building mt-1 font-size-18"></i></a>
                                                                 <a href="javascript:void(0);" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-primary" data-bs-target="#staticBackdropedititineraire-{{$itineraire->id}}"><i class="bx bx-edit mt-1 font-size-18"></i></a>
@@ -440,4 +428,5 @@
 
     <!-- Init js -->
     <script src="{{asset('admin/assets/js/pages/table-responsive.init.js')}}"></script>
+     <script src="{{asset('admin/assets/js/table.js')}}"></script>
 @endsection

@@ -68,60 +68,20 @@
     <!-- hero section end -->
 
   <!-- hero section start -->
-    <section class="section hero-section bg-ico-hero" style="margin-top:-50px;">
+    <section class="section hero-section bg-ico-hero">
         <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
-            <div class="row align-items-center row_pricipal" >
-                <div class="col-lg-5 card_show">
+            <div class="row align-items-center row_pricipal" style="margin-top: -70px;" >
+                <div class="col-lg-8 card_show">
                     <div class="text-white-50">
-                        <h2 class="text-white font-weight-semibold mb-3 ">Yombalal Toucki Thi Biir Rewmi</h2>
-                        <p class="font-size-20" >
-                            Le secteur du tourisme a fort à faire dans une conjoncture économique pleine de défis. Pour vous démarquer, en tant qu’agence de voyages.
+                        <h1 class="text-white font-weight-semibold mb-3 hero-title ">Yombalal Toucki Thi Biir Rewmi</h1>
+                        <p class="font-size-20 text-white" >
+                            Toutes les options de voyage sur une seule plateforme
                         </p>
 
-                        <div class="button-items mt-4 ">
+                        <!-- <div class="button-items mt-4 ">
                             <a href="{{ route('agence.create') }}" class="btn btn-success">Creer votre compte agence</a>
                             <a href="{{ route('agence.index') }}" class="btn btn-light">Nos agences de transport</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-8 col-sm-10 ms-lg-auto card_hide" >
-                   
-                    <div class="overflow-hidden mb-0 mt-3 mt-lg-0">
-                         <img src="{{ asset('user/assets/images/sn2.jpg') }}" style="width: 100%;"  alt="" srcset="">
-                        <!-- <div class="card-header text-center">
-                            <h5 class="mb-0">ICO Countdown time</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="text-center">
-
-                                <h5>Time left to Ico :</h5>
-                                <div class="mt-4">
-                                    <div data-countdown="2021/12/31" class="counter-number ico-countdown"></div>
-                                </div>
-
-                                <div class="mt-4">
-                                    <button type="button" class="btn btn-success w-md">Get Token</button>
-                                </div>
-
-                                <div class="mt-5">
-                                    <h4 class="font-weight-semibold">1 ETH = 2235 SKT</h4>
-                                    <div class="clearfix mt-4">
-                                        <h5 class="float-end font-size-14">5234.43</h5>
-                                    </div>
-                                    <div class="progress p-1 progress-xl softcap-progress">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 15%"
-                                            aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">
-                                            <div class="progress-label">15 %</div>
-                                        </div>
-                                        <div class="progress-bar progress-bar-striped progress-bar-animated"
-                                            role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0"
-                                            aria-valuemax="100">
-                                            <div class="progress-label">30 %</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div> -->
                     </div>
                 </div>
@@ -224,10 +184,14 @@
                 <div class="col-lg-5">
 
                     <div class="text-muted">
-                        <h4>Best ICO for your cryptocurrency business</h4>
-                        <p>If several languages coalesce, the grammar of the resulting that of the individual new common
-                            language will be more simple and regular than the existing.</p>
-                        <p class="mb-4">It would be necessary to have uniform pronunciation.</p>
+                        <h4>Réservez vos billets de bus avec TouCki</h4>
+                        <p>
+                            Recherchez, comparez et réservez vos billets de bus en toute simplicité sur TouCki ! <br> Notre plateforme tout-en-un est également un comparateur bus qui vous permet de visualiser tous les trajets de bus de différents transporteurs au Senegal et de les trier par prix, par heure de départ, ou selon le temps et le type de trajet. <br> Une fois votre itinéraire choisi, il ne vous reste plus qu’à réserver votre bus en quelques clics et obtenir vos billets de bus en ligne.
+                            
+                        </p>
+                        <p class="mb-4">
+                            Avec TouCki, vous profitez notamment de voyages connectés avec notre application. Embarquez rapidement avec votre billet mobile, recevez des notifications de rappele de voyage en temps réel,gestion de vos bagage et colis. Tout est à portée de main !
+                        </p>
 
                         <div class="button-items">
                             <a href="#" class="btn btn-success">Read More</a>
@@ -369,11 +333,13 @@
                     <div class="mt-4 mt-md-auto">
                         <div class="d-flex align-items-center mb-2">
                             <div class="features-number font-weight-semibold display-4 me-3">01</div>
-                            <h4 class="mb-0">Clients</h4>
+                            <h4 class="mb-0">Vos billets de bus sur TouCki</h4>
                         </div>
-                        <p class="text-muted">If several languages coalesce, the grammar of the resulting language is
-                            more simple and regular than of the individual will be more simple and regular than the
-                            existing.</p>
+                        <p class="text-muted">
+                            À la recherche d’une petite escapade ou d’un long séjour ? Peu importe vos plans de voyage, sautez dans un bus et profitez d’une expérience de voyage unique !
+
+                            Organiser et voyager en bus est encore plus pratique et simple avec Omio. Pour vous aider à faire le meilleur choix et trouver des billets pas chers, nous vous proposons un comparateur bus permettant de visualiser toutes les agences de transport : trains, bus, vols et ferries.
+                        </p>
                         <div class="text-muted mt-4">
                             <p class="mb-2"><i class="mdi mdi-circle-medium text-success me-1"></i>Donec pede justo vel
                                 aliquet</p>
@@ -391,12 +357,12 @@
                             <div class="features-number font-weight-semibold display-4 me-3">02</div>
                             <h4 class="mb-0">Agences</h4>
                         </div>
-                        <p class="text-muted">It will be as simple as Occidental; in fact, it will be Occidental. To an
-                            English person, it will seem like simplified English, as a skeptical Cambridge friend.</p>
-                        <div class="text-muted mt-4">
-                            <p class="mb-2"><i class="mdi mdi-circle-medium text-success me-1"></i>Donec pede justo vel
-                                aliquet</p>
-                            <p><i class="mdi mdi-circle-medium text-success me-1"></i>Aenean et nisl sagittis</p>
+                        <p class="text-muted">
+                            Grâce à un réseau développé au Sénégal, de nombreux trajets en bus et car pas chers de courte et longue-distance vous sont proposés par des compagnies routières renommées. Voyager en bus, c’est choisir des trajets à prix réduits dans tout le Sénégal, comparés au train et à l’avion.
+                            Avec des itinéraires quotidiens vers les villes et capitales du pays, vous pouvez organiser des escapades parfaitement adaptées à tous les budgets !.
+                        </p>
+                        <div class="button-items">
+                            <a href="{{ route('agence.create') }}" class="btn btn-success">Creer votre compte agence</a>
                         </div>
                     </div>
                 </div>

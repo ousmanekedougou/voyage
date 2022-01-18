@@ -57,7 +57,7 @@ if(! function_exists('buse_all')){
 if(! function_exists('carbon_today')){
     function carbon_today()
     {
-        $today = Carbon::today();
+        $today = Carbon::today()->format('Y-m-d');
         return $today;
     }
 }
@@ -65,7 +65,7 @@ if(! function_exists('carbon_today')){
 if(! function_exists('carbon_tomorrow')){
     function carbon_tomorrow()
     {
-        $tomorrow = Carbon::tomorrow();
+        $tomorrow = Carbon::tomorrow()->format('Y-m-d');
         return $tomorrow;
     }
 }
@@ -73,7 +73,7 @@ if(! function_exists('carbon_tomorrow')){
 if(! function_exists('carbon_yesterday')){
     function carbon_yesterday()
     {
-        $yesterday = Carbon::yesterday();
+        $yesterday = Carbon::yesterday()->format('Y-m-d');
         return $yesterday;
     }
 }
@@ -88,8 +88,25 @@ if (! function_exists('part')) {
 
 if (! function_exists('historical')) {
     function historical(){
-        $historical = Historical::where('siege_id',Auth::user()->siege->id)->get();
+        $historical = Historical::where('siege_id',Auth::user()->siege->id)->where('registered_at','<',Carbon::today()->format('Y-m-d'))->first();
         return $historical;
+    }
+}
+
+if (! function_exists('montant_today')) {
+    function montant_today(){
+        $itineraires = Itineraire::where('siege_id',Auth::user()->siege_id)->where('user_id',Auth::user()->id)->orderBy('id','ASC')->get();
+         foreach ($itineraires as $itineraire) {
+            foreach ($itineraire->date_departs as $iti_date) {
+               $somme_buse = Bus::where('itineraire_id',$iti_date->itineraire_id)->get();
+               foreach ($somme_buse as $buse_som) {
+                    if ($buse_som->date_depart->depart_at == Carbon::today()->format('Y-m-d')) {
+                      $somme_total_today =  Bus::where('id',$buse_som->id)->sum('montant');
+                      return $somme_total_today;
+                    }
+               }
+            }
+        }
     }
 }
 

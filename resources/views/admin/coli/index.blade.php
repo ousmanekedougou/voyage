@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('headsection')
-
+    <link href="{{asset('admin/assets/css/table.css')}}" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('main-content')
@@ -40,7 +40,7 @@
                                         </div>
                 
                                         <div class="table-responsive">
-                                            <table class="table align-middle table-nowrap table-check">
+                                            <table class="table responsive-table align-middle table-nowrap table-check">
                                                 <thead class="table-light">
                                                     <tr>
                                                         <th class="align-middle">Prenom et Nom</th>
@@ -79,7 +79,7 @@
                                                             </button>
                                                         </td>
                                                         <td>
-                                                            <div class="d-flex gap-3">
+                                                            <div class="d-flex gap-3 div_button">
                                                                 <a href="javascript:void(0);" class="text-primary" data-bs-toggle="modal" data-bs-target="#AddBagage-{{$client->id}}"><i class="fa fa-suitcase-rolling font-size-18"></i></a>
                                                                 
                                                                     <a href="{{ route('admin.colis.show',$client->id) }}" class="text-success"><i class="fa fa-print font-size-18"></i></a>
@@ -391,5 +391,5 @@
 
 
 @section('footersection')
-
+<script src="{{asset('admin/assets/js/table.js')}}"></script>
 @endsection

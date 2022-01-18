@@ -35,7 +35,7 @@
                 </ul>
 
                 <div class="my-2 ms-lg-2 btn-sign-ine">
-                    <a href="{{ route('agence.create') }}" class="btn btn-outline-info w-xs {{ set_active_roote('agence.create') }}"><i class="fa fa-user-plus"></i> Creer votre compte agence</a>
+                    <!-- <a href="{{ route('agence.create') }}" class="btn btn-outline-info w-xs {{ set_active_roote('agence.create') }}"><i class="fa fa-user-plus"></i> Creer votre compte agence</a> -->
                     <a href="{{ route('login') }}" class="btn btn-outline-success w-xs {{ set_active_roote('login') }}"><i class="fa fa-sign-in-alt"></i> Se Connecter</a>
                 </div>
             </div>

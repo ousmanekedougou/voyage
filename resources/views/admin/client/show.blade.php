@@ -64,7 +64,7 @@
                                     @foreach($clients as $client)
                                         <tr>
                                             <td>
-                                                {{$client->id}}
+                                                {{$client->position}}
                                             </td>
                                             <td>{{$client->name}}</td>
                                             <td>

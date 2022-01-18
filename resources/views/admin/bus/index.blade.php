@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 
 @section('headsection')
-
+ <link href="{{asset('admin/assets/css/table.css')}}" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('main-content')
@@ -14,13 +14,6 @@
                         <div class="col-12">
                             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                                 <h4 class="mb-sm-0 font-size-18">Liste des bus</h4>
-
-                                <div class="page-title-right">
-                                    <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
-                                        <li class="breadcrumb-item active">Customers</li>
-                                    </ol>
-                                </div>
 
                             </div>
                         </div>
@@ -50,10 +43,9 @@
                                     </div>
 
                                     <div class="table-responsive">
-                                        <table class="table align-middle table-nowrap">
+                                        <table class="table responsive-table align-middle table-nowrap">
                                             <thead>
                                                 <tr>
-                                                    <th>#</th>
                                                     <th>Numero</th>
                                                     <th>Marticule</th>
                                                     <th>Nombre de place</th>
@@ -66,15 +58,7 @@
                                             <tbody>
                                             @foreach($buses as $bus)
                                                 <tr>
-                                                    <td>
-                                                        <div class="form-check font-size-16">
-                                                            <input class="form-check-input" type="checkbox"
-                                                                id="customerlistcheck08">
-                                                            <label class="form-check-label"
-                                                                for="customerlistcheck08"></label>
-                                                        </div>
-                                                    </td>
-                                                    <td>{{$bus->number}}</td>
+                                                    <td>Bus {{$bus->number}}</td>
                                                     <td>{{$bus->matricule}}</td>
                                                     <td>
                                                         <p class="mb-1">{{$bus->place}}</p>
@@ -96,8 +80,7 @@
                                                     </td>
                                                     
                                                     <td>
-                                                        <div class="d-flex gap-3">
-
+                                                        <div class="d-flex gap-3 div_button">
                                                             <a href="{{ route('admin.client.show',$bus->id) }}" class="text-primary"><i class="fas fa-users mt-1 font-size-18"></i></a>
                                                             <a href="javascript:void(0);" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-primary" data-bs-target="#staticBackdropeditbus-{{$bus->id}}"><i class="bx bx-edit mt-1 font-size-18"></i></a>
                                                             <a href="javascript:void(0);" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-danger" data-bs-target="#subscribeModalbus-{{ $bus->id }}"><i class="mdi mdi-delete font-size-18"></i></a>
@@ -439,5 +422,5 @@
 
 
 @section('footersection')
-
+<script src="{{asset('admin/assets/js/table.js')}}"></script>
 @endsection

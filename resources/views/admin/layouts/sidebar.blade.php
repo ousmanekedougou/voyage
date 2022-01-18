@@ -112,9 +112,11 @@
                                         <span key="t-ecommerce">Historiques</span>
                                     </a>
                                     <ul class="sub-menu" aria-expanded="false">
-                                        @foreach(historical() as $history)
-                                            <li><a href="{{route('admin.historique.show',$history->siege_id)}}" key="t-products"> <i class="fa fa-clock"></i> {{ $history->registered_at }}</a></li>
-                                        @endforeach
+                                        @if(historical()->count() > 0)
+                                            <li><a href="{{route('admin.historique.show',historical()->siege_id)}}" key="t-products"> <i class="fa fa-clock"></i> Hiere et plus</a></li>
+                                        @else
+                                            <li><a href="" key="t-products"> <i class="fa fa-clock"></i> 0 Clients</a></li>
+                                        @endif
                                     </ul>
                                 </li>
                             @endif

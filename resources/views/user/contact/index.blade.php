@@ -4,45 +4,26 @@
 @endsection
 @section('main-content')
 
- <!-- Features start -->
-      <section class="section hero-section bg-ico-hero" id="home" style="margin-top:-70px;">
+   <!-- hero section start -->
+    <section class="section hero-section bg-ico-hero"  id="home">
         <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
-            <!-- <div class="row">
-                <div class="col-lg-12">
-                    <div class="text-center mb-5">
-                        <div class="small-title">Features</div>
-                        <h4>Key features of the product</h4>
-                    </div>
-                </div>
-            </div> -->
-            <!-- end row -->
-
-            <div class="row align-items-center">
-                 <div class="col-md-6 col-sm-8 col-lg-6 col-xs-12">
-                   <div class="overflow-hidden mb-0 mt-3 mt-lg-0">
-                        <img src="{{asset('user/assets/images/profile-img.png')}}" alt="" class="img-fluid mx-auto d-block">
-                    </div>
-                </div>
-                <div class="col-md-5 col-lg-6 col-xs-12 ms-auto ">
-                    <div class="mt-4 mt-md-auto">
-                        <div class="d-flex align-items-center mb-2">
-                            <h1 class="mb-0 text-white">Travaillons ensemble</h1>
-                        </div>
-                        <p class="text-white">Pour toute question, informations supplémentaires ou demande de devis, n’hésitez pas à nous contacter.</p>
-                        <div class="text-wite mt-4">
-                            <p class="mb-2 text-white"><i class="mdi mdi-circle-medium text-success me-1"></i>Donec pede justo vel
-                                aliquet</p>
-                            <p class="text-white"><i class="mdi mdi-circle-medium text-success me-1"></i>Aenean et nisl sagittis</p>
-                        </div>
+                <div class="row align-items-center row_pricipal" style="margin-top: -70px;" >
+                <div class="col-lg-8 card_show">
+                    <div class="text-white-50">
+                        <h1 class="text-white font-weight-semibold mb-3 hero-title ">Réservez vos billets de bus au meilleur prix</h1>
+                        <p class="font-size-20" >
+                            Réservez des billets selon votre agence de choix
+                        </p>
                     </div>
                 </div>
             </div>
-            <!-- end row -->
+
+            
         </div>
         <!-- end container -->
     </section>
-    <!-- Features end -->
+    <!-- hero section end -->
 
  
     <!-- about section start -->

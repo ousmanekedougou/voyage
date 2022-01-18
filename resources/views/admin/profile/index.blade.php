@@ -29,12 +29,11 @@
                                             @if($admin->is_admin == 1)
                                                 Administrateur
                                             @elseif($admin->is_admin == 2)
-                                                {{$admin->name_agence}}
+                                                {{$admin->agence_name}}
                                             @elseif($admin->is_admin == 3)
-                                               {{$admin->name_agence}}
+                                               {{$admin->agence_name}}
                                             @endif
                                             </h5>
-                                            <!-- <p>Cela semblera simplifié</p> -->
                                         </div>
                                     </div>
                                     <div class="col-5 align-self-end">
@@ -62,7 +61,7 @@
 
                                     <div class="col-sm-8">
                                         <div class="pt-4">
-                                            
+                                            {{--                                             
                                             <div class="row">
                                                 <div class="col-6">
                                                     <h5 class="font-size-15">125</h5>
@@ -72,7 +71,7 @@
                                                     <h5 class="font-size-15">$1245</h5>
                                                     <p class="text-muted mb-0">Revenue</p>
                                                 </div>
-                                            </div>
+                                            </div> --}}
                                             <div class="mt-4">
                                                 <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target=".orderEditModal-{{ $admin->id }}" class="btn btn-info waves-effect waves-light btn-sm">Image <i class="fa fa-camera-retro ms-1"></i></a>
                                             </div>

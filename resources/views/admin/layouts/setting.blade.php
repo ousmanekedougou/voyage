@@ -22,22 +22,8 @@
 
         <script src="{{asset('admin/assets/js/pages/form-validation.init.js')}}"></script>
         
-
         <!-- App js -->
         <script src="{{asset('admin/assets/js/app.js')}}"></script>
-              @if(Session::has('flashy_notification.message'))
-                <script id="flashy-template" type="text/template">
-                    <div class="flashy flashy--{{ Session::get('flashy_notification.type') }}">
-                        <i class="material-icons">speaker_notes</i>
-                        <a href="#" class="flashy__body" target="_blank"></a>
-                    </div>
-                </script>
-
-                <script>
-                    flashy("{{ Session::get('flashy_notification.message') }}", "{{ Session::get('flashy_notification.link') }}");
-                </script>
-            @endif
-            <script src="//code.jquery.com/jquery.js"></script>
 
         <script>
         function validation()
@@ -82,7 +68,7 @@
             });
 
             $("#topBtn").click(function(){
-                $('html ,body').animate({scrollTop : 0},2000);
+                $('html ,body').animate({scrollTop : 0},1000);
             });
         });
     </script>
