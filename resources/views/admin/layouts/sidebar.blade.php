@@ -114,8 +114,6 @@
                                     <ul class="sub-menu" aria-expanded="false">
                                         @if(historical()->count() > 0)
                                             <li><a href="{{route('admin.historique.show',historical()->siege_id)}}" key="t-products"> <i class="fa fa-clock"></i> Hiere et plus</a></li>
-                                        @else
-                                            <li><a href="" key="t-products"> <i class="fa fa-clock"></i> 0 Clients</a></li>
                                         @endif
                                     </ul>
                                 </li>
