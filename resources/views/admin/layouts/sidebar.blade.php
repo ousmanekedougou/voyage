@@ -112,7 +112,7 @@
                                         <span key="t-ecommerce">Historiques</span>
                                     </a>
                                     <ul class="sub-menu" aria-expanded="false">
-                                        @if(historical()->count() > 0)
+                                        @if(historical()->id > 0)
                                             <li><a href="{{route('admin.historique.show',historical()->siege_id)}}" key="t-products"> <i class="fa fa-clock"></i> Hiere et plus</a></li>
                                         @endif
                                     </ul>
