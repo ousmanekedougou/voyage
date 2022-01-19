@@ -28,11 +28,11 @@
                         @elseif(Auth::user()->is_admin == 2)
                             <a href="{{ route('admin.home') }}" class="logo logo-dark">
                                 <span class="logo-sm">
-                                    {{Auth::user()->name}}
+                                    {{Auth::user()->agence_name}}
                                     <img src="{{Storage::url(Auth::user()->logo)}}" alt="" height="22">
                                 </span>
                                 <span class="logo-lg">
-                                    {{Auth::user()->name}}
+                                    {{Auth::user()->agence_name}}
                                     <img src="{{Storage::url(Auth::user()->logo)}}" alt="" height="17">
                                 </span>
                             </a>
