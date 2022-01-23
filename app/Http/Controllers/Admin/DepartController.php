@@ -60,6 +60,7 @@ class DepartController extends Controller
                 $add_date->rendez_vous = $request->heure_rv;
                 $add_date->depart_time = $request->heure_dep;
                 $add_date->itineraire_id = $request->itineraire;
+                $add_date->siege_id = Auth::user()->siege_id;
                 $add_date->save();
                 return back()->with('success','Votre date a bien ete creer');
             }
@@ -110,12 +111,13 @@ class DepartController extends Controller
             if ($request->heure_rv >= $request->heure_dep ) {
                 return back()->with('error','L\'heure du rendez-vous doit etre inferieur a votre here de depart');
             }else {
-                $add_date = DateDepart::where('id',$id)->first();
-                $add_date->depart_at = $request->date_depart;
-                $add_date->rendez_vous = $request->heure_rv;
-                $add_date->depart_time = $request->heure_dep;
-                $add_date->itineraire_id = $request->itineraire;
-                $add_date->save();
+                $update_date = DateDepart::where('id',$id)->first();
+                $update_date->depart_at = $request->date_depart;
+                $update_date->rendez_vous = $request->heure_rv;
+                $update_date->depart_time = $request->heure_dep;
+                $update_date->itineraire_id = $request->itineraire;
+                $update_date->siege_id = Auth::user()->siege_id;
+                $update_date->save();
                 return back()->with('success','Votre date a bien ete creer');
             }
            

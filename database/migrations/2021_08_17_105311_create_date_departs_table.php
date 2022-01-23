@@ -19,6 +19,7 @@ class CreateDateDepartsTable extends Migration
             $table->time('depart_time');
             $table->time('rendez_vous');
             $table->integer('itineraire_id');
+            $table->integer('siege_id');
             $table->timestamps();
         });
     }

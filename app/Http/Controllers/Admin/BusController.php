@@ -23,8 +23,8 @@ class BusController extends Controller
 
     public function index()
     {
-        $itineraires = Itineraire::where('user_id',Auth::user()->id)->where('siege_id',Auth::user()->siege_id)->orderBy('id','ASC')->get();
-        $buses = Bus::where('user_id',Auth::user()->id)->where('siege_id',Auth::user()->siege_id)->orderBy('id','ASC')->paginate(5);
+        $itineraires = Itineraire::where('siege_id',Auth::user()->siege_id)->orderBy('id','ASC')->get();
+        $buses = Bus::where('siege_id',Auth::user()->siege_id)->orderBy('id','ASC')->paginate(5);
         return view('admin.bus.index',compact('buses','itineraires'));
     }
 
@@ -56,7 +56,7 @@ class BusController extends Controller
         $add_bus->number = $request->numero;
         $add_bus->place = $request->place;
         $add_bus->status = 1;
-        $add_bus->user_id = Auth::user()->id;
+        // $add_bus->user_id = Auth::user()->id;
         $add_bus->siege_id = Auth::user()->siege_id;
         $add_bus->itineraire_id = $request->itineraire;
         $add_bus->date_depart_id = $request->date;
@@ -105,7 +105,7 @@ class BusController extends Controller
         $update_bus->place = $request->place;
         $update_bus->matricule = $request->matricule;
         $update_bus->status = 1;
-        $update_bus->user_id = Auth::user()->id;
+        // $update_bus->user_id = Auth::user()->id;
         $update_bus->siege_id = Auth::user()->siege_id;
         $update_bus->itineraire_id = $request->itineraire;
         $update_bus->date_depart_id = $request->date;
@@ -121,7 +121,7 @@ class BusController extends Controller
      */
     public function destroy($id)
     {
-        Bus::find($id)->delete();
+        Bus::find($id)->where('siege_id',Auth::user()->siege_id)->delete();
         return back()->with('success','Votre bus a bien ete supprimer');
     }
 }

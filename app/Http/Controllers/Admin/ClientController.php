@@ -140,7 +140,7 @@ class ClientController extends Controller
        
         // $buse = Bus::where('id',$request->bus)->first();
         $date = DateDepart::where('id',$request->date)->first();
-        $buse = Bus::where('date_depart_id',$date->id)->where('plein',0)->first();
+        $buse = Bus::where('date_depart_id',$date->id)->where('siege_id',Auth::user()->siege_id)->where('plein',0)->first();
         if ($buse) {
             $clients = Client::where('bus_id',$buse->id)->get();
             $info_email = Client::where('registered_at',$buse->date_depart->depart_at)->where('email',$request->email)->first();
@@ -191,6 +191,7 @@ class ClientController extends Controller
                     $add_client->confirmation_token = str_replace('/','',Hash::make(Str::random(40)));
                     $add_client->agence = Auth::user()->agence_name;
                     $add_client->agence_logo = Auth::user()->image_agence;
+                    $add_client->siege_id = Auth::user()->siege_id;
                     $add_client->save();
                     // $add_client->notify(new RegisteredClient());
                     return back()->with('success','Votre client a ete bien ete ajoute');
@@ -214,9 +215,9 @@ class ClientController extends Controller
      */
     public function show($id)
     {
-        $itineraires  = Itineraire::where('user_id',Auth::user()->id)->where('siege_id',Auth::user()->siege_id)->orderBy('id','ASC')->get();
-        $buses  = Bus::where('user_id',Auth::user()->id)->where('siege_id',Auth::user()->siege_id)->orderBy('id','ASC')->get();
-        $clients = Client::where('bus_id',$id)->orderBy('id','ASC')->paginate(10);
+        $itineraires = Itineraire::where('siege_id',Auth::user()->siege_id)->orderBy('id','ASC')->get();
+        $buses  = Bus::where('siege_id',Auth::user()->siege_id)->orderBy('id','ASC')->get();
+        $clients = Client::where('bus_id',$id)->where('siege_id',Auth::user()->siege_id)->orderBy('id','ASC')->paginate(10);
         return view('admin.client.show',compact('clients','itineraires','buses'));
     }
 
@@ -255,7 +256,7 @@ class ClientController extends Controller
         // $clients = Client::where('bus_id',$request->bus)->get();
         // $buse = Bus::where('id',$request->bus)->first();
         $date = DateDepart::where('id',$request->date)->first();
-        $buse = Bus::where('date_depart_id',$date->id)->where('itineraire_id',$date->itineraire_id)->where('plein',0)->first();
+        $buse = Bus::where('date_depart_id',$date->id)->where('itineraire_id',$date->itineraire_id)->where('siege_id',Auth::user()->siege_id)->where('plein',0)->first();
         $clients = Client::where('bus_id',$buse->id)->get();
         $info_update_email = Client::where('registered_at',$buse->date_depart->depart_at)->where('email',$request->email)->first();
         $info_update_phone = Client::where('registered_at',$buse->date_depart->depart_at)->where('phone',$request->phone)->first();
@@ -277,6 +278,7 @@ class ClientController extends Controller
                 $update_client->bus_id = $request->bus;
                 $update_client->registered_at = $buse->date_depart->depart_at;
                 $update_client->agence = $buse->siege->user->name;
+                $update_client->siege_id = Auth::user()->siege_id;
                 $update_client->save();
                 // $update_client->notify(new RegisteredClient());
                 return back()->with('success','Votre client a ete bien ete mise a jour');
@@ -313,8 +315,8 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        $user = Client::where('id',$id)->first();
-        $montant_bus = Bus::where('id',$user->bus_id)->where('plein',0)->first();
+        $user = Client::where('id',$id)->where('siege_id',Auth::user()->siege_id)->first();
+        $montant_bus = Bus::where('id',$user->bus_id)->where('siege_id',Auth::user()->siege_id)->where('plein',0)->first();
         if ($montant_bus->montant >= $user->ville->amount) {
             $montan = $montant_bus->montant - $user->ville->amount;
         }else {

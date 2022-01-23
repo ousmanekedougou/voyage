@@ -220,7 +220,7 @@
                                               
                                             </div>
                                             <div class="col-xl-6">
-                                                 <div class="mb-3">
+                                                <div class="mb-3">
                                                     <label class="form-label">Nom de l'agence</label>
                                                     <input type="text" id="name_agence" class="form-control @error('name_agence') is-invalid @enderror" name="name_agence" value="{{ old('name_agence') }}" required autocomplete="name_agence"
                                                         placeholder="Nom de l'agence" />

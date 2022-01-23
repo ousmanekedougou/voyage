@@ -4,6 +4,7 @@ namespace App\Models\User;
 
 use App\Models\Admin\Bagage;
 use App\Models\Admin\Bus;
+use App\Models\Admin\Siege;
 use App\Models\Admin\Ville;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -24,6 +25,10 @@ class Client extends Model
       public function ville()
     {
         return $this->belongsTo(Ville::class);
+    }
+
+     public function siege(){
+        return $this->belongsTo(Siege::class);
     }
 
       protected $fillable = [

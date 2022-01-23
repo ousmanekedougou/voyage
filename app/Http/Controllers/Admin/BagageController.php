@@ -8,6 +8,7 @@ use App\Models\Admin\BagageClient;
 use App\Models\User\Client;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BagageController extends Controller
 {
@@ -22,7 +23,7 @@ class BagageController extends Controller
      */
     public function index()
     {
-        $clients = Bagage::paginate(15);
+        $clients = Bagage::where('siege_id',Auth::user()->siege_id)->paginate(15);
         return view('admin.bagage.index',compact('clients'));
     }
 
@@ -54,6 +55,7 @@ class BagageController extends Controller
             $ad_bagage->client_phone = $client->phone;
             $ad_bagage->client_ville = $client->ville->name;
             $ad_bagage->client_id = $client->id;
+            $ad_bagage->siege_id = Auth::user()->siege_id;
             $ad_bagage->save();
             return back()->with('success','Votre client a ete cree');
         }else {
@@ -104,6 +106,7 @@ class BagageController extends Controller
          $client->prix = $request->prix;
          $client->desc = $request->desc;
          $client->bagage_id = $id;
+         $client->siege_id = Auth::user()->siege_id;
          $client->save();
          $client_p_t = Bagage::where('id',$id)->first();
         if ($client_p_t->prix_total == 0) {
@@ -123,7 +126,7 @@ class BagageController extends Controller
      */
     public function destroy($id)
     {
-        Bagage::where('id',$id)->delete();
+        Bagage::where('id',$id)->where('siege_id',Auth::user()->siege_id)->delete();
         BagageClient::where('bagage_id',$id)->delete();
         return back()->with('success','Votre client et ses bagages ont ete supprimer');
     }

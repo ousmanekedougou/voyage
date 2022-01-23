@@ -6,7 +6,7 @@
                         @if(Auth::user()->is_admin == 3)
                             <a href="{{ route('admin.home') }}" class="logo logo-dark">
                                 <span class="logo-sm">
-                                    <span class="text-bold text-uppercase text-white">{{Auth::user()->agence_name}}</span>
+                                    <!-- <span class="text-bold text-uppercase text-white"></span> -->
                                     <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" height="22">
                                 </span>
                                 <span class="logo-lg">
@@ -17,7 +17,7 @@
 
                             <a href="{{ route('admin.home') }}" class="logo logo-light">
                                 <span class="logo-sm">
-                                    <span class="text-bold text-uppercase text-white">{{Auth::user()->agence_name}}</span>
+                                    <!-- <span class="text-bold text-uppercase text-white">{{Auth::user()->agence_name}}</span> -->
                                     <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" height="22">
                                 </span>
                                 <span class="logo-lg">
@@ -28,23 +28,22 @@
                         @elseif(Auth::user()->is_admin == 2)
                             <a href="{{ route('admin.home') }}" class="logo logo-dark">
                                 <span class="logo-sm">
-                                    {{Auth::user()->agence_name}}
-                                    <img src="{{Storage::url(Auth::user()->logo)}}" alt="" height="22">
+                                    <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" height="22">
                                 </span>
                                 <span class="logo-lg">
                                     {{Auth::user()->agence_name}}
-                                    <img src="{{Storage::url(Auth::user()->logo)}}" alt="" height="17">
+                                    <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" height="17">
                                 </span>
                             </a>
 
                             <a href="{{ route('admin.home') }}" class="logo logo-light">
                                 <span class="logo-sm">
-                                   <span class="text-bold text-uppercase text-white" style="font-size: 14px;margin-left:-25px;">{{Auth::user()->name}}</span>
-                                    <img src="{{Storage::url(Auth::user()->logo)}}" alt="" style="width: 50px;height:50px;border-radius:100%;">
+                                   <!-- <span class="text-bold text-uppercase text-white" style="font-size: 14px;margin-left:-25px;"></span> -->
+                                    <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" style="width: 50px;height:50px;border-radius:100%;">
                                 </span>
                                 <span class="logo-lg">
-                                   <span class="text-bold text-uppercase text-white" style="font-size: 14px;margin-left:-25px;">{{Auth::user()->name}}</span>
-                                    <img src="{{Storage::url(Auth::user()->logo)}}" alt="" style="width: 50px;height:50px;border-radius:100%;">
+                                   <span class="text-bold text-uppercase text-white" style="font-size: 14px;margin-left:-25px;">{{Auth::user()->agence_name}}</span>
+                                    <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" style="width: 50px;height:50px;border-radius:100%;">
                                 </span>
                             </a>
                         @else
@@ -67,12 +66,12 @@
                             </a>
                         @endif
                     </div>
-
                     <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect"
                         id="vertical-menu-btn">
                         <i class="fa fa-fw fa-bars"></i>
                     </button>
-
+                    
+                    {{--
                     <!-- App Search-->
                     <form class="app-search d-none d-lg-block">
                         <div class="position-relative">
@@ -80,11 +79,11 @@
                             <span class="bx bx-search-alt"></span>
                         </div>
                     </form>
-
+                    --}}
                 </div>
 
                 <div class="d-flex">
-
+                    {{--
                     <div class="dropdown d-inline-block d-lg-none ms-2">
                         <button type="button" class="btn header-item noti-icon waves-effect"
                             id="page-header-search-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
@@ -199,13 +198,13 @@
                             </div>
                         </div>
                     </div>
-
+                    --}}
                     <div class="dropdown d-none d-lg-inline-block ms-1">
                         <button type="button" class="btn header-item noti-icon waves-effect" data-toggle="fullscreen">
                             <i class="bx bx-fullscreen"></i>
                         </button>
                     </div>
-
+                    @if(Auth::user()->is_admin == 3 && Auth::user()->role == 1)
                     <div class="dropdown d-inline-block">
                         <button type="button" class="btn header-item noti-icon waves-effect"
                             id="page-header-notifications-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
@@ -302,6 +301,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
 
                     <div class="dropdown d-inline-block">
                         <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"

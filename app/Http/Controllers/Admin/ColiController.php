@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\ColiClient;
 use App\Models\Admin\Colie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ColiController extends Controller
 {
@@ -20,7 +21,7 @@ class ColiController extends Controller
      */
     public function index()
     {
-        $clients = Colie::paginate(15);
+        $clients = Colie::where('siege_id',Auth::user()->siege_id)->paginate(15);
         return view('admin.coli.index',compact('clients'));
     }
 
@@ -57,6 +58,7 @@ class ColiController extends Controller
         $coli_client->name_recept = $request->name_recept; 
         $coli_client->phone_recept = $request->phone_recept; 
         $coli_client->ville = $request->ville; 
+        $coli_client->siege_id = Auth::user()->siege_id;
         $coli_client->save();
         return back()->with('success','Votre client a ete ajouter');
     }
@@ -69,7 +71,7 @@ class ColiController extends Controller
      */
     public function show($id)
     {
-        $client = Colie::where('id',$id)->first();
+        $client = Colie::where('id',$id)->where('siege_id',Auth::user()->siege_id)->first();
         return view('admin.coli.show',compact('client'));
     }
 
@@ -104,6 +106,7 @@ class ColiController extends Controller
          $client->prix = $request->prix;
          $client->desc = $request->desc;
          $client->colie_id = $id;
+         $client->siege_id = Auth::user()->siege_id;
          $client->save();
 
          $client_p_t = Colie::where('id',$id)->first();
@@ -125,7 +128,7 @@ class ColiController extends Controller
      */
     public function destroy($id)
     {
-        Colie::where('id',$id)->delete();
+        Colie::where('id',$id)->where('siege_id',Auth::user()->siege_id)->delete();
         ColiClient::where('colie_id',$id)->delete();
         return back()->with('success','Votre client et ses bagages ont ete supprimer');
     }

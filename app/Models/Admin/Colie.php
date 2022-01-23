@@ -11,4 +11,8 @@ class Colie extends Model
     public function coli_clients(){
         return $this->hasMany(ColiClient::class);
     }
+
+    public function siege(){
+        return $this->belongsTo(Siege::class);
+    }
 }

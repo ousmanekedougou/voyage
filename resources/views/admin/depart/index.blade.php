@@ -27,12 +27,12 @@
                                     <div class="card-body">
                                         <div class="row mb-2">
                                             <div class="col-sm-4">
-                                                <div class="search-box me-2 mb-2 d-inline-block">
+                                                <!-- <div class="search-box me-2 mb-2 d-inline-block">
                                                     <div class="position-relative">
                                                         <input type="text" class="form-control" placeholder="Search...">
                                                         <i class="bx bx-search-alt search-icon"></i>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                             </div>
                                             <div class="col-sm-8">
                                                 <div class="text-sm-end">

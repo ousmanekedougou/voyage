@@ -22,6 +22,7 @@ class CreateColiesTable extends Migration
             $table->integer('phone_recept');
             $table->string('ville');
             $table->string('prix_total');
+            $table->integer('siege_id');
             $table->timestamps();
         });
     }

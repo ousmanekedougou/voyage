@@ -15,7 +15,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                    <h4 class="mb-sm-0 font-size-18">Itineraires des itineraire</h4>
+                                    <h4 class="mb-sm-0 font-size-18">Liste des itineraires</h4>
                                 </div>
                             </div>
                         </div>
@@ -27,12 +27,12 @@
                                     <div class="card-body">
                                         <div class="row mb-2">
                                             <div class="col-sm-4">
-                                                <div class="search-box me-2 mb-2 d-inline-block">
+                                                <!-- <div class="search-box me-2 mb-2 d-inline-block">
                                                     <div class="position-relative">
                                                         <input type="text" class="form-control" placeholder="Search...">
                                                         <i class="bx bx-search-alt search-icon"></i>
                                                     </div>
-                                                </div>
+                                                </div> -->
                                             </div>
                                             <div class="col-sm-8">
                                                 <div class="text-sm-end">
@@ -48,7 +48,7 @@
                                                 <thead>
                                                     <tr>
                                                         <th>Num</th>
-                                                        <th>Itinaires</th>
+                                                        <th>Itineraires</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>

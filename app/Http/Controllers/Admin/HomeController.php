@@ -39,7 +39,7 @@ class HomeController extends Controller
         $buses = Bus::where('siege_id',Auth::user()->siege_id)->orderBy('id','ASC')->get();
         $itineraires = Itineraire::where('siege_id',Auth::user()->siege_id)->where('user_id',Auth::user()->id)->orderBy('id','ASC')->get();
         foreach ($buses as $buse) {
-            $client_historiques = Client::where('bus_id',$buse->id)->where('amount','>',2)->where('registered_at','<',Carbon::today()->format('Y-m-d'))->get();
+            $client_historiques = Client::where('bus_id',$buse->id)->where('siege_id',Auth::user()->siege_id)->where('amount','>',2)->where('registered_at','<',Carbon::today()->format('Y-m-d'))->get();
             foreach ($client_historiques as $client_hsto) {
                 $add_client_htsto = new Historical();
                 $add_client_htsto->name = $client_hsto->name;

@@ -24,7 +24,7 @@ class ItineraireController extends Controller
     public function index()
     {
         $villes = Ville::all();
-        $itineraires = Itineraire::where('user_id',Auth::user()->id)->orderBy('id','ASC')->paginate(5);
+        $itineraires = Itineraire::where('siege_id',Auth::user()->siege_id)->orderBy('id','ASC')->paginate(5);
         return view('admin.itineraire.index',compact('itineraires','villes'));
     }
 
@@ -51,7 +51,7 @@ class ItineraireController extends Controller
         ]);
         $add_itineraire = new Itineraire();
         $add_itineraire->name = $request->name;
-        $add_itineraire->user_id = Auth::user()->id;
+        // $add_itineraire->user_id = Auth::user()->id;
         $add_itineraire->siege_id = Auth::user()->siege_id;
          $add_itineraire->save();
         return back()->with('success','Votre itineraire a bien ete creer');
@@ -95,7 +95,7 @@ class ItineraireController extends Controller
         ]);
         $update_itineraire = Itineraire::where('id',$id)->first();
         $update_itineraire->name = $request->name;
-        $update_itineraire->user_id = Auth::user()->id;
+        // $update_itineraire->user_id = Auth::user()->id;
         $update_itineraire->siege_id = Auth::user()->siege_id;
         $update_itineraire->save();
         return back()->with('success','Votre itineraire a bien ete creer');

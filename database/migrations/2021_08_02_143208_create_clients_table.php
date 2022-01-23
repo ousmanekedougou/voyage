@@ -31,6 +31,7 @@ class CreateClientsTable extends Migration
             $table->string('confirmation_token')->nullable();
             $table->string('agence')->nullable();
             $table->string('agence_logo')->nullable();
+            $table->integer('siege_id');
             $table->timestamps();
         });
     }

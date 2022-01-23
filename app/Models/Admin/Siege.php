@@ -5,6 +5,7 @@ use App\Models\Admin\Agent;
 use App\Models\Admin\Bus;
 use App\Models\Admin\Itineraire;
 use App\Models\User;
+use App\Models\User\Client;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -35,5 +36,20 @@ class Siege extends Model
      public function buses()
     {
         return $this->hasMany(Bus::class);
+    }
+
+     public function colies()
+    {
+        return $this->hasMany(Colie::class);
+    }
+
+     public function bagages()
+    {
+        return $this->hasMany(Bagage::class);
+    }
+    
+     public function clients()
+    {
+        return $this->hasMany(Client::class);
     }
 }

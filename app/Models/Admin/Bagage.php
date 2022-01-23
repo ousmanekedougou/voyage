@@ -17,4 +17,8 @@ class Bagage extends Model
     public function bagage_clients(){
         return $this->hasMany(BagageClient::class);
     }
+
+     public function siege(){
+        return $this->belongsTo(Siege::class);
+    }
 }
