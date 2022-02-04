@@ -96,7 +96,7 @@ class AgenceController extends Controller
         }
         define('AGENCE',2);
         $add_agence->name = $request->name;
-        $add_agence->agence_name = $request->name_agence;
+        $add_agence->name_agence = $request->name_agence;
         $add_agence->email = $request->email;
         $add_agence->phone = $request->phone;
         $add_agence->agence_phone = $request->agence_phone;
