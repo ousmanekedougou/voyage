@@ -32,7 +32,7 @@
             <div class="row align-items-center">
                 <div class="text-muted">
                     <h4 class="text-center">Nous contacter</h4>
-                    <p class=" text-center">Vous souhaitez des renseignements complémentaires, une demande de devis ou prendre un rendez-vous, n’hésitez pas à nous contacter</p>
+                    <p class=" text-center">Vous souhaitez des renseignements complémentaires,prendre un rendez-vous, n’hésitez pas à nous contacter</p>
                         
                     <!-- <div class="button-items">
                         <a href="#" class="btn btn-success">Read More</a>
@@ -66,14 +66,17 @@
 
             <div class="row align-items-center">
                 <div class="mt-4 mt-lg-0">
-                        <div class="card">
-                            <div class="card-body">
+                    <div class="card">
+                        <div class="card-body">
 
-                                <form  class="custom-validation" action="{{ route('contact.store') }}" method="POST">
-                                    @csrf
-                                    <div class="row align-items-center">
-
-                                        <div class="col-lg-6 mb-3">
+                            <form  class="custom-validation" action="{{ route('contact.store') }}" method="POST">
+                                @csrf
+                                <div class="row align-items-center">
+                                   <div class="col-md-6">
+                                        <img src="{{asset('user/assets/images/profile-img.png')}}" style="width: 100%;" alt="" srcset="">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
                                             <label class="form-label">Prenom et Nom</label>
                                             <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name"
                                                 placeholder="Prenom et Nom" />
@@ -84,7 +87,7 @@
                                             @enderror
                                         </div>
 
-                                        <div class="col-lg-6 mb-3">
+                                        <div class="mb-3">
                                             <label class="form-label">E-Mail </label>
                                             <div>
                                                 <input type="email" id="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" parsley-type="email"
@@ -96,9 +99,7 @@
                                                     @enderror
                                             </div>
                                         </div>
-                                    </div>
-                            
-                                    <div class="col-lg-12 col-sm-12">
+                                    
                                         <div class="mb-3">
                                             <label class="form-label">Message</label>
                                             <div>
@@ -110,19 +111,21 @@
                                                     @enderror
                                             </div>
                                         </div>
+                                        <div class="d-flex flex-wrap gap-2 col-lg-12">
+                                            <button type="submit" class="btn btn-primary waves-effect waves-light btn-block">
+                                                Envoyer
+                                            </button>
+                                            <button type="reset" class="btn btn-secondary waves-effect btn-block">
+                                                Anuller
+                                            </button>
+                                        </div>
                                     </div>
-                                    <div class="d-flex flex-wrap gap-2 col-lg-12">
-                                        <button type="submit" class="btn btn-primary waves-effect waves-light btn-block">
-                                            Envoyer
-                                        </button>
-                                        <button type="reset" class="btn btn-secondary waves-effect btn-block">
-                                            Anuller
-                                        </button>
-                                    </div>
-                                </form>
+                                </div>
+                                
+                            </form>
 
-                            </div>
                         </div>
+                    </div>
                 </div>
             </div>
             <!-- end row -->
@@ -139,6 +142,9 @@
         <!-- end container -->
     </section>
     <!-- about section end -->
+
+
+    
     
            
 @endsection

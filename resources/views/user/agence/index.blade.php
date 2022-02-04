@@ -8,7 +8,7 @@
     <section class="section hero-section bg-ico-hero bg-agence"  id="home">
         <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
-                <div class="row align-items-center row_pricipal" style="margin-top: -70px;" >
+            <div class="row align-items-center row_pricipal" style="margin-top: -70px;" >
                 <div class="col-lg-8 card_show">
                     <div class="text-white-50">
                         <h1 class="text-white font-weight-semibold mb-2 hero-title ">Voyage par tout au senegal avec nos agences </h1>
@@ -18,8 +18,6 @@
                     </div>
                 </div>
             </div>
-
-            
         </div>
         <!-- end container -->
     </section>

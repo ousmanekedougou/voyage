@@ -95,7 +95,66 @@
 
     
  <!-- currency price section start -->
-    <section class="section bg-white p-0">
+    <section class="section bg-white p-0 section_lg">
+        <div class="container">
+            <div class="currency-price">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                           <img src="{{ asset('user/assets/images/app.webp') }}" style="width:100%;" alt="" srcset="">
+                                       </div>
+                                    <div class="col-md-8">
+                                        <h5>Billets sur votre mobile</h5>
+                                        Accès facile à vos billets, peu importe votre destination, même hors connexion
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                           <img src="{{ asset('user/assets/images/planing.webp') }}" style="width:100%;" alt="" srcset="">
+                                       </div>
+                                    <div class="col-md-8">
+                                        <h5>Planificateur de voyages à portée de main</h5>
+                                       Tout ce dont vous avez besoin dans une seule application
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                           <img src="{{ asset('user/assets/images/notify.webp') }}" style="width:100%;" alt="" srcset="">
+                                       </div>
+                                    <div class="col-md-8">
+                                        <h5>Notifications en temps réel</h5>
+                                        Mises à jour et rappels tout au long du trajet pour un voyage réussi
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+            </div>
+        </div>
+        <!-- end container -->
+    </section>
+<!-- currency price section end -->
+
+
+ <!-- currency price section start -->
+    <section class="section bg-white p-0 section_sm">
         <div class="container">
             <div class="currency-price">
                 <div class="row">
@@ -110,10 +169,8 @@
                                         </span>
                                     </div>
                                     <div class="media-body">
-                                        <p class="text-muted">Bitcoin</p>
-                                        <h5>$ 9134.39</h5>
-                                        <p class="text-muted text-truncate mb-0">+ 0.0012.23 ( 0.2 % ) <i
-                                                class="mdi mdi-arrow-up ms-1 text-success"></i></p>
+                                        <h5>Billets sur votre mobile</h5>
+                                        <p class="text-muted  mb-0">Accès facile à vos billets, peu importe votre destination, même hors connexion</p>
                                     </div>
                                 </div>
                             </div>
@@ -130,10 +187,8 @@
                                         </span>
                                     </div>
                                     <div class="media-body">
-                                        <p class="text-muted">Ethereum</p>
-                                        <h5>$ 245.44</h5>
-                                        <p class="text-muted text-truncate mb-0">- 004.12 ( 0.1 % ) <i
-                                                class="mdi mdi-arrow-down ms-1 text-danger"></i></p>
+                                        <h5>Planificateur de voyages à portée de main</h5>
+                                        <p class="text-muted  mb-0">Tout ce dont vous avez besoin dans une seule application</p>
                                     </div>
                                 </div>
                             </div>
@@ -150,10 +205,8 @@
                                         </span>
                                     </div>
                                     <div class="media-body">
-                                        <p class="text-muted">Litecoin</p>
-                                        <h5>$ 63.61</h5>
-                                        <p class="text-muted text-truncate mb-0">+ 0.0001.12 ( 0.1 % ) <i
-                                                class="mdi mdi-arrow-up ms-1 text-success"></i></p>
+                                        <h5>Notifications en temps réel</h5>
+                                        <p class="text-muted  mb-0">Mises à jour et rappels tout au long du trajet pour un voyage réussi</p>
                                     </div>
                                 </div>
                             </div>
@@ -175,8 +228,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="text-center mb-5">
-                        <div class="small-title">About us</div>
-                        <h4>What is ICO Token?</h4>
+                        <div class="small-title">A propos de TouCki</div>
+                        <h4>TouCki est l’application tout-en-un des voyageurs</h4>
                     </div>
                 </div>
             </div>
@@ -277,13 +330,10 @@
     </section>
     <!-- about section end -->
 
-    
-
-
      <!-- Features start -->
     <section class="section" id="features">
         <div class="container">
-            <div class="row">
+             <div class="row">
                 <div class="col-lg-12">
                     <div class="text-center mb-5">
                         <h2 class="text-center text-primary text-uppercase">Pourquoi TouKi ?</h2>
@@ -294,40 +344,20 @@
                 </div>
             </div>
             <!-- end row -->
+        </div>
+    </section>
 
-            <div class="row align-items-center pt-4">
-                <div class="col-md-6 col-sm-8">
-                    <div>
-                        <img src="{{('admin/assets/images/crypto/features-img/img-1.png')}}" alt="" class="img-fluid mx-auto d-block">
-                    </div>
-                </div>
-                <div class="col-md-5 ms-auto">
-                    <div class="mt-4 mt-md-auto">
-                        <div class="d-flex align-items-center mb-2">
-                            <div class="features-number font-weight-semibold display-4 me-3">01</div>
-                            <h4 class="mb-0">Vos billets de bus sur TouCki</h4>
-                        </div>
-                        <p class="text-muted">
-                            À la recherche d’une petite escapade ou d’un long séjour ? Peu importe vos plans de voyage, sautez dans un bus et profitez d’une expérience de voyage unique !
 
-                            Organiser et voyager en bus est encore plus pratique et simple avec Omio. Pour vous aider à faire le meilleur choix et trouver des billets pas chers, nous vous proposons un comparateur bus permettant de visualiser toutes les agences de transport : trains, bus, vols et ferries.
-                        </p>
-                        <div class="text-muted mt-4">
-                            <p class="mb-2"><i class="mdi mdi-circle-medium text-success me-1"></i>Donec pede justo vel
-                                aliquet</p>
-                            <p><i class="mdi mdi-circle-medium text-success me-1"></i>Aenean et nisl sagittis</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- end row -->
+     <!-- Features start -->
+    <section class="section bg-white" id="features">
+        <div class="container">
 
-            <div class="row align-items-center mt-5 pt-md-5">
+            <div class="row align-items-center">
                 <div class="col-md-5">
-                    <div class="mt-4 mt-md-0">
-                        <div class="d-flex align-items-center mb-2">
-                            <div class="features-number font-weight-semibold display-4 me-3">02</div>
-                            <h4 class="mb-0">Agences</h4>
+                    <div class="">
+                        <div class="d-flex align-items-center">
+                            <div class="features-number font-weight-semibold display-4 me-3">01</div>
+                            <h4 class="mb-0">Toutes les options de voyage sur une seule plateforme</h4>
                         </div>
                         <p class="text-muted">
                             Grâce à un réseau développé au Sénégal, de nombreux trajets en bus et car pas chers de courte et longue-distance vous sont proposés par des compagnies routières renommées. Voyager en bus, c’est choisir des trajets à prix réduits dans tout le Sénégal, comparés au train et à l’avion.
@@ -351,130 +381,71 @@
     </section>
     <!-- Features end -->
 
+      <!-- Features start -->
+    <section class="section" id="features">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div>
+                        <img src="{{('user/assets/images/updateClient.svg')}}" alt="" class="img-fluid mx-auto d-block">
+                    </div>
+                </div>
+                <div class="col-md-6 ms-auto">
+                    <div class="mt-4 mt-md-auto">
+                        <div class="d-flex align-items-center mb-2">
+                            <div class="features-number font-weight-semibold display-4 me-3">02</div>
+                            <h4 class="mb-0">L’application tout-en-un des voyageurs</h4>
+                        </div>
+                        <p class="text-muted">
+                            Téléchargez gratuitement l'application Omio pour bénéficier d’une expertise de qualité et organiser vos voyages en toute confiance.
+                        </p>
+                        <div class="text-muted mt-4">
+                            <p class="mb-2"><i class="mdi mdi-circle-medium text-success me-1"></i>Donec pede justo vel
+                                aliquet</p>
+                            <p><i class="mdi mdi-circle-medium text-success me-1"></i>Aenean et nisl sagittis</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </section>
+    <!-- Features end -->
+
 
       <!-- Roadmap start -->
     <section class="section bg-white" id="roadmap">
         <div class="container">
-            <div class="row">
+            <div class="row align-items-center">
                 <div class="col-lg-12">
-                    <div class="text-center mb-5">
-                        <div class="small-title">Timeline</div>
-                        <h4>Our Roadmap</h4>
+                    <div class="text-center mb-3">
+                        <div class="small-title">LE MONDE DE TouCki</div>
+                        <h4 class="text-center">Recevez des réductions exclusives et des mises à jour de voyage directement dans votre boîte de réception.</h4>
                     </div>
                 </div>
             </div>
             <!-- end row -->
 
-            <div class="row mt-4">
-                <div class="col-lg-12">
-                    <div class="hori-timeline" dir="ltr">
-                        <div class="owl-carousel owl-theme events navs-carousel" id="timeline-carousel">
-                            <div class="item event-list">
-                                <div>
-                                    <div class="event-date">
-                                        <div class="text-primary mb-1">December, 2019</div>
-                                        <h5 class="mb-4">ICO Platform Idea</h5>
-                                    </div>
-                                    <div class="event-down-icon">
-                                        <i class="bx bx-down-arrow-circle h1 text-primary down-arrow-icon"></i>
-                                    </div>
-
-                                    <div class="mt-3 px-3">
-                                        <p class="text-muted">It will be as simple as occidental in fact it will be
-                                            Cambridge</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="item event-list">
-                                <div>
-                                    <div class="event-date">
-                                        <div class="text-primary mb-1">January, 2020</div>
-                                        <h5 class="mb-4">Research on project</h5>
-                                    </div>
-                                    <div class="event-down-icon">
-                                        <i class="bx bx-down-arrow-circle h1 text-primary down-arrow-icon"></i>
-                                    </div>
-
-                                    <div class="mt-3 px-3">
-                                        <p class="text-muted">To an English person, it will seem like simplified English
-                                            existence.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="item event-list active">
-                                <div>
-                                    <div class="event-date">
-                                        <div class="text-primary mb-1">February, 2020</div>
-                                        <h5 class="mb-4">ICO & Token Design</h5>
-                                    </div>
-                                    <div class="event-down-icon">
-                                        <i class="bx bx-down-arrow-circle h1 text-primary down-arrow-icon"></i>
-                                    </div>
-
-                                    <div class="mt-3 px-3">
-                                        <p class="text-muted">For science, music, sport, etc, Europe uses the same
-                                            vocabulary.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="item event-list">
-                                <div>
-                                    <div class="event-date">
-                                        <div class="text-primary mb-1">March, 2020</div>
-                                        <h5 class="mb-4">ICO Launch Platform</h5>
-                                    </div>
-                                    <div class="event-down-icon">
-                                        <i class="bx bx-down-arrow-circle h1 text-primary down-arrow-icon"></i>
-                                    </div>
-
-                                    <div class="mt-3 px-3">
-                                        <p class="text-muted">New common language will be more simple than existing.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="item event-list">
-                                <div>
-                                    <div class="event-date">
-                                        <div class="text-primary mb-1">April, 2020</div>
-                                        <h5 class="mb-4">Token sale round 1</h5>
-                                    </div>
-                                    <div class="event-down-icon">
-                                        <i class="bx bx-down-arrow-circle h1 text-primary down-arrow-icon"></i>
-                                    </div>
-
-                                    <div class="mt-3 px-3">
-                                        <p class="text-muted">It will be as simple as occidental in fact it will be
-                                            Cambridge</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="item event-list">
-                                <div>
-                                    <div class="event-date">
-                                        <div class="text-primary mb-1">May, 2020</div>
-                                        <h5 class="mb-4">Token sale round 2</h5>
-                                    </div>
-                                    <div class="event-down-icon">
-                                        <i class="bx bx-down-arrow-circle h1 text-primary down-arrow-icon"></i>
-                                    </div>
-
-                                    <div class="mt-3 px-3">
-                                        <p class="text-muted">To an English person, it will seem like simplified English
-                                            existence.</p>
-                                    </div>
-                                </div>
-                            </div>
+            <div class="row align-items-center">
+                <div class="col-md-8 col-sm-8">
+                    <div class="mb-3">
+                        <label class="form-label">Votre adresse e-Mail</label>
+                        <div>
+                            <input type="email" id="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" parsley-type="email"
+                                placeholder="E-Mail du client" />
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                         </div>
                     </div>
-
                 </div>
+                <div class="col-md-4">dhdhdh</div>
             </div>
             <!-- end row -->
+
         </div>
         <!-- end container -->
     </section>
