@@ -64,16 +64,20 @@
 
                                     <div class="col-lg-8">
                                         <div>
-                                            <h6 class="text-truncate "><i class="fa fa-mobile"> {{$siege->phone}}</i></h6>
-                                            <p class="mb-4 mb-lg-5 d-flex"><i class="fa fa-envelope" style="font-size: 11px;"> {{$siege->email}}</i></p>
+                                            <p class="d-flex"><i class="fa fa-envelope" style="font-size: 11px;"> {{$siege->email}}</i></p>
+                                            <h6 class="text-truncate mb-4"><i class="fa fa-mobile"> {{$siege->phone}}</i></h6>
                                             <ul class="list-inline mb-0">
                                                 <li class="list-inline-item me-3">
-                                                     <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$siege->id}}" class="badge bg-primary btn-xs"> <i
-                                                            class="fa fa-user-plus"> S'isncrire</i> </a>
+                                                     <a href="" title="S'inscrire" data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$siege->id}}" class="badge bg-success font-size-16 btn-xs"> <i
+                                                            class="fa fa-user-plus"></i> </a>
                                                 </li>
                                                  <li class="list-inline-item me-3">
-                                                   <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdropEmailAgence-{{$siege->id}}" class="badge bg-info btn-xs"> <i
-                                                            class="fa fa-user-plus"> Contacter</i> </a>
+                                                   <a href="" title="Nous contacter" data-bs-toggle="modal" data-bs-target="#staticBackdropEmailAgence-{{$siege->id}}" class="badge bg-primary font-size-16 btn-xs"> <i
+                                                            class="fa fa-address-card"></i> </a>
+                                                </li>
+                                                <li class="list-inline-item me-3">
+                                                   <a href="" title="Modifier vos coordonnes" data-bs-toggle="modal" data-bs-target="#staticBackdropTickerClient-{{$siege->id}}" class="badge bg-info font-size-16 btn-xs"> <i
+                                                            class="fa fa-user-edit"></i> </a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -258,7 +262,7 @@
             <div class="modal-dialog modal-md modal-dialog-centered" role="document">
                 <div class="modal-content ">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Nous Contacter </h5>
+                        <h5 class="modal-title" id="staticBackdropLabel">Contacter le siege de {{$siege->name}}   </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                         <div class="modal-body">
@@ -312,6 +316,71 @@
                                         <div class="d-flex flex-wrap gap-2">
                                             <button type="submit" class="btn btn-primary waves-effect waves-light btn-block">
                                                 Envoyer le message
+                                            </button>
+                                            <button type="reset" class="btn btn-secondary waves-effect btn-block">
+                                                Anuller
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </p>
+                        </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+    <!-- Fin du modal de l'ajout -->
+
+
+         <!-- Static Backdrop Modal de l'ajout -->
+    @foreach($sieges as $siege)
+        <div class="modal fade" id="staticBackdropTickerClient-{{$siege->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+                <div class="modal-content ">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Modifier votre inscription sur le siege de {{$siege->name}}   </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                        <div class="modal-body">
+                            <p class="text-bold text-center">
+                                <span class="text-warning">Attention:</span> la modification n'est possible qu'avant le paiement de votre ticker
+                            </p>
+                            <p>
+                                <form class="custom-validation" action="{{ route('client.show',$siege->id) }}" method="POST" enctype="multipart/form-data">
+                                    {{csrf_field()}}
+                                    {{method_field('GET')}}
+                                    <div class="row">
+                                        <div class="col-xl-12">
+                                            <div class="mb-3" >
+                                                <label class="form-label">Votre numero de telephone</label>
+                                                <div>
+                                                    <input data-parsley-type="number" type="number" id="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" autocomplete="phone"
+                                                        required placeholder="Numero de telephone"  />
+                                                        <input type="hidden" name="indicatif" id="indicatif">
+                                                        @error('phone')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <label class="form-label">Votre numero de carte d'identite nationale</label>
+                                                <div>
+                                                    <input data-parsley-type="number" type="number" id="cni" class="form-control @error('cni') is-invalid @enderror" name="cni" value="{{ old('cni') }}" autocomplete="cni"
+                                                        required placeholder="Numero de votre cni" />
+                                                        @error('cni')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex flex-wrap gap-2">
+                                            <button type="submit" class="btn btn-primary waves-effect waves-light btn-block">
+                                                Envoyer
                                             </button>
                                             <button type="reset" class="btn btn-secondary waves-effect btn-block">
                                                 Anuller

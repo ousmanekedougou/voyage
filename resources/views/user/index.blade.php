@@ -260,42 +260,14 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="owl-carousel owl-theme clients-carousel" id="clients-carousel" dir="ltr">
-                        <div class="item">
-                            <div class="client-images">
-                                <img src="{{('admin/assets/images/clients/1.png')}}" alt="client-img"
-                                    class="mx-auto img-fluid d-block">
+                        @foreach( part() as $part)
+                            <div class="item">
+                                <div class="client-images">
+                                    <img src="{{ Storage::url($part->logo) }}" alt="client-img"
+                                        class="mx-auto img-fluid d-block">
+                                </div>
                             </div>
-                        </div>
-                        <div class="item">
-                            <div class="client-images">
-                                <img src="{{('admin/assets/images/clients/2.png')}}" alt="client-img"
-                                    class="mx-auto img-fluid d-block">
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="client-images">
-                                <img src="{{('admin/assets/images/clients/3.png')}}" alt="client-img"
-                                    class="mx-auto img-fluid d-block">
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="client-images">
-                                <img src="{{('admin/assets/images/clients/4.png')}}" alt="client-img"
-                                    class="mx-auto img-fluid d-block">
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="client-images">
-                                <img src="{{('admin/assets/images/clients/5.png')}}" alt="client-img"
-                                    class="mx-auto img-fluid d-block">
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="client-images">
-                                <img src="{{('admin/assets/images/clients/6.png')}}" alt="client-img"
-                                    class="mx-auto img-fluid d-block">
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

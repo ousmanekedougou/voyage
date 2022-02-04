@@ -32,9 +32,11 @@
 
         <!-- App js -->
         <script src="{{asset('admin/assets/js/app.js')}}"></script>
+        
+        <script src="{{asset('admin/assets/toastr/jquery.min.js')}}"></script>
+        <script src="{{asset('admin/assets/toastr/toastr.min.js')}}"></script>
 
-        <script src="{{asset('admin/assets/back/particles.js')}}"></script>
-        <script src="{{asset('admin/assets/back/app.js')}}"></script>
+        {!! Toastr::message() !!}
 
         @section('settingsection')
         

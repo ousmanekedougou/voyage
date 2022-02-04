@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Bus;
 use App\Models\Admin\Itineraire;
+use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -56,12 +57,13 @@ class BusController extends Controller
         $add_bus->number = $request->numero;
         $add_bus->place = $request->place;
         $add_bus->status = 1;
-        // $add_bus->user_id = Auth::user()->id;
+        $add_bus->user_id = Auth::user()->id;
         $add_bus->siege_id = Auth::user()->siege_id;
         $add_bus->itineraire_id = $request->itineraire;
         $add_bus->date_depart_id = $request->date;
         $add_bus->save();
-        return back()->with('success','Votre bus a bien ete creer');
+        Toastr::success('Votre bus a bien ete creer', 'Ajout Bus', ["positionClass" => "toast-top-right"]);
+        return back();
     }
 
     /**
@@ -105,12 +107,13 @@ class BusController extends Controller
         $update_bus->place = $request->place;
         $update_bus->matricule = $request->matricule;
         $update_bus->status = 1;
-        // $update_bus->user_id = Auth::user()->id;
+        $update_bus->user_id = Auth::user()->id;
         $update_bus->siege_id = Auth::user()->siege_id;
         $update_bus->itineraire_id = $request->itineraire;
         $update_bus->date_depart_id = $request->date;
         $update_bus->save();
-        return back()->with('success','Votre bus a bien ete modifier');
+        Toastr::success('Votre bus a bien ete modifier', 'Modifier Bus', ["positionClass" => "toast-top-right"]);
+        return back();
     }
 
     /**
@@ -122,6 +125,7 @@ class BusController extends Controller
     public function destroy($id)
     {
         Bus::find($id)->where('siege_id',Auth::user()->siege_id)->delete();
-        return back()->with('success','Votre bus a bien ete supprimer');
+        Toastr::success('Votre bus a bien ete suuppression Bus', ["positionClass" => "toast-top-right"]);
+        return back();
     }
 }

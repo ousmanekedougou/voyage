@@ -16,7 +16,7 @@ class CreateItinerairesTable extends Migration
         Schema::create('itineraires', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->integer('user_id');
+            $table->integer('user_id')->nullable();
             $table->integer('siege_id');
             $table->timestamps();
         });

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Ville;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 class VilleController extends Controller
@@ -50,7 +51,8 @@ class VilleController extends Controller
         $add_ville->amount = $request->prix;
         $add_ville->itineraire_id = $request->itineraire;
         $add_ville->save();
-        return back()->with('success','Votre ville a bien ete creer');
+        Toastr::success('Votre ville a bien ete creer', 'Ajout Ville', ["positionClass" => "toast-top-right"]);
+        return back();
     }
 
     /**
@@ -93,7 +95,8 @@ class VilleController extends Controller
         $update_ville->amount = $request->prix;
         $update_ville->itineraire_id = $update_ville->itineraire->id;
         $update_ville->save();
-        return back()->with('success','Votre ville a bien ete creer');
+        Toastr::success('Votre ville a bien ete modifier', 'Modifier Ville', ["positionClass" => "toast-top-right"]);
+        return back();
     }
 
     /**
@@ -104,7 +107,8 @@ class VilleController extends Controller
      */
     public function destroy($id)
     {
-         Ville::find($id)->delete();
-        return back()->with('success','Votre ville a bien ete supprimer');
+        Ville::find($id)->delete();
+        Toastr::success('Votre ville a bien ete supprimer', 'Suppression Ville', ["positionClass" => "toast-top-right"]);
+        return back();
     }
 }

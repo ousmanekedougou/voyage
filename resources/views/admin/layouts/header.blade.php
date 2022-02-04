@@ -31,7 +31,7 @@
                                     <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" height="22">
                                 </span>
                                 <span class="logo-lg">
-                                    {{Auth::user()->agence_name}}
+                                    <span class="text-bold text-uppercase text-white" style="font-size: 14px;margin-left:-25px;">{{Auth::user()->agence_name}}</span>
                                     <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" height="17">
                                 </span>
                             </a>
@@ -49,7 +49,7 @@
                         @else
                             <a href="{{ route('admin.home') }}" class="logo logo-dark">
                                 <span class="logo-sm">
-                                    <img src="{{asset('admin/assets/images/logo.svg')}}" alt="" height="22">
+                                    <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="22">
                                 </span>
                                 <span class="logo-lg">
                                     <img src="{{asset('admin/assets/images/logo-dark.png')}}" alt="" height="17">
@@ -58,7 +58,7 @@
 
                             <a href="{{ route('admin.home') }}" class="logo logo-light">
                                 <span class="logo-sm">
-                                    <img src="{{asset('admin/assets/images/logo-light.svg')}}" alt="" height="22">
+                                    <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="22">
                                 </span>
                                 <span class="logo-lg">
                                     <img src="{{asset('admin/assets/images/logo-light.png')}}" alt="" height="19">
@@ -345,6 +345,7 @@
                     </div>
 
                 </div>
+                {{--
                 @if(session('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         <i class="mdi mdi-check-all me-2"></i>
@@ -359,10 +360,12 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
+                --}}
             </div>
             
         </header>
 
+         {!! Toastr::message() !!}
 		
 
 		
@@ -377,8 +380,6 @@
 				</ul>
 			</div>
 		@endif--}}
-
-        @include('flashy::message')
 
        
 

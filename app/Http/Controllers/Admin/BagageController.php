@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\Bagage;
 use App\Models\Admin\BagageClient;
 use App\Models\User\Client;
+use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class BagageController extends Controller
 {
@@ -57,9 +59,11 @@ class BagageController extends Controller
             $ad_bagage->client_id = $client->id;
             $ad_bagage->siege_id = Auth::user()->siege_id;
             $ad_bagage->save();
-            return back()->with('success','Votre client a ete cree');
+            Toastr::success('Votre client a bien ete creer', 'Creattion client', ["positionClass" => "toast-top-right"]);
+            return back();
         }else {
-            return back()->with('error','Votre client n\'existe pas');
+            Toastr::error('Votre client n\'existe pas', 'Error client', ["positionClass" => "toast-top-right"]);
+            return back();
         }
     }
 
@@ -115,7 +119,8 @@ class BagageController extends Controller
             $client_p_t->prix_total = $client_p_t->prix_total + $request->prix;
         }
         $client_p_t->save();
-         return back()->with('success','Vos bagage ont ete ajouter');
+        Toastr::success('Vos bagages ont bien ete ajouter', 'Ajout Bagages', ["positionClass" => "toast-top-right"]);
+        return back();
     }
 
     /**
@@ -126,9 +131,16 @@ class BagageController extends Controller
      */
     public function destroy($id)
     {
+        $bag_clients = BagageClient::where('bagage_id',$id)->get();
+        if ($bag_clients->count() > 0) {
+            foreach ($bag_clients as $bag) {
+            Storage::delete($bag->image);
+            $bag->delete();
+            }
+        }
         Bagage::where('id',$id)->where('siege_id',Auth::user()->siege_id)->delete();
-        BagageClient::where('bagage_id',$id)->delete();
-        return back()->with('success','Votre client et ses bagages ont ete supprimer');
+        Toastr::success('Votre client et ses bagages ont ete supprimer', 'Suppression Bagages', ["positionClass" => "toast-top-right"]);
+        return back();
     }
 }
 

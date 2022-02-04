@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Siege;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 class SiegeController extends Controller
@@ -55,7 +56,8 @@ class SiegeController extends Controller
         $add_siege->adress = $request->adress;
         $add_siege->user_id = Auth::user()->id;
         $add_siege->save();
-        return back()->with('success','Votre siege a bien ete creer');
+        Toastr::success('Votre siege a bien ete creer', 'Ajout Siege', ["positionClass" => "toast-top-right"]);
+        return back();
     }
 
     /**
@@ -102,7 +104,8 @@ class SiegeController extends Controller
         $update_siege->adress = $request->adress;
         $update_siege->agence_id = Auth::user()->id;
         $update_siege->save();
-        return back()->with('success','Votre siege a bien ete modifier');
+        Toastr::success('Votre siege a bien ete modifier', 'Modifier Siege', ["positionClass" => "toast-top-right"]);
+        return back();
     }
 
     /**
@@ -114,6 +117,7 @@ class SiegeController extends Controller
     public function destroy($id)
     {
         Siege::find($id)->delete();
-        return back()->with('success','Votre siege a bien ete supprimer');
+        Toastr::success('Votre siege a bien ete supprimer', 'Suppression Siege', ["positionClass" => "toast-top-right"]);
+        return back();
     }
 }

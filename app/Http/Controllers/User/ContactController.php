@@ -8,6 +8,8 @@ use App\Models\User\Contact;
 use App\Mail\ContactMessage;
 use Illuminate\Support\Facades\Mail;
 use App\Notifications\ContactMailClient;
+use Brian2694\Toastr\Facades\Toastr;
+
 class ContactController extends Controller
 {
      public function index(){
@@ -23,11 +25,8 @@ class ContactController extends Controller
         $mailable = new ContactMessage($request->name,$request->email,$request->msg);
         Mail::to(config('contact.contact_support_email'))
             ->send($mailable);
-
-        // Mail::to('ousmanelaravel@gmail.com')
-        //     ->send(new ContactMessage($request->name,$request->email,$request->msg));
-
-        return back()->with('success','Votre message a bien ete envoyer');
+        Toastr::success('Votre message a ete envoyer', 'Message', ["positionClass" => "toast-top-right"]);
+        return back();
     }
 }
 

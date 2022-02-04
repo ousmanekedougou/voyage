@@ -35,6 +35,7 @@ class CreateAgencesTable extends Migration
             $table->string('confirmation_token')->unique()->nullable();
              $table->string('image')->nullable();
              $table->string('agence_name')->nullable();
+             $table->integer('agence_phone')->nullable();
             $table->timestamps();
         });
     }

@@ -136,7 +136,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="shortcut icon" href="{{asset('admin/assets/images/favicon.ico')}}">
+  <link rel="shortcut icon" href="{{asset('admin/assets/images/bus.svg')}}">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="{{ asset('user/assets/css/login2.css') }}" />
   <title>TouCki|Connexion</title>
@@ -227,7 +227,7 @@
     </div>
   </div>
 
-  <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+  <script src="{{asset('user/assets/js/pages/login2.js')}}"></script>
   <script src="app.js"></script>
 </body>
 

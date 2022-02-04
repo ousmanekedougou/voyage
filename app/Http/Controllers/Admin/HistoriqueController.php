@@ -7,6 +7,7 @@ use App\Models\User\Client;
 use Carbon\Carbon;
 use App\Models\Admin\Bus;
 use App\Models\Admin\Historical;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 
 class HistoriqueController extends Controller
@@ -15,6 +16,7 @@ class HistoriqueController extends Controller
     {
         $this->middleware(['auth','isAgent','isClient']);
     }
+
     // public function index(){
     //     $buses = Bus::where('siege_id',Auth::user()->siege_id)->orderBy('id','ASC')->get();
     //     foreach ($buses as $buse) {
@@ -29,16 +31,17 @@ class HistoriqueController extends Controller
                     $clients = Historical::where('siege_id',Auth::user()->siege_id)->where('registered_at',$request->search)->paginate(15);
                     return view('admin.historique.show',compact('clients'));
             }else {
+                Toastr::success('Il n\'y a pas de resultat', 'Resultat Recherche', ["positionClass" => "toast-top-right"]);
                 return back();
             }
         }
         
         if ($request->hidden_date == 2) {
-        // dd($request->phone);
             if ($request->phone != null) {
                     $clients = Historical::where('siege_id',Auth::user()->siege_id)->where('phone',$request->phone)->paginate(15);
                     return view('admin.historique.show',compact('clients'));
             }else {
+                Toastr::success('Il n\'y a pas de resultat', 'Resultat Recherche', ["positionClass" => "toast-top-right"]);
                 return back();
             }
         }
@@ -57,10 +60,12 @@ class HistoriqueController extends Controller
                     'amount' =>  0,
                     'voyage_status' => 3
                 ]);
-                return back()->with('success','Votre client a bien ete rembourser');
+                Toastr::success('Votre client a bien ete rembourser', 'Rembourser Client', ["positionClass" => "toast-top-right"]);
+                return back();
         }
         else {
-            return back()->with('error','Ce client ne semble plus valide');
+            Toastr::error('Ce client ne semble plus valide', 'Client Invalide', ["positionClass" => "toast-top-right"]);
+            return back();
         }
     }
 

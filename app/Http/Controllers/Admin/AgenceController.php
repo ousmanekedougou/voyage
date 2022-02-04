@@ -9,8 +9,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Notifications\RegisteredUser;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Storage;
 
 class AgenceController extends Controller
 {
@@ -38,9 +40,11 @@ class AgenceController extends Controller
     //     if ($user) {
     //         $user->update(['confirmation_token' => null , 'is_active' => ACTIVE]);
     //         $this->guard()->login($user);
-    //         return redirect($this->redirectPath())->with('success','Votre compte a bien ete confirmer');
+    //         Toastr::success('Votre compte a bien ete confirmer', 'Confirmation de compte', ["positionClass" => "toast-top-right"]);
+    //         return redirect($this->redirectPath());
     //     }else {
-    //         return redirect('/login')->with('error','Ce lien ne semble plus valide');
+    //         Toastr::error('Ce lien ne semble plus valide', 'Error de connexion', ["positionClass" => "toast-top-right"]);
+    //         return redirect()->route('login');
     //     }
     // }
 
@@ -70,8 +74,9 @@ class AgenceController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'email_agence' => 'required|string|email|max:255|unique:users',
             'phone' => 'required|string|max:255|unique:users',
+            'agence_phone' => 'required|string|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
-            'registre_commerce' => 'required|string|max:255|unique:users',
+            // 'registre_commerce' => 'required|string|max:255|unique:users',
             'adress' => 'required|string',
             'slogan' => 'required|string',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
@@ -91,11 +96,12 @@ class AgenceController extends Controller
         }
         define('AGENCE',2);
         $add_agence->name = $request->name;
-        $add_agence->name_agence = $request->name_agence;
+        $add_agence->agence_name = $request->name_agence;
         $add_agence->email = $request->email;
         $add_agence->phone = $request->phone;
+        $add_agence->agence_phone = $request->agence_phone;
         $add_agence->password = Hash::make($request->password);
-        $add_agence->registre_commerce = $request->registre_commerce;
+        // $add_agence->registre_commerce = $request->registre_commerce;
         $add_agence->email_agence = $request->email_agence;
         $add_agence->adress = $request->adress;
         $add_agence->slogan = $request->slogan;
@@ -108,7 +114,8 @@ class AgenceController extends Controller
         $add_agence->save();
         Notification::route('mail',Auth::user()->email)
                 ->notify(new RegisteredUser($add_agence));
-        return back()->with('success','Votre agence a bien ete creer');
+         Toastr::success('Votre agence a bien ete creer', 'Ajout agence', ["positionClass" => "toast-top-right"]);
+        return back();
     }
 
     /**
@@ -156,7 +163,8 @@ class AgenceController extends Controller
                 $agent->is_active = DESACTIVEAGENCE;
                 $agent->save();
             }
-            return back()->with('success','Cette agence a ete desactiver');
+             Toastr::error('Votre agence a bien ete desactiver', 'Desactivation', ["positionClass" => "toast-top-right"]);
+            return back();
         }else{
             $update_agence->is_active = ACTIVEAGENCE;
             $update_agence->confirmation_token = null;
@@ -166,7 +174,8 @@ class AgenceController extends Controller
                 $agent->is_active = ACTIVEAGENCE;
                 $agent->save();
             }
-            return back()->with('success','Cette agence a ete activer');
+            Toastr::success('Votre agence a bien ete activer', 'Activation', ["positionClass" => "toast-top-right"]);
+            return back();
         }
     }
 
@@ -178,7 +187,13 @@ class AgenceController extends Controller
      */
     public function destroy($id)
     {
-        User::find($id)->delete();
-        return back()->with('success','Votre agence a bien ete supprimer');
+        $agencedele = User::find($id);
+        $agenec_logo = $agencedele->logo;
+        $img_ag = $agencedele->image_agence;
+        Storage::delete($agenec_logo); 
+        Storage::delete($img_ag);
+        $agencedele->delete();  
+        Toastr::success('Votre agence a bien ete supprimer', 'Suppression', ["positionClass" => "toast-top-right"]);
+        return back();
     }
 }

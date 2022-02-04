@@ -19,8 +19,8 @@ class CreateBagagesTable extends Migration
             $table->string('client_phone')->unique();
             $table->string('client_ville');
             $table->integer('client_id');
-             $table->integer('prix_total');
-             $table->integer('siege_id');
+            $table->integer('prix_total')->nullable();
+            $table->integer('siege_id');
             $table->timestamps();
         });
     }

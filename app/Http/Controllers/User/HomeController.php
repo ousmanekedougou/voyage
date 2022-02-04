@@ -25,43 +25,13 @@ class HomeController extends Controller
     // }
 
     public function index(){
-         return view('auth.login');
+         return view('user.index');
     }
 
    
 
      public function store(Request $request)
     {
-         $this->validate($request,[
-            'name' => 'required|string',
-            'email' => 'required|string|email|max:255|unique:clients',
-            'phone' => 'required|string|max:255|unique:clients',
-            'ville' => 'required|numeric',
-            'bus' => 'required|numeric',
-        ]);
-        $clients = Client::where('bus_id',$request->bus)->where('registered_at',Carbon::today())->get();
-        $buse = Bus::where('id',$request->bus)->first();
-        if ($clients->count() < $buse->place) {
-            $pl = $buse->inscrit;
-            $buse->inscrit = $pl + 1;
-            $buse->save();
-            
-            $add_client = new Client();
-            $add_client->name = $request->name;
-            $add_client->email = $request->email;
-            $add_client->phone = $request->phone;
-            $add_client->ville_id = $request->ville;
-            $add_client->bus_id = $request->bus;
-            $add_client->registered_at = $request->date;
-            $add_client->confirmation_token = str_replace('/','',Hash::make(Str::random(40)));
-            $add_client->save();
-            $add_client->notify(new RegisteredClient());
-            return back()->with('success','Votre client a ete bien ete ajoute');
-        }else if ($clients->count() == $buse->place){
-            $bus_plein = Bus::where('id',$request->bus)->first();
-            $bus_plein->plein = 1;
-            $bus_plein->save();
-            return back()->with('error','Ce bus est pelin');
-        }
+        
     }
 }

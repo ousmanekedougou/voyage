@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\ColiClient;
 use App\Models\Admin\Colie;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ColiController extends Controller
 {
@@ -60,7 +62,8 @@ class ColiController extends Controller
         $coli_client->ville = $request->ville; 
         $coli_client->siege_id = Auth::user()->siege_id;
         $coli_client->save();
-        return back()->with('success','Votre client a ete ajouter');
+        Toastr::success('Votre client ont bien ete ajouter', 'Ajout Client', ["positionClass" => "toast-top-right"]);
+        return back();
     }
 
     /**
@@ -117,7 +120,8 @@ class ColiController extends Controller
         }
         $client_p_t->save();
 
-        return back()->with('success','Vos bagage ont ete ajouter');
+        Toastr::success('Vos colies ont bien ete ajouter', 'Ajout Bagages', ["positionClass" => "toast-top-right"]);
+        return back();
     }
 
     /**
@@ -128,8 +132,15 @@ class ColiController extends Controller
      */
     public function destroy($id)
     {
+        $bag_clients = ColiClient::where('colie_id',$id)->get();
+        if ($bag_clients->count() > 0) {
+            foreach ($bag_clients as $bag) {
+            Storage::delete($bag->image);
+            $bag->delete();
+            }
+        }
         Colie::where('id',$id)->where('siege_id',Auth::user()->siege_id)->delete();
-        ColiClient::where('colie_id',$id)->delete();
-        return back()->with('success','Votre client et ses bagages ont ete supprimer');
+        Toastr::success('Votre client et ses colies ont ete supprimer', 'Suppression Bagages', ["positionClass" => "toast-top-right"]);
+        return back();
     }
 }

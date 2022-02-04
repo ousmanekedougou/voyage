@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Notifications\RegisteredUser;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -55,9 +56,11 @@ class RegisterController extends Controller
         if ($user) {
             $user->update(['confirmation_token' => null , 'is_active' => ACTIVE]);
             $this->guard()->login($user);
-            return redirect($this->redirectPath())->with('success','Votre compte a bien ete confirmer');
+            Toastr::success('Votre compte a bien ete confirmer', 'Compte Confirmer', ["positionClass" => "toast-top-right"]);
+            return redirect($this->redirectPath());
         }else {
-            return redirect('/login')->with('error','Ce lien ne semble plus valide');
+            Toastr::success('Ce lien ne semble plus valide', 'Compte invalide', ["positionClass" => "toast-top-right"]);
+            return redirect()->route('login');
         }
     }
 
@@ -68,9 +71,8 @@ class RegisterController extends Controller
         event(new Registered($user = $this->create($request->all())));
 
         Notification::route('mail',Auth::user()->email)
-                ->notify(new RegisteredUser($user));
-
-        return back()->with('success','Ce compte a bien ete creer');
+            ->notify(new RegisteredUser($user));
+        Toastr::success('Votre compte a bien ete creer', 'Creation de compte', ["positionClass" => "toast-top-right"]);
     }
 
     /**

@@ -10,14 +10,17 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Notifications\RegisteredUser;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
 
 class AgenceController extends Controller
 {
      public function index(){
-        $agences = User::where('is_admin',2)->where('is_active',1)->orderBy('id','ASC')->get();
-        return view('user.agence.index',compact('agences'));
+        $agences = User::where('is_admin',2)->where('is_active',1)->orderBy('id','ASC')->paginate(10);
+        $agenceAll = User::where('is_admin',2)->where('is_active',1)->orderBy('id','ASC')->get();
+        $agenceCount = $agenceAll->count(); 
+        return view('user.agence.index',compact('agences','agenceCount'));
     }
 
     public function create(){
@@ -27,38 +30,52 @@ class AgenceController extends Controller
      public function store(Request $request)
     {
         $this->validate($request,[
-            'name' => 'required|string|max:255|unique:users',
+            'name' => 'required|string|max:255',
+            'name_agence' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
-            'phone' => 'required|string|max:255|unique:users',
+            'email_agence' => 'required|string|email|unique:users',
+            'phone' => 'required|numeric|unique:users',
+            'agence_phone' => 'required|numeric|unique:users',
             'password' => 'required|string|min:6|confirmed',
-            'registre_commerce' => 'required|string|max:255|unique:users',
+            // 'registre_commerce' => 'required|string|max:255|unique:users',
             'adress' => 'required|string',
             'slogan' => 'required|string',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
+            'image_agence' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
         ]);
-        // dd($request->all());
-         $imageName = '';
+        // dd($request->agence_phone);
+           $imageName = '';
+        $imageAgenceName = '';
         $add_agence = new User();
           if($request->hasFile('image'))
         {
             $imageName = $request->image->store('public/Agence');
         }
+          if($request->hasFile('image_agence'))
+        {
+            $imageAgenceName = $request->image_agence->store('public/Agence');
+        }
         define('AGENCE',2);
         $add_agence->name = $request->name;
+        $add_agence->agence_name = $request->name_agence;
         $add_agence->email = $request->email;
         $add_agence->phone = $request->phone;
+        $add_agence->agence_phone = $request->agence_phone;
         $add_agence->password = Hash::make($request->password);
-        $add_agence->registre_commerce = $request->registre_commerce;
+        // $add_agence->registre_commerce = $request->registre_commerce;
+        $add_agence->email_agence = $request->email_agence;
         $add_agence->adress = $request->adress;
         $add_agence->slogan = $request->slogan;
         $add_agence->is_admin = AGENCE;
         $add_agence->logo = $imageName;
+        $add_agence->image_agence = $imageAgenceName;
         $add_agence->confirmation_token = str_replace('/','',Hash::make(Str::random(40)));
         $add_agence->slug = str_replace('/','',Hash::make(Str::random(20).'agence'.$request->email));
         $add_agence->save();
-         Notification::route('mail','ousmanelaravel@mail.com')
+        Notification::route('mail','ousmanelaravel@gmail.com')
                 ->notify(new RegisteredUser($add_agence));
-        return back()->with('success','Votre agence a bien ete creer');
+        Toastr::success('Votre agence a bien ete creer', 'Inscription', ["positionClass" => "toast-top-right"]);
+        return back();
     }
 
       public function show($slug)
@@ -69,7 +86,8 @@ class AgenceController extends Controller
         if($sieges->count() > 0){
             return view('user.agence.show',compact('sieges','agence','buses'));
         }else {
-            return back()->with('error',"L'agence $agence->name_agence n'a pas encore de siège");
+            Toastr::error('L\'agence '.$agence->name_agence.' n\'a pas encore de siège', 'Sieges', ["positionClass" => "toast-top-right"]);
+            return back();
         }
     }
 }

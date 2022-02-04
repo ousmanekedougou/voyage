@@ -5,7 +5,7 @@
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />
         <!-- <link rel="shortcut icon" href="{{asset('admin/assets/images/favicon.ico')}}"> -->
-        <link rel="shortcut icon" href="{{ asset('user/assets/images/bus.png') }}">
+        <link rel="shortcut icon" href="{{ asset('admin/assets/images/bus.svg') }}" style="width:100%;">
          <!-- owl.carousel css -->
         <link rel="stylesheet" href="{{asset('admin/assets/libs/owl.carousel/assets/owl.carousel.min.css')}}">
 
@@ -17,7 +17,9 @@
         <!-- App Css-->
         <link href="{{asset('admin/assets/css/app.min.css')}}"  rel="stylesheet" type="text/css" />
         <link href="{{asset('admin/assets/css/style.css')}}"  rel="stylesheet" type="text/css" />
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        
+        <link rel="stylesheet" href="{{asset('admin/assets/toastr/toastr.min.css')}}">
+        <script src="{{asset('admin/assets/css/jquery-3.6.0.min.js')}}"></script>
 
 @section('headsection')
 

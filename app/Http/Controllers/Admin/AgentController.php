@@ -8,9 +8,11 @@ use App\Models\User;
 use App\Models\Admin\Siege;
 use Illuminate\Support\Str;
 use App\Notifications\RegisteredUser;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Storage;
 
 class AgentController extends Controller
 {
@@ -82,7 +84,8 @@ class AgentController extends Controller
         $add_agent->save();
         Notification::route('mail',Auth::user()->email_agence)
                 ->notify(new RegisteredUser($add_agent));
-        return back()->with('success','Votre agence a bien ete creer');
+        Toastr::success('Votre agent a bien ete creer', 'Ajout agence', ["positionClass" => "toast-top-right"]);
+        return back();
     }
 
     /**
@@ -116,7 +119,8 @@ class AgentController extends Controller
         $user = User::where('id',$id)->first();
         $user->role = $request->role;
         $user->save();
-        return back()->with('success','Votre role a ete asigne');
+        Toastr::success('Votre role a bien ete assigne', 'Ajout de role', ["positionClass" => "toast-top-right"]);
+        return back();
     }
 
     /**
@@ -138,7 +142,8 @@ class AgentController extends Controller
             $update_agent->agence_name = Auth::user()->name_agence;
             $update_agent->email_agence = Auth::user()->email_agence;
             $update_agent->save();
-            return back()->with('success','Cette agent a ete desactiver');
+            Toastr::success('Votre agent a bien ete desactiver', 'Desactivation', ["positionClass" => "toast-top-right"]);
+            return back();
         }else{
             $update_agent->is_active = ACTIVEAGENCE;
             $update_agent->confirmation_token = null;
@@ -146,7 +151,8 @@ class AgentController extends Controller
             $update_agent->agence_name = Auth::user()->name_agence;
             $update_agent->email_agence = Auth::user()->email_agence;
             $update_agent->save();
-            return back()->with('success','Cette agent a ete activer');
+            Toastr::success('Votre agent a bien ete activer', 'Activation', ["positionClass" => "toast-top-right"]);
+            return back();
         }
     }
 
@@ -158,7 +164,11 @@ class AgentController extends Controller
      */
     public function destroy($id)
     {
-         User::find($id)->delete();
-        return back()->with('success','Votre agent a bien ete supprimer');
+        $agent = User::find($id)->delete();
+        $imgag = $agent->logo;
+        Storage::delete($imgag);
+        $agent->delete();
+        Toastr::success('Votre agent a bien ete supprimer', 'Suppression agent', ["positionClass" => "toast-top-right"]);
+        return back();
     }
 }

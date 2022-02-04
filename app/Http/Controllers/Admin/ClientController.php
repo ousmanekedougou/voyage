@@ -8,6 +8,7 @@ use App\Models\Admin\DateDepart;
 use App\Models\Admin\Itineraire;
 use App\Models\User\Client;
 use App\Notifications\PaymentTicker;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
@@ -54,13 +55,16 @@ class ClientController extends Controller
 
                 Notification::route('mail',$user->bus->siege->email)
                     ->notify(new PaymentTicker($user));
-                return redirect('http://localhost:8000')->with('success',"Salut votre billet a ete payer avec succes.<br>Veuillez ouvrire votre comptre gmail pour voir votre ticker electronique et ses instruction");
+                Toastr::success('Salut votre billet a ete payer avec succes,accedez sur votre compte gmail', 'Paiement Ticker', ["positionClass" => "toast-top-right"]);
+                return redirect()->route('/');
             }else{
-                return redirect('http://localhost:8000')->with('error',"Cette date de voyage est passer");
+                Toastr::error('Cette date de voyage est passer', 'Paiement Ticker', ["positionClass" => "toast-top-right"]);
+                return redirect()->route('/');
             }
 
         }else {
-            return redirect('http://localhost:8000')->with('error',"Salut chere clien il semble que ce ticker a deja ete payer");
+            Toastr::error('Salut chere client il semble que ce ticker a deja ete payer', 'Paiement Ticker', ["positionClass" => "toast-top-right"]);
+            return redirect()->route('/');
         }
     }
 
@@ -81,13 +85,15 @@ class ClientController extends Controller
                 $montant_bus->valider = $montant_bus->valider + 1;
                 $montant_bus->save();
 
-                // Notification::route('mail',Auth::user()->siege->email)
-                // ->notify(new PaymentTicker($user));
-                return back()->with('success','Votre billet a ete payer');
+                Notification::route('mail',Auth::user()->siege->email)
+                ->notify(new PaymentTicker($user));
+                Toastr::success('Salut votre billet a ete payer avec succes', 'Paiement Ticker', ["positionClass" => "toast-top-right"]);
+                return back();
             }
         }
         else {
-            return back()->with('error','Ce client ne semble plus valide');
+            Toastr::error('Ce client ne semble plus valide', 'Error lien', ["positionClass" => "toast-top-right"]);
+            return back();
         }
     }
 
@@ -116,7 +122,8 @@ class ClientController extends Controller
                 'error',"Il y'a $nombre resultat(s) pour la recherche $search"        
                 ]);
         }else{
-            return back()->with('error',"Il n'y a pas de resultat pour la recherche $search");
+            Toastr::error('Il n\'y a pas de resultat pour la recherche '.$search, 'Error search', ["positionClass" => "toast-top-right"]);
+            return back();
         }
         
     }
@@ -147,11 +154,14 @@ class ClientController extends Controller
             $info_phone = Client::where('registered_at',$buse->date_depart->depart_at)->where('phone',$request->phone)->first();
             $info_cni = Client::where('registered_at',$buse->date_depart->depart_at)->where('cni',$request->cni)->first();
             if ($info_email == true) {
-                return back()->with('error','Cette adresse email est utiliser pour cette date');
+                Toastr::error('Cette adresse email est utiliser pour cette date', 'Error email', ["positionClass" => "toast-top-right"]);
+                return back();
             }elseif ($info_phone == true) {
-                return back()->with('error','Ce numero de telephone est utiliser pour cette date');
+                Toastr::error('Ce numero de telephone est utiliser pour cette date', 'Error phone', ["positionClass" => "toast-top-right"]);
+                return back();
             }elseif ($info_cni == true) {
-                return back()->with('error','Ce numero de CNI est utiliser pour cette date');
+                Toastr::error('Ce numero de CNI est utiliser pour cette date', 'Error CNI', ["positionClass" => "toast-top-right"]);
+                return back();
             }else {
                 if ($clients->count() < $buse->place) {
                     $pl = $buse->inscrit;
@@ -160,12 +170,13 @@ class ClientController extends Controller
                     
                     $phoneFinale = '';
                     $phoneComplet = '221'.$request->phone;
-                    if (strlen($request->phone) == 13 ) {
+                    if (strlen($request->phone) == 12 ) {
                         $phoneFinale = $request->phone;
                     }elseif (strlen($request->phone) == 9) {
                         $phoneFinale = $phoneComplet;
                     }else {
-                        return back()->with('error','votre numero de telephone est invalid');
+                        Toastr::error('votre numero de telephone est invalid', 'Error CNI', ["positionClass" => "toast-top-right"]);
+                        return back();
                     }
 
                     //  $cni_final = '';
@@ -194,16 +205,19 @@ class ClientController extends Controller
                     $add_client->siege_id = Auth::user()->siege_id;
                     $add_client->save();
                     // $add_client->notify(new RegisteredClient());
-                    return back()->with('success','Votre client a ete bien ete ajoute');
+                    Toastr::success('Votre client a ete bien ete ajoute', 'Ajout Client', ["positionClass" => "toast-top-right"]);
+                    return back();
                 }else if ($clients->count() == $buse->place){
                     $bus_plein = Bus::where('id',$buse->id)->first();
                     $bus_plein->plein = 1;
                     $bus_plein->save();
-                    return back()->with('error','Ce bus est pelin');
+                    Toastr::error('Ce bus est pelin', 'Bus Plein', ["positionClass" => "toast-top-right"]);
+                    return back();
                 }
             }
          }else{
-             return back()->with('error','Ce bus est plein');
+            Toastr::error('Ce bus n\'existe pas', 'Error Bus', ["positionClass" => "toast-top-right"]);
+            return back();
          }
     }
 
@@ -262,11 +276,14 @@ class ClientController extends Controller
         $info_update_phone = Client::where('registered_at',$buse->date_depart->depart_at)->where('phone',$request->phone)->first();
         $info_update_cni = Client::where('registered_at',$buse->date_depart->depart_at)->where('cni',$request->cni)->first();
         if ($info_update_email == true) {
-            return back()->with('error','Cette adresse email est utiliser pour cette date');
+            Toastr::error('Cette adresse email est utiliser pour cette date', 'Error email', ["positionClass" => "toast-top-right"]);
+            return back();
         }elseif ($info_update_phone == true) {
-            return back()->with('error','Ce numero de telephone est utiliser pour cette date');
+            Toastr::error('Ce numero de telephone est utiliser pour cette date', 'Error phone', ["positionClass" => "toast-top-right"]);
+            return back();
         }elseif ($info_update_cni == true) {
-            return back()->with('error','Ce numero de CNI est utiliser pour cette date');
+            Toastr::error('Ce numero de CNI est utiliser pour cette date', 'Error CNI', ["positionClass" => "toast-top-right"]);
+            return back();
         }else {
             if ($clients->count() < $buse->place) {
                 $update_client = Client::where('id',$id)->first();
@@ -281,12 +298,14 @@ class ClientController extends Controller
                 $update_client->siege_id = Auth::user()->siege_id;
                 $update_client->save();
                 // $update_client->notify(new RegisteredClient());
-                return back()->with('success','Votre client a ete bien ete mise a jour');
+                Toastr::success('Votre client a ete bien ete mise a jour', 'Modification Client', ["positionClass" => "toast-top-right"]);
+                return back();
             }else if ($clients->count() == $buse->place){
                 $bus_plein = Bus::where('id',$request->bus)->first();
                 $bus_plein->plein = 1;
                 $bus_plein->save();
-                return back()->with('error','Ce bus est pelin');
+                Toastr::error('Ce bus est plein', 'Error Bus', ["positionClass" => "toast-top-right"]);
+                return back();
             }
         }
     }
@@ -296,9 +315,11 @@ class ClientController extends Controller
         if ($client_present->amount == $client_present->ville->amount) {
             $client_present->voyage_status = $request->presence;
             $client_present->save();
-            return back()->with('success','Votre client a ete attribuer');
+            Toastr::success('Votre client a ete attribuer', 'Presence Client', ["positionClass" => "toast-top-right"]);
+            return back();
         }else {
-            return back()->with('error','Vous ne pouvez pas modifier un client qui n\'a pas payer son ticker');
+            Toastr::error('Vous ne pouvez pas modifier un client qui n\'a pas payer son ticker', 'Presence Client', ["positionClass" => "toast-top-right"]);
+            return back();
         }
     }
 
@@ -337,6 +358,7 @@ class ClientController extends Controller
         }
         $montant_bus->save();
         $user->delete();
-        return back()->with('success','Votre client a ete supprimer');
+        Toastr::success('Votre client a ete supprimer', 'Suppression Client', ["positionClass" => "toast-top-right"]);
+        return back();
     }
 }

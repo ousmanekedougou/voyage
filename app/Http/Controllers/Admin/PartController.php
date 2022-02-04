@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Part;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 
 class PartController extends Controller
@@ -65,7 +66,8 @@ class PartController extends Controller
         $ad_part->logo = $imageName;
         $ad_part->is_active = ACTIVE;
         $ad_part->save();
-        return back()->with('success','Votre partenaire a ete ajoute et activer');
+        Toastr::success('Votre partenaire a ete ajoute et activer', 'Ajout Partenaire', ["positionClass" => "toast-top-right"]);
+        return back();
     }
 
     /**
@@ -122,13 +124,15 @@ class PartController extends Controller
             $update_part->logo = $imageName;
             $update_part->is_active = $update_part->is_active;
             $update_part->save();
-            return back()->with('success','Votre partenaire a ete modifier');
+            Toastr::success('Votre partenaire a ete modifier', 'Modifier Partenaire', ["positionClass" => "toast-top-right"]);
+            return back();
         }
         else if ($request->hidden == 2) {
             $update_admin = Part::where('id',$id)->first();
             $update_admin->is_active = $request->radio;
             $update_admin->save();
-            return back()->with('success','Votre partenaire a ete active');
+            Toastr::success('Le status de votre partenaire a ete modifier', 'Status Partenaire', ["positionClass" => "toast-top-right"]);
+            return back();
         }
     }
 
@@ -141,6 +145,7 @@ class PartController extends Controller
     public function destroy($id)
     {
         Part::find($id)->delete();
-        return back()->with('success','Votre partenaire a ete supprimer');
+        Toastr::success('Votre partenaire a ete supprimer', 'Suppression Partenaire', ["positionClass" => "toast-top-right"]);
+        return back();
     }
 }

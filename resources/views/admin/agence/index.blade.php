@@ -39,41 +39,16 @@
                                             </div>
 
                                             <div class="media-body overflow-hidden">
-                                                <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">{{ $agence->name_agence }}</a></h5>
-                                                <p class="text-muted mb-1">{{ $agence->email_agence }}</p>
-                                                <p class="text-muted mb-4">{{ $agence->slogan }}</p>
-                                                {{--
+                                                <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">{{ $agence->agence_name }}</a></h5>
+                                                <p class="text-muted mb-1"> <i class="fa fa-envelope"></i> {{ $agence->email_agence }}</p>
+                                                <p class="text-muted mb-4 font-size-10"><i class="fa fa-mobile"></i> Agence : {{ $agence->agence_phone }}</p>
+                                                
                                                 <div class="avatar-group">
-                                                    <div class="avatar-group-item">
-                                                        <a href="javascript: void(0);" class="d-inline-block">
-                                                            <img src="assets/images/users/avatar-4.jpg" alt=""
-                                                                class="rounded-circle avatar-xs">
-                                                        </a>
-                                                    </div>
-                                                    <div class="avatar-group-item">
-                                                        <a href="javascript: void(0);" class="d-inline-block">
-                                                            <img src="assets/images/users/avatar-5.jpg" alt=""
-                                                                class="rounded-circle avatar-xs">
-                                                        </a>
-                                                    </div>
-                                                    <div class="avatar-group-item">
-                                                        <a href="javascript: void(0);" class="d-inline-block">
-                                                            <div class="avatar-xs">
-                                                                <span
-                                                                    class="avatar-title rounded-circle bg-success text-white font-size-16">
-                                                                    A
-                                                                </span>
-                                                            </div>
-                                                        </a>
-                                                    </div>
-                                                    <div class="avatar-group-item">
-                                                        <a href="javascript: void(0);" class="d-inline-block">
-                                                            <img src="assets/images/users/avatar-2.jpg" alt=""
-                                                                class="rounded-circle avatar-xs">
-                                                        </a>
+                                                    <div class="avatar-group-item font-size-11">
+                                                        {{$agence->name}} : {{$agence->phone}}
                                                     </div>
                                                 </div>
-                                                --}}
+                                                
                                             </div>
                                         </div>
                                     </div>
@@ -254,6 +229,19 @@
                                                         @enderror
                                                 </div>
                                                 <div class="mb-3">
+                                                    <label class="form-label">Telephone de l'agence</label>
+                                                    <div>
+                                                        <input data-parsley-type="number" type="number" id="agence_phone" class="form-control @error('agence_phone') is-invalid @enderror" name="agence_phone" value="{{ old('agence_phone') }}" autocomplete="agence_phone"
+                                                            required placeholder="Numero de telephone" />
+                                                             @error('agence_phone')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
+                                                    </div>
+                                                </div>
+                                                {{--
+                                                <div class="mb-3">
                                                     <label class="form-label">Registre de commerce</label>
                                                     <div>
                                                         <input data-parsley-type="digits" type="text" id="registre_commerce" class="form-control @error('registre_commerce') is-invalid @enderror" name="registre_commerce" value="{{ old('registre_commerce') }}" autocomplete="registre_commerce"
@@ -265,6 +253,7 @@
                                                             @enderror
                                                     </div>
                                                 </div>
+                                                --}}
                                                 <div class="mb-3">
                                                     <label class="form-label">Logo de l'agence</label>
                                                     <input type="file" class="form-control" required id="image_agence" class="form-control @error('image_agence') is-invalid @enderror" name="image_agence" value="{{ old('image_agence') }}" autocomplete="image_agence"

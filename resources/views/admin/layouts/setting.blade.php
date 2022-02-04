@@ -73,6 +73,9 @@
         });
     </script>
 
+        <script src="{{asset('admin/assets/toastr/jquery.min.js')}}"></script>
+        <script src="{{asset('admin/assets/toastr/toastr.min.js')}}"></script>
+         {!! Toastr::message() !!}
         @section('settingsection')
         
         @show

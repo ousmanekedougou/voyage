@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Itineraire;
 use App\Models\Admin\DateDepart;
+use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -50,10 +51,12 @@ class DepartController extends Controller
         ]);
       
         if ($request->date_depart <= Carbon::today()) {
-            return back()->with('error','La date de votre date doit commencer a partire de demain'); 
+            Toastr::error('Votre date doit commencer a partire de demain', 'Error date', ["positionClass" => "toast-top-right"]);
+            return back();
         }else {
             if ($request->heure_rv >= $request->heure_dep ) {
-                return back()->with('error','L\'heure du rendez-vous doit etre inferieur a votre here de depart');
+                Toastr::error('L\'heure du rendez-vous doit etre inferieur a votre here de depart', 'Error time', ["positionClass" => "toast-top-right"]);
+                return back();
             }else {
                 $add_date = new DateDepart();
                 $add_date->depart_at = $request->date_depart;
@@ -62,7 +65,8 @@ class DepartController extends Controller
                 $add_date->itineraire_id = $request->itineraire;
                 $add_date->siege_id = Auth::user()->siege_id;
                 $add_date->save();
-                return back()->with('success','Votre date a bien ete creer');
+                Toastr::success('Votre date a bien ete creer', 'Ajout date', ["positionClass" => "toast-top-right"]);
+                return back();
             }
            
         }
@@ -106,10 +110,12 @@ class DepartController extends Controller
         ]);
       
         if ($request->date_depart <= Carbon::today()) {
-            return back()->with('error','La date de votre date doit commencer a partire de demain'); 
+            Toastr::error('Votre date doit commencer a partire de demain', 'Error date', ["positionClass" => "toast-top-right"]);
+            return back();
         }else {
             if ($request->heure_rv >= $request->heure_dep ) {
-                return back()->with('error','L\'heure du rendez-vous doit etre inferieur a votre here de depart');
+                Toastr::error('L\'heure du rendez-vous doit etre inferieur a votre here de depart', 'Error time', ["positionClass" => "toast-top-right"]);
+                return back();
             }else {
                 $update_date = DateDepart::where('id',$id)->first();
                 $update_date->depart_at = $request->date_depart;
@@ -118,7 +124,8 @@ class DepartController extends Controller
                 $update_date->itineraire_id = $request->itineraire;
                 $update_date->siege_id = Auth::user()->siege_id;
                 $update_date->save();
-                return back()->with('success','Votre date a bien ete creer');
+                Toastr::success('Votre date a bien ete creer', 'Modifier date', ["positionClass" => "toast-top-right"]);
+                return back();
             }
            
         }
@@ -133,6 +140,7 @@ class DepartController extends Controller
     public function destroy($id)
     {
         DateDepart::find($id)->delete();
-        return back()->with('success','Votre date a ete supprimer');
+        Toastr::success('Votre date a bien ete supprimer', 'Suppression date', ["positionClass" => "toast-top-right"]);
+        return back();
     }
 }

@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -79,7 +81,8 @@ class AdminController extends Controller
         $update_admin = User::where('id',$id)->first();
         $update_admin->is_active = $request->radio;
         $update_admin->save();
-        return back()->with('success','Cet admin a ete modifier');
+        Toastr::success('Cet administrateur a ete modifier', 'Modification admin', ["positionClass" => "toast-top-right"]);
+        return back();
     }
 
     /**
@@ -90,7 +93,11 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        User::find($id)->delete();
-        return back()->with('success','Cet admin a ete supprimer');
+        $admin = User::find($id)->delete();
+        $img = $admin->logo;
+        Storage::delete($img);
+        $admin->delete();
+        Toastr::success('Cet administrateur a ete supprimer', 'Modification admin', ["positionClass" => "toast-top-right"]);
+        return back();
     }
 }

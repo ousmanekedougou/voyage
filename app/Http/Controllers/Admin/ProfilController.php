@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -90,7 +91,8 @@ class ProfilController extends Controller
                 $update_admin->email = $request->email;
                 $update_admin->phone = $request->phone;
                 $update_admin->save();
-                return back()->with('success','Vos informations ont bien ete mise a jour');
+                Toastr::success('Vos informations ont bien ete mise a jour', 'Modifier Profile', ["positionClass" => "toast-top-right"]);
+                return back();
            }else if ($request->hidden == 2) {
                 $this->validate($request,[
                     'password' => 'required|string|confirmed',
@@ -98,7 +100,8 @@ class ProfilController extends Controller
                 $update_admin = User::Where('slug',Auth::user()->slug)->first();
                 $update_admin->password = Hash::make($request->password);
                 $update_admin->save();
-                return back()->with('success','Votre mot de passe a bien ete mise a jour');
+                Toastr::success('Votre mot de passe a bien ete mise a jour', 'Modifier Profile', ["positionClass" => "toast-top-right"]);
+                return back();
            }elseif ($request->hidden == 3) {
                 $this->validate($request,[
                    'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
@@ -117,7 +120,8 @@ class ProfilController extends Controller
                 }
                 $update_admin->logo = $imageName;
                 $update_admin->save();
-                return back()->with('success','Votre image a bien ete mise a jour');
+                Toastr::success('Votre image a bien ete mise a jour', 'Modifier Profile', ["positionClass" => "toast-top-right"]);
+                return back();
            }elseif ($request->hidden == 4) {
                $this->validate($request,[
                     'slogan' => 'required|string',
@@ -127,7 +131,8 @@ class ProfilController extends Controller
                 $update_admin->slogan = $request->slogan;
                 $update_admin->adress = $request->adress;
                 $update_admin->save();
-                return back()->with('success','Vos informations ont bien ete mise a jour');
+                Toastr::success('Vos informations ont bien ete mise a jour', 'Modifier Profile', ["positionClass" => "toast-top-right"]);
+                return back();
            }elseif ($request->hidden == 5) {
                $this->validate($request,[
                     'name_agence' => 'required|string',
@@ -140,11 +145,12 @@ class ProfilController extends Controller
                     $image_agence = $request->image_agence->store('public/Agence');
                 }
                 $update = User::Where('slug',Auth::user()->slug)->first();
-                $update->name_agence = $request->name_agence;
+                $update->agence_name = $request->name_agence;
                 $update->email_agence = $request->email_agence;
                 $update->image_agence = $image_agence;
                 $update->save();
-                return back()->with('success','Vos informations ont bien ete mise a jour');
+                Toastr::success('Votre profile a bien ete mise a jour', 'Modifier Profile', ["positionClass" => "toast-top-right"]);
+                return back();
            }
     }
 
