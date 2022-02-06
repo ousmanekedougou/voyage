@@ -15,7 +15,7 @@
                 <div class="row align-items-center row_pricipal" style="margin-top: -70px;" >
                 <div class="col-lg-8 card_show">
                     <div class="text-white-50">
-                        <h1 class="text-white font-weight-semibold mb-3 hero-title ">Réservez vos billets de bus sur <span class="text-warning">{{$agence->name_agence}}</span> au meilleur prix</h1>
+                        <h1 class="text-white font-size-23 font-weight-semibold mb-3 hero-title ">Réservez vos billets de bus sur <span class="text-danger">{{$agence->name_agence}}</span> au meilleur prix</h1>
                     
                     </div>
                 </div>
@@ -27,6 +27,56 @@
     </section>
     <!-- hero section end -->
 
+
+    <!-- currency price section start-->
+    <section class="section bg-white p-0">
+        <div class="container">
+            <div class="currency-price">
+                <div class="row">
+                    @foreach($sieges as $siege)
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="media">
+                                    <div class="avatar-xs me-3">
+                                        <span
+                                            class="avatar-title rounded-circle bg-info bg-soft text-warning font-size-18">
+                                            @if($siege->image == '')
+                                                <i class="mdi mdi-bus"></i>
+                                                @else
+                                            <img src="{{Storage::url($siege->image)}}" alt="" style="width:100%;">
+                                            @endif
+                                        </span>
+                                    </div>
+                                    <div class="media-body">
+                                        <h5>Siege de {{ $siege->name }}</h5>
+                                        <p class="text-muted  mb-1"><i class="fa fa-envelope"></i> {{ $siege->email }} </p>
+                                        <p class="text-muted  mb-2"><i class="fa fa-mobile"></i> {{ $siege->phone }} </p>
+                                        <ul class="list-inline mb-0">
+                                            <li class="list-inline-item me-3">
+                                                <a href="#" class="badge bg-success p-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$siege->id}}"> <i class="fa fa-user-plus"></i> S'inscrire</a>
+                                            </li>
+                                                <li class="list-inline-item me-3">
+                                                    <a href="#" class="badge bg-primary p-1" data-bs-toggle="modal" data-bs-target="#staticBackdropEmailAgence-{{$siege->id}}"> <i class="fa fa-address-card"></i> Contacter</a>
+                                            </li>
+                                            <li class="list-inline-item me-3">
+                                                <a href="#" class="badge bg-info p-1" data-bs-toggle="modal" data-bs-target="#staticBackdropTickerClient-{{$siege->id}}"> <i class="fa fa-edit"></i> Ticker</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                <!-- end row -->
+            </div>
+        </div>
+        <!-- end container -->
+    </section>
+    <!-- currency price section end -->
+{{--
     <!-- about section start -->
     <section class="section" id="agence">
          <!-- <div class="bg-overlay bg-primary"></div> -->
@@ -94,7 +144,7 @@
         </div>
     </section>
     <!-- about section end -->
-
+--}}
     <!-- Static Backdrop Modal de l'ajout -->
     @foreach($sieges as $siege)
         <div class="modal fade" id="staticBackdrop-{{$siege->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
