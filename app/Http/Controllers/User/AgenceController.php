@@ -90,4 +90,23 @@ class AgenceController extends Controller
             return back();
         }
     }
+
+    public function search(){
+        request()->validate([
+            'q' => 'required|min:3'
+        ]);
+        $q = request()->input('q');
+        if ($q != null ) {
+            $agence = User::where('name_agence','like',"%$q%")->where('is_admin',2)->where('is_active',1)->first();
+            if ($agence != null) {
+                return redirect()->route('agence.show',$agence->slug);
+            }else {
+                Toastr::warning('Il n\'y a pas de resultat pour cette recherche', 'Resultat Recherche', ["positionClass" => "toast-top-right"]);
+                return back();
+            }
+        }else {
+           Toastr::warning('Il n\'y a pas de resultat pour cette recherche', 'Resultat Recherche', ["positionClass" => "toast-top-right"]);
+            return back();
+        }
+    }
 }

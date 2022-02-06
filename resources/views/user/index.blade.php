@@ -164,8 +164,8 @@
                                 <div class="media">
                                     <div class="avatar-xs me-3">
                                         <span
-                                            class="avatar-title rounded-circle bg-warning bg-soft text-warning font-size-18">
-                                            <i class="mdi mdi-bitcoin"></i>
+                                            class="avatar-title rounded-circle bg-info bg-soft text-warning font-size-18">
+                                            <i class="fa fa-ticket-alt"></i>
                                         </span>
                                     </div>
                                     <div class="media-body">
@@ -183,7 +183,7 @@
                                     <div class="avatar-xs me-3">
                                         <span
                                             class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-18">
-                                            <i class="mdi mdi-ethereum"></i>
+                                            <i class="fa fa-ruler-combined"></i>
                                         </span>
                                     </div>
                                     <div class="media-body">
@@ -200,8 +200,8 @@
                                 <div class="media">
                                     <div class="avatar-xs me-3">
                                         <span
-                                            class="avatar-title rounded-circle bg-info bg-soft text-info font-size-18">
-                                            <i class="mdi mdi-litecoin"></i>
+                                            class="avatar-title rounded-circle bg-success bg-soft text-info font-size-18">
+                                            <i class="fa fa-envelope-open-text"></i>
                                         </span>
                                     </div>
                                     <div class="media-body">
@@ -391,9 +391,9 @@
                                 <div class="col-md-8">
                                     <div class="row">
                                         <div class="col-md-9">
-                                            <div class="mb-3" style="margin-right:-50px;">
+                                            <div class="mb-3 newsinput-mobile">
                                                 <input  type="email" id="email" class="form-control @error('email') is-invalid @enderror bg-default p-3" name="email" value="{{ old('email') }}" required autocomplete="email" parsley-type="email"
-                                                    placeholder="E-Mail du client" />
+                                                    placeholder="E-Mail de notification" />
                                                     @error('email')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -402,7 +402,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-3">
-                                            <button type="submit" class="btn btn-outline-primary p-3">S'abonner</button>
+                                            <button type="submit" style="width: 100%;" class="btn btn-outline-primary p-3">S'abonner</button>
                                         </div>
                                     </div>
                                 </div>

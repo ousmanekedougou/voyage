@@ -33,20 +33,25 @@
                      <div class="col-md-8">
                         <div class="card">
                             <div class="card-body">
-                                <div class="media">
-                                    <div class="media-body">
-                                        <form action="" method="post" class="app-search d-none d-lg-block">
+                                    <form action="{{ route('agence.search') }}" method="post">
+                                        <div class="row">
                                             @csrf
-                                            <div class="row">
-                                                <div class="position-relative">
-                                                    <input type="text" class="form-control" placeholder="Recherchez une agence de transport">
-                                                    <span class="bx bx-search-alt inco-searche"></span>
+                                            <div class="col-md-9">
+                                                <div class="mb-3">
+                                                    <input  type="text" id="q" class="form-control @error('q') is-invalid @enderror bg-default p-3" name="q" value="{{ old('q') }}" required autocomplete="q" parsley-type="q"
+                                                        placeholder="Recherchez une agence de transport" />
+                                                        @error('q')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
                                                 </div>
                                             </div>
-                                            
-                                        </form>
-                                    </div>
-                                </div>
+                                            <div class="col-md-3">
+                                                <button type="submit" style="width: 100%;" class="btn btn-outline-primary p-3">Recherche</button>
+                                            </div>
+                                        </div>
+                                    </form>
                             </div>
                         </div>
                     </div>

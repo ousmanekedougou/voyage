@@ -23,6 +23,7 @@ Route::get('/agence', [App\Http\Controllers\User\AgenceController::class, 'index
 Route::get('/agence/create', [App\Http\Controllers\User\AgenceController::class, 'create'])->name('agence.create');
 Route::get('/agence/show/{slug}', [App\Http\Controllers\User\AgenceController::class, 'show'])->name('agence.show');
 Route::post('/agence/store', [App\Http\Controllers\User\AgenceController::class, 'store'])->name('agence.store');
+Route::post('/agence/search', [App\Http\Controllers\User\AgenceController::class, 'search'])->name('agence.search');
 Route::get('/setting', [App\Http\Controllers\User\SettingController::class, 'index'])->name('setting.index');
 Route::get('/contact', [App\Http\Controllers\User\ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact/store', [App\Http\Controllers\User\ContactController::class, 'store'])->name('contact.store');
