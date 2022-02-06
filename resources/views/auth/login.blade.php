@@ -37,7 +37,7 @@
                                         </div>
                                     </div>
                                     <div class="col-5 align-self-end">
-                                        <img src="{{asset('user/assets/images/profile-img.png')}}" alt="" class="img-fluid">
+                                        <img src="{{asset('admin/assets/images/bus.')}}" alt="" class="img-fluid">
                                     </div>
                                 </div>
                             </div>
@@ -54,7 +54,7 @@
                                     <a href="/" class="auth-logo-dark">
                                         <div class="avatar-md profile-user-wid mb-4">
                                             <span class="avatar-title rounded-circle bg-light">
-                                                <img src="{{asset('user/assets/images/logo.svg')}}" alt="" class="rounded-circle" height="34">
+                                                <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" class="rounded-circle" height="34">
                                             </span>
                                         </div>
                                     </a>

@@ -74,8 +74,8 @@
             <div class="row align-items-center row_pricipal" style="margin-top: -70px;" >
                 <div class="col-lg-8 card_show">
                     <div class="text-white-50">
-                        <h1 class="text-white font-weight-semibold mb-3 hero-title ">Yombalal Toucki Thi Biir Rewmi</h1>
-                        <p class="font-size-20 text-white" >
+                        <h1 class="text-white font-weight-semibold mb-3 hero-title ">Yombalal Toucki Thi Biir Réwmi</h1>
+                        <p class="font-size-16" >
                             Toutes les options de voyage sur une seule plateforme
                         </p>
 
@@ -94,7 +94,7 @@
 
 
     
- <!-- currency price section start -->
+ <!-- currency price section start version desktop-->
     <section class="section bg-white p-0 section_lg">
         <div class="container">
             <div class="currency-price">
@@ -153,7 +153,7 @@
 <!-- currency price section end -->
 
 
- <!-- currency price section start -->
+ <!-- currency price section start Version mobile-->
     <section class="section bg-white p-0 section_sm">
         <div class="container">
             <div class="currency-price">
@@ -223,91 +223,51 @@
 
   
    <!-- about section start -->
-    <section class="section pt-4 bg-white" id="about">
+    <section class="section pt-4 bg-white mb-5" id="about">
         <div class="container">
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-lg-12">
                     <div class="text-center mb-5">
                         <div class="small-title">A propos de TouCki</div>
                         <h4>TouCki est l’application tout-en-un des voyageurs</h4>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="row align-items-center">
                 <div class="col-lg-5">
 
                     <div class="text-muted">
-                        <h4>Réservez vos billets de bus avec TouCki</h4>
-                        <p>
-                            Recherchez, comparez et réservez vos billets de bus en toute simplicité sur TouCki ! <br> Notre plateforme tout-en-un est également un comparateur bus qui vous permet de visualiser tous les trajets de bus de différents transporteurs au Senegal et de les trier par prix, par heure de départ, ou selon le temps et le type de trajet. <br> Une fois votre itinéraire choisi, il ne vous reste plus qu’à réserver votre bus en quelques clics et obtenir vos billets de bus en ligne.
-                            
-                        </p>
-                        <p class="mb-4">
-                            Avec TouCki, vous profitez notamment de voyages connectés avec notre application. Embarquez rapidement avec votre billet mobile, recevez des notifications de rappele de voyage en temps réel,gestion de vos bagage et colis. Tout est à portée de main !
+                        <h4>Toutes les options de voyage sur une seule plateforme</h4>
+                        <p class="text-muted">
+                            Grâce à un réseau développé au Sénégal, de nombreux trajets en bus et car pas chers de courte et longue-distance vous sont proposés par des compagnies routières renommées. Voyager en bus, c’est choisir des trajets à prix réduits dans tout le Sénégal, comparés au train et à l’avion.
+                            Avec des itinéraires quotidiens vers les villes et capitales du pays, vous pouvez organiser des escapades parfaitement adaptées à tous les budgets !.
                         </p>
 
-                        <div class="button-items">
-                            <a href="#" class="btn btn-success">Read More</a>
-                            <a href="#" class="btn btn-outline-primary">How It work</a>
-                        </div>
-
-                        <div class="row mt-4">
-                            <div class="col-lg-4 col-6">
-                                <div class="mt-4">
-                                    <h4>$ 6.2 M</h4>
-                                    <p>Invest amount</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-6">
-                                <div class="mt-4">
-                                    <h4>16245</h4>
-                                    <p>Users</p>
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
 
                 <div class="col-lg-6 ms-auto">
-                    <div class="mt-4 mt-lg-0">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="card border">
-                                    <div class="card-body">
-                                        <div class="mb-3">
-                                            <i class="mdi mdi-bitcoin h2 text-success"></i>
-                                        </div>
-                                        <h5>Lending</h5>
-                                        <p class="text-muted mb-0">At vero eos et accusamus et iusto blanditiis</p>
-
-                                    </div>
-                                    <div class="card-footer bg-transparent border-top text-center">
-                                        <a href="#" class="text-primary">Learn more</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="card border mt-lg-5">
-                                    <div class="card-body">
-                                        <div class="mb-3">
-                                            <i class="mdi mdi-wallet-outline h2 text-success"></i>
-                                        </div>
-                                        <h5>Wallet</h5>
-                                        <p class="text-muted mb-0">Quis autem vel eum iure reprehenderit</p>
-
-                                    </div>
-                                    <div class="card-footer bg-transparent border-top text-center">
-                                        <a href="#" class="text-primary">Learn more</a>
-                                    </div>
-                                </div>
-                            </div>
+                    <div class="row">
+                        <div class="col-md-12 me-md-0">
+                            <img src="{{('user/assets/images/agence.webp')}}" alt="" class="img-fluid mx-auto d-block">
+                        </div>
+                        <div class="col-md-12">
+                            <h4>Toutes les options de voyage sur une seule plateforme</h4>
+                            <p class="text-muted">
+                                Plus de 1 000 partenaires de transport pour vos trajets en train, bus, avion, ferry et vos transferts aéroportuaires pour profiter pleinement du voyage.
+                            </p>
+                        </div>
+                        <div class="button-items text-center">
+                            <a href="{{ route('setting.index') }}" class="btn btn-primary">Comment ca marche</a>
+                            <a href="{{ route('agence.create') }}" class="btn btn-outline-success">Creer votre compte agence</a>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- end row -->
 
-                <h5 class="text-center">Des relations de confiance</h5>
+            <h5 class="text-center mt-5">Des relations de confiance</h5>
             <hr class="my-5">
 
             <div class="row">
@@ -349,28 +309,30 @@
 
 
      <!-- Features start -->
-    <section class="section bg-white" id="features">
+    <section class="section bg-white p-3" id="features">
         <div class="container">
 
             <div class="row align-items-center">
-                <div class="col-md-5">
+                
+                <div class="col-md-6  col-sm-8 ms-md-auto text-center">
+                    <div class="mt-4 me-md-0">
+                        <img src="{{('user/assets/images/app.webp')}}" alt="" class="img-fluid mx-auto d-block">
+                    </div>
+                </div>
+
+                <div class="col-md-6">
                     <div class="">
                         <div class="d-flex align-items-center">
                             <div class="features-number font-weight-semibold display-4 me-3">01</div>
-                            <h4 class="mb-0">Toutes les options de voyage sur une seule plateforme</h4>
+                            <h4 class="mb-0">Réservez vos billets de bus avec TouCki</h4>
                         </div>
-                        <p class="text-muted">
-                            Grâce à un réseau développé au Sénégal, de nombreux trajets en bus et car pas chers de courte et longue-distance vous sont proposés par des compagnies routières renommées. Voyager en bus, c’est choisir des trajets à prix réduits dans tout le Sénégal, comparés au train et à l’avion.
-                            Avec des itinéraires quotidiens vers les villes et capitales du pays, vous pouvez organiser des escapades parfaitement adaptées à tous les budgets !.
+                         <p class="text-muted">
+                            Recherchez, comparez et réservez vos billets de bus en toute simplicité sur TouCki ! <br> Notre plateforme tout-en-un est également un comparateur bus qui vous permet de visualiser tous les trajets de bus de différents transporteurs au Senegal et de les trier par prix, par heure de départ, ou selon le temps et le type de trajet. <br> Une fois votre itinéraire choisi, il ne vous reste plus qu’à réserver votre bus en quelques clics et obtenir vos billets de bus en ligne.
+                            
                         </p>
-                        <div class="button-items">
-                            <a href="{{ route('agence.create') }}" class="btn btn-success">Creer votre compte agence</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6  col-sm-8 ms-md-auto">
-                    <div class="mt-4 me-md-0">
-                        <img src="{{('admin/assets/images/crypto/features-img/img-2.png')}}" alt="" class="img-fluid mx-auto d-block">
+                        <p class="mb-4 text-muted">
+                            Avec TouCki, vous profitez notamment de voyages connectés avec notre application. Embarquez rapidement avec votre billet mobile, recevez des notifications de rappele de voyage en temps réel,gestion de vos bagage et colis. Tout est à portée de main !
+                        </p>
                     </div>
                 </div>
 
@@ -385,11 +347,6 @@
     <section class="section" id="features">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-md-6">
-                    <div>
-                        <img src="{{('user/assets/images/updateClient.svg')}}" alt="" class="img-fluid mx-auto d-block">
-                    </div>
-                </div>
                 <div class="col-md-6 ms-auto">
                     <div class="mt-4 mt-md-auto">
                         <div class="d-flex align-items-center mb-2">
@@ -406,6 +363,11 @@
                         </div>
                     </div>
                 </div>
+                 <div class="col-md-6">
+                    <div>
+                        <img src="{{('user/assets/images/updateClient.svg')}}" alt="" class="img-fluid mx-auto d-block">
+                    </div>
+                </div>
             </div>
             <!-- end row -->
         </div>
@@ -419,30 +381,36 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-12">
-                    <div class="text-center mb-3">
+                    <div class="text-center mb-3 p-4">
                         <div class="small-title">LE MONDE DE TouCki</div>
-                        <h4 class="text-center">Recevez des réductions exclusives et des mises à jour de voyage directement dans votre boîte de réception.</h4>
+                        <h1 class="text-center">Recevez des réductions exclusives et des mises à jour de voyage directement dans votre boîte de réception.</h1>
+                        <form action="{{ route('contact.post') }}" method="post" class="">
+                            @csrf
+                            <div class="row text-center mt-4">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-8">
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <div class="mb-3" style="margin-right:-50px;">
+                                                <input  type="email" id="email" class="form-control @error('email') is-invalid @enderror bg-default p-3" name="email" value="{{ old('email') }}" required autocomplete="email" parsley-type="email"
+                                                    placeholder="E-Mail du client" />
+                                                    @error('email')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <button type="submit" class="btn btn-outline-primary p-3">S'abonner</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                               
+                        </form>
                     </div>
                 </div>
-            </div>
-            <!-- end row -->
-
-            <div class="row align-items-center">
-                <div class="col-md-8 col-sm-8">
-                    <div class="mb-3">
-                        <label class="form-label">Votre adresse e-Mail</label>
-                        <div>
-                            <input type="email" id="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" parsley-type="email"
-                                placeholder="E-Mail du client" />
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">dhdhdh</div>
             </div>
             <!-- end row -->
 
@@ -450,6 +418,8 @@
         <!-- end container -->
     </section>
     <!-- Roadmap end -->
+
+    
 
     
 

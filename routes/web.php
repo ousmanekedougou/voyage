@@ -26,6 +26,7 @@ Route::post('/agence/store', [App\Http\Controllers\User\AgenceController::class,
 Route::get('/setting', [App\Http\Controllers\User\SettingController::class, 'index'])->name('setting.index');
 Route::get('/contact', [App\Http\Controllers\User\ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact/store', [App\Http\Controllers\User\ContactController::class, 'store'])->name('contact.store');
+Route::post('/contact/post', [App\Http\Controllers\User\ContactController::class, 'post'])->name('contact.post');
 Route::post('/client', [App\Http\Controllers\User\ClientController::class, 'store'])->name('client.store');
 Route::post('/client/sendmail/{id}', [App\Http\Controllers\User\ClientController::class, 'edit'])->name('client.edit');
 Route::get('/client/{id}', [App\Http\Controllers\User\ClientController::class, 'show'])->name('client.show');

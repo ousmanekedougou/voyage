@@ -91,6 +91,23 @@
          width: 0px;
          height: 0px;
      }
+     .contact-login-img{
+         visibility: hidden;
+         width: 0px;
+         height: 0px;
+     }
+     .section-search{
+         margin-top: 30px;
+     }
+     .contact-login-title{
+         width: 100%;
+     }
+     .flex-column-mobile{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        width: 100%;
+     }
 
     
      
@@ -116,6 +133,6 @@
  } */
 
 .hero-section.bg-agence{
-     background-image:url(../images/crypto/banier_bus.jpg);background-size:cover;background-position:top;
+     background-image:url(../images/crypto/agence.webp);background-size:cover;background-position:top;
  height: 100px;
  }

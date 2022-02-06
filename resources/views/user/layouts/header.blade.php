@@ -27,14 +27,16 @@
                     </li>
 
                      <li class="nav-item">
-                        <a class="nav-link {{ set_active_roote('contact.index') }} " href="{{ route('contact.index') }}"><i class="fa fa-at"></i> Contact</a>
+                        <a class="nav-link {{ set_active_roote('contact.index') }} " href="{{ route('contact.index') }}" data-bs-toggle="modal"
+                                            data-bs-target=".bs-exampleContact-modal-lg"><i class="fa fa-at"></i> Contact</a>
                     </li>
 
                 </ul>
 
                 <div class="my-2 ms-lg-2 btn-sign-ine">
                     <!-- <a href="{{ route('agence.create') }}" class="btn btn-outline-primary w-xs {{ set_active_roote('agence.create') }}"><i class="fa fa-user-plus"></i> Creer un compte agence</a> -->
-                    <a href="{{ route('login') }}" class="btn btn-outline-success  w-xs {{ set_active_roote('login') }}"><i class="fa fa-sign-in-alt"></i> Se Connecter</a>
+                    <a href="{{ route('login') }}" class="btn btn-outline-success  w-xs {{ set_active_roote('login') }}" data-bs-toggle="modal"
+                                            data-bs-target=".bs-exampleLogin-modal-lg"><i class="fa fa-sign-in-alt"></i> Se Connecter</a>
                 </div>
             </div>
         </div>

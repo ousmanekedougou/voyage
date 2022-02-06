@@ -73,7 +73,7 @@ class AgenceController extends Controller
         $add_agence->slug = str_replace('/','',Hash::make(Str::random(20).'agence'.$request->email));
         $add_agence->save();
         Notification::route('mail','ousmanelaravel@gmail.com')
-                ->notify(new RegisteredUser($add_agence));
+            ->notify(new RegisteredUser($add_agence));
         Toastr::success('Votre agence a bien ete creer', 'Inscription', ["positionClass" => "toast-top-right"]);
         return back();
     }

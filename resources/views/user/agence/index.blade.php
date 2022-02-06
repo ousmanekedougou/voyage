@@ -11,7 +11,7 @@
             <div class="row align-items-center row_pricipal" style="margin-top: -70px;" >
                 <div class="col-lg-8 card_show">
                     <div class="text-white-50">
-                        <h1 class="text-white font-weight-semibold mb-2 hero-title ">Voyage par tout au senegal avec nos agences </h1>
+                        <h1 class="text-white font-weight-semibold mb-2 hero-title ">Voyage par tout au sénégal avec nos agences </h1>
                         <p class="font-size-16" >
                             Plus de {{$agenceCount}} compagnies de voyages nous font confiance pour vendre leurs billets sur une seule plateforme.
                         </p>
@@ -24,41 +24,27 @@
     <!-- hero section end -->
     
      <!-- currency price section start -->
-    <section class="section p-0">
+    <section class="section p-0 section-search">
         <div class="container">
             <div class="currency-price">
                 <div class="row">
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="media">
-                                   <div class="row">
-                                       <div class="col-md-3">
-                                           <img src="{{ asset('user/assets/images/updateClient.svg') }}" style="width:100%;" alt="" srcset="">
-                                       </div>
-                                       <div class="col-md-10">
-                                           Lorem ipsum dolor sit amet consectetur.
-                                       </div>
-                                   </div>
-                                </div>
-                            </div>
-                        </div>
+                     <div class="col-md-2">
                     </div>
                      <div class="col-md-8">
                         <div class="card">
                             <div class="card-body">
                                 <div class="media">
-                                    <div class="avatar-xs me-3">
-                                        <span
-                                            class="avatar-title rounded-circle bg-warning bg-soft text-warning font-size-18">
-                                            <i class="mdi mdi-bitcoin"></i>
-                                        </span>
-                                    </div>
                                     <div class="media-body">
-                                        <p class="text-muted">Bitcoin</p>
-                                        <h5>$ 9134.39</h5>
-                                        <p class="text-muted text-truncate mb-0">+ 0.0012.23 ( 0.2 % ) <i
-                                                class="mdi mdi-arrow-up ms-1 text-success"></i></p>
+                                        <form action="" method="post" class="app-search d-none d-lg-block">
+                                            @csrf
+                                            <div class="row">
+                                                <div class="position-relative">
+                                                    <input type="text" class="form-control" placeholder="Recherchez une agence de transport">
+                                                    <span class="bx bx-search-alt inco-searche"></span>
+                                                </div>
+                                            </div>
+                                            
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -74,7 +60,7 @@
     
   
     <!-- Blog start -->
-    <section class="section" id="agence" style="margin-top: -40px;">
+    <section class="section" id="agence" style="margin-top: -80px;">
         <div class="container">
             <div class="row">
                 @foreach($agences as $agence)

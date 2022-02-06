@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Agence;
 use App\Models\User;
+use App\Models\User\Notify;
+use App\Notifications\Newsleter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -114,6 +116,11 @@ class AgenceController extends Controller
         $add_agence->save();
         Notification::route('mail',Auth::user()->email)
                 ->notify(new RegisteredUser($add_agence));
+        $notifys = Notify::all();
+        foreach ($notifys as $notify) {
+            Notification::route('mail','ousmanelaravel@gmail.com')
+                ->notify(new Newsleter($notify));
+        }
          Toastr::success('Votre agence a bien ete creer', 'Ajout agence', ["positionClass" => "toast-top-right"]);
         return back();
     }
@@ -173,6 +180,11 @@ class AgenceController extends Controller
             foreach ($agence_agents as $agent) {
                 $agent->is_active = ACTIVEAGENCE;
                 $agent->save();
+            }
+            $notifys = Notify::all();
+            foreach ($notifys as $notify) {
+                Notification::route('mail','ousmanelaravel@gmail.com')
+                    ->notify(new Newsleter($notify));
             }
             Toastr::success('Votre agence a bien ete activer', 'Activation', ["positionClass" => "toast-top-right"]);
             return back();
