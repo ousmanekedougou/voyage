@@ -52,4 +52,6 @@ class Siege extends Model
     {
         return $this->hasMany(Client::class);
     }
+
+    
 }

@@ -23,9 +23,15 @@ class ContactController extends Controller
             'email' => 'required|string|email',
             'msg' => 'required|string',
         ]);
-        $mailable = new ContactMessage($request->name,$request->email,$request->msg);
-        Mail::to(config('contact.contact_support_email'))
-            ->send($mailable);
+        // $mailable = new ContactMessage($request->name,$request->email,$request->msg);
+        // Mail::to(config('contact.contact_support_email'))
+        //     ->send($mailable);
+        Contact::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'msg' => $request->msg,
+            'status' => false,
+        ]);
         Toastr::success('Votre message a ete envoyer', 'Message', ["positionClass" => "toast-top-right"]);
         return back();
     }

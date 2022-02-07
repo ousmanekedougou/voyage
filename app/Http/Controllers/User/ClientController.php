@@ -10,6 +10,7 @@ use App\Notifications\RegisteredClient;
 use Illuminate\Support\Str;
 use App\Models\Admin\DateDepart;
 use App\Models\Admin\Siege;
+use App\Models\User\Contact;
 use App\Notifications\ContactSiegeEmail;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
@@ -46,7 +47,7 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-         $this->validate($request,[
+        $this->validate($request,[
             'name' => 'required|string',
             'email' => 'required|string|email|max:255',
             'phone' => 'required|string|max:255',
@@ -95,7 +96,7 @@ class ClientController extends Controller
                 if (strlen($r_cni) == 13) {
                     $cni_final = $r_cni;
                 }else{
-                    Toastr::error('Votre numero d\'identite est invalide', 'Error phone', ["positionClass" => "toast-top-right"]);
+                    Toastr::error('Votre numero d\'identite est invalide', 'Error CNI', ["positionClass" => "toast-top-right"]);
                     return back();
                 }
                 
@@ -142,8 +143,29 @@ class ClientController extends Controller
             'cni' => 'required|numeric',
         ]);
         $siege = Siege::where('id',$id)->first();
-        $client = Client::where('phone',$request->phone)
-            ->where('cni',$request->cni)
+        $phoneFinale = '';
+        $phoneComplet = '221'.$request->phone;
+        if (strlen($request->phone) == 12 ) {
+            $phoneFinale = $request->phone;
+        }elseif (strlen($request->phone) == 9) {
+            $phoneFinale = $phoneComplet;
+        }else {
+            Toastr::error('Votre numero de telephone est invalide', 'Error phone', ["positionClass" => "toast-top-right"]);
+            return back();
+        }
+
+        $cni_final = '';
+        $r_cni = intval($request->cni);
+
+        if (strlen($r_cni) == 13) {
+            $cni_final = $r_cni;
+        }else{
+            Toastr::error('Votre numero d\'identite est invalide', 'Error CNI', ["positionClass" => "toast-top-right"]);
+            return back();
+        }
+
+        $client = Client::where('phone',$phoneFinale)
+            ->where('cni',$$cni_final)
             ->where('siege_id',$id)
             ->where('siege_id',$id)
             ->first();
@@ -176,9 +198,24 @@ class ClientController extends Controller
      */
     public function edit(Request $request,$id)
     {
-        $siege = Siege::where('id',$id)->first();
-         Notification::route('mail',$request->email)
-                ->notify(new ContactSiegeEmail($siege->email,$request->name,$request->email,$request->sub,$request->sms));
+        // dd($request->all());
+        // $siege = Siege::where('id',$id)->first();
+        // Notification::route('mail',$request->email)
+        //         ->notify(new ContactSiegeEmail($siege->email,$request->name,$request->email,$request->sub,$request->sms));
+        $this->validate($request,[
+            'name' => 'required|string',
+            'email' => 'required|string|email|max:255',
+            'sub' => 'required|string',
+            'sms' => 'required|string',
+        ]);
+        Contact::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'subject' => $request->sub,
+            'msg' => $request->sms,
+            'status' => false,
+            'siege_id' => $id
+        ]);
         Toastr::success('Votre message a ete envoyer', 'Message', ["positionClass" => "toast-top-right"]);
         return back();
     }

@@ -8,5 +8,5 @@ use Illuminate\Notifications\Notifiable;
 class Contact extends Model
 {
     use HasFactory,Notifiable;
-     protected $fillable = ['name','email','msg'];
+     protected $fillable = ['name','email','msg','subject','siege_id','status'];
 }

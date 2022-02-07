@@ -5,7 +5,7 @@
             <div class="modal-content">
                 <div class="card overflow-hidden">
                     <div class="bg-primary bg-soft">
-                            <button type="button" class="btn-close" style="float:right;" data-bs-dismiss="modal"
+                            <button type="button" class="btn-close rounded-circle bg-primary bg-soft font-size-18" style="float:right;" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                         <div class="row">
                             <div class="col-7 contact-login-title">
@@ -96,7 +96,7 @@
             <div class="modal-content">
                 <div class="card overflow-hidden">
                     <div class="bg-primary bg-soft">
-                            <button type="button" class="btn-close" style="float:right;" data-bs-dismiss="modal"
+                            <button type="button" class="btn-close rounded-circle bg-primary bg-soft font-size-18" style="float:right;" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
                         <div class="row">
                             <div class="col-8 contact-login-title">

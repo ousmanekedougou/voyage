@@ -17,7 +17,10 @@ class CreateContactsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('email');
+            $table->string('subject')->nullable();
+            $table->integer('siege_id')->nullable();
             $table->longText('msg');
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }
