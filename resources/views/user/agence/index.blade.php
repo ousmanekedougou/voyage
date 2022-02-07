@@ -1,5 +1,5 @@
 @extends('user.layouts.app',['title' => 'Agence'])
-
+ <meta name="csrf-token" content="{{ csrf_token() }}">
 @section('main-content')
 
  

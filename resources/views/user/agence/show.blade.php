@@ -306,7 +306,7 @@
     <!-- Fin du modal de l'ajout -->
 
 
-      <!-- Static Backdrop Modal de l'ajout -->
+      <!-- Static Backdrop Modal de contact -->
     @foreach($sieges as $siege)
         <div class="modal fade" id="staticBackdropEmailAgence-{{$siege->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-md modal-dialog-centered" role="document">
@@ -382,7 +382,7 @@
     <!-- Fin du modal de l'ajout -->
 
 
-         <!-- Static Backdrop Modal de l'ajout -->
+         <!-- Static Backdrop Modal de update -->
     @foreach($sieges as $siege)
         <div class="modal fade" id="staticBackdropTickerClient-{{$siege->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-md modal-dialog-centered" role="document">
