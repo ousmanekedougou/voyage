@@ -63,5 +63,6 @@ Route::prefix('/admin')->name('admin.')->group(function()
     Route::get('/profil/show/{slug}', [App\Http\Controllers\Admin\ProfilController::class,'show'])->name('profil.show'); 
     Route::put('/profil/update/{slug}', [App\Http\Controllers\Admin\ProfilController::class,'update'])->name('profil.update');
     Route::resource('/bagage', App\Http\Controllers\Admin\BagageController::class); 
-    Route::resource('/colis', App\Http\Controllers\Admin\ColiController::class); 
+    Route::resource('/colis', App\Http\Controllers\Admin\ColiController::class);
+    Route::resource('/contact',App\Http\Controllers\Admin\ContactController::class); 
 });

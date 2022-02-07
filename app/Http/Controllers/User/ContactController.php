@@ -47,6 +47,30 @@ class ContactController extends Controller
         Toastr::success('Votre inscription a bien ete enregistre', 'Newsleter', ["positionClass" => "toast-top-right"]);
         return back();
     }
+
+      public function edit(Request $request,$id)
+    {
+        // dd($request->all());
+        // $siege = Siege::where('id',$id)->first();
+        // Notification::route('mail',$request->email)
+        //         ->notify(new ContactSiegeEmail($siege->email,$request->name,$request->email,$request->sub,$request->sms));
+        $this->validate($request,[
+            'name' => 'required|string',
+            'email' => 'required|string|email|max:255',
+            'sub' => 'required|string',
+            'sms' => 'required|string',
+        ]);
+        Contact::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'subject' => $request->sub,
+            'msg' => $request->sms,
+            'status' => false,
+            'siege_id' => $id
+        ]);
+        Toastr::success('Votre message a ete envoyer', 'Message', ["positionClass" => "toast-top-right"]);
+        return back();
+    }
 }
 
 

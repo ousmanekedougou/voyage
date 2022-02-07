@@ -28,8 +28,7 @@
                                     <span key="t-contacts">Contacts</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="" key="t-user-grid">Contact Cart</a></li>
-                                    <li><a href="contacts-list.html" key="t-user-list">Contact list</a></li>
+                                    <li><a href="{{ route('admin.contact.index') }}" key="t-user-list">Liste contacts</a></li>
                                 </ul>
                             </li>
                         @endif
@@ -116,6 +115,16 @@
                                             <li><a href="{{route('admin.historique.show',historical()->siege_id)}}" key="t-products"> <i class="fa fa-clock"></i> Hiere et plus</a></li>
                                         @endif
                                         --}}
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                        <i class="bx bxs-user-detail"></i>
+                                        <span key="t-contacts">Contacts</span>
+                                    </a>
+                                    <ul class="sub-menu" aria-expanded="false">
+                                        <li><a href="" key="t-user-grid">Contact Cart</a></li>
+                                        <li><a href="contacts-list.html" key="t-user-list">Contact list</a></li>
                                     </ul>
                                 </li>
                             @endif
