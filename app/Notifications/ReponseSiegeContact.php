@@ -2,25 +2,23 @@
 
 namespace App\Notifications;
 
-use App\Models\User\Notify;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class Newsleter extends Notification
+class ReponseSiegeContact extends Notification
 {
     use Queueable;
-    public $notify; 
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Notify $notify)
+    public function __construct()
     {
-        $this->notify = $notify;
+        //
     }
 
     /**
@@ -42,7 +40,10 @@ class Newsleter extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->view('user.notification.new',['user' => $this->notify]);
+        return (new MailMessage)
+                    ->line('The introduction to the notification.')
+                    ->action('Notification Action', url('/'))
+                    ->line('Thank you for using our application!');
     }
 
     /**
@@ -58,5 +59,3 @@ class Newsleter extends Notification
         ];
     }
 }
-
-

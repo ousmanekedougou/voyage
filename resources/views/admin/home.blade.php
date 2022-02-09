@@ -156,7 +156,7 @@
                                             <hr>
                                         @endforeach
                                     @else
-                                    <p class="text-muted text-center">Vous n'aviez pas de bus pour cette aujourdhuit</p>
+                                    <p class="text-muted text-center">Vous n'aviez pas de bus pour aujourdhuit</p>
                                     @endif
                                 @endforeach
                             </div>

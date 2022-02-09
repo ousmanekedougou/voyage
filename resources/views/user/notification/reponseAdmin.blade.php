@@ -45,42 +45,39 @@
                                     <td class="container" width="600" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; display: block !important; max-width: 600px !important; clear: both !important; margin: 0 auto;" valign="top">
                                         <div class="content" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; max-width: 600px; display: block; margin: 0 auto; padding: 20px;">
                                             <table class="main" width="100%" cellpadding="0" cellspacing="0" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; border-radius: 7px; background-color: #fff; color: #495057; margin: 0; box-shadow: 0 0.75rem 1.5rem rgba(18,38,63,.03);" bgcolor="#fff">
-                                                <div class="agence_logo" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 16px; vertical-align: top; color: #fff; font-weight: 500; text-align: center; border-radius: 7px 7px 0 0; background-color: #556ee6; margin: 0; padding: 20px;">
+                                                @if($status == 1)
+                                                <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                    <div class="alert alert-warning" style="width:100%; font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 16px; vertical-align: top; color: #fff; font-weight: 500; text-align: center; border-radius: 7px 7px 0 0; background-color: #556ee6; margin: 0; padding: 0px;" align="center" bgcolor="#71b6f9" valign="top">
+                                                        <img src="{{$image}}" alt="" srcset="" style="width: 25%;height:auto;">
+                                                    </div>
+                                                </tr>
+                                                @elseif($status == 2)
+                                                <div class="agence_logo" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 16px; vertical-align: top; color: #fff; font-weight: 500; text-align: center; border-radius: 7px 7px 0 0; background-color: #556ee6; margin: 0; padding: 3px;">
                                                     <div class="alert agence_image" >
-                                                        <img src="{{ asset('admin/asstes/images/logo-light.png') }}" alt="" srcset="" >
+                                                        <img src="http://localhost:8000{{$image}}" alt="" srcset="" style="width: 50%;height:auto;">
                                                     </div>
                                                     <div class="alert agence_name" >
-                                                        <img src="{{ asset('admin/asstes/images/logo-light.png') }}" alt="" srcset="" >
+                                                        <h2 style="margin-bottom: -1px;">{{$agence}} </h2>
+                                                        <span style="width: 40%;">Siege de {{$siege}}</span>
                                                     </div>
                                                 </div>
+                                                @endif
                                                 <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                                     <td class="content-wrap" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 20px;" valign="top">
                                                         <table width="100%" cellpadding="0" cellspacing="0" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                                             <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                                                 <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
-                                                                    Salut chere client,
+                                                                    Bonjour cher(e) {{$name}},
                                                                 </td>
                                                             </tr>
                                                             <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                                                 <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
-                                                                    Nous avons encord le plaisire de vous informer que vous avez une nouvelle compagnie de voyage a votre service.
-                                                                    A locurence {{$user->name}} qui se trouve a {{$user->adresse}} 
+                                                                   {{$msg}} 
                                                                 </td>
                                                             </tr>
                                                             <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                                                 <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
-                                                                    Vous pouvez payer votre ticker en ligne en cliquant sur le bouton ci-dessous
-                                                                </td>
-                                                            </tr>
-                                                            <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
-                                                                <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
-                                                                    Merci d'avoir choisi Tocki.
-                                                                </td>
-                                                            </tr>
-                                                            <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
-                                                                <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
-                                                                    <b>Skote</b>
-                                                                    <p>Support Team</p>
+                                                                    Merci de nous avoir contacter.
                                                                 </td>
                                                             </tr>
 

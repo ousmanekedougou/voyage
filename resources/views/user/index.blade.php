@@ -249,11 +249,12 @@
 
                 <div class="col-lg-6 ms-auto">
                     <div class="row">
+                        <h4>Toutes les options de voyage sur une seule plateforme</h4>
                         <div class="col-md-12 me-md-0">
                             <img src="{{('user/assets/images/agence.webp')}}" alt="" class="img-fluid mx-auto d-block">
                         </div>
                         <div class="col-md-12">
-                            <h4>Toutes les options de voyage sur une seule plateforme</h4>
+                            
                             <p class="text-muted">
                                 Plus de 1 000 partenaires de transport pour vos trajets en train, bus, avion, ferry et vos transferts aéroportuaires pour profiter pleinement du voyage.
                             </p>
@@ -418,12 +419,5 @@
         <!-- end container -->
     </section>
     <!-- Roadmap end -->
-
-    
-
-    
-
-  
-
            
 @endsection

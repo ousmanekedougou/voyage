@@ -2,25 +2,29 @@
 
 namespace App\Notifications;
 
-use App\Models\User\Notify;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Auth;
 
-class Newsleter extends Notification
+class ReponseAdminContact extends Notification
 {
     use Queueable;
-    public $notify; 
+    public $name;
+    public $msg;
+    public $image;
 
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Notify $notify)
+    public function __construct($name , $msg , $image)
     {
-        $this->notify = $notify;
+        $this->name = $name;
+        $this->msg = $msg;
+        $this->image = $image;
     }
 
     /**
@@ -42,7 +46,25 @@ class Newsleter extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)->view('user.notification.new',['user' => $this->notify]);
+        $status = ''; 
+        $siege = '';
+        $agence = '';
+        if (Auth::user()->is_admin == 0 || Auth::user()->is_admin == 1) {
+            $status = 1;
+        }elseif (Auth::user()->is_admin == 3) {
+            $status = 2;
+            $siege = Auth::user()->siege->name;
+            $agence = Auth::user()->agence_name;
+        }
+        return (new MailMessage)->view('user.notification.reponseAdmin',
+        [
+            'name' => $this->name, 
+            'msg' => $this->msg, 
+            'image' => $this->image, 
+            'status' => $status,
+            'siege' => $siege,
+            'agence' => $agence
+        ]);
     }
 
     /**
@@ -58,5 +80,4 @@ class Newsleter extends Notification
         ];
     }
 }
-
 

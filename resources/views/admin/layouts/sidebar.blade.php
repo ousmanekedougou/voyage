@@ -62,11 +62,55 @@
 
                          
                             @if(Auth::user()->role == 1)
-                                <li><a href="{{ route('admin.itineraire.index') }}" key="t-products"> <i class="fa fa-road"></i>Vos Itineraires</a></li>
-                                <li><a href="{{ route('admin.depart.index') }}" key="t-products"> <i class="fa fa-clock"></i> Vos Dates</a></li>
-                                <li><a href="{{ route('admin.bus.index') }}" key="t-products"><i class="fa fa-bus"></i>Vos Bus</a></li>
+                                <li>
+                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                        <i class="bx bxs-user-detail"></i>
+                                        <span key="t-contacts">Contacts</span>
+                                    </a>
+                                    <ul class="sub-menu" aria-expanded="false">
+                                        <li><a href="{{ route('admin.contact.index') }}" key="t-user-list">Vos Contacts</a></li>
+                                    </ul>
+                                </li>
+                                <hr>
+                                <li>
+                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                        <i class="fa fa-road"></i>
+                                        <span key="t-contacts">Itineraires</span>
+                                    </a>
+                                    <ul class="sub-menu" aria-expanded="false">
+                                        <li><a href="{{ route('admin.itineraire.index') }}" key="t-products"> <i class="fa fa-road"></i>Vos Itineraires</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                        <i class="fa fa-clock"></i>
+                                        <span key="t-contacts">Dates</span>
+                                    </a>
+                                    <ul class="sub-menu" aria-expanded="false">
+                                        <li><a href="{{ route('admin.depart.index') }}" key="t-products"> <i class="fa fa-clock"></i> Vos Dates</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                        <i class="fa fa-bus"></i>
+                                        <span key="t-contacts">Buses</span>
+                                    </a>
+                                    <ul class="sub-menu" aria-expanded="false">
+                                        <li><a href="{{ route('admin.bus.index') }}" key="t-products"><i class="fa fa-bus"></i>Vos Buses</a></li>
+                                    </ul>
+                                </li>
+
+                                 <li>
+                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                        <i class="fa fa-user-plus"></i>
+                                        <span key="t-contacts">Clients</span>
+                                    </a>
+                                    <ul class="sub-menu" aria-expanded="false">
+                                        <li><a href="#" data-bs-toggle="modal" data-bs-target="#FooterstaticBackdrop" key="t-products" class=""> <i class="fa fa-user-plus"></i> Ajouter un client</a></li>
+                                    </ul>
+                                </li>
+
                                 
-                                <li><a data-bs-toggle="modal" data-bs-target="#FooterstaticBackdrop" key="t-products" class="btn btn-primary"> <i class="fa fa-user-plus"></i> Ajouter un client</a></li>
                                 <li class="menu-title" key="t-menu"></li>
                                 <li class="menu-title" key="t-menu"> <i class="fa fa-user-check"></i> Liste de vos clients</li>
                                 @foreach(itineraire_all() as $itineraire)
@@ -104,6 +148,7 @@
                                         </ul>
                                     </li>
                                 @endforeach
+                                <hr>
                                 <li>
                                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                                         <i class="fa fa-folder-open"></i>
@@ -117,16 +162,7 @@
                                         --}}
                                     </ul>
                                 </li>
-                                <li>
-                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                        <i class="bx bxs-user-detail"></i>
-                                        <span key="t-contacts">Contacts</span>
-                                    </a>
-                                    <ul class="sub-menu" aria-expanded="false">
-                                        <li><a href="" key="t-user-grid">Contact Cart</a></li>
-                                        <li><a href="contacts-list.html" key="t-user-list">Contact list</a></li>
-                                    </ul>
-                                </li>
+                                
                             @endif
                             @if(Auth::user()->role == 2 || Auth::user()->role == 3)
                             <li>
