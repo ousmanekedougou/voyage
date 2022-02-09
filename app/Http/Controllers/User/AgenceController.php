@@ -97,7 +97,7 @@ class AgenceController extends Controller
         ]);
         $q = request()->input('q');
         if ($q != null ) {
-            $agence = User::where('name_agence','like',"%$q%")->where('is_admin',2)->where('is_active',1)->first();
+            $agence = User::where('name_agence',$q)->where('is_admin',2)->where('is_active',1)->first();
             if ($agence != null) {
                 return redirect()->route('agence.show',$agence->slug);
             }else {

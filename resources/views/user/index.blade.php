@@ -249,9 +249,9 @@
 
                 <div class="col-lg-6 ms-auto">
                     <div class="row">
-                        <h4>Toutes les options de voyage sur une seule plateforme</h4>
+                        <h4>Ravivez votre passion du voyage</h4>
                         <div class="col-md-12 me-md-0">
-                            <img src="{{('user/assets/images/agence.webp')}}" alt="" class="img-fluid mx-auto d-block">
+                            <img src="{{('user/assets/images/dowload/tiker-photo.png')}}" alt="" class="img-fluid mx-auto d-block" style="width: 60%;height:auto;">
                         </div>
                         <div class="col-md-12">
                             
