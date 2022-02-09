@@ -53,6 +53,7 @@
                                                     <h5 class="mb-0">{{$sieges->count()}}</h5>
                                                 </div>
                                             </div>
+                                            {{--
                                             <div class="col-4">
                                                 <div>
                                                     <p class="text-muted text-truncate mb-2">Clients</p>
@@ -60,6 +61,7 @@
                                                     
                                                 </div>
                                             </div>
+                                            --}}
                                         </div>
                                     </div>
                                 </div>
