@@ -59,7 +59,8 @@
                                     </div>
                                 </div>
     
-                                <div class="col-lg-4 d-none d-lg-block">
+                                <div class="col-lg-4 d-lg-block">
+                                    <!-- d-none -->
                                     <div class="media">
                                         <div class="media-body">
                                             <p class="text-muted fw-medium text-center">Montant Total du jour</p>

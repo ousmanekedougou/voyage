@@ -170,7 +170,7 @@ class AgenceController extends Controller
                 $agent->is_active = DESACTIVEAGENCE;
                 $agent->save();
             }
-             Toastr::error('Votre agence a bien ete desactiver', 'Desactivation', ["positionClass" => "toast-top-right"]);
+             Toastr::success('Votre agence a bien ete desactiver', 'Desactivation', ["positionClass" => "toast-top-right"]);
             return back();
         }else{
             $update_agence->is_active = ACTIVEAGENCE;

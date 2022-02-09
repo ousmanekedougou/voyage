@@ -58,7 +58,7 @@
                                                     <div class="avatar-group">
                                                         <div class="text-center">
                                                             <a href="{{ route('admin.agent.show',$siege->id) }}" class="d-inline-block">
-                                                                <img src="{{asset('admin/assets/images/users/avatar-2.jpg')}}" alt=""
+                                                                <img src="{{asset('admin/assets/images/users/profil.jpg')}}" alt=""
                                                                     class="rounded-circle avatar-xs">
                                                             </a>
                                                         </div>

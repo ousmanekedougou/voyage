@@ -29,6 +29,7 @@
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
                                     <li><a href="{{ route('admin.contact.index') }}" key="t-user-list">Liste contacts</a></li>
+                                    <li><a href="{{ route('admin.contact.create') }}" key="t-user-list">News</a></li>
                                 </ul>
                             </li>
                         @endif
