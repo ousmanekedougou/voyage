@@ -14,6 +14,7 @@ use App\Models\Admin\Historical;
 use App\Models\Admin\Itineraire;
 use App\Models\Admin\Siege;
 use App\Models\User;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -92,10 +93,11 @@ class HomeController extends Controller
             DateDepart::where('itineraire_id',$itineraire->id)->where('depart_at','<',Carbon::today())->delete();
         }
 
-
-        if (Auth::user()->is_admin == 3 && Auth::user()->role == 1) {
+        if ($this->middleware(['IsAgent']) && Auth::user()->role == 1) {
             $user = User::where('id',Auth::user()->id)->first() ; 
-            return view('admin.home',compact('itineraires','user'));
+            $clientCount = Client::where('siege_id',Auth::user()->siege_id)->where('registered_at',carbon_today())->get();
+            $busCount = Bus::where('siege_id',Auth::user()->siege_id)->get();
+            return view('admin.homeAgent.index',compact('itineraires','user','clientCount','busCount'));
         }elseif (Auth::user()->is_admin == 2) {
             $sieges = Siege::where('user_id',Auth::user()->id)->orderBy('id','DESC')->get(); 
             return view('admin.siege.index',compact('sieges'));
@@ -108,8 +110,11 @@ class HomeController extends Controller
         }elseif (Auth::user()->is_admin == 3 && Auth::user()->role == 3) {
             $clients = Colie::paginate(15);
             return view('admin.coli.index',compact('clients'));
-        }
+        }else {
+            Toastr::error('Vous n\'aviez pas le droit d\'acces sur cette page', 'Resultat Recherche', ["positionClass" => "toast-top-right"]);
+            return back();
             // return view('admin.home',compact('itineraires','user'));
+        }
     }
     
 }

@@ -109,10 +109,8 @@
                                         <li><a href="#" data-bs-toggle="modal" data-bs-target="#FooterstaticBackdrop" key="t-products" class=""> <i class="fa fa-user-plus"></i> Ajouter un client</a></li>
                                     </ul>
                                 </li>
-
-                                
-                                <li class="menu-title" key="t-menu"></li>
-                                <li class="menu-title" key="t-menu"> <i class="fa fa-user-check"></i> Liste de vos clients</li>
+                                <hr>
+                                <li class="menu-title" key="t-menu"> <i class="fa fa-user-check"></i> Listes de vos clients</li>
                                 @foreach(itineraire_all() as $itineraire)
                                     <li>
                                         <a href="javascript: void(0);" class="has-arrow waves-effect">
