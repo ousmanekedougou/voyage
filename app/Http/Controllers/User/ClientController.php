@@ -99,7 +99,7 @@ class ClientController extends Controller
                     Toastr::error('Votre numero d\'identite est invalide', 'Error CNI', ["positionClass" => "toast-top-right"]);
                     return back();
                 }
-                
+
                 $add_client = new Client();
                 $add_client->name = $request->name;
                 $add_client->email = $request->email;
@@ -114,6 +114,7 @@ class ClientController extends Controller
                 $add_client->confirmation_token = str_replace('/','',Hash::make(Str::random(40)));
                 $add_client->agence = $buse->user->agence_name;
                 $add_client->agence_logo = $buse->user->image_agence;
+                $add_client->reference = reference();
                 $add_client->save();
                 
                 Notification::route('mail',$buse->siege->email)
@@ -140,7 +141,7 @@ class ClientController extends Controller
     {
         $this->validate($request,[
             'phone' => 'required|string|max:255',
-            'cni' => 'required|numeric',
+            'ref' => 'required|string',
         ]);
         $siege = Siege::where('id',$id)->first();
         $phoneFinale = '';
@@ -154,19 +155,18 @@ class ClientController extends Controller
             return back();
         }
 
-        $cni_final = '';
-        $r_cni = intval($request->cni);
+        $ref_final = '';
+        $ref = $request->ref;
 
-        if (strlen($r_cni) == 13) {
-            $cni_final = $r_cni;
+        if (strlen($ref) == 5) {
+            $ref_final = $ref;
         }else{
-            Toastr::error('Votre numero d\'identite est invalide', 'Error CNI', ["positionClass" => "toast-top-right"]);
+            Toastr::error('Votre reference est invalide', 'Error Reference', ["positionClass" => "toast-top-right"]);
             return back();
         }
 
         $client = Client::where('phone',$phoneFinale)
-            ->where('cni',$$cni_final)
-            ->where('siege_id',$id)
+            ->where('reference',$ref_final)
             ->where('siege_id',$id)
             ->first();
         if ($client) {

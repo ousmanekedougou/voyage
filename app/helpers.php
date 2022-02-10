@@ -5,6 +5,7 @@ use App\Models\Admin\Historical;
 use App\Models\Admin\Itineraire;
 use App\Models\Admin\Part;
 use App\Models\Admin\Siege;
+use App\Models\User\Client;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -90,6 +91,20 @@ if (! function_exists('historical')) {
     function historical(){
         $historical = Historical::where('siege_id',Auth::user()->siege->id)->where('registered_at','<',Carbon::today()->format('Y-m-d'))->first();
         return $historical;
+    }
+}
+
+if (! function_exists('reference')) {
+    function reference(){
+        $ref = random_int(0000, 9999);
+        $ref_finale = '';
+        $client_ref = Client::where('reference',$ref)->first();
+        if ($client_ref) {
+            $ref_finale = random_int(0000, 9999);
+        }else {
+            $ref_finale = $ref;
+        }
+        return $ref_finale;
     }
 }
 

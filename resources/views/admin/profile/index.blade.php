@@ -104,7 +104,7 @@
                                                 <th scope="row">E-mail :</th>
                                                 <td>{{$admin->email}}</td>
                                             </tr>
-                                            @if(Auth::user()->is_Agent)
+                                            @if($admin->is_admin == 3 )
                                             <tr>
                                                 <th scope="row">Siege :</th>
                                                 <td>{{ $admin->siege->name }}  ({{ $admin->siege->adress }})</td>
@@ -214,8 +214,6 @@
                             </div>
                         </div>
 
-
-
                              <!-- Les premiers informations -->
                         <div class="card">
                             <div class="card-body">
@@ -302,6 +300,38 @@
                             </div>
                         </div>
                         <!-- Fin des seconds information -->
+
+
+                         @if($admin->is_admin == 3 && $admin->role == 1)
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title mb-4">Configuration de vos sms</h4>
+                                    <div class="table-responsive">
+                                        <table class="table table-nowrap mb-0">
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">clientId :   </th>
+                                                    <td>{{$admin->name}}</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">clientSecret :</th>
+                                                    <td>{{$admin->phone}}</td>
+                                                    <td></td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Status de rappelle sms :</th>
+                                                    <td>{{$admin->email}}</td>
+                                                    <td>{{$admin->email}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        <!-- end card -->
+                        @endif
                     </div>
                 </div>
                 <!-- end row -->

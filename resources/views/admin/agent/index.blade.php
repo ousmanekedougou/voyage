@@ -26,123 +26,124 @@
                     </div>
                     <!-- end page title -->
 
-                            <div class="row">
-                                <h3 class="btn btn-primary btn-block">Les agents du siege de {{ $siege->name }}</h3>
-                                @foreach($siege->users as $agent)
-                                    <div class="col-xl-4 col-sm-6">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-lg-4">
-                                                        <div class="text-lg-center">
-                                                            <div
-                                                                class="avatar-sm me-3 mx-lg-auto mb-3 mt-1 float-start float-lg-none">
-                                                                <span
-                                                                    class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-16">
-                                                                    <img src="{{Storage::url($agent->logo)}}" alt="" style="width:100%;border-radius:100%;">
-                                                                </span>
-                                                            </div>
-                                                            <h5 class="mb-1 font-size-10">{{ $agent->name }}</h5>
-                                                        </div>
+                    <div class="row">
+                        <h3 class="btn btn-primary btn-block">Les agents du siege de {{ $siege->name }}</h3>
+                        @foreach($siege->users as $agent)
+                            <div class="col-xl-4 col-sm-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="text-lg-center">
+                                                    <div
+                                                        class="avatar-sm me-3 mx-lg-auto mb-3 mt-1 float-start float-lg-none">
+                                                        <span
+                                                            class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-16">
+                                                            <img src="{{Storage::url($agent->logo)}}" alt="" style="width:100%;border-radius:100%;">
+                                                        </span>
                                                     </div>
-
-                                                    <div class="col-lg-8">
-                                                        <div>
-                                                            <h6 class="text-truncate "><i class="fa fa-mobile"> {{$agent->phone}}</i></h6>
-                                                            <p class="d-flex"><i class="fa fa-envelope"> {{$agent->email}}</i></p>
-                                                            <p class=" d-flex">
-                                                                  <span class="badge bg-warning">
-                                                                @if($agent->role == 1)
-                                                                    Gestion Clients
-                                                                @elseif($agent->role == 2)
-                                                                    Gestion Bagages
-                                                                @elseif($agent->role == 3)
-                                                                    Gestion Colis
-                                                                @endif
-                                                            </span>
-                                                            </p>
-                                                            <ul class="list-inline mb-0">
-                                                                <li class="list-inline-item me-3">
-                                                                    @if($agent->is_active == 1)
-                                                                    <span class="badge bg-success"><i class="bx bxs-check-circle me-1"></i>
-                                                                            Active
-                                                                    </span>
-                                                                    @else
-                                                                    <span class="badge bg-danger"><i class="bx bxs-x-square me-1"></i>
-                                                                        Desactive
-                                                                    </span>
-                                                                    @endif
-                                                                    
-                                                                </li>
-                                                                <li class="list-inline-item me-3">
-                                                                    <!-- <a href=""><i class="bx bx-block me-1"></i></a> -->
-                                                                    <div class="form-check form-switch mb-3" dir="ltr">
-                                                                        <input class="form-check-input" type="checkbox"
-                                                                            id="SwitchCheckSizesm" @if($agent->is_active == 1) checked @endif  data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$agent->id}}">
-                                                                        <label class="form-check-label" for="SwitchCheckSizesm"></label>
-                                                                    </div>
-                                                                </li>
-                                                                <li class="list-inline-item me-3">
-                                                                    <a href="" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-danger" data-bs-target="#subscribeModalagence-{{ $agent->id }}"><i class="bx bx-trash me-1 text-danger"></i></a>
-                                                                    <a href="" style="margin-left: 8px;" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-warning" data-bs-target="#subscribeModalRole-{{ $agent->id }}"><i class="fa fa-pencil-ruler me-1 text-warning"></i></a>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
+                                                    <h5 class="mb-1 font-size-10">{{ $agent->name }}</h5>
                                                 </div>
+                                            </div>
 
+                                            <div class="col-lg-8">
+                                                <div>
+                                                    <h6 class="text-truncate "><i class="fa fa-mobile"> {{$agent->phone}}</i></h6>
+                                                    <p class="d-flex"><i class="fa fa-envelope"> {{$agent->email}}</i></p>
+                                                    <p class=" d-flex">
+                                                            <span class="badge bg-warning">
+                                                        @if($agent->role == 1)
+                                                            Gestion Clients
+                                                        @elseif($agent->role == 2)
+                                                            Gestion Bagages
+                                                        @elseif($agent->role == 3)
+                                                            Gestion Colis
+                                                        @endif
+                                                    </span>
+                                                    </p>
+                                                    <ul class="list-inline mb-0">
+                                                        <li class="list-inline-item me-3">
+                                                            @if($agent->is_active == 1)
+                                                            <span class="badge bg-success"><i class="bx bxs-check-circle me-1"></i>
+                                                                    Active
+                                                            </span>
+                                                            @else
+                                                            <span class="badge bg-danger"><i class="bx bxs-x-square me-1"></i>
+                                                                Desactive
+                                                            </span>
+                                                            @endif
+                                                            
+                                                        </li>
+                                                        <li class="list-inline-item me-3">
+                                                            <!-- <a href=""><i class="bx bx-block me-1"></i></a> -->
+                                                            <div class="form-check form-switch mb-3" dir="ltr">
+                                                                <input class="form-check-input" type="checkbox"
+                                                                    id="SwitchCheckSizesm" @if($agent->is_active == 1) checked @endif  data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$agent->id}}">
+                                                                <label class="form-check-label" for="SwitchCheckSizesm"></label>
+                                                            </div>
+                                                        </li>
+                                                        <li class="list-inline-item me-3">
+                                                            <a href="" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-danger" data-bs-target="#subscribeModalagence-{{ $agent->id }}"><i class="bx bx-trash me-1 text-danger"></i></a>
+                                                            <a href="" style="margin-left: 8px;" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-warning" data-bs-target="#subscribeModalRole-{{ $agent->id }}"><i class="fa fa-pencil-ruler me-1 text-warning"></i></a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Modal pour la desactivation de l'agence -->
+                                <!-- Static Backdrop Modal -->
+                                <div class="modal fade modal-sm modal-center" id="staticBackdrop-{{$agent->id}}" data-bs-backdrop="static"
+                                    data-bs-keyboard="false" tabindex="-1" role="dialog"
+                                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="staticBackdropLabel">
+                                                    @if($agent->is_active == 1)
+                                                        <span class="text-danger">Desactivation d'agent</span>
+                                                    @else
+                                                        <span class="text-success">Activation d'agent</span>
+                                                    @endif
+                                                </h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                @if($agent->is_active == 1)
+                                                    <p class="text-danger">Etse vous sure de desactiver {{ $agent->name }}</p>
+                                                @else
+                                                    <p class="text-primary">Etse vous sure d'activer {{ $agent->name }}</p>
+                                                @endif
+                                            </div>
+                                            <div class="modal-footer">
+                                                <form action="{{ route('admin.agent.update',$agent->id) }}" method="post">
+                                                    {{csrf_field()}}
+                                                    {{method_field('PUT')}}
+                                                        <input type="hidden" name="is_active" value="{{$agent->is_active}}">
+
+                                                    <button type="reset" class="btn btn-light"
+                                                        data-bs-dismiss="modal">Ferner</button>
+                                                    <button type="submit"
+                                                    @if($agent->is_active == 1)
+                                                        class="btn btn-danger">Desactiver
+                                                    @else
+                                                        class="btn btn-success">Activer
+                                                    @endif
+                                                        </button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
-
-                                    <!-- Modal pour la desactivation de l'agence -->
-                                        <!-- Static Backdrop Modal -->
-                                        <div class="modal fade modal-sm modal-center" id="staticBackdrop-{{$agent->id}}" data-bs-backdrop="static"
-                                            data-bs-keyboard="false" tabindex="-1" role="dialog"
-                                            aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="staticBackdropLabel">
-                                                            @if($agent->is_active == 1)
-                                                                <span class="text-danger">Desactivation d'agent</span>
-                                                            @else
-                                                                <span class="text-success">Activation d'agent</span>
-                                                            @endif
-                                                        </h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        @if($agent->is_active == 1)
-                                                            <p class="text-danger">Etse vous sure de desactiver {{ $agent->name }}</p>
-                                                        @else
-                                                            <p class="text-primary">Etse vous sure d'activer {{ $agent->name }}</p>
-                                                        @endif
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <form action="{{ route('admin.agent.update',$agent->id) }}" method="post">
-                                                            {{csrf_field()}}
-                                                            {{method_field('PUT')}}
-                                                                <input type="hidden" name="is_active" value="{{$agent->is_active}}">
-
-                                                            <button type="reset" class="btn btn-light"
-                                                                data-bs-dismiss="modal">Ferner</button>
-                                                            <button type="submit"
-                                                            @if($agent->is_active == 1)
-                                                                class="btn btn-danger">Desactiver
-                                                            @else
-                                                                class="btn btn-success">Activer
-                                                            @endif
-                                                                </button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    <!-- Fin du modal pour la desactivation de l'agence -->
-                                @endforeach
-                            </div>
+                                </div>
+                            <!-- Fin du modal pour la desactivation de l'agence -->
+                        @endforeach
+                    </div>
+                    
                     <!-- end row -->
                     <div class="row">
                         <div class="col-12">

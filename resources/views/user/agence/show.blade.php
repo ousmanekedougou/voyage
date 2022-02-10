@@ -60,7 +60,7 @@
                                                     <a href="#" class="badge bg-primary p-1" data-bs-toggle="modal" data-bs-target="#staticBackdropEmailAgence-{{$siege->id}}"> <i class="fa fa-address-card"></i> Contacter</a>
                                             </li>
                                             <li class="list-inline-item me-3">
-                                                <a href="#" class="badge bg-info p-1" data-bs-toggle="modal" data-bs-target="#staticBackdropTickerClient-{{$siege->id}}"> <i class="fa fa-edit"></i> Ticker</a>
+                                                <a href="#" class="badge bg-info p-1" data-bs-toggle="modal" data-bs-target="#staticBackdropTickerClient-{{$siege->id}}"> <i class="fa fa-ticket-alt"></i> Modifier</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -382,7 +382,7 @@
     <!-- Fin du modal de l'ajout -->
 
 
-         <!-- Static Backdrop Modal de update -->
+         <!-- Static Backdrop Modal de update inscription -->
     @foreach($sieges as $siege)
         <div class="modal fade" id="staticBackdropTickerClient-{{$siege->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-md modal-dialog-centered" role="document">
@@ -416,11 +416,11 @@
                                             </div>
 
                                             <div class="mb-3">
-                                                <label class="form-label">Votre numero de carte d'identite nationale</label>
+                                                <label class="form-label">Votre numero reference</label>
                                                 <div>
-                                                    <input data-parsley-type="number" type="number" id="cni" class="form-control @error('cni') is-invalid @enderror" name="cni" value="{{ old('cni') }}" autocomplete="cni"
-                                                        required placeholder="Numero de votre cni" />
-                                                        @error('cni')
+                                                    <input data-parsley-type="number" type="number" id="ref" class="form-control @error('ref') is-invalid @enderror" name="ref" value="{{ old('ref') }}" autocomplete="ref"
+                                                        required placeholder="Numero de votre reference" />
+                                                        @error('ref')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
                                                             </span>

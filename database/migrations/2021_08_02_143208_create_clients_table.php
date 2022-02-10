@@ -32,6 +32,7 @@ class CreateClientsTable extends Migration
             $table->string('agence')->nullable();
             $table->string('agence_logo')->nullable();
             $table->integer('siege_id');
+            $table->integer('reference')->unique();
             $table->timestamps();
         });
     }

@@ -179,21 +179,19 @@ class ClientController extends Controller
                         return back();
                     }
 
-                    //  $cni_final = '';
+                     $cni_final = '';
 
-                    // if (strlen($request->cni == 13)) {
-                    //     $cni_final = $request->cni;
-                    // }else{
-                    //     return back()->with('error','votre numero de piece est invalide');
-                    // }
-
-                    // dd($phoneFinale);
+                    if (strlen($request->cni) == 13) {
+                        $cni_final = $request->cni;
+                    }else{
+                        return back()->with('error','votre numero de piece est invalide');
+                    }
                     
                     $add_client = new Client();
                     $add_client->name = $request->name;
                     $add_client->email = $request->email;
                     $add_client->phone = $phoneFinale;
-                    $add_client->cni = $request->cni;
+                    $add_client->cni = $cni_final;
                     $add_client->ville_id = $request->ville;
                     $add_client->bus_id = $buse->id;
                     $add_client->position = $buse->inscrit;
@@ -203,6 +201,7 @@ class ClientController extends Controller
                     $add_client->agence = Auth::user()->agence_name;
                     $add_client->agence_logo = Auth::user()->image_agence;
                     $add_client->siege_id = Auth::user()->siege_id;
+                    $add_client->reference = reference();
                     $add_client->save();
                     // $add_client->notify(new RegisteredClient());
                     Toastr::success('Votre client a ete bien ete ajoute', 'Ajout Client', ["positionClass" => "toast-top-right"]);
