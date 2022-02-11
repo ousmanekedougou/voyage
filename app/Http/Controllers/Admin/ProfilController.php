@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Siegemsg;
 use App\Models\User;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
@@ -55,7 +56,9 @@ class ProfilController extends Controller
     public function show($slug)
     {
         $admin = User::where('slug',$slug)->first();
-        return view('admin.profile.index',compact('admin'));
+        $siege_sms = $admin->siege->id;
+        $sms = Siegemsg::where('siege_id',$siege_sms)->first();
+        return view('admin.profile.index',compact('admin','sms'));
     }
 
     /**
@@ -153,6 +156,58 @@ class ProfilController extends Controller
                 return back();
            }
     }
+
+    public function sendApi(Request $request , $id){
+
+        if ($request->status == 1) {
+            $this->validate($request,[
+                'clientId' => 'required|string',
+                'clientSecret' => 'required|string',
+            ]);
+            $add_sms = new Siegemsg();
+            $add_sms->create([
+                'siege_id' => Auth::user()->siege->id,
+                'clientId' => $request->clientId,
+                'clientSecret' => $request->clientSecret,
+                'status' => true
+            ]);
+            Toastr::success('Vos clets de rapelle sms ont ete ajouter', 'Ajout Clets API Sms', ["positionClass" => "toast-top-right"]);
+            return back();
+
+        }elseif ($request->status == 2) {
+        $sms_update = Siegemsg::where('id',$id)->where('siege_id',Auth::user()->siege->id)->first();
+            $sms_update->update([
+                'clientId' => $request->clientId,
+                'clientSecret' => $request->clientSecret,
+                'status' => $sms_update->status
+            ]);
+            Toastr::success('Vos clets de rapelle sms ont ete modifier', 'Modifier Clets API Sms', ["positionClass" => "toast-top-right"]);
+            return back();
+        }
+    }
+
+    public function sendSms(Request $request , $id){
+        define('DESACTIVESMS',0);
+        define('ACTIVESMS',1);
+        $sms_update = Siegemsg::where('id',$id)->where('siege_id',Auth::user()->siege->id)->first();
+
+        if ($request->status == 1) {
+            $sms_update->update([
+                'status' => DESACTIVESMS
+            ]);
+
+        }else {
+            $sms_update->update([
+                'status' => ACTIVESMS
+            ]);
+        }
+        Toastr::success('Votre status de rapelle sms a ete modifier', 'Modifier Sms Message', ["positionClass" => "toast-top-right"]);
+        return back();
+    }
+
+
+    
+    
 
     /**
      * Remove the specified resource from storage.

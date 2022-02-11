@@ -62,6 +62,8 @@ Route::prefix('/admin')->name('admin.')->group(function()
     Route::get('/client/ticker/{id}', [App\Http\Controllers\Admin\ClientController::class, 'ticker'])->name('ticker');
     Route::get('/profil/show/{slug}', [App\Http\Controllers\Admin\ProfilController::class,'show'])->name('profil.show'); 
     Route::put('/profil/update/{slug}', [App\Http\Controllers\Admin\ProfilController::class,'update'])->name('profil.update');
+    Route::put('/profil/sendSms/{id}', [App\Http\Controllers\Admin\ProfilController::class,'sendSms'])->name('profil.sendSms');
+    Route::put('/profil/sendApi/{id}', [App\Http\Controllers\Admin\ProfilController::class,'sendApi'])->name('profil.sendApi');
     Route::resource('/bagage', App\Http\Controllers\Admin\BagageController::class); 
     Route::resource('/colis', App\Http\Controllers\Admin\ColiController::class);
     Route::resource('/contact',App\Http\Controllers\Admin\ContactController::class); 

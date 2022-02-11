@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSiegeSmsTable extends Migration
+class CreateSiegemsgsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateSiegeSmsTable extends Migration
      */
     public function up()
     {
-        Schema::create('siege_sms', function (Blueprint $table) {
+        Schema::create('siegemsgs', function (Blueprint $table) {
             $table->id();
             $table->integer('siege_id');
             $table->string('clientId')->unique();
@@ -30,6 +30,6 @@ class CreateSiegeSmsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('siege_sms');
+        Schema::dropIfExists('siegemsgs');
     }
 }

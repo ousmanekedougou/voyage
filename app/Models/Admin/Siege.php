@@ -2,7 +2,7 @@
 
 namespace App\Models\Admin;
 use App\Models\Admin\Agent;
-use App\Models\Admin\SiegeSms;
+use App\Models\Admin\Siegemsg;
 use App\Models\Admin\Bus;
 use App\Models\Admin\Itineraire;
 use App\Models\User;
@@ -54,7 +54,7 @@ class Siege extends Model
         return $this->hasMany(Client::class);
     }
 
-    public function siege_sms(){
-        return $this->belongsTo(SiegeSms::class);
+    public function siegemsg(){
+        return $this->belongsTo(Siegemsg::class);
     }
 }
