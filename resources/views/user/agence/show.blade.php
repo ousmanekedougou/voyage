@@ -8,7 +8,7 @@
 
 @section('main-content')
 
-   <!-- hero section start -->
+    <!-- hero section start -->
     <section class="section hero-section bg-ico-hero"  id="home">
         <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
@@ -60,7 +60,7 @@
                                                     <a href="#" class="badge bg-primary p-1" data-bs-toggle="modal" data-bs-target="#staticBackdropEmailAgence-{{$siege->id}}"> <i class="fa fa-address-card"></i> Contacter</a>
                                             </li>
                                             <li class="list-inline-item me-3">
-                                                <a href="#" class="badge bg-info p-1" data-bs-toggle="modal" data-bs-target="#staticBackdropTickerClient-{{$siege->id}}"> <i class="fa fa-ticket-alt"></i> Modifier</a>
+                                                <a href="#" class="badge bg-info p-1" data-bs-toggle="modal" data-bs-target="#staticBackdropTickerClient-{{$siege->id}}"><i class="fa fa-ticket-alt"></i> Ticker</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -76,7 +76,7 @@
         <!-- end container -->
     </section>
     <!-- currency price section end -->
-{{--
+    {{--
     <!-- about section start -->
     <section class="section" id="agence">
          <!-- <div class="bg-overlay bg-primary"></div> -->
@@ -144,7 +144,7 @@
         </div>
     </section>
     <!-- about section end -->
---}}
+    --}}
     <!-- Static Backdrop Modal de l'ajout -->
     @foreach($sieges as $siege)
         <div class="modal fade" id="staticBackdrop-{{$siege->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -382,7 +382,7 @@
     <!-- Fin du modal de l'ajout -->
 
 
-         <!-- Static Backdrop Modal de update inscription -->
+    <!-- Static Backdrop Modal de update inscription -->
     @foreach($sieges as $siege)
         <div class="modal fade" id="staticBackdropTickerClient-{{$siege->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-md modal-dialog-centered" role="document">
@@ -445,7 +445,6 @@
         </div>
     @endforeach
     <!-- Fin du modal de l'ajout -->
-
 @endsection
 
 @section('footerSection')

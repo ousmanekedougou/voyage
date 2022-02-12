@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Notification;
 class AgenceController extends Controller
 {
      public function index(){
-        $agences = User::where('is_admin',2)->where('is_active',1)->orderBy('id','ASC')->paginate(10);
+        $agences = User::where('is_admin',2)->where('is_active',1)->orderBy('id','ASC')->paginate(12);
         $agenceAll = User::where('is_admin',2)->where('is_active',1)->orderBy('id','ASC')->get();
         $agenceCount = $agenceAll->count(); 
         return view('user.agence.index',compact('agences','agenceCount'));

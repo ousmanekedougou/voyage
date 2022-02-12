@@ -75,12 +75,16 @@
                             <div class="media">
                                 <div class="avatar-md me-4">
                                     <span class="avatar-title rounded-circle bg-light text-danger font-size-16">
+                                        @if($agence->image_agence != Null)
                                         <img src="{{Storage::url($agence->image_agence)}}" alt="" height="30">
+                                        @else
+                                        <i class="fa fa-bus"></i>
+                                        @endif
                                     </span>
                                 </div>
 
                                 <div class="media-body overflow-hidden">
-                                    <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">{{ $agence->agence_name }}</a></h5>
+                                    <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">{{ $agence->name_agence }}</a></h5>
                                     <p class="text-muted mb-1"> <i class="bx bx-envelope me-1"> {{ $agence->email_agence }}</i> </p>
                                     <p class="text-muted mb-1"> <i class="bx bx-mobile me-1"> {{ $agence->agence_phone }}</i> </p>
                                 </div>

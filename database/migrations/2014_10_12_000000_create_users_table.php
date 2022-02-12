@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('name_agence')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('phone')->unique()->nullable();
+             $table->string('agence_phone')->nullable();
             $table->string('adress')->nullable();
             $table->string('registre_commerce')->unique()->nullable();
             $table->text('slogan')->nullable();
@@ -38,7 +39,6 @@ class CreateUsersTable extends Migration
             $table->string('confirmation_token')->unique()->nullable();
              $table->string('image_agence')->nullable();
              $table->string('agence_name')->nullable();
-             $table->integer('agence_phone')->nullable();
              $table->integer('role')->nullable();
             $table->rememberToken();
             $table->timestamps();
