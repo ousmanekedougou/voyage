@@ -45,7 +45,7 @@
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <div class="avatar-md profile-user-wid mb-4">
-                                            <img src="{{ Storage::url($admin->logo) }}" alt="" class="img-thumbnail rounded-circle">
+                                            <img src="{{ Storage::url($admin->logo) }}" alt="" class="img-thumbnail rounded-circle" data-bs-toggle="modal" data-bs-target=".orderEditModal-{{ $admin->id }}">
                                         </div>
                                         <h5 class="font-size-15 text-truncate">{{$admin->name}}</h5>
                                         <p class="text-muted mb-0 text-truncate">

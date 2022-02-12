@@ -56,12 +56,12 @@ class HistoriqueController extends Controller
     {
         $user = Historical::where('id',$id)->where('amount',$request->client_amount)->first();
         if ($user) {
-                $user->update([
-                    'amount' =>  0,
-                    'voyage_status' => 3
-                ]);
-                Toastr::success('Votre client a bien ete rembourser', 'Rembourser Client', ["positionClass" => "toast-top-right"]);
-                return back();
+            $user->update([
+                'amount' =>  0,
+                'voyage_status' => 3
+            ]);
+            Toastr::success('Votre client a bien ete rembourser', 'Rembourser Client', ["positionClass" => "toast-top-right"]);
+            return back();
         }
         else {
             Toastr::error('Ce client ne semble plus valide', 'Client Invalide', ["positionClass" => "toast-top-right"]);

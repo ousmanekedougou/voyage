@@ -40,58 +40,62 @@ class HomeController extends Controller
     {
         $buses = Bus::where('siege_id',Auth::user()->siege_id)->orderBy('id','ASC')->get();
         $itineraires = Itineraire::where('siege_id',Auth::user()->siege_id)->where('user_id',Auth::user()->id)->orderBy('id','ASC')->get();
-        foreach ($buses as $buse) {
-            $client_historiques = Client::where('bus_id',$buse->id)->where('siege_id',Auth::user()->siege_id)->where('amount','>',2)->where('registered_at','<',Carbon::today()->format('Y-m-d'))->get();
-            foreach ($client_historiques as $client_hsto) {
-                $add_client_htsto = new Historical();
-                $add_client_htsto->name = $client_hsto->name;
-                $add_client_htsto->email = $client_hsto->email;
-                $add_client_htsto->phone = $client_hsto->phone;
-                $add_client_htsto->cni = $client_hsto->cni;
-                $add_client_htsto->ville_name = $client_hsto->ville->name;
-                $add_client_htsto->bus_matricule = $client_hsto->bus->matricule;
-                $add_client_htsto->position = $client_hsto->bus->inscrit;
-                $add_client_htsto->registered_at = $client_hsto->registered_at;
-                $add_client_htsto->heure = $client_hsto->heure;
-                $add_client_htsto->amount = $client_hsto->amount;
-                $add_client_htsto->payment_at = $client_hsto->payment_at;
-                $add_client_htsto->voyage_status = $client_hsto->voyage_status;
-                $add_client_htsto->agence = $client_hsto->agence;
-                $add_client_htsto->agence_logo = $client_hsto->agence_logo;
-                $add_client_htsto->siege_id = Auth::user()->siege_id;
-                $add_client_htsto->save();
+        
+        if ($this->middleware(['IsAgent']) && Auth::user()->role == 1) {
+            foreach ($buses as $buse) {
+                $client_historiques = Client::where('bus_id',$buse->id)->where('siege_id',Auth::user()->siege_id)->where('amount','>',2)->where('registered_at','<',Carbon::today()->format('Y-m-d'))->get();
+                foreach ($client_historiques as $client_hsto) {
+                    $add_client_htsto = new Historical();
+                    $add_client_htsto->name = $client_hsto->name;
+                    $add_client_htsto->email = $client_hsto->email;
+                    $add_client_htsto->phone = $client_hsto->phone;
+                    $add_client_htsto->cni = $client_hsto->cni;
+                    $add_client_htsto->ville_name = $client_hsto->ville->name;
+                    $add_client_htsto->bus_matricule = $client_hsto->bus->matricule;
+                    $add_client_htsto->position = $client_hsto->bus->inscrit;
+                    $add_client_htsto->registered_at = $client_hsto->registered_at;
+                    $add_client_htsto->heure = $client_hsto->heure;
+                    $add_client_htsto->amount = $client_hsto->amount;
+                    $add_client_htsto->payment_at = $client_hsto->payment_at;
+                    $add_client_htsto->voyage_status = $client_hsto->voyage_status;
+                    $add_client_htsto->agence = $client_hsto->agence;
+                    $add_client_htsto->agence_logo = $client_hsto->agence_logo;
+                    $add_client_htsto->siege_id = Auth::user()->siege_id;
+                    $add_client_htsto->save();
+                }
+                Client::where('bus_id',$buse->id)->where('registered_at','<',Carbon::today()->format('Y-m-d'))->delete();
             }
-            Client::where('bus_id',$buse->id)->where('registered_at','<',Carbon::today()->format('Y-m-d'))->delete();
+
+            $date_today = Carbon::today();
+            $dayOfweek = $date_today->dayOfWeek;
+            if ($dayOfweek == 1) {
+                Historical::where('registered_at','<',Carbon::today())->where('siege_id',Auth::user()->siege_id)->delete();
+            }
+
+
+            foreach ($itineraires as $itineraire) {
+                foreach ($itineraire->date_departs as $iti_date) {
+                $delete_bus = Bus::where('itineraire_id',$iti_date->itineraire_id)->get();
+                foreach ($delete_bus as $bus_delete) {
+                    if ($bus_delete->date_depart->depart_at < Carbon::today()->format('Y-m-d')) {
+                            Bus::where('id',$bus_delete->id)->delete();
+                    }
+                }
+                }
+                DateDepart::where('itineraire_id',$itineraire->id)->where('depart_at','<',Carbon::today())->delete();
+            }
         }
 
         Client::where('registered_at','<',Carbon::yesterday()->format('Y-m-d'))->delete();
 
-        Bagage::where('created_at','<',Carbon::yesterday())->delete();
-        
-        BagageClient::where('created_at','<',Carbon::yesterday())->delete();
-
-        Colie::where('created_at','<',Carbon::yesterday())->delete();
-
-        ColiClient::where('created_at','<',Carbon::yesterday())->delete();
-        
-
-        $date_today = Carbon::today();
-        $dayOfweek = $date_today->dayOfWeek;
-        if ($dayOfweek == 1) {
-            Historical::where('registered_at','<',Carbon::today())->where('siege_id',Auth::user()->siege_id)->delete();
+        if ($this->middleware(['IsAgent']) && Auth::user()->role == 2) {
+            Bagage::where('created_at','<',Carbon::yesterday())->delete();
+            BagageClient::where('created_at','<',Carbon::yesterday())->delete();
         }
 
-
-        foreach ($itineraires as $itineraire) {
-            foreach ($itineraire->date_departs as $iti_date) {
-               $delete_bus = Bus::where('itineraire_id',$iti_date->itineraire_id)->get();
-               foreach ($delete_bus as $bus_delete) {
-                   if ($bus_delete->date_depart->depart_at < Carbon::today()->format('Y-m-d')) {
-                        Bus::where('id',$bus_delete->id)->delete();
-                   }
-               }
-            }
-            DateDepart::where('itineraire_id',$itineraire->id)->where('depart_at','<',Carbon::today())->delete();
+        if ($this->middleware(['IsAgent']) && Auth::user()->role == 3) {
+            Colie::where('created_at','<',Carbon::yesterday())->delete();
+            ColiClient::where('created_at','<',Carbon::yesterday())->delete();
         }
 
         if ($this->middleware(['IsAgent']) && Auth::user()->role == 1) {

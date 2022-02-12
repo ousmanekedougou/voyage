@@ -89,7 +89,7 @@ if (! function_exists('part')) {
 
 if (! function_exists('historical')) {
     function historical(){
-        $historical = Historical::where('siege_id',Auth::user()->siege->id)->where('registered_at','<',Carbon::today()->format('Y-m-d'))->first();
+        $historical = Historical::where('siege_id',Auth::user()->siege_id)->where('registered_at','<',Carbon::today()->format('Y-m-d'))->get();
         return $historical;
     }
 }

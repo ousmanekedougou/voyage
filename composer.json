@@ -30,7 +30,8 @@
             "Database\\Seeders\\": "database/seeders/"
         },
         "files":[
-            "app/helpers.php"
+            "app/Helpers/helper.php",
+            "app/Helpers/Sms.php"
         ]
     },
     "autoload-dev": {
@@ -38,7 +39,8 @@
             "Tests\\": "tests/"
         },
         "files":[
-            "app/helpers.php"
+            "app/Helpers/helper.php",
+            "app/Helpers/Sms.php"
         ]
     },
     "scripts": {
