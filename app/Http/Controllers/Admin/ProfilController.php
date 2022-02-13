@@ -56,7 +56,10 @@ class ProfilController extends Controller
     public function show($slug)
     {
         $admin = User::where('slug',$slug)->first();
-        $siege_sms = $admin->siege->id;
+        $siege_sms = '';
+        if (Auth::user()->is_admin == 3 && Auth::user()->role == 1) {
+            $siege_sms = $admin->siege->id;
+        }
         $sms = Siegemsg::where('siege_id',$siege_sms)->first();
         return view('admin.profile.index',compact('admin','sms'));
     }
