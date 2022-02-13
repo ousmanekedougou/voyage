@@ -7,43 +7,78 @@
                             <a href="{{ route('admin.home') }}" class="logo logo-dark">
                                 <span class="logo-sm">
                                     <!-- <span class="text-bold text-uppercase text-white"></span> -->
-                                    <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" height="22">
+                                    @if(Auth::user()->image_agence == null)
+                                        <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="22">
+                                    @else
+                                        <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" height="22">
+                                    @endif
                                 </span>
                                 <span class="logo-lg">
                                     <span class="text-bold text-uppercase text-white">{{Auth::user()->agence_name}}</span>
-                                    <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" height="17">
+                                     @if(Auth::user()->image_agence == null)
+                                        <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="17">
+                                    @else
+                                        <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" height="17">
+                                    @endif
                                 </span>
                             </a>
 
                             <a href="{{ route('admin.home') }}" class="logo logo-light">
                                 <span class="logo-sm">
                                     <!-- <span class="text-bold text-uppercase text-white">{{Auth::user()->agence_name}}</span> -->
-                                    <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" height="22">
+                                    @if(Auth::user()->image_agence == null)
+                                        <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="22">
+                                    @else
+                                        <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" height="22">
+                                    @endif
                                 </span>
                                 <span class="logo-lg">
                                      <span class="text-bold text-uppercase text-white" style="font-size: 14px;margin-left:-25px;">{{Auth::user()->agence_name}}</span>
-                                    <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" style="width: 50px;height:50px;border-radius:100%;">
+                                    
+                                    @if(Auth::user()->image_agence == null)
+                                        <img src="{{asset('admin/assets/images/bus.svg')}}" alt=""  style="width: 50px;height:50px;border-radius:100%;">
+                                    @else
+                                        <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" style="width: 50px;height:50px;border-radius:100%;">
+                                    @endif
                                 </span>
                             </a>
                         @elseif(Auth::user()->is_admin == 2)
-                            <a href="{{ route('admin.home') }}" class="logo logo-dark">
+                               <a href="{{ route('admin.home') }}" class="logo logo-dark">
                                 <span class="logo-sm">
-                                    <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" height="22">
+                                    <!-- <span class="text-bold text-uppercase text-white"></span> -->
+                                    @if(Auth::user()->image_agence == null)
+                                        <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="22">
+                                    @else
+                                        <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" height="22">
+                                    @endif
                                 </span>
                                 <span class="logo-lg">
-                                    <span class="text-bold text-uppercase text-white" style="font-size: 14px;margin-left:-25px;">{{Auth::user()->agence_name}}</span>
-                                    <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" height="17">
+                                    <span class="text-bold text-uppercase text-white">{{Auth::user()->name_agence}}</span>
+                                     @if(Auth::user()->image_agence == null)
+                                        <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="17">
+                                    @else
+                                        <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" height="17">
+                                    @endif
                                 </span>
                             </a>
 
                             <a href="{{ route('admin.home') }}" class="logo logo-light">
                                 <span class="logo-sm">
-                                   <!-- <span class="text-bold text-uppercase text-white" style="font-size: 14px;margin-left:-25px;"></span> -->
-                                    <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" style="width: 50px;height:50px;border-radius:100%;">
+                                    <!-- <span class="text-bold text-uppercase text-white">{{Auth::user()->agence_name}}</span> -->
+                                    @if(Auth::user()->image_agence == null)
+                                        <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="22">
+                                    @else
+                                        <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" height="22">
+                                    @endif
                                 </span>
                                 <span class="logo-lg">
-                                   <span class="text-bold text-uppercase text-white" style="font-size: 14px;margin-left:-25px;">{{Auth::user()->agence_name}}</span>
-                                    <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" style="width: 50px;height:50px;border-radius:100%;">
+                                     <span class="text-bold text-uppercase text-white" style="font-size: 14px;margin-left:-25px;">{{Auth::user()->name_agence}}</span>
+                                    
+                                    @if(Auth::user()->image_agence == null)
+                                        <img src="{{asset('admin/assets/images/bus.svg')}}" alt=""  style="width: 50px;height:50px;border-radius:100%;">
+                                    @else
+                                        <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" style="width: 50px;height:50px;border-radius:100%;">
+                                    @endif
                                 </span>
                             </a>
                         @else
