@@ -37,9 +37,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/",
-            "Database\\Factories\\": "database/factories/",
-            "Database\\Seeders\\": "database/seeders/"
+            "Tests\\": "tests/"
         },
         "files":[
             "app/Helpers/helper.php",

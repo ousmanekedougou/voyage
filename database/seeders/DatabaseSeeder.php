@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use \Faker\Factory as Faker;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -43,7 +44,7 @@ class DatabaseSeeder extends Seeder
             'confirmation_token' => null
         ]);
 
-        $faker = \Faker\Factory::create();
+        $faker = Faker::create();
         for ($i=0; $i < 12; $i++) { 
             User::create([
                 'name' => $faker->name,
