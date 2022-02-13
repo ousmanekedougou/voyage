@@ -86,7 +86,7 @@ class AgenceController extends Controller
         if($sieges->count() > 0){
             return view('user.agence.show',compact('sieges','agence','buses'));
         }else {
-            Toastr::error('L\'agence '.$agence->name_agence.' n\'a pas encore de siège', 'Sieges', ["positionClass" => "toast-top-right"]);
+            Toastr::warning('L\'agence '.$agence->name_agence.' n\'a pas encore de siège', 'Sieges', ["positionClass" => "toast-top-right"]);
             return back();
         }
     }
