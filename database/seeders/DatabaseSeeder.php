@@ -43,6 +43,7 @@ class DatabaseSeeder extends Seeder
             'confirmation_token' => null
         ]);
 
+        // Ajout des agences
         User::create([
             'name' => 'Ousmane Diallo',
             'name_agence' => 'Terranga Transport',
@@ -82,7 +83,7 @@ class DatabaseSeeder extends Seeder
             'user_id' => 1
         ]);
 
-         User::create([
+        User::create([
             'name' => 'Amadou Keita',
             'name_agence' => 'Bassari Transport',
             'email' => 'keita@gmail.com',
@@ -198,7 +199,7 @@ class DatabaseSeeder extends Seeder
             'user_id' => 1
         ]);
 
-          User::create([
+        User::create([
             'name' => 'Mortala sokho',
             'name_agence' => 'Matam Transport',
             'email' => 'mortala@gmail.com',
@@ -216,6 +217,9 @@ class DatabaseSeeder extends Seeder
             'slogan' => 'Faire du voyage votre passion',
             'user_id' => 1
         ]);
+        // Fin D'ajout des agences
+
+      
 
         //Pour les sieges
             //Pour terranga 
@@ -355,5 +359,70 @@ class DatabaseSeeder extends Seeder
             'adress' => 'Bingniona',
             'user_id' => 8
         ]); 
+
+
+          // Ajout des Agents
+        User::create([
+            'name' => 'Mouhamadou Dansokho',
+            'agence_name' => 'Terranga Transport',
+            'email' => 'kaw@gmail.com',
+            'email_agence' => 'terranga@gmail.com',
+            'phone' => '2218823900',
+            'agence_phone' => '002458976',
+            'adress' => 'Kedougou',
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', //password
+            'is_admin' => 3,
+            'slug' => str_replace('/','',Hash::make(Str::random(5).'Terrange Transport')),
+            'confirmation_token' => null,
+            'is_active' => 1,
+            'logo' => null,
+            'image_agence' => null,
+            'slogan' => 'Voyager en bonne compagnie',
+            'user_id' => 3,
+            'siege_id' => 2,
+            'role' => 1
+        ]);
+
+        User::create([
+            'name' => 'Cheikhe Tidjiane',
+            'agence_name' => 'Terranga Transport',
+            'email' => 'cheikh@gmail.com',
+            'email_agence' => 'terranga@gmail.com',
+            'phone' => '2218823901',
+            'agence_phone' => '082458976',
+            'adress' => 'Dakar',
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', //password
+            'is_admin' => 3,
+            'slug' => str_replace('/','',Hash::make(Str::random(5).'Terrange Transport')),
+            'confirmation_token' => null,
+            'is_active' => 1,
+            'logo' => null,
+            'image_agence' => null,
+            'slogan' => 'Voyager en bonne compagnie',
+            'user_id' => 3,
+            'siege_id' => 1,
+            'role' => 2
+        ]);
+
+        User::create([
+            'name' => 'Moussa Khouma',
+            'agence_name' => 'Terranga Transport',
+            'email' => 'khouma@gmail.com',
+            'email_agence' => 'terranga@gmail.com',
+            'phone' => '22188276901',
+            'agence_phone' => '0898458976',
+            'adress' => 'Ziguinchor',
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', //password
+            'is_admin' => 3,
+            'slug' => str_replace('/','',Hash::make(Str::random(5).'Terrange Transport')),
+            'confirmation_token' => null,
+            'is_active' => 1,
+            'logo' => null,
+            'image_agence' => null,
+            'slogan' => 'Voyager en bonne compagnie',
+            'user_id' => 3,
+            'siege_id' => 3,
+            'role' => 3
+        ]);
     }
 }

@@ -109,12 +109,12 @@ class HomeController extends Controller
         }elseif ($this->middleware(['IsAgent']) && Auth::user()->role == 3) {
             $clients = Colie::paginate(15);
             return view('admin.coli.index',compact('clients'));
-        }elseif (Auth::user()->is_admin == 2) {
+        }elseif (Auth::user()->is_admin == 2 && Auth::user()->role == null) {
             $sieges = Siege::where('user_id',Auth::user()->id)->get();
             $agents = User::where('user_id',Auth::user()->id)->get(); 
             $user = Auth::user();
             return view('admin.homeAgence.index',compact('sieges','agents','user'));
-        }elseif ($this->middleware(['IsAdmin'])) {
+        }elseif ($this->middleware(['IsAdmin']) && Auth::user()->role == null) {
             $agences = User::where('is_admin',2)->orderBy('id','DESC')->paginate(10);
             $user = Auth::user();
             $siegeCount = Siege::all();

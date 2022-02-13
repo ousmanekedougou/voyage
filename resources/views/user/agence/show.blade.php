@@ -450,7 +450,7 @@
 @section('footerSection')
 <script src=" {{ asset('js/app.js') }} "></script>
   <script src="{{asset('user/assets/build/js/intlTelInput.js')}}"></script>
-  <script>
+<script>
     var input = document.querySelector("#phone");
     window.intlTelInput(input, {
       utilsScript: "user/assets/build/js/utils.js",
