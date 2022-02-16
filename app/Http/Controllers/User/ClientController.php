@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Helpers\OrangeMoney;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Bus;
 use App\Models\Admin\Itineraire;
@@ -36,7 +37,10 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        $order = Str::random(4);
+        $om = new OrangeMoney(500 , $order);
+        $orangePayment = $om->getPaymentUrl('return_url_here');
+        return redirect($orangePayment->payment_url);
     }
 
     /**
