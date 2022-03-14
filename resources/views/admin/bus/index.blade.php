@@ -146,123 +146,122 @@
                                     <h5 class="modal-title" id="staticBackdropLabel">Modifier le bus {{$edit_bus->matricule}}</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                    <div class="modal-body">
-                                        <p>
-                                            <form class="custom-validation" action="{{ route('admin.bus.update',$edit_bus->id) }}" method="POST" enctype="multipart/form-data">
-                                                @csrf
-                                                {{Method_field('PUT')}}
-                                                <div class="row">
-                                                    <div class="col-xl-12">
-                                                        <div class="mb-3">
-                                                            <label class="form-label">Numero du bus</label>
-                                                            <div>
-                                                                <input data-parsley-type="number" type="number" id="numero" class="form-control @error('numero') is-invalid @enderror" name="numero" value="{{ old('numero') ?? $edit_bus->number }}" autocomplete="numero"
-                                                                    required placeholder="Nombre de numero du bus" />
-                                                                    @error('numero')
-                                                                        <span class="invalid-feedback" role="alert">
-                                                                            <strong>{{ $message }}</strong>
-                                                                        </span>
-                                                                    @enderror
-                                                            </div>
+                                <div class="modal-body">
+                                    <p>
+                                        <form class="custom-validation" action="{{ route('admin.bus.update',$edit_bus->id) }}" method="POST" enctype="multipart/form-data">
+                                            @csrf
+                                            {{Method_field('PUT')}}
+                                            <div class="row">
+                                                <div class="col-xl-12">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Numero du bus</label>
+                                                        <div>
+                                                            <input data-parsley-type="number" type="number" id="numero" class="form-control @error('numero') is-invalid @enderror" name="numero" value="{{ old('numero') ?? $edit_bus->number }}" autocomplete="numero"
+                                                                required placeholder="Nombre de numero du bus" />
+                                                                @error('numero')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
                                                         </div>
-                                                        <div class="mb-3">
-                                                            <label class="form-label">Matricule du bus</label>
-                                                            <input type="text" id="matricule" class="form-control @error('matricule') is-invalid @enderror" name="matricule" value="{{ old('matricule') ?? $edit_bus->matricule}}" required autocomplete="matricule"
-                                                                placeholder="Matricule du bus" />
-                                                            @error('matricule')
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Matricule du bus</label>
+                                                        <input type="text" id="matricule" class="form-control @error('matricule') is-invalid @enderror" name="matricule" value="{{ old('matricule') ?? $edit_bus->matricule}}" required autocomplete="matricule"
+                                                            placeholder="Matricule du bus" />
+                                                        @error('matricule')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Nombre de place du bus</label>
+                                                        <div>
+                                                            <input data-parsley-type="number" type="number" id="place" class="form-control @error('place') is-invalid @enderror" name="place" value="{{ old('place') ?? $edit_bus->place}}" autocomplete="place"
+                                                                required placeholder="Nombre de place du bus" />
+                                                                @error('place')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    {{--
+                                                    <div class="mb-3 row">
+                                                        <label class="form-label">Selectionner un status</label>
+                                                        <div class="col-md-12">
+                                                            <select class="form-select" class="form-control @error('status') is-invalid @enderror" name="status" required autocomplete="status" required>
+                                                                    <option value="1"
+                                                                        @if($edit_bus->status == 1)
+                                                                        selected
+                                                                        @endif
+                                                                    >Va voyager</option>
+                                                                    <option value="2"
+                                                                            @if($edit_bus->status == 2)
+                                                                        selected
+                                                                        @endif
+                                                                    >Ne voyage pas</option>
+                                                            </select>
+                                                            @error('status')
                                                                 <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
                                                                 </span>
                                                             @enderror
                                                         </div>
-
-                                                        <div class="mb-3">
-                                                            <label class="form-label">Nombre de place du bus</label>
-                                                            <div>
-                                                                <input data-parsley-type="number" type="number" id="place" class="form-control @error('place') is-invalid @enderror" name="place" value="{{ old('place') ?? $edit_bus->place}}" autocomplete="place"
-                                                                    required placeholder="Nombre de place du bus" />
-                                                                    @error('place')
-                                                                        <span class="invalid-feedback" role="alert">
-                                                                            <strong>{{ $message }}</strong>
-                                                                        </span>
-                                                                    @enderror
-                                                            </div>
-                                                        </div>
-
-                                                        {{--<div class="mb-3 row">
-                                                            <label class="form-label">Selectionner un status</label>
-                                                            <div class="col-md-12">
-                                                                <select class="form-select" class="form-control @error('status') is-invalid @enderror" name="status" required autocomplete="status" required>
-                                                                        <option value="1"
-                                                                            @if($edit_bus->status == 1)
-                                                                            selected
-                                                                            @endif
-                                                                        >Va voyager</option>
-                                                                        <option value="2"
-                                                                             @if($edit_bus->status == 2)
-                                                                            selected
-                                                                            @endif
-                                                                        >Ne voyage pas</option>
-                                                                </select>
-                                                                @error('status')
-                                                                    <span class="invalid-feedback" role="alert">
-                                                                        <strong>{{ $message }}</strong>
-                                                                    </span>
-                                                                @enderror
-                                                            </div>
-                                                        </div>
-                                                        --}}
-                                                        <div class="mb-3 row">
-                                                            <label class="form-label">Selectionner un itineraire</label>
-                                                            <div class="col-md-12">
-                                                                <select class="form-select" class="form-control @error('itineraire') is-invalid @enderror" name="itineraire" required autocomplete="itineraire" required>
-                                                                        @foreach($itineraires as $itineraire)
-                                                                            <option value="{{ $itineraire->id }}"
-                                                                                @foreach($buses as $bus)
-                                                                                    @if($bus->itineraire_id == $itineraire->id) selected @endif
-                                                                                @endforeach    
-                                                                            >{{ $itineraire->name }}</option>
-                                                                        @endforeach
-                                                                </select>
-                                                                @error('itineraire')
-                                                                    <span class="invalid-feedback" role="alert">
-                                                                        <strong>{{ $message }}</strong>
-                                                                    </span>
-                                                                @enderror
-                                                            </div>
-                                                        </div>
-                                                        <div class="mb-3 row">
-                                                            <label class="form-label">Selectionner une date</label>
-                                                            <div class="col-md-12">
-                                                                <select class="form-select" class="form-control @error('date') is-invalid @enderror" name="date" required autocomplete="date" required>
+                                                    </div>
+                                                    --}}
+                                                    <div class="mb-3 row">
+                                                        <label class="form-label">Selectionner un itineraire</label>
+                                                        <div class="col-md-12">
+                                                            <select class="form-select" class="form-control @error('itineraire') is-invalid @enderror" name="itineraire" required autocomplete="itineraire" required>
                                                                     @foreach($itineraires as $itineraire)
-                                                                            <optgroup label="{{$itineraire->name}}">
-                                                                                @foreach($itineraire->date_departs as $date)
-                                                                                    <option value="{{ $date->id }}"> {{ $date->depart_at }}</option>
-                                                                                @endforeach
-                                                                            </optgroup>
-                                                                        @endforeach
-                                                                </select>
-                                                                @error('date')
-                                                                    <span class="invalid-feedback" role="alert">
-                                                                        <strong>{{ $message }}</strong>
-                                                                    </span>
-                                                                @enderror
-                                                            </div>
+                                                                        <option value="{{ $itineraire->id }}"
+                                                                            @foreach($buses as $bus)
+                                                                                @if($bus->itineraire_id == $itineraire->id) selected @endif
+                                                                            @endforeach    
+                                                                        >{{ $itineraire->name }}</option>
+                                                                    @endforeach
+                                                            </select>
+                                                            @error('itineraire')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
                                                         </div>
                                                     </div>
-                                                    <div class="d-flex flex-wrap gap-2">
-                                                        <button type="submit" class="btn btn-primary waves-effect waves-light btn-block">
-                                                            Enregistrer l'agent
-                                                        </button>
-                                                        <button type="reset" class="btn btn-secondary waves-effect btn-block">
-                                                            Anuller
-                                                        </button>
+                                                    <div class="mb-3 row">
+                                                        <label class="form-label">Selectionner une date</label>
+                                                        <div class="col-md-12">
+                                                            <select class="form-select" class="form-control @error('date') is-invalid @enderror" name="date" required autocomplete="date" required>
+                                                                @foreach($itineraires as $itineraire)
+                                                                    @foreach($itineraire->date_departs as $date)
+                                                                        <option value="{{ $date->id }}"> {{ $date->depart_at }}</option>
+                                                                    @endforeach
+                                                                @endforeach
+                                                            </select>
+                                                            @error('date')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </form>
-                                        </p>
-                                    </div>
+                                                <div class="d-flex flex-wrap gap-2">
+                                                    <button type="submit" class="btn btn-primary waves-effect waves-light btn-block">
+                                                        Enregistrer le bus
+                                                    </button>
+                                                    <button type="reset" class="btn btn-secondary waves-effect btn-block">
+                                                        Anuller
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -365,12 +364,12 @@
                                                 </div>
                                                 --}}
                                                 <div class="mb-3 row">
-                                                    <label class="form-label">Selectionner un itineraire</label>
+                                                    <label class="form-label">Selectionner une itineraire</label>
                                                     <div class="col-md-12">
                                                         <select class="form-select" class="form-control @error('itineraire') is-invalid @enderror" name="itineraire" required autocomplete="itineraire" required>
-                                                                @foreach($itineraires as $itineraire)
-                                                                    <option value="{{ $itineraire->id }}">{{ $itineraire->name }}</option>
-                                                                @endforeach
+                                                            @foreach($itineraires as $itineraire)
+                                                                <option value="{{ $itineraire->id }}">{{ $itineraire->name }}</option>
+                                                            @endforeach
                                                         </select>
                                                         @error('itineraire')
                                                             <span class="invalid-feedback" role="alert">
@@ -383,13 +382,11 @@
                                                     <label class="form-label">Selectionner une date</label>
                                                     <div class="col-md-12">
                                                         <select class="form-select" class="form-control @error('date') is-invalid @enderror" name="date" required autocomplete="date" required>
-                                                               @foreach($itineraires as $itineraire)
-                                                                    <optgroup label="{{$itineraire->name}}">
-                                                                        @foreach($itineraire->date_departs as $date)
-                                                                            <option value="{{ $date->id }}"> {{ $date->depart_at }}</option>
-                                                                        @endforeach
-                                                                    </optgroup>
+                                                            @foreach($itineraires as $itineraire)
+                                                                @foreach($itineraire->date_departs as $date)
+                                                                    <option value="{{ $date->id }}"> {{ $date->depart_at }}</option>
                                                                 @endforeach
+                                                            @endforeach
                                                         </select>
                                                         @error('date')
                                                             <span class="invalid-feedback" role="alert">
@@ -401,7 +398,7 @@
                                             </div>
                                             <div class="d-flex flex-wrap gap-2">
                                                 <button type="submit" class="btn btn-primary waves-effect waves-light btn-block">
-                                                    Enregistrer l'agent
+                                                    Enregistrer le bus
                                                 </button>
                                                 <button type="reset" class="btn btn-secondary waves-effect btn-block">
                                                     Anuller

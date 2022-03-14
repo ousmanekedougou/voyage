@@ -41,7 +41,7 @@ if(! function_exists('all_siege')){
 if(! function_exists('itineraire_all')){
     function itineraire_all()
     {
-        $itineraire_all = Itineraire::where('user_id',Auth::user()->id)->where('siege_id',Auth::user()->siege_id)->orderBy('id','ASC')->get();
+        $itineraire_all = Itineraire::where('siege_id',Auth::user()->siege_id)->orderBy('id','ASC')->get();
         return $itineraire_all;
     }
 }

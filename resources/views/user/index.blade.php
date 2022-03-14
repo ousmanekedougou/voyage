@@ -75,14 +75,14 @@
                 <div class="col-lg-8 card_show">
                     <div class="text-white-50">
                         <h1 class="text-white font-weight-semibold mb-3 hero-title ">Yombalal Toucki Thi Biir Réwmi</h1>
-                        <p class="font-size-16" >
+                        <p class="font-size-16 text-white">
                             Toutes les options de voyage sur une seule plateforme
                         </p>
 
-                        <!-- <div class="button-items mt-4 ">
+                        <div class="button-items mt-4 ">
                             <a href="{{ route('agence.create') }}" class="btn btn-success">Creer votre compte agence</a>
                             <a href="{{ route('agence.index') }}" class="btn btn-light">Nos agences de transport</a>
-                        </div> -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -243,17 +243,20 @@
                             Avec des itinéraires quotidiens vers les villes et capitales du pays, vous pouvez organiser des escapades parfaitement adaptées à tous les budgets !.
                         </p>
 
-                        
+                            <div class="button-items">
+                            <a href="{{ route('setting.index') }}" class="btn btn-primary">Comment ça marche</a>
+                            <a href="{{ route('agence.create') }}" class="btn btn-outline-success">Creer votre compte agence</a>
+                        </div> 
                     </div>
                 </div>
 
                 <div class="col-lg-6 ms-auto">
                     <div class="row">
-                        <h4>Ravivez votre passion du voyage</h4>
+                        <!-- <h4>Ravivez votre passion du voyage</h4> -->
                         <div class="col-md-12 me-md-0">
-                            <img src="{{('user/assets/images/dowload/tiker-photo.png')}}" alt="" class="img-fluid mx-auto d-block" style="width: 60%;height:auto;">
+                            <img src="{{('user/assets/images/dowload/tiker-photo.png')}}" alt="" class="img-fluid mx-auto d-block" style="width: 100%;height:auto;">
                         </div>
-                        <div class="col-md-12">
+                        <!-- <div class="col-md-12">
                             
                             <p class="text-muted">
                                 Plus de 1 000 partenaires de transport pour vos trajets en train, bus, avion, ferry et vos transferts aéroportuaires pour profiter pleinement du voyage.
@@ -262,7 +265,7 @@
                         <div class="button-items text-center">
                             <a href="{{ route('setting.index') }}" class="btn btn-primary">Comment ca marche</a>
                             <a href="{{ route('agence.create') }}" class="btn btn-outline-success">Creer votre compte agence</a>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

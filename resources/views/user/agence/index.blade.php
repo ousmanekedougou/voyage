@@ -33,25 +33,25 @@
                      <div class="col-md-8">
                         <div class="card">
                             <div class="card-body">
-                                    <form action="{{ route('agence.search') }}" method="post">
-                                        <div class="row">
-                                            @csrf
-                                            <div class="col-md-9">
-                                                <div class="mb-3">
-                                                    <input  type="text" id="q" class="form-control @error('q') is-invalid @enderror bg-default p-3" name="q" value="{{ old('q') }}" required autocomplete="q" parsley-type="q"
-                                                        placeholder="Recherchez une agence de transport" />
-                                                        @error('q')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
-                                                </div>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <button type="submit" style="width: 100%;" class="btn btn-outline-primary p-3">Recherche</button>
+                                <form action="{{ route('agence.search') }}" method="post" style="margin-bottom: -15px;">
+                                    <div class="row">
+                                        @csrf
+                                        <div class="col-md-9">
+                                            <div class="mb-3">
+                                                <input  type="text" id="q" class="form-control @error('q') is-invalid @enderror bg-default p-3" name="q" value="{{ old('q') }}" required autocomplete="q" parsley-type="q"
+                                                    placeholder="Recherchez une agence de transport" />
+                                                    @error('q')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                             </div>
                                         </div>
-                                    </form>
+                                        <div class="col-md-3">
+                                            <button type="submit" style="width: 100%;" class="btn btn-outline-primary p-3">Recherche</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -90,17 +90,17 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row p-0">
+                        <div class="row p-0" style="margin-top: -15px;">
                             <h6 class="text-center"> <i class="fa fa-blog badge bg-success"> Slogan</i></h6>
                             <p class="text-muted text-center">{{ $agence->slogan }}</p>
                         </div>
-                        <div class="px-4 py-3 border-top">
-                            <ul class="list-inline mb-0">
+                        <div class="px-4 py-3 border-top bg-light">
+                            <ul class="list-inline mb-0 text-center">
                                 <li class="list-inline-item me-3">
-                                    <a href="{{ route('agence.show',$agence->slug) }}" class="btn btn-outline-success btn-xs"><i class="bx bx-show me-1"></i>Voire nos sieges</a>
+                                    <a href="{{ route('agence.show',$agence->slug) }}" class="btn btn-success btn-xs"><i class="bx bx-show me-1"></i>Nos sieges</a>
                                 </li>
                                 <li class="list-inline-item me-3">
-                                    <a href="" class="btn btn-outline-primary btn-xs"><i class="bx bx-file me-1"></i>A propos</a>
+                                    <a href="" class="btn btn-primary btn-xs"><i class="bx bx-file me-1"></i>A propos</a>
                                 </li>
                             </ul>
                         </div>
