@@ -23,6 +23,7 @@ class CreateColiesTable extends Migration
             $table->string('ville');
             $table->string('prix_total')->nullable();
             $table->integer('siege_id');
+            $table->boolean('status');
             $table->timestamps();
         });
     }

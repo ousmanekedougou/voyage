@@ -27,7 +27,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        //
+        return view('user.client.index');
     }
 
     /**
@@ -80,9 +80,6 @@ class ClientController extends Controller
             return back();
         }else {
             if ($clients->count() < $buse->place) {
-                $pl = $buse->inscrit;
-                $buse->inscrit = $pl + 1;
-                $buse->save();
 
                 $phoneFinale = '';
                 $phoneComplet = '221'.$request->phone;
@@ -103,6 +100,12 @@ class ClientController extends Controller
                     Toastr::error('Votre numero d\'identite est invalide', 'Error CNI', ["positionClass" => "toast-top-right"]);
                     return back();
                 }
+
+                // $pl = $buse->inscrit;
+                // $buse->inscrit = $pl + 1;
+                // $buse->save();
+
+                $buse->update(['inscrit' => $buse->inscrit + 1]);
 
                 $add_client = new Client();
                 $add_client->name = $request->name;
@@ -269,26 +272,32 @@ class ClientController extends Controller
         }
         
         $update_client = Client::where('id',$id)->first();
-        $update_client->name = $request->name;
-        $update_client->email = $request->email;
-        $update_client->phone = $phoneFinale;
-        $update_client->cni = $cni_final;
-        $update_client->ville_id = $request->ville;
-        $update_client->bus_id = $buse->id;
-        $update_client->siege_id = $buse->siege->id;
-        $update_client->position = $buse->inscrit;
-        $update_client->registered_at = $buse->date_depart->depart_at;
-        $update_client->heure = $buse->date_depart->rendez_vous;
-        $update_client->confirmation_token = str_replace('/','',Hash::make(Str::random(40)));
-        $update_client->agence = $buse->user->agence_name;
-        $update_client->agence_logo = $buse->user->image_agence;
-        $update_client->save();
-        // dd($update_client->email);
-        
-        Notification::route('mail',$buse->siege->email)
-        ->notify(new RegisteredClient($update_client));
-        Toastr::success('Votre inscription a bien ete modifier sur '.$update_client->agence, 'Inscription', ["positionClass" => "toast-top-right"]);
-        return redirect()->route('index');
+        if ($update_client->amount == 0) {
+            $update_client->name = $request->name;
+            $update_client->email = $request->email;
+            $update_client->phone = $phoneFinale;
+            $update_client->cni = $cni_final;
+            $update_client->ville_id = $request->ville;
+            $update_client->bus_id = $buse->id;
+            $update_client->siege_id = $buse->siege->id;
+            $update_client->position = $buse->inscrit;
+            $update_client->registered_at = $buse->date_depart->depart_at;
+            $update_client->heure = $buse->date_depart->rendez_vous;
+            $update_client->confirmation_token = str_replace('/','',Hash::make(Str::random(40)));
+            $update_client->agence = $buse->user->agence_name;
+            $update_client->agence_logo = $buse->user->image_agence;
+            $update_client->save();
+            // dd($update_client->email);
+            
+            Notification::route('mail',$buse->siege->email)
+            ->notify(new RegisteredClient($update_client));
+            Toastr::success('Votre inscription a bien ete modifier sur '.$update_client->agence, 'Inscription', ["positionClass" => "toast-top-right"]);
+            return redirect()->route('index');
+        }else {
+            Toastr::error('Vous ne pouvez pas modifier apres le paiement du billet', 'Error Billet', 
+            ["positionClass" => "toast-top-right"]);
+            return back();
+        }
     }
 
     /**

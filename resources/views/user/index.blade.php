@@ -218,7 +218,7 @@
         </div>
         <!-- end container -->
     </section>
-    <!-- currency price section end -->
+<!-- currency price section end -->
     
 
   
@@ -358,7 +358,7 @@
                             <h4 class="mb-0">L’application tout-en-un des voyageurs</h4>
                         </div>
                         <p class="text-muted">
-                            Téléchargez gratuitement l'application Omio pour bénéficier d’une expertise de qualité et organiser vos voyages en toute confiance.
+                            Téléchargez gratuitement l'application TouCki pour bénéficier d’une expertise de qualité et organiser vos voyages en toute confiance.
                         </p>
                         {{--
                         <div class="text-muted mt-4">

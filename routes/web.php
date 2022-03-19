@@ -28,10 +28,13 @@ Route::get('/setting', [App\Http\Controllers\User\SettingController::class, 'ind
 Route::get('/contact', [App\Http\Controllers\User\ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact/store', [App\Http\Controllers\User\ContactController::class, 'store'])->name('contact.store');
 Route::post('/contact/post', [App\Http\Controllers\User\ContactController::class, 'post'])->name('contact.post');
-Route::post('/client', [App\Http\Controllers\User\ClientController::class, 'store'])->name('client.store');
+Route::get('/client', [App\Http\Controllers\User\ClientController::class, 'index'])->name('client.index');
+Route::post('/client/store', [App\Http\Controllers\User\ClientController::class, 'store'])->name('client.store');
 Route::post('/client/sendmail/{id}', [App\Http\Controllers\User\ClientController::class, 'edit'])->name('client.edit');
 Route::get('/client/{id}', [App\Http\Controllers\User\ClientController::class, 'show'])->name('client.show');
 Route::put('/client/update/{id}', [App\Http\Controllers\User\ClientController::class, 'update'])->name('client.update');
+Route::put('/client/bagage/{id}', [App\Http\Controllers\User\ClientController::class, 'bagage'])->name('client.bagage');
+Route::put('/client/colis/{id}', [App\Http\Controllers\User\ClientController::class, 'colis'])->name('client.colis');
 Route::get('/store', [App\Http\Controllers\User\HomeController::class, 'store'])->name('store');
 
 Auth::routes();

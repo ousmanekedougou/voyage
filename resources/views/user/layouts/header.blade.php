@@ -22,8 +22,11 @@
                     <li class="nav-item">
                         <a class="nav-link {{ set_active_roote('agence.index') }} " href="{{ route('agence.index') }}"><i class="fa fa-building"></i> Nos agences</a>
                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link {{ set_active_roote('client.index') }} " href="{{ route('client.index') }}"><i class="fas fa-suitcase-rolling"></i> Vos réservation</a>
+                    </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ set_active_roote('setting.index') }} " href="{{ route('setting.index') }}"><i class="fa fa-cog"></i> Comment ça Marche ?</a>
+                        <a class="nav-link {{ set_active_roote('setting.index') }} " href="{{ route('setting.index') }}"><i class="fa fa-cog"></i> Comment ça marche ?</a>
                     </li>
 
                      <li class="nav-item">
@@ -36,7 +39,7 @@
                 <div class="my-2 ms-lg-2 btn-sign-ine">
                     <!-- <a href="{{ route('agence.create') }}" class="btn btn-outline-primary w-xs {{ set_active_roote('agence.create') }}"><i class="fa fa-user-plus"></i> Creer un compte agence</a> -->
                     <a href="{{ route('login') }}" class="btn btn-outline-success  w-xs {{ set_active_roote('login') }}" data-bs-toggle="modal"
-                                            data-bs-target=".bs-exampleLogin-modal-lg"><i class="fa fa-sign-in-alt"></i> Se Connecter</a>
+                                            data-bs-target=".bs-exampleLogin-modal-lg"><i class="fa fa-sign-in-alt"></i> Se connecter</a>
                 </div>
             </div>
         </div>
