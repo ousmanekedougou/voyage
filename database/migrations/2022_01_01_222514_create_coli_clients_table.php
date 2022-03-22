@@ -20,6 +20,7 @@ class CreateColiClientsTable extends Migration
             $table->integer('prix');
             $table->text('desc');
             $table->integer('colie_id');
+            $table->integer('siege_id');
             $table->timestamps();
         });
     }

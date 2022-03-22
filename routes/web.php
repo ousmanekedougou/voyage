@@ -33,8 +33,9 @@ Route::post('/client/store', [App\Http\Controllers\User\ClientController::class,
 Route::post('/client/sendmail/{id}', [App\Http\Controllers\User\ClientController::class, 'edit'])->name('client.edit');
 Route::get('/client/{id}', [App\Http\Controllers\User\ClientController::class, 'show'])->name('client.show');
 Route::put('/client/update/{id}', [App\Http\Controllers\User\ClientController::class, 'update'])->name('client.update');
-Route::put('/client/bagage/{id}', [App\Http\Controllers\User\ClientController::class, 'bagage'])->name('client.bagage');
-Route::put('/client/colis/{id}', [App\Http\Controllers\User\ClientController::class, 'colis'])->name('client.colis');
+Route::post('/client/colis', [App\Http\Controllers\User\ClientController::class, 'colis'])->name('client.colis');
+Route::post('/client/bagage', [App\Http\Controllers\User\ClientController::class, 'bagage'])->name('client.bagage');
+Route::post('/client/ticket', [App\Http\Controllers\User\ClientController::class, 'ticket'])->name('client.ticket');
 Route::get('/store', [App\Http\Controllers\User\HomeController::class, 'store'])->name('store');
 
 Auth::routes();

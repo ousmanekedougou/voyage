@@ -455,10 +455,8 @@
     window.intlTelInput(input, {
       utilsScript: "user/assets/build/js/utils.js",
     });
-</script>
 
-<script>
-	function validation(){
+    function validation(){
 		var phone = document.forms["myform"]["phone"];
 		var get_num_1 = String(phone.value).charAt(0);
 		var get_num_2 = String(phone.value).charAt(1);
@@ -474,15 +472,9 @@
 			alert('Votre numero de telphone doit commencer par un (77 ou 78 ou 76 ou 70 ou 75)')
 			return false;
 		}
-        var cni = document.forms["myform"]["cni"];
-		if (isNaN(cni.value)) {
-			alert('Votre numero numero de piece est invalide');
-			return false;
-		}else if(cni.value.length != 13){
-			alert('Votre numero de piece doit etre de 13 carractere');
-			return false;
-		}
 		return true;
 	}
 </script>
+
+
 @endsection

@@ -51,18 +51,23 @@ class BagageController extends Controller
             'phone' => 'required|string|max:255',
         ]);
         $client = Client::where('phone','221'.$request->phone)->where('registered_at',Carbon::today()->format('Y-m-d'))->first();
-        if ($client->amount == $client->ville->amount) {
-            $ad_bagage = new Bagage();
-            $ad_bagage->client_name = $client->name;
-            $ad_bagage->client_phone = $client->phone;
-            $ad_bagage->client_ville = $client->ville->name;
-            $ad_bagage->client_id = $client->id;
-            $ad_bagage->siege_id = Auth::user()->siege_id;
-            $ad_bagage->save();
-            Toastr::success('Votre client a bien ete creer', 'Creattion client', ["positionClass" => "toast-top-right"]);
-            return back();
+        if ($client) {
+            if ($client->amount == $client->ville->amount) {
+                $ad_bagage = new Bagage();
+                $ad_bagage->client_name = $client->name;
+                $ad_bagage->client_phone = $client->phone;
+                $ad_bagage->client_ville = $client->ville->name;
+                $ad_bagage->client_id = $client->id;
+                $ad_bagage->siege_id = Auth::user()->siege_id;
+                $ad_bagage->save();
+                Toastr::success('Votre client a bien ete creer', 'Creattion client', ["positionClass" => "toast-top-right"]);
+                return back();
+            }else {
+                Toastr::error('Vous n\'aviez pas payer votre ticket', 'Error Ticker', ["positionClass" => "toast-top-right"]);
+                return back();
+            }
         }else {
-            Toastr::error('Votre client n\'existe pas', 'Error client', ["positionClass" => "toast-top-right"]);
+            Toastr::error('Votre client n\'etes pas inscrit pour aujourdhuit', 'Error client', ["positionClass" => "toast-top-right"]);
             return back();
         }
     }

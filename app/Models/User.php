@@ -62,7 +62,12 @@ class User extends Authenticatable
         return $this->hasMany(Bus::class);
     }
 
-    public function siege()
+    // public function sieges()
+    // {
+    //     return $this->hasMany(Siege::class);
+    // }
+
+      public function siege()
     {
         return $this->belongsTo(Siege::class);
     }

@@ -56,15 +56,15 @@ class ClientController extends Controller
                 Notification::route('mail',$user->bus->siege->email)
                     ->notify(new PaymentTicker($user));
                 Toastr::success('Salut votre billet a ete payer avec succes,accedez sur votre compte gmail', 'Paiement Ticker', ["positionClass" => "toast-top-right"]);
-                return redirect()->route('/');
+                return redirect()->route('index');
             }else{
                 Toastr::error('Cette date de voyage est passer', 'Paiement Ticker', ["positionClass" => "toast-top-right"]);
-                return redirect()->route('/');
+                return redirect()->route('index');
             }
 
         }else {
             Toastr::error('Salut chere client il semble que ce ticker a deja ete payer', 'Paiement Ticker', ["positionClass" => "toast-top-right"]);
-            return redirect()->route('/');
+            return redirect()->route('index');
         }
     }
 

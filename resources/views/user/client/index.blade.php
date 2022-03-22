@@ -64,7 +64,7 @@
                                         <h5>Verifiez votre colis</h5>
                                         Accès facile à vos billets, peu importe votre destination, même hors connexion
                                         <div class="button-items text-center">
-                                            <a href="" class="btn btn-success btn-sm btn-block" style="width: 100%;">Verifiez</a>
+                                            <a href="" class="btn btn-outline-success btn-sm btn-block" data-bs-toggle="modal" data-bs-target="#staticBackdropColisClient" style="width: 100%;">Verifiez</a>
                                         </div>
                                     </div>
                                 </div>
@@ -82,7 +82,7 @@
                                         <h5>Verifiez vos bagages</h5>
                                         Accès facile à vos billets, peu importe votre destination, même hors connexion
                                         <div class="button-items text-center">
-                                            <a href="" class="btn btn-success btn-sm btn-block" style="width: 100%;">Verifiez</a>
+                                            <a href="" class="btn btn-outline-success btn-sm btn-block" data-bs-toggle="modal" data-bs-target="#staticBackdropBagageClient" style="width: 100%;">Verifiez</a>
                                         </div>
                                     </div>
                                 </div>
@@ -100,7 +100,7 @@
                                         <h5>Modififer votre ticket</h5>
                                         Accès facile à vos billets, peu importe votre destination, même hors connexion
                                         <div class="button-items text-center">
-                                            <a href="" class="btn btn-success btn-sm btn-block" data-bs-toggle="modal" data-bs-target="#staticBackdropTickerClient" style="width: 100%;">Verifiez</a>
+                                            <a href="" class="btn btn-outline-success btn-sm btn-block" data-bs-toggle="modal" data-bs-target="#staticBackdropTickerClient" style="width: 100%;">Verifiez</a>
                                         </div>
                                     </div>
                                 </div>
@@ -115,8 +115,144 @@
     </section>
 <!-- currency price section end -->
 
+<div class="modal fade" id="staticBackdropColisClient" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Rechercez votre colis</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+                <div class="modal-body">
+                    <p class="text-bold text-center">
+                        Entrez votre numero de telephone
+                    </p>
+                    <p>
+                        <form class="custom-validation" action="{{ route('client.colis') }}" method="POST" enctype="multipart/form-data">
+                          @csrf
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <div class="mb-3" >
+                                        <label class="form-label">Votre numero de telephone</label>
+                                        <div>
+                                            <input data-parsley-type="number" type="number" id="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" autocomplete="phone"
+                                            required placeholder="Numero de telephone"  />
+                                            <input type="hidden" name="indicatif" id="indicatif">
+                                            @error('phone')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
 
- <div class="modal fade" id="staticBackdropTickerClient" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="mb-3 row">
+                                        <label class="form-label">Selectionner le siege de l'agence</label>
+                                        <div class="col-md-12">
+                                            <select  class="form-control @error('siege') is-invalid @enderror" name="siege" required autocomplete="siege" required>
+                                                @foreach($agences as $agence)
+                                                    @if($agence->sieges->count() > 0 )
+                                                        <optgroup label="{{$agence->name_agence}}">
+                                                            @foreach($agence->sieges as $siege)
+                                                                <option value="{{ $siege->id }}">{{$siege->name}}</option>
+                                                            @endforeach
+                                                        </optgroup>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                            @error('siege')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-wrap gap-2">
+                                    <button type="submit" class="btn btn-primary waves-effect waves-light btn-block">
+                                        Envoyer
+                                    </button>
+                                    <button type="reset" class="btn btn-secondary waves-effect btn-block">
+                                        Anuller
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </p>
+                </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="staticBackdropBagageClient" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Rechercer vos bagages  </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+                 <div class="modal-body">
+                    <p class="text-bold text-center">
+                        Entrez votre numero de telephone
+                    </p>
+                    <p>
+                        <form class="custom-validation" action="{{ route('client.bagage') }}" method="POST" enctype="multipart/form-data">
+                          @csrf
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <div class="mb-3" >
+                                        <label class="form-label">Votre numero de telephone</label>
+                                        <div>
+                                            <input data-parsley-type="number" type="number" id="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" autocomplete="phone"
+                                            required placeholder="Numero de telephone"  />
+                                            <input type="hidden" name="indicatif" id="indicatif">
+                                            @error('phone')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label class="form-label">Selectionner le siege de l'agence</label>
+                                        <div class="col-md-12">
+                                            <select  class="form-control @error('siege') is-invalid @enderror" name="siege" required autocomplete="siege" required>
+                                                @foreach($agences as $agence)
+                                                    @if($agence->sieges->count() > 0 )
+                                                        <optgroup label="{{$agence->name_agence}}">
+                                                            @foreach($agence->sieges as $siege)
+                                                                <option value="{{ $siege->id }}">{{$siege->name}}</option>
+                                                            @endforeach
+                                                        </optgroup>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                            @error('siege')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-wrap gap-2">
+                                    <button type="submit" class="btn btn-primary waves-effect waves-light btn-block">
+                                        Envoyer
+                                    </button>
+                                    <button type="reset" class="btn btn-secondary waves-effect btn-block">
+                                        Anuller
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </p>
+                </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="staticBackdropTickerClient" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-md modal-dialog-centered" role="document">
         <div class="modal-content ">
             <div class="modal-header">
@@ -128,7 +264,7 @@
                         <span class="text-warning">Attention:</span> la modification n'est possible qu'avant le paiement de votre ticker
                     </p>
                     <p>
-                        <form class="custom-validation" action="" method="POST" enctype="multipart/form-data">
+                        <form class="custom-validation" action="{{ route('client.ticket') }}" method="POST" enctype="multipart/form-data">
                             {{csrf_field()}}
                             {{method_field('GET')}}
                             <div class="row">
@@ -157,6 +293,28 @@
                                                         <strong>{{ $message }}</strong>
                                                     </span>
                                                 @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 row">
+                                        <label class="form-label">Selectionner le siege de l'agence</label>
+                                        <div class="col-md-12">
+                                            <select  class="form-control @error('siege') is-invalid @enderror" name="siege" required autocomplete="siege" required>
+                                                @foreach($agences as $agence)
+                                                    @if($agence->sieges->count() > 0 )
+                                                        <optgroup label="{{$agence->name_agence}}">
+                                                            @foreach($agence->sieges as $siege)
+                                                                <option value="{{ $siege->id }}">{{$siege->name}}</option>
+                                                            @endforeach
+                                                        </optgroup>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                            @error('siege')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>

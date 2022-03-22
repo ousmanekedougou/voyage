@@ -34,7 +34,7 @@
                                             </div>
                                             <div class="col-sm-8">
                                                 <div class="text-sm-end">
-                                                    <button type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2" data-bs-toggle="modal" data-bs-target="#NewClientBagage"><i class="fa fa-luggage-cart"></i> Ajouter des bagages</button>
+                                                    <button type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2" data-bs-toggle="modal" data-bs-target="#NewClientBagage"><i class="fa fa-luggage-cart"></i> Ajouter des clients</button>
                                                 </div>
                                             </div><!-- end col-->
                                         </div>
@@ -199,7 +199,7 @@
                             </div>
                                 <div class="modal-body">
                                     <p>
-                                    <form class="custom-validation" action="{{ route('admin.bagage.store') }}" method="POST" enctype="multipart/form-data" name="myform" onsubmit="return validation()">
+                                    <form class="custom-validation" id="phone" action="{{ route('admin.bagage.store') }}" method="POST" enctype="multipart/form-data" name="myform" onsubmit="return validation()">
                                             @csrf
                                             <div class="row">
                                                 <div class="col-xl-12">

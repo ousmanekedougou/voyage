@@ -86,7 +86,7 @@ class HomeController extends Controller
             }
         }
 
-        Client::where('registered_at','<',Carbon::yesterday()->format('Y-m-d'))->delete();
+        DateDepart::where('depart_at','<',Carbon::today()->format('Y-m-d'))->delete();
 
         if ($this->middleware(['IsAgent']) && Auth::user()->role == 2) {
             Bagage::where('created_at','<',Carbon::yesterday())->delete();

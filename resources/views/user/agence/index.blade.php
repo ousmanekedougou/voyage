@@ -12,7 +12,7 @@
                 <div class="col-lg-8 card_show">
                     <div class="text-white-50">
                         <h1 class="text-white font-weight-semibold mb-2 hero-title ">Voyage par tout au sénégal avec nos agences </h1>
-                        <p class="font-size-16" >
+                        <p class="font-size-16 text-white">
                             Plus de {{$agenceCount}} compagnies de voyages nous font confiance pour vendre leurs billets sur une seule plateforme.
                         </p>
                     </div>
