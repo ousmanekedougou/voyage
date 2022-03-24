@@ -154,19 +154,12 @@
                                         <span key="t-ecommerce">Historiques</span>
                                     </a>
                                     <ul class="sub-menu" aria-expanded="false">
-                                        
-                                        @foreach(historical() as $historique)
-                                            <li><a href="{{route('admin.historique.show',$historique->siege_id)}}" key="t-products"> <i class="fa fa-clock"></i>
-                                                @if($historique->registered_at < carbon_today())
-                                                    Hiere
-                                                @elseif($historique->registered_at < carbon_today())
-                                                 Avant Hiere
-                                                @else
-                                                {{$historique->registered_at}}
-                                                @endif
-                                             </a></li>
-                                        @endforeach
-                                        
+                                        @if(historical_hiere() != null)
+                                            <li><a href="{{route('admin.historique.show',historical_hiere()->siege_id)}}" key="t-products"> <i class="fa fa-clock"></i>Hiere</a></li>
+                                        @endif
+                                        @if(historical_avant_hiere() != null)
+                                            <li><a href="{{route('admin.historique.show',historical_avant_hiere()->siege_id)}}" key="t-products"> <i class="fa fa-clock"></i>Avant Hiere</a></li>
+                                        @endif
                                     </ul>
                                 </li>
                                 

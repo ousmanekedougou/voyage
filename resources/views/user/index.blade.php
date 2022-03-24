@@ -72,19 +72,21 @@
         <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
             <div class="row align-items-center row_pricipal" style="margin-top: -70px;" >
+                <div class="col-lg-2"></div>
                 <div class="col-lg-8 card_show">
                     <div class="text-white-50">
-                        <h1 class="text-white font-weight-semibold mb-3 hero-title ">Yombalal Toucki Thi Biir Réwmi</h1>
-                        <p class="font-size-16 text-white">
+                        <h1 class="text-white font-weight-semibold mb-3 hero-title text-center">Yombalal Toucki Thi Biir Réwmi</h1>
+                        <p class="font-size-16 text-white text-center">
                             Toutes les options de voyage sur une seule plateforme
                         </p>
 
-                        <div class="button-items mt-4 ">
+                        <div class="button-items mt-4 text-center">
                             <a href="{{ route('agence.create') }}" class="btn btn-success">Creer votre compte agence</a>
                             <a href="{{ route('agence.index') }}" class="btn btn-light">Nos agences de transport</a>
                         </div>
                     </div>
                 </div>
+                <div class="col-lg-2"></div>
             </div>
             <!-- end row -->
         </div>

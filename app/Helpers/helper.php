@@ -87,12 +87,26 @@ if (! function_exists('part')) {
     }
 }
 
-if (! function_exists('historical')) {
-    function historical(){
-        $historical = Historical::where('siege_id',Auth::user()->siege_id)->where('registered_at','<',Carbon::today()->format('Y-m-d'))->get();
-        return $historical;
+if (! function_exists('historical_hiere')) {
+    function historical_hiere(){
+        $historical_hiere = Historical::where('siege_id',Auth::user()->siege_id)->where('registered_at','<',Carbon::today()->format('Y-m-d'))->first();
+        return $historical_hiere;
     }
 }
+
+if (! function_exists('historical_avant_hiere')) {
+    function historical_avant_hiere(){
+        $historical_avant_hiere = Historical::where('siege_id',Auth::user()->siege_id)->where('registered_at','<',Carbon::yesterday()->format('Y-m-d'))->first();
+        return $historical_avant_hiere;
+    }
+}
+
+// if (! function_exists('historical')) {
+//     function historical(){
+//         $historical = Historical::where('siege_id',Auth::user()->siege_id)->where('registered_at','<',Carbon::today()->format('Y-m-d'))->get();
+//         return $historical;
+//     }
+// }
 
 if (! function_exists('reference')) {
     function reference(){

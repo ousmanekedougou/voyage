@@ -17,7 +17,7 @@ class CreateColiesTable extends Migration
             $table->id();
             $table->string('name');
             $table->integer('phone');
-            $table->integer('cni');
+            $table->string('cni');
             $table->string('name_recept');
             $table->integer('phone_recept');
             $table->string('ville');

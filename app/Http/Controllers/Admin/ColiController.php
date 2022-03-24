@@ -53,10 +53,20 @@ class ColiController extends Controller
             'phone_recept' => 'required|numeric|unique:colies',
             'ville' => 'required|string|max:255',
         ]);
+        // dd($request->all());
+         $cni_final = '';
+        $r_cni = intval($request->cni);
+
+        if (strlen($r_cni) == 13) {
+            $cni_final = $r_cni;
+        }else{
+            Toastr::error('Votre numero d\'identite est invalide', 'Error phone', ["positionClass" => "toast-top-right"]);
+            return back();
+        }
         $coli_client = new Colie();
         $coli_client->name = $request->name; 
         $coli_client->phone = $request->phone; 
-        $coli_client->cni = $request->cni; 
+        $coli_client->cni = $cni_final; 
         $coli_client->name_recept = $request->name_recept; 
         $coli_client->phone_recept = $request->phone_recept; 
         $coli_client->ville = $request->ville; 
@@ -98,6 +108,9 @@ class ColiController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request,[
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
+        ]);
         $imageName = '';
         if($request->hasFile('image'))
         {

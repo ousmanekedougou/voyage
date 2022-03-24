@@ -7,12 +7,14 @@
         <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
             <div class="row align-items-center">
+                <div class="col-lg-2"></div>
                 <div class="col-lg-8">
                     <div class="text-white-50">
                         <h1 class="text-white font-weight-semibold mb-3 hero-title">Vérifiez toutes vos réservations</h1>
                         
                     </div>
                 </div>
+                <div class="col-lg-2"></div>
             </div>
             <!-- end row -->
         </div>
@@ -31,7 +33,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <h5>Billets sur votre mobile</h5>
+                                        <h5 class="text-center">La fiabilite et la tracabilite</h5>
                                            <p class="font-size-16">
                                                 Pour nous aider à retrouver votre billet,vos bagages ou vos colis saisissez ci-dessous votre référence de réservation (indiquée dans l'email ou sms de confirmation que vous avez reçu) et votre adresse email ou numero de telephone.
                                             </p>
@@ -145,18 +147,18 @@
                                         </div>
                                     </div>
 
-                                    <div class="mb-3 row">
+                                     <div class="mb-3 row">
                                         <label class="form-label">Selectionner le siege de l'agence</label>
                                         <div class="col-md-12">
                                             <select  class="form-control @error('siege') is-invalid @enderror" name="siege" required autocomplete="siege" required>
                                                 @foreach($agences as $agence)
-                                                    @if($agence->sieges->count() > 0 )
-                                                        <optgroup label="{{$agence->name_agence}}">
-                                                            @foreach($agence->sieges as $siege)
+                                                    <optgroup label="{{$agence->name_agence}}">
+                                                        @foreach($sieges as $siege)
+                                                            @if($agence->id == $siege->user_id)
                                                                 <option value="{{ $siege->id }}">{{$siege->name}}</option>
-                                                            @endforeach
-                                                        </optgroup>
-                                                    @endif
+                                                            @endif
+                                                        @endforeach
+                                                    </optgroup>
                                                 @endforeach
                                             </select>
                                             @error('siege')
@@ -218,13 +220,13 @@
                                         <div class="col-md-12">
                                             <select  class="form-control @error('siege') is-invalid @enderror" name="siege" required autocomplete="siege" required>
                                                 @foreach($agences as $agence)
-                                                    @if($agence->sieges->count() > 0 )
-                                                        <optgroup label="{{$agence->name_agence}}">
-                                                            @foreach($agence->sieges as $siege)
+                                                    <optgroup label="{{$agence->name_agence}}">
+                                                        @foreach($sieges as $siege)
+                                                            @if($agence->id == $siege->user_id)
                                                                 <option value="{{ $siege->id }}">{{$siege->name}}</option>
-                                                            @endforeach
-                                                        </optgroup>
-                                                    @endif
+                                                            @endif
+                                                        @endforeach
+                                                    </optgroup>
                                                 @endforeach
                                             </select>
                                             @error('siege')
@@ -296,18 +298,18 @@
                                         </div>
                                     </div>
 
-                                    <div class="mb-3 row">
+                                     <div class="mb-3 row">
                                         <label class="form-label">Selectionner le siege de l'agence</label>
                                         <div class="col-md-12">
                                             <select  class="form-control @error('siege') is-invalid @enderror" name="siege" required autocomplete="siege" required>
                                                 @foreach($agences as $agence)
-                                                    @if($agence->sieges->count() > 0 )
-                                                        <optgroup label="{{$agence->name_agence}}">
-                                                            @foreach($agence->sieges as $siege)
+                                                    <optgroup label="{{$agence->name_agence}}">
+                                                        @foreach($sieges as $siege)
+                                                            @if($agence->id == $siege->user_id)
                                                                 <option value="{{ $siege->id }}">{{$siege->name}}</option>
-                                                            @endforeach
-                                                        </optgroup>
-                                                    @endif
+                                                            @endif
+                                                        @endforeach
+                                                    </optgroup>
                                                 @endforeach
                                             </select>
                                             @error('siege')
@@ -333,5 +335,5 @@
         </div>
     </div>
 </div>
-           
+
 @endsection

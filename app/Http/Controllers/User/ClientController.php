@@ -33,7 +33,8 @@ class ClientController extends Controller
     public function index()
     {
         $agences = User::where('is_admin',2)->where('is_active',1)->get();
-        return view('user.client.index',compact('agences'));
+        $sieges = Siege::all();
+        return view('user.client.index',compact('agences','sieges'));
     }
 
     /**
@@ -307,29 +308,24 @@ class ClientController extends Controller
     }
 
     public function colis(Request $request){
+
         $this->validate($request,[
             'phone' => 'required|numeric',
             'siege' => 'required|string',
         ]);
 
-        $phoneFinale = '';
-        $phoneComplet = '221'.$request->phone;
-        if (strlen($request->phone) == 12 ) {
-            $phoneFinale = $request->phone;
-        }elseif (strlen($request->phone) == 9) {
-            $phoneFinale = $phoneComplet;
-        }else {
-            Toastr::error('Votre numero de telephone est invalide', 'Error phone', ["positionClass" => "toast-top-right"]);
-            return back();
-        }
-
-        $colie = Colie::where('phone',$phoneFinale)->orWhere('phone_recept',$phoneFinale)
-        ->where('siege_id',$request->siege)
+        $colie = Colie::where('phone',$request->phone)->where('siege_id',$request->siege)->orWhere('phone_recept',$request->phone)
         ->first();
 
         if ($colie) {
-            $coli_clients = ColiClient::where('client_id',$colie->id)->get();
-            return view('user.client.colie',compact('coli_clients'));
+            if($colie->siege_id == $request->siege){
+                $prix_total = $colie->prix_total;
+                $coli_clients = ColiClient::where('colie_id',$colie->id)->get();
+                return view('user.client.colie',compact('coli_clients','colie','prix_total'));
+            }else {
+                Toastr::error('Votre colie n\'est de ce siege', 'Error Colie', ["positionClass" => "toast-top-right"]);
+                return back();
+            }
         }else {
             Toastr::error('Vous n\'aviez pas de colie', 'Error Colie', ["positionClass" => "toast-top-right"]);
             return back();
@@ -358,15 +354,22 @@ class ClientController extends Controller
         ->first();
 
         if ($bagage) {
-            $bagage_clients = BagageClient::where('client_id',$bagage->id)->get();
-            return view('user.client.bagage',compact('bagage_clients'));
+            if ($bagage->siege_id == $request->siege) {
+                $prix_total = $bagage->prix_total;
+                $client = $bagage->client->name;
+                $bagage_clients = BagageClient::where('bagage_id',$bagage->id)->get();
+                return view('user.client.bagage',compact('bagage_clients','prix_total','client'));
+            }else {
+                Toastr::error('Vous bagages ne sont pas de ce siege', 'Error Bagage', ["positionClass" => "toast-top-right"]);
+                return back();
+            }
         }else {
             Toastr::error('Vous n\'aviez pas de bagages', 'Error Bagage', ["positionClass" => "toast-top-right"]);
             return back();
         }
     }
 
-      public function ticket(Request $request)
+    public function ticket(Request $request)
     {
         $this->validate($request,[
             'phone' => 'required|numeric',
@@ -398,16 +401,22 @@ class ClientController extends Controller
             ->where('siege_id',$request->siege)
             ->first();
         if ($client) {
-            if ($client->registered_at >= carbon_today()) {
-                if ($client->amount == $client->ville->amount) {
-                    Toastr::error('Vous ne pouvez pas modifier apres le paiement du billet', 'Error Billet', 
+            if ($client->siege_id == $request->siege) {
+                if ($client->registered_at >= carbon_today()) {
+                    if ($client->amount == $client->ville->amount) {
+                        Toastr::error('Vous ne pouvez pas modifier apres le paiement du billet', 'Error Billet', 
+                        ["positionClass" => "toast-top-right"]);
+                        return back();
+                    }elseif ($client->amount == 0) {
+                        return view('user.agence.clientShow',compact('client','siege'));
+                    }
+                }else {
+                    Toastr::error('La date de votre inscription est depasser', 'Error date', 
                     ["positionClass" => "toast-top-right"]);
                     return back();
-                }elseif ($client->amount == 0) {
-                    return view('user.agence.clientShow',compact('client','siege'));
                 }
             }else {
-                Toastr::error('La date de votre inscription est depasser', 'Error date', 
+                Toastr::error('Vous etes pas inscrit sur ce siege', 'Error inscription', 
                 ["positionClass" => "toast-top-right"]);
                 return back();
             }

@@ -157,6 +157,9 @@ class ProfilController extends Controller
                 $update->email_agence = $request->email_agence;
                 $update->image_agence = $image_agence;
                 $update->save();
+                User::where('user_id',$update->id)->update([
+                    'image_agence' => $image_agence
+                ]);
                 Toastr::success('Votre profile a bien ete mise a jour', 'Modifier Profile', ["positionClass" => "toast-top-right"]);
                 return back();
            }

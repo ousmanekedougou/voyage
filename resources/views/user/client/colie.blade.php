@@ -39,54 +39,63 @@
                                                 aria-labelledby="v-pills-confir-tab">
                                                 <div class="card shadow-none border mb-0">
                                                     <div class="card-body">
-                                                        <h4 class="card-title mb-4">Les colies de Ousmane diallo</h4>
 
                                                         <div class="table-responsive">
-                                                            <table class="table align-middle mb-0 table-nowrap">
-                                                                <thead class="table-light">
+                                                             <table class="table align-middle mb-0 table-nowrap">
+                                                                 <thead class="table-light">
+                                                                    <tr class="text-center">
+                                                                        <td>
+                                                                            <h5 class="font-size-14 text-truncate"><a
+                                                                                    href="ecommerce-product-detail.html"
+                                                                                    class="text-dark">Envoye par</a></h5>
+                                                                            <p class="text-muted mb-0">{{ $colie->name }} : {{ $colie->phone }}</p>
+                                                                        </td>
+                                                                       
+                                                                        <td>
+                                                                            <h5 class="font-size-14 text-truncate"><a
+                                                                                    href="ecommerce-product-detail.html"
+                                                                                    class="text-dark">Recepteur</a></h5>
+                                                                            <p class="text-muted mb-0">{{ $colie->name_recept }} : {{ $colie->phone_recept }}</p>
+                                                                        </td>
+                                                                        <td>
+                                                                             <h5 class="font-size-14 text-truncate"><a
+                                                                                    href="ecommerce-product-detail.html"
+                                                                                    class="text-dark">Ville</a></h5>
+                                                                            <p class="text-muted mb-0">{{ $colie->ville }} </p>
+                                                                        </td>
+                                                                    </tr>
+                                                                
                                                                     <tr>
-                                                                        <th scope="col">Product</th>
-                                                                        <th scope="col">Product Desc</th>
-                                                                        <th scope="col">Price</th>
+                                                                        <th scope="col">Images</th>
+                                                                        <th scope="col">Nom & Description</th>
+                                                                        <th scope="col">Prix</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
+                                                                    @foreach($coli_clients as $colie)
                                                                     <tr>
                                                                         <th scope="row"><img
-                                                                                src="{{asset('admin/assets/images/product/img-1.png')}}"
+                                                                                src="{{Storage::url($colie->image)}}"
                                                                                 alt="product-img" title="product-img"
                                                                                 class="avatar-md"></th>
                                                                         <td>
                                                                             <h5 class="font-size-14 text-truncate"><a
                                                                                     href="ecommerce-product-detail.html"
-                                                                                    class="text-dark">Half sleeve
-                                                                                    T-shirt (64GB) </a></h5>
-                                                                            <p class="text-muted mb-0">$ 450 x 1</p>
+                                                                                    class="text-dark">{{ $colie->name }}</a></h5>
+                                                                            <p class="text-muted mb-0">{{ $colie->desc }}</p>
                                                                         </td>
-                                                                        <td>$ 450</td>
+                                                                        <td>{{ $colie->prix }} f</td>
                                                                     </tr>
-                                                                    <tr>
-                                                                        <th scope="row"><img
-                                                                                src="{{asset('admin/assets/images/product/img-7.png')}}"
-                                                                                alt="product-img" title="product-img"
-                                                                                class="avatar-md"></th>
-                                                                        <td>
-                                                                            <h5 class="font-size-14 text-truncate"><a
-                                                                                    href="ecommerce-product-detail.html"
-                                                                                    class="text-dark">Wirless Headphone
-                                                                                </a></h5>
-                                                                            <p class="text-muted mb-0">$ 225 x 1</p>
-                                                                        </td>
-                                                                        <td>$ 225</td>
-                                                                    </tr>
+                                                                    @endforeach
                                                                     <tr>
                                                                         <td colspan="2">
-                                                                            <h6 class="m-0 text-end">Sub Total:</h6>
+                                                                            <h6 class="m-0 text-end">Total:</h6>
                                                                         </td>
                                                                         <td>
-                                                                            $ 675
+                                                                            {{$prix_total}} f
                                                                         </td>
                                                                     </tr>
+                                                                    {{--
                                                                     <tr>
                                                                         <td colspan="3">
                                                                             <div class="bg-primary bg-soft p-3 rounded">
@@ -108,6 +117,7 @@
                                                                             $ 675
                                                                         </td>
                                                                     </tr>
+                                                                    --}}
                                                                 </tbody>
                                                             </table>
 

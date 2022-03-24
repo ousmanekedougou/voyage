@@ -104,6 +104,9 @@ class BagageController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request,[
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
+        ]);
          $imageName = '';
         if($request->hasFile('image'))
         {

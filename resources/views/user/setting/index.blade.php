@@ -7,14 +7,16 @@
         <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
             <div class="row align-items-center" style="margin-top: -70px;">
+                <div class="col-lg-2"></div>
                 <div class="col-lg-8">
                     <div class="text-white-50">
-                        <h1 class="text-white font-weight-semibold mb-3 hero-title">Yombalal Toucki Thi Biir Réwmi</h1>
-                        <p class="font-size-16 text-white">
+                        <h1 class="text-white font-weight-semibold mb-3 hero-title text-center">Yombalal Toucki Thi Biir Réwmi</h1>
+                        <p class="font-size-16 text-white text-center">
                             Le secteur du tourisme a fort à faire dans une conjoncture économique pleine de défis. Pour vous démarquer, en tant qu’agence de voyages.
                         </p>
                     </div>
                 </div>
+                <div class="col-lg-2"></div>
             </div>
             <!-- end row -->
         </div>
