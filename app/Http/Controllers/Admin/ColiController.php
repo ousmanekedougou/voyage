@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helpers\Sms;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\ColiClient;
 use App\Models\Admin\Colie;
+use App\Models\User;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -85,7 +87,17 @@ class ColiController extends Controller
     public function show($id)
     {
         $client = Colie::where('id',$id)->where('siege_id',Auth::user()->siege_id)->first();
-        return view('admin.coli.show',compact('client'));
+        if ($client) {
+            if ($client->coli_clients->count() > 0) {
+                return view('admin.coli.show',compact('client'));
+            }else {
+                Toastr::error('Ce client n\'a pas de colis', 'Error Colis', ["positionClass" => "toast-top-right"]);
+                return back();
+            }
+        }else {
+            Toastr::error('Ce client n\'existe pas', 'Error Client', ["positionClass" => "toast-top-right"]);
+            return back();
+        }
     }
 
     /**
@@ -116,16 +128,43 @@ class ColiController extends Controller
         {
             $imageName = $request->image->store('public/Colis');
         }
-         $client = new ColiClient();
-         $client->image = $imageName;
-         $client->name = $request->name;
-         $client->prix = $request->prix;
-         $client->desc = $request->desc;
-         $client->colie_id = $id;
-         $client->siege_id = Auth::user()->siege_id;
-         $client->save();
 
-         $client_p_t = Colie::where('id',$id)->first();
+        $client = new ColiClient();
+        $client->image = $imageName;
+        $client->name = $request->name;
+        $client->prix = $request->prix;
+        $client->desc = $request->desc;
+        $client->colie_id = $id;
+        $client->siege_id = Auth::user()->siege_id;
+        $client->save();
+
+        // $sendPhone = User::where('');
+        // $config = array(
+        //     'clientId' => config('app.clientId'),
+        //     'clientSecret' =>  config('app.clientSecret'),
+        // );
+        // $osms = new Sms($config);
+
+        // $data = $osms->getTokenFromConsumerKey();
+        // // dd($data);
+        // $token = array(
+        //     'token' => $data['access_token']
+        // );
+        // $phone = intval($client->phone);
+        // $message = "AEERK KEDOUGOU:\nSalut $client->prenom $client->nom les documents que vous avez deposés pour les codifications ont été rejetés\n\nMotif du rejet :\n$client->texmail.\nVeuiilez vous repprocher au-pres du bureau plus d'information. \nCordialement le Bureau de l'AEERK";
+            
+        // $response = $osms->sendSms(
+        //     // sender
+        //     'tel:+' . $sendPhone->sendPhone,
+        //     // receiver
+        //     'tel:+221782875971',
+        //     // message
+        //     $message,
+
+        //     'TouCki'
+        // );
+
+        $client_p_t = Colie::where('id',$id)->first();
         if ($client_p_t->prix_total == 0) {
             $client_p_t->prix_total = $request->prix;
         }elseif ($client_p_t->prix_total > 0) {

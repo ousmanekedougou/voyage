@@ -12,11 +12,10 @@
     <section class="section hero-section bg-ico-hero"  id="home">
         <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
-                <div class="row align-items-center row_pricipal" style="margin-top: -70px;" >
-                <div class="col-lg-8 card_show">
+            <div class="row align-items-center row_pricipal" style="margin-top: -70px;" >
+                <div class="col-lg-offset-6 card_show">
                     <div class="text-white-50">
-                        <h1 class="text-white font-size-23 font-weight-semibold mb-3 hero-title ">Réservez vos billets de bus sur <span class="text-danger">{{$agence->name_agence}}</span> au meilleur prix</h1>
-                    
+                        <h1 class="text-white font-size-23 font-weight-semibold mb-3 hero-title text-center">Réservez vos billets de bus sur <span class="text-danger">{{$agence->name_agence}}</span> au meilleur prix</h1>
                     </div>
                 </div>
             </div>

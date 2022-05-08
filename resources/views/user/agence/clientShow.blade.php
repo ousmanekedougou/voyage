@@ -1,4 +1,4 @@
-@extends('user.layouts.app',['title' => 'Update Client'])
+@extends('user.layouts.app',['title' => 'Modifier Ticket Client'])
 @section('headSection')
     <meta name="csrf-token" content="{{ csrf_token() }}">
 	<link rel="stylesheet" href="{{asset('user/assets/build/css/intlTelInput.css')}}">
@@ -12,19 +12,20 @@
         <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
             <div class="row align-items-center row_pricipal" style="margin-top: -70px;" >
-                <div class="col-lg-8 card_show">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-8 card_show text-center">
                     <div class="text-white-50">
                         <h1 class="text-white font-weight-semibold mb-3 hero-title ">Creer votre agence de transport</h1>
                         <p class="font-size-20 text-white" >
                             Toutes les options de voyage sur une seule plateforme
                         </p>
-
                         <!-- <div class="button-items mt-4 ">
                             <a href="{{ route('agence.create') }}" class="btn btn-success">Creer votre compte agence</a>
                             <a href="{{ route('agence.index') }}" class="btn btn-light">Nos agences de transport</a>
                         </div> -->
                     </div>
                 </div>
+                <div class="col-lg-2"></div>
             </div>
             <!-- end row -->
         </div>
@@ -40,6 +41,11 @@
                 {{method_field('PUT')}}
                 <div class="row">
                     <div class="col-xl-6">
+                        <p class="text-center">
+                            Bonjour {{$client->name}} vous etes sur le point de modifier votre ticket sur @foreach($client->siege->users() as $client_us) {{$client_us->name}} @endforeach
+                            pour le siege de {{$client->siege->name}}.
+                            Nous vous informon que la modification ne peut se faire apres le paiement du ticket.
+                        </p>
                         <img src="{{asset('user/assets/images/updateClient.svg')}}" style="width: 100%;" alt="" srcset="">
                     </div>
                     <div class="col-xl-6">
@@ -146,7 +152,7 @@
 
                          <div class="d-flex flex-wrap gap-2 text-center">
                         <button type="submit" class="btn btn-primary waves-effect waves-light btn-block">
-                            Modifier vos Coordonnes
+                            Modifier votre ticket
                         </button>
                         <button type="reset" class="btn btn-secondary waves-effect btn-block">
                             Anuller

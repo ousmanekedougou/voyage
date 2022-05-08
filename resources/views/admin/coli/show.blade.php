@@ -50,16 +50,34 @@
 
                         <div class="row bagage_show" id="print">
                             <div class="col-12">
-                                <p class="mb-2">Prenom et Nom: <span class="text-primary">{{ $client->name }}</span></p>
-                                    <p class="mb-2">Telephone: <span class="text-primary">{{ $client->phone }}</span></p>
-
                                     <div class="table-responsive">
                                         <table class="table align-middle table-nowrap">
                                             <thead>
+                                                <tr class="text-center">
+                                                    <td>
+                                                        <h5 class="font-size-14 text-truncate"><a
+                                                                href="ecommerce-product-detail.html"
+                                                                class="text-dark">Envoye par</a></h5>
+                                                        <p class="text-muted mb-0">{{ $client->name }} : {{ $client->phone }}</p>
+                                                    </td>
+                                                    
+                                                    <td>
+                                                        <h5 class="font-size-14 text-truncate"><a
+                                                                href="ecommerce-product-detail.html"
+                                                                class="text-dark">Recepteur</a></h5>
+                                                        <p class="text-muted mb-0">{{ $client->name_recept }} : {{ $client->phone_recept }}</p>
+                                                    </td>
+                                                    <td>
+                                                            <h5 class="font-size-14 text-truncate"><a
+                                                                href="ecommerce-product-detail.html"
+                                                                class="text-dark">Ville</a></h5>
+                                                        <p class="text-muted mb-0">{{ $client->ville }} </p>
+                                                    </td>
+                                                </tr>
                                                 <tr>
-                                                <th scope="col">Images</th>
-                                                <th scope="col">Nom et Description</th>
-                                                <th scope="col">Prix</th>
+                                                    <th scope="col">Images</th>
+                                                    <th scope="col">Nom et Description</th>
+                                                    <th scope="col">Prix</th>
                                                 </tr>
                                             </thead>
                                             <tbody>

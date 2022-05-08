@@ -81,7 +81,17 @@ class BagageController extends Controller
     public function show($id)
     {
         $client = Bagage::where('id',$id)->first();
-        return view('admin.bagage.show',compact('client'));
+        if ($client) {
+            if ($client->bagage_clients->count() > 0) {
+                return view('admin.bagage.show',compact('client'));
+            }else {
+                Toastr::error('Ce client n\'a pas de bagages', 'Error Bagages', ["positionClass" => "toast-top-right"]);
+                return back();
+            }
+        }else {
+            Toastr::error('Ce client n\'existe pas', 'Error Client', ["positionClass" => "toast-top-right"]);
+            return back();
+        }
     }
 
     /**

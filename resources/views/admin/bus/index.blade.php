@@ -76,7 +76,11 @@
                                                     </td>
 
                                                     <td>
-                                                        {{ $bus->date_depart->depart_at }}
+                                                        @if($bus->date_depart->depart_at != '')
+                                                            {{ $bus->date_depart->depart_at }}
+                                                        @else
+                                                            Pas de date
+                                                        @endif
                                                     </td>
                                                     
                                                     <td>

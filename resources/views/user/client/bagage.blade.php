@@ -7,7 +7,7 @@
         <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-8">
+                <div class="col-lg-12 text-center">
                     <div class="text-white-50">
                         <h1 class="text-white font-weight-semibold mb-3 hero-title">Tout vos bagage</h1>
                         
@@ -39,11 +39,28 @@
                                                 aria-labelledby="v-pills-confir-tab">
                                                 <div class="card shadow-none border mb-0">
                                                     <div class="card-body">
-                                                        <h4 class="card-title mb-4 text-center bg-primary bg-soft p-3 rounded">Les bagages de {{ $client }}</h4>
-
+                                                        <h4 class="card-title mb-4 text-center bg-primary bg-soft p-3 rounded">Les bagages de {{ $client->name }}</h4>
                                                         <div class="table-responsive">
                                                             <table class="table align-middle mb-0 table-nowrap">
                                                                 <thead class="table-light">
+                                                                    <tr class="text-center">
+                                                                        <td>
+                                                                            <h5 class="font-size-14 text-truncate"><a
+                                                                                    class="text-dark">Prenom et nom</a></h5>
+                                                                            <p class="text-muted mb-0">{{ $bagage->client_name }}</p>
+                                                                        </td>
+                                                                       
+                                                                        <td>
+                                                                            <h5 class="font-size-14 text-truncate"><a
+                                                                                    class="text-dark">Téléphone</a></h5>
+                                                                            <p class="text-muted mb-0">{{ $bagage->client_phone }}</p>
+                                                                        </td>
+                                                                        <td>
+                                                                             <h5 class="font-size-14 text-truncate"><a
+                                                                                    class="text-dark">Ville</a></h5>
+                                                                            <p class="text-muted mb-0">{{ $bagage->ville }} </p>
+                                                                        </td>
+                                                                    </tr>
                                                                     <tr>
                                                                         <th scope="col">Images</th>
                                                                         <th scope="col">Nom & Description</th>
@@ -51,19 +68,18 @@
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
-                                                                    @foreach($bagage_clients as $bagage)
+                                                                    @foreach($bagage_clients as $bagageClient)
                                                                     <tr>
                                                                         <th scope="row"><img
-                                                                                src="{{Storage::url($bagage->image)}}"
+                                                                                src="{{Storage::url($bagageClient->image)}}"
                                                                                 alt="product-img" title="product-img"
                                                                                 class="avatar-md"></th>
                                                                         <td>
                                                                             <h5 class="font-size-14 text-truncate"><a
-                                                                                    href="ecommerce-product-detail.html"
-                                                                                    class="text-dark">{{ $bagage->name }}</a></h5>
-                                                                            <p class="text-muted mb-0">{{ $bagage->desc }}</p>
+                                                                                    class="text-dark">{{ $bagageClient->name }}</a></h5>
+                                                                            <p class="text-muted mb-0">{{ $bagageClient->desc }}</p>
                                                                         </td>
-                                                                        <td>{{ $bagage->prix }} f</td>
+                                                                        <td>{{ $bagageClient->prix }} f</td>
                                                                     </tr>
                                                                     @endforeach
                                                                     <tr>
@@ -71,7 +87,7 @@
                                                                             <h6 class="m-0 text-end">Total:</h6>
                                                                         </td>
                                                                         <td>
-                                                                            {{$prix_total}} f
+                                                                            {{$bagage->prix_total}} f
                                                                         </td>
                                                                     </tr>
                                                                     {{--

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBagagesTable extends Migration
+class CreateSiegeomgsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,12 @@ class CreateBagagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('bagages', function (Blueprint $table) {
+        Schema::create('siegeomgs', function (Blueprint $table) {
             $table->id();
-            $table->string('client_name');
-            $table->string('client_phone')->unique();
-            $table->string('client_ville');
-            $table->integer('client_id');
-            $table->integer('prix_total')->nullable();
             $table->integer('siege_id');
-            $table->boolean('status')->default(0);
+            $table->string('clientId')->unique();
+            $table->string('clientSecret')->unique();
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }
@@ -33,6 +30,6 @@ class CreateBagagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bagages');
+        Schema::dropIfExists('siegeomgs');
     }
 }

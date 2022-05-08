@@ -9,8 +9,7 @@
         <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
             <div class="row align-items-center row_pricipal" style="margin-top: -70px;" >
-                <div class="col-lg-2"></div>
-                <div class="col-lg-8 card_show">
+                <div class="col-lg-offset-8 card_show">
                     <div class="text-white-50">
                         <h1 class="text-white font-weight-semibold mb-2 hero-title text-center">Voyage par tout au sénégal avec nos agences </h1>
                         <p class="font-size-16 text-white text-center">
@@ -18,7 +17,6 @@
                         </p>
                     </div>
                 </div>
-                <div class="col-lg-2"></div>
             </div>
         </div>
         <!-- end container -->
@@ -99,11 +97,13 @@
                         <div class="px-4 py-3 border-top bg-light">
                             <ul class="list-inline mb-0 text-center">
                                 <li class="list-inline-item me-3">
-                                    <a href="{{ route('agence.show',$agence->slug) }}" class="btn btn-success btn-xs"><i class="bx bx-show me-1"></i>Nos sieges</a>
+                                    <a href="{{ route('agence.show',$agence->slug) }}" class="btn btn-success btn-xs"><i class="bx bx-show me-1"></i>Voir nos sieges</a>
                                 </li>
+                                {{--
                                 <li class="list-inline-item me-3">
-                                    <a href="" class="btn btn-primary btn-xs"><i class="bx bx-file me-1"></i>A propos</a>
+                                    <a href="{{ route('agence.about',$agence->slug) }}" class="btn btn-primary btn-xs"><i class="bx bx-file me-1"></i>A propos</a>
                                 </li>
+                                --}}
                             </ul>
                         </div>
                     </div>

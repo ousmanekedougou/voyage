@@ -2,19 +2,19 @@
 
 @section('main-content')
 
-     <!-- hero section start -->
+    <!-- hero section start -->
     <section class="section hero-section bg-ico-hero" id="home">
         <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-2"></div>
-                <div class="col-lg-8">
+            <div class="row align-items-center" style="margin-top: -70px;">
+                <div class="col-lg-offset-8 ">
                     <div class="text-white-50">
-                        <h1 class="text-white font-weight-semibold mb-3 hero-title">Vérifiez toutes vos réservations</h1>
-                        
+                        <h1 class="text-white font-weight-semibold mb-3 hero-title text-center">Vérifiez toutes vos résérvations</h1>
+                        <p class="font-size-16 text-center text-white">
+                            Pour nous aider à retrouver votre billet,vos bagages ou vos colis saisissez ci-dessous votre référence de réservation (indiquée dans l'email ou sms de confirmation que vous avez reçu) et votre adresse email ou numero de telephone.
+                        </p>
                     </div>
                 </div>
-                <div class="col-lg-2"></div>
             </div>
             <!-- end row -->
         </div>
@@ -23,20 +23,69 @@
     <!-- hero section end -->
 
 
- <!-- currency price section start -->
+<!-- currency price section start Version mobile-->
     <section class="section bg-white p-0">
         <div class="container">
             <div class="currency-price">
                 <div class="row">
-                   <div class="col-md-12">
+                    <div class="col-md-4">
                         <div class="card">
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <h5 class="text-center">La fiabilite et la tracabilite</h5>
-                                           <p class="font-size-16">
-                                                Pour nous aider à retrouver votre billet,vos bagages ou vos colis saisissez ci-dessous votre référence de réservation (indiquée dans l'email ou sms de confirmation que vous avez reçu) et votre adresse email ou numero de telephone.
-                                            </p>
+                                <div class="media">
+                                    <div class="avatar-xs me-3">
+                                        <span
+                                            class="avatar-title rounded-circle bg-info bg-soft text-warning font-size-18">
+                                            <i class="fa fa-box-open"></i>
+                                        </span>
+                                    </div>
+                                    <div class="media-body">
+                                        <h5>Vérifiez votre colis</h5>
+                                        <p class="text-muted  mb-0">Accès facile à vos billets, peu importe votre destination, même hors connexion</p>
+                                        <div class="button-items text-center mt-1">
+                                            <a href="" class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdropColisClient">Verifiez vos colis</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="media">
+                                    <div class="avatar-xs me-3">
+                                        <span
+                                            class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-18">
+                                            <i class="fa fa-suitcase-rolling"></i>
+                                        </span>
+                                    </div>
+                                    <div class="media-body">
+                                        <h5>Vérifiez vos bagages</h5>
+                                        <p class="text-muted  mb-0">Tout ce dont vous avez besoin dans une seule application</p>
+                                        <div class="button-items text-center mt-1">
+                                            <a href="" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdropBagageClient">Verifiez vos bagages</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="media">
+                                    <div class="avatar-xs me-3">
+                                        <span
+                                            class="avatar-title rounded-circle bg-success bg-soft text-info font-size-18">
+                                            <i class="fa fa-ticket-alt"></i>
+                                        </span>
+                                    </div>
+                                    <div class="media-body">
+                                        <h5>Modififer votre ticket</h5>
+                                        <p class="text-muted  mb-0">Mises à jour et rappels tout au long du trajet pour un voyage réussi</p>
+                                        <div class="button-items text-center mt-1">
+                                            <a href="" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdropTickerClient">Verifiez votre ticker</a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -50,72 +99,7 @@
     </section>
 <!-- currency price section end -->
 
- <!-- currency price section start -->
-    <section class="section bg-white p-0">
-        <div class="container">
-            <div class="currency-price">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-4 text-center pb-3">
-                                           <i class="fas fa-suitcase-rolling" style="font-size:80px;"></i>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <h5>Verifiez votre colis</h5>
-                                        Accès facile à vos billets, peu importe votre destination, même hors connexion
-                                        <div class="button-items text-center">
-                                            <a href="" class="btn btn-outline-success btn-sm btn-block" data-bs-toggle="modal" data-bs-target="#staticBackdropColisClient" style="width: 100%;">Verifiez</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                     <div class="col-md-4 text-center pb-3">
-                                           <i class="bx bx-cart-alt" style="font-size:80px;"></i>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <h5>Verifiez vos bagages</h5>
-                                        Accès facile à vos billets, peu importe votre destination, même hors connexion
-                                        <div class="button-items text-center">
-                                            <a href="" class="btn btn-outline-success btn-sm btn-block" data-bs-toggle="modal" data-bs-target="#staticBackdropBagageClient" style="width: 100%;">Verifiez</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-4 text-center pb-3">
-                                           <i class="bx bxs-id-card " style="font-size:80px;"></i>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <h5>Modififer votre ticket</h5>
-                                        Accès facile à vos billets, peu importe votre destination, même hors connexion
-                                        <div class="button-items text-center">
-                                            <a href="" class="btn btn-outline-success btn-sm btn-block" data-bs-toggle="modal" data-bs-target="#staticBackdropTickerClient" style="width: 100%;">Verifiez</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- end row -->
-            </div>
-        </div>
-        <!-- end container -->
-    </section>
-<!-- currency price section end -->
+
 
 <div class="modal fade" id="staticBackdropColisClient" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-md modal-dialog-centered" role="document">
@@ -267,8 +251,7 @@
                     </p>
                     <p>
                         <form class="custom-validation" action="{{ route('client.ticket') }}" method="POST" enctype="multipart/form-data">
-                            {{csrf_field()}}
-                            {{method_field('GET')}}
+                            @csrf
                             <div class="row">
                                 <div class="col-xl-12">
                                     <div class="mb-3" >

@@ -19,11 +19,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [App\Http\Controllers\User\HomeController::class, 'index'])->name('index');
 Route::get('/about', [App\Http\Controllers\User\AboutController::class, 'index'])->name('about.index');
+
 Route::get('/agence', [App\Http\Controllers\User\AgenceController::class, 'index'])->name('agence.index');
+Route::get('/agence/about/{slug}', [App\Http\Controllers\User\AgenceController::class, 'about'])->name('agence.about');
 Route::get('/agence/create', [App\Http\Controllers\User\AgenceController::class, 'create'])->name('agence.create');
 Route::get('/agence/show/{slug}', [App\Http\Controllers\User\AgenceController::class, 'show'])->name('agence.show');
 Route::post('/agence/store', [App\Http\Controllers\User\AgenceController::class, 'store'])->name('agence.store');
 Route::post('/agence/search', [App\Http\Controllers\User\AgenceController::class, 'search'])->name('agence.search');
+
 Route::get('/setting', [App\Http\Controllers\User\SettingController::class, 'index'])->name('setting.index');
 Route::get('/contact', [App\Http\Controllers\User\ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact/store', [App\Http\Controllers\User\ContactController::class, 'store'])->name('contact.store');
@@ -34,6 +37,7 @@ Route::post('/client/sendmail/{id}', [App\Http\Controllers\User\ClientController
 Route::get('/client/{id}', [App\Http\Controllers\User\ClientController::class, 'show'])->name('client.show');
 Route::put('/client/update/{id}', [App\Http\Controllers\User\ClientController::class, 'update'])->name('client.update');
 Route::post('/client/colis', [App\Http\Controllers\User\ClientController::class, 'colis'])->name('client.colis');
+Route::put('/client/confirme/{id}', [App\Http\Controllers\User\ClientController::class, 'confirme'])->name('colis.confirme');
 Route::post('/client/bagage', [App\Http\Controllers\User\ClientController::class, 'bagage'])->name('client.bagage');
 Route::post('/client/ticket', [App\Http\Controllers\User\ClientController::class, 'ticket'])->name('client.ticket');
 Route::get('/store', [App\Http\Controllers\User\HomeController::class, 'store'])->name('store');
@@ -64,10 +68,16 @@ Route::prefix('/admin')->name('admin.')->group(function()
     Route::put('/client/presence/{id}', [App\Http\Controllers\Admin\ClientController::class,'presence'])->name('client.presence'); 
     Route::put('/client/payer/{id}', [App\Http\Controllers\Admin\ClientController::class, 'payer'])->name('payer');
     Route::get('/client/ticker/{id}', [App\Http\Controllers\Admin\ClientController::class, 'ticker'])->name('ticker');
+    
     Route::get('/profil/show/{slug}', [App\Http\Controllers\Admin\ProfilController::class,'show'])->name('profil.show'); 
     Route::put('/profil/update/{slug}', [App\Http\Controllers\Admin\ProfilController::class,'update'])->name('profil.update');
+    
     Route::put('/profil/sendSms/{id}', [App\Http\Controllers\Admin\ProfilController::class,'sendSms'])->name('profil.sendSms');
     Route::put('/profil/sendApi/{id}', [App\Http\Controllers\Admin\ProfilController::class,'sendApi'])->name('profil.sendApi');
+    
+    Route::put('/profil/ActiveOmg/{id}', [App\Http\Controllers\Admin\ProfilController::class,'activeOmg'])->name('profil.activeOmg');
+    Route::put('/profil/sendOmg/{id}', [App\Http\Controllers\Admin\ProfilController::class,'sendOmg'])->name('profil.sendOmg');
+
     Route::resource('/bagage', App\Http\Controllers\Admin\BagageController::class); 
     Route::resource('/colis', App\Http\Controllers\Admin\ColiController::class);
     Route::resource('/contact',App\Http\Controllers\Admin\ContactController::class); 

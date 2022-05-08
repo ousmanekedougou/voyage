@@ -3,6 +3,7 @@
 namespace App\Models\Admin;
 use App\Models\Admin\Agent;
 use App\Models\Admin\Siegemsg;
+use App\Models\Admin\Siegeomg;
 use App\Models\Admin\Bus;
 use App\Models\Admin\Itineraire;
 use App\Models\User;
@@ -56,5 +57,9 @@ class Siege extends Model
 
     public function siegemsg(){
         return $this->belongsTo(Siegemsg::class);
+    }
+
+    public function siegeomg(){
+        return $this->belongsTo(Siegeomg::class);
     }
 }

@@ -27,7 +27,7 @@ class Client extends Model
         return $this->belongsTo(Ville::class);
     }
 
-     public function siege(){
+    public function siege(){
         return $this->belongsTo(Siege::class);
     }
 

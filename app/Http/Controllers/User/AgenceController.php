@@ -27,6 +27,11 @@ class AgenceController extends Controller
         return view('user.agence.create');
     }
 
+    public function about($sluge){
+        $slug = User::where('slug',$sluge)->first();
+        return view('user.agence.about',compact('slug'));
+    }
+
      public function store(Request $request)
     {
         $this->validate($request,[

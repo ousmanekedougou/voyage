@@ -40,6 +40,7 @@ class CreateUsersTable extends Migration
              $table->string('image_agence')->nullable();
              $table->string('agence_name')->nullable();
              $table->integer('role')->nullable();
+             $table->integer('region_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

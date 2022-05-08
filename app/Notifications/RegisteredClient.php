@@ -18,9 +18,10 @@ class RegisteredClient extends Notification
      *
      * @return void
      */
-    public function __construct(Client $client)
+    public function __construct(Client $client,$type_store)
     {
         $this->client = $client;
+        $this->type_store = $type_store;
     }
 
     /**
@@ -42,11 +43,12 @@ class RegisteredClient extends Notification
      */
     public function toMail($notifiable)
     {
-            $image = Storage::url($this->client->agence_logo); 
-           return (new MailMessage)->view('user.notification.registeredClient',[
-               'client' => $this->client,
-               'image' => $image
-               ]);
+        $image = Storage::url($this->client->agence_logo); 
+        return (new MailMessage)->view('user.notification.registeredClient',[
+            'client' => $this->client,
+            'image' => $image,
+            'type_store' => $this->type_store
+            ]);
     }
 
     /**

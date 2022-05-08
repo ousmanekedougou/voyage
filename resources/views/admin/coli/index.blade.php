@@ -49,7 +49,8 @@
                                                         <th class="align-middle">Ville</th>
                                                         <th class="align-middle">Nom du receveur</th>
                                                         <th class="align-middle">Phone du receveur</th>
-                                                        <th class="align-middle">Bagages</th>
+                                                        <th class="align-middle">Colis</th>
+                                                        <th class="align-middle">Reception</th>
                                                         <th class="align-middle">Action</th>
                                                     </tr>
                                                 </thead>
@@ -69,8 +70,11 @@
                                                          <td>
                                                             {{$client->name_recept}}
                                                         </td>
-                                                         <td>
+                                                        <td>
                                                             {{$client->phone_recept}}
+                                                        </td>
+                                                        <td>
+                                                            @if($client->status == 1) <span class="badge bg-success text-white">Colie Reçu</span> @else <span class="badge bg-info text-white">Non reçu</span> @endif
                                                         </td>
                                                         <td>
                                                             <!-- Button trigger modal -->
@@ -144,23 +148,42 @@
                 
                 @foreach($clients as $client_bag)
                     <div class="modal fade orderdetailsModal-{{ $client_bag->id }}" tabindex="-1" role="dialog" aria-labelledby="orderdetailsModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="orderdetailsModalLabel">Bagages Client</h5>
+                                    <h5 class="modal-title" id="orderdetailsModalLabel">Le colis de {{ $client_bag->name }}</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    <p class="mb-2">Prenom et Nom: <span class="text-primary">{{ $client_bag->client_name }}</span></p>
-                                    <p class="mb-2">Telephone: <span class="text-primary">{{ $client_bag->client_phone }}</span></p>
 
                                     <div class="table-responsive">
                                         <table class="table align-middle table-nowrap">
                                             <thead>
+                                                <tr class="text-center">
+                                                    <td>
+                                                        <h5 class="font-size-14 text-truncate"><a
+                                                                href="ecommerce-product-detail.html"
+                                                                class="text-dark">Envoye par</a></h5>
+                                                        <p class="text-muted mb-0">{{ $client_bag->name }} : {{ $client_bag->phone }}</p>
+                                                    </td>
+                                                    
+                                                    <td>
+                                                        <h5 class="font-size-14 text-truncate"><a
+                                                                href="ecommerce-product-detail.html"
+                                                                class="text-dark">Recepteur</a></h5>
+                                                        <p class="text-muted mb-0">{{ $client_bag->name_recept }} : {{ $client_bag->phone_recept }}</p>
+                                                    </td>
+                                                    <td>
+                                                            <h5 class="font-size-14 text-truncate"><a
+                                                                href="ecommerce-product-detail.html"
+                                                                class="text-dark">Ville</a></h5>
+                                                        <p class="text-muted mb-0">{{ $client_bag->ville }} </p>
+                                                    </td>
+                                                </tr>
                                                 <tr>
-                                                <th scope="col">Images</th>
-                                                <th scope="col">Nom et Description</th>
-                                                <th scope="col">Prix</th>
+                                                    <th scope="col">Images</th>
+                                                    <th scope="col">Nom et Description</th>
+                                                    <th scope="col">Prix</th>
                                                 </tr>
                                             </thead>
                                             <tbody>

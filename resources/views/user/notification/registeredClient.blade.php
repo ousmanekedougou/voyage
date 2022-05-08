@@ -63,7 +63,12 @@
                                                             </tr>
                                                             <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                                                 <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
-                                                                    Votre inscription du {{$client->registered_at}} pour la destination de {{$client->ville->name}} a bien ete enregistre.
+                                                                    Votre inscription du {{$client->registered_at}} pour la destination de {{$client->ville->name}} a bien ete
+                                                                    @if($type_store == 1)
+                                                                        enregistre.
+                                                                    @elseif($type_store == 2)
+                                                                        modifie.
+                                                                    @endif
                                                                 </td>
                                                             </tr>
                                                             <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">

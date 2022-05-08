@@ -9,19 +9,16 @@
         <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
             <div class="row align-items-center row_pricipal" style="margin-top: -70px;" >
-                <div class="col-lg-8 card_show">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-8 card_show text-center">
                     <div class="text-white-50">
                         <h1 class="text-white font-weight-semibold mb-3 hero-title ">Creer votre agence de transport</h1>
                         <p class="font-size-20 text-white" >
-                            <!-- Toutes les options de voyage sur une seule plateforme -->
+                            Toutes les options de voyage sur une seule plateforme
                         </p>
-
-                        <!-- <div class="button-items mt-4 ">
-                            <a href="{{ route('agence.create') }}" class="btn btn-success">Creer votre compte agence</a>
-                            <a href="{{ route('agence.index') }}" class="btn btn-light">Nos agences de transport</a>
-                        </div> -->
                     </div>
                 </div>
+                <div class="col-lg-2"></div>
             </div>
             <!-- end row -->
         </div>
@@ -30,7 +27,7 @@
     <!-- hero section end -->
 
 
-        <section class="section bg-white" id="agence">
+        <section class="section bg-default" id="agence">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
@@ -103,7 +100,10 @@
                                             </span>
                                         @enderror
                                 </div>
-                                <div class="mt-2">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Confirmez votre mot de passe</label>
+                                <div class="">
                                     <input type="password" id="password-confirm" class="form-control" name="password_confirmation" required autocomplete="new-password"
                                         data-parsley-equalto="#pass2" placeholder="Confirmer le mot de passe" />
                                 </div>
@@ -113,7 +113,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="text-left mb-1 mt-5">
-                                <h4>Entrez les information de votre agence</h4>
+                                <h4 class="text-center">Entrez les information de votre agence</h4>
                                 <!-- <div class="small-title">Fait votre choix</div> -->
                             </div>
                         </div>
@@ -194,7 +194,7 @@
                             <div class="mb-3">
                                 <label class="form-label">Slogan de l'agence</label>
                                 <div>
-                                    <textarea required id="slogan" class="form-control @error('slogan') is-invalid @enderror" name="slogan" value="{{ old('slogan') }}" autocomplete="slogan" class="form-control" rows="3"></textarea>
+                                    <textarea required id="slogan" class="form-control @error('slogan') is-invalid @enderror" name="slogan" value="{{ old('slogan') }}" autocomplete="slogan" class="form-control" rows="1"></textarea>
                                         @error('slogan')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -206,7 +206,7 @@
                     </div>
                     <div class="d-flex flex-wrap gap-2">
                         <button type="submit" class="btn btn-primary waves-effect waves-light btn-block">
-                            Enregistrer l'agence
+                            Validez votre inscription
                         </button>
                         <button type="reset" class="btn btn-secondary waves-effect btn-block">
                             Anuller
@@ -215,7 +215,7 @@
                     
                 </form>
 
-                {{--
+                
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
@@ -437,7 +437,7 @@
                     <!-- end col -->
                 </div>
                 <!-- end row -->
-                --}}
+                
             </div>
         </section>
 

@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Admin\Agence;
 use App\Models\Admin\Bus;
 use App\Models\Admin\Siege;
+use App\Models\User\Region;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -35,7 +36,8 @@ class User extends Authenticatable
         'status',
         'is_active',
         'slug',
-        'confirmation_token'
+        'confirmation_token',
+        'region_id'
     ];
 
     /**
@@ -75,5 +77,10 @@ class User extends Authenticatable
     public function agences()
     {
         return $this->hasMany(Agence::class);
+    }
+
+     public function region()
+    {
+        return $this->belongsTo(Region::class);
     }
 }

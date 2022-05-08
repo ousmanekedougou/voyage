@@ -56,10 +56,31 @@
                                     <div class="table-responsive">
                                         <table class="table align-middle table-nowrap">
                                             <thead>
+                                                <tr class="text-center">
+                                                    <td>
+                                                        <h5 class="font-size-14 text-truncate"><a
+                                                                href="ecommerce-product-detail.html"
+                                                                class="text-dark">Prenom et nom</a></h5>
+                                                        <p class="text-muted mb-0">{{ $client->client_name }}</p>
+                                                    </td>
+                                                    
+                                                    <td>
+                                                        <h5 class="font-size-14 text-truncate"><a
+                                                                href="ecommerce-product-detail.html"
+                                                                class="text-dark">Telephone</a></h5>
+                                                        <p class="text-muted mb-0">{{ $client->client_phone }}</p>
+                                                    </td>
+                                                    <td>
+                                                            <h5 class="font-size-14 text-truncate"><a
+                                                                href="ecommerce-product-detail.html"
+                                                                class="text-dark">Ville</a></h5>
+                                                        <p class="text-muted mb-0">{{ $client->ville }} </p>
+                                                    </td>
+                                                </tr>
                                                 <tr>
-                                                <th scope="col">Images</th>
-                                                <th scope="col">Nom et Description</th>
-                                                <th scope="col">Prix</th>
+                                                    <th scope="col">Images</th>
+                                                    <th scope="col">Nom et Description</th>
+                                                    <th scope="col">Prix</th>
                                                 </tr>
                                             </thead>
                                             <tbody>

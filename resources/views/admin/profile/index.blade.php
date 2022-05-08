@@ -366,6 +366,69 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row mb-4">
+                                        <div class="col-8"><h4 class="card-title">Configuration de vos cles orange money</h4></div>
+                                        <div class="col-3 text-center">
+                                            @if($omg)
+                                                <button type="submit" class="btn btn-primary btn-block" data-bs-toggle="modal" data-bs-target="#staticBackdropOmgClient-{{$omg->id}}"> <i class="fa fa-edit"></i> Modifier</button>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="table-responsive">
+                                        <table class="table table-nowrap mb-0">
+                                            <tbody>
+                                            @if($omg)
+                                                <tr>
+                                                    <th scope="row">clientId :   </th>
+                                                    <td>{{$omg->clientId}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">clientSecret :</th>
+                                                    <td>{{$omg->clientSecret}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">Status de votre compte orange money :</th>
+                                                    <td> 
+                                                       
+                                                        <div class="form-check form-switch mb-3" dir="ltr">
+                                                            
+                                                            <input class="form-check-input" type="checkbox"
+                                                                id="SwitchCheckSizesm" @if($omg->status == 1) checked @endif  data-bs-toggle="modal" data-bs-target="#staticBackdropOmg-{{$omg->id}}">
+                                                            <label class="form-check-label" for="SwitchCheckSizesm"></label>
+                                                            @if($omg->status == 1)
+                                                                <span class="badge bg-success"><i class="bx bxs-check-circle me-1"></i>
+                                                                        Active
+                                                                </span>
+                                                                @else
+                                                                <span class="badge bg-danger"><i class="bx bxs-x-square me-1"></i>
+                                                                        Desactive
+                                                                </span>
+                                                            @endif
+                                                        </div>
+                                                        
+                                                    </td>
+                                                </tr>
+                                                @else
+                                                <tr>
+
+                                                    <td class="text-center text-default">
+                                                        Vous n'aviez pas de donnes de configuration pour orange money
+                                                    </td>
+                                                    <td class="">
+                                                        <button type="submit" class="btn btn-primary btn-block text-center" data-bs-toggle="modal" data-bs-target="#staticBackdropOmgClient" style="margin-top:-10px;"> <i class="fa fa-plus"></i> Ajouter</button>
+                                                    </td>
+                                                </tr>
+                                            @endif
+                                            </tbody>
+                                            
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         <!-- end card -->
                         @endif
                     </div>
@@ -547,6 +610,177 @@
                                 <div class="modal-body">
                                     <p>
                                         <form class="custom-validation" action="{{ route('admin.profil.sendApi',0) }}" method="POST" enctype="multipart/form-data">
+                                            {{csrf_field()}}
+                                            {{method_field('PUT')}}
+                                            <input type="hidden" name="status" value="1">
+                                            <div class="row">
+                                                <div class="col-xl-12">
+                                                    <div class="mb-3" >
+                                                        <label class="form-label">clientId</label>
+                                                        <div>
+                                                            <input data-parsley-type="number" type="text" id="clientId" class="form-control @error('clientId') is-invalid @enderror" name="clientId" value="{{ old('clientId')}}" autocomplete="clientId"
+                                                                required placeholder="Numero de clientId"  />
+                                                                <input type="hidden" name="indicatif" id="indicatif">
+                                                                @error('clientId')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label class="form-label">clientSecret</label>
+                                                        <div>
+                                                            <input data-parsley-type="number" type="text" id="clientSecret" class="form-control @error('clientSecret') is-invalid @enderror" name="clientSecret" value="{{ old('clientSecret') }}" autocomplete="clientSecret"
+                                                                required placeholder="Numero de votre clientSecret" />
+                                                                @error('clientSecret')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex flex-wrap gap-2">
+                                                    <button type="submit" class="btn btn-primary waves-effect waves-light btn-block">
+                                                        Envoyer
+                                                    </button>
+                                                    <button type="reset" class="btn btn-secondary waves-effect btn-block">
+                                                        Anuller
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </p>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                <!--  -->
+
+            
+            <!-- _________________ Les information orange money ______________________________-->
+
+             @if($omg)
+                <!-- Static Backdrop Modal -->
+                <div class="modal fade modal-md" id="staticBackdropOmg-{{$omg->id}}" data-bs-backdrop="static"
+                    data-bs-keyboard="false" tabindex="-1" role="dialog"
+                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">
+                                    @if($omg->status == 1)
+                                        <span class="text-danger">Desactivation du paiement orange money</span>
+                                    @else
+                                        <span class="text-success">Activation du paiement orange money</span>
+                                    @endif
+                                </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                @if($omg->status == 1)
+                                    <p class="text-danger">Etse vous sure de desactiver lee paiement orange money</p>
+                                @else
+                                    <p class="text-primary">Etse vous sure d'activer le paiement orange money</p>
+                                @endif
+                            </div>
+                            <div class="modal-footer">
+                                <form action="{{ route('admin.profil.activeOmg',$omg->id) }}" method="post">
+                                    {{csrf_field()}}
+                                    {{method_field('PUT')}}
+                                        <input type="hidden" name="status" value="{{$omg->status}}">
+
+                                    <button type="reset" class="btn btn-light"
+                                        data-bs-dismiss="modal">Ferner</button>
+                                    <button type="submit"
+                                    @if($omg->status == 1)
+                                        class="btn btn-danger">Desactiver
+                                    @else
+                                        class="btn btn-success">Activer
+                                    @endif
+                                        </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <!-- Fin du modal pour la desactivation de l'admin -->
+
+                <!-- Modification des informatio api omg -->
+                <div class="modal fade" id="staticBackdropOmgClient-{{$omg->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+                        <div class="modal-content ">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Modifier vos information de Sms   </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                                <div class="modal-body">
+                                    <p>
+                                        <form class="custom-validation" action="{{ route('admin.profil.sendOmg',$omg->id) }}" method="POST" enctype="multipart/form-data">
+                                            {{csrf_field()}}
+                                            {{method_field('PUT')}}
+                                            <input type="hidden" name="status" value="2">
+                                            <div class="row">
+                                                <div class="col-xl-12">
+                                                    <div class="mb-3" >
+                                                        <label class="form-label">clientId</label>
+                                                        <div>
+                                                            <input data-parsley-type="number" type="text" id="clientId" class="form-control @error('clientId') is-invalid @enderror" name="clientId" value="{{ old('clientId') ?? $omg->clientId }}" autocomplete="clientId"
+                                                                required placeholder="Numero de clientId"  />
+                                                                <input type="hidden" name="indicatif" id="indicatif">
+                                                                @error('clientId')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="mb-3">
+                                                        <label class="form-label">clientSecret</label>
+                                                        <div>
+                                                            <input data-parsley-type="number" type="text" id="clientSecret" class="form-control @error('clientSecret') is-invalid @enderror" name="clientSecret" value="{{ old('clientSecret') ?? $omg->clientSecret }}" autocomplete="clientSecret"
+                                                                required placeholder="Numero de votre clientSecret" />
+                                                                @error('clientSecret')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex flex-wrap gap-2">
+                                                    <button type="submit" class="btn btn-primary waves-effect waves-light btn-block">
+                                                        Envoyer
+                                                    </button>
+                                                    <button type="reset" class="btn btn-secondary waves-effect btn-block">
+                                                        Anuller
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </p>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                <!--  -->
+            @endif
+
+             <!-- Ajout des information api -->
+                <div class="modal fade" id="staticBackdropOmgClient" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+                        <div class="modal-content ">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Ajouter vos information orange money   </h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                                <div class="modal-body">
+                                    <p>
+                                        <form class="custom-validation" action="{{ route('admin.profil.sendOmg',0) }}" method="POST" enctype="multipart/form-data">
                                             {{csrf_field()}}
                                             {{method_field('PUT')}}
                                             <input type="hidden" name="status" value="1">

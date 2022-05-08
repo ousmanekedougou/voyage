@@ -192,7 +192,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="text-sm-end d-none d-sm-block">
-                        Design & Develop by KDGWeb
+                        Design & Develop by KédWeb
                     </div>
                 </div>
             </div>
