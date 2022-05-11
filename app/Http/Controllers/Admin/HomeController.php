@@ -38,10 +38,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $buses = Bus::where('siege_id',Auth::user()->siege_id)->orderBy('id','ASC')->get();
-        $itineraires = Itineraire::where('siege_id',Auth::user()->siege_id)->where('user_id',Auth::user()->id)->orderBy('id','ASC')->get();
-        
         if ($this->middleware(['IsAgent']) && Auth::user()->role == 1) {
+            $buses = Bus::where('siege_id',Auth::user()->siege_id)->orderBy('id','ASC')->get();
+            $itineraires = Itineraire::where('siege_id',Auth::user()->siege_id)->where('user_id',Auth::user()->id)->orderBy('id','ASC')->get();
+        
             foreach ($buses as $buse) {
                 $client_historiques = Client::where('bus_id',$buse->id)->where('siege_id',Auth::user()->siege_id)->where('amount','>',2)->where('registered_at','<',Carbon::today()->format('Y-m-d'))->get();
                 foreach ($client_historiques as $client_hsto) {
@@ -74,14 +74,6 @@ class HomeController extends Controller
 
 
             foreach ($itineraires as $itineraire) {
-                // foreach ($itineraire->date_departs as $iti_date) {
-                //     $delete_bus = Bus::where('itineraire_id',$iti_date->itineraire_id)->get();
-                //     foreach ($delete_bus as $bus_delete) {
-                //         if ($bus_delete->date_depart->depart_at < Carbon::today()->format('Y-m-d')) {
-                //             Bus::where('id',$bus_delete->id)->delete();
-                //         }
-                //     }
-                // }
                 $dates = DateDepart::where('itineraire_id',$itineraire->id)->where('depart_at','<',Carbon::today())->delete();
                 foreach ($dates as $date) {
                     Bus::where('date_depart_id',$date->id)->delete();

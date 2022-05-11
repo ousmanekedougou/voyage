@@ -22,8 +22,8 @@
                     <li class="nav-item">
                         <a class="nav-link {{ set_active_roote('agence.index') }} " href="{{ route('agence.index') }}"><i class="fa fa-building"></i> Nos agences</a>
                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link {{ set_active_roote('client.index') }} " href="{{ route('client.index') }}"><i class="fas fa-suitcase-rolling"></i> Vos réservation</a>
+                    <li class="nav-item">
+                        <a class="nav-link {{ set_active_roote('client.index') }} " href="{{ route('client.index') }}"><i class="fa fa-suitcase-rolling"></i> Vos réservation</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link {{ set_active_roote('setting.index') }} " href="{{ route('setting.index') }}"><i class="fa fa-cog"></i> Comment ça marche ?</a>

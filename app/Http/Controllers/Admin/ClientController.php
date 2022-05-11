@@ -41,21 +41,21 @@ class ClientController extends Controller
         define('ACTIVE',1);
         $user = Client::where('id',$id)->where('confirmation_token',$token)->first();
         if ($user) {
-                if ($user->registered_at >= Carbon::today()) {
-                    $user->update([
-                        'confirmation_token' => null,
-                        'amount' =>  $user->ville->amount,
-                        'payment_at' => new DateTime()
-                    ]);
-                    $montant_bus = Bus::where('id',$user->bus_id)->where('plein',0)->first();
-                    $montan = $montant_bus->montant + $user->ville->amount;
-                    $montant_bus->montant = $montan;
-                    $montant_bus->valider = $montant_bus->valider + 1;
-                    $montant_bus->save();
+            if ($user->registered_at >= Carbon::today()) {
+                $user->update([
+                    'confirmation_token' => null,
+                    'amount' =>  $user->ville->amount,
+                    'payment_at' => new DateTime()
+                ]);
+                $montant_bus = Bus::where('id',$user->bus_id)->where('plein',0)->first();
+                $montan = $montant_bus->montant + $user->ville->amount;
+                $montant_bus->montant = $montan;
+                $montant_bus->valider = $montant_bus->valider + 1;
+                $montant_bus->save();
 
                 Notification::route('mail',$user->bus->siege->email)
                     ->notify(new PaymentTicker($user));
-                Toastr::success('Salut votre billet a ete payer avec succes,accedez sur votre compte gmail', 'Paiement Ticker', ["positionClass" => "toast-top-right"]);
+                Toastr::success('Salut cher client votre billet a ete payer avec succes,accedez sur votre compte gmail', 'Paiement Ticker', ["positionClass" => "toast-top-right"]);
                 return redirect()->route('index');
             }else{
                 Toastr::error('Cette date de voyage est passer', 'Paiement Ticker', ["positionClass" => "toast-top-right"]);
@@ -63,7 +63,7 @@ class ClientController extends Controller
             }
 
         }else {
-            Toastr::error('Salut chere client il semble que ce ticker a deja ete payer', 'Paiement Ticker', ["positionClass" => "toast-top-right"]);
+            Toastr::error('Salut cher client il semble que ce ticker a deja ete payer', 'Paiement Ticker', ["positionClass" => "toast-top-right"]);
             return redirect()->route('index');
         }
     }

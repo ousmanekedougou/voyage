@@ -15,7 +15,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                    <h4 class="mb-sm-0 font-size-18">Itineraires des itineraire</h4>
+                                    <h4 class="mb-sm-0 font-size-18">Definire une date pour chaque itineraire</h4>
                                 </div>
                             </div>
                         </div>
@@ -97,7 +97,7 @@
                                                                                             <p class="text-muted font-size-14 mb-4">Etes vous sure de bien vouloire supprimer cette date</p>
 
                                                                                             <div class="input-group bg-white rounded text-center" style="text-align:center;">
-                                                                                                <form method="post" action="{{ route('admin.itineraire.destroy',$itineraire->id) }}"  style="display:flex;text-align:center;width:100%;">
+                                                                                                <form method="post" action="{{ route('admin.depart.destroy',$date->id) }}"  style="display:flex;text-align:center;width:100%;">
                                                                                                     {{csrf_field()}}
                                                                                                     {{method_field('delete')}}
                                                                                                     <button type="submit" class="btn btn-danger btn-xs" style="margin-left: 70px;margin-right:20px;"> Oui je veux bient </button> 

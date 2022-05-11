@@ -11,7 +11,7 @@
                     <div class="text-white-50">
                         <h1 class="text-white font-weight-semibold mb-3 hero-title text-center">Vérifiez toutes vos résérvations</h1>
                         <p class="font-size-16 text-center text-white">
-                            Pour nous aider à retrouver votre billet,vos bagages ou vos colis saisissez ci-dessous votre référence de réservation (indiquée dans l'email ou sms de confirmation que vous avez reçu) et votre adresse email ou numero de telephone.
+                            Pour vous aider à retrouver votre billet,vos bagages ou vos colis saisissez ci-dessous votre référence de réservation (indiquée dans l'email ou sms de confirmation que vous avez reçu) et votre adresse email ou numero de telephone.
                         </p>
                     </div>
                 </div>
