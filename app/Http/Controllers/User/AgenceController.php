@@ -24,7 +24,7 @@ class AgenceController extends Controller
         // dd($get_user_geo->country);
         $region = Region::where('name',$get_user_geo->city)->orWhere('name',$get_user_geo->state_name)->first();
         $autre_regions = Region::where('name',!$get_user_geo->city)->orWhere('name',!$get_user_geo->state_name)->get();
-        // dd($region);
+        dd($autre_regions);
         $agences = User::where('is_admin',2)
         ->where('is_active',1)
         ->where('region_id',$region->id)
