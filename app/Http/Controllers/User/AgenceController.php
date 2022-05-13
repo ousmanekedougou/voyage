@@ -23,7 +23,7 @@ class AgenceController extends Controller
         $get_user_geo = geoip()->getLocation($getip);
         // dd($get_user_geo->city,$get_user_geo->state_name);
         $region = Region::where('name',$get_user_geo->city)->orWhere('slug',$get_user_geo->city)->first();
-        $autre_regions = Region::where('name',!$get_user_geo->city)->orWhere('name',!$get_user_geo->city)->get();
+        $autre_regions = Region::where('name',!$get_user_geo->city)->orWhere('slug',!$get_user_geo->city)->get();
         dd($autre_regions);
         $agences = User::where('is_admin',2)
         ->where('is_active',1)
