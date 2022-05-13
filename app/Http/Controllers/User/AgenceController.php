@@ -21,9 +21,9 @@ class AgenceController extends Controller
      public function index(){
         $getip = UserSystemInfoHelper::get_ip();
         $get_user_geo = geoip()->getLocation($getip);
-        // dd($get_user_geo->country);
-        $region = Region::where('name',$get_user_geo->city)->orWhere('name',$get_user_geo->state_name)->first();
-        $autre_regions = Region::where('name',!$get_user_geo->city)->orWhere('name',!$get_user_geo->state_name)->get();
+        // dd($get_user_geo->city,$get_user_geo->state_name);
+        $region = Region::where('name',$get_user_geo->city)->orWhere('slug',$get_user_geo->city)->first();
+        $autre_regions = Region::where('name',!$get_user_geo->city)->orWhere('name',!$get_user_geo->city)->get();
         dd($autre_regions);
         $agences = User::where('is_admin',2)
         ->where('is_active',1)
@@ -119,7 +119,7 @@ class AgenceController extends Controller
 
             $getip = UserSystemInfoHelper::get_ip();
             $get_user_geo = geoip()->getLocation($getip);
-            $autre_regions = Region::where('name',!$get_user_geo->city)->orWhere('name',!$get_user_geo->state_name)->get();
+            $autre_regions = Region::where('name',!$get_user_geo->city)->orWhere('slug',!$get_user_geo->city)->get();
 
             return view('user.agence.index',compact('agences','agenceCount','autre_regions'));
         }else {
