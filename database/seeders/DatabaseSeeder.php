@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Admin\Siege;
 use App\Models\User;
+use App\Models\User\Region;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -16,6 +17,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+       $regions = [
+            'Dakar','Kaolack','Thies',
+            'Saint Louis','Diourbel',
+            'Kedougou','Kolda','Fatick',
+            'Matam','Zinguinchor','Sedhiou',
+            'Tambacounda','Louga','Kafrine'
+        ];
+
+        foreach ($regions as $reg) {
+            Region::create([
+                'name' => $reg,
+                'slug' => $reg,
+                'status' => 1
+            ]);
+        }
         // \App\Models\User::factory(10)->create();
         User::create([
             'name' => 'Ousmane Diallo',
@@ -60,7 +76,8 @@ class DatabaseSeeder extends Seeder
             'logo' => null,
             'image_agence' => null,
             'slogan' => 'Voyager en bonne compagnie',
-            'user_id' => 1
+            'user_id' => 1,
+            'region_id' => 1
         ]);
 
 
@@ -80,7 +97,8 @@ class DatabaseSeeder extends Seeder
             'logo' => null,
             'image_agence' => null,
             'slogan' => 'Votre bien etre notre priorite',
-            'user_id' => 1
+            'user_id' => 1,
+            'region_id' => 1
         ]);
 
         User::create([
@@ -99,7 +117,8 @@ class DatabaseSeeder extends Seeder
             'logo' => null,
             'image_agence' => null,
             'slogan' => 'Faire du voyage votre passion',
-            'user_id' => 1
+            'user_id' => 1,
+            'region_id' => 1
         ]);
 
           User::create([
@@ -118,7 +137,8 @@ class DatabaseSeeder extends Seeder
             'logo' => null,
             'image_agence' => null,
             'slogan' => 'Faire du voyage votre passion',
-            'user_id' => 1
+            'user_id' => 1,
+            'region_id' => 6
         ]);
 
 
@@ -138,7 +158,8 @@ class DatabaseSeeder extends Seeder
             'logo' => null,
             'image_agence' => null,
             'slogan' => 'Faire du voyage votre passion',
-            'user_id' => 1
+            'user_id' => 1,
+            'region_id' => 6
         ]);
 
          User::create([
@@ -157,7 +178,8 @@ class DatabaseSeeder extends Seeder
             'logo' => null,
             'image_agence' => null,
             'slogan' => 'Faire du voyage votre passion',
-            'user_id' => 1
+            'user_id' => 1,
+            'region_id' => 6
         ]);
 
         // Des agence sans sieges
@@ -177,7 +199,8 @@ class DatabaseSeeder extends Seeder
             'logo' => null,
             'image_agence' => null,
             'slogan' => 'Faire du voyage votre passion',
-            'user_id' => 1
+            'user_id' => 1,
+            'region_id' => 1
         ]);
 
           User::create([
@@ -196,7 +219,8 @@ class DatabaseSeeder extends Seeder
             'logo' => null,
             'image_agence' => null,
             'slogan' => 'Faire du voyage votre passion',
-            'user_id' => 1
+            'user_id' => 1,
+            'region_id' => 1
         ]);
 
         User::create([
@@ -215,7 +239,8 @@ class DatabaseSeeder extends Seeder
             'logo' => null,
             'image_agence' => null,
             'slogan' => 'Faire du voyage votre passion',
-            'user_id' => 1
+            'user_id' => 1,
+            'region_id' => 1
         ]);
         // Fin D'ajout des agences
 

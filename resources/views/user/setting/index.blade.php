@@ -75,7 +75,7 @@
                                                                 data-bs-toggle="collapse" aria-expanded="true"
                                                                 aria-controls="general-collapseOne">
 
-                                                                <div>What is Lorem Ipsum ?</div>
+                                                                <div>C'est qoi TouCki ?</div>
                                                                 <i class="mdi mdi-minus accor-plus-icon"></i>
 
                                                             </a>
@@ -83,11 +83,9 @@
                                                             <div id="general-collapseOne" class="collapse show"
                                                                 data-bs-parent="#gen-ques-accordion">
                                                                 <div class="card-body">
-                                                                    <p class="mb-0">Everyone realizes why a new common
-                                                                        language would be desirable: one could refuse to
-                                                                        pay expensive translators. To achieve this, it
-                                                                        would be necessary to have uniform grammar,
-                                                                        pronunciation and more common words.</p>
+                                                                    <p class="mb-0">
+                                                                        TouCki est une application cree 
+                                                                    </p>
                                                                 </div>
                                                             </div>
                                                         </div>

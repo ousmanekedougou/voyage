@@ -185,7 +185,8 @@
                                                                 </span>
                                                             @enderror
                                                     </div>
-                                                    <div class="mt-2">
+                                                    <div class="mt-3">
+                                                        <label class="form-label">Confirmer votre mot de passe</label>
                                                         <input type="password" id="password-confirm" class="form-control" name="password_confirmation" required autocomplete="new-password"
                                                             data-parsley-equalto="#pass2" placeholder="Confirmer le mot de passe" />
                                                     </div>
@@ -263,6 +264,21 @@
                                                                     <strong>{{ $message }}</strong>
                                                                 </span>
                                                             @enderror
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <label class="form-label">Selectionner une region</label>
+                                                    <div class="col-md-12">
+                                                        <select  class="form-control @error('region') is-invalid @enderror" name="region" required autocomplete="region" required>
+                                                            @foreach($regions as $region)
+                                                                <option value="{{ $region->id }}">{{ $region->name }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        @error('region')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
                                                 </div>
                                                 <div class="mb-3">
                                                     <label class="form-label">Slogan de l'agence</label>

@@ -49,26 +49,32 @@ class DepartController extends Controller
             'heure_rv' => 'required|string',
             'heure_dep' => 'required|string',
         ]);
-      
-        if ($request->date_depart <= Carbon::today()) {
-            Toastr::error('Votre date doit commencer a partire de demain', 'Error date', ["positionClass" => "toast-top-right"]);
-            return back();
-        }else {
-            if ($request->heure_rv >= $request->heure_dep ) {
-                Toastr::error('L\'heure du rendez-vous doit etre inferieur a votre here de depart', 'Error time', ["positionClass" => "toast-top-right"]);
+
+        $doublon_date = DateDepart::where('depart_at',$request->date_depart)->first();
+        if (!$doublon_date) {
+            if ($request->date_depart <= Carbon::today()) {
+                Toastr::error('Votre date doit commencer a partire de demain', 'Error date', ["positionClass" => "toast-top-right"]);
                 return back();
             }else {
-                $add_date = new DateDepart();
-                $add_date->depart_at = $request->date_depart;
-                $add_date->rendez_vous = $request->heure_rv;
-                $add_date->depart_time = $request->heure_dep;
-                $add_date->itineraire_id = $request->itineraire;
-                $add_date->siege_id = Auth::user()->siege_id;
-                $add_date->save();
-                Toastr::success('Votre date a bien ete creer', 'Ajout date', ["positionClass" => "toast-top-right"]);
-                return back();
+                if ($request->heure_rv >= $request->heure_dep ) {
+                    Toastr::error('L\'heure du rendez-vous doit etre inferieur a votre here de depart', 'Error time', ["positionClass" => "toast-top-right"]);
+                    return back();
+                }else {
+                    $add_date = new DateDepart();
+                    $add_date->depart_at = $request->date_depart;
+                    $add_date->rendez_vous = $request->heure_rv;
+                    $add_date->depart_time = $request->heure_dep;
+                    $add_date->itineraire_id = $request->itineraire;
+                    $add_date->siege_id = Auth::user()->siege_id;
+                    $add_date->save();
+                    Toastr::success('Votre date a bien ete creer', 'Ajout date', ["positionClass" => "toast-top-right"]);
+                    return back();
+                }
+            
             }
-           
+        }else {
+            Toastr::error('Cette date exit deja', 'Error Doublon date', ["positionClass" => "toast-top-right"]);
+            return back();
         }
        
        

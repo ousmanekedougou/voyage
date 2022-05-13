@@ -6,10 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\Siegemsg;
 use App\Models\Admin\Siegeomg;
 use App\Models\User;
+use App\Models\User\Region;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
+
 class ProfilController extends Controller
 {
     /**
@@ -57,6 +60,7 @@ class ProfilController extends Controller
     public function show($slug)
     {
         $admin = User::where('slug',$slug)->first();
+        $regions = Region::where('status',1)->get();
         $siege_sms = '';
         if (Auth::user()->is_admin == 3 && Auth::user()->role == 1) {
             $siege_sms = $admin->siege->id;
@@ -64,7 +68,7 @@ class ProfilController extends Controller
             $omg = Siegeomg::where('siege_id',$siege_sms)->first();
             return view('admin.profile.index',compact('admin','sms','omg'));
         }else {
-           return view('admin.profile.index',compact('admin'));
+           return view('admin.profile.index',compact('admin','regions'));
         }
     }
 
@@ -126,6 +130,7 @@ class ProfilController extends Controller
                     if($request->hasFile('image'))
                     {
                         $imageName = $request->image->store('public/Admins');
+                        Storage::delete($update_admin->image);
                     }
                 }
                 $update_admin->logo = $imageName;
@@ -147,20 +152,21 @@ class ProfilController extends Controller
                $this->validate($request,[
                     'name_agence' => 'required|string',
                     'email_agence' => 'required|email|string',
-                    'image_agence' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
                 ]);
                 $image_agence = '';
-                 if($request->hasFile('image_agence'))
+                $update = User::Where('slug',Auth::user()->slug)->first();
+                if($request->hasFile('image_agence'))
                 {
                     $image_agence = $request->image_agence->store('public/Agence');
+                    Storage::delete($update->image_agence); 
                 }
-                $update = User::Where('slug',Auth::user()->slug)->first();
                 $update->agence_name = $request->name_agence;
                 $update->email_agence = $request->email_agence;
                 $update->image_agence = $image_agence;
+                $update->region_id = $request->region;
                 $update->save();
                 User::where('user_id',$update->id)->update([
-                    'image_agence' => $image_agence
+                    'image_agence' =>  $update->image_agence
                 ]);
                 Toastr::success('Votre profile a bien ete mise a jour', 'Modifier Profile', ["positionClass" => "toast-top-right"]);
                 return back();

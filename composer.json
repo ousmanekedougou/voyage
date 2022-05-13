@@ -7,6 +7,7 @@
     "require": {
         "php": "^7.3|^8.0",
         "brian2694/laravel-toastr": "^5.56",
+        "fakerphp/faker": "^1.9.1",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
@@ -14,7 +15,7 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
         "mercuryseries/flashy": "^1.0",
-        "fakerphp/faker": "^1.9.1"
+        "torann/geoip": "^3.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -33,7 +34,8 @@
         "files":[
             "app/Helpers/helper.php",
             "app/Helpers/Sms.php",
-            "app/Helpers/OrangeMoney.php"
+            "app/Helpers/OrangeMoney.php",
+            "app/Helpers/UserSystemInfoHelper.php"
         ]
     },
     "autoload-dev": {
@@ -43,7 +45,8 @@
         "files":[
             "app/Helpers/helper.php",
             "app/Helpers/Sms.php",
-            "app/Helpers/OrangeMoney.php"
+            "app/Helpers/OrangeMoney.php",
+            "app/Helpers/UserSystemInfoHelper.php"
         ]
     },
     "scripts": {

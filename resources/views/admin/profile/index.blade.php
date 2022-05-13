@@ -243,6 +243,24 @@
                                                 @enderror
                                             </div>
 
+                                            <div class="mb-3 row">
+                                                <label class="form-label">Selectionner une region</label>
+                                                <div class="col-md-12">
+                                                    <select  class="form-control @error('region') is-invalid @enderror" name="region" required autocomplete="region" required>
+                                                        @foreach($regions as $region)
+                                                            <option value="{{ $region->id }}"
+                                                            @if($region->id == Auth::user()->region_id) selected @endif
+                                                            >{{ $region->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('region')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
                                             <div class="mb-3">
                                                 <label for="manufacturerbrand">Image de l'agence * </label>
                                                 <input id="image_agence" name="image_agence" type="file" class="form-control @error('image_agence') is-invalid @enderror" value="{{ old('image_agence') }}"  autocomplete="image_agence" style="width: 100%;">

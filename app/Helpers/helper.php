@@ -71,6 +71,15 @@ if(! function_exists('carbon_tomorrow')){
     }
 }
 
+if(! function_exists('carbon_after_tomorrow')){
+    function carbon_after_tomorrow()
+    {
+        $after_tomorrow = Carbon::tomorrow()->addDay(1)->format('Y-m-d');
+        return $after_tomorrow;
+    }
+}
+
+
 if(! function_exists('carbon_yesterday')){
     function carbon_yesterday()
     {
@@ -89,7 +98,7 @@ if (! function_exists('part')) {
 
 if (! function_exists('historical_hiere')) {
     function historical_hiere(){
-        $historical_hiere = Historical::where('siege_id',Auth::user()->siege_id)->where('registered_at','<',Carbon::today()->format('Y-m-d'))->first();
+        $historical_hiere = Historical::where('siege_id',Auth::user()->siege_id)->where('registered_at','<',Carbon::yesterday()->format('Y-m-d'))->first();
         return $historical_hiere;
     }
 }
@@ -138,5 +147,7 @@ if (! function_exists('montant_today')) {
         }
     }
 }
+
+
 
 

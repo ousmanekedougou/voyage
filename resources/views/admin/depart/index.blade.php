@@ -73,8 +73,6 @@
                                                         
                                                         <td>
                                                             <div class="d-flex gap-3 div_button">
-
-                                                                <a href="javascript:void(0);" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-primary" data-bs-target="#staticBackdropprenicpaleVille-{{$date->id}}"><i class="fas fa-building mt-1 font-size-18"></i></a>
                                                                 <a href="javascript:void(0);" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-primary" data-bs-target="#staticBackdropeditdate-{{$date->id}}"><i class="bx bx-edit mt-1 font-size-18"></i></a>
                                                                 <a href="javascript:void(0);" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-danger" data-bs-target="#subscribeModaldate-{{ $date->id }}"><i class="mdi mdi-delete font-size-18"></i></a>
                                                                 <div class="modal modal-xs fade" id="subscribeModaldate-{{ $date->id }}" tabindex="-1" aria-labelledby="subscribeModalLabel" aria-hidden="true">

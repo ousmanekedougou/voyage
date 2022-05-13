@@ -15,6 +15,7 @@ use App\Models\Admin\Itineraire;
 use App\Models\Admin\Siege;
 use App\Models\User;
 use App\Models\User\Notify;
+use App\Models\User\Region;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -111,11 +112,12 @@ class HomeController extends Controller
             $user = Auth::user();
             return view('admin.homeAgence.index',compact('sieges','agents','user'));
         }elseif ($this->middleware(['IsAdmin']) && Auth::user()->role == null) {
-            $agences = User::where('is_admin',2)->orderBy('id','DESC')->paginate(10);
+            $agences = User::where('is_admin',2)->orderBy('id','DESC')->paginate(9);
             $user = Auth::user();
             $siegeCount = Siege::all();
             $newCount = Notify::all();
-            return view('admin.homeAdmin.index',compact('agences','user','siegeCount','newCount'));
+            $regions = Region::where('status',1)->get();
+            return view('admin.homeAdmin.index',compact('agences','user','siegeCount','newCount','regions'));
         }else {
             Toastr::error('Vous n\'aviez pas le droit d\'acces sur cette page', 'Resultat Recherche', ["positionClass" => "toast-top-right"]);
             return back();

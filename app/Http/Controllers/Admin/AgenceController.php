@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\Agence;
 use App\Models\User;
 use App\Models\User\Notify;
+use App\Models\User\Region;
 use App\Notifications\Newsleter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -32,7 +33,8 @@ class AgenceController extends Controller
       public function index()
     {
         $agences = User::where('is_admin',2)->orderBy('id','DESC')->paginate(10);
-        return view('admin.agence.index',compact('agences'));
+        $regions = Region::where('status',1)->get();
+        return view('admin.agence.index',compact('agences','regions'));
     }
 
 
@@ -83,6 +85,7 @@ class AgenceController extends Controller
             'slogan' => 'required|string',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
             'image_agence' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
+            'region' => 'required|numeric'
         ]);
 
         $imageName = '';
@@ -113,13 +116,14 @@ class AgenceController extends Controller
         $add_agence->confirmation_token = str_replace('/','',Hash::make(Str::random(40)));
         $add_agence->slug = str_replace('/','',Hash::make(Str::random(20).'agence'.$request->email));
         $add_agence->user_id = Auth::user()->id;
+        $add_agence->region_id = $request->region;
         $add_agence->save();
         Notification::route('mail',Auth::user()->email)
-                ->notify(new RegisteredUser($add_agence));
+            ->notify(new RegisteredUser($add_agence));
         $notifys = Notify::all();
         foreach ($notifys as $notify) {
             Notification::route('mail','ousmanelaravel@gmail.com')
-                ->notify(new Newsleter($notify));
+            ->notify(new Newsleter($notify));
         }
          Toastr::success('Votre agence a bien ete creer', 'Ajout agence', ["positionClass" => "toast-top-right"]);
         return back();

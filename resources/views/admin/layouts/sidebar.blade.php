@@ -126,13 +126,13 @@
                                                         <a href="javascript: void(0);" class="has-arrow waves-effect">
                                                             <span key="" class="fa fa-clock">
                                                                 @if($date->depart_at == carbon_today())
-                                                                    liste du jour
+                                                                    <span class="text-success">Aujourd'huit</span>
                                                                 @elseif($date->depart_at == carbon_tomorrow())
-                                                                    liste de demain
-                                                                @elseif($date->depart_at > carbon_tomorrow())
-                                                                    Apres demain
-                                                                @else
-                                                                    {{ $date->depart_at }}
+                                                                    <span class="text-primary">Demain</span>
+                                                                @elseif($date->depart_at == carbon_after_tomorrow())
+                                                                    <span class="text-warning">Apres demain</span>
+                                                                @elseif($date->depart_at > carbon_after_tomorrow())
+                                                                    Le {{ $date->depart_at }}
                                                                 @endif
                                                             </span>
                                                         </a>
