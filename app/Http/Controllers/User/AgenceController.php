@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Helpers\UserSystemInfoHelper;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Bus;
 use App\Models\Admin\Siege;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\User\Region;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Notifications\RegisteredUser;
@@ -17,7 +19,19 @@ use Illuminate\Support\Facades\Notification;
 class AgenceController extends Controller
 {
      public function index(){
-        $agences = User::where('is_admin',2)->where('is_active',1)->orderBy('id','ASC')->paginate(12);
+        $getip = UserSystemInfoHelper::get_ip();
+        $getbrowser = UserSystemInfoHelper::get_browsers();
+        $getdevice = UserSystemInfoHelper::get_device();
+        $getos = UserSystemInfoHelper::get_os();
+        // dd($getip);
+        $get_user_geo = geoip()->getLocation($getip);
+        // dd($get_user_geo->country);
+        $region = Region::where('name',$get_user_geo->city)->orWhere('name',$get_user_geo->state_name)->first();
+        dd($region);
+        $agences = User::where('is_admin',2)
+        ->where('is_active',1)
+        ->where('region_id',$region->id)
+        ->orderBy('id','ASC')->paginate(12);
         $agenceAll = User::where('is_admin',2)->where('is_active',1)->orderBy('id','ASC')->get();
         $agenceCount = $agenceAll->count(); 
         return view('user.agence.index',compact('agences','agenceCount'));
