@@ -20,13 +20,10 @@ class AgenceController extends Controller
 {
      public function index(){
         $getip = UserSystemInfoHelper::get_ip();
-        $getbrowser = UserSystemInfoHelper::get_browsers();
-        $getdevice = UserSystemInfoHelper::get_device();
-        $getos = UserSystemInfoHelper::get_os();
-        // dd($getip);
         $get_user_geo = geoip()->getLocation($getip);
         // dd($get_user_geo->country);
         $region = Region::where('name',$get_user_geo->city)->orWhere('name',$get_user_geo->state_name)->first();
+        $autre_regions = Region::where('name',!$get_user_geo->city)->orWhere('name',!$get_user_geo->state_name)->get();
         // dd($region);
         $agences = User::where('is_admin',2)
         ->where('is_active',1)
@@ -34,7 +31,7 @@ class AgenceController extends Controller
         ->orderBy('id','ASC')->paginate(12);
         $agenceAll = User::where('is_admin',2)->where('is_active',1)->orderBy('id','ASC')->get();
         $agenceCount = $agenceAll->count(); 
-        return view('user.agence.index',compact('agences','agenceCount'));
+        return view('user.agence.index',compact('agences','agenceCount','autre_regions'));
     }
 
     public function create(){
@@ -110,11 +107,33 @@ class AgenceController extends Controller
         }
     }
 
+    public function region($slug){
+        $region = Region::where('slug',$slug)->first();
+        $agences = User::where('is_admin',2)
+        ->where('is_active',1)
+        ->where('region_id',$region->id)
+        ->orderBy('id','ASC')->paginate(12);
+        if ($agences->count() > 0) {
+            $agenceAll = User::where('is_admin',2)->where('is_active',1)->orderBy('id','ASC')->get();
+            $agenceCount = $agenceAll->count(); 
+
+            $getip = UserSystemInfoHelper::get_ip();
+            $get_user_geo = geoip()->getLocation($getip);
+            $autre_regions = Region::where('name',!$get_user_geo->city)->orWhere('name',!$get_user_geo->state_name)->get();
+
+            return view('user.agence.index',compact('agences','agenceCount','autre_regions'));
+        }else {
+            Toastr::warning('Il n\'y a pas d\'agence de transport pour la region de '.$region->name, 'Pas d\'agence', ["positionClass" => "toast-top-right"]);
+            return back();
+        }
+
+    }
+
     public function search(){
         request()->validate([
-            'q' => 'required|min:3'
+            'recherche' => 'required|min:3'
         ]);
-        $q = request()->input('q');
+        $q = request()->input('recherche');
         if ($q != null ) {
             $agence = User::where('name_agence',$q)->where('is_admin',2)->where('is_active',1)->first();
             if ($agence != null) {

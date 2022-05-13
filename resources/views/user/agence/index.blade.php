@@ -28,31 +28,49 @@
         <div class="container">
             <div class="currency-price">
                 <div class="row">
-                     <div class="col-md-2">
-                    </div>
-                     <div class="col-md-8">
-                        <div class="card">
-                            <div class="card-body">
-                                <form action="{{ route('agence.search') }}" method="post" style="margin-bottom: -15px;">
-                                    <div class="row">
-                                        @csrf
-                                        <div class="col-md-9">
-                                            <div class="mb-3">
-                                                <input  type="text" id="q" class="form-control @error('q') is-invalid @enderror bg-default p-3" name="q" value="{{ old('q') }}" required autocomplete="q" parsley-type="q"
-                                                    placeholder="Recherchez une agence de transport" />
-                                                    @error('q')
-                                                        <span class="invalid-feedback" role="alert">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <div class="card p-1">
+                            <div class="row">
+                                <div class="col-md-8 pt-3">
+                                    <div class="search-box d-inline-block" style="width: 100%">
+                                        <div class="position-relative">
+                                                <form id="searchClients"  action=" {{ route('agence.search') }} " method="post">
+                                                     @csrf
+                                                    <input  type="text" id="recherche" class="form-control @error('recherche') is-invalid @enderror" name="recherche"  required autocomplete="recherche" value="{{ request()->recherche ?? old('recherche') }}" placeholder="Rechercher une agence de transport">
+                                                    @error('recherche')
+                                                        <span class="invalid-feedback text-center" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <button type="submit" style="width: 100%;" class="btn btn-outline-primary p-3">Recherche</button>
+                                                </form>
+                                                <a onclick="event.preventDefault();document.getElementById('searchClients').submit();">
+                                                    <i class="bx bx-search-alt search-icon"></i>
+                                                </a>
                                         </div>
                                     </div>
-                                </form>
+                                </div>
+                                <div class="col-md-4 pt-3">
+                                    <div class="btn-group" style="width: 100%;">
+                                        <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Agences d'autres regions <i class="mdi mdi-chevron-down"></i>
+                                        </button>
+                                        <div class="dropdown-menu dropdown-menu-end" style="width: 100%;">
+                                            @foreach($autre_regions as $region)
+                                                <form id="searchClients-{{$region->id}}"  action=" {{ route('agence.region',$region->slug) }} " method="post">
+                                                    @csrf 
+                                                    <input type="hidden" name="region" value="{{ $region->id }}">
+                                                </form>
+                                                <a href="#" class="dropdown-item" onclick="event.preventDefault();document.getElementById('searchClients-{{$region->id}}').submit();">
+                                                    <i class="bx bx-search-alt search-icon"></i> {{$region->name}}
+                                                </a>
+                                                 
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
+                            
                         </div>
                     </div>
                 </div>

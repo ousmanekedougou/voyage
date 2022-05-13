@@ -11,51 +11,51 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 
-if(! function_exists('page_title')){
+if (!function_exists('page_title')) {
     function page_title($title)
     {
         $base_title = 'TouCki';
-        if($title === ''){
+        if ($title === '') {
             return  $base_title;
-        }else{
+        } else {
             return $title . ' | ' . $base_title;
         }
     }
 }
 
-if(! function_exists('set_active_roote')){
+if (!function_exists('set_active_roote')) {
     function set_active_roote($route)
     {
         return Route::is($route) ? 'active' : '';
     }
 }
 
-if(! function_exists('all_siege')){
+if (!function_exists('all_siege')) {
     function all_siege()
     {
-        $siege = Siege::where('user_id',Auth::user()->id)->get();
+        $siege = Siege::where('user_id', Auth::user()->id)->get();
         return $siege;
     }
 }
 
-if(! function_exists('itineraire_all')){
+if (!function_exists('itineraire_all')) {
     function itineraire_all()
     {
-        $itineraire_all = Itineraire::where('siege_id',Auth::user()->siege_id)->orderBy('id','ASC')->get();
+        $itineraire_all = Itineraire::where('siege_id', Auth::user()->siege_id)->orderBy('id', 'ASC')->get();
         return $itineraire_all;
     }
 }
 
-if(! function_exists('buse_all')){
+if (!function_exists('buse_all')) {
     function buse_all()
     {
-        $buse_all = Bus::where('user_id',Auth::user()->id)->where('siege_id',Auth::user()->siege_id)->orderBy('id','ASC')->get();
+        $buse_all = Bus::where('user_id', Auth::user()->id)->where('siege_id', Auth::user()->siege_id)->orderBy('id', 'ASC')->get();
         return $buse_all;
     }
 }
 
 
-if(! function_exists('carbon_today')){
+if (!function_exists('carbon_today')) {
     function carbon_today()
     {
         $today = Carbon::today()->format('Y-m-d');
@@ -63,7 +63,7 @@ if(! function_exists('carbon_today')){
     }
 }
 
-if(! function_exists('carbon_tomorrow')){
+if (!function_exists('carbon_tomorrow')) {
     function carbon_tomorrow()
     {
         $tomorrow = Carbon::tomorrow()->format('Y-m-d');
@@ -71,7 +71,7 @@ if(! function_exists('carbon_tomorrow')){
     }
 }
 
-if(! function_exists('carbon_after_tomorrow')){
+if (!function_exists('carbon_after_tomorrow')) {
     function carbon_after_tomorrow()
     {
         $after_tomorrow = Carbon::tomorrow()->addDay(1)->format('Y-m-d');
@@ -80,7 +80,7 @@ if(! function_exists('carbon_after_tomorrow')){
 }
 
 
-if(! function_exists('carbon_yesterday')){
+if (!function_exists('carbon_yesterday')) {
     function carbon_yesterday()
     {
         $yesterday = Carbon::yesterday()->format('Y-m-d');
@@ -88,24 +88,27 @@ if(! function_exists('carbon_yesterday')){
     }
 }
 
-if (! function_exists('part')) {
-    function part(){
-        define('ACTIVE',1);
-        $part = Part::where('is_active',ACTIVE)->get();
+if (!function_exists('part')) {
+    function part()
+    {
+        define('ACTIVE', 1);
+        $part = Part::where('is_active', ACTIVE)->get();
         return $part;
     }
 }
 
-if (! function_exists('historical_hiere')) {
-    function historical_hiere(){
-        $historical_hiere = Historical::where('siege_id',Auth::user()->siege_id)->where('registered_at','<',Carbon::yesterday()->format('Y-m-d'))->first();
+if (!function_exists('historical_hiere')) {
+    function historical_hiere()
+    {
+        $historical_hiere = Historical::where('siege_id', Auth::user()->siege_id)->where('registered_at', '<', Carbon::yesterday()->format('Y-m-d'))->first();
         return $historical_hiere;
     }
 }
 
-if (! function_exists('historical_avant_hiere')) {
-    function historical_avant_hiere(){
-        $historical_avant_hiere = Historical::where('siege_id',Auth::user()->siege_id)->where('registered_at','<',Carbon::yesterday()->format('Y-m-d'))->first();
+if (!function_exists('historical_avant_hiere')) {
+    function historical_avant_hiere()
+    {
+        $historical_avant_hiere = Historical::where('siege_id', Auth::user()->siege_id)->where('registered_at', '<', Carbon::yesterday()->format('Y-m-d'))->first();
         return $historical_avant_hiere;
     }
 }
@@ -117,37 +120,35 @@ if (! function_exists('historical_avant_hiere')) {
 //     }
 // }
 
-if (! function_exists('reference')) {
-    function reference(){
+if (!function_exists('reference')) {
+    function reference()
+    {
         $ref = random_int(0000, 9999);
         $ref_finale = '';
-        $client_ref = Client::where('reference',$ref)->first();
+        $client_ref = Client::where('reference', $ref)->first();
         if ($client_ref) {
             $ref_finale = random_int(0000, 9999);
-        }else {
+        } else {
             $ref_finale = $ref;
         }
         return $ref_finale;
     }
 }
 
-if (! function_exists('montant_today')) {
-    function montant_today(){
-        $itineraires = Itineraire::where('siege_id',Auth::user()->siege_id)->where('user_id',Auth::user()->id)->orderBy('id','ASC')->get();
-         foreach ($itineraires as $itineraire) {
+if (!function_exists('montant_today')) {
+    function montant_today()
+    {
+        $itineraires = Itineraire::where('siege_id', Auth::user()->siege_id)->where('user_id', Auth::user()->id)->orderBy('id', 'ASC')->get();
+        foreach ($itineraires as $itineraire) {
             foreach ($itineraire->date_departs as $iti_date) {
-               $somme_buse = Bus::where('itineraire_id',$iti_date->itineraire_id)->get();
-               foreach ($somme_buse as $buse_som) {
+                $somme_buse = Bus::where('itineraire_id', $iti_date->itineraire_id)->get();
+                foreach ($somme_buse as $buse_som) {
                     if ($buse_som->date_depart->depart_at == Carbon::today()->format('Y-m-d')) {
-                      $somme_total_today =  Bus::where('id',$buse_som->id)->sum('montant');
-                      return $somme_total_today;
+                        $somme_total_today =  Bus::where('id', $buse_som->id)->sum('montant');
+                        return $somme_total_today;
                     }
-               }
+                }
             }
         }
     }
 }
-
-
-
-

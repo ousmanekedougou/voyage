@@ -11,7 +11,7 @@ class DateDepart extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['depart_at','heure_rv','heure_dep'];
+    protected $fillable = ['depart_at','heure_rv','heure_dep','name_of_day','num_of_day'];
 
     public function buses(){
         return $this->hasMany(Bus::class);
