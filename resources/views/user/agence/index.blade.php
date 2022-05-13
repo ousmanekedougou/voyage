@@ -62,7 +62,7 @@
                                                     <input type="hidden" name="region" value="{{ $region->id }}">
                                                 </form>
                                                 <a href="#" class="dropdown-item" onclick="event.preventDefault();document.getElementById('searchClients-{{$region->id}}').submit();">
-                                                    <i class="bx bx-search-alt search-icon"></i> {{$region->name}}
+                                                    <i class="fa fa-city"></i> {{$region->name}}
                                                 </a>
                                                  
                                             @endforeach
