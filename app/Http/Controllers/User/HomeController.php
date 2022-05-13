@@ -17,13 +17,13 @@ class HomeController extends Controller
 
     public function index()
     {
-        $getip = UserSystemInfoHelper::get_ip();
-        $getbrowser = UserSystemInfoHelper::get_browsers();
-        $getdevice = UserSystemInfoHelper::get_device();
-        $getos = UserSystemInfoHelper::get_os();
+        // $getip = UserSystemInfoHelper::get_ip();
+        // $getbrowser = UserSystemInfoHelper::get_browsers();
+        // $getdevice = UserSystemInfoHelper::get_device();
+        // $getos = UserSystemInfoHelper::get_os();
         // dd($getip);
-        $get_user_ip = geoip()->getLocation($getip);
-        dd($get_user_ip->country);
+        // $get_user_ip = geoip()->getLocation($getip);
+        // dd($get_user_ip->country);
         return view('user.index');
     }
 
