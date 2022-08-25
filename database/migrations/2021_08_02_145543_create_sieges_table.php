@@ -18,7 +18,7 @@ class CreateSiegesTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone')->unique();
-            $table->integer('user_id');
+            $table->integer('agence_id');
             $table->string('adress')->nullable();
             $table->timestamps();
         });

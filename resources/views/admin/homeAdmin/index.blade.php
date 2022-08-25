@@ -84,7 +84,7 @@
             </div>
             <!-- end row -->
 
-             <div class="row">
+                    <div class="row">
                         @foreach($agences as $agence)
                             <div class="col-xl-4 col-sm-6">
                                 <div class="card">

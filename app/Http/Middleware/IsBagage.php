@@ -18,10 +18,12 @@ class IsBagage
      */
     public function handle(Request $request, Closure $next)
     {
-          if (Auth::user()->role == 2) {
-            return $next($request);
+        if (Auth::guard('agent')->user()) {
+            if (Auth::guard('agent')->user()->role == 2) {
+                return $next($request);
+            }
+            Toastr::error('Vous n\'aviez pas acces a cette page', 'Message', ["positionClass" => "toast-top-right"]);
+            return back();
         }
-        Toastr::error('Vous n\'aviez pas acces a cette page', 'Message', ["positionClass" => "toast-top-right"]);
-        return back();
     }
 }

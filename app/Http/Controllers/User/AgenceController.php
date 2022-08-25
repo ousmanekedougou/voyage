@@ -4,6 +4,8 @@ namespace App\Http\Controllers\User;
 
 use App\Helpers\UserSystemInfoHelper;
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Agence;
+use App\Models\Admin\Agent;
 use App\Models\Admin\Bus;
 use App\Models\Admin\Siege;
 use Illuminate\Http\Request;
@@ -24,18 +26,19 @@ class AgenceController extends Controller
         // dd($get_user_geo->city,$get_user_geo->state_name);
         $region = Region::where('name',$get_user_geo->city)->orWhere('slug',$get_user_geo->state_name)->first();
         $autre_regions = Region::where('name','!=',$get_user_geo->city)->orWhere('slug','!=',$get_user_geo->state_name)->get();
-        // dd($autre_regions);
-        $agences = User::where('is_admin',2)
+        // dd($region);
+        $agences = Agence::where('is_admin',0)
         ->where('is_active',1)
-        ->where('region_id',$region->id)
+        // ->where('region_id',$region->id)
         ->orderBy('id','ASC')->paginate(12);
-        $agenceAll = User::where('is_admin',2)->where('is_active',1)->orderBy('id','ASC')->get();
+        $agenceAll = Agence::where('is_admin',2)->where('is_active',1)->orderBy('id','ASC')->get();
         $agenceCount = $agenceAll->count(); 
         return view('user.agence.index',compact('agences','agenceCount','autre_regions'));
     }
 
     public function create(){
-        return view('user.agence.create');
+        $regions = Region::where('status',1)->get();
+        return view('user.agence.create',compact('regions'));
     }
 
     public function about($sluge){
@@ -58,11 +61,12 @@ class AgenceController extends Controller
             'slogan' => 'required|string',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
             'image_agence' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
+            'region' => 'required|numeric'
         ]);
         // dd($request->agence_phone);
            $imageName = '';
         $imageAgenceName = '';
-        $add_agence = new User();
+        $add_agence = new Agence();
           if($request->hasFile('image'))
         {
             $imageName = $request->image->store('public/Agence');
@@ -85,11 +89,12 @@ class AgenceController extends Controller
         $add_agence->is_admin = AGENCE;
         $add_agence->logo = $imageName;
         $add_agence->image_agence = $imageAgenceName;
+        $add_agence->region_id = $request->region;
         $add_agence->confirmation_token = str_replace('/','',Hash::make(Str::random(40)));
         $add_agence->slug = str_replace('/','',Hash::make(Str::random(20).'agence'.$request->email));
         $add_agence->save();
-        Notification::route('mail','ousmanelaravel@gmail.com')
-            ->notify(new RegisteredUser($add_agence));
+        // Notification::route('mail','ousmanelaravel@gmail.com')
+        //     ->notify(new RegisteredUser($add_agence));
         Toastr::success('Votre agence a bien ete creer', 'Inscription', ["positionClass" => "toast-top-right"]);
         return back();
     }
@@ -97,8 +102,8 @@ class AgenceController extends Controller
       public function show($slug)
     {
         $buses  = Bus::orderBy('id','ASC')->get();
-        $agence = User::where('slug',$slug)->first();
-        $sieges = Siege::where('user_id',$agence->id)->get();
+        $agence = Agence::where('slug',$slug)->first();
+        $sieges = Siege::where('agence_id',$agence->id)->get();
         if($sieges->count() > 0){
             return view('user.agence.show',compact('sieges','agence','buses'));
         }else {

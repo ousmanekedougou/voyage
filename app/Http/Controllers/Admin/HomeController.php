@@ -38,80 +38,8 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
-        if ($this->middleware(['IsAgent']) && Auth::user()->role == 1) {
-            $buses = Bus::where('siege_id',Auth::user()->siege_id)->orderBy('id','ASC')->get();
-            $itineraires = Itineraire::where('siege_id',Auth::user()->siege_id)->where('user_id',Auth::user()->id)->orderBy('id','ASC')->get();
-        
-            foreach ($buses as $buse) {
-                $client_historiques = Client::where('bus_id',$buse->id)->where('siege_id',Auth::user()->siege_id)->where('amount','>',2)->where('registered_at','<',Carbon::today()->format('Y-m-d'))->get();
-                foreach ($client_historiques as $client_hsto) {
-                    $add_client_htsto = new Historical();
-                    $add_client_htsto->name = $client_hsto->name;
-                    $add_client_htsto->email = $client_hsto->email;
-                    $add_client_htsto->phone = $client_hsto->phone;
-                    $add_client_htsto->cni = $client_hsto->cni;
-                    $add_client_htsto->ville_name = $client_hsto->ville->name;
-                    $add_client_htsto->bus_matricule = $client_hsto->bus->matricule;
-                    $add_client_htsto->position = $client_hsto->bus->inscrit;
-                    $add_client_htsto->registered_at = $client_hsto->registered_at;
-                    $add_client_htsto->heure = $client_hsto->heure;
-                    $add_client_htsto->amount = $client_hsto->amount;
-                    $add_client_htsto->payment_at = $client_hsto->payment_at;
-                    $add_client_htsto->voyage_status = $client_hsto->voyage_status;
-                    $add_client_htsto->agence = $client_hsto->agence;
-                    $add_client_htsto->agence_logo = $client_hsto->agence_logo;
-                    $add_client_htsto->siege_id = Auth::user()->siege_id;
-                    $add_client_htsto->save();
-                }
-                Client::where('bus_id',$buse->id)->where('registered_at','<',Carbon::today()->format('Y-m-d'))->delete();
-            }
-
-            $date_today = Carbon::today();
-            $dayOfweek = $date_today->dayOfWeek;
-            if ($dayOfweek == 1) {
-                Historical::where('registered_at','<',Carbon::today())->where('siege_id',Auth::user()->siege_id)->delete();
-            }
-
-
-            foreach ($itineraires as $itineraire) {
-                $dates = DateDepart::where('itineraire_id',$itineraire->id)->where('depart_at','<',Carbon::today())->delete();
-                foreach ($dates as $date) {
-                    Bus::where('date_depart_id',$date->id)->delete();
-                }
-                DateDepart::where('itineraire_id',$itineraire->id)->where('depart_at','<',Carbon::today())->delete();
-            }
-        }
-
-        DateDepart::where('depart_at','<',Carbon::today()->format('Y-m-d'))->delete();
-
-        if ($this->middleware(['IsAgent']) && Auth::user()->role == 2) {
-            Bagage::where('created_at','<',Carbon::yesterday())->delete();
-            BagageClient::where('created_at','<',Carbon::yesterday())->delete();
-        }
-
-        if ($this->middleware(['IsAgent']) && Auth::user()->role == 3) {
-            Colie::where('created_at','<',Carbon::yesterday())->delete();
-            ColiClient::where('created_at','<',Carbon::yesterday())->delete();
-        }
-
-        if ($this->middleware(['IsAgent']) && Auth::user()->role == 1) {
-            $user = User::where('id',Auth::user()->id)->first() ; 
-            $clientCount = Client::where('siege_id',Auth::user()->siege_id)->where('registered_at',carbon_today())->get();
-            $busCount = Bus::where('siege_id',Auth::user()->siege_id)->get();
-            return view('admin.homeAgent.index',compact('itineraires','user','clientCount','busCount'));
-        }elseif ($this->middleware(['IsAgent']) && Auth::user()->role == 2) {
-            $clients = Bagage::paginate(15);
-            return view('admin.bagage.index',compact('clients'));
-        }elseif ($this->middleware(['IsAgent']) && Auth::user()->role == 3) {
-            $clients = Colie::paginate(15);
-            return view('admin.coli.index',compact('clients'));
-        }elseif (Auth::user()->is_admin == 2 && Auth::user()->role == null) {
-            $sieges = Siege::where('user_id',Auth::user()->id)->get();
-            $agents = User::where('user_id',Auth::user()->id)->get(); 
-            $user = Auth::user();
-            return view('admin.homeAgence.index',compact('sieges','agents','user'));
-        }elseif ($this->middleware(['IsAdmin']) && Auth::user()->role == null) {
+    {   
+        if ($this->middleware(['IsAdmin'])) {
             $agences = User::where('is_admin',2)->orderBy('id','DESC')->paginate(9);
             $user = Auth::user();
             $siegeCount = Siege::all();

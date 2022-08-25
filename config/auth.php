@@ -40,6 +40,18 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'agence' => [
+            'driver' => 'session',
+            'provider' => 'agences',
+        ],
+        'agent' => [
+            'driver' => 'session',
+            'provider' => 'agents',
+        ],
+        'client' => [
+            'driver' => 'session',
+            'provider' => 'customers',
+        ],
 
         'api' => [
             'driver' => 'token',
@@ -70,6 +82,18 @@ return [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
         ],
+        'agences' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin\Agence::class,
+        ],
+        'agents' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin\Agent::class,
+        ],
+        'customers' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User\Customer::class,
+        ],
 
         // 'users' => [
         //     'driver' => 'database',
@@ -95,6 +119,24 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+         'agences' => [
+            'provider' => 'agences',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+         'agents' => [
+            'provider' => 'agents',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'customers' => [
+            'provider' => 'customers',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

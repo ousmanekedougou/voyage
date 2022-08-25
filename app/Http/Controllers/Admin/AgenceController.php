@@ -32,7 +32,7 @@ class AgenceController extends Controller
 
       public function index()
     {
-        $agences = User::where('is_admin',2)->orderBy('id','DESC')->paginate(10);
+        $agences = Agence::where('is_admin',0)->orderBy('id','DESC')->paginate(10);
         $regions = Region::where('status',1)->get();
         return view('admin.agence.index',compact('agences','regions'));
     }
@@ -74,45 +74,33 @@ class AgenceController extends Controller
     {
         $this->validate($request,[
             'name' => 'required|string|max:255',
-            'name_agence' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
-            'email_agence' => 'required|string|email|max:255|unique:users',
             'phone' => 'required|string|max:255|unique:users',
-            'agence_phone' => 'required|string|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed',
             // 'registre_commerce' => 'required|string|max:255|unique:users',
             'adress' => 'required|string',
             'slogan' => 'required|string',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
-            'image_agence' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
             'region' => 'required|numeric'
         ]);
 
+        $add_agence = new Agence();
         $imageName = '';
-        $imageAgenceName = '';
-        $add_agence = new User();
-          if($request->hasFile('image'))
+        if($request->hasFile('image'))
         {
             $imageName = $request->image->store('public/Agence');
         }
-          if($request->hasFile('image_agence'))
-        {
-            $imageAgenceName = $request->image_agence->store('public/Agence');
-        }
-        define('AGENCE',2);
+
+        
         $add_agence->name = $request->name;
-        $add_agence->name_agence = $request->name_agence;
         $add_agence->email = $request->email;
         $add_agence->phone = $request->phone;
-        $add_agence->agence_phone = $request->agence_phone;
-        $add_agence->password = Hash::make($request->password);
+        $add_agence->password = Hash::make('password');
         // $add_agence->registre_commerce = $request->registre_commerce;
-        $add_agence->email_agence = $request->email_agence;
         $add_agence->adress = $request->adress;
         $add_agence->slogan = $request->slogan;
-        $add_agence->is_admin = AGENCE;
+        $add_agence->is_admin = 0;
+        $add_agence->is_active = 0;
         $add_agence->logo = $imageName;
-        $add_agence->image_agence = $imageAgenceName;
         $add_agence->confirmation_token = str_replace('/','',Hash::make(Str::random(40)));
         $add_agence->slug = str_replace('/','',Hash::make(Str::random(20).'agence'.$request->email));
         $add_agence->user_id = Auth::user()->id;
@@ -120,6 +108,7 @@ class AgenceController extends Controller
         $add_agence->save();
         Notification::route('mail',Auth::user()->email)
             ->notify(new RegisteredUser($add_agence));
+
         $notifys = Notify::all();
         foreach ($notifys as $notify) {
             Notification::route('mail','ousmanelaravel@gmail.com')
@@ -137,7 +126,7 @@ class AgenceController extends Controller
      */
     public function show($id)
     {
-        $agence = User::where('id',$id)->first();
+        $agence = Agence::where('id',$id)->first();
         return view('admin.order.index',compact('agence'));
     }
 
@@ -163,8 +152,8 @@ class AgenceController extends Controller
     {
         define('DESACTIVEAGENCE',0);
         define('ACTIVEAGENCE',1);
-        $update_agence = User::where('id',$id)->first();
-        $agence_agents = User::where('user_id',$update_agence->id)->get();
+        $update_agence = Agence::where('id',$id)->first();
+        $agence_agents = Agence::where('user_id',$update_agence->id)->get();
         if ($request->is_active == 1) {
             $update_agence->is_active = DESACTIVEAGENCE;
             $update_agence->confirmation_token = str_replace('/','',Hash::make(Str::random(40)));
@@ -203,7 +192,7 @@ class AgenceController extends Controller
      */
     public function destroy($id)
     {
-        $agencedele = User::find($id);
+        $agencedele = Agence::find($id);
         $agenec_logo = $agencedele->logo;
         $img_ag = $agencedele->image_agence;
         Storage::delete($agenec_logo); 

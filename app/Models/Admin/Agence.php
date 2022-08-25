@@ -3,13 +3,16 @@
 namespace App\Models\Admin;
 
 use App\Models\User;
+use App\Models\Admin\Agent;
+use App\Models\Admin\Siege;
+// use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-class Agence extends Model
+class Agence extends Authenticatable
 {
-    use HasFactory, Notifiable ,Authenticatable;
+    use HasFactory, Notifiable;
        protected $fillable = [
         'name',
         'email',
@@ -26,7 +29,9 @@ class Agence extends Model
         'status',
         'is_active',
         'slug',
-        'confirmation_token'
+        'confirmation_token',
+        'region_id',
+        'is_admin',
     ];
 
     public function user()
@@ -36,5 +41,9 @@ class Agence extends Model
 
     public function agents(){
         return $this->hasMany(Agent::class);
+    }
+
+    public function sieges(){
+        return $this->hasMany(Siege::class);
     }
 }

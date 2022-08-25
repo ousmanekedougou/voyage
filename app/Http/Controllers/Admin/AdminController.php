@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\User\Customer;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -33,7 +34,8 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+        $users = Customer::paginate(9);
+        return view('admin.admin.customer',compact('users'));
     }
 
     /**

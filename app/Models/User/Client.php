@@ -6,17 +6,37 @@ use App\Models\Admin\Bagage;
 use App\Models\Admin\Bus;
 use App\Models\Admin\Siege;
 use App\Models\Admin\Ville;
+use App\Models\User\Customer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+
 class Client extends Model
 {
     use HasFactory,Notifiable;
+      protected $fillable = [
+        'name',
+        'email',
+        'phone',
+        'ville_id',
+        'bus_id',
+        'position',
+        'amount',
+        'registered_at',
+        'payment_at',
+        'confirmation_token',
+        'remboursement',
+        'voyage_status',
+        'siege_id',
+        'reference',
+        'cni',
+    ];
 
      public function bus()
     {
         return $this->belongsTo(Bus::class);
     }
+
 
     public function bagages(){
       return $this->hasMany(Bagage::class);
@@ -31,16 +51,8 @@ class Client extends Model
         return $this->belongsTo(Siege::class);
     }
 
-      protected $fillable = [
-        'name',
-        'email',
-        'phone',
-        'ville_id',
-        'bus_id',
-        'position',
-        'amount',
-        'registered_at',
-        'payment_at',
-        'confirmation_token'
-    ];
+    public function customer(){
+      return $this->belongsTo(Customer::class);
+    }
+    
 }

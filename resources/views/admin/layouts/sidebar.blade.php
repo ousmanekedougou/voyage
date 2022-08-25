@@ -7,7 +7,7 @@
                     <!-- Left Menu Start -->
                     <ul class="metismenu list-unstyled" id="side-menu">
                         <li class="menu-title" key="t-menu">Menu</li>
-                        @if(Auth::user()->is_admin == 1 || Auth::user()->is_admin == 0)
+                        @if(Auth::guard('web')->user())
                             <li>
                                 <a href="javascript: void(0);" class="waves-effect">
                                     <span class="badge rounded-pill bg-success float-end" key="t-new">New</span>
@@ -16,12 +16,14 @@
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
                                     <li><a href="{{ route('admin.agence.index') }}" key="t-blog-list"> <i class="fa fa-project-diagram"></i> Agences</a></li>
-                                    @if(Auth::user()->is_admin == 0)
+                                    @if(Auth::guard('web')->user()->is_admin == 0)
                                         <li><a href="{{ route('admin.admin.index') }}" key="t-blog-list">Admins</a></li>
                                         <li><a href="{{ route('admin.partenaire.index') }}" key="t-blog-list">Partenaires</a></li>
+                                        <li><a href="{{ route('admin.admin.create') }}" key="t-blog-list">Utilisateurs</a></li>
                                     @endif
                                 </ul>
                             </li>
+                            
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
                                     <i class="bx bxs-user-detail"></i>
@@ -34,7 +36,7 @@
                             </li>
                         @endif
 
-                        @if(Auth::user()->is_admin == 2)
+                        @if(Auth::guard('agence')->user())
                             <!-- La partie des agence -->
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -42,7 +44,7 @@
                                     <span key="t-ecommerce">Sieges</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="{{ route('admin.siege.index') }}" key="t-products">Sieges</a></li>
+                                    <li><a href="{{ route('agence.siege.index') }}" key="t-products">Sieges</a></li>
                                 </ul>
                             </li>
                             <li>
@@ -52,24 +54,22 @@
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
                                     @foreach(all_siege() as $siege)
-                                    <li><a href="{{ route('admin.agent.show',$siege->id) }}" key="t-products">{{$siege->name}}</a></li>
+                                        <li><a href="{{ route('agence.agent.show',$siege->id) }}" key="t-products">{{$siege->name}}</a></li>
                                     @endforeach
                                 </ul>
                             </li>
                             <!-- Fin de la partie des agence -->
                         @endif
 
-                        @if(Auth::user()->is_admin == 3)
-
-                         
-                            @if(Auth::user()->role == 1)
+                        @if(Auth::guard('agent')->user())
+                            @if(Auth::guard('agent')->user()->role == 1)
                                 <li>
                                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                                         <i class="bx bxs-user-detail"></i>
                                         <span key="t-contacts">Contacts</span>
                                     </a>
                                     <ul class="sub-menu" aria-expanded="false">
-                                        <li><a href="{{ route('admin.contact.index') }}" key="t-user-list">Vos Contacts</a></li>
+                                        <li><a href="{{ route('agent.contact.index') }}" key="t-user-list">Vos Contacts</a></li>
                                     </ul>
                                 </li>
                                 <hr>
@@ -79,7 +79,7 @@
                                         <span key="t-contacts">Itineraires</span>
                                     </a>
                                     <ul class="sub-menu" aria-expanded="false">
-                                        <li><a href="{{ route('admin.itineraire.index') }}" key="t-products"> <i class="fa fa-road"></i>Vos Itineraires</a></li>
+                                        <li><a href="{{ route('agent.itineraire.index') }}" key="t-products"> <i class="fa fa-road"></i>Vos Itineraires</a></li>
                                     </ul>
                                 </li>
                                 <li>
@@ -88,7 +88,7 @@
                                         <span key="t-contacts">Dates</span>
                                     </a>
                                     <ul class="sub-menu" aria-expanded="false">
-                                        <li><a href="{{ route('admin.depart.index') }}" key="t-products"> <i class="fa fa-clock"></i> Vos Dates</a></li>
+                                        <li><a href="{{ route('agent.depart.index') }}" key="t-products"> <i class="fa fa-clock"></i> Vos Dates</a></li>
                                     </ul>
                                 </li>
                                 <li>
@@ -97,7 +97,7 @@
                                         <span key="t-contacts">Buses</span>
                                     </a>
                                     <ul class="sub-menu" aria-expanded="false">
-                                        <li><a href="{{ route('admin.bus.index') }}" key="t-products"><i class="fa fa-bus"></i>Vos Buses</a></li>
+                                        <li><a href="{{ route('agent.bus.index') }}" key="t-products"><i class="fa fa-bus"></i>Vos Buses</a></li>
                                     </ul>
                                 </li>
 
@@ -138,7 +138,7 @@
                                                         </a>
                                                         <ul class="sub-menu" aria-expanded="false">
                                                             @foreach($date->buses as $bus)
-                                                                <li><a href="{{route('admin.client.show',$bus->id)}}" key="t-products"> <i class="bx bxs-bus Bus"></i>   Bus  {{ $bus->number }} | {{ $bus->matricule }}</a></li>
+                                                                <li><a href="{{route('agent.client.show',$bus->id)}}" key="t-products"> <i class="bx bxs-bus Bus"></i>   Bus  {{ $bus->number }} | {{ $bus->matricule }}</a></li>
                                                             @endforeach
                                                         </ul>
                                                     </li>
@@ -155,31 +155,67 @@
                                     </a>
                                     <ul class="sub-menu" aria-expanded="false">
                                         @if(historical_hiere() != null)
-                                            <li><a href="{{route('admin.historique.show',historical_hiere()->siege_id)}}" key="t-products"> <i class="fa fa-clock"></i>Hiere</a></li>
+                                            <li><a href="{{route('agent.historique.show',historical_hiere()->siege_id)}}" key="t-products"> <i class="fa fa-clock"></i>Hiere</a></li>
                                         @endif
                                         @if(historical_avant_hiere() != null)
-                                            <li><a href="{{route('admin.historique.show',historical_avant_hiere()->siege_id)}}" key="t-products"> <i class="fa fa-clock"></i>Avant Hiere</a></li>
+                                            <li><a href="{{route('agent.historique.show',historical_avant_hiere()->siege_id)}}" key="t-products"> <i class="fa fa-clock"></i>Avant Hiere</a></li>
                                         @endif
                                     </ul>
                                 </li>
                                 
                             @endif
-                            @if(Auth::user()->role == 2 || Auth::user()->role == 3)
+                            @if(Auth::guard('agent')->user()->role == 2 || Auth::guard('agent')->user()->role == 3)
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
                                     <i class="fa fa-store-alt"></i>
                                     <span key="t-ecommerce">Bagages et Colis</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
-                                        @if(Auth::user()->role == 2)
-                                        <li><a href="{{route('admin.bagage.index')}}" key="t-products"> <i class="fa fa-luggage-cart"></i>Bagages</a></li>
+                                        @if(Auth::guard('agent')->user()->role == 2)
+                                        <li><a href="{{route('agent.bagage.index')}}" key="t-products"> <i class="fa fa-luggage-cart"></i>Bagages</a></li>
                                         @endif
-                                        @if(Auth::user()->role == 3)
-                                        <li><a href="{{route('admin.colis.index')}}" key="t-products"> <i class="fa fa-suitcase-rolling"></i>Colis</a></li>
+                                        @if(Auth::guard('agent')->role == 3)
+                                        <li><a href="{{route('agent.colis.index')}}" key="t-products"> <i class="fa fa-suitcase-rolling"></i>Colis</a></li>
                                         @endif
                                 </ul>
                             </li>
                             @endif
+                        @endif
+
+                        @if(Auth::guard('client')->user())
+                            <li>
+                                <a href="#" class="waves-effect">
+                                    <i class="fa fa-ticket-alt"></i>
+                                    <span class="badge rounded-pill bg-success float-end" key="t-new">New</span>
+                                    <span key="t-file-manager">Tickets</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="maps-google.html" class="waves-effect">
+                                    <i class="fa fa-suitcase-rolling"></i>
+                                    <span class="badge rounded-pill bg-success float-end" key="t-new">New</span>
+                                    <span key="t-file-manager">Colis</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="maps-google.html" class="waves-effect">
+                                    <i class="fa fa-luggage-cart"></i>
+                                    <span class="badge rounded-pill bg-success float-end" key="t-new">New</span>
+                                    <span key="t-file-manager">Bagages</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                    <i class="bx bx-map"></i>
+                                    <span key="t-maps">D'autres agences</span>
+                                </a>
+                                <ul class="sub-menu" aria-expanded="false">
+                                    @foreach(region() as $region)
+                                    <li><a href="{{ route('customer.agence.region',$region->slug) }}" key="t-g-maps-{{$region->id}}"><i class="fa fa-suitcase-rolling"></i> {{$region->name}}</a></li>
+                                    @endforeach
+                                </ul>
+                            </li>
                         @endif
                     </ul>
                 </div>

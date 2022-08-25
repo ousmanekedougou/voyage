@@ -15,24 +15,22 @@ class CreateClientsTable extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique()->nullable();
-            $table->string('phone')->unique();
-            $table->integer('ville_id');
-            $table->integer('bus_id');
+            // $table->string('name')->nullable();
+            // $table->string('email')->unique()->nullable();
+            // $table->integer('phone')->unique()->nullable();
+            $table->integer('ville_id')->nullable();
+            $table->integer('bus_id')->nullable();
             $table->integer('position')->nullable();
             $table->integer('amount')->nullable();
             $table->dateTime('registered_at')->nullable();
-            $table->time('heure')->nullable();
             $table->date('payment_at')->nullable();
-            $table->string('cni')->nullable();
             $table->integer('remboursement')->nullable();
             $table->integer('voyage_status')->default(0);
-            $table->string('confirmation_token')->nullable();
-            $table->string('agence')->nullable();
-            $table->string('agence_logo')->nullable();
             $table->integer('siege_id');
-            $table->integer('reference')->unique();
+            $table->string('cni')->unique()->nullable();
+            $table->integer('customer_id')->nullable();
+            // $table->integer('reference')->unique()->nullable();
+            // $table->string('image')->nullable();
             $table->timestamps();
         });
     }

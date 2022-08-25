@@ -22,11 +22,11 @@ class CreateAgencesTable extends Migration
             $table->string('adress')->nullable();
             $table->string('registre_commerce')->unique()->nullable();
             $table->text('slogan')->nullable();
-            $table->string('logo')->nullable();
             $table->integer('status')->default(0);
+            $table->integer('region_id');
             $table->string('password');
             $table->boolean('is_active')->default(0);
-            $table->integer('is_admin')->default(1);
+            $table->boolean('is_admin')->default(1);
             $table->string('slug')->unique();
             $table->string('facture')->nullable();
             $table->string('amount')->nullable();
@@ -34,8 +34,6 @@ class CreateAgencesTable extends Migration
             $table->integer('user_id')->nullable();
             $table->string('confirmation_token')->unique()->nullable();
              $table->string('image')->nullable();
-             $table->string('agence_name')->nullable();
-             $table->integer('agence_phone')->nullable();
             $table->timestamps();
         });
     }

@@ -3,100 +3,158 @@
                 <div class="d-flex">
                     <!-- LOGO -->
                     <div class="navbar-brand-box">
-                        @if(Auth::user()->is_admin == 3)
-                            <a href="{{ route('admin.home') }}" class="logo logo-dark">
+                        @if(Auth::guard('agent')->user())
+                            <a href="{{ route('agent.home') }}" class="logo logo-dark">
                                 <span class="logo-sm">
                                     <!-- <span class="text-bold text-uppercase text-white"></span> -->
-                                    @if(Auth::user()->image_agence == null)
+                                    @if(Auth::guard('agent')->user()->agence->logo == null)
                                         <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="22">
                                     @else
-                                        <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" height="22">
+                                        <img src="{{Storage::url(Auth::guard('agent')->user()->agence->logo)}}" alt="" height="22">
                                     @endif
                                 </span>
                                 <span class="logo-lg">
-                                    <span class="text-bold text-uppercase text-white">{{Auth::user()->agence_name}}</span>
-                                     @if(Auth::user()->image_agence == null)
+                                    <span class="text-bold text-uppercase text-white">{{Auth::guard('agent')->user()->name}}</span>
+                                     @if(Auth::guard('agent')->user()->agence->logo == null)
                                         <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="17">
                                     @else
-                                        <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" height="17">
+                                        <img src="{{Storage::url(Auth::guard('agent')->user()->agence->logo)}}" alt="" height="17">
                                     @endif
                                 </span>
                             </a>
 
-                            <a href="{{ route('admin.home') }}" class="logo logo-light">
+                            <a href="{{ route('agent.home') }}" class="logo logo-light">
                                 <span class="logo-sm">
-                                    <!-- <span class="text-bold text-uppercase text-white">{{Auth::user()->agence_name}}</span> -->
-                                    @if(Auth::user()->image_agence == null)
+                                    <!-- <span class="text-bold text-uppercase text-white">{{Auth::guard('agent')->user()->logo}}</span> -->
+                                    @if(Auth::guard('agent')->user()->agence->logo == null)
                                         <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="22">
                                     @else
-                                        <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" height="22">
+                                        <img src="{{Storage::url(Auth::guard('agent')->user()->agence->logo)}}" alt="" height="22">
                                     @endif
                                 </span>
                                 <span class="logo-lg">
-                                     <span class="text-bold text-uppercase text-white" style="font-size: 14px;margin-left:-25px;">{{Auth::user()->agence_name}}</span>
+                                     <span class="text-bold text-uppercase text-white" style="font-size: 14px;margin-left:-25px;">{{Auth::guard('agent')->user()->name}}</span>
                                     
-                                    @if(Auth::user()->image_agence == null)
+                                    @if(Auth::guard('agent')->user()->agence->logo == null)
                                         <img src="{{asset('admin/assets/images/bus.svg')}}" alt=""  style="width: 50px;height:50px;border-radius:100%;">
                                     @else
-                                        <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" style="width: 50px;height:50px;border-radius:100%;">
+                                        <img src="{{Storage::url(Auth::guard('agent')->user()->agence->logo)}}" alt="" style="width: 50px;height:50px;border-radius:100%;">
                                     @endif
                                 </span>
                             </a>
-                        @elseif(Auth::user()->is_admin == 2)
-                               <a href="{{ route('admin.home') }}" class="logo logo-dark">
+                        @endif
+                        @if(Auth::guard('agence')->user())
+                               <a href="{{ route('agence.agence.home') }}" class="logo logo-dark">
                                 <span class="logo-sm">
                                     <!-- <span class="text-bold text-uppercase text-white"></span> -->
-                                    @if(Auth::user()->image_agence == null)
+                                    @if(Auth::guard('agence')->user()->logo == null)
                                         <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="22">
                                     @else
-                                        <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" height="22">
+                                        <img src="{{Storage::url(Auth::guard('agence')->user()->logo)}}" alt="" height="22">
                                     @endif
                                 </span>
                                 <span class="logo-lg">
-                                    <span class="text-bold text-uppercase text-white">{{Auth::user()->name_agence}}</span>
-                                     @if(Auth::user()->image_agence == null)
+                                    <span class="text-bold text-uppercase text-white">{{Auth::guard('agence')->user()->name}}</span>
+                                     @if(Auth::guard('agence')->user()->logo == null)
                                         <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="17">
                                     @else
-                                        <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" height="17">
+                                        <img src="{{Storage::url(Auth::guard('agence')->user()->logo)}}" alt="" height="17">
                                     @endif
                                 </span>
                             </a>
 
-                            <a href="{{ route('admin.home') }}" class="logo logo-light">
+                            <a href="{{ route('agence.agence.home') }}" class="logo logo-light">
                                 <span class="logo-sm">
-                                    <!-- <span class="text-bold text-uppercase text-white">{{Auth::user()->agence_name}}</span> -->
-                                    @if(Auth::user()->image_agence == null)
+                                    <!-- <span class="text-bold text-uppercase text-white">{{Auth::guard('agence')->user()->agence_name}}</span> -->
+                                    @if(Auth::guard('agence')->user()->logo == null)
                                         <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="22">
                                     @else
-                                        <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" height="22">
+                                        <img src="{{Storage::url(Auth::guard('agence')->user()->logo)}}" alt="" height="22">
                                     @endif
                                 </span>
                                 <span class="logo-lg">
-                                     <span class="text-bold text-uppercase text-white" style="font-size: 14px;margin-left:-25px;">{{Auth::user()->name_agence}}</span>
+                                     <span class="text-bold text-uppercase text-white" style="font-size: 14px;margin-left:-25px;">{{Auth::guard('agence')->user()->name}}</span>
                                     
-                                    @if(Auth::user()->image_agence == null)
+                                    @if(Auth::guard('agence')->user()->logo == null)
                                         <img src="{{asset('admin/assets/images/bus.svg')}}" alt=""  style="width: 50px;height:50px;border-radius:100%;">
                                     @else
-                                        <img src="{{Storage::url(Auth::user()->image_agence)}}" alt="" style="width: 50px;height:50px;border-radius:100%;">
+                                        <img src="{{Storage::url(Auth::guard('agence')->user()->logo)}}" alt="" style="width: 50px;height:50px;border-radius:100%;">
                                     @endif
                                 </span>
                             </a>
-                        @else
+                        @endif
+                        @if(Auth::guard('web')->user())
                             <a href="{{ route('admin.home') }}" class="logo logo-dark">
                                 <span class="logo-sm">
+                                    @if(Auth::guard('web')->user()->logo == null)
                                     <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="22">
+                                    @else
+                                    <img src="{{Storage::url(Auth::guard('web')->user()->logo)}}}" alt="" height="22">
+                                    @endif
                                 </span>
                                 <span class="logo-lg">
-                                    <img src="{{asset('admin/assets/images/logo-dark.png')}}" alt="" height="17">
+                                    <span class="text-bold text-uppercase text-white">{{Auth::guard('web')->user()->name}}</span>
+                                    @if(Auth::guard('web')->user()->logo == null)
+                                    <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="17">
+                                    @else
+                                    <img src="{{Storage::url(Auth::guard('web')->user()->logo)}}}" alt="" height="17">
+                                    @endif
                                 </span>
                             </a>
 
                             <a href="{{ route('admin.home') }}" class="logo logo-light">
                                 <span class="logo-sm">
+                                    @if(Auth::guard('web')->user()->logo == null)
                                     <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="22">
+                                    @else
+                                    <img src="{{Storage::url(Auth::guard('web')->user()->logo)}}}" alt="" height="22">
+                                    @endif
                                 </span>
                                 <span class="logo-lg">
-                                    <img src="{{asset('admin/assets/images/logo-light.png')}}" alt="" height="19">
+                                    <span class="text-bold text-uppercase text-white">{{Auth::guard('web')->user()->name}}</span>
+                                    @if(Auth::guard('web')->user()->logo == null)
+                                    <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="19">
+                                    @else
+                                    <img src="{{Storage::url(Auth::guard('web')->user()->logo)}}}" alt="" height="19">
+                                    @endif
+                                </span>
+                            </a>
+                        @endif
+
+                        @if(Auth::guard('client')->user())                        
+                            <a href="{{ route('customer.home') }}" class="logo logo-dark">
+                                <span class="logo-sm">
+                                    @if(Auth::guard('client')->user()->image == null)
+                                    <img src="{{ asset('admin/assets/images/users/profil.jpg') }}" alt="" height="22">
+                                    @else
+                                    <img src="{{Storage::url(Auth::guard('client')->user()->image)}}}" alt="" height="22">
+                                    @endif
+                                </span>
+                                <span class="logo-lg">
+                                    <span class="text-bold text-uppercase text-white">{{Auth::guard('client')->user()->name}}</span>
+                                    @if(Auth::guard('client')->user()->image == null)
+                                    <img src="{{ asset('admin/assets/images/users/profil.jpg') }}" alt="" height="17">
+                                    @else
+                                    <img src="{{Storage::url(Auth::guard('client')->user()->image)}}}" alt="" height="17">
+                                    @endif
+                                </span>
+                            </a>
+
+                            <a href="{{ route('customer.home') }}" class="logo logo-light">
+                                <span class="logo-sm">
+                                    @if(Auth::guard('client')->user()->image == null)
+                                    <img src="{{ asset('admin/assets/images/users/profil.jpg') }}" alt="" height="22">
+                                    @else
+                                    <img src="{{Storage::url(Auth::guard('client')->user()->image)}}}" alt="" height="22">
+                                    @endif
+                                </span>
+                                <span class="logo-lg">
+                                    <span class="text-bold text-uppercase text-white">{{Auth::guard('client')->user()->name}}</span>
+                                    @if(Auth::guard('client')->user()->image == null)
+                                        <img src="{{ asset('admin/assets/images/users/profil.jpg') }}" alt="" height="19">
+                                    @else
+                                        <img src="{{Storage::url(Auth::guard('client')->user()->image)}}}" alt="" height="19">
+                                    @endif
                                 </span>
                             </a>
                         @endif
@@ -239,7 +297,8 @@
                             <i class="bx bx-fullscreen"></i>
                         </button>
                     </div>
-                    @if(Auth::user()->is_admin == 3 && Auth::user()->role == 1)
+                    
+                    @if(Auth::guard('agent')->user() && Auth::guard('agent')->user()->role == 1)
                     <div class="dropdown d-inline-block">
                         <button type="button" class="btn header-item noti-icon waves-effect"
                             id="page-header-notifications-dropdown" data-bs-toggle="dropdown" aria-haspopup="true"
@@ -341,20 +400,81 @@
                     <div class="dropdown d-inline-block">
                         <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            @if(Auth::user()->logo !== null)
-                            <img class="rounded-circle header-profile-user" src="{{ Storage::url(Auth::user()->logo) }}"
+                            @if(Auth::guard('web')->user())
+                                @if(Auth::guard('web')->user()->logo !== null)
+                                <img class="rounded-circle header-profile-user" src="{{ Storage::url(Auth::guard('web')->user()->logo) }}"
+                                    alt="Header Avatar">
+                                    <span class="d-none d-xl-inline-block ms-1" key="t-henry"> {{ Auth::guard('web')->user()->name }}</span>
+                                    <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                                @else
+                                 <img class="rounded-circle header-profile-user" src="{{ asset('admin/assets/images/users/profil.jpg') }}"
                                 alt="Header Avatar">
-                            @else
-                             <img class="rounded-circle header-profile-user" src="{{ asset('admin/assets/images/users/profil.jpg') }}"
-                                alt="Header Avatar">
+                                <span class="d-none d-xl-inline-block ms-1" key="t-henry"> {{ Auth::guard('web')->user()->name }}</span>
+                                <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                                @endif
                             @endif
-                            <span class="d-none d-xl-inline-block ms-1" key="t-henry"> {{ Auth::user()->name }}</span>
+
+                            @if(Auth::guard('agence')->user())
+                                @if(Auth::guard('agence')->user()->logo !== null)
+                                <img class="rounded-circle header-profile-user" src="{{ Storage::url(Auth::guard('agence')->user()->logo) }}"
+                                    alt="Header Avatar">
+                                    <span class="d-none d-xl-inline-block ms-1" key="t-henry"> {{ Auth::guard('agence')->user()->name }}</span>
+                                    <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                                @else
+                                 <img class="rounded-circle header-profile-user" src="{{ asset('admin/assets/images/users/profil.jpg') }}"
+                                alt="Header Avatar">
+                                <span class="d-none d-xl-inline-block ms-1" key="t-henry"> {{ Auth::guard('agence')->user()->name }}</span>
+                                <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                                @endif
+                            @endif
+
+                             @if(Auth::guard('agent')->user())
+                                @if(Auth::guard('agent')->user()->logo !== null)
+                                <img class="rounded-circle header-profile-user" src="{{ Storage::url(Auth::guard('agent')->user()->logo) }}"
+                                    alt="Header Avatar">
+                                    <span class="d-none d-xl-inline-block ms-1" key="t-henry"> {{ Auth::guard('agent')->user()->name }}</span>
+                                    <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                                @else
+                                 <img class="rounded-circle header-profile-user" src="{{ asset('admin/assets/images/users/profil.jpg') }}"
+                                alt="Header Avatar">
+                                <span class="d-none d-xl-inline-block ms-1" key="t-henry"> {{ Auth::guard('agent')->user()->name }}</span>
+                                <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                                @endif
+                            @endif
+
+                             @if(Auth::guard('client')->user())
+                                @if(Auth::guard('client')->user()->image == null)
+                                     <img class="rounded-circle header-profile-user" src="{{ asset('admin/assets/images/users/profil.jpg') }}"
+                                alt="Header Avatar">
+                                    <span class="d-none d-xl-inline-block ms-1" key="t-henry"> {{ Auth::guard('client')->user()->name }}</span>
+                                    <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                                @else
+                                <img class="rounded-circle header-profile-user" src="{{ Storage::url(Auth::guard('client')->user()->image) }}"
+                                    alt="Header Avatar">
+                                <span class="d-none d-xl-inline-block ms-1" key="t-henry"> {{ Auth::guard('client')->user()->name }}</span>
+                                <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                                @endif
+                            @endif
+                            {{--
+                            <span class="d-none d-xl-inline-block ms-1" key="t-henry"> name</span>
                             <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                            --}}
                         </button>
                         <div class="dropdown-menu dropdown-menu-end">
                             <!-- item-->
+                            @if(Auth::guard('web')->user())
                             <a class="dropdown-item" href="{{ route('admin.profil.show',Auth::guard('web')->user()->slug) }}"><i class="bx bx-user font-size-16 align-middle me-1"></i>
                                 <span key="t-profile">Profile</span></a>
+                            @elseif(Auth::guard('agence')->user())
+                             <a class="dropdown-item" href="{{ route('agence.profil.show',Auth::guard('agence')->user()->slug) }}"><i class="bx bx-user font-size-16 align-middle me-1"></i>
+                                <span key="t-profile">Profile</span></a>
+                            @elseif(Auth::guard('agent')->user())
+                             <a class="dropdown-item" href="{{ route('agent.profil.show',Auth::guard('agent')->user()->slug) }}"><i class="bx bx-user font-size-16 align-middle me-1"></i>
+                                <span key="t-profile">Profile</span></a>
+                            @elseif(Auth::guard('client')->user())
+                             <a class="dropdown-item" href="{{ route('customer.profil.show',Auth::guard('client')->user()->slug) }}"><i class="bx bx-user font-size-16 align-middle me-1"></i>
+                                <span key="t-profile">Profile</span></a>
+                            @endif
                             {{--
                             <a class="dropdown-item" href=""><i
                                     class="bx bx-wallet font-size-16 align-middle me-1"></i> <span key="t-my-wallet">My
@@ -369,52 +489,49 @@
                             --}}
                             <div class="dropdown-divider"></div>
 
+                            @if(Auth::guard('web')->user())
                             <a class="dropdown-item text-danger" href="" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"><i
+                                                     document.getElementById('logout-form-1').submit();"><i
                                     class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span
                                     key="t-logout" >Deconexion</span></a>
-                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                     <form id="logout-form-1" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
+                            @elseif(Auth::guard('agence')->user())
+                            <a class="dropdown-item text-danger" href="" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form-2').submit();"><i
+                                    class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span
+                                    key="t-logout" >Deconexion</span></a>
+                                     <form id="logout-form-2" action="{{ route('agence.agence.logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                            @elseif(Auth::guard('agent')->user())
+                            <a class="dropdown-item text-danger" href="" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form-3').submit();"><i
+                                    class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span
+                                    key="t-logout" >Deconexion</span></a>
+                                     <form id="logout-form-3" action="{{ route('agent.agent.logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                            @elseif(Auth::guard('client')->user())
+                            <a class="dropdown-item text-danger" href="" onclick="event.preventDefault();
+                                    document.getElementById('logout-form-4').submit();"><i
+                                    class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span
+                                    key="t-logout" >Deconexion</span></a>
+                                     <form id="logout-form-4" action="{{ route('customer.customer.logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                            @endif
                         </div>
                     </div>
 
                 </div>
-                {{--
-                @if(session('success'))
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <i class="mdi mdi-check-all me-2"></i>
-                        {{ session('success') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                @endif
-                @if(session('error'))
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <i class="mdi mdi-block-helper me-2"></i>
-                        {{ session('error') }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                @endif
-                --}}
+          
             </div>
             
         </header>
 
          {!! Toastr::message() !!}
-		
-
-		
-
-		{{--@if(count($errors) > 0)
-			<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <i class="mdi mdi-block-helper me-2"></i>
-				<ul class="mb-0 mt-4">
-					@foreach($errors->all() as $error)
-						<li>{{ $error }}</li>
-					@endforeach
-				</ul>
-			</div>
-		@endif--}}
 
        
 

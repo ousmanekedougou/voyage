@@ -37,9 +37,9 @@
                         </div>
                     </div>
                 </div>
-                <form class="custom-validation" action="{{ route('agence.store') }}" method="POST" enctype="multipart/form-data">
+                <form class="custom-validation card" action="{{ route('agence.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="row">
+                    <div class="row card-body">
                         <div class="col-xl-6">
                             <div class="mb-3">
                                 <label class="form-label">Nom de l'agence</label>
@@ -110,7 +110,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row card-body">
                         <div class="col-lg-12">
                             <div class="text-left mb-1 mt-5">
                                 <h4 class="text-center">Entrez les information de votre agence</h4>
@@ -118,7 +118,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <div class="row card-body">
                         <div class="col-xl-6">
                             <div class="mb-3">
                                 <label class="form-label">Nom de l'agence</label>
@@ -192,6 +192,19 @@
                                         @enderror
                             </div>
                             <div class="mb-3">
+                                <label class="form-label">Selectionner une region</label>
+                                <select  class="form-control @error('region') is-invalid @enderror" name="region" required autocomplete="region" required>
+                                    @foreach($regions as $region)
+                                        <option value="{{ $region->id }}">{{ $region->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('region')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
                                 <label class="form-label">Slogan de l'agence</label>
                                 <div>
                                     <textarea required id="slogan" class="form-control @error('slogan') is-invalid @enderror" name="slogan" value="{{ old('slogan') }}" autocomplete="slogan" class="form-control" rows="1"></textarea>
@@ -204,7 +217,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="d-flex flex-wrap gap-2">
+                    <div class="d-flex flex-wrap gap-2 card-body">
                         <button type="submit" class="btn btn-primary waves-effect waves-light btn-block">
                             Validez votre inscription
                         </button>
@@ -214,8 +227,9 @@
                     </div>
                     
                 </form>
+                <br>
 
-                
+                {{--
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
@@ -284,36 +298,31 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                          
-                                        </form>
-                                    </section>
 
-                                    <!-- Company Document -->
-                                    <h3>Votre mot de passe</h3>
-                                    <section>
-                                        <form class="custom-validation" action="{{ route('agence.store') }}" method="POST" enctype="multipart/form-data">
                                             <div class="row">
                                                 <div class="col-lg-6">
-                                                     <div class="mb-3">
-                                                    <label class="form-label">Mot de passe de votre compte</label>
-                                                    <div>
-                                                        <input type="password" id="pass2"  class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" required
-                                                            placeholder="Mot de passe de l'agence" />
-                                                             @error('password')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
-                                                            @enderror
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Mot de passe de votre compte</label>
+                                                        <div>
+                                                            <input type="password" id="pass2"  class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" required
+                                                                placeholder="Mot de passe de l'agence" />
+                                                                @error('password')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
+                                                        </div>
                                                     </div>
-                                                    <div class="mt-3">
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="">
                                                         <label class="form-label">Comfirmation de votre mot de passe</label>
                                                         <input type="password" id="password-confirm" class="form-control" name="password_confirmation" required autocomplete="new-password"
                                                             data-parsley-equalto="#pass2" placeholder="Confirmer le mot de passe" />
                                                     </div>
                                                 </div>
-                                                </div>
-
-                                                
+                                             </div>
+                                          
                                         </form>
                                     </section>
 
@@ -394,22 +403,36 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-lg-6">
-                                                        <div class="mb-3">
-                                                                <label class="form-label">Slogan de l'agence</label>
-                                                                <div>
-                                                                    <textarea required id="slogan" class="form-control @error('slogan') is-invalid @enderror" name="slogan" value="{{ old('slogan') }}" autocomplete="slogan" class="form-control" rows="3"></textarea>
-                                                                    @error('slogan')
-                                                                            <span class="invalid-feedback" role="alert">
-                                                                                <strong>{{ $message }}</strong>
-                                                                            </span>
-                                                                        @enderror
-                                                                </div>
-                                                            </div>
+                                                        <div class="mb-3 row">
+                                                            <label class="form-label">Selectionner une region</label>
+                                                            <select  class="form-control @error('region') is-invalid @enderror" name="region" required autocomplete="region" required>
+                                                                @foreach($regions as $region)
+                                                                    <option value="{{ $region->id }}">{{ $region->name }}</option>
+                                                                @endforeach
+                                                            </select>
+                                                            @error('region')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
+                                                        </div>
                                                     </div>
-
+                                                    <div class="col-lg-12">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Slogan de l'agence</label>
+                                                            <div>
+                                                                <textarea required id="slogan" class="form-control @error('slogan') is-invalid @enderror" name="slogan" value="{{ old('slogan') }}" autocomplete="slogan" class="form-control" rows="1"></textarea>
+                                                                    @error('slogan')
+                                                                        <span class="invalid-feedback" role="alert">
+                                                                            <strong>{{ $message }}</strong>
+                                                                        </span>
+                                                                    @enderror
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </form>
-                                            </div>
+                                        </div>
                                     </section>
 
                                     <!-- Confirm Details -->
@@ -437,7 +460,7 @@
                     <!-- end col -->
                 </div>
                 <!-- end row -->
-                
+                --}}
             </div>
         </section>
 

@@ -13,7 +13,7 @@
                 </div>
                 
             </footer>
-            
+            @if(Auth::guard('agent')->user())
             <!-- Static Backdrop Modal de l'ajout -->
             <div class="modal fade" id="FooterstaticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="FooterstaticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-md modal-dialog-centered" role="document">
@@ -24,7 +24,7 @@
                         </div>
                             <div class="modal-body">
                                 <p>
-                                    <form class="custom-validation" action="{{ route('admin.client.store') }}" method="POST" enctype="multipart/form-data" name="myform" onsubmit="return validation()">
+                                    <form class="custom-validation" action="{{ route('agent.client.store') }}" method="POST" enctype="multipart/form-data" name="myform" onsubmit="return validation()">
                                         @csrf
                                         <div class="row">
                                             <div class="col-xl-12">
@@ -165,7 +165,7 @@
                 </div>
             </div>
             <!-- Fin du modal de l'ajout -->
-
+            @endif
            
 
             @section('footersection')

@@ -2,18 +2,22 @@
 
 namespace App\Models\Admin;
 use App\Models\Admin\Agent;
+use App\Models\Admin\Agence;
 use App\Models\Admin\Siegemsg;
 use App\Models\Admin\Siegeomg;
 use App\Models\Admin\Bus;
 use App\Models\Admin\Itineraire;
 use App\Models\User;
 use App\Models\User\Client;
+use App\Models\User\Customer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Siege extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['name','email','phone','adress','agence_id'];
 
       public function agence()
     {
@@ -61,5 +65,10 @@ class Siege extends Model
 
     public function siegeomg(){
         return $this->belongsTo(Siegeomg::class);
+    }
+
+    public function customers()
+    {
+        return $this->hasMany(Customer::class);
     }
 }

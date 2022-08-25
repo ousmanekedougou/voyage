@@ -33,6 +33,11 @@ Route::get('/contact', [App\Http\Controllers\User\ContactController::class, 'ind
 Route::post('/contact/store', [App\Http\Controllers\User\ContactController::class, 'store'])->name('contact.store');
 Route::post('/contact/post', [App\Http\Controllers\User\ContactController::class, 'post'])->name('contact.post');
 Route::get('/client', [App\Http\Controllers\User\ClientController::class, 'index'])->name('client.index');
+Route::get('/client/register', [App\Http\Controllers\User\ClientController::class, 'register'])->name('client.register');
+Route::get('/token/confirm/{id}/{token}', [App\Http\Controllers\User\ClientController::class, 'confirm'])->name('customer.confirm');
+
+
+Route::post('/client/post', [App\Http\Controllers\User\ClientController::class, 'post'])->name('client.post');
 Route::post('/client/store', [App\Http\Controllers\User\ClientController::class, 'store'])->name('client.store');
 Route::post('/client/sendmail/{id}', [App\Http\Controllers\User\ClientController::class, 'edit'])->name('client.edit');
 Route::get('/client/{id}', [App\Http\Controllers\User\ClientController::class, 'show'])->name('client.show');
@@ -44,6 +49,7 @@ Route::post('/client/ticket', [App\Http\Controllers\User\ClientController::class
 Route::get('/store', [App\Http\Controllers\User\HomeController::class, 'store'])->name('store');
 
 Auth::routes();
+
 Route::get('/confirm/{id}/{token}', [App\Http\Controllers\Auth\RegisterController::class, 'confirm']);
 Route::get('/paiment/{id}/{token}', [App\Http\Controllers\Admin\ClientController::class, 'paiment']);
 
@@ -54,32 +60,127 @@ Route::prefix('/admin')->name('admin.')->group(function()
     Route::get('/home', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home');
     Route::resource('/admin', App\Http\Controllers\Admin\AdminController::class);
     Route::resource('/agence', App\Http\Controllers\Admin\AgenceController::class);
-    Route::resource('/siege', App\Http\Controllers\Admin\SiegeController::class);
-    Route::resource('/agent', App\Http\Controllers\Admin\AgentController::class);
-    Route::put('/agent/edite/{id}', [App\Http\Controllers\Admin\AgentController::class,'edite'])->name('agent.edite');
-    Route::resource('/bus', App\Http\Controllers\Admin\BusController::class);
-    Route::resource('/itineraire', App\Http\Controllers\Admin\ItineraireController::class);
-    Route::resource('/depart', App\Http\Controllers\Admin\DepartController::class);
-    Route::resource('/ville', App\Http\Controllers\Admin\VilleController::class);
-    Route::resource('/client', App\Http\Controllers\Admin\ClientController::class);
     Route::resource('/partenaire', App\Http\Controllers\Admin\PartController::class);
-    Route::get('/historique/show/{id}', [App\Http\Controllers\Admin\HistoriqueController::class,'show'])->name('historique.show');
-    Route::post('/historique/search', [App\Http\Controllers\Admin\HistoriqueController::class,'search'])->name('historique.search');
-    Route::put('/historique/rembourser/{id}', [App\Http\Controllers\Admin\HistoriqueController::class,'rembourser'])->name('historique.rembourser');
-    Route::put('/client/presence/{id}', [App\Http\Controllers\Admin\ClientController::class,'presence'])->name('client.presence'); 
-    Route::put('/client/payer/{id}', [App\Http\Controllers\Admin\ClientController::class, 'payer'])->name('payer');
-    Route::get('/client/ticker/{id}', [App\Http\Controllers\Admin\ClientController::class, 'ticker'])->name('ticker');
+    Route::resource('/contact',App\Http\Controllers\Admin\ContactController::class);
     
     Route::get('/profil/show/{slug}', [App\Http\Controllers\Admin\ProfilController::class,'show'])->name('profil.show'); 
-    Route::put('/profil/update/{slug}', [App\Http\Controllers\Admin\ProfilController::class,'update'])->name('profil.update');
-    
-    Route::put('/profil/sendSms/{id}', [App\Http\Controllers\Admin\ProfilController::class,'sendSms'])->name('profil.sendSms');
-    Route::put('/profil/sendApi/{id}', [App\Http\Controllers\Admin\ProfilController::class,'sendApi'])->name('profil.sendApi');
-    
-    Route::put('/profil/ActiveOmg/{id}', [App\Http\Controllers\Admin\ProfilController::class,'activeOmg'])->name('profil.activeOmg');
-    Route::put('/profil/sendOmg/{id}', [App\Http\Controllers\Admin\ProfilController::class,'sendOmg'])->name('profil.sendOmg');
+    Route::put('/profil/update/{slug}', [App\Http\Controllers\Admin\ProfilController::class,'update'])->name('profil.update');   
+});
 
-    Route::resource('/bagage', App\Http\Controllers\Admin\BagageController::class); 
-    Route::resource('/colis', App\Http\Controllers\Admin\ColiController::class);
-    Route::resource('/contact',App\Http\Controllers\Admin\ContactController::class); 
+Route::prefix('/agence')->name('agence.')->group(function() 
+{
+    Route::get('/home', [App\Http\Controllers\Agence\HomeController::class, 'index'])->name('agence.home');
+    Route::resource('/siege', App\Http\Controllers\Agence\SiegeController::class);
+    Route::resource('/agent', App\Http\Controllers\Agence\AgentController::class);
+    Route::put('/agent/edite/{id}', [App\Http\Controllers\Agence\AgentController::class,'edite'])->name('agent.edite');
+    Route::get('/confirm/{id}/{token}', [App\Http\Controllers\Agence\Auth\RegisterController::class, 'confirm']);
+    Route::get('/paiment/{id}/{token}', [App\Http\Controllers\Agence\ClientController::class, 'paiment']);
+
+    Route::get('/profil/show/{slug}', [App\Http\Controllers\Agence\ProfilController::class,'show'])->name('profil.show'); 
+    Route::put('/profil/update/{slug}', [App\Http\Controllers\Agence\ProfilController::class,'update'])->name('profil.update');
+    
+
+    // login des agence
+        Route::get('/login','App\Http\Controllers\Agence\Auth\LoginController@showLoginForm')->name('agence.login');
+        Route::post('/login',[App\Http\Controllers\Agence\Auth\LoginController::class, 'login'])->name('agence.login');
+        Route::post('/logout',[App\Http\Controllers\Agence\Auth\LoginController::class, 'logout'])->name('agence.logout');
+    // fin des login agence
+
+    // Forgot password des agences
+        Route::get('/password/reset','App\Http\Controllers\Agence\ForgotPassword\ForgotController@reset')->name('password.reset');
+        Route::post('/password/verify','App\Http\Controllers\Agence\ForgotPassword\ForgotController@verify')->name('password.verify');
+        Route::get('/confirm/{id}/{email}','App\Http\Controllers\Agence\ForgotPassword\ForgotController@confirm')->name('password.confirm');
+        Route::put('/update/{id}/{email}/{token}','App\Http\Controllers\Agence\ForgotPassword\ForgotController@update')->name('password.update');
+    // And forgot password agences
+});
+
+Route::prefix('/agent')->name('agent.')->group(function() 
+{
+    Route::get('/home', [App\Http\Controllers\Agent\HomeController::class, 'index'])->name('home');
+    Route::get('/confirm/{id}/{token}', [App\Http\Controllers\Agent\Auth\RegisterController::class, 'confirm']);
+    Route::get('/paiment/{id}/{token}', [App\Http\Controllers\Agent\ClientController::class, 'paiment']);
+
+    Route::get('/historique/show/{id}', [App\Http\Controllers\Agent\HistoriqueController::class,'show'])->name('historique.show');
+    Route::post('/historique/search', [App\Http\Controllers\Agent\HistoriqueController::class,'search'])->name('historique.search');
+    Route::put('/historique/rembourser/{id}', [App\Http\Controllers\Agent\HistoriqueController::class,'rembourser'])->name('historique.rembourser');
+    Route::put('/client/presence/{id}', [App\Http\Controllers\Agent\ClientController::class,'presence'])->name('client.presence'); 
+    Route::put('/client/payer/{id}', [App\Http\Controllers\Agent\ClientController::class, 'payer'])->name('payer');
+    Route::get('/client/ticker/{id}', [App\Http\Controllers\Agent\ClientController::class, 'ticker'])->name('ticker');
+
+    Route::resource('/bus', App\Http\Controllers\Agent\BusController::class);
+    Route::resource('/itineraire', App\Http\Controllers\Agent\ItineraireController::class);
+    Route::resource('/depart', App\Http\Controllers\Agent\DepartController::class);
+    Route::resource('/ville', App\Http\Controllers\Agent\VilleController::class);
+    Route::resource('/client', App\Http\Controllers\Agent\ClientController::class);
+
+    Route::resource('/bagage', App\Http\Controllers\Agent\BagageController::class); 
+    Route::resource('/colis', App\Http\Controllers\Agent\ColiController::class);
+
+    Route::resource('/contact',App\Http\Controllers\Agent\ContactController::class);
+
+
+     Route::get('/profil/show/{slug}', [App\Http\Controllers\Agent\ProfilController::class,'show'])->name('profil.show'); 
+    Route::put('/profil/update/{slug}', [App\Http\Controllers\Agent\ProfilController::class,'update'])->name('profil.update');
+    
+    Route::put('/profil/sendSms/{id}', [App\Http\Controllers\Agent\ProfilController::class,'sendSms'])->name('profil.sendSms');
+    Route::put('/profil/sendApi/{id}', [App\Http\Controllers\Agent\ProfilController::class,'sendApi'])->name('profil.sendApi');
+    
+    Route::put('/profil/ActiveOmg/{id}', [App\Http\Controllers\Agent\ProfilController::class,'activeOmg'])->name('profil.activeOmg');
+    Route::put('/profil/sendOmg/{id}', [App\Http\Controllers\Agent\ProfilController::class,'sendOmg'])->name('profil.sendOmg');
+
+    // login des agent
+        Route::get('/login','App\Http\Controllers\Agent\Auth\LoginController@showLoginForm')->name('agent.login');
+        Route::post('/login','App\Http\Controllers\Agent\Auth\LoginController@login')->name('agent.login');
+        Route::post('/logout','App\Http\Controllers\Agent\Auth\LoginController@logout')->name('agent.logout');
+    // fin des login agent
+
+    // Forgot password des agents
+        Route::get('/password/reset','App\Http\Controllers\Agent\ForgotPassword\ForgotController@reset')->name('password.reset');
+        Route::post('/password/verify','App\Http\Controllers\Agent\ForgotPassword\ForgotController@verify')->name('password.verify');
+        Route::get('/confirm/{id}/{email}','App\Http\Controllers\Agent\ForgotPassword\ForgotController@confirm')->name('password.confirm');
+        Route::put('/update/{id}/{email}/{token}','App\Http\Controllers\Agent\ForgotPassword\ForgotController@update')->name('password.update');
+    // And forgot password agents
+});
+
+Route::prefix('/customer')->name('customer.')->group(function() 
+{
+    Route::get('/home', [App\Http\Controllers\Client\HomeController::class, 'index'])->name('home');
+    Route::get('/agence', [App\Http\Controllers\Client\AgenceController::class, 'index'])->name('agence.index');
+    Route::get('/agence/about/{slug}', [App\Http\Controllers\Client\AgenceController::class, 'about'])->name('agence.about');
+    Route::get('/agence/show/{slug}', [App\Http\Controllers\Client\AgenceController::class, 'show'])->name('agence.show');
+    Route::post('/agence/search', [App\Http\Controllers\Client\AgenceController::class, 'search'])->name('agence.search');
+    Route::get('/agence/region/{slug}', [App\Http\Controllers\Client\AgenceController::class, 'region'])->name('agence.region');
+
+    Route::post('/client/store', [App\Http\Controllers\Client\ClientController::class, 'store'])->name('client.store');
+    Route::post('/client/sendmail/{id}', [App\Http\Controllers\Client\ClientController::class, 'edit'])->name('client.edit');
+    Route::get('/client/{id}', [App\Http\Controllers\Client\ClientController::class, 'show'])->name('client.show');
+    Route::put('/client/update/{id}', [App\Http\Controllers\Client\ClientController::class, 'update'])->name('client.update');
+    Route::post('/client/colis', [App\Http\Controllers\Client\ClientController::class, 'colis'])->name('client.colis');
+    Route::put('/client/confirme/{id}', [App\Http\Controllers\Client\ClientController::class, 'confirme'])->name('colis.confirme');
+    Route::post('/client/bagage', [App\Http\Controllers\Client\ClientController::class, 'bagage'])->name('client.bagage');
+    Route::post('/client/ticket', [App\Http\Controllers\Client\ClientController::class, 'ticket'])->name('client.ticket');
+    Route::delete('/client/destroy/{id}', [App\Http\Controllers\Client\ClientController::class, 'destroy'])->name('client.destroy');
+    // Route::get('/store', [App\Http\Controllers\Client\HomeController::class, 'store'])->name('store');
+
+    Route::get('/confirm/{id}/{token}', [App\Http\Controllers\Client\Auth\RegisterController::class, 'confirm']);
+    Route::get('/paiment/{id}/{token}', [App\Http\Controllers\Client\ClientController::class, 'paiment']);
+
+
+    Route::get('/profil/show/{slug}', [App\Http\Controllers\Client\ProfilController::class,'show'])->name('profil.show'); 
+    Route::put('/profil/update/{slug}', [App\Http\Controllers\Client\ProfilController::class,'update'])->name('profil.update');
+    
+
+
+    // login des customer
+        Route::get('/login','App\Http\Controllers\Client\Auth\LoginController@showLoginForm')->name('customer.login');
+        Route::post('/login','App\Http\Controllers\Client\Auth\LoginController@login')->name('customer.login');
+        Route::post('/logout','App\Http\Controllers\Client\Auth\LoginController@logout')->name('customer.logout');
+    // fin des login customer
+
+    // Forgot password des customers
+        Route::get('/password/reset','Client\ForgotPassword\ForgotController@reset')->name('password.reset');
+        Route::post('/password/verify','Client\ForgotPassword\ForgotController@verify')->name('password.verify');
+        Route::get('/confirm/{id}/{email}','Client\ForgotPassword\ForgotController@confirm')->name('password.confirm');
+        Route::put('/update/{id}/{email}/{token}','Client\ForgotPassword\ForgotController@update')->name('password.update');
+    // And forgot password clients
 });

@@ -2,6 +2,7 @@
 
 namespace App\Notifications;
 
+use App\Models\Admin\Agence;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -17,7 +18,7 @@ class RegisteredUser extends Notification
      *
      * @return void
      */
-      public function __construct(User $user)
+      public function __construct(Agence $user)
     {
         $this->user = $user;
     }

@@ -25,9 +25,10 @@ class CreateAgentsTable extends Migration
             $table->boolean('is_active')->default(0);
             $table->integer('is_admin')->default(1);
             $table->string('slug')->unique();
-            $table->integer('agence_id')->nullable();
-            $table->integer('siege_id')->nullable();
-            $table->string('confirmation_token')->unique()->nullable();
+            $table->integer('agence_id');
+            $table->integer('siege_id');
+            $table->integer('role');
+            $table->string('confirmation_token')->unique();
              $table->string('image')->nullable();
             $table->timestamps();
         });

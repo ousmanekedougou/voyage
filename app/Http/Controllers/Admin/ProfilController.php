@@ -22,7 +22,7 @@ class ProfilController extends Controller
      */
       public function __construct()
     {
-        $this->middleware(['auth']);
+        $this->middleware(['isAdmin']);
     }
 
     public function index()
@@ -61,15 +61,7 @@ class ProfilController extends Controller
     {
         $admin = User::where('slug',$slug)->first();
         $regions = Region::where('status',1)->get();
-        $siege_sms = '';
-        if (Auth::user()->is_admin == 3 && Auth::user()->role == 1) {
-            $siege_sms = $admin->siege->id;
-            $sms = Siegemsg::where('siege_id',$siege_sms)->first();
-            $omg = Siegeomg::where('siege_id',$siege_sms)->first();
-            return view('admin.profile.index',compact('admin','sms','omg'));
-        }else {
-           return view('admin.profile.index',compact('admin','regions'));
-        }
+        return view('admin.profile.index',compact('admin','regions'));
     }
 
     /**
@@ -137,140 +129,10 @@ class ProfilController extends Controller
                 $update_admin->save();
                 Toastr::success('Votre image a bien ete mise a jour', 'Modifier Profile', ["positionClass" => "toast-top-right"]);
                 return back();
-           }elseif ($request->hidden == 4) {
-               $this->validate($request,[
-                    'slogan' => 'required|string',
-                    'adress' => 'required|string',
-                ]);
-                $update_admin = User::Where('slug',Auth::user()->slug)->first();
-                $update_admin->slogan = $request->slogan;
-                $update_admin->adress = $request->adress;
-                $update_admin->save();
-                Toastr::success('Vos informations ont bien ete mise a jour', 'Modifier Profile', ["positionClass" => "toast-top-right"]);
-                return back();
-           }elseif ($request->hidden == 5) {
-               $this->validate($request,[
-                    'name_agence' => 'required|string',
-                    'email_agence' => 'required|email|string',
-                ]);
-                $image_agence = '';
-                $update = User::Where('slug',Auth::user()->slug)->first();
-                if($request->hasFile('image_agence'))
-                {
-                    $image_agence = $request->image_agence->store('public/Agence');
-                    Storage::delete($update->image_agence); 
-                }
-                $update->agence_name = $request->name_agence;
-                $update->email_agence = $request->email_agence;
-                $update->image_agence = $image_agence;
-                $update->region_id = $request->region;
-                $update->save();
-                User::where('user_id',$update->id)->update([
-                    'image_agence' =>  $update->image_agence
-                ]);
-                Toastr::success('Votre profile a bien ete mise a jour', 'Modifier Profile', ["positionClass" => "toast-top-right"]);
-                return back();
            }
     }
 
-    public function sendApi(Request $request , $id){
-
-        if ($request->status == 1) {
-            $this->validate($request,[
-                'clientId' => 'required|string',
-                'clientSecret' => 'required|string',
-            ]);
-            $add_sms = new Siegemsg();
-            $add_sms->create([
-                'siege_id' => Auth::user()->siege->id,
-                'clientId' => $request->clientId,
-                'clientSecret' => $request->clientSecret,
-                'status' => true
-            ]);
-            Toastr::success('Vos clets de rapelle sms ont ete ajouter', 'Ajout Clets API Sms', ["positionClass" => "toast-top-right"]);
-            return back();
-
-        }elseif ($request->status == 2) {
-        $sms_update = Siegemsg::where('id',$id)->where('siege_id',Auth::user()->siege->id)->first();
-            $sms_update->update([
-                'clientId' => $request->clientId,
-                'clientSecret' => $request->clientSecret,
-                'status' => $sms_update->status
-            ]);
-            Toastr::success('Vos clets de rapelle sms ont ete modifier', 'Modifier Clets API Sms', ["positionClass" => "toast-top-right"]);
-            return back();
-        }
-    }
-
-    public function sendSms(Request $request , $id){
-        define('DESACTIVESMS',0);
-        define('ACTIVESMS',1);
-        $sms_update = Siegemsg::where('id',$id)->where('siege_id',Auth::user()->siege->id)->first();
-
-        if ($request->status == 1) {
-            $sms_update->update([
-                'status' => DESACTIVESMS
-            ]);
-
-        }else {
-            $sms_update->update([
-                'status' => ACTIVESMS
-            ]);
-        }
-        Toastr::success('Votre status de rapelle sms a ete modifier', 'Modifier Sms Message', ["positionClass" => "toast-top-right"]);
-        return back();
-    }
-
-
-    // la partie orange money
-
-     public function sendOmg(Request $request , $id){
-
-        if ($request->status == 1) {
-            $this->validate($request,[
-                'clientId' => 'required|string',
-                'clientSecret' => 'required|string',
-            ]);
-            $add_sms = new Siegeomg();
-            $add_sms->create([
-                'siege_id' => Auth::user()->siege->id,
-                'clientId' => $request->clientId,
-                'clientSecret' => $request->clientSecret,
-                'status' => true
-            ]);
-            Toastr::success('Vos clets de rapelle sms ont ete ajouter', 'Ajout Clets API Sms', ["positionClass" => "toast-top-right"]);
-            return back();
-
-        }elseif ($request->status == 2) {
-        $sms_update = Siegeomg::where('id',$id)->where('siege_id',Auth::user()->siege->id)->first();
-            $sms_update->update([
-                'clientId' => $request->clientId,
-                'clientSecret' => $request->clientSecret,
-                'status' => $sms_update->status
-            ]);
-            Toastr::success('Vos clets de rapelle sms ont ete modifier', 'Modifier Clets API Sms', ["positionClass" => "toast-top-right"]);
-            return back();
-        }
-    }
-
-    public function activeOmg(Request $request , $id){
-        define('DESACTIVEOMG',0);
-        define('ACTIVEOMG',1);
-        $sms_update = Siegeomg::where('id',$id)->where('siege_id',Auth::user()->siege->id)->first();
-
-        if ($request->status == 1) {
-            $sms_update->update([
-                'status' => DESACTIVEOMG
-            ]);
-
-        }else {
-            $sms_update->update([
-                'status' => ACTIVEOMG
-            ]);
-        }
-        Toastr::success('Votre status de rapelle sms a ete modifier', 'Modifier Sms Message', ["positionClass" => "toast-top-right"]);
-        return back();
-    }
+   
 
 
     

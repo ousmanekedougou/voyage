@@ -35,12 +35,80 @@
                     </li>
 
                 </ul>
-
+                {{--
                 <div class="my-2 ms-lg-2 btn-sign-ine">
                     <!-- <a href="{{ route('agence.create') }}" class="btn btn-outline-primary w-xs {{ set_active_roote('agence.create') }}"><i class="fa fa-user-plus"></i> Creer un compte agence</a> -->
                     <a href="{{ route('login') }}" class="btn btn-outline-success  w-xs {{ set_active_roote('login') }}" data-bs-toggle="modal"
-                                            data-bs-target=".bs-exampleLogin-modal-lg"><i class="fa fa-sign-in-alt"></i> Se connecter</a>
+                                            data-bs-target=".bs-exampleLogin-modal-lg"> Se connecter <i class="fa fa-sign-in-alt"></i>  <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i></a>
                 </div>
+                --}}
+                @if(!Auth::guard('web')->user() && !Auth::guard('agence')->user() && !Auth::guard('agent')->user() && !Auth::guard('client')->user())
+                <div class="dropdown d-inline-block">
+                    <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
+                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="d-none d-xl-inline-block ms-1 btn btn-outline-success" key="t-henry">Se Connecter
+                            <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                        </span>
+                        
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-end text-center">
+                        <!-- item-->
+                        <a class="dropdown-item {{ set_active_roote('agent.agent.login') }}" href="{{ route('agent.agent.login') }}"><i class="bx bx-user font-size-16 align-middle me-1"></i>
+                            <span key="t-profile">Compte Agent</span>
+                        </a>
+                        <a class="dropdown-item {{ set_active_roote('customer.login') }}" href="{{ route('customer.customer.login') }}"><i
+                                class="bx bx-wallet font-size-16 align-middle me-1"></i> <span key="t-my-wallet">Compte Client</span>
+                        </a>
+                        <a class="dropdown-item d-block {{ set_active_roote('agence.agence.login') }}" href="{{ route('agence.agence.login') }}">
+                            <i class="bx bx-wrench font-size-16 align-middle me-1"></i> <span
+                                key="t-settings">Compte Agence</span>
+                        </a>
+                    </div>
+                </div>
+                @else
+                    @if(Auth::guard('web')->user())
+                        <div class="my-2 ms-lg-2 btn-sign-ine">
+                            <a href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();"
+                            class="btn btn-outline-danger  w-xs"> Se Deconnecter <i class="fa fa-sign-up-alt"></i>  <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i></a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                    @elseif(Auth::guard('agence')->user())
+                        <div class="my-2 ms-lg-2 btn-sign-ine">
+                            <a href="{{ route('agence.agence.logout') }}"
+                                        onclick="event.preventDefault();
+                            document.getElementById('logout-form-agence').submit();"
+                            class="btn btn-outline-danger  w-xs"> Se Deconnecter <i class="fa fa-sign-up-alt"></i>  <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i></a>
+                            <form id="logout-form-agence" action="{{ route('agence.agence.logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                    @elseif(Auth::guard('agent')->user())
+                        <div class="my-2 ms-lg-2 btn-sign-ine">
+                            <a href="{{ route('agent.agent.logout') }}"
+                                onclick="event.preventDefault();
+                            document.getElementById('logout-form-agent').submit();"
+                            class="btn btn-outline-danger w-xs text-white"> Se Deconnecter <i class="fa fa-sign-up-alt"></i></a>
+                            <form id="logout-form-agent" action="{{ route('agent.agent.logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                    @elseif(Auth::guard('client')->user())
+                        <div class="my-2 ms-lg-2 btn-sign-ine">
+                            <a href="{{ route('customer.customer.logout') }}"
+                                        onclick="event.preventDefault();
+                            document.getElementById('logout-form-customer').submit();"
+                            class="btn btn-outline-danger  w-xs"> Se Deconnecter <i class="fa fa-sign-up-alt"></i>  <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i></a>
+                            <form id="logout-form-customer" action="{{ route('customer.customer.logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                    @endif
+                @endif
+
             </div>
         </div>
         

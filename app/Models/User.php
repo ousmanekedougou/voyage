@@ -3,9 +3,6 @@
 namespace App\Models;
 
 use App\Models\Admin\Agence;
-use App\Models\Admin\Bus;
-use App\Models\Admin\Siege;
-use App\Models\User\Region;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -26,18 +23,12 @@ class User extends Authenticatable
         'password',
         'phone',
         'adress',
-        'registre_commerce',
-        'amount',
-        'facture',
-        'payment_at',
-        'slogan',
-        'logo',
         'image',
         'status',
         'is_active',
+        'is_admin',
         'slug',
         'confirmation_token',
-        'region_id'
     ];
 
     /**
@@ -59,28 +50,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-     public function buses()
-    {
-        return $this->hasMany(Bus::class);
-    }
-
-    // public function sieges()
-    // {
-    //     return $this->hasMany(Siege::class);
-    // }
-
-      public function siege()
-    {
-        return $this->belongsTo(Siege::class);
-    }
 
     public function agences()
     {
         return $this->hasMany(Agence::class);
     }
+   
 
-     public function region()
-    {
-        return $this->belongsTo(Region::class);
-    }
+
+
+
 }

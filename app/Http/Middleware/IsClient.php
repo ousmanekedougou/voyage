@@ -18,10 +18,12 @@ class IsClient
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->role == 1 ) {
-            return $next($request);
+        if (Auth::guard('client')->user()) {
+            if (Auth::guard('client')->user()->is_admin == 1 && Auth::guard('client')->user()->is_active == 1 ) {
+                return $next($request);
+            }
+            Toastr::error('Vous n\'aviez pas acces a cette page', 'Message', ["positionClass" => "toast-top-right"]);
+            return back();
         }
-        Toastr::error('Vous n\'aviez pas acces a cette page', 'Message', ["positionClass" => "toast-top-right"]);
-        return back();
     }
 }

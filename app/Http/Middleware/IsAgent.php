@@ -17,7 +17,7 @@ class IsAgent
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->is_admin == 3 ) {
+        if (Auth::guard('agent')->user() ) {
             return $next($request);
         }
         Toastr::error('Vous n\'aviez pas acces a cette page', 'Message', ["positionClass" => "toast-top-right"]);

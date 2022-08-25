@@ -17,14 +17,20 @@ use App\Models\Admin\DateDepart;
 use App\Models\Admin\Siege;
 use App\Models\User;
 use App\Models\User\Contact;
+use App\Models\User\Customer;
+use App\Models\User\Region;
 use App\Notifications\ContactSiegeEmail;
+use App\Notifications\CustomerRegister;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Support\Facades\Auth;
+
 class ClientController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -49,6 +55,60 @@ class ClientController extends Controller
         $orangePayment = $om->getPaymentUrl('return_url_here');
         return redirect($orangePayment->payment_url);
     }
+
+    public function register(){
+        $regions = Region::where('status',1)->get();
+        return view('client.auth.register',compact('regions'));
+    }
+
+    public function post(Request $request){
+        $this->validate($request,[
+            'name' => 'required|string',
+            'email' => 'required|string|email|max:255',
+            'phone' => 'required|string|max:255',
+            'password' => 'required|string|min:6|confirmed',
+            'region' => 'required|numeric',
+            'cni' => 'required|numeric',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
+        ]);
+        
+        $imageName = '';
+        if($request->hasFile('image'))
+        {
+            $imageName = $request->image->store('public/Customers');
+        }
+        // dd($request->all());
+        $Customer = Customer::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'password' => Hash::make($request->password),
+            'confirmation_token' => str_replace('/','',Hash::make(Str::random(40))),
+            'slug' => str_replace('/','',Hash::make(Str::random(20).'customers'.$request->email)),
+            'image' => $imageName,
+            'region_id' => $request->region,
+            'is_admin' => 1 
+        ]);
+         Notification::route('mail','ousmanelaravel@gmail.com')
+        ->notify(new CustomerRegister($Customer));
+        Toastr::success('Votre compte client a bien ete creer', 'Inscription', ["positionClass" => "toast-top-right"]);
+        return back();
+    }
+
+     public function confirm($id , $token){
+        define('ACTIVE',1);
+        $user = Customer::where('id',$id)->where('confirmation_token',$token)->first();
+        if ($user) {
+            $user->update(['confirmation_token' => null , 'is_active' => ACTIVE]);
+            Toastr::success('Votre compte a bien ete confirmer', 'Compte Confirmer', ["positionClass" => "toast-top-right"]);
+            return view('client.auth.login');
+        }else {
+            Toastr::success('Ce lien ne semble plus valide', 'Compte invalide', ["positionClass" => "toast-top-right"]);
+            return redirect()->route('index');
+        }
+    }
+
+    
 
     /**
      * Store a newly created resource in storage.

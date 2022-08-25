@@ -81,7 +81,7 @@
 
                         <div class="button-items mt-4 text-center">
                             <a href="{{ route('agence.create') }}" class="btn btn-success">Creer votre compte agence</a>
-                            <a href="{{ route('agence.index') }}" class="btn btn-light">Nos agences de transport</a>
+                            <a href="{{ route('client.register') }}" class="btn btn-light">Creer votre compte client</a>
                         </div>
                     </div>
                 </div>
@@ -99,7 +99,7 @@
         <div class="container">
             <div class="currency-price">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-xl-4 col-sm-6">
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">
@@ -114,7 +114,7 @@
                             </div>
                         </div>
                     </div>
-                     <div class="col-md-4">
+                     <div class="col-xl-4 col-sm-6">
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">
@@ -129,7 +129,7 @@
                             </div>
                         </div>
                     </div>
-                     <div class="col-md-4">
+                     <div class="col-xl-4 col-sm-6">
                         <div class="card">
                             <div class="card-body">
                                 <div class="row">
@@ -152,7 +152,7 @@
     </section>
 <!-- currency price section end -->
 
-
+{{--
  <!-- currency price section start Version mobile-->
     <section class="section bg-white p-0 section_sm">
         <div class="container">
@@ -360,13 +360,13 @@
                         <p class="text-muted">
                             Téléchargez gratuitement l'application TouCki pour bénéficier d’une expertise de qualité et organiser vos voyages en toute confiance.
                         </p>
-                        {{--
+                        
                         <div class="text-muted mt-4">
                             <p class="mb-2"><i class="mdi mdi-circle-medium text-success me-1"></i>Donec pede justo vel
                                 aliquet</p>
                             <p><i class="mdi mdi-circle-medium text-success me-1"></i>Aenean et nisl sagittis</p>
                         </div>
-                        --}}
+                        
                     </div>
                 </div>
                  <div class="col-md-6">
@@ -380,7 +380,7 @@
         <!-- end container -->
     </section>
     <!-- Features end -->
-
+    --}}
 
       <!-- Roadmap start -->
     <section class="section bg-white" id="roadmap">

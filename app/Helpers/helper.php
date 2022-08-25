@@ -1,11 +1,13 @@
 <?php
 
+use App\Helpers\UserSystemInfoHelper;
 use App\Models\Admin\Bus;
 use App\Models\Admin\Historical;
 use App\Models\Admin\Itineraire;
 use App\Models\Admin\Part;
 use App\Models\Admin\Siege;
 use App\Models\User\Client;
+use App\Models\User\Region;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -33,7 +35,7 @@ if (!function_exists('set_active_roote')) {
 if (!function_exists('all_siege')) {
     function all_siege()
     {
-        $siege = Siege::where('user_id', Auth::user()->id)->get();
+        $siege = Siege::where('agence_id', Auth::guard('agence')->user()->id)->get();
         return $siege;
     }
 }
@@ -41,7 +43,7 @@ if (!function_exists('all_siege')) {
 if (!function_exists('itineraire_all')) {
     function itineraire_all()
     {
-        $itineraire_all = Itineraire::where('siege_id', Auth::user()->siege_id)->orderBy('id', 'ASC')->get();
+        $itineraire_all = Itineraire::where('siege_id', Auth::guard('agent')->user()->siege_id)->orderBy('id', 'ASC')->get();
         return $itineraire_all;
     }
 }
@@ -49,7 +51,7 @@ if (!function_exists('itineraire_all')) {
 if (!function_exists('buse_all')) {
     function buse_all()
     {
-        $buse_all = Bus::where('user_id', Auth::user()->id)->where('siege_id', Auth::user()->siege_id)->orderBy('id', 'ASC')->get();
+        $buse_all = Bus::where('user_id',  Auth::guard('agent')->user()->id)->where('siege_id',  Auth::guard('agent')->user()->siege_id)->orderBy('id', 'ASC')->get();
         return $buse_all;
     }
 }
@@ -100,7 +102,7 @@ if (!function_exists('part')) {
 if (!function_exists('historical_hiere')) {
     function historical_hiere()
     {
-        $historical_hiere = Historical::where('siege_id', Auth::user()->siege_id)->where('registered_at', '<', Carbon::yesterday()->format('Y-m-d'))->first();
+        $historical_hiere = Historical::where('siege_id',  Auth::guard('agent')->user()->siege_id)->where('registered_at', '<', Carbon::yesterday()->format('Y-m-d'))->first();
         return $historical_hiere;
     }
 }
@@ -108,7 +110,7 @@ if (!function_exists('historical_hiere')) {
 if (!function_exists('historical_avant_hiere')) {
     function historical_avant_hiere()
     {
-        $historical_avant_hiere = Historical::where('siege_id', Auth::user()->siege_id)->where('registered_at', '<', Carbon::yesterday()->format('Y-m-d'))->first();
+        $historical_avant_hiere = Historical::where('siege_id',  Auth::guard('agent')->user()->siege_id)->where('registered_at', '<', Carbon::yesterday()->format('Y-m-d'))->first();
         return $historical_avant_hiere;
     }
 }
@@ -138,7 +140,7 @@ if (!function_exists('reference')) {
 if (!function_exists('montant_today')) {
     function montant_today()
     {
-        $itineraires = Itineraire::where('siege_id', Auth::user()->siege_id)->where('user_id', Auth::user()->id)->orderBy('id', 'ASC')->get();
+        $itineraires = Itineraire::where('siege_id',  Auth::guard('agent')->user()->siege_id)->where('user_id',  Auth::guard('agent')->user()->id)->orderBy('id', 'ASC')->get();
         foreach ($itineraires as $itineraire) {
             foreach ($itineraire->date_departs as $iti_date) {
                 $somme_buse = Bus::where('itineraire_id', $iti_date->itineraire_id)->get();
@@ -150,5 +152,17 @@ if (!function_exists('montant_today')) {
                 }
             }
         }
+    }
+}
+
+if (!function_exists('region')) {
+    function region()
+    {
+        $getip = UserSystemInfoHelper::get_ip();
+        $get_user_geo = geoip()->getLocation($getip);
+        // dd($get_user_geo->city,$get_user_geo->state_name);
+        $autre_regions = Region::where('name','!=',$get_user_geo->city)->orWhere('slug','!=',$get_user_geo->state_name)->get();
+        return $autre_regions;
+
     }
 }

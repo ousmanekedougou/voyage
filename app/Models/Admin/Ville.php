@@ -10,6 +10,8 @@ class Ville extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name','itineraire_id','amount'];
+
     public function itineraire()
     {
         return $this->belongsTo(Itineraire::class);
