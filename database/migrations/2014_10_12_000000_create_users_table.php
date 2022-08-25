@@ -49,6 +49,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique()->nullable();
             $table->string('phone')->unique();
+            $table->string('password');
             $table->string('cni')->nullable();
             $table->integer('status');
             $table->boolean('is_admin');

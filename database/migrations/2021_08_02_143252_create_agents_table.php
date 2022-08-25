@@ -28,8 +28,9 @@ class CreateAgentsTable extends Migration
             $table->integer('agence_id');
             $table->integer('siege_id');
             $table->integer('role');
-            $table->string('confirmation_token')->unique();
+            $table->string('confirmation_token')->unique()->nullable();
              $table->string('image')->nullable();
+             $table->string('logo')->nullable();
             $table->timestamps();
         });
     }
