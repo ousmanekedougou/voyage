@@ -73,8 +73,8 @@ Route::prefix('/agence')->name('agence.')->group(function()
     Route::resource('/siege', App\Http\Controllers\Agence\SiegeController::class);
     Route::resource('/agent', App\Http\Controllers\Agence\AgentController::class);
     Route::put('/agent/edite/{id}', [App\Http\Controllers\Agence\AgentController::class,'edite'])->name('agent.edite');
-    Route::get('/confirm/{id}/{token}', [App\Http\Controllers\Agence\Auth\RegisterController::class, 'confirm']);
-    Route::get('/paiment/{id}/{token}', [App\Http\Controllers\Agence\ClientController::class, 'paiment']);
+    // Route::get('/confirm/{id}/{token}', [App\Http\Controllers\Agence\Auth\RegisterController::class, 'confirm']);
+    // Route::get('/paiment/{id}/{token}', [App\Http\Controllers\Agence\ClientController::class, 'paiment']);
 
     Route::get('/profil/show/{slug}', [App\Http\Controllers\Agence\ProfilController::class,'show'])->name('profil.show'); 
     Route::put('/profil/update/{slug}', [App\Http\Controllers\Agence\ProfilController::class,'update'])->name('profil.update');
@@ -87,17 +87,17 @@ Route::prefix('/agence')->name('agence.')->group(function()
     // fin des login agence
 
     // Forgot password des agences
-        Route::get('/password/reset','App\Http\Controllers\Agence\ForgotPassword\ForgotController@reset')->name('password.reset');
-        Route::post('/password/verify','App\Http\Controllers\Agence\ForgotPassword\ForgotController@verify')->name('password.verify');
-        Route::get('/confirm/{id}/{email}','App\Http\Controllers\Agence\ForgotPassword\ForgotController@confirm')->name('password.confirm');
-        Route::put('/update/{id}/{email}/{token}','App\Http\Controllers\Agence\ForgotPassword\ForgotController@update')->name('password.update');
+        Route::get('/password/reset','App\Http\Controllers\Agence\Auth\ForgotPasswordController@reset')->name('password.reset');
+        Route::post('/password/verify','App\Http\Controllers\Agence\Auth\ForgotPasswordController@verify')->name('password.verify');
+        Route::get('/confirm/{id}/{email}','App\Http\Controllers\Agence\Auth\ForgotPasswordController@confirm')->name('password.confirm');
+        Route::put('/update/{email}','App\Http\Controllers\Agence\Auth\ForgotPasswordController@update')->name('password.update');
     // And forgot password agences
 });
 
 Route::prefix('/agent')->name('agent.')->group(function() 
 {
     Route::get('/home', [App\Http\Controllers\Agent\HomeController::class, 'index'])->name('home');
-    Route::get('/confirm/{id}/{token}', [App\Http\Controllers\Agent\Auth\RegisterController::class, 'confirm']);
+    // Route::get('/confirm/{id}/{token}', [App\Http\Controllers\Agent\Auth\RegisterController::class, 'confirm']);
     Route::get('/paiment/{id}/{token}', [App\Http\Controllers\Agent\ClientController::class, 'paiment']);
 
     Route::get('/historique/show/{id}', [App\Http\Controllers\Agent\HistoriqueController::class,'show'])->name('historique.show');
@@ -135,10 +135,10 @@ Route::prefix('/agent')->name('agent.')->group(function()
     // fin des login agent
 
     // Forgot password des agents
-        Route::get('/password/reset','App\Http\Controllers\Agent\ForgotPassword\ForgotController@reset')->name('password.reset');
-        Route::post('/password/verify','App\Http\Controllers\Agent\ForgotPassword\ForgotController@verify')->name('password.verify');
-        Route::get('/confirm/{id}/{email}','App\Http\Controllers\Agent\ForgotPassword\ForgotController@confirm')->name('password.confirm');
-        Route::put('/update/{id}/{email}/{token}','App\Http\Controllers\Agent\ForgotPassword\ForgotController@update')->name('password.update');
+        Route::get('/password/reset','App\Http\Controllers\Agent\Auth\ForgotPasswordController@reset')->name('password.reset');
+        Route::post('/password/verify','App\Http\Controllers\Agent\Auth\ForgotPasswordController@verify')->name('password.verify');
+        Route::get('/confirm/{id}/{email}','App\Http\Controllers\Agent\Auth\ForgotPasswordController@confirm')->name('password.confirm');
+        Route::put('/update/{email}','App\Http\Controllers\Agent\Auth\ForgotPasswordController@update')->name('password.update');
     // And forgot password agents
 });
 
@@ -162,7 +162,7 @@ Route::prefix('/customer')->name('customer.')->group(function()
     Route::delete('/client/destroy/{id}', [App\Http\Controllers\Client\ClientController::class, 'destroy'])->name('client.destroy');
     // Route::get('/store', [App\Http\Controllers\Client\HomeController::class, 'store'])->name('store');
 
-    Route::get('/confirm/{id}/{token}', [App\Http\Controllers\Client\Auth\RegisterController::class, 'confirm']);
+    // Route::get('/confirm/{id}/{token}', [App\Http\Controllers\Client\Auth\RegisterController::class, 'confirm']);
     Route::get('/paiment/{id}/{token}', [App\Http\Controllers\Client\ClientController::class, 'paiment']);
 
 
@@ -178,9 +178,9 @@ Route::prefix('/customer')->name('customer.')->group(function()
     // fin des login customer
 
     // Forgot password des customers
-        Route::get('/password/reset','Client\ForgotPassword\ForgotController@reset')->name('password.reset');
-        Route::post('/password/verify','Client\ForgotPassword\ForgotController@verify')->name('password.verify');
-        Route::get('/confirm/{id}/{email}','Client\ForgotPassword\ForgotController@confirm')->name('password.confirm');
-        Route::put('/update/{id}/{email}/{token}','Client\ForgotPassword\ForgotController@update')->name('password.update');
+        Route::get('/password/reset','App\Http\Controllers\Client\Auth\ForgotPasswordController@reset')->name('password.reset');
+        Route::post('/password/verify','App\Http\Controllers\Client\Auth\ForgotPasswordController@verify')->name('password.verify');
+        Route::get('/confirm/{id}/{email}','App\Http\Controllers\Client\Auth\ForgotPasswordController@confirm')->name('password.confirm');
+        Route::put('/update/{email}','App\Http\Controllers\Client\Auth\ForgotPasswordController@update')->name('password.update');
     // And forgot password clients
 });

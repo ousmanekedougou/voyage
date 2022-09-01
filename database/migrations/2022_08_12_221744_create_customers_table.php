@@ -33,6 +33,7 @@ class CreateCustomersTable extends Migration
             $table->integer('is_admin');
             $table->integer('is_active')->default(0);
             $table->integer('reference')->unique()->nullable();
+            $table->integer('slug')->unique()->nullable();
             $table->string('image')->nullable();
             $table->string('password');
             $table->timestamps();

@@ -15,13 +15,10 @@ class Bus extends Model
     use HasFactory;
     
     protected $fillable = [
-        'inscrit' 
+        'inscrit',
     ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+   
 
     public function itineraire()
     {

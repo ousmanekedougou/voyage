@@ -33,7 +33,7 @@
                                     @endif
                                 </span>
                                 <span class="logo-lg">
-                                     <span class="text-bold text-uppercase text-white" style="font-size: 14px;margin-left:-25px;">{{Auth::guard('agent')->user()->name}}</span>
+                                     <span class="text-bold text-uppercase text-white" style="font-size: 14px;margin-left:-25px;">{{Auth::guard('agent')->user()->agence->name}}</span>
                                     
                                     @if(Auth::guard('agent')->user()->agence->logo == null)
                                         <img src="{{asset('admin/assets/images/bus.svg')}}" alt=""  style="width: 50px;height:50px;border-radius:100%;">

@@ -36,7 +36,7 @@
                                 <div class="row">
                                     <div class="col-7">
                                         <div class="text-primary p-4">
-                                            <h5 class="text-primary"> Reset Password</h5>
+                                            <h5 class="text-primary">Client password resete</h5>
                                             <p>Re-Password with Skote.</p>
                                         </div>
                                     </div>
@@ -66,7 +66,7 @@
                                         Entrez votre email et les instructions vous seront envoyées!
                                     </div>
                                     @endif
-                                    <form class="form-horizontal" method="POST" action="{{ route('password.email') }}">
+                                    <form class="form-horizontal" method="POST" action="{{ route('customer.password.verify') }}">
                                        
                                             @csrf
                                         <div class="mb-3">
@@ -89,7 +89,7 @@
                             </div>
                         </div>
                         <div class="mt-5 text-center">
-                            <p>Si vous vous souvenez ? <a href="{{ route('login') }}" class="fw-medium text-primary"> Se Connecter ici</a> </p>
+                            <p>Si vous vous souvenez ? <a href="{{ route('customer.customer.login') }}" class="fw-medium text-primary"> Se Connecter ici</a> </p>
                             <p>© <script>document.write(new Date().getFullYear())</script> Voyage. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand</p>
                         </div>
 

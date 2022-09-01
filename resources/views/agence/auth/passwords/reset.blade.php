@@ -56,8 +56,9 @@
                                 <div class="alert alert-success text-center mb-4" role="alert">
                                     Veuiller entre votre nouveau mot de passe pour l'adresse " {{$email}} "
                                 </div>
-                                <form class="form-horizontal" method="POST" action="{{ route('password.update') }}">
+                                <form class="form-horizontal" method="POST" action="{{ route('agence.password.update',$email) }}">
                                     @csrf
+                                    {{Method_field('PUT')}}
                                     <input type="hidden" name="token" value="{{ $token }}">
                                     <div class="mb-3">
                                         <label for="useremail" class="form-label">Adresse E-mail</label>
@@ -98,7 +99,7 @@
                         </div>
                     </div>
                     <div class="mt-5 text-center">
-                        <p>Si vous vous souvenez ? <a href="{{ route('login') }}" class="fw-medium text-primary"> Se Connecter ici</a> </p>
+                        <p>Si vous vous souvenez ? <a href="{{ route('agence.agence.login') }}" class="fw-medium text-primary"> Se Connecter ici</a> </p>
                         <p>© <script>
                                 document.write(new Date().getFullYear())
                             </script> Voyage. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand</p>

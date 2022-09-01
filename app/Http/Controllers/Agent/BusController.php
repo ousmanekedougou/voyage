@@ -57,7 +57,6 @@ class BusController extends Controller
         $add_bus->number = $request->numero;
         $add_bus->place = $request->place;
         $add_bus->status = 1;
-        $add_bus->agent_id = Auth::guard('agent')->user()->id;
         $add_bus->siege_id = Auth::guard('agent')->user()->siege_id;
         $add_bus->itineraire_id = $request->itineraire;
         $add_bus->date_depart_id = $request->date;
@@ -107,7 +106,6 @@ class BusController extends Controller
         $update_bus->place = $request->place;
         $update_bus->matricule = $request->matricule;
         $update_bus->status = 1;
-        $update_bus->agent_id = Auth::guard('agent')->user()->id;
         $update_bus->siege_id = Auth::guard('agent')->user()->siege_id;
         $update_bus->itineraire_id = $request->itineraire;
         $update_bus->date_depart_id = $request->date;
@@ -124,8 +122,8 @@ class BusController extends Controller
      */
     public function destroy($id)
     {
-        Bus::find($id)->where('siege_id',Auth::guard('agent')->user()->siege_id)->delete();
-        Toastr::success('Votre bus a bien ete suuppression Bus', ["positionClass" => "toast-top-right"]);
+        Bus::where('id',$id)->where('siege_id',Auth::guard('agent')->user()->siege_id)->delete();
+        Toastr::success('Votre bus a bien ete suppremer', 'Suppression Bus', ["positionClass" => "toast-top-right"]);
         return back();
     }
 }

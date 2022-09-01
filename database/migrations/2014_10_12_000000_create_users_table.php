@@ -58,6 +58,7 @@ class CreateUsersTable extends Migration
             $table->string('slug')->nullable();
             $table->string('image')->nullable();
             $table->string('adress')->nullable();
+            $table->rememberToken();
             $table->timestamps();
         });
     }

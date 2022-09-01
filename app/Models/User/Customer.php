@@ -36,7 +36,8 @@ class Customer extends Authenticatable
         'is_active',
         'slug',
         'password',
-        'image'
+        'image',
+        'region_id'
     ];
 
     public function siege()
