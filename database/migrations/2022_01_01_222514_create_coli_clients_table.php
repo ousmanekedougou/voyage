@@ -17,10 +17,14 @@ class CreateColiClientsTable extends Migration
             $table->id();
             $table->string('image');
             $table->string('name');
+            $table->string('name_recept')->nullable();
+            $table->integer('phone_recept')->nullable()->unique();
             $table->integer('prix');
-            $table->text('desc');
+            $table->text('detail');
             $table->integer('colie_id');
             $table->integer('siege_id');
+            $table->integer('ville_id');
+            $table->integer('customer_id')->nullable();
             $table->timestamps();
         });
     }

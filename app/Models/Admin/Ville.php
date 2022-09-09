@@ -3,6 +3,7 @@
 namespace App\Models\Admin;
 use App\Models\Admin\Itineraire;
 use App\Models\User\Client;
+use App\Models\Admin\ColiClient;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,5 +21,9 @@ class Ville extends Model
      public function clients()
     {
         return $this->hasMany(Client::class);
+    }
+
+    public function colie_clients(){
+        return $this->hasMany(ColiClient::class);
     }
 }

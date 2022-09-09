@@ -18,7 +18,7 @@ class CreateBagageClientsTable extends Migration
             $table->string('image');
             $table->string('name');
             $table->integer('prix');
-            $table->text('desc');
+            $table->text('detail');
             $table->integer('bagage_id');
             $table->integer('siege_id');
             $table->timestamps();

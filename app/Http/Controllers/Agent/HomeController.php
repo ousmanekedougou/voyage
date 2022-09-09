@@ -106,10 +106,12 @@ class HomeController extends Controller
             $busCount = Bus::where('siege_id',Auth::guard('agent')->user()->siege_id)->get();
             return view('agent.index',compact('itineraires','user','clientCount','busCount'));
         }elseif ($this->middleware(['IsAgent']) && Auth::guard('agent')->user()->role == 2) {
-            $clients = Bagage::paginate(15);
+            $clients = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
+            ->where('registered_at',Carbon::today()->format('Y-m-d'))
+            ->paginate(15);
             return view('agent.bagage.index',compact('clients'));
         }elseif ($this->middleware(['IsAgent']) && Auth::guard('agent')->user()->role == 3) {
-            $clients = Colie::paginate(15);
+            $clients = Colie::orderBy('id','DESC')->paginate(15);
             return view('agent.coli.index',compact('clients'));
         }
     }

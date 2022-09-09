@@ -115,6 +115,10 @@ Route::prefix('/agent')->name('agent.')->group(function()
 
     Route::resource('/bagage', App\Http\Controllers\Agent\BagageController::class); 
     Route::resource('/colis', App\Http\Controllers\Agent\ColiController::class);
+    Route::post('/colis/post', [App\Http\Controllers\Agent\ColiController::class,'post'])->name('colis.post');
+    Route::post('/colis/cutomer', [App\Http\Controllers\Agent\ColiController::class,'customer'])->name('colis.customer');
+    Route::put('/colis/updateColi/{id}', [App\Http\Controllers\Agent\ColiController::class,'updateColi'])->name('colis.updateColi');
+    Route::delete('/colis/delete/{id}', [App\Http\Controllers\Agent\ColiController::class,'delete'])->name('colis.delete');
 
     Route::resource('/contact',App\Http\Controllers\Agent\ContactController::class);
 
@@ -153,17 +157,16 @@ Route::prefix('/customer')->name('customer.')->group(function()
 
     Route::post('/client/store', [App\Http\Controllers\Client\ClientController::class, 'store'])->name('client.store');
     Route::post('/client/sendmail/{id}', [App\Http\Controllers\Client\ClientController::class, 'edit'])->name('client.edit');
-    Route::get('/client/{id}', [App\Http\Controllers\Client\ClientController::class, 'show'])->name('client.show');
+    Route::get('/client/show', [App\Http\Controllers\Client\ClientController::class, 'show'])->name('client.show');
     Route::put('/client/update/{id}', [App\Http\Controllers\Client\ClientController::class, 'update'])->name('client.update');
-    Route::post('/client/colis', [App\Http\Controllers\Client\ClientController::class, 'colis'])->name('client.colis');
-    Route::put('/client/confirme/{id}', [App\Http\Controllers\Client\ClientController::class, 'confirme'])->name('colis.confirme');
-    Route::post('/client/bagage', [App\Http\Controllers\Client\ClientController::class, 'bagage'])->name('client.bagage');
-    Route::post('/client/ticket', [App\Http\Controllers\Client\ClientController::class, 'ticket'])->name('client.ticket');
+    Route::get('client/paiment', [App\Http\Controllers\Client\ClientController::class, 'paiment'])->name('client.paiment');
     Route::delete('/client/destroy/{id}', [App\Http\Controllers\Client\ClientController::class, 'destroy'])->name('client.destroy');
+
+    Route::resource('/bagage', App\Http\Controllers\Client\BagageController::class); 
+    Route::resource('/colis', App\Http\Controllers\Client\ColiController::class);
     // Route::get('/store', [App\Http\Controllers\Client\HomeController::class, 'store'])->name('store');
 
     // Route::get('/confirm/{id}/{token}', [App\Http\Controllers\Client\Auth\RegisterController::class, 'confirm']);
-    Route::get('/paiment/{id}/{token}', [App\Http\Controllers\Client\ClientController::class, 'paiment']);
 
 
     Route::get('/profil/show/{slug}', [App\Http\Controllers\Client\ProfilController::class,'show'])->name('profil.show'); 

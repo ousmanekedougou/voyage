@@ -172,7 +172,7 @@
               </p>
             @enderror
           <input type="submit" value="Connexion" name="signin" class="btn solid"/>
-          <p style="display: flex;justify-content: center;align-items: center;margin-top: 20px;"><a href="{{ route('password.request') }}" style="color: #4590ef;"> <i style="margin-right:4px;" class="fas fa-unlock"></i> Mot de passe oublié? </a></p>
+          <p style="display: flex;justify-content: center;align-items: center;margin-top: 20px;"><a href="{{ route('password.request') }}" style="color: #4590ef;"> <i style="margin-right:4px;" class="fas fa-unlock"></i> Mot de passe oublié ? </a></p>
         </form>
 
         <form action="" class="sign-up-form" method="post">

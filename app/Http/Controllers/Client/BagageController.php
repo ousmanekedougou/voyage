@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Bagage;
@@ -16,7 +16,7 @@ class BagageController extends Controller
 {
      public function __construct()
     {
-        $this->middleware(['auth','isAgent','isBagage']);
+        $this->middleware(['isClient']);
     }
     /**
      * Display a listing of the resource.
@@ -25,8 +25,21 @@ class BagageController extends Controller
      */
     public function index()
     {
-        $clients = Bagage::where('siege_id',Auth::user()->siege_id)->paginate(15);
-        return view('admin.bagage.index',compact('clients'));
+        $client = Client::where('customer_id',Auth::guard('client')->user()->id)
+        ->where('registered_at',Carbon::today()->format('Y-m-d'))
+        ->first();
+        if ($client) {
+            $bagages = Bagage::where('siege_id',$client->siege_id)->where('client_id',$client->id)->paginate(15);
+            if ($bagages->count() > 0) {
+                return view('client.bagage.index',compact('bagages','client'));
+            }else {
+                Toastr::warning('Vous n\'aviez pas de bagages enregistre', 'Enregistrement Bagages', ["positionClass" => "toast-top-right"]);
+                return back();
+            }
+        }else {
+            Toastr::warning('Vous n\'aviez pas de bagages enregistre', 'Enregistrement Bagages', ["positionClass" => "toast-top-right"]);
+            return back();
+        }
     }
 
     /**

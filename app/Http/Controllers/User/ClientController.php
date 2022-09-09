@@ -58,7 +58,7 @@ class ClientController extends Controller
 
     public function register(){
         $regions = Region::where('status',1)->get();
-        return view('client.auth.register',compact('regions'));
+        return view('user.client.register',compact('regions'));
     }
 
     public function post(Request $request){
@@ -110,100 +110,7 @@ class ClientController extends Controller
 
     
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $this->validate($request,[
-            'name' => 'required|string',
-            'email' => 'required|string|email|max:255',
-            'phone' => 'required|string|max:255',
-            'ville' => 'required|numeric',
-            'date' => 'required|string',
-            'cni' => 'required|numeric',
-        ]);
-        // $clients = Client::where('bus_id',$request->bus)->get();
-        // $buse = Bus::where('id',$request->bus)->first();
-        $date = DateDepart::where('id',$request->date)->first();
-        // dd($date->itineraire_id);
-        $buse = Bus::where('date_depart_id',$date->id)->where('itineraire_id',$date->itineraire_id)->where('plein',0)->first();
-        
-        $clients = Client::where('bus_id',$buse->id)->get();
-        $info_email = Client::where('registered_at',$buse->date_depart->depart_at)->where('email',$request->email)->first();
-        $info_phone = Client::where('registered_at',$buse->date_depart->depart_at)->where('phone',$request->phone)->first();
-        $info_cni = Client::where('registered_at',$buse->date_depart->depart_at)->where('cni',$request->cni)->first();
-        if ($info_email == true) {
-            Toastr::error('Cette adresse email est utiliser pour cette date', 'Error email adress', ["positionClass" => "toast-top-right"]);
-            return back();
-        }elseif ($info_phone == true) {
-            Toastr::error('Ce numero de telephone est utiliser pour cette date', 'Error phone', ["positionClass" => "toast-top-right"]);
-            return back();
-        }elseif ($info_cni == true) {
-             Toastr::error('Ce numero d\'identite est utiliser pour cette date', 'Error identite', ["positionClass" => "toast-top-right"]);
-            return back();
-        }else {
-            if ($clients->count() < $buse->place) {
 
-                $phoneFinale = '';
-                $phoneComplet = '221'.$request->phone;
-                if (strlen($request->phone) == 12 ) {
-                    $phoneFinale = $request->phone;
-                }elseif (strlen($request->phone) == 9) {
-                    $phoneFinale = $phoneComplet;
-                }else {
-                    Toastr::error('Votre numero de telephone est invalide', 'Error phone', ["positionClass" => "toast-top-right"]);
-                    return back();
-                }
-                $cni_final = '';
-                $r_cni = intval($request->cni);
-
-                if (strlen($r_cni) == 13) {
-                    $cni_final = $r_cni;
-                }else{
-                    Toastr::error('Votre numero d\'identite est invalide', 'Error CNI', ["positionClass" => "toast-top-right"]);
-                    return back();
-                }
-
-                // $pl = $buse->inscrit;
-                // $buse->inscrit = $pl + 1;
-                // $buse->save();
-
-                $buse->update(['inscrit' => $buse->inscrit + 1]);
-
-                $add_client = new Client();
-                $add_client->name = $request->name;
-                $add_client->email = $request->email;
-                $add_client->phone = $phoneFinale;
-                $add_client->cni = $cni_final;
-                $add_client->ville_id = $request->ville;
-                $add_client->bus_id = $buse->id;
-                $add_client->siege_id = $buse->siege->id;
-                $add_client->position = $buse->inscrit;
-                $add_client->registered_at = $buse->date_depart->depart_at;
-                $add_client->heure = $buse->date_depart->rendez_vous;
-                $add_client->confirmation_token = str_replace('/','',Hash::make(Str::random(40)));
-                $add_client->agence = $buse->user->agence_name;
-                $add_client->agence_logo = $buse->user->image_agence;
-                $add_client->reference = reference();
-                $add_client->save();
-                
-                Notification::route('mail',$buse->siege->email)
-                ->notify(new RegisteredClient($add_client,1));
-                Toastr::success('Votre inscription a bien ete enregistre sur '.$add_client->agence, 'Inscription', ["positionClass" => "toast-top-right"]);
-                return back();
-            }else if ($clients->count() == $buse->place){
-                $bus_plein = Bus::where('id',$buse->id)->first();
-                $bus_plein->plein = 1;
-                $bus_plein->save();
-                Toastr::warning('Ce bus est plein', 'Inscription', ["positionClass" => "toast-top-right"]);
-                return back();
-            }
-        }
-    }
 
     /**
      * Display the specified resource.

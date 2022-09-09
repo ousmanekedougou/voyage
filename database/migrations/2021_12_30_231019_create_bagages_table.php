@@ -15,9 +15,13 @@ class CreateBagagesTable extends Migration
     {
         Schema::create('bagages', function (Blueprint $table) {
             $table->id();
-            $table->string('client_name');
-            $table->string('client_phone')->unique();
-            $table->string('client_ville');
+            // $table->string('client_name');
+            // $table->string('client_phone')->unique();
+            // $table->string('client_ville');
+            $table->string('image');
+            $table->string('name');
+            $table->integer('prix');
+            $table->text('detail');
             $table->integer('client_id');
             $table->integer('prix_total')->nullable();
             $table->integer('siege_id');

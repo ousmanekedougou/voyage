@@ -29,6 +29,7 @@ class CreateClientsTable extends Migration
             $table->integer('siege_id');
             $table->string('cni')->unique()->nullable();
             $table->integer('customer_id')->nullable();
+            $table->integer('prix_total')->nullable();
             // $table->integer('reference')->unique()->nullable();
             // $table->string('image')->nullable();
             $table->timestamps();

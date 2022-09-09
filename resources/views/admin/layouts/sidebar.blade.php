@@ -164,19 +164,19 @@
                                 </li>
                                 
                             @endif
-                            @if(Auth::guard('agent')->user()->role == 2 || Auth::guard('agent')->user()->role == 3)
+                            @if(Auth::guard('agent')->user()->role != 1)
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
                                     <i class="fa fa-store-alt"></i>
                                     <span key="t-ecommerce">Bagages et Colis</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
-                                        @if(Auth::guard('agent')->user()->role == 2)
+                                    @if(Auth::guard('agent')->user()->role == 2)
                                         <li><a href="{{route('agent.bagage.index')}}" key="t-products"> <i class="fa fa-luggage-cart"></i>Bagages</a></li>
-                                        @endif
-                                        @if(Auth::guard('agent')->role == 3)
+                                    @endif
+                                    @if(Auth::guard('agent')->user()->role == 3)
                                         <li><a href="{{route('agent.colis.index')}}" key="t-products"> <i class="fa fa-suitcase-rolling"></i>Colis</a></li>
-                                        @endif
+                                    @endif
                                 </ul>
                             </li>
                             @endif
@@ -184,21 +184,21 @@
 
                         @if(Auth::guard('client')->user())
                             <li>
-                                <a href="#" class="waves-effect">
+                                <a href="{{ route('customer.client.show') }}" class="waves-effect">
                                     <i class="fa fa-ticket-alt"></i>
                                     <span class="badge rounded-pill bg-success float-end" key="t-new">New</span>
                                     <span key="t-file-manager">Tickets</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="maps-google.html" class="waves-effect">
+                                <a href="{{ route('customer.colis.index') }}" class="waves-effect">
                                     <i class="fa fa-suitcase-rolling"></i>
                                     <span class="badge rounded-pill bg-success float-end" key="t-new">New</span>
                                     <span key="t-file-manager">Colis</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="maps-google.html" class="waves-effect">
+                                <a href="{{ route('customer.bagage.index') }}" class="waves-effect">
                                     <i class="fa fa-luggage-cart"></i>
                                     <span class="badge rounded-pill bg-success float-end" key="t-new">New</span>
                                     <span key="t-file-manager">Bagages</span>

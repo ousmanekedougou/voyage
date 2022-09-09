@@ -54,6 +54,9 @@
                                            <a href="javascript:void(0);" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-primary" data-bs-target="#staticBackdropedititineraire-{{$itineraire->id}}"><i class="bx bx-edit mt-1 font-size-18"></i></a>
                                         </li>
                                         <li class="list-inline-item me-2">
+                                           <a href="javascript:void(0);" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-primary" data-bs-target="#staticBackdropAjouteVille-{{$itineraire->id}}"><i class="fas fa-plus mt-1 font-size-18"></i></a>
+                                        </li>
+                                        <li class="list-inline-item me-2">
                                             <a href="javascript:void(0);" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-danger" data-bs-target="#subscribeModalitineraire-{{ $itineraire->id }}"><i class="mdi mdi-delete font-size-18"></i></a>
                                             <div class="modal modal-xs fade" id="subscribeModalitineraire-{{ $itineraire->id }}" tabindex="-1" aria-labelledby="subscribeModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered">
@@ -156,13 +159,12 @@
                         <div class="modal-dialog modal-md modal-dialog-scrollable" role="document">
                             <div class="modal-content ">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel">Ville de {{ $itineraire_ville->name }}</h5>
+                                    <h5 class="modal-title" id="staticBackdropLabel">Villes de {{ $itineraire_ville->name }}</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                     <div class="modal-body">
                                         <div class="table-rep-plugin">
                                             <div class="table-responsive mb-0" data-pattern="priority-columns">
-                                                <button data-bs-toggle="modal" data-bs-target="#staticBackdropAjouteVille-{{$itineraire_ville->id}}" class="btn btn-primary btn-xs">Ajouter une ville pour {{ $itineraire_ville->name }}</button>
                                                 <table id="tech-companies-1" class="table table-striped">
                                                     <thead>
                                                         <tr>
@@ -248,8 +250,8 @@
             <!-- Modal de l'ajout des ville -->
             @foreach($itineraires as $itineraire_ville_iti)
                 <div class="modal fade" id="staticBackdropAjouteVille-{{$itineraire_ville_iti->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
-                        <div class="modal-content bg-success text-white">
+                    <div class="modal-dialog modal-md modal-dialog-centered modal-sm" role="document">
+                        <div class="modal-content text-white">
                             <div class="modal-header">
                                 <h5 class="modal-title text-center" id="staticBackdropLabel">Ajouter une ville pour {{ $itineraire_ville_iti->name }}</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -306,8 +308,8 @@
             <!-- Modal de modification des ville -->
             @foreach($villes as $ville)
                 <div class="modal fade" id="staticBackdropeditville-{{$ville->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel-{{$ville->id}}" aria-hidden="true">
-                    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
-                        <div class="modal-content bg-success text-white">
+                    <div class="modal-dialog modal-md modal-dialog-centered modal-sm" role="document">
+                        <div class="modal-content text-white">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="staticBackdropLabel-{{$ville->id}}">Modifier de {{ $ville->name }}</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

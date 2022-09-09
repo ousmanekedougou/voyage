@@ -68,42 +68,37 @@
                 @else
                     @if(Auth::guard('web')->user())
                         <div class="my-2 ms-lg-2 btn-sign-ine">
+                            {{--
                             <a href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();"
                             class="btn btn-outline-danger  w-xs"> Se Deconnecter <i class="fa fa-sign-up-alt"></i>  <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i></a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            --}}
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                 @csrf
+                                <button type="submit" class="btn btn-outline-danger  w-xs"> Se Deconnecter <i class="fa fa-sign-up-alt"></i> </button>
                             </form>
                         </div>
                     @elseif(Auth::guard('agence')->user())
                         <div class="my-2 ms-lg-2 btn-sign-ine">
-                            <a href="{{ route('agence.agence.logout') }}"
-                                        onclick="event.preventDefault();
-                            document.getElementById('logout-form-agence').submit();"
-                            class="btn btn-outline-danger  w-xs"> Se Deconnecter <i class="fa fa-sign-up-alt"></i>  <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i></a>
-                            <form id="logout-form-agence" action="{{ route('agence.agence.logout') }}" method="POST" class="d-none">
+                            <form id="logout-form-agence" action="{{ route('agence.agence.logout') }}" method="POST">
                                 @csrf
+                                <button type="submit" class="btn btn-outline-danger  w-xs"> Se Deconnecter <i class="fa fa-sign-up-alt"></i> </button>
                             </form>
                         </div>
                     @elseif(Auth::guard('agent')->user())
                         <div class="my-2 ms-lg-2 btn-sign-ine">
-                            <a href="{{ route('agent.agent.logout') }}"
-                                onclick="event.preventDefault();
-                            document.getElementById('logout-form-agent').submit();"
-                            class="btn btn-outline-danger w-xs text-white"> Se Deconnecter <i class="fa fa-sign-up-alt"></i></a>
-                            <form id="logout-form-agent" action="{{ route('agent.agent.logout') }}" method="POST" class="d-none">
+                           
+                            <form id="logout-form-agent" action="{{ route('agent.agent.logout') }}" method="POST" >
                                 @csrf
+                                <button type="submit" class="btn btn-outline-danger  w-xs"> Se Deconnecter <i class="fa fa-sign-up-alt"></i> </button>
                             </form>
                         </div>
                     @elseif(Auth::guard('client')->user())
                         <div class="my-2 ms-lg-2 btn-sign-ine">
-                            <a href="{{ route('customer.customer.logout') }}"
-                                        onclick="event.preventDefault();
-                            document.getElementById('logout-form-customer').submit();"
-                            class="btn btn-outline-danger  w-xs"> Se Deconnecter <i class="fa fa-sign-up-alt"></i>  <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i></a>
-                            <form id="logout-form-customer" action="{{ route('customer.customer.logout') }}" method="POST" class="d-none">
+                            <form id="logout-form-customer" action="{{ route('customer.customer.logout') }}" method="POST">
                                 @csrf
+                                <button type="submit" class="btn btn-outline-danger  w-xs"> Se Deconnecter <i class="fa fa-sign-up-alt"></i> </button>
                             </form>
                         </div>
                     @endif

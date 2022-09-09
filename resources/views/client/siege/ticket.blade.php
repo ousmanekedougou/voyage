@@ -83,15 +83,15 @@
                                 <div class="avatar-md me-4">
                                     <span class="avatar-title rounded-circle bg-light text-danger font-size-16">
                                         <!-- height="30" pour l'image -->
-                                        <img src="{{Storage::url($siege->agence->logo)}}"  alt="" style="width: 100%;height:auto;border-radius:100%;">
+                                        <img src="{{Storage::url($ticket->siege->agence->logo)}}"  alt="" style="width: 100%;height:auto;border-radius:100%;">
                                     </span>
                                 </div>
 
                                 <div class="media-body overflow-hidden">
                                     <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">
-                                        {{$siege->agence->name}}</a>
+                                        {{$ticket->siege->agence->name}}</a>
                                     </h5>
-                                    <p class="text-muted mb-1"> Siege de {{ $siege->name }}</p>
+                                    <p class="text-muted mb-1"> Siege de {{ $ticket->siege->name }}</p>
                                     <p class="text-muted mb-1"> Destination {{ $ticket->ville->name }}</p>
                                     
                                 </div>
@@ -151,6 +151,21 @@
                                                         {{$ticket->ville->amount}} f
                                                     </td>
                                                 </tr>
+                                                <tr
+                                                    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                    <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                        valign="top">Status
+                                                    </td>
+                                                    <td class="alignright"
+                                                        style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                        align="right" valign="top">
+                                                        @if($ticket->amount > 0 && $ticket->amount == $ticket->ville->amount)
+                                                            <span class="badge bg-success">Ticket Paye</span>
+                                                        @else
+                                                            <span class="badge bg-warning">Tiket Non Paye</span>
+                                                        @endif
+                                                    </td>
+                                                </tr>
                                             </table>
                                         </td>
                                     </tr>
@@ -159,6 +174,11 @@
                         </div>
                         <div class="px-4 py-3 border-top">
                             <ul class="list-inline mb-0 text-center">
+                                @if($ticket->amount == $ticket->ville->amount)
+                                <li class="list-inline-item me-3">
+                                    <a href="#" class="badge bg-danger p-1" data-bs-toggle="modal" data-bs-target="#staticBackdropSupprimer-{{$ticket->id}}"> <i class="fa fa-trash"></i> Archiver</a>
+                                </li>
+                                @else
                                 <li class="list-inline-item me-3">
                                     <a href="#" class="badge bg-info p-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$ticket->id}}"> <i class="fa fa-edit"></i> Modifier</a>
                                 </li>
@@ -168,6 +188,7 @@
                                 <li class="list-inline-item me-3">
                                     <a href="#" class="badge bg-danger p-1" data-bs-toggle="modal" data-bs-target="#staticBackdropSupprimer-{{$ticket->id}}"> <i class="fa fa-trash"></i> Annuler</a>
                                 </li>
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -196,7 +217,7 @@
             <div class="modal-dialog modal-md modal-dialog-centered" role="document">
                 <div class="modal-content ">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel text-center">Modifier ce ticket {{ $siege->name }} </h5>
+                        <h5 class="modal-title" id="staticBackdropLabel text-center">Modifier ce ticket {{ $ticket->siege->name }} </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                         <div class="modal-body">
@@ -215,7 +236,7 @@
                                                     <select class="form-control select2 @error('ville') is-invalid @enderror" name="ville" required autocomplete="ville" required>
                                                         <option>Select</option>
                                                         
-                                                            @foreach($siege->itineraires as $itineraire)
+                                                            @foreach($ticket->siege->itineraires as $itineraire)
                                                                 <optgroup label="{{$itineraire->name}}">
                                                                     @foreach($itineraire->villes as $ville)
                                                                         <option value="{{ $ville->id }}"
@@ -239,7 +260,7 @@
                                                 <div class="col-md-12">
                                                     <select  class="form-control @error('date') is-invalid @enderror" name="date" required autocomplete="date" required>
                                                         
-                                                            @foreach($siege->itineraires as $itineraire)
+                                                            @foreach($ticket->siege->itineraires as $itineraire)
                                                                 <optgroup label="{{$itineraire->name}}">
                                                                     @foreach($itineraire->date_departs as $date)
                                                                         @if($date->depart_at >= carbon_today())
@@ -314,6 +335,118 @@
         </div>
     </div> 
   @endforeach
+
+
+   @foreach($tickets as $ticket)
+     <!-- Static Backdrop Modal de l'ajout -->
+        <div class="modal fade" id="staticBackdropPayer-{{$ticket->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+                <div class="modal-content ">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                        <div class="modal-body">
+                               <div class="card">
+                                    <div class="card-body">
+                                        <div class="tab-content" id="v-pills-tabContent">
+                                            <div class="" id="v-pills-payment" role="tabpanel"
+                                                aria-labelledby="v-pills-payment-tab">
+                                                <div>
+                                                    <h4 class="card-title">Payment information</h4>
+                                                    <p class="card-title-desc">Fill all information below</p>
+
+                                                    <form action="{{ route('customer.client.paiment') }}" method="GET">
+                                                        @csrf
+                                                        <input type="hidden" name="siege" value="{{ $ticket->siege->id }}">
+                                                        <input type="hidden" name="ville" value="{{ $ticket->ville->amount }}">
+                                                        <div>
+                                                            <div class="form-check form-check-inline font-size-16">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="paymentoptionsRadio" id="paymentoptionsRadio1"
+                                                                    checked>
+                                                                <label class="form-check-label font-size-13"
+                                                                    for="paymentoptionsRadio1"><i
+                                                                        class="fab fa-cc-mastercard me-1 font-size-20 align-top"></i>
+                                                                    Credit / Debit Card</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline font-size-16">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="paymentoptionsRadio" id="paymentoptionsRadio2">
+                                                                <label class="form-check-label font-size-13"
+                                                                    for="paymentoptionsRadio2"><i
+                                                                        class="fab fa-cc-paypal me-1 font-size-20 align-top"></i>
+                                                                    Paypal</label>
+                                                            </div>
+                                                            <div class="form-check form-check-inline font-size-16">
+                                                                <input class="form-check-input" type="radio"
+                                                                    name="paymentoptionsRadio" id="paymentoptionsRadio3">
+                                                                <label class="form-check-label font-size-13"
+                                                                    for="paymentoptionsRadio3"><i
+                                                                        class="far fa-money-bill-alt me-1 font-size-20 align-top"></i>
+                                                                    Cash on Delivery</label>
+                                                            </div>
+                                                        </div>
+
+                                                        <h5 class="mt-5 mb-3 font-size-15">For card Payment</h5>
+                                                        <div class="p-4 border">
+                                                            <div class="form-group mb-0">
+                                                                <label for="cardnumberInput">Card Number</label>
+                                                                <input type="text" class="form-control"
+                                                                    id="cardnumberInput"
+                                                                    placeholder="0000 0000 0000 0000">
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-lg-6">
+                                                                    <div class="form-group mt-4 mb-0">
+                                                                        <label for="cardnameInput">Name on card</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="cardnameInput"
+                                                                            placeholder="Name on Card">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-3">
+                                                                    <div class="form-group mt-4 mb-0">
+                                                                        <label for="expirydateInput">Expiry date</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="expirydateInput" placeholder="MM/YY">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-lg-3">
+                                                                    <div class="form-group mt-4 mb-0">
+                                                                        <label for="cvvcodeInput">CVV Code</label>
+                                                                        <input type="text" class="form-control"
+                                                                            id="cvvcodeInput"
+                                                                            placeholder="Enter CVV Code">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                         <div class="row mt-4">
+                                                            <div class="col-sm-6">
+                                                            <button type="button" data-bs-dismiss="modal"
+                                                                    class="btn text-muted d-none d-sm-inline-block btn-link">
+                                                                    <i class="mdi mdi-arrow-left me-1"></i> Back to Shopping Cart </button>
+                                                            </div> <!-- end col -->
+                                                            <div class="col-sm-6">
+                                                                <div class="text-end">
+                                                                    <button type="submit" class="btn btn-success">
+                                                                        <i class="mdi mdi-truck-fast me-1"></i> Proceed to Shipping </button>
+                                                                </div>
+                                                            </div> <!-- end col -->
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                        </div>
+                </div>
+            </div>
+        </div>
+    <!-- Fin du modal de l'ajout -->
+    @endforeach
 -
 
 

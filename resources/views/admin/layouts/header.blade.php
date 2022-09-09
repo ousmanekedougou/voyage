@@ -127,7 +127,7 @@
                                     @if(Auth::guard('client')->user()->image == null)
                                     <img src="{{ asset('admin/assets/images/users/profil.jpg') }}" alt="" height="22">
                                     @else
-                                    <img src="{{Storage::url(Auth::guard('client')->user()->image)}}}" alt="" height="22">
+                                    <img src="{{Storage::url(Auth::guard('client')->user()->image)}}" alt="" height="22">
                                     @endif
                                 </span>
                                 <span class="logo-lg">
@@ -135,7 +135,7 @@
                                     @if(Auth::guard('client')->user()->image == null)
                                     <img src="{{ asset('admin/assets/images/users/profil.jpg') }}" alt="" height="17">
                                     @else
-                                    <img src="{{Storage::url(Auth::guard('client')->user()->image)}}}" alt="" height="17">
+                                    <img src="{{Storage::url(Auth::guard('client')->user()->image)}}" alt="" height="17">
                                     @endif
                                 </span>
                             </a>
@@ -145,7 +145,7 @@
                                     @if(Auth::guard('client')->user()->image == null)
                                     <img src="{{ asset('admin/assets/images/users/profil.jpg') }}" alt="" height="22">
                                     @else
-                                    <img src="{{Storage::url(Auth::guard('client')->user()->image)}}}" alt="" height="22">
+                                    <img src="{{Storage::url(Auth::guard('client')->user()->image)}}" alt="" height="22">
                                     @endif
                                 </span>
                                 <span class="logo-lg">
@@ -153,7 +153,7 @@
                                     @if(Auth::guard('client')->user()->image == null)
                                         <img src="{{ asset('admin/assets/images/users/profil.jpg') }}" alt="" height="19">
                                     @else
-                                        <img src="{{Storage::url(Auth::guard('client')->user()->image)}}}" alt="" height="19">
+                                        <img src="{{Storage::url(Auth::guard('client')->user()->image)}}" alt="" height="19">
                                     @endif
                                 </span>
                             </a>

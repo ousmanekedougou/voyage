@@ -195,133 +195,134 @@
 
 
                        
-
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row mb-4">
-                                        <div class="col-8"><h4 class="card-title">Configuration de vos sms</h4></div>
-                                        <div class="col-3 text-center">
-                                            @if($sms)
-                                                <button type="submit" class="btn btn-primary btn-block" data-bs-toggle="modal" data-bs-target="#staticBackdropSmsClient-{{$sms->id}}"> <i class="fa fa-edit"></i> Modifier</button>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="table-responsive">
-                                        <table class="table table-nowrap mb-0">
-                                            <tbody>
-                                            @if($sms)
-                                                <tr>
-                                                    <th scope="row">clientId :   </th>
-                                                    <td>{{$sms->clientId}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">clientSecret :</th>
-                                                    <td>{{$sms->clientSecret}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Status de rappelle sms :</th>
-                                                    <td> 
-                                                       
-                                                        <div class="form-check form-switch mb-3" dir="ltr">
-                                                            
-                                                            <input class="form-check-input" type="checkbox"
-                                                                id="SwitchCheckSizesm" @if($sms->status == 1) checked @endif  data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$sms->id}}">
-                                                            <label class="form-check-label" for="SwitchCheckSizesm"></label>
-                                                            @if($sms->status == 1)
-                                                                <span class="badge bg-success"><i class="bx bxs-check-circle me-1"></i>
-                                                                        Active
-                                                                </span>
-                                                                @else
-                                                                <span class="badge bg-danger"><i class="bx bxs-x-square me-1"></i>
-                                                                        Desactive
-                                                                </span>
-                                                            @endif
-                                                        </div>
-                                                        
-                                                    </td>
-                                                </tr>
-                                                @else
-                                                <tr>
-
-                                                    <td class="text-center text-default">
-                                                        Vous aviez pas de donnes de configuration pour sms
-                                                    </td>
-                                                    <td class="">
-                                                        <button type="submit" class="btn btn-primary btn-block text-center" data-bs-toggle="modal" data-bs-target="#staticBackdropSmsClient" style="margin-top:-10px;"> <i class="fa fa-plus"></i> Ajouter</button>
-                                                    </td>
-                                                </tr>
-                                            @endif
-                                            </tbody>
-                                            
-                                        </table>
+                        @if(Auth::guard('agent')->user()->role == 1)
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row mb-4">
+                                    <div class="col-8"><h4 class="card-title">Configuration de vos sms</h4></div>
+                                    <div class="col-3 text-center">
+                                        @if($sms)
+                                            <button type="submit" class="btn btn-primary btn-block" data-bs-toggle="modal" data-bs-target="#staticBackdropSmsClient-{{$sms->id}}"> <i class="fa fa-edit"></i> Modifier</button>
+                                        @endif
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row mb-4">
-                                        <div class="col-8"><h4 class="card-title">Configuration de vos cles orange money</h4></div>
-                                        <div class="col-3 text-center">
-                                            @if($omg)
-                                                <button type="submit" class="btn btn-primary btn-block" data-bs-toggle="modal" data-bs-target="#staticBackdropOmgClient-{{$omg->id}}"> <i class="fa fa-edit"></i> Modifier</button>
-                                            @endif
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="table-responsive">
-                                        <table class="table table-nowrap mb-0">
-                                            <tbody>
-                                            @if($omg)
-                                                <tr>
-                                                    <th scope="row">clientId :   </th>
-                                                    <td>{{$omg->clientId}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">clientSecret :</th>
-                                                    <td>{{$omg->clientSecret}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">Status de votre compte orange money :</th>
-                                                    <td> 
-                                                       
-                                                        <div class="form-check form-switch mb-3" dir="ltr">
-                                                            
-                                                            <input class="form-check-input" type="checkbox"
-                                                                id="SwitchCheckSizesm" @if($omg->status == 1) checked @endif  data-bs-toggle="modal" data-bs-target="#staticBackdropOmg-{{$omg->id}}">
-                                                            <label class="form-check-label" for="SwitchCheckSizesm"></label>
-                                                            @if($omg->status == 1)
-                                                                <span class="badge bg-success"><i class="bx bxs-check-circle me-1"></i>
-                                                                        Active
-                                                                </span>
-                                                                @else
-                                                                <span class="badge bg-danger"><i class="bx bxs-x-square me-1"></i>
-                                                                        Desactive
-                                                                </span>
-                                                            @endif
-                                                        </div>
+                                
+                                <div class="table-responsive">
+                                    <table class="table table-nowrap mb-0">
+                                        <tbody>
+                                        @if($sms)
+                                            <tr>
+                                                <th scope="row">clientId :   </th>
+                                                <td>{{$sms->clientId}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">clientSecret :</th>
+                                                <td>{{$sms->clientSecret}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Status de rappelle sms :</th>
+                                                <td> 
+                                                    
+                                                    <div class="form-check form-switch mb-3" dir="ltr">
                                                         
-                                                    </td>
-                                                </tr>
-                                                @else
-                                                <tr>
+                                                        <input class="form-check-input" type="checkbox"
+                                                            id="SwitchCheckSizesm" @if($sms->status == 1) checked @endif  data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$sms->id}}">
+                                                        <label class="form-check-label" for="SwitchCheckSizesm"></label>
+                                                        @if($sms->status == 1)
+                                                            <span class="badge bg-success"><i class="bx bxs-check-circle me-1"></i>
+                                                                    Active
+                                                            </span>
+                                                            @else
+                                                            <span class="badge bg-danger"><i class="bx bxs-x-square me-1"></i>
+                                                                    Desactive
+                                                            </span>
+                                                        @endif
+                                                    </div>
+                                                    
+                                                </td>
+                                            </tr>
+                                            @else
+                                            <tr>
 
-                                                    <td class="text-center text-default">
-                                                        Vous n'aviez pas de donnes de configuration pour orange money
-                                                    </td>
-                                                    <td class="">
-                                                        <button type="submit" class="btn btn-primary btn-block text-center" data-bs-toggle="modal" data-bs-target="#staticBackdropOmgClient" style="margin-top:-10px;"> <i class="fa fa-plus"></i> Ajouter</button>
-                                                    </td>
-                                                </tr>
-                                            @endif
-                                            </tbody>
-                                            
-                                        </table>
-                                    </div>
+                                                <td class="text-center text-default">
+                                                    Vous aviez pas de donnes de configuration pour sms
+                                                </td>
+                                                <td class="">
+                                                    <button type="submit" class="btn btn-primary btn-block text-center" data-bs-toggle="modal" data-bs-target="#staticBackdropSmsClient" style="margin-top:-10px;"> <i class="fa fa-plus"></i> Ajouter</button>
+                                                </td>
+                                            </tr>
+                                        @endif
+                                        </tbody>
+                                        
+                                    </table>
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row mb-4">
+                                    <div class="col-8"><h4 class="card-title">Configuration de vos cles orange money</h4></div>
+                                    <div class="col-3 text-center">
+                                        @if($omg)
+                                            <button type="submit" class="btn btn-primary btn-block" data-bs-toggle="modal" data-bs-target="#staticBackdropOmgClient-{{$omg->id}}"> <i class="fa fa-edit"></i> Modifier</button>
+                                        @endif
+                                    </div>
+                                </div>
+                                
+                                <div class="table-responsive">
+                                    <table class="table table-nowrap mb-0">
+                                        <tbody>
+                                        @if($omg)
+                                            <tr>
+                                                <th scope="row">clientId :   </th>
+                                                <td>{{$omg->clientId}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">clientSecret :</th>
+                                                <td>{{$omg->clientSecret}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Status de votre compte orange money :</th>
+                                                <td> 
+                                                    
+                                                    <div class="form-check form-switch mb-3" dir="ltr">
+                                                        
+                                                        <input class="form-check-input" type="checkbox"
+                                                            id="SwitchCheckSizesm" @if($omg->status == 1) checked @endif  data-bs-toggle="modal" data-bs-target="#staticBackdropOmg-{{$omg->id}}">
+                                                        <label class="form-check-label" for="SwitchCheckSizesm"></label>
+                                                        @if($omg->status == 1)
+                                                            <span class="badge bg-success"><i class="bx bxs-check-circle me-1"></i>
+                                                                    Active
+                                                            </span>
+                                                            @else
+                                                            <span class="badge bg-danger"><i class="bx bxs-x-square me-1"></i>
+                                                                    Desactive
+                                                            </span>
+                                                        @endif
+                                                    </div>
+                                                    
+                                                </td>
+                                            </tr>
+                                            @else
+                                            <tr>
+
+                                                <td class="text-center text-default">
+                                                    Vous n'aviez pas de donnes de configuration pour orange money
+                                                </td>
+                                                <td class="">
+                                                    <button type="submit" class="btn btn-primary btn-block text-center" data-bs-toggle="modal" data-bs-target="#staticBackdropOmgClient" style="margin-top:-10px;"> <i class="fa fa-plus"></i> Ajouter</button>
+                                                </td>
+                                            </tr>
+                                        @endif
+                                        </tbody>
+                                        
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                         <!-- end card -->
+                        @endif
                     </div>
                 </div>
                 <!-- end row -->

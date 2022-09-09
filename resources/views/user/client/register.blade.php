@@ -1,4 +1,4 @@
-@extends('user.layouts.app',['title' => 'Create Agence'])
+@extends('user.layouts.app',['title' => 'Create Client'])
 
 @section('main-content')
 

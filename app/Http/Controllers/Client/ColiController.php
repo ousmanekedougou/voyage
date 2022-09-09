@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Client;
 
 use App\Helpers\Sms;
 use App\Http\Controllers\Controller;
@@ -16,7 +16,7 @@ class ColiController extends Controller
 {
      public function __construct()
     {
-        $this->middleware(['auth','isAgent','isColis']);
+        $this->middleware(['isClient']);
     }
     /**
      * Display a listing of the resource.
@@ -25,8 +25,8 @@ class ColiController extends Controller
      */
     public function index()
     {
-        $clients = Colie::where('siege_id',Auth::user()->siege_id)->paginate(15);
-        return view('admin.coli.index',compact('clients'));
+        $clients = Colie::where('customer_id',Auth::guard('client')->user()->id)->paginate(10);
+        return view('client.colis.index',compact('clients'));
     }
 
     /**
@@ -86,16 +86,12 @@ class ColiController extends Controller
      */
     public function show($id)
     {
-        $client = Colie::where('id',$id)->where('siege_id',Auth::user()->siege_id)->first();
-        if ($client) {
-            if ($client->coli_clients->count() > 0) {
-                return view('admin.coli.show',compact('client'));
-            }else {
-                Toastr::error('Ce client n\'a pas de colis', 'Error Colis', ["positionClass" => "toast-top-right"]);
-                return back();
-            }
+        $getColi = Colie::where('id',$id)->first();
+        $colis = ColiClient::where('colie_id',$getColi->id)->where('siege_id',$getColi->siege_id)->get();
+        if ($colis->count() > 0) {
+            return view('client.colis.show',compact('colis','getColi'));
         }else {
-            Toastr::error('Ce client n\'existe pas', 'Error Client', ["positionClass" => "toast-top-right"]);
+            Toastr::warning('Vous n\'aviez pas de colis enregistre', 'Error Colis', ["positionClass" => "toast-top-right"]);
             return back();
         }
     }

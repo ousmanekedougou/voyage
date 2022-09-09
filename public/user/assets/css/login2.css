@@ -133,6 +133,10 @@ form.sign-in-form {
   color: white;
 }
 
+a{
+  text-decoration: none;
+}
+
 .btn {
   width: 380px;
   background-color: #5995fd;
@@ -406,5 +410,8 @@ form.sign-in-form {
   }
   .sign-in-form{
       margin-top: -15rem;
+  }
+  .solid{
+    width: 100%;
   }
 }
