@@ -237,13 +237,13 @@
                 <div class="col-lg-5">
 
                     <div class="text-muted">
-                        <h4>Toutes les options de voyage sur une seule plateforme</h4>
-                        <p class="text-muted">
+                        <h4 class="mb-4">Toutes les options de voyage sur une seule plateforme</h4>
+                        <p class="text-muted mb-4">
                             Grâce à un réseau développé au Sénégal, de nombreux trajets en bus et car pas chers de courte et longue-distance vous sont proposés par des compagnies routières renommées. Voyager en bus, c’est choisir des trajets à prix réduits dans tout le Sénégal, comparés au train et à l’avion.
                             Avec des itinéraires quotidiens vers les villes et capitales du pays, vous pouvez organiser des escapades parfaitement adaptées à tous les budgets !.
                         </p>
 
-                            <div class="button-items">
+                        <div class="button-items mb-3">
                             <a href="{{ route('setting.index') }}" class="btn btn-primary">Comment ça marche</a>
                             <a href="{{ route('agence.create') }}" class="btn btn-outline-success">Creer votre compte agence</a>
                         </div> 
@@ -252,20 +252,9 @@
 
                 <div class="col-lg-6 ms-auto">
                     <div class="row">
-                        <!-- <h4>Ravivez votre passion du voyage</h4> -->
                         <div class="col-md-12 me-md-0">
                             <img src="{{('user/assets/images/dowload/tiker-photo.png')}}" alt="" class="img-fluid mx-auto d-block" style="width: 100%;height:auto;">
                         </div>
-                        <!-- <div class="col-md-12">
-                            
-                            <p class="text-muted">
-                                Plus de 1 000 partenaires de transport pour vos trajets en train, bus, avion, ferry et vos transferts aéroportuaires pour profiter pleinement du voyage.
-                            </p>
-                        </div>
-                        <div class="button-items text-center">
-                            <a href="{{ route('setting.index') }}" class="btn btn-primary">Comment ca marche</a>
-                            <a href="{{ route('agence.create') }}" class="btn btn-outline-success">Creer votre compte agence</a>
-                        </div> -->
                     </div>
                 </div>
             </div>
