@@ -32,6 +32,7 @@ class CreateAgencesTable extends Migration
             $table->string('amount')->nullable();
             $table->dateTime('payment_at')->nullable();
             $table->integer('user_id')->nullable();
+            $table->integer('region_id')->nullable();
             $table->string('confirmation_token')->unique()->nullable();
              $table->string('logo')->nullable();
             //  $table->string('image')->nullable();
