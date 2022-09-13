@@ -152,7 +152,7 @@
     </section>
 <!-- currency price section end -->
 
-{{--
+
  <!-- currency price section start Version mobile-->
     <section class="section bg-white p-0 section_sm">
         <div class="container">
@@ -312,40 +312,6 @@
     </section>
 
 
-     <!-- Features start -->
-    <section class="section bg-white p-3" id="features">
-        <div class="container">
-
-            <div class="row align-items-center">
-                
-                <div class="col-md-6  col-sm-8 ms-md-auto text-center">
-                    <div class="mt-4 me-md-0">
-                        <img src="{{('user/assets/images/app.webp')}}" alt="" class="img-fluid mx-auto d-block">
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <div class="">
-                        <div class="d-flex align-items-center">
-                            <div class="features-number font-weight-semibold display-4 me-3">01</div>
-                            <h4 class="mb-0">Réservez vos billets de bus avec TouCki</h4>
-                        </div>
-                         <p class="text-muted">
-                            Recherchez, comparez et réservez vos billets de bus en toute simplicité sur TouCki ! <br> Notre plateforme tout-en-un est également un comparateur bus qui vous permet de visualiser tous les trajets de bus de différents transporteurs au Senegal et de les trier par prix, par heure de départ, ou selon le temps et le type de trajet. <br> Une fois votre itinéraire choisi, il ne vous reste plus qu’à réserver votre bus en quelques clics et obtenir vos billets de bus en ligne.
-                            
-                        </p>
-                        <p class="mb-4 text-muted">
-                            Avec TouCki, vous profitez notamment de voyages connectés avec notre application. Embarquez rapidement avec votre billet mobile, recevez des notifications de rappele de voyage en temps réel,gestion de vos bagage et colis. Tout est à portée de main !
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-            <!-- end row -->
-        </div>
-        <!-- end container -->
-    </section>
-    <!-- Features end -->
 
       <!-- Features start -->
     <section class="section" id="features">
@@ -354,7 +320,7 @@
                 <div class="col-md-6 ms-auto">
                     <div class="mt-4 mt-md-auto">
                         <div class="d-flex align-items-center mb-2">
-                            <div class="features-number font-weight-semibold display-4 me-3">02</div>
+                           {{--<div class="features-number font-weight-semibold display-4 me-3">02</div>--}}
                             <h4 class="mb-0">L’application tout-en-un des voyageurs</h4>
                         </div>
                         <p class="text-muted">
@@ -380,7 +346,7 @@
         <!-- end container -->
     </section>
     <!-- Features end -->
-    --}}
+    
 
       <!-- Roadmap start -->
     <section class="section bg-white" id="roadmap">
