@@ -10,7 +10,9 @@ use App\Models\Admin\Bus;
 use App\Models\Admin\Siege;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\User\Notify;
 use App\Models\User\Region;
+use App\Notifications\Newsleter;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Notifications\RegisteredUser;
@@ -31,7 +33,7 @@ class AgenceController extends Controller
         ->where('is_active',1)
         // ->where('region_id',$region->id)
         ->orderBy('id','ASC')->paginate(12);
-        $agenceAll = Agence::where('is_admin',2)->where('is_active',1)->orderBy('id','ASC')->get();
+        $agenceAll = Agence::where('is_admin',2)->where('is_active',1)->orderBy('id','ASC')->paginate(9);
         $agenceCount = $agenceAll->count(); 
         return view('user.agence.index',compact('agences','agenceCount','autre_regions'));
     }
@@ -50,52 +52,48 @@ class AgenceController extends Controller
     {
         $this->validate($request,[
             'name' => 'required|string|max:255',
-            'name_agence' => 'required|string|max:255|unique:users',
             'email' => 'required|string|email|max:255|unique:users',
-            'email_agence' => 'required|string|email|unique:users',
-            'phone' => 'required|numeric|unique:users',
-            'agence_phone' => 'required|numeric|unique:users',
-            'password' => 'required|string|min:6|confirmed',
+            'phone' => 'required|string|max:255|unique:users',
             // 'registre_commerce' => 'required|string|max:255|unique:users',
             'adress' => 'required|string',
             'slogan' => 'required|string',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
-            'image_agence' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
-            'region' => 'required|numeric'
+            'region' => 'required|numeric',
+            'password' => 'required|string|min:6|confirmed',
         ]);
-        // dd($request->agence_phone);
-           $imageName = '';
-        $imageAgenceName = '';
-        $add_agence = new Agence();
-          if($request->hasFile('image'))
+         $add_agence = new Agence();
+        $imageName = '';
+        if($request->hasFile('image'))
         {
             $imageName = $request->image->store('public/Agence');
         }
-          if($request->hasFile('image_agence'))
-        {
-            $imageAgenceName = $request->image_agence->store('public/Agence');
-        }
-        define('AGENCE',2);
+
+        
         $add_agence->name = $request->name;
-        $add_agence->agence_name = $request->name_agence;
         $add_agence->email = $request->email;
         $add_agence->phone = $request->phone;
-        $add_agence->agence_phone = $request->agence_phone;
-        $add_agence->password = Hash::make($request->password);
         // $add_agence->registre_commerce = $request->registre_commerce;
-        $add_agence->email_agence = $request->email_agence;
         $add_agence->adress = $request->adress;
         $add_agence->slogan = $request->slogan;
-        $add_agence->is_admin = AGENCE;
+        $add_agence->is_admin = 0;
+        $add_agence->is_active = 0;
         $add_agence->logo = $imageName;
-        $add_agence->image_agence = $imageAgenceName;
-        $add_agence->region_id = $request->region;
         $add_agence->confirmation_token = str_replace('/','',Hash::make(Str::random(40)));
         $add_agence->slug = str_replace('/','',Hash::make(Str::random(20).'agence'.$request->email));
+        // $add_agence->user_id = Auth::user()->id;
+        $add_agence->region_id = $request->region;
+        $add_agence->password = Hash::make($request->password);
         $add_agence->save();
-        // Notification::route('mail','ousmanelaravel@gmail.com')
-        //     ->notify(new RegisteredUser($add_agence));
-        Toastr::success('Votre agence a bien ete creer', 'Inscription', ["positionClass" => "toast-top-right"]);
+
+        Notification::route('mail',Auth::user()->email)
+            ->notify(new RegisteredUser($add_agence));
+
+        $notifys = Notify::all();
+        foreach ($notifys as $notify) {
+            Notification::route('mail','ousmanelaravel@gmail.com')
+            ->notify(new Newsleter($notify));
+        }
+         Toastr::success('Votre agence a bien ete creer', 'Ajout agence', ["positionClass" => "toast-top-right"]);
         return back();
     }
 

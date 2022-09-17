@@ -6,21 +6,21 @@
   @show
 </head>
 <body data-bs-spy="scroll" data-bs-target="#topnav-menu" data-bs-offset="60">
-    @include('user.layouts.header')
+  @include('user.layouts.header')
 
-    @section('main-content')
+  @section('main-content')
 
-    
+  
 
-    @show
+  @show
 
-    @include('user.layouts.footer')
-  <!-- END layout-wrapper -->
+  @include('user.layouts.footer')
+  @section('footerSection')
+  @show
+  
+  @include('user.layouts.setting')
 
- @include('user.layouts.setting')
-
- @section('footerSection')
- @show
+  
 
 
 </body>

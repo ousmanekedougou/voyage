@@ -21,6 +21,7 @@
         <link rel="stylesheet" href="{{asset('admin/assets/toastr/toastr.min.css')}}">
         <script src="{{asset('admin/assets/css/jquery-3.6.0.min.js')}}"></script>
 
-@section('headsection')
+
+@section('headSection')
 
 @show
