@@ -67,11 +67,10 @@
                     </div>
 
                     <p class="mb-2">
-                        <script>document.write(new Date().getFullYear())</script> © Skote. Design & Develop by
-                        Themesbrand
+                        <script>document.write(new Date().getFullYear())</script> © TouCki. Design & Develop by
+                        KdgWeb
                     </p>
-                    <p>It will be as simple as occidental in fact, it will be to an english person, it will seem like
-                        simplified English, as a skeptical</p>
+                    <p>Ce sera aussi simple qu'occidental en fait, ce sera pour un anglais, cela ressemblera à un anglais simplifié, pour un sceptique</p>
                 </div>
 
             </div>

@@ -44,13 +44,10 @@
                 --}}
                 @if(!Auth::guard('web')->user() && !Auth::guard('agence')->user() && !Auth::guard('agent')->user() && !Auth::guard('client')->user())
                 <div class="dropdown d-inline-block">
-                    <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="d-none d-xl-inline-block ms-1 btn btn-outline-success" key="t-henry">Se Connecter
+                        <span id="page-header-user-dropdown"
+                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="d-xl-inline-block ms-1 btn btn-outline-success" key="t-henry">Se Connecter
                             <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                         </span>
-                        
-                    </button>
                     <div class="dropdown-menu dropdown-menu-end text-center">
                         <!-- item-->
                         <a class="dropdown-item {{ set_active_roote('agent.agent.login') }}" href="{{ route('agent.agent.login') }}"><i class="bx bx-user font-size-16 align-middle me-1"></i>

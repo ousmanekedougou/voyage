@@ -237,10 +237,11 @@
                 <div class="col-lg-5">
 
                     <div class="text-muted">
-                        <h4 class="mb-4">Toutes les options de voyage sur une seule plateforme</h4>
-                        <p class="text-muted mb-4">
-                            Grâce à un réseau développé au Sénégal, de nombreux trajets en bus et car pas chers de courte et longue-distance vous sont proposés par des compagnies routières renommées. Voyager en bus, c’est choisir des trajets à prix réduits dans tout le Sénégal, comparés au train et à l’avion.
-                            Avec des itinéraires quotidiens vers les villes et capitales du pays, vous pouvez organiser des escapades parfaitement adaptées à tous les budgets !.
+                        <h4 class="mb-4">Toutes les options de voyage sur TouCki</h4>
+                        <p class="text-muted mb-4 text-justify">
+                            Grâce à un réseau développé au Sénégal, de nombreux trajets en bus et car pas chers de courte et longue-distance vous sont proposés par des compagnies routières renommées. 
+                            <br> Voyager en bus, c’est choisir des trajets à prix réduits dans tout le Sénégal, comparés au train et à l’avion.
+                            <br> Avec des itinéraires quotidiens vers les villes et capitales du pays, vous pouvez organiser des escapades parfaitement adaptées à tous les budgets !.
                         </p>
 
                         <div class="button-items mb-3">
@@ -681,21 +682,20 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="text-center mb-5">
-                        <div class="small-title">Informations</div>
-                        <h4>Comment marche notre structure</h4>
+                        <h4>Nous contacter</h4>
                     </div>
                 </div>
             </div>
             <!-- end row -->
 
             <div class="row">
-                <div class="col-lg-offset-6">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6">
                     <div class="vertical-nav">
                         <div class="row">
                             <div class="row">
                                 <div class="col-8 contact-login-title">
                                     <div class="text-default p-2">
-                                        <h5 class="text-default">Nous contacter</h5>
                                         <p>Vous souhaitez des renseignements complémentaires,prendre un rendez-vous, n’hésitez pas à nous contacter</p>
                                     </div>
                                 </div>
@@ -775,6 +775,7 @@
                     </div>
                     <!-- end vertical nav -->
                 </div>
+                <div class="col-lg-3"></div>
             </div>
             <!-- end row -->
         </div>
