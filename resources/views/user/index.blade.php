@@ -316,18 +316,22 @@
                         <p class="text-muted">
                             Téléchargez gratuitement l'application TouCki pour bénéficier d’une expertise de qualité et organiser vos voyages en toute confiance.
                         </p>
-                        
+                        {{--
                         <div class="text-muted mt-4">
                             <p class="mb-2"><i class="mdi mdi-circle-medium text-success me-1"></i>Donec pede justo vel
                                 aliquet</p>
                             <p><i class="mdi mdi-circle-medium text-success me-1"></i>Aenean et nisl sagittis</p>
                         </div>
-                        
+                        --}}
                     </div>
                 </div>
                  <div class="col-md-6">
                     <div>
                         <img src="{{('user/assets/images/updateClient.svg')}}" alt="" class="img-fluid mx-auto d-block">
+                        <div class="button-items mb-3">
+                            <a href="" class="btn btn-primary">Telecharger sur Play Store</a>
+                            <a href="" class="btn btn-outline-success">Telecharger sur App Store</a>
+                        </div> 
                     </div>
                 </div>
             </div>
