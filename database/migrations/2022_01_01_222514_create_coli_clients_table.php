@@ -25,6 +25,7 @@ class CreateColiClientsTable extends Migration
             $table->integer('siege_id');
             $table->integer('ville_id');
             $table->integer('customer_id')->nullable();
+            $table->boolean('status')->nullable();
             $table->timestamps();
         });
     }

@@ -26,12 +26,14 @@
                         <a class="nav-link {{ set_active_roote('client.index') }} " href="{{ route('client.index') }}"><i class="fa fa-suitcase-rolling"></i> Vos réservation</a>
                     </li>
                     <li class="nav-item">
-                        {{-- <a class="nav-link {{ set_active_roote('setting.index') }} " href="{{ route('setting.index') }}"><i class="fa fa-cog"></i> Comment ça marche ?</a> --}}
-                        <a class="nav-link {{ set_active_roote('setting.index') }} " href="#settings"><i class="fa fa-cog"></i> Comment ça marche ?</a>
+                        <a class="nav-link {{ set_active_roote('setting.index') }} " href="{{ route('setting.index') }}"><i class="fa fa-cog"></i> Comment ça marche ?</a>
                     </li>
 
                      <li class="nav-item">
-                        <a class="nav-link {{ set_active_roote('contact.index') }} " href="#contact"><i class="fa fa-at"></i> Contact</a>
+                        <a class="nav-link {{ set_active_roote('contact.index') }} " href="#contact"
+                        data-bs-toggle="modal"
+                                            data-bs-target=".ContactUs"
+                        ><i class="fa fa-at"></i> Contact</a>
                     </li>
 
                 </ul>

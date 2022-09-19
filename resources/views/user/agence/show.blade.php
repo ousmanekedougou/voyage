@@ -13,10 +13,13 @@
         <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
             <div class="row align-items-center row_pricipal" style="margin-top: -70px;" >
-                <div class="col-lg-offset-6 card_show">
+                <div class="card_show">
                     <div class="text-white-50">
-                        <h1 class="text-white font-size-23 font-weight-semibold mb-3 hero-title text-center">Réservez vos billets de bus sur <span class="text-danger">{{$agence->name_agence}}</span> au meilleur prix</h1>
+                        <h1 class="text-white font-size-23 font-weight-semibold mb-3 hero-title">Réservez vos billets de bus sur <span class="text-success">{{$agence->name}}</span> au meilleur prix</h1>
                     </div>
+                   <p class="font-size-16 text-white text-center">
+                       Nous comptons {{$sieges->count()}} sieges de voyages au sein notre agence.
+                    </p>
                 </div>
             </div>
 
@@ -52,15 +55,19 @@
                                         <p class="text-muted  mb-1"><i class="fa fa-envelope"></i> {{ $siege->email }} </p>
                                         <p class="text-muted  mb-2"><i class="fa fa-mobile"></i> {{ $siege->phone }} </p>
                                         <ul class="list-inline mb-0">
+                                            {{--
                                             <li class="list-inline-item me-3">
                                                 <a href="#" class="badge bg-success p-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$siege->id}}"> <i class="fa fa-user-plus"></i> S'inscrire</a>
                                             </li>
-                                                <li class="list-inline-item me-3">
+                                            --}}
+                                            <li class="list-inline-item me-3">
                                                     <a href="#" class="badge bg-primary p-1" data-bs-toggle="modal" data-bs-target="#staticBackdropEmailAgence-{{$siege->id}}"> <i class="fa fa-address-card"></i> Contacter</a>
                                             </li>
+                                            {{--
                                             <li class="list-inline-item me-3">
                                                 <a href="#" class="badge bg-info p-1" data-bs-toggle="modal" data-bs-target="#staticBackdropTickerClient-{{$siege->id}}"><i class="fa fa-ticket-alt"></i> Ticker</a>
                                             </li>
+                                            --}}
                                         </ul>
                                     </div>
                                 </div>
@@ -75,75 +82,8 @@
         <!-- end container -->
     </section>
     <!-- currency price section end -->
-    {{--
-    <!-- about section start -->
-    <section class="section" id="agence">
-         <!-- <div class="bg-overlay bg-primary"></div> -->
-         <div class="container">
-             <div class="row">
-                <div class="col-lg-12">
-                    <div class="text-center mb-5">
-                        <h4> {{$agence->slogan}}</h4>
-                    </div>
-                </div>
-            </div>
-            <div class="currency-price">
-                <div class="row">
-                    @foreach($sieges as $siege)
-                    <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-lg-4">
-                                        <div class="text-lg-center">
-                                            <div
-                                                class="avatar-sm me-3 mx-lg-auto mb-3 mt-1 float-start float-lg-none">
-                                                <span
-                                                    class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-16">
-                                                    @if($siege->image == '')
-                                                     <i class="mdi mdi-bus"></i>
-                                                     @else
-                                                    <img src="{{Storage::url($siege->image)}}" alt="" style="width:100%;">
-                                                    @endif
-                                                </span>
-                                            </div>
-                                            <h5 class="mb-1 font-size-10 text-uppercase siege_show_title"> Siege de {{ $siege->name }}</h5>
-                                        </div>
-                                    </div>
 
-                                    <div class="col-lg-8">
-                                        <div>
-                                            <p class="d-flex"><i class="fa fa-envelope" style="font-size: 11px;"> {{$siege->email}}</i></p>
-                                            <h6 class="text-truncate mb-4"><i class="fa fa-mobile"> {{$siege->phone}}</i></h6>
-                                            <ul class="list-inline mb-0">
-                                                <li class="list-inline-item me-3">
-                                                     <a href="" title="S'inscrire" data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$siege->id}}" class="badge bg-success font-size-16 btn-xs"> <i
-                                                            class="fa fa-user-plus"></i> </a>
-                                                </li>
-                                                 <li class="list-inline-item me-3">
-                                                   <a href="" title="Nous contacter" data-bs-toggle="modal" data-bs-target="#staticBackdropEmailAgence-{{$siege->id}}" class="badge bg-primary font-size-16 btn-xs"> <i
-                                                            class="fa fa-address-card"></i> </a>
-                                                </li>
-                                                <li class="list-inline-item me-3">
-                                                   <a href="" title="Modifier vos coordonnes" data-bs-toggle="modal" data-bs-target="#staticBackdropTickerClient-{{$siege->id}}" class="badge bg-info font-size-16 btn-xs"> <i
-                                                            class="fa fa-user-edit"></i> </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-                <!-- end row -->
-            </div>
-        </div>
-    </section>
-    <!-- about section end -->
-    --}}
+    
     <!-- Static Backdrop Modal de l'ajout -->
     @foreach($sieges as $siege)
         <div class="modal fade" id="staticBackdrop-{{$siege->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -187,7 +127,7 @@
                                                 <label class="form-label">Votre numero de telephone</label>
                                                 <div>
                                                     <input data-parsley-type="number" type="number" id="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" autocomplete="phone"
-                                                        required placeholder="Numero de telephone"  />
+                                                        required placeholder="Numero de telephone" style="width: 100%;"  />
                                                         <input type="hidden" name="indicatif" id="indicatif">
                                                         @error('phone')
                                                             <span class="invalid-feedback" role="alert">

@@ -3,20 +3,20 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Agence;
+use App\Models\Admin\Siege;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
 class HomeController extends Controller
 {
-    // public function index()
-    // {
-    //     define('Is_Admin',2);
-    //     $agences = User::where('is_admin',Is_Admin)->orderBy('id','ASC')->get();
-    //     return view('user.index',compact('agences'));
-    // }
 
     public function index(){
-        return view('user.index');
+        $agences = Agence::where('is_admin',0)
+        ->where('is_active',1)
+        ->orderBy('id','ASC')->get();
+        $sieges = Siege::all();
+        return view('user.index',compact('agences','sieges'));
     }
 
      public function store(Request $request)

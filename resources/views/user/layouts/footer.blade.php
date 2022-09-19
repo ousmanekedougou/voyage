@@ -67,7 +67,7 @@
                     </div>
 
                     <p class="mb-2">
-                        <script>document.write(new Date().getFullYear())</script> © TouCki. Design & Develop by
+                        2021 - <script>document.write(new Date().getFullYear())</script> © TouCki. Design & Develop by
                         KdgWeb
                     </p>
                     <p>Ce sera aussi simple qu'occidental en fait, ce sera pour un anglais, cela ressemblera à un anglais simplifié, pour un sceptique</p>
@@ -170,19 +170,21 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal --> 
-     <!--  Large modal example -->
-    <div class="modal fade bs-exampleContact-modal-lg" tabindex="-1" role="dialog"
+
+
+      <!--  Large modal example -->
+    <div class="modal fade ContactUs" tabindex="-1" role="dialog"
         aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-md">
             <div class="modal-content">
                 <div class="card overflow-hidden">
-                    <div class="bg-primary bg-soft">
+                    <div class="bg-primary bg-soft p-2">
                             <button type="button" class="btn-close rounded-circle bg-primary bg-soft font-size-18" style="float:right;" data-bs-dismiss="modal"
                                                             aria-label="Close"></button>
+                             <h5 class="text-default">Nous Contacter</h5>
                         <div class="row">
                             <div class="col-8 contact-login-title">
-                                <div class="text-primary p-2">
-                                    <h5 class="text-primary">Nous contacter</h5>
+                                <div class="text-default p-2">
                                     <p>Vous souhaitez des renseignements complémentaires,prendre un rendez-vous, n’hésitez pas à nous contacter</p>
                                 </div>
                             </div>
@@ -258,12 +260,13 @@
                                 </div>
                             </form>
                         </div>
-    
                     </div>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+    </div><!-- /.modal --> 
+
+
 
 
     

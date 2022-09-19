@@ -1,6 +1,7 @@
 <?php
 
 use App\Helpers\UserSystemInfoHelper;
+use App\Models\Admin\Agence;
 use App\Models\Admin\Bus;
 use App\Models\Admin\Historical;
 use App\Models\Admin\Itineraire;
@@ -37,6 +38,22 @@ if (!function_exists('all_siege')) {
     {
         $siege = Siege::where('agence_id', Auth::guard('agence')->user()->id)->get();
         return $siege;
+    }
+}
+
+if (!function_exists('all_siege_user')) {
+    function all_siege_user()
+    {
+        $siege = Siege::all();
+        return $siege;
+    }
+}
+
+if (!function_exists('all_agence_user')) {
+    function all_agence_user()
+    {
+        $agences = Agence::where('is_admin',0)->where('is_active',1)->get();
+        return $agences;
     }
 }
 

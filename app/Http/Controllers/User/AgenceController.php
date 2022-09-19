@@ -32,8 +32,8 @@ class AgenceController extends Controller
         $agences = Agence::where('is_admin',0)
         ->where('is_active',1)
         // ->where('region_id',$region->id)
-        ->orderBy('id','ASC')->paginate(12);
-        $agenceAll = Agence::where('is_admin',2)->where('is_active',1)->orderBy('id','ASC')->paginate(9);
+        ->orderBy('id','ASC')->paginate(9);
+        $agenceAll = Agence::where('is_admin',0)->where('is_active',1)->orderBy('id','ASC')->get();
         $agenceCount = $agenceAll->count(); 
         return view('user.agence.index',compact('agences','agenceCount','autre_regions'));
     }

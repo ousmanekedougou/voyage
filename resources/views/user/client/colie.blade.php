@@ -29,9 +29,9 @@
                 <div class="row">
                     <div class="checkout-tabs">
                         <div class="row">
-                            <div class="col-xl-2 col-sm-3">
+                            <div class="col-xl-1 col-sm-3">
                             </div>
-                            <div class="col-xl-8 col-sm-6">
+                            <div class="col-xl-10 col-sm-6">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="tab-content" id="v-pills-tabContent">
@@ -43,29 +43,12 @@
                                                         <div class="table-responsive">
                                                              <table class="table align-middle mb-0 table-nowrap">
                                                                  <thead class="table-light">
-                                                                    <tr class="text-center">
-                                                                        <td>
-                                                                            <h5 class="font-size-14 text-truncate"><a
-                                                                                    class="text-dark">Envoyé par</a></h5>
-                                                                            <p class="text-muted mb-0">{{ $colie->name }} : {{ $colie->phone }}</p>
-                                                                        </td>
-                                                                       
-                                                                        <td>
-                                                                            <h5 class="font-size-14 text-truncate"><a
-                                                                                    class="text-dark">Récépteur</a></h5>
-                                                                            <p class="text-muted mb-0">{{ $colie->name_recept }} : {{ $colie->phone_recept }}</p>
-                                                                        </td>
-                                                                        <td>
-                                                                             <h5 class="font-size-14 text-truncate"><a
-                                                                                    class="text-dark">Ville</a></h5>
-                                                                            <p class="text-muted mb-0">{{ $colie->ville }} </p>
-                                                                        </td>
-                                                                    </tr>
-                                                                
                                                                     <tr>
                                                                         <th scope="col">Images</th>
                                                                         <th scope="col">Nom & Déscription</th>
                                                                         <th scope="col">Prix</th>
+                                                                        <th scope="col">Envoye par</th>
+                                                                        <th scope="col">Status</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -78,36 +61,37 @@
                                                                         <td>
                                                                             <h5 class="font-size-14 text-truncate"><a
                                                                                     class="text-dark">{{ $colieClient->name }}</a></h5>
-                                                                            <p class="text-muted mb-0">{{ $colieClient->desc }}</p>
+                                                                            <p class="text-muted mb-0">{{ $colieClient->detail }}</p>
                                                                         </td>
                                                                         <td>{{ $colieClient->prix }} f</td>
+                                                                        <td>
+                                                                            <h5 class="font-size-14 text-truncate"><a
+                                                                                    class="text-dark">{{ $colieClient->colie->name }}</a></h5>
+                                                                            <p class="text-muted mb-0">{{ $colieClient->colie->phone }}</p>
+                                                                        </td>
+                                                                        <td>
+                                                                            @if($colieClient->status == 0)
+                                                                                <span class="badge bg-warning">Non Payer</span>
+                                                                            @else
+                                                                                <span class="badge bg-success">Payer</span>
+                                                                            @endif
+                                                                        </td>
                                                                     </tr>
                                                                     @endforeach
                                                                     <tr>
                                                                         <td colspan="3">
-                                                                            <div class=" @if($colie->status == 0) bg-success bg-soft @else bg-success text-white @endif  p-3 rounded">
+                                                                            <div class="   p-3 rounded">
                                                                                 <h5
-                                                                                    class="font-size-14 @if($colie->status == 0) text-primary @else text-white @endif mb-0">
-                                                                                    @if($colie->status == 0)
+                                                                                    class="font-size-14 mb-0">
+                                                                                   
                                                                                         <a href="#" data-bs-toggle="modal" data-bs-target="#suppresionDuColie" ><i class="fa fa-check-double me-2"></i> Cofirmer la récéption</a>
-                                                                                    @elseif($colie->status == 1)
-                                                                                        <i class="fa fa-check-double me-2"></i> <span class="">Vous avez confirmer la récéption de votre colie</span>
-                                                                                    @endif
-                                                                                     <span class="float-end">Total :  {{$colie->prix_total}} f</span>
+                                                                                   
+                                                                                     <span class="float-end">Total : </span>
                                                                                 </h5>
                                                                             </div>
                                                                         </td>
                                                                     </tr>
-                                                                    {{--
-                                                                    <tr>
-                                                                        <td colspan="2">
-                                                                            <h6 class="m-0 text-end">Total:</h6>
-                                                                        </td>
-                                                                        <td>
-                                                                            $ 675
-                                                                        </td>
-                                                                    </tr>
-                                                                    --}}
+                                                                    
                                                                 </tbody>
                                                             </table>
 
@@ -119,7 +103,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-2 col-sm-3">
+                            <div class="col-xl-1 col-sm-3">
                             </div>
                         </div>
                     </div>
@@ -133,42 +117,6 @@
 <!-- currency price section end -->
 
 
- <!-- Modal pour la suppression de l'agence -->
-    <div class="modal modal-md fade" id="suppresionDuColie" tabindex="-1" aria-labelledby="subscribeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header border-bottom-0">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="text-center mb-4">
-                        <div class="avatar-md mx-auto mb-4">
-                            <div class="avatar-title bg-success text-center rounded-circle text-white h1">
-                                <i class="fa fa-check-double me-2"></i>
-                            </div>
-                        </div>
 
-                        <div class="row justify-content-center">
-                            <div class="col-xl-10">
-                                <h4 class="text-success">Confirmation de colie !</h4>
-                                <p class="text-muted font-size-14 mb-4">Etes vous sure de bien vouloire confirmer la reception du colie de {{$colie->name}} </p>
-
-                                <div class="input-group bg-white rounded text-center" style="text-align:center;">
-                                    <form method="post" action="{{ route('colis.confirme',$colie->id) }}"  style="display:flex;text-align:center;width:100%;">
-                                        {{csrf_field()}}
-                                        {{method_field('PUT')}}
-                                            <input type="hidden" name="delete" value="1">
-                                        <button type="submit" class="btn btn-success btn-xs" style="margin-left: 70px;margin-right:20px;"> Oui je veux bient </button> 
-                                        <button type="button" class="btn btn-info btn-xs" data-bs-dismiss="modal" aria-label="Close"> x Anuller</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-<!-- Fin du modal pour la suppression de l'agence -->
            
 @endsection

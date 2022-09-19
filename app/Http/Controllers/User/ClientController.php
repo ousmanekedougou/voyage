@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Helpers\OrangeMoney;
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Agence;
 use App\Models\Admin\Bagage;
 use App\Models\Admin\BagageClient;
 use App\Models\Admin\Bus;
@@ -38,8 +39,9 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $agences = User::where('is_admin',2)->where('is_active',1)->get();
+        $agences = Agence::where('is_admin',0)->where('is_active',1)->get();
         $sieges = Siege::all();
+        // dd($sieges);
         return view('user.client.index',compact('agences','sieges'));
     }
 
@@ -335,35 +337,16 @@ class ClientController extends Controller
     }
 
     public function colis(){
-
-        // $this->validate($request,[
-        //     'phone' => 'required|numeric',
-        //     'siege' => 'required|string',
-        // ]);
-
         request()->validate([
             'phone' => 'required|numeric',
             'siege' => 'required|string',
         ]);
         $phone = request()->input('phone');
         $siege = request()->input('siege');
+        $coli_clients = ColiClient::where('phone_recept',$phone)->where('siege_id',$siege)->get();
 
-        $colie = Colie::where('phone',$phone)->where('siege_id',$siege)->orWhere('phone_recept',$phone)
-        ->first();
-
-        if ($colie) {
-            if($colie->siege_id == $siege){
-                $coli_clients = ColiClient::where('colie_id',$colie->id)->get();
-                if ($coli_clients->count() > 0) {
-                    return view('user.client.colie',compact('coli_clients','colie'));
-                }else {
-                    Toastr::error('Ce client n\'a pas de colie', 'Error Colie', ["positionClass" => "toast-top-right"]);
-                    return back();
-                }
-            }else {
-                Toastr::error('Votre colie n\'est de ce siege', 'Error Colie', ["positionClass" => "toast-top-right"]);
-                return back();
-            }
+        if ($coli_clients->count() > 0) {
+            return view('user.client.colie',compact('coli_clients'));
         }else {
             Toastr::error('Vous n\'aviez pas de colie', 'Error Colie', ["positionClass" => "toast-top-right"]);
             return back();
