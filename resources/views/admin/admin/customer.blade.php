@@ -41,7 +41,7 @@
                                             <div class="media-body overflow-hidden">
                                                 <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">{{ $user->name }}</a></h5>
                                                 <p class="text-muted mb-1"> <i class="fa fa-envelope"></i> {{ $user->email }}</p>
-                                                <p class="text-muted mb-4 font-size-10"><i class="fa fa-mobile"></i> Agence : {{ $user->phone }}</p>
+                                                <p class="text-muted mb-4 font-size-10"><i class="fa fa-mobile"></i> Phone : {{ $user->phone }}</p>
                                                 
                                                 <div class="avatar-group">
                                                     <div class="avatar-group-item font-size-11">

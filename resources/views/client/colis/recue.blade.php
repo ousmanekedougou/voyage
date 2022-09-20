@@ -20,7 +20,7 @@
                         <!-- end page title -->
                         <div class="row">
                             <div class="col-xl-12">
-                                <p class="text-muted mb-2 text-left font-size-15">Envoyer depuis le siege de  {{ $getColi->siege->name }} </p>
+                                <p class="text-muted mb-2 text-left font-size-15">Recu au siege de  {{ $getColi->siege->name }} </p>
                             </div>
                            
                             <div class="col-xl-9">

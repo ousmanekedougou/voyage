@@ -101,12 +101,7 @@ class ColiController extends Controller
         // dd('jduud');
         $coli = Colie::where('id',$id)->where('siege_id',Auth::guard('agent')->user()->siege_id)->first();
         if ($coli) {
-            if ($coli->coli_clients->count() > 0) {
-                return view('agent.coli.show',compact('coli'));
-            }else {
-                Toastr::warning('Ce client n\'a pas de colis', 'Error Colis', ["positionClass" => "toast-top-right"]);
-                return back();
-            }
+            return view('agent.coli.show',compact('coli'));
         }else {
             Toastr::warning('Ce client n\'existe pas', 'Error Client', ["positionClass" => "toast-top-right"]);
             return back();
@@ -147,7 +142,9 @@ class ColiController extends Controller
         $newColie->ville_id = $request->ville; 
         $newColie->siege_id = Auth::guard('agent')->user()->siege_id;
         if ($getCustomer) {
-             $newColie->customer_id = $getCustomer->id;
+            $newColie->name_recept = $getCustomer->name;
+            $newColie->phone_recept = $getCustomer->phone;
+            $newColie->customer_id = $getCustomer->id;
         }else {
             $newColie->name_recept = $request->name_recept;
             $newColie->phone_recept = $request->phone_recept;

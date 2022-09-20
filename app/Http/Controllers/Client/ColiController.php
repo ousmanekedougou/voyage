@@ -87,7 +87,10 @@ class ColiController extends Controller
     public function show($id)
     {
         $getColi = Colie::where('id',$id)->first();
-        $colis = ColiClient::where('colie_id',$getColi->id)->where('siege_id',$getColi->siege_id)->get();
+        $colis = ColiClient::where('colie_id',$getColi->id)
+        ->where('siege_id',$getColi->siege_id)
+        ->where('customer_id',$getColi->customer_id)
+        ->get();
         if ($colis->count() > 0) {
             return view('client.colis.show',compact('colis','getColi'));
         }else {
@@ -104,7 +107,17 @@ class ColiController extends Controller
      */
     public function edit($id)
     {
-        //
+        $getColi = Colie::where('siege_id',$id)->where('customer_id',Auth::guard('client')->user()->id)->first();
+        if ($getColi) {
+            $colis = ColiClient::where('siege_id',$id)->where('colie_id',$getColi->id)
+            ->where('customer_id',Auth::guard('client')->user()->id)
+            ->get();
+            return view('client.colis.recue',compact('colis','getColi'));
+        }else {
+            Toastr::warning('Ce siege n\'a pas de colis', 'Absence de colis', ["positionClass" => "toast-top-right"]);
+            return back();
+        }
+        
     }
 
     /**

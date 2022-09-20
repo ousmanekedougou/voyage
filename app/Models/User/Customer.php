@@ -4,6 +4,7 @@ namespace App\Models\User;
 
 use App\Models\Admin\Bagage;
 use App\Models\Admin\Bus;
+use App\Models\Admin\ColiClient;
 use App\Models\Admin\Colie;
 use App\Models\Admin\Siege;
 use App\Models\Admin\Ville;
@@ -66,6 +67,10 @@ class Customer extends Authenticatable
 
     public function clients(){
         return $this->hasMany(Client::class);
+    }
+
+    public function colie_clients(){
+        return $this->hasMany(ColiClient::class);
     }
     
 }

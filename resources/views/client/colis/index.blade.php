@@ -51,7 +51,7 @@
                                                 <a href="{{ route('customer.colis.show',$client->id) }} " class="badge bg-success" ><i class="fa fa-eye font-size-12"></i> {{ $client->coli_clients->count()}} Colie(s) Envoye</a>
                                             </li>
                                             <li class="list-inline-item me-3">
-                                                <a href="{{ route('customer.colis.show',$client->id) }} " class="badge bg-primary" ><i class="fa fa-eye font-size-12"></i> {{ $client->coli_clients->count()}} Colie(s) recue</a>
+                                                <a href="{{route('customer.colis.edit',$client->siege_id)}} " class="badge bg-primary" ><i class="fa fa-eye font-size-12"></i> {{ Auth::guard('client')->user()->colie_clients->count()}} Colie(s) recue</a>
                                             </li>
                                         </ul>
                                     </div>
