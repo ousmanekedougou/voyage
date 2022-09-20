@@ -7,12 +7,12 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Recover Password | </title>
+    <title>Modification de votre mot de passe </title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{asset('user/assets/images/favicon.ico')}}">
+    <link rel="shortcut icon" href="{{ asset('admin/assets/images/bus.svg') }}">
 
     <!-- Bootstrap Css -->
     <link href="{{asset('user/assets/css/bootstrap.min.css')}}" id="bootstrap-style" rel="stylesheet" type="text/css" />
@@ -46,7 +46,7 @@
                                 <a href="">
                                     <div class="avatar-md profile-user-wid mb-4">
                                         <span class="avatar-title rounded-circle bg-light">
-                                            <img src="{{asset('user/assets/images/logo.svg')}}" alt="" class="rounded-circle" height="34">
+                                            <img src="{{ asset('admin/assets/images/bus.svg') }}" alt="" class="rounded-circle" height="34">
                                         </span>
                                     </div>
                                 </a>
