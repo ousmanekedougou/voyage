@@ -6,6 +6,7 @@ use App\Helpers\Sms;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\ColiClient;
 use App\Models\Admin\Colie;
+use App\Models\Admin\Siege;
 use App\Models\User;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
@@ -26,7 +27,12 @@ class ColiController extends Controller
     public function index()
     {
         $clients = Colie::where('customer_id',Auth::guard('client')->user()->id)->paginate(10);
-        return view('client.colis.index',compact('clients'));
+        if ($clients->count() > 0) {
+            return view('client.colis.index',compact('clients'));
+        }else {
+           Toastr::warning('Vous n\'aviez pas de colis enregistre', 'Error Colis', ["positionClass" => "toast-top-right"]);
+            return back();
+        }
     }
 
     /**
@@ -107,16 +113,18 @@ class ColiController extends Controller
      */
     public function edit($id)
     {
-        $getColi = Colie::where('siege_id',$id)->where('customer_id',Auth::guard('client')->user()->id)->first();
+        $getColi = Colie::where('siege_id',$id)->first();
         if ($getColi) {
-            $colis = ColiClient::where('siege_id',$id)->where('colie_id',$getColi->id)
+            $colis = ColiClient::where('siege_id',$id)
             ->where('customer_id',Auth::guard('client')->user()->id)
+            ->where('phone_recept',Auth::guard('client')->user()->phone)
             ->get();
             return view('client.colis.recue',compact('colis','getColi'));
         }else {
-            Toastr::warning('Ce siege n\'a pas de colis', 'Absence de colis', ["positionClass" => "toast-top-right"]);
+            Toastr::warning('vous n\'aviez pas recue de colis sur ce siege', 'Absence de colis', ["positionClass" => "toast-top-right"]);
             return back();
         }
+        
         
     }
 

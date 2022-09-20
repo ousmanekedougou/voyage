@@ -38,8 +38,7 @@
                                                     <tr>
                                                         <th>Images</th>
                                                         <th>Nom & Detail</th>
-                                                        <th>Nom Recveveur</th>
-                                                        <th>Phone Receveur</th>
+                                                        <th>Recveveur</th>
                                                         <th>Ville</th>
                                                         <th>Prix</th>
                                                         <th colspan="2">Actions</th>
@@ -54,13 +53,11 @@
                                                         </td>
                                                         <td>
                                                             <h5 class="font-size-14 text-truncate"><a href="ecommerce-product-detail.html" class="text-dark">{{$bag->name}}</a></h5>
-                                                            <p class="mb-0">{{$bag->detail}} : <span class="fw-medium">Maroon</span></p>
+                                                            <p class="mb-0">{{$bag->detail}}</p>
                                                         </td>
-                                                        <td class="text-center">
-                                                            {{$bag->name_recept}}
-                                                        </td>
-                                                        <td class="text-center">
-                                                            {{$bag->phone_recept}}
+                                                        <td>
+                                                            <h5 class="font-size-14 text-truncate"><a href="ecommerce-product-detail.html" class="text-dark">{{$bag->name_recept}}</a></h5>
+                                                            <p class="mb-0"> {{$bag->phone_recept}}</p>
                                                         </td>
                                                         <td class="text-center">
                                                             {{ $bag->ville->name }}

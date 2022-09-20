@@ -33,8 +33,7 @@
                                                     <tr>
                                                         <th>Images</th>
                                                         <th>Nom & Detail</th>
-                                                        <th>Nom Recveveur</th>
-                                                        <th>Phone Receveur</th>
+                                                        <th>Envoyer Par</th>
                                                         <th>Ville</th>
                                                         <th>Prix</th>
                                                     </tr>
@@ -46,15 +45,13 @@
                                                             <img src="{{Storage::url($bag->image)}}" alt="product-img"
                                                                 title="product-img" class="avatar-md" />
                                                         </td>
-                                                        <td>
+                                                       <td>
                                                             <h5 class="font-size-14 text-truncate"><a href="ecommerce-product-detail.html" class="text-dark">{{$bag->name}}</a></h5>
-                                                            <p class="mb-0">{{$bag->detail}} : <span class="fw-medium">Maroon</span></p>
+                                                            <p class="mb-0">{{$bag->detail}} </span></p>
                                                         </td>
-                                                        <td class="text-center">
-                                                            {{$bag->name_recept}}
-                                                        </td>
-                                                        <td class="text-center">
-                                                            {{$bag->phone_recept}}
+                                                        <td>
+                                                            <h5 class="font-size-14 text-truncate"><a href="ecommerce-product-detail.html" class="text-dark">{{$bag->colie->customer->name}}</a></h5>
+                                                            <p class="mb-0"> {{$bag->colie->customer->phone}}</span></p>
                                                         </td>
                                                         <td class="text-center">
                                                             {{ $bag->ville->name }}
@@ -69,7 +66,7 @@
                                         </div>
                                         <div class="row mt-4">
                                             <div class="col-sm-6">
-                                                <a href="{{ route('customer.colis.index') }}" class="btn btn-secondary">
+                                                <a href="" class="btn btn-secondary">
                                                     <i class="mdi mdi-arrow-left me-1"></i> Retoure </a>
                                             </div> <!-- end col -->
                                         </div> <!-- end row-->

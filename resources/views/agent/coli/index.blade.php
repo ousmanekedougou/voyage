@@ -46,7 +46,7 @@
                                                 <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">{{ $client->name }}</a></h5>
                                                 <p class="text-muted mb-1"> <i class="fa fa-mobile"></i> {{ $client->phone }}</p>
                                                 
-                                                <p class="text-muted mb-1 font-size-10"><i class="fa fa-mobile"></i> {{ $client->cni }} </p>
+                                                <p class="text-muted mb-1 font-size-10"><i class="bx bxs-wallet-alt"></i> {{ $client->cni }} </p>
                                               
                                             </div>
                                         </div>

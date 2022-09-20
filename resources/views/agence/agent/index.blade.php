@@ -73,7 +73,8 @@
                                                         <li class="list-inline-item me-3">
                                                             <!-- <a href=""><i class="bx bx-block me-1"></i></a> -->
                                                             <div class="form-check form-switch mb-3" dir="ltr">
-                                                                <input class="form-check-input" type="checkbox"
+                                                                <input class="form-check-input" type="checkbox" 
+                                                                role="button" aria-disabled="true" data-bs-toggle="modal" data-bs-target="#subscribeModalRoleActivationAgent-{{ $agent->id }}"
                                                                     id="SwitchCheckSizesm" @if($agent->is_active == 1) checked @endif  data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$agent->id}}">
                                                                 <label class="form-check-label" for="SwitchCheckSizesm"></label>
                                                             </div>
@@ -91,52 +92,6 @@
                                 </div>
                             </div>
 
-                            <!-- Modal pour la desactivation de l'agence -->
-                                <!-- Static Backdrop Modal -->
-                                <div class="modal fade modal-sm modal-center" id="staticBackdrop-{{$agent->id}}" data-bs-backdrop="static"
-                                    data-bs-keyboard="false" tabindex="-1" role="dialog"
-                                    aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="staticBackdropLabel">
-                                                    @if($agent->is_active == 1)
-                                                        <span class="text-danger">Desactivation d'agent</span>
-                                                    @else
-                                                        <span class="text-success">Activation d'agent</span>
-                                                    @endif
-                                                </h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                @if($agent->is_active == 1)
-                                                    <p class="text-danger">Etse vous sure de desactiver {{ $agent->name }}</p>
-                                                @else
-                                                    <p class="text-primary">Etse vous sure d'activer {{ $agent->name }}</p>
-                                                @endif
-                                            </div>
-                                            <div class="modal-footer">
-                                                <form action="{{ route('agence.agent.update',$agent->id) }}" method="post">
-                                                    {{csrf_field()}}
-                                                    {{method_field('PUT')}}
-                                                        <input type="hidden" name="is_active" value="{{$agent->is_active}}">
-
-                                                    <button type="reset" class="btn btn-light"
-                                                        data-bs-dismiss="modal">Ferner</button>
-                                                    <button type="submit"
-                                                    @if($agent->is_active == 1)
-                                                        class="btn btn-danger">Desactiver
-                                                    @else
-                                                        class="btn btn-success">Activer
-                                                    @endif
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            <!-- Fin du modal pour la desactivation de l'agence -->
                         @endforeach
                     </div>
                     
@@ -271,6 +226,58 @@
                 </div> 
             @endforeach
             <!-- Fin du modal pour la presence du client -->
+
+
+            @foreach($agents as $agent)
+            <div class="modal modal-xs fade" id="subscribeModalRoleActivationAgent-{{$agent->id}}" tabindex="-1" aria-labelledby="subscribeModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header border-bottom-0">
+                            
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="text-center mb-4">
+
+                                <div class="row justify-content-center">
+                                    <div class="col-xl-10">
+                                        <h5 class="modal-title mb-4" id="staticBackdropLabel">
+                                            @if($agent->is_active == 1)
+                                                <span class="text-default">Desactivation d'agent</span>
+                                            @else
+                                                <span class="text-default">Activation d'agent</span>
+                                            @endif
+                                        </h5>
+                                        @if($agent->is_active == 1)
+                                            <p class="text-default font-size-14 mb-3">Etse vous sure de desactiver {{ $agent->name }}</p>
+                                        @else
+                                            <p class="text-default font-size-14 mb-3">Etse vous sure d'activer {{ $agent->name }}</p>
+                                        @endif
+
+                                        <div class="input-group bg-white rounded text-center" style="text-align:center;">
+                                            <form method="post" action="{{ route('agence.agent.update',$agent->id) }}"  style="display:block;text-align:center;width:100%;">
+                                                {{csrf_field()}}
+                                                    {{method_field('PUT')}}
+                                                         <input type="hidden" name="is_active" value="{{$agent->is_active}}">
+
+                                                <button type="submit"  style="margin-left: 70px;margin-right:20px;" class="@if($agent->is_active == 1) btn btn-danger btn-xs @else btn btn-success btn-xs @endif" >
+                                                    @if($agent->is_active == 1)
+                                                        Desactiver
+                                                    @else
+                                                        Activer
+                                                    @endif
+                                                    </button> 
+                                                <button type="button" class="btn btn-danger btn-xs" data-bs-dismiss="modal" aria-label="Close"> x Anuller</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+            @endforeach
 
              
 

@@ -37,6 +37,12 @@
                         @endif
 
                         @if(Auth::guard('agence')->user())
+                            <li>
+                                <a href="" class="waves-effect">
+                                    <i class="bx bx-food-menu"></i>
+                                    <span key="t-file-manager">Presentation</span>
+                                </a>
+                            </li>
                             <!-- La partie des agence -->
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -194,7 +200,7 @@
                                 <a href="{{ route('customer.colis.index') }}" class="waves-effect">
                                     <i class="fa fa-suitcase-rolling"></i>
                                     <span class="badge rounded-pill bg-success float-end" key="t-new">New</span>
-                                    <span key="t-file-manager">Colis</span>
+                                    <span key="t-file-manager">Colis Evoyer</span>
                                 </a>
                             </li>
                             <li>
