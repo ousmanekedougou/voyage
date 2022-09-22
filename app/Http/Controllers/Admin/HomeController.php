@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Agence;
 use App\Models\Admin\Bagage;
 use App\Models\Admin\BagageClient;
 use App\Models\User\Client;
@@ -40,8 +41,8 @@ class HomeController extends Controller
     public function index()
     {   
         if ($this->middleware(['IsAdmin'])) {
-            $agences = User::where('is_admin',2)->orderBy('id','DESC')->paginate(9);
-            $user = Auth::user();
+            $agences = Agence::orderBy('id','DESC')->paginate(9);
+            $user = Auth::guard('web')->user();
             $siegeCount = Siege::all();
             $newCount = Notify::all();
             $regions = Region::where('status',1)->get();
