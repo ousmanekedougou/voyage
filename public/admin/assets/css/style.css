@@ -20,6 +20,25 @@
         height: 0px;
 
     }
+
+    .navbar-admin-mobile-show{
+        display: flex;
+        visibility: hidden;
+        width: 0px;
+        height: 0px;
+    }
+    .show-logo-toucki{
+        visibility: hidden;
+        opacity: 0;
+        z-index: 0;
+        width: 0px;
+        height: 0px;
+   }
+   .show-logo-a-toucki{
+    visibility: visible;
+    opacity: 1;
+    z-index: 1;
+   }
  @media only screen and (max-width:1000px) {
      .row_pricipal{
          padding-top: 35px;
@@ -157,8 +176,77 @@
         flex-direction: column;
         flex-wrap: wrap;
    }
+
+  
    
  }
+
+.button-client-bar{
+    visibility: visible;
+    opacity: 1;
+}
+ /* Pour le admin client  */
+ @media only screen and (max-width:1000px) {
+    .show-logo-toucki{
+    visibility: visible;
+    opacity: 1;
+    z-index: 1;
+    background-color: none;
+    position: absolute;
+    top: -10px;
+   }
+   .show-brand-box-bg{
+    background: white !important;
+    width: 0px;
+    height: 0px;
+   }
+   .show-logo-a-toucki{
+    visibility: hidden;
+    opacity: 0;
+    z-index: 0;
+    width: 0px;
+    height: 0px;
+   }
+   .button-client-bar{
+    visibility: hidden;
+    opacity: 0;
+    width: 0px;
+    height: 0px;
+    }
+
+    .navbar-admin-mobile-show{
+        padding-top: 8px;
+        display: flex;
+        margin-left: -45px;
+        visibility: visible;
+        width: 100%;
+        height: auto;
+    }
+    .navbar-admin-mobile-show .nav-item{
+        list-style: none;
+        color: #74788d;
+    }
+    .navbar-admin-mobile-show .nav-item a{
+        color: #74788d;
+    }
+    
+    .navbar-admin-mobile-show .drop-down-mobile  {
+        position: absolute;
+        right: 0;
+        /* top: 10px; */
+        margin-top: -8px;
+        margin-right: 20px;
+    }
+    .nav-item .nav-link.active{color:#556ee6}
+    .navbar-admin-mobile-show .drop-down-mobile .dropdown .dropdown-menu{
+        position: absolute;
+        right: 0;
+    }
+    .navbar-admin-mobile-show .nav-item .fa-fa-item{
+        font-size: 15px;
+    }
+ }
+ 
 
 
 

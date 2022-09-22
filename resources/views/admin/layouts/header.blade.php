@@ -2,7 +2,7 @@
             <div class="navbar-header">
                 <div class="d-flex">
                     <!-- LOGO -->
-                    <div class="navbar-brand-box">
+                    <div class="navbar-brand-box @if(Auth::guard('client')->user()) show-brand-box-bg @endif">
                         @if(Auth::guard('agent')->user())
                             <a href="{{ route('agent.home') }}" class="logo logo-dark">
                                 <span class="logo-sm">
@@ -121,8 +121,14 @@
                             </a>
                         @endif
 
-                        @if(Auth::guard('client')->user())                        
-                            <a href="{{ route('customer.home') }}" class="logo logo-dark">
+                        @if(Auth::guard('client')->user()) 
+                            <a href="{{ route('customer.home') }}" class="logo logo-light show-logo-toucki">
+                                <span class="logo-sm">
+                                    <img src="{{asset('admin/assets/images/logo-dark.png')}}" alt="" height="19" class="logo logo-light">    
+                                </span>
+                            </a>
+                                                   
+                            <a href="{{ route('customer.home') }}" class="logo logo-dark show-logo-a-toucki">
                                 <span class="logo-sm">
                                     @if(Auth::guard('client')->user()->image == null)
                                     <img src="{{ asset('admin/assets/images/users/profil.jpg') }}" alt="" height="22">
@@ -140,7 +146,7 @@
                                 </span>
                             </a>
 
-                            <a href="{{ route('customer.home') }}" class="logo logo-light">
+                            <a href="{{ route('customer.home') }}" class="logo logo-light show-logo-a-toucki">
                                 <span class="logo-sm">
                                     @if(Auth::guard('client')->user()->image == null)
                                     <img src="{{ asset('admin/assets/images/users/profil.jpg') }}" alt="" height="22">
@@ -157,12 +163,37 @@
                                     @endif
                                 </span>
                             </a>
+
+                            <ul class="navbar-admin-mobile-show" >
+                                <li class="nav-item">
+                                    <a class="nav-link {{ set_active_roote('customer.client.show') }} " href="{{ route('customer.client.show') }}"><i class="fa fa-ticket-alt fa-fa-item"></i></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ set_active_roote('customer.bagage.index') }} " href="{{ route('customer.bagage.index') }}"><i class="fa fa-luggage-cart fa-fa-item"></i></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ set_active_roote('customer.colis.index') }} " href="{{ route('customer.colis.index') }}"><i class="fa fa-suitcase-rolling fa-fa-item"></i> </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link {{ set_active_roote('setting.index') }} " href=""><i class="bx bx-map fa-fa-item"></i></a>
+                                </li>
+
+                            </ul>
                         @endif
                     </div>
+                    @if(!Auth::guard('client')->user()) 
                     <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect"
                         id="vertical-menu-btn">
                         <i class="fa fa-fw fa-bars"></i>
                     </button>
+                    @endif
+
+                    @if(Auth::guard('client')->user()) 
+                        <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect button-client-bar"
+                            id="vertical-menu-btn">
+                            <i class="fa fa-fw fa-bars"></i>
+                        </button>
+                    @endif
                     
                     {{--
                     <!-- App Search-->
