@@ -26,7 +26,6 @@ class CreateCustomersTable extends Migration
             $table->string('slug')->unique()->nullable();
             $table->string('image')->nullable();
             $table->string('password');
-            $table->string('image');
             $table->timestamps();
         });
     }
