@@ -13,9 +13,16 @@
          width: 0px;
          height: 0px;
      }
- @media only screen and (max-width:700px) {
+    .navbar-mobile-show{
+        display: flex;
+        visibility: hidden;
+        width: 0px;
+        height: 0px;
+
+    }
+ @media only screen and (max-width:1000px) {
      .row_pricipal{
-         padding-top: 30px;
+         padding-top: 35px;
      }
      .row_pricipal .card_show{
          width: 100%;
@@ -108,8 +115,52 @@
         flex-wrap: nowrap;
         width: 100%;
      }
+    .navbar-mobile-show{
+        display: flex;
+        margin-left: -45px;
+        visibility: visible;
+        width: 100%;
+        height: auto;
+    }
+    .navbar-mobile-show .nav-item{
+        list-style: none;
+        color: #74788d;
+    }
+    .navbar-mobile-show .nav-item a{
+        color: #74788d;
+    }
+    .navbar-logo{
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+    .navbar-mobile-show .drop-down-mobile  {
+        position: absolute;
+        right: 0;
+        /* top: 10px; */
+        margin-top: -8px;
+        margin-right: 20px;
+    }
+    .nav-item .nav-link.active{color:#556ee6}
+    .navbar-mobile-show .drop-down-mobile .dropdown .dropdown-menu{
+        position: absolute;
+        right: 0;
+    }
+    .navbar-mobile-show .nav-item .fa-fa-item{
+        font-size: 15px;
+    }
+    .coli-h1{
+        margin-top: 50px;
+    }
+
+   .setting-show{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+   }
    
  }
+
+
 
  #topBtn{
     position: fixed;

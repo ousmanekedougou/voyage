@@ -9,8 +9,8 @@
     <section class="section hero-section bg-ico-hero" id="home">
         <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
-            <div class="row align-items-center" style="margin-top: -70px;">
-                <div class="">
+            <div class="row align-items-center row_pricipal" style="margin-top: -70px;">
+                <div class="col-lg-offset-8 card_show">
                     <div class="text-white-50">
                         <h1 class="text-white font-weight-semibold mb-3 hero-title">Vérifiez toutes vos résérvations</h1>
                         <p class="font-size-16 text-white">

@@ -6,8 +6,8 @@
     <section class="section hero-section bg-ico-hero" id="home">
         <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
-            <div class="row align-items-center" style="margin-top: -70px;">
-                <div class="col-lg-offset-8">
+            <div class="row align-items-center row_pricipal" style="margin-top: -70px;">
+                <div class="col-lg-offset-8 card_show">
                     <div class="text-white-50">
                         <h1 class="text-white font-weight-semibold mb-3 hero-title text-center">Yombalal Toucki Thi Biir Réwmi</h1>
                         <p class="font-size-16 text-white text-center">
@@ -42,7 +42,7 @@
                     <div class="vertical-nav">
                         <div class="row">
                             <div class="col-lg-2 col-sm-4">
-                                <div class="nav flex-column nav-pills flex-column-mobile" role="tablist">
+                                <div class="nav flex-column nav-pills flex-column-mobile setting-show" role="tablist">
                                     <a class="nav-link active" id="v-pills-gen-ques-tab" data-bs-toggle="pill"
                                         href="#v-pills-gen-ques" role="tab">
                                         <i class="bx bx bx-user nav-icon d-block mb-2"></i>
