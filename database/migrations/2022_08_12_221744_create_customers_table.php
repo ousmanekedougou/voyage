@@ -18,14 +18,15 @@ class CreateCustomersTable extends Migration
             $table->string('name');
             $table->string('email')->unique()->nullable();
             $table->string('phone')->unique();
-            $table->string('cni')->nullable();
+            $table->string('cni')->nullable()->unique();
             $table->string('confirmation_token')->nullable();
             $table->integer('region_id');
             $table->integer('is_admin');
             $table->integer('is_active')->default(0);
-            $table->integer('slug')->unique()->nullable();
+            $table->string('slug')->unique()->nullable();
             $table->string('image')->nullable();
             $table->string('password');
+            $table->string('image');
             $table->timestamps();
         });
     }
