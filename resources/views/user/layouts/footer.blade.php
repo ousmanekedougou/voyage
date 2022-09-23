@@ -267,12 +267,6 @@
     </div><!-- /.modal --> 
 
 
-
-
-    
-
-
-            
     @section('footerSection')
 
     <script>
@@ -290,6 +284,7 @@
                 $('html ,body').animate({scrollTop : 0},2000);
             });
         });
+      
     </script>
     @show
           

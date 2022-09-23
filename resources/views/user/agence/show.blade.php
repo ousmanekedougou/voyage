@@ -34,6 +34,58 @@
     <section class="section p-0 section-siege-mobile">
         <div class="container">
             <div class="currency-price">
+                <div class="row section-agence-information">
+                    <div class="card">
+                        <div class="card-body">
+
+                            <h4 class="card-title mb-4">{{$agence->name}}</h4>
+                            <div id="task-1">
+                                <div id="upcoming-task" class="pb-1 task-list">
+                                    <div class="card task-box" id="uptask-1">
+                                        <div class="card-body">
+                                            <div>
+                                                <h5 class="font-size-15"><a href="javascript: void(0);" class="text-dark" id="task-name">Nous comptons {{$sieges->count()}} sieges</a></h5>
+                                                <p class="text-muted mb-4">14 Oct, 2019</p>
+                                            </div>
+                                            <div class="avatar-group float-start task-assigne">
+                                                <div class="avatar-group-item">
+                                                    <a href="javascript: void(0);" class="d-inline-block" value="member-4">
+                                                        <img src="assets/images/users/avatar-4.jpg" alt="" class="rounded-circle avatar-xs">
+                                                    </a>
+                                                </div>
+                                                <div class="avatar-group-item">
+                                                    <a href="javascript: void(0);" class="d-inline-block" value="member-5">
+                                                        <img src="assets/images/users/avatar-5.jpg" alt="" class="rounded-circle avatar-xs">
+                                                    </a>
+                                                </div>
+                                                <div class="avatar-group-item">
+                                                    <a href="javascript: void(0);" class="d-inline-block" value="member-6">
+                                                        <img src="assets/images/users/avatar-2.jpg" alt="" class="rounded-circle avatar-xs">
+                                                    </a>
+                                                </div>
+                                                <div class="avatar-group-item">
+                                                    <a href="javascript: void(0);" class="d-inline-block">
+                                                        <div class="avatar-xs">
+                                                            <span class="avatar-title rounded-circle bg-info text-white font-size-16">
+                                                                {{$agence->agents->count()}}
+                                                            </span>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                            <div class="text-end">
+                                                <h5 class="font-size-15 mb-1" id="task-budget">{{$agence->agents->count()}}</h5>
+                                                <p class="mb-0 text-muted">Agents</p>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     @foreach($sieges as $siege)
                     <div class="col-xl-4 col-sm-6">
