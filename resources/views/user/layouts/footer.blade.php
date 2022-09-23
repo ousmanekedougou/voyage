@@ -1,7 +1,7 @@
      <!-- Footer start -->
     <footer class="landing-footer">
         <div class="container">
-
+            {{--
             <div class="row">
                 <div class="col-lg-3 col-sm-6">
                     <div class="mb-4 mb-lg-0">
@@ -59,7 +59,7 @@
             <!-- end row -->
 
             <hr class="footer-border my-5">
-
+            --}}
             <div class="row">
                 <div class="col-lg-6">
                     <div class="mb-4">

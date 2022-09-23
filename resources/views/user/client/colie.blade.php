@@ -3,7 +3,7 @@
 @section('main-content')
 
      <!-- hero section start -->
-    <section class="section hero-section bg-ico-hero" id="home">
+    <section class="section hero-section bg-ico-hero section-responsive" id="home">
         <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
             <div class="row align-items-center">

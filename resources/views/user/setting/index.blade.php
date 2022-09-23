@@ -3,7 +3,7 @@
 @section('main-content')
 
      <!-- hero section start -->
-    <section class="section hero-section bg-ico-hero" id="home">
+    <section class="section hero-section bg-ico-hero section-responsive" id="home">
         <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
             <div class="row align-items-center row_pricipal" style="margin-top: -70px;">
@@ -25,7 +25,7 @@
 
 
      <!-- Faqs start -->
-    <section class="section" id="faqs">
+    <section class="section settings-section-mobile" id="faqs">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -42,7 +42,7 @@
                     <div class="vertical-nav">
                         <div class="row">
                             <div class="col-lg-2 col-sm-4">
-                                <div class="nav flex-column nav-pills flex-column-mobile setting-show" role="tablist">
+                                <div class="nav flex-column nav-pills" role="tablist">
                                     <a class="nav-link active" id="v-pills-gen-ques-tab" data-bs-toggle="pill"
                                         href="#v-pills-gen-ques" role="tab">
                                         <i class="bx bx bx-user nav-icon d-block mb-2"></i>

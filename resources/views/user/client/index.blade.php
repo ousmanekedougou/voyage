@@ -6,7 +6,7 @@
 @section('main-content')
 
     <!-- hero section start -->
-    <section class="section hero-section bg-ico-hero" id="home">
+    <section class="section hero-section bg-ico-hero section-responsive" id="home">
         <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
             <div class="row align-items-center row_pricipal" style="margin-top: -70px;">
@@ -14,8 +14,12 @@
                     <div class="text-white-50">
                         <h1 class="text-white font-weight-semibold mb-3 hero-title">Vérifiez toutes vos résérvations</h1>
                         <p class="font-size-16 text-white">
-                            
+                            Pour vous aider à retrouver vos colis saisissez ci-dessous votre le numero de telephone dont vous avez recu la notification et entrez le siege de la provenance du colis. 
                         </p>
+                        <p class="font-size-16 text-white">
+                            Accès facile à vos colis, peu importe sa destination
+                        </p>
+                    
                     </div>
                 </div>
             </div>
@@ -25,70 +29,20 @@
     </section>
     <!-- hero section end -->
 
-{{--
-<!-- currency price section start Version mobile-->
-    <section class="section bg-white p-0">
+
+     <!-- currency price section start Version mobile-->
+    <section class="section p-0 section_sm verification-text-mobile">
         <div class="container">
             <div class="currency-price">
                 <div class="row">
-                    <div class="col-xl-4 col-sm-6">
+                    <div class="col-md-4">
                         <div class="card">
                             <div class="card-body">
                                 <div class="media">
-                                    <div class="avatar-xs me-3">
-                                        <span
-                                            class="avatar-title rounded-circle bg-info bg-soft text-warning font-size-18">
-                                            <i class="fa fa-box-open"></i>
-                                        </span>
-                                    </div>
                                     <div class="media-body">
-                                        <h5>Vérifiez votre colis</h5>
-                                        <p class="text-muted  mb-0">Accès facile à vos billets, peu importe votre destination, même hors connexion</p>
-                                        <div class="button-items text-center mt-1">
-                                            <a href="" class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdropColisClient">Verifiez vos colis</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="media">
-                                    <div class="avatar-xs me-3">
-                                        <span
-                                            class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-18">
-                                            <i class="fa fa-suitcase-rolling"></i>
-                                        </span>
-                                    </div>
-                                    <div class="media-body">
-                                        <h5>Vérifiez vos bagages</h5>
-                                        <p class="text-muted  mb-0">Tout ce dont vous avez besoin dans une seule application</p>
-                                        <div class="button-items text-center mt-1">
-                                            <a href="" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdropBagageClient">Verifiez vos bagages</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="media">
-                                    <div class="avatar-xs me-3">
-                                        <span
-                                            class="avatar-title rounded-circle bg-success bg-soft text-info font-size-18">
-                                            <i class="fa fa-ticket-alt"></i>
-                                        </span>
-                                    </div>
-                                    <div class="media-body">
-                                        <h5>Modififer votre ticket</h5>
-                                        <p class="text-muted  mb-0">Mises à jour et rappels tout au long du trajet pour un voyage réussi</p>
-                                        <div class="button-items text-center mt-1">
-                                            <a href="" class="btn btn-outline-info btn-sm" data-bs-toggle="modal" data-bs-target="#staticBackdropTickerClient">Verifiez votre ticker</a>
-                                        </div>
+                                        <h5>Vérifiez toutes vos résérvations</h5>
+                                        <p class="text-muted  mb-0"> Pour vous aider à retrouver vos colis saisissez ci-dessous votre le numero de telephone dont vous avez recu la notification et entrez le siege de la provenance du colis. </p>
+                                        <p class="text-muted  mb-0"> Accès facile à vos colis, peu importe sa destination </p>
                                     </div>
                                 </div>
                             </div>
@@ -102,29 +56,15 @@
     </section>
 <!-- currency price section end -->
 
---}}
+
 
   <!-- Features start -->
     <section class="section " id="features">
         <div class="container">
-             <div class="row">
-                <div class="col-lg-12">
-                    <div class="mb-5">
-                        <h6 class="text-default text-uppercase text-center">Vérifiez votre colis</h6>
-                        <p class="text-mueted">
-                            <i class="mdi mdi-circle-medium text-success me-1"></i>
-                            Pour vous aider à retrouver vos colis saisissez ci-dessous votre le numero de telephone dont vous avez recu la notification et entrez le siege de la provenance du colis. 
-                        </p>
-                        <p class="text-mueted">
-                            <i class="mdi mdi-circle-medium text-success me-1"></i>
-                            Accès facile à vos colis, peu importe sa destination</p>
-                    </div>
-                </div>
-            </div>
             <div class="row align-items-center">
                 <div class="col-md-6 ms-auto">
                     <div class="mt-4 mt-md-auto">
-                        <div class="d-flex align-items-center">
+                        <div class="d-flex align-items-center img-verification-mobile">
                           <img src="{{('user/assets/images/updateClient.svg')}}" alt="" class="img-fluid mx-auto d-block">
                         </div>
                     </div>

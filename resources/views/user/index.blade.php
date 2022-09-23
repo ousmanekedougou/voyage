@@ -245,7 +245,7 @@
                         </p>
 
                         <div class="button-items mb-3">
-                            <a href="{{ route('setting.index') }}" class="btn btn-primary">Comment ça marche</a>
+                            <a href="{{ route('client.register') }}" class="btn btn-outline-primary">Creer votre copmte client</a>
                             <a href="{{ route('agence.create') }}" class="btn btn-outline-success">Creer votre compte agence</a>
                         </div> 
                     </div>

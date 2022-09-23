@@ -44,7 +44,7 @@ class AgenceController extends Controller
     }
 
     public function about($sluge){
-        $slug = User::where('slug',$sluge)->first();
+        $slug = Agence::where('slug',$sluge)->first();
         return view('user.agence.about',compact('slug'));
     }
 
@@ -105,19 +105,18 @@ class AgenceController extends Controller
         if($sieges->count() > 0){
             return view('user.agence.show',compact('sieges','agence','buses'));
         }else {
-            Toastr::warning('L\'agence '.$agence->name_agence.' n\'a pas encore de siège', 'Sieges', ["positionClass" => "toast-top-right"]);
+            Toastr::warning('L\'agence '.$agence->name.' n\'a pas encore de siège', 'Sieges', ["positionClass" => "toast-top-right"]);
             return back();
         }
     }
 
     public function region($slug){
         $region = Region::where('slug',$slug)->first();
-        $agences = User::where('is_admin',2)
-        ->where('is_active',1)
+        $agences = Agence::where('is_active',1)
         ->where('region_id',$region->id)
         ->orderBy('id','ASC')->paginate(12);
         if ($agences->count() > 0) {
-            $agenceAll = User::where('is_admin',2)->where('is_active',1)->orderBy('id','ASC')->get();
+            $agenceAll = Agence::where('is_active',1)->orderBy('id','ASC')->get();
             $agenceCount = $agenceAll->count(); 
 
             $getip = UserSystemInfoHelper::get_ip();
@@ -138,7 +137,7 @@ class AgenceController extends Controller
         ]);
         $q = request()->input('recherche');
         if ($q != null ) {
-            $agence = User::where('name_agence',$q)->where('is_admin',2)->where('is_active',1)->first();
+            $agence = Agence::where('name',$q)->where('is_active',1)->first();
             if ($agence != null) {
                 return redirect()->route('agence.show',$agence->slug);
             }else {

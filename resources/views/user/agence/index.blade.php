@@ -9,7 +9,7 @@
  </style>
 @section('main-content')
    <!-- hero section start -->
-    <section class="section hero-section bg-ico-hero bg-agence"  id="home">
+    <section class="section hero-section bg-ico-hero bg-agence section-responsive" id="home">
         <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
             <div class="row align-items-center row_pricipal" style="margin-top: -70px;" >

@@ -9,7 +9,7 @@
 @section('main-content')
 
     <!-- hero section start -->
-    <section class="section hero-section bg-ico-hero"  id="home">
+    <section class="section hero-section bg-ico-hero section-responsive"  id="home">
         <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
             <div class="row align-items-center row_pricipal" style="margin-top: -70px;" >
@@ -31,7 +31,7 @@
 
 
     <!-- currency price section start-->
-    <section class="section p-0">
+    <section class="section p-0 section-siege-mobile">
         <div class="container">
             <div class="currency-price">
                 <div class="row">
