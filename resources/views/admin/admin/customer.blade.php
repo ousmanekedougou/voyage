@@ -14,13 +14,6 @@
                         <div class="col-12">
                             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                                 <h4 class="mb-sm-0 font-size-18">Les utilisateurs</h4>
-
-                                <div class="page-title-right">
-                                    <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item"><a href="javascript: void(0);" class="btn btn-primary waves-effect waves-light text-white" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Ajouter une agence</a></li>
-                                    </ol>
-                                </div>
-
                             </div>
                         </div>
                     </div>
@@ -358,18 +351,21 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                    @if($user->is_active == 1)
+                                @if($user->is_active == 1)
                                     <p class="text-danger">Etse vous sure de desactiver {{ $user->name }}</p>
                                 @else
                                     <p class="text-primary">Etse vous sure d'activer {{ $user->name }}</p>
                                 @endif
                             </div>
                             <div class="modal-footer">
-                                <form action="{{ route('admin.agence.update',$user->id) }}" method="post">
+                                <form action="{{ route('admin.admin.updateCustomer',$user->id) }}" method="post">
                                     {{csrf_field()}}
                                     {{method_field('PUT')}}
-                                        <input type="hidden" name="is_active" value="{{$user->is_active}}">
-
+                                    @if($user->is_active == 1)
+                                        <input type="hidden" name="is_active" value="0">
+                                    @else
+                                        <input type="hidden" name="is_active" value="1">
+                                    @endif
                                     <button type="reset" class="btn btn-light"
                                         data-bs-dismiss="modal">Ferner</button>
                                     <button type="submit"

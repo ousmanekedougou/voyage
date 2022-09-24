@@ -59,6 +59,7 @@ Route::prefix('/admin')->name('admin.')->group(function()
 {
     Route::get('/home', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home');
     Route::resource('/admin', App\Http\Controllers\Admin\AdminController::class);
+    Route::put('/admin/updateCustomer/{id}', [App\Http\Controllers\Admin\AdminController::class,'updateCustomer'])->name('admin.updateCustomer'); 
     Route::resource('/agence', App\Http\Controllers\Admin\AgenceController::class);
     Route::resource('/partenaire', App\Http\Controllers\Admin\PartController::class);
     Route::resource('/contact',App\Http\Controllers\Admin\ContactController::class);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Agence;
 use App\Models\User;
 use App\Models\User\Customer;
 use Brian2694\Toastr\Facades\Toastr;
@@ -68,7 +69,17 @@ class AdminController extends Controller
      */
     public function edit($id)
     {
-        //
+        
+    }
+
+       public function updateCustomer(Request $request,$id)
+    {
+        $update_admin = Customer::where('id',$id)->first();
+        $update_admin->is_active = $request->is_active;
+        $update_admin->confirmation_token = null;
+        $update_admin->save();
+        Toastr::success('Cet administrateur a ete modifier', 'Modification admin', ["positionClass" => "toast-top-right"]);
+        return back();
     }
 
     /**

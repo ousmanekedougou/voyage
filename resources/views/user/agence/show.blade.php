@@ -439,33 +439,31 @@
 @endsection
 
 @section('footerSection')
-<script src=" {{ asset('js/app.js') }} "></script>
-  <script src="{{asset('user/assets/build/js/intlTelInput.js')}}"></script>
-<script>
-    var input = document.querySelector("#phone");
-    window.intlTelInput(input, {
-      utilsScript: "user/assets/build/js/utils.js",
-    });
+    <script src=" {{ asset('js/app.js') }} "></script>
+    <script src="{{asset('user/assets/build/js/intlTelInput.js')}}"></script>
+    <script>
+        var input = document.querySelector("#phone");
+        window.intlTelInput(input, {
+        utilsScript: "user/assets/build/js/utils.js",
+        });
 
-    function validation(){
-		var phone = document.forms["myform"]["phone"];
-		var get_num_1 = String(phone.value).charAt(0);
-		var get_num_2 = String(phone.value).charAt(1);
-		var get_num_final = get_num_1+''+get_num_2;
-		var first_num = Number(get_num_final);
-		if (isNaN(phone.value)) {
-			alert('Votre numero de telephone est invalide');
-			return false;
-		}else if(phone.value.length != 9){
-			alert('Votre numero de telphone doit etre de 9 caracter exp: 77xxxxxxx');
-			return false;
-		}else if(first_num != 77 & first_num != 78 & first_num != 76 & first_num != 70 & first_num != 75  ){
-			alert('Votre numero de telphone doit commencer par un (77 ou 78 ou 76 ou 70 ou 75)')
-			return false;
-		}
-		return true;
-	}
-</script>
-
-
+        function validation(){
+            var phone = document.forms["myform"]["phone"];
+            var get_num_1 = String(phone.value).charAt(0);
+            var get_num_2 = String(phone.value).charAt(1);
+            var get_num_final = get_num_1+''+get_num_2;
+            var first_num = Number(get_num_final);
+            if (isNaN(phone.value)) {
+                alert('Votre numero de telephone est invalide');
+                return false;
+            }else if(phone.value.length != 9){
+                alert('Votre numero de telphone doit etre de 9 caracter exp: 77xxxxxxx');
+                return false;
+            }else if(first_num != 77 & first_num != 78 & first_num != 76 & first_num != 70 & first_num != 75  ){
+                alert('Votre numero de telphone doit commencer par un (77 ou 78 ou 76 ou 70 ou 75)')
+                return false;
+            }
+            return true;
+        }
+    </script>
 @endsection
