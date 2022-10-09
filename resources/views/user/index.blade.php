@@ -311,7 +311,7 @@
                     <div class="mt-4 mt-md-auto">
                         <div class="d-flex align-items-center mb-2">
                            {{--<div class="features-number font-weight-semibold display-4 me-3">02</div>--}}
-                            <h4 class="mb-0">L’application tout-en-un des voyageurs</h4>
+                            <h4 class="mb-0">L'application incontournable des voyageurs</h4>
                         </div>
                         <p class="text-muted">
                             Téléchargez gratuitement l'application TouCki pour bénéficier d’une expertise de qualité et organiser de vos voyages en toute confiance.
@@ -329,8 +329,8 @@
                     <div>
                         <img src="{{('user/assets/images/updateClient.svg')}}" alt="" class="img-fluid mx-auto d-block">
                         <div class="button-items mb-3">
-                            <a href="" class="btn btn-primary">Telecharger sur Play Store</a>
-                            <a href="" class="btn btn-outline-success">Telecharger sur App Store</a>
+                            <a href="" class="btn btn-primary"> <i class="bx bxl-play-store"></i> Telecharger sur Play Store</a>
+                            <a href="" class="btn btn-outline-success"> <i class="bx bxl-apple"></i> Telecharger sur App Store</a>
                         </div> 
                     </div>
                 </div>
@@ -342,47 +342,6 @@
     <!-- Features end -->
 
 
-      <!-- Roadmap start -->
-    <section class="section bg-white" id="roadmap">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-12">
-                    <div class="text-center mb-3 p-4">
-                        <div class="small-title">LE MONDE DE TouCki</div>
-                        <h1 class="text-center">Recevez des réductions exclusives et des mises à jour de voyage directement dans votre boîte de réception.</h1>
-                        <form action="{{ route('contact.post') }}" method="post" class="">
-                            @csrf
-                            <div class="row text-center mt-4">
-                                <div class="col-md-2"></div>
-                                <div class="col-md-8">
-                                    <div class="row">
-                                        <div class="col-md-9">
-                                            <div class="mb-3 newsinput-mobile">
-                                                <input  type="email" id="email" class="form-control @error('email') is-invalid @enderror bg-default p-3" name="email" value="{{ old('email') }}" required autocomplete="email" parsley-type="email"
-                                                    placeholder="E-Mail de notification" />
-                                                    @error('email')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <button type="submit" style="width: 100%;" class="btn btn-outline-primary p-3">S'abonner</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                               
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <!-- end row -->
-
-        </div>
-        <!-- end container -->
-    </section>
-    <!-- Roadmap end -->
+    
            
 @endsection

@@ -1,3 +1,47 @@
+     
+       <!-- Roadmap start -->
+    <section class="section bg-white" id="roadmap">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12">
+                    <div class="text-center mb-3 p-4">
+                        <div class="small-title">LE MONDE DE TouCki</div>
+                        <h1 class="text-center">Recevez des réductions exclusives et des mises à jour de voyage directement dans votre boîte de réception.</h1>
+                        <form action="{{ route('contact.post') }}" method="post" class="">
+                            @csrf
+                            <div class="row text-center mt-4">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-8">
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <div class="mb-3 newsinput-mobile">
+                                                <input  type="email" id="email" class="form-control @error('email') is-invalid @enderror bg-default p-3" name="email" value="{{ old('email') }}" required autocomplete="email" parsley-type="email"
+                                                    placeholder="E-Mail de notification" />
+                                                    @error('email')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <button type="submit" style="width: 100%;" class="btn btn-outline-primary p-3"> <i class="bx bxs-bell"></i> S'abonner</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                               
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+
+        </div>
+        <!-- end container -->
+    </section>
+    <!-- Roadmap end -->
+     
      <!-- Footer start -->
     <footer class="landing-footer">
         <div class="container">
