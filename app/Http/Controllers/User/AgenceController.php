@@ -85,14 +85,10 @@ class AgenceController extends Controller
         $add_agence->password = Hash::make($request->password);
         $add_agence->save();
 
-        Notification::route('mail',Auth::user()->email)
-            ->notify(new RegisteredUser($add_agence));
+        // Notification::route('mail',Auth::user()->email)
+        //     ->notify(new RegisteredUser($add_agence));
 
-        $notifys = Notify::all();
-        foreach ($notifys as $notify) {
-            Notification::route('mail','ousmanelaravel@gmail.com')
-            ->notify(new Newsleter($notify));
-        }
+       
          Toastr::success('Votre agence a bien ete creer', 'Ajout agence', ["positionClass" => "toast-top-right"]);
         return back();
     }

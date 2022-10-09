@@ -97,7 +97,7 @@ class ClientController extends Controller
         return back();
     }
 
-     public function confirm($id , $token){
+    public function confirm($id , $token){
         define('ACTIVE',1);
         $user = Customer::where('id',$id)->where('confirmation_token',$token)->first();
         if ($user) {

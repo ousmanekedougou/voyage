@@ -1,4 +1,4 @@
-{{--
+
 <!doctype html>
 <html lang="en">
 <!-- Mirrored from themesbrand.com/skote/layouts/auth-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 23 Mar 2021 16:19:25 GMT -->
@@ -37,7 +37,7 @@
                                         </div>
                                     </div>
                                     <div class="col-5 align-self-end">
-                                        <img src="{{asset('admin/assets/images/bus.')}}" alt="" class="img-fluid">
+                                        <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" class="img-fluid">
                                     </div>
                                 </div>
                             </div>
@@ -46,7 +46,7 @@
                                     <a href="/" class="auth-logo-light">
                                         <div class="avatar-md profile-user-wid mb-4">
                                             <span class="avatar-title rounded-circle bg-light">
-                                                <img src="{{asset('user/assets/images/logo-light.svg')}}" alt="" class="rounded-circle" height="34">
+                                                <img src="{{asset('admin/assets/images/logo-light.svg')}}" alt="" class="rounded-circle" height="34">
                                             </span>
                                         </div>
                                     </a>
@@ -85,14 +85,14 @@
                                                 @enderror
                                             </div>
                                         </div>
-
+                                      {{--
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}  id="remember-check">
                                             <label class="form-check-label" for="remember-check">
                                                 Se souvenir de moi
                                             </label>
                                         </div>
-                                        
+                                      --}}
                                         <div class="mt-3 d-grid">
                                             <button class="btn btn-primary waves-effect waves-light" type="submit">Se Connecter</button>
                                         </div>
@@ -100,7 +100,7 @@
                                          
                                         @if (Route::has('password.request'))
                                             <div class="mt-4 text-center">
-                                                <a href="{{ route('password.request') }}" class="text-muted"><i class="mdi mdi-lock me-1"></i> J'ai oublier mon mot de passe ?</a>
+                                              <a href="{{ route('password.request') }}" class="text-muted"><i class="mdi mdi-lock me-1"></i> J'ai oublier mon mot de passe ?</a>
                                             </div>
                                          @endif
                                     </form>
@@ -108,7 +108,7 @@
             
                             </div>
                         </div>
-
+                
                     </div>
                 </div>
             </div>
@@ -128,107 +128,6 @@
 
 <!-- Mirrored from themesbrand.com/skote/layouts/auth-login.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 23 Mar 2021 16:19:25 GMT -->
 </html>
---}}
 
 
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-  <meta charset="UTF-8" />
-  <link rel="shortcut icon" href="{{asset('admin/assets/images/bus.svg')}}">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="{{ asset('user/assets/css/login2.css') }}" />
-  <title>TouCki|Connexion</title>
-</head>
-
-<body>
-  <div class="container">
-    <div class="forms-container">
-      <div class="signin-signup">
-        <form action="{{ route('login') }}" method="post" class="sign-in-form">
-          @csrf
-          <h2 class="title">Se Connécter</h2>
-          <div class="input-field">
-            <i class="fas fa-user"></i>
-            <input class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus id="username" placeholder="Entrez votre adresse email" />
-          </div>
-           <p style="width: 70%;font-size:11px;color:red;">
-              @error('email')
-                <span class="invalid-feedback" role="alert" style="width: 100%;">
-                    {{ $message }}
-                </span>
-            @enderror
-           </p>
-          <div class="input-field">
-            <i class="fas fa-lock"></i>
-            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Entrez votre mot de passe" aria-label="Password" aria-describedby="password-addon" />
-          </div>
-            @error('password')
-              <p style="width: 70%;font-size:11px;color:red;">
-                <span class="invalid-feedback" role="alert" >
-                  {{ $message }}
-              </span>
-              </p>
-            @enderror
-          <input type="submit" value="Connexion" name="signin" class="btn solid"/>
-          <p style="display: flex;justify-content: center;align-items: center;margin-top: 20px;"><a href="{{ route('password.request') }}" style="color: #4590ef;"> <i style="margin-right:4px;" class="fas fa-unlock"></i> Mot de passe oublié ? </a></p>
-        </form>
-
-        <form action="" class="sign-up-form" method="post">
-          <h2 class="title">Sign up</h2>
-          <div class="input-field">
-            <i class="fas fa-user"></i>
-            <input type="text" placeholder="Full Name" name="signup_full_name" value="" required />
-          </div>
-          <div class="input-field">
-            <i class="fas fa-envelope"></i>
-            <input type="email" placeholder="Email Address" name="signup_email" value="" required />
-          </div>
-          <div class="input-field">
-            <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Password" name="signup_password" value="" required />
-          </div>
-          <div class="input-field">
-            <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Confirm Password" name="signup_cpassword" value="" required />
-          </div>
-          <input type="submit" class="btn" name="signup" value="Sign up" />
-        </form>
-      </div>
-    </div>
-
-    <div class="panels-container">
-      <div class="panel left-panel">
-        <div class="content">
-          <h3>TouCki cii Sénégal</h3>
-          <p>
-            Nous sommes convaincus que le digital est un facteur de croissance et de survie pour toutes entreprises quels que soient la taille et le secteur, c’est pourquoi nous nous engageons à vous accompagner à maximiser votre performance et vos résultats grâce à la digitalisation. 
-          </p>
-          <!-- <button class="btn transparent" id="sign-up-btn">
-            Creer un compte agence
-          </button> -->
-        </div>
-        <img src="{{asset('admin/assets/images/bus.svg')}}" class="image" alt="" />
-      </div>
-      <div class="panel right-panel">
-        <div class="content">
-          <h3>One of us ?</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-            laboriosam ad deleniti.
-          </p>
-          <button class="btn transparent" id="sign-in-btn">
-            Sign in
-          </button>
-        </div>
-        <img src="{{asset('user/assets/images/register.svg')}}" class="image" alt="" />
-      </div>
-    </div>
-  </div>
-
-  <script src="{{asset('user/assets/js/pages/login2.js')}}"></script>
-  <script src="app.js"></script>
-</body>
-
-</html>

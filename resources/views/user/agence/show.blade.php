@@ -107,11 +107,11 @@
                                         <p class="text-muted  mb-1"><i class="fa fa-envelope"></i> {{ $siege->email }} </p>
                                         <p class="text-muted  mb-2"><i class="fa fa-mobile"></i> {{ $siege->phone }} </p>
                                         <ul class="list-inline mb-0 text-center">
-                                            {{--
+                                            
                                             <li class="list-inline-item me-3">
                                                 <a href="#" class="badge bg-success p-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$siege->id}}"> <i class="fa fa-user-plus"></i> S'inscrire</a>
                                             </li>
-                                            --}}
+                                            
                                             <li class="list-inline-item me-3">
                                                     <a href="#" class="badge bg-primary p-1" data-bs-toggle="modal" data-bs-target="#staticBackdropEmailAgence-{{$siege->id}}"> <i class="fa fa-address-card"></i> Contacter ce siege</a>
                                             </li>
@@ -151,6 +151,7 @@
                                     @csrf
                                     <div class="row">
                                         <div class="col-xl-12">
+                                            {{--
                                             <div class="mb-3">
                                                 <label class="form-label">Prenom et nom</label>
                                                 <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name"
@@ -174,7 +175,10 @@
                                                         @enderror
                                                 </div>
                                             </div>
-
+                                            --}}
+                                            <div class="mb-3">
+                                                <h6 class="text-center">Vous devez avoire un compte pour pouvoire vous inscrire</h6>
+                                            </div>
                                             <div class="mb-3" >
                                                 <label class="form-label">Votre numero de telephone</label>
                                                 <div>
@@ -188,7 +192,7 @@
                                                         @enderror
                                                 </div>
                                             </div>
-
+                                            {{--
                                             <div class="mb-3">
                                                 <label class="form-label">Votre numero de carte d'identite nationale</label>
                                                 <div>
@@ -201,7 +205,7 @@
                                                         @enderror
                                                 </div>
                                             </div>
-
+                                            --}}
                                             <div class="mb-3 row">
                                                 <label class="form-label">Selectionner votre ville de voyage</label>
                                                 <div class="col-md-12">

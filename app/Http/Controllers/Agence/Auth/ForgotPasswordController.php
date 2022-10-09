@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Agence;
 use App\Notifications\ForgotAgencePassword;
+use Brian2694\Toastr\Facades\Toastr;
 
 class ForgotPasswordController extends Controller
 {
@@ -35,7 +36,9 @@ class ForgotPasswordController extends Controller
 
         if ($admin_email) {
             $admin_email->notify(new ForgotAgencePassword());
-            return back()->with('message','Un email vous a ete envoyer merci de verifier');
+            Toastr::success('Un email vous a ete envoyer merci de verifier', 'Notification Message', ["positionClass" => "toast-top-right"]);
+            return redirect()->route('index');
+            // return back()->with('message','Un email vous a ete envoyer merci de verifier');
         }else {
             return back()->with('error_email','Cet adresse email n\' existe');
         }

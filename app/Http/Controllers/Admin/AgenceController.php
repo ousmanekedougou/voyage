@@ -106,14 +106,15 @@ class AgenceController extends Controller
         $add_agence->user_id = Auth::user()->id;
         $add_agence->region_id = $request->region;
         $add_agence->save();
-        Notification::route('mail',Auth::user()->email)
-            ->notify(new RegisteredUser($add_agence));
 
-        $notifys = Notify::all();
-        foreach ($notifys as $notify) {
-            Notification::route('mail','ousmanelaravel@gmail.com')
-            ->notify(new Newsleter($notify));
-        }
+        // Notification::route('mail',Auth::user()->email)
+        //     ->notify(new RegisteredUser($add_agence));
+
+        // $notifys = Notify::all();
+        // foreach ($notifys as $notify) {
+        //     Notification::route('mail','ousmanelaravel@gmail.com')
+        //     ->notify(new Newsleter($notify));
+        // }
          Toastr::success('Votre agence a bien ete creer', 'Ajout agence', ["positionClass" => "toast-top-right"]);
         return back();
     }
@@ -163,7 +164,37 @@ class AgenceController extends Controller
                 $agent->is_active = DESACTIVEAGENCE;
                 $agent->save();
             }
-             Toastr::success('Votre agence a bien ete desactiver', 'Desactivation', ["positionClass" => "toast-top-right"]);
+            $notifys = Notify::all();
+            foreach ($notifys as $notify) {
+                Notification::route('mail','ousmanelaravel@gmail.com')
+                    ->notify(new Newsleter($notify));
+            }
+            // $sendPhone = User::where('');
+            // $config = array(
+            //     'clientId' => config('app.clientId'),
+            //     'clientSecret' =>  config('app.clientSecret'),
+            // );
+            // $osms = new Sms($config);
+
+            // $data = $osms->getTokenFromConsumerKey();
+            // // dd($data);
+            // $token = array(
+            //     'token' => $data['access_token']
+            // );
+            // $phone = intval($client->phone);
+            // $message = "AEERK KEDOUGOU:\nSalut $client->prenom $client->nom les documents que vous avez deposés pour les codifications ont été rejetés\n\nMotif du rejet :\n$client->texmail.\nVeuiilez vous repprocher au-pres du bureau plus d'information. \nCordialement le Bureau de l'AEERK";
+                
+            // $response = $osms->sendSms(
+            //     // sender
+            //     'tel:+' . $sendPhone->sendPhone,
+            //     // receiver
+            //     'tel:+221782875971',
+            //     // message
+            //     $message,
+
+            //     'TouCki'
+            // );
+            Toastr::success('Votre agence a bien ete desactiver', 'Desactivation', ["positionClass" => "toast-top-right"]);
             return back();
         }else{
             $update_agence->is_active = ACTIVEAGENCE;
