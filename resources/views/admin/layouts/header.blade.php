@@ -473,7 +473,7 @@
                                 @endif
                             @endif
 
-                             @if(Auth::guard('client')->user())
+                            @if(Auth::guard('client')->user())
                                 @if(Auth::guard('client')->user()->image == null)
                                      <img class="rounded-circle header-profile-user" src="{{ asset('admin/assets/images/users/profil.jpg') }}"
                                 alt="Header Avatar">
@@ -486,10 +486,6 @@
                                 <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                                 @endif
                             @endif
-                            {{--
-                            <span class="d-none d-xl-inline-block ms-1" key="t-henry"> name</span>
-                            <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
-                            --}}
                         </button>
                         <div class="dropdown-menu dropdown-menu-end">
                             <!-- item-->

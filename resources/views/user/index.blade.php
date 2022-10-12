@@ -311,7 +311,7 @@
                     <div class="mt-4 mt-md-auto">
                         <div class="d-flex align-items-center mb-2">
                            {{--<div class="features-number font-weight-semibold display-4 me-3">02</div>--}}
-                            <h4 class="mb-0">L'application incontournable des voyageurs</h4>
+                            <h1 class="mb-0">L'application incontournable des voyageurs</h1>
                         </div>
                         <p class="text-muted">
                             Téléchargez gratuitement l'application TouCki pour bénéficier d’une expertise de qualité et organiser de vos voyages en toute confiance.

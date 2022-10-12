@@ -42,7 +42,7 @@
                     <div class="vertical-nav">
                         <div class="row">
                             <div class="col-lg-2 col-sm-4">
-                                <div class="nav flex-column nav-pills" role="tablist">
+                                <div class="nav setting-mobile flex-column nav-pills " role="tablist">
                                     <a class="nav-link active" id="v-pills-gen-ques-tab" data-bs-toggle="pill"
                                         href="#v-pills-gen-ques" role="tab">
                                         <i class="bx bx bx-user nav-icon d-block mb-2"></i>
@@ -363,4 +363,23 @@
     </section>
     <!-- Faqs end -->
            
+@endsection
+@section('footerSection')
+<script>
+   jQuery(document).ready(function($) {
+  var alterClass = function() {
+    var ww = document.body.clientWidth;
+    if (ww < 600) {
+      $('.setting-mobile').removeClass('flex-column');
+    } else if (ww >= 601) {
+      $('.setting-mobile').addClass('flex-column');
+    };
+  };
+  $(window).resize(function(){
+    alterClass();
+  });
+  //Fire it when the page first loads:
+  alterClass();
+});
+</script>
 @endsection
