@@ -44,17 +44,17 @@
                         <div class="row">
                             <div class="col-lg-2 col-sm-4">
                                 <div class="nav setting-mobile flex-column nav-pills " role="tablist">
-                                    <a class="nav-link active" id="v-pills-gen-ques-tab" data-bs-toggle="pill"
+                                    <a class="nav-link setting-a-m active" id="v-pills-gen-ques-tab" data-bs-toggle="pill"
                                         href="#v-pills-gen-ques" role="tab">
                                         <i class="bx bx bx-user nav-icon d-block mb-2"></i>
                                         <p class="font-weight-bold mb-0">Clients</p>
                                     </a>
-                                    <a class="nav-link" id="v-pills-token-sale-tab" data-bs-toggle="pill"
+                                    <a class="nav-link setting-a-m" id="v-pills-token-sale-tab" data-bs-toggle="pill"
                                         href="#v-pills-token-sale" role="tab">
                                         <i class="fa fa-user-tie nav-icon d-block mb-2"></i>
                                         <p class="font-weight-bold mb-0">Agents</p>
                                     </a>
-                                    <a class="nav-link" id="v-pills-roadmap-tab" data-bs-toggle="pill"
+                                    <a class="nav-link setting-a-m" id="v-pills-roadmap-tab" data-bs-toggle="pill"
                                         href="#v-pills-roadmap" role="tab">
                                         <i class="bx bx-building d-block nav-icon mb-2"></i>
                                         <p class="font-weight-bold mb-0">Agences</p>
