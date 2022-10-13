@@ -2,7 +2,7 @@
 
 @section('main-content')
   <!-- hero section start -->
-    <section class="section hero-section bg-ico-hero section-responsive" id="home-section-lg">
+    <section class="section hero-section bg-ico-hero section-responsive">
         <div class="container">
             <div class="row align-items-center row_pricipal" style="margin-top: -70px;" >
                 <div class="col-lg-offset-8  card_show">
