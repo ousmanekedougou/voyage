@@ -30,6 +30,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="text-center mb-5">
+                        <img class="setting-img" src="{{asset('user/assets/images/faqs-bus.webp') }}" alt="" srcset="">
                         <div class="small-title">Informations</div>
                         <h4>Comment marche notre structure</h4>
                     </div>

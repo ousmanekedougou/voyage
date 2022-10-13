@@ -97,13 +97,13 @@
                                             </div>
 
                                             <div class="media-body overflow-hidden">
-                                                <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">{{ $agence->agence_name }}</a></h5>
-                                                <p class="text-muted mb-1"> <i class="fa fa-envelope"></i> {{ $agence->email_agence }}</p>
-                                                <p class="text-muted mb-4 font-size-10"><i class="fa fa-mobile"></i> Agence : {{ $agence->agence_phone }}</p>
+                                                <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">{{ $agence->name }}</a></h5>
+                                                <p class="text-muted mb-1"> <i class="fa fa-envelope"></i> {{ $agence->email }}</p>
+                                                <p class="text-muted mb-4 font-size-10"><i class="fa fa-mobile"></i>{{ $agence->phone }}</p>
                                                 
                                                 <div class="avatar-group">
                                                     <div class="avatar-group-item font-size-11">
-                                                        {{$agence->name}} : {{$agence->phone}}
+                                                        {{$agence->slogan}}
                                                     </div>
                                                 </div>
                                                 
@@ -382,7 +382,7 @@
                                                         <img src="{{Storage::url($agence_edit->image_agence)}}" alt="" class="avatar-sm me-4">
 
                                                         <div class="media-body overflow-hidden">
-                                                            <h5 class="text-truncate font-size-15">{{$agence_edit->name_agence}}</h5>
+                                                            <h5 class="text-truncate font-size-15">{{$agence_edit->name}}</h5>
                                                             <p class="text-muted">{{$agence_edit->slogan}}</p>
                                                         </div>
                                                     </div>
@@ -395,7 +395,7 @@
                                                         For science, music, sport, etc,</p> -->
 
                                                     <div class="text-muted mt-4">
-                                                        <p><i class="bx bxs-envelope me-1 text-primary me-1"></i>{{$agence_edit->email_agence}} </p>
+                                                        <p><i class="bx bxs-envelope me-1 text-primary me-1"></i>{{$agence_edit->email}} </p>
                                                         <p><i class="bx bxs-mobile text-primary me-1"></i>{{$agence_edit->phone}}</p>
                                                         <p><i class="bx bx-map-pin text-primary me-1"></i> {{ $agence_edit->adress }}</p>
                                                         <p><i class="bx bx-fingerprint text-primary me-1"></i> {{ $agence_edit->registre_commerce }}</p>

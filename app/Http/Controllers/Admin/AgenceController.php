@@ -115,7 +115,7 @@ class AgenceController extends Controller
         //     Notification::route('mail','ousmanelaravel@gmail.com')
         //     ->notify(new Newsleter($notify));
         // }
-         Toastr::success('Votre agence a bien ete creer', 'Ajout agence', ["positionClass" => "toast-top-right"]);
+        Toastr::success('Votre agence a bien ete creer', 'Ajout agence', ["positionClass" => "toast-top-right"]);
         return back();
     }
 
