@@ -1,7 +1,30 @@
 @extends('user.layouts.app',['title' => 'Acceuil'])
 
 @section('main-content')
-  
+  <!-- hero section start -->
+    <section class="section hero-section bg-ico-hero home-section-lg">
+        <!-- <div class="bg-overlay bg-primary"></div> -->
+        <div class="container">
+            <div class="row align-items-center row_pricipal" style="margin-top: -70px;" >
+                <div class="col-lg-offset-8  card_show">
+                    <div class="text-white-50">
+                        <h1 class="text-white font-weight-semibold mb-3 hero-title text-center">Yombalal Toucki Thi Biir Réwmi</h1>
+                        <p class="font-size-16 text-white text-center">
+                            Toutes les options de voyage sur une seule plateforme
+                        </p>
+
+                        <div class="button-items mt-4 text-center">
+                            <a href="{{ route('agence.create') }}" class="btn btn-success">Creer votre compte agence</a>
+                            <a href="{{ route('client.register') }}" class="btn btn-light">Creer votre compte client</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </section>
+    <!-- hero section end -->
 
     <section class="section p-0 home-section-mobile">
         <div class="container">
