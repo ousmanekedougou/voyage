@@ -275,7 +275,7 @@
         margin-left: 10px;
         margin-right: 10px;
     }
-    .hero-section.bg-ico-hero{
+    .hero-section{
         visibility: hidden;
         opacity: 0;
         width: 0px;
