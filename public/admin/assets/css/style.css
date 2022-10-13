@@ -69,15 +69,11 @@
  height: 100px;
  } */
 
-.hero-section .bg-agence{
-    background-image:url(../images/crypto/agence.webp);background-size:cover;background-position:top;
+.bg-agence{
+    background-image:url(./user/assets/images/siege.jpg);background-size:cover;background-position:top;
     height: 100px;
  }
- #home-section-lg{
-        visibility: visible;
-        width: 100%;
-        height: 100px;
-    }
+
  .home-section-mobile{
     visibility: hidden;
     width: 0px;
@@ -275,17 +271,12 @@
         margin-left: 10px;
         margin-right: 10px;
     }
-    #home-section-lg{
-        visibility: hidden !important;
-        opacity: 0 !important;
-        width: 0px !important;
-        height: 0px !important;
-    }
+   
     .home-section-mobile{
         visibility: visible;
         width: 100%;
         height: 100%;
-        margin-top: -17em;
+        margin-top: 5em;
         margin-bottom: 4em;
     }
     .home-section-mobile .container{
