@@ -3,7 +3,6 @@
 @section('main-content')
   <!-- hero section start -->
     <section class="section hero-section bg-ico-hero" id="home-section-lg">
-        <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
             <div class="row align-items-center row_pricipal" style="margin-top: -70px;" >
                 <div class="col-lg-offset-8  card_show">
