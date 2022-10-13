@@ -2,7 +2,8 @@
 
 @section('main-content')
   <!-- hero section start -->
-    <section class="section hero-section bg-ico-hero section-responsive">
+    <section class="section hero-section bg-ico-hero ">
+        <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
             <div class="row align-items-center row_pricipal" style="margin-top: -70px;" >
                 <div class="col-lg-offset-8  card_show">
@@ -24,13 +25,13 @@
         <!-- end container -->
     </section>
     <!-- hero section end -->
-
-    <section class="section home-section-mobile">
+{{--
+    <section class="section p-0 home-section-mobile">
         <div class="container">
             <img class="setting-img" src="{{asset('user/assets/images/bus.svg') }}" alt="" srcset="">
         </div>
     </section>
-
+--}}
 
     
  <!-- currency price section start version desktop-->
