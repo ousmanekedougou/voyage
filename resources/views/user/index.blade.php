@@ -25,13 +25,13 @@
         <!-- end container -->
     </section>
     <!-- hero section end -->
-{{--
+
     <section class="section p-0 home-section-mobile">
         <div class="container">
             <img class="setting-img" src="{{asset('user/assets/images/bus.svg') }}" alt="" srcset="">
         </div>
     </section>
---}}
+
 
     
  <!-- currency price section start version desktop-->
