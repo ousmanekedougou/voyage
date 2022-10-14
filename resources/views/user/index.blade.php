@@ -28,7 +28,9 @@
 
     <section class="section p-0 home-section-mobile">
         <div class="container">
-            <img class="setting-img" src="{{asset('user/assets/images/bus.svg') }}" alt="" srcset="">
+            <div class="row">
+                <img class="setting-img" src="{{asset('user/assets/images/bus.svg') }}" alt="" srcset="">
+            </div>
         </div>
     </section>
 
