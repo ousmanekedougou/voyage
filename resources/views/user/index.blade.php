@@ -26,7 +26,7 @@
     </section>
     <!-- hero section end -->
 
-    <section class="section  home-section-mobile">
+    <section class="section p-0 home-section-mobile">
         <div class="container">
             <div class="row">
                 <img class="setting-img" src="{{asset('user/assets/images/bus.svg') }}" alt="" srcset="">
