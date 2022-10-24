@@ -2,10 +2,15 @@
 @section('headSection')
     <meta name="csrf-token" content="{{ csrf_token() }}">
 	<link rel="stylesheet" href="{{asset('user/assets/build/css/intlTelInput.css')}}">
+    <style>
+        .bg-ico-hero{
+            background-image:url(./user/assets/images/client.jpg) !important;
+            background-size:cover;background-position:top !important;
+            height: 100px !important;
+        }
+    </style>
 @endsection
 @section('main-content')
-
- 
 
    <!-- hero section start -->
     <section class="section hero-section bg-ico-hero">

@@ -65,11 +65,6 @@
                                             <li class="list-inline-item me-3">
                                                 <a href="" data-bs-toggle="modal" data-bs-target="#edit-agence-{{$user->id}}"><i class="bx bx-show me-1"></i></a>
                                             </li>
-                                            @if(Auth::user()->is_admin == 0)
-                                                <li class="list-inline-item me-3">
-                                                    <a href="{{ route('admin.agence.show',$user->id) }}"><i class="fa fa-file-invoice me-1"></i></a>
-                                                </li>
-                                            @endif
                                             <li class="list-inline-item me-3">
                                                 <!-- <a href=""><i class="bx bx-block me-1"></i></a> -->
                                                 <div class="form-check form-switch mb-3" dir="ltr">
@@ -105,132 +100,13 @@
             </div>
             <!-- End Page-content -->
 
-              
-             <!-- Static Backdrop Modal -->
-            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                    <div class="modal-content ">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Ajouter une agence de transport</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                            <div class="modal-body">
-                                <p>
-                                    <form class="custom-validation" action="{{ route('admin.agence.store') }}" method="POST" enctype="multipart/form-data">
-                                        @csrf
-                                        <div class="row">
-                                            <div class="col-xl-6">
-                                                <div class="mb-3">
-                                                    <label class="form-label">Nom complet de l'agence</label>
-                                                    <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name"
-                                                        placeholder="Nom complet de l'agence" />
-                                                    @error('name')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label class="form-label">Adresse email de l'agence</label>
-                                                    <div>
-                                                        <input type="email" id="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" parsley-type="email"
-                                                            placeholder="Adresse email de l'agence" />
-                                                            @error('email')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
-                                                            @enderror
-                                                    </div>
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label class="form-label">Numero de telephone de l'agence</label>
-                                                    <div>
-                                                        <input data-parsley-type="number" type="number" id="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" autocomplete="phone"
-                                                            required placeholder="Numero de telephone de l'agence" />
-                                                             @error('phone')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
-                                                            @enderror
-                                                    </div>
-                                                </div>
-                                                
-                                            </div>
-                                            <div class="col-xl-6">
-                                                 <div class="mb-3">
-                                                    <label class="form-label">Adresse de l'agence</label>
-                                                    <input type="text" class="form-control" required id="adress" class="form-control @error('adress') is-invalid @enderror" name="adress" value="{{ old('adress') }}" autocomplete="adress"
-                                                        placeholder="Adresse de l'agence" />
-                                                        @error('adress')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
-                                                </div>
-                                                {{--
-                                                <div class="mb-3">
-                                                    <label class="form-label">Registre de commerce</label>
-                                                    <div>
-                                                        <input data-parsley-type="digits" type="text" id="registre_commerce" class="form-control @error('registre_commerce') is-invalid @enderror" name="registre_commerce" value="{{ old('registre_commerce') }}" autocomplete="registre_commerce"
-                                                            required placeholder="Registre de commerce" />
-                                                            @error('registre_commerce')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
-                                                            @enderror
-                                                    </div>
-                                                </div>
-                                                --}}
-                                                 <div class="mb-3">
-                                                    <label class="form-label">Le logo de l'agence</label>
-                                                    <input type="file" class="form-control" required id="image" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" autocomplete="image"
-                                                        placeholder="Le logo de l'agence" />
-                                                          @error('image')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
-                                                            @enderror
-                                                </div>
-                                                
-                                            </div>
-                                            <div class="col-md-12">
-                                                <div class="mb-3">
-                                                    <label class="form-label">Slogan de l'agence</label>
-                                                    <div>
-                                                        <textarea required id="slogan" class="form-control @error('slogan') is-invalid @enderror" name="slogan" value="{{ old('slogan') }}" autocomplete="slogan" class="form-control" rows="3"></textarea>
-                                                          @error('slogan')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
-                                                            @enderror
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex flex-wrap gap-2">
-                                                <button type="submit" class="btn btn-primary waves-effect waves-light btn-block">
-                                                    Enregistrer l'agence
-                                                </button>
-                                                <button type="reset" class="btn btn-secondary waves-effect btn-block">
-                                                    Anuller
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </p>
-                            </div>
-                    </div>
-                </div>
-            </div>
-
             @foreach($users as $user_edit)
             <!-- Static Backdrop Modal -->
             <div class="modal fade" id="edit-agence-{{$user_edit->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-md modal-dialog-centered" role="document">
                     <div class="modal-content ">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Detail de l'agence</h5>
+                            <h5 class="modal-title" id="staticBackdropLabel">Detail du client</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                             <div class="modal-body">
@@ -249,11 +125,6 @@
                                                     </div>
 
                                                     <h5 class="font-size-15 mt-4">Informations :</h5>
-
-                                                    <!-- <p class="text-muted">To an English person, it will seem like simplified English, as
-                                                        a skeptical Cambridge friend of mine told me what Occidental is. The European
-                                                        languages are members of the same family. Their separate existence is a myth.
-                                                        For science, music, sport, etc,</p> -->
 
                                                     <div class="text-muted mt-4">
                                                         <p><i class="bx bxs-envelope me-1 text-primary me-1"></i>{{$user_edit->email}} </p>
@@ -342,9 +213,9 @@
                             <div class="modal-header">
                                 <h5 class="modal-title" id="staticBackdropLabel">
                                     @if($user->is_active == 1)
-                                        <span class="text-danger">Desactivation d'agence</span>
+                                        <span class="text-danger">Desactivation du compte du client</span>
                                     @else
-                                        <span class="text-success">Activation d'agence</span>
+                                        <span class="text-success">Activation du compte du client</span>
                                     @endif
                                 </h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"

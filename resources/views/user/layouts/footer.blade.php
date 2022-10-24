@@ -328,6 +328,21 @@
                 $('html ,body').animate({scrollTop : 0},2000);
             });
         });
+
+
+        //  $(document).ready(function(){
+        //     $(window).scroll(function(){
+        //         if($(this).scrollTop() > 40) {
+        //             $("#agenceBtn").fadeIn();
+        //         }else{
+        //             $("#agenceBtn").fadeOut();
+        //         }
+        //     });
+
+        //     $("#agenceBtn").click(function(){
+        //         $('html ,body').animate({scrollTop : 0},2000);
+        //     });
+        // });
       
     </script>
     @show

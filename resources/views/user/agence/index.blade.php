@@ -6,6 +6,11 @@
     max-height: 200px;
     overflow-x: hidden;
 }
+.bg-agence{
+    background-image:url(./user/assets/images/agence.webp) !important;
+    background-size:cover;background-position:top !important;
+    height: 100px !important;
+ }
  </style>
 @section('main-content')
    <!-- hero section start -->
@@ -145,7 +150,7 @@
             </div>
             <!-- end row -->
         </div>
-        
+        <button id="agenceBtn"> <i class="fa fa-plus"></i> </button>
     </section>
     <!-- Blog end -->
 

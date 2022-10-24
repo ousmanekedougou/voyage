@@ -165,7 +165,7 @@
 
   
    <!-- about section start -->
-    <section class="section pt-4 mb-5" id="about">
+    <section class="section pt-4 mb-5 bg-white" id="about">
         <div class="container">
             <!-- <div class="row">
                 <div class="col-lg-12">
@@ -193,12 +193,8 @@
                     </div>
                 </div>
 
-                <div class="col-lg-6 ms-auto">
-                    <div class="row">
-                        <div class="col-md-12 me-md-0">
-                            <img src="{{('user/assets/images/dowload/tiker-photo.png')}}" alt="" class="img-fluid mx-auto d-block" style="width: 100%;height:auto;">
-                        </div>
-                    </div>
+                <div class="col-lg-6 ms-auto home-about-img">
+                    <img src="{{('user/assets/images/dowload/setting2.png')}}" alt="" class="img-fluid mx-auto d-block">
                 </div>
             </div>
             <!-- end row -->
@@ -283,7 +279,4 @@
     </section>
     <!-- Features end -->
 
-
-    
-           
 @endsection

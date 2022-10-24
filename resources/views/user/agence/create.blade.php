@@ -29,6 +29,14 @@
 
         <section class="section bg-default" id="agence">
             <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="text-center mb-5">
+                            <h4>Creer votre compte agence</h4>
+                            <!-- <div class="small-title">Fait votre choix</div> -->
+                        </div>
+                    </div>
+                </div>
                 <form class="custom-validation card" action="{{ route('agence.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row card-body">

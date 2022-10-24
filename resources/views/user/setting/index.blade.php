@@ -1,5 +1,11 @@
 @extends('user.layouts.app',['title' => 'Setting'])
-
+<style>
+     .bg-ico-hero{
+            background-image:url(./user/assets/images/siege.jpg) !important;
+            background-size:cover;background-position:top !important;
+            height: 100px !important;
+        }
+</style>
 @section('main-content')
 
      <!-- hero section start -->

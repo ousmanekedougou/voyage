@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Admin\Agence;
 use App\Models\Admin\Agent;
+use App\Models\Admin\Jour;
 use App\Models\Admin\Siege;
 use App\Models\User;
 use App\Models\User\Region;
@@ -19,6 +20,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $jours = [
+            'Diamache' => 0, 
+            'Lundi' => 1,
+            'Mardin' => 2,
+            'Mercredi' => 3,
+            'Jeudi' => 4,
+            'Vendredi' => 5,
+            'Samdi' => 6
+        ];
+       foreach ($jours as $name => $index) {
+            Jour::create([
+                'name' => $name,
+                'index' => $index
+            ]);
+       }
        $regions = [
             'Dakar','Kaolack','Thies',
             'Saint Louis','Diourbel',

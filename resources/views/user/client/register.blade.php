@@ -44,7 +44,7 @@
                             <div class="mb-3">
                                 <label class="form-label">Prenom et nom</label>
                                 <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name"
-                                    placeholder="Nom de l'agence" />
+                                    placeholder="Prenom et nom" />
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -116,10 +116,10 @@
                                 @enderror
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Mot de passe de l'agence</label>
+                                <label class="form-label">Votre mot de passe</label>
                                 <div>
                                     <input type="password" id="pass2"  class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" required
-                                        placeholder="Mot de passe de l'agence" />
+                                        placeholder="Votre mot de passe" />
                                             @error('password')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

@@ -74,16 +74,16 @@
                     <div class="dropdown-menu dropdown-menu-end text-center">
                         <!-- item-->
                         <a class="dropdown-item {{ set_active_roote('customer.login') }}" href="{{ route('customer.customer.login') }}"><i
-                                class="bx bx-user font-size-16 align-middle me-1"></i> <span key="t-my-wallet">Compte Client</span>
+                                class="bx bx-user font-size-16 align-middle me-1"></i> <span key="t-my-wallet">Espace Client</span>
                         </a>
 
                         <a class="dropdown-item {{ set_active_roote('agent.agent.login') }}" href="{{ route('agent.agent.login') }}"><i class="bx bx-user-circle  font-size-16 align-middle me-1"></i>
-                            <span key="t-profile">Compte Agent</span>
+                            <span key="t-profile">Espace Agent</span>
                         </a>
                         
                         <a class="dropdown-item {{ set_active_roote('agence.agence.login') }}" href="{{ route('agence.agence.login') }}">
                             <i class="bx bx-building font-size-16 align-middle me-1"></i><span
-                                key="t-settings">Compte Agence</span>
+                                key="t-settings">Espace Agence</span>
                         </a>
                     </div>
                 </div>
@@ -174,16 +174,16 @@
                     <div class="dropdown-menu dropdown-menu-end">
                         <!-- item-->
                         <a class="dropdown-item {{ set_active_roote('customer.login') }}" href="{{ route('customer.customer.login') }}"><i
-                                class="bx bx-user font-size-16 align-middle me-1"></i> <span key="t-my-wallet">Compte Client</span>
+                                class="bx bx-user font-size-16 align-middle me-1"></i> <span key="t-my-wallet">Espace Client</span>
                         </a>
 
                         <a class="dropdown-item {{ set_active_roote('agent.agent.login') }}" href="{{ route('agent.agent.login') }}"><i class="bx bx-user-circle  font-size-16 align-middle me-1"></i>
-                            <span key="t-profile">Compte Agent</span>
+                            <span key="t-profile">Espace Agent</span>
                         </a>
                         
                         <a class="dropdown-item {{ set_active_roote('agence.agence.login') }}" href="{{ route('agence.agence.login') }}">
                             <i class="bx bx-building font-size-16 align-middle me-1"></i><span
-                                key="t-settings">Compte Agence</span>
+                                key="t-settings">Espace Agence</span>
                         </a>
                     </div>
                 </div>
@@ -233,16 +233,16 @@
                     <div class="dropdown-menu dropdown-menu-end text-center">
                         <!-- item-->
                         <a class="dropdown-item {{ set_active_roote('customer.login') }}" href="{{ route('customer.customer.login') }}"><i
-                                class="bx bx-user font-size-16 align-middle me-1"></i> <span key="t-my-wallet">Compte Client</span>
+                                class="bx bx-user font-size-16 align-middle me-1"></i> <span key="t-my-wallet">Espace Client</span>
                         </a>
 
                         <a class="dropdown-item {{ set_active_roote('agent.agent.login') }}" href="{{ route('agent.agent.login') }}"><i class="bx bx-user-circle  font-size-16 align-middle me-1"></i>
-                            <span key="t-profile">Compte Agent</span>
+                            <span key="t-profile">Espace Agent</span>
                         </a>
                         
                         <a class="dropdown-item {{ set_active_roote('agence.agence.login') }}" href="{{ route('agence.agence.login') }}">
                             <i class="bx bx-building font-size-16 align-middle me-1"></i><span
-                                key="t-settings">Compte Agence</span>
+                                key="t-settings">Espace Agence</span>
                         </a>
                     </div>
                 </div>
