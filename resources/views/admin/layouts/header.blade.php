@@ -517,7 +517,7 @@
                             <div class="dropdown-divider"></div>
 
                             @if(Auth::guard('web')->user())
-                            <a class="dropdown-item text-danger" href="" onclick="event.preventDefault();
+                                <a class="dropdown-item text-danger" href="" onclick="event.preventDefault();
                                                      document.getElementById('logout-form-1').submit();"><i
                                     class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span
                                     key="t-logout" >Deconexion</span></a>
@@ -525,7 +525,7 @@
                                         @csrf
                                     </form>
                             @elseif(Auth::guard('agence')->user())
-                            <a class="dropdown-item text-danger" href="" onclick="event.preventDefault();
+                                <a class="dropdown-item text-danger" href="" onclick="event.preventDefault();
                                                      document.getElementById('logout-form-2').submit();"><i
                                     class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span
                                     key="t-logout" >Deconexion</span></a>
@@ -533,7 +533,7 @@
                                         @csrf
                                     </form>
                             @elseif(Auth::guard('agent')->user())
-                            <a class="dropdown-item text-danger" href="" onclick="event.preventDefault();
+                                <a class="dropdown-item text-danger" href="" onclick="event.preventDefault();
                                                      document.getElementById('logout-form-3').submit();"><i
                                     class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span
                                     key="t-logout" >Deconexion</span></a>
@@ -541,7 +541,7 @@
                                         @csrf
                                     </form>
                             @elseif(Auth::guard('client')->user())
-                            <a class="dropdown-item text-danger" href="" onclick="event.preventDefault();
+                                <a class="dropdown-item text-danger" href="" onclick="event.preventDefault();
                                     document.getElementById('logout-form-4').submit();"><i
                                     class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i> <span
                                     key="t-logout" >Deconexion</span></a>

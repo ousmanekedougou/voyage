@@ -37,7 +37,7 @@
                         </div>
                     </div>
                 </div>
-                <form class="custom-validation card" action="{{ route('client.post') }}" method="POST" enctype="multipart/form-data">
+                <form class="custom-validation card" action="{{ route('client.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="row card-body">
                         <div class="col-xl-6">

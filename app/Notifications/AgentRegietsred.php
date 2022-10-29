@@ -2,23 +2,23 @@
 
 namespace App\Notifications;
 
+use App\Models\Admin\Agent;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
-
-class ForgotClientPassword extends Notification
+class AgentRegietsred extends Notification
 {
     use Queueable;
-
+    public $agent;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Agent $agent)
     {
-        //
+        $this->agent = $agent;
     }
 
     /**
@@ -40,12 +40,7 @@ class ForgotClientPassword extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
-        ->success()
-        ->subject("Verification d'adresse email")
-            ->line('Salut cher etudiant clicker sur le bouton si dessous pour modifier votre mot de passe')
-            ->action('Confirmer votre email', url("/customer/confirm/{$notifiable->id}/" . urlencode($notifiable->email)))
-            ;
+        return (new MailMessage)->view('agent.notification.index',['agent' => $this->agent]);
     }
 
     /**

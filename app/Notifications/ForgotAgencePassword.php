@@ -45,7 +45,7 @@ class ForgotAgencePassword extends Notification
         ->subject("Verification d'adresse email")
                     ->line('Salut cher etudiant clicker sur le bouton si dessous pour modifier votre mot de passe')
                     ->action('Confirmer votre email', url("/agence/confirm/{$notifiable->id}/" . urlencode($notifiable->email)))
-                    ->line('Thank you for using our application!');
+                    ;
     }
 
     /**

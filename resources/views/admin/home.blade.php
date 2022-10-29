@@ -43,21 +43,28 @@
                                 <div class="col-lg-4 align-self-center">
                                     <div class="text-lg-center mt-4 mt-lg-0">
                                         <div class="row">
-                                            <div class="col-4">
+                                            <div class="col-3">
                                                 <div>
                                                     <p class="text-muted text-truncate mb-2">Total Agences</p>
                                                     <h5 class="mb-0">{{$agences->count()}}</h5>
                                                 </div>
                                             </div>
-                                            <div class="col-4">
+                                            <div class="col-3">
                                                 <div>
                                                     <p class="text-muted text-truncate mb-2">Total Sieges</p>
                                                     <h5 class="mb-0">{{$siegeCount->count()}}</h5>
                                                 </div>
                                             </div>
-                                            <div class="col-4">
+                                            <div class="col-3">
                                                 <div>
-                                                    <p class="text-muted text-truncate mb-2">Newsletter</p>
+                                                    <p class="text-muted text-truncate mb-2">Utilisateurs</p>
+                                                    <h5 class="mb-0">{{$customerCount->count()}}</h5>
+                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div>
+                                                    <p class="text-muted text-truncate mb-2">Abones</p>
                                                     <h5 class="mb-0">{{$newCount->count()}}</h5>
                                                     
                                                 </div>
@@ -157,200 +164,6 @@
     <!-- End Page-content -->
 
 
-     <!-- Static Backdrop Modal -->
-            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-                    <div class="modal-content ">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Ajouter une agence de transport</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                            <div class="modal-body">
-                                <p>
-                                    <form class="custom-validation" action="{{ route('admin.agence.store') }}" method="POST" enctype="multipart/form-data">
-                                        @csrf
-                                        <div class="row">
-                                            <div class="col-xl-6">
-                                                <div class="mb-3">
-                                                    <label class="form-label">Votre prenom et nom</label>
-                                                    <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name"
-                                                        placeholder="Votre prenom et nom" />
-                                                    @error('name')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label class="form-label">Votre email</label>
-                                                    <div>
-                                                        <input type="email" id="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" parsley-type="email"
-                                                            placeholder="Votre email" />
-                                                            @error('email')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
-                                                            @enderror
-                                                    </div>
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label class="form-label">Numero de telephone</label>
-                                                    <div>
-                                                        <input data-parsley-type="number" type="number" id="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" autocomplete="phone"
-                                                            required placeholder="Numero de telephone" />
-                                                             @error('phone')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
-                                                            @enderror
-                                                    </div>
-                                                </div>
-                                                 <div class="mb-3">
-                                                    <label class="form-label">Votre image</label>
-                                                    <input type="file" class="form-control" required id="image" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" autocomplete="image"
-                                                        placeholder="Votre image" />
-                                                          @error('image')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
-                                                            @enderror
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label class="form-label">Mot de passe de l'agence</label>
-                                                    <div>
-                                                        <input type="password" id="pass2"  class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" required
-                                                            placeholder="Mot de passe de l'agence" />
-                                                             @error('password')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
-                                                            @enderror
-                                                    </div>
-                                                    <div class="mt-3">
-                                                        <label class="form-label">Confirmer votre mot de passe</label>
-                                                        <input type="password" id="password-confirm" class="form-control" name="password_confirmation" required autocomplete="new-password"
-                                                            data-parsley-equalto="#pass2" placeholder="Confirmer le mot de passe" />
-                                                    </div>
-                                                </div>
-
-                                             
-                                              
-                                            </div>
-                                            <div class="col-xl-6">
-                                                <div class="mb-3">
-                                                    <label class="form-label">Nom de l'agence</label>
-                                                    <input type="text" id="name_agence" class="form-control @error('name_agence') is-invalid @enderror" name="name_agence" value="{{ old('name_agence') }}" required autocomplete="name_agence"
-                                                        placeholder="Nom de l'agence" />
-                                                    @error('name_agence')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label class="form-label">E-mail de lagence</label>
-                                                    <div>
-                                                        <input type="email_agence" id="email_agence" class="form-control @error('email_agence') is-invalid @enderror" name="email_agence" value="{{ old('email_agence') }}" required autocomplete="email_agence" parsley-type="email_agence"
-                                                            placeholder="E-mail de lagence" />
-                                                            @error('email_agence')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
-                                                            @enderror
-                                                    </div>
-                                                </div>
-                                                 <div class="mb-3">
-                                                    <label class="form-label">Adresse de l'agence</label>
-                                                    <input type="text" class="form-control" required id="adress" class="form-control @error('adress') is-invalid @enderror" name="adress" value="{{ old('adress') }}" autocomplete="adress"
-                                                        placeholder="Adresse de l'agence" />
-                                                        @error('adress')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label class="form-label">Telephone de l'agence</label>
-                                                    <div>
-                                                        <input data-parsley-type="number" type="number" id="agence_phone" class="form-control @error('agence_phone') is-invalid @enderror" name="agence_phone" value="{{ old('agence_phone') }}" autocomplete="agence_phone"
-                                                            required placeholder="Numero de telephone" />
-                                                             @error('agence_phone')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
-                                                            @enderror
-                                                    </div>
-                                                </div>
-                                                {{--
-                                                <div class="mb-3">
-                                                    <label class="form-label">Registre de commerce</label>
-                                                    <div>
-                                                        <input data-parsley-type="digits" type="text" id="registre_commerce" class="form-control @error('registre_commerce') is-invalid @enderror" name="registre_commerce" value="{{ old('registre_commerce') }}" autocomplete="registre_commerce"
-                                                            required placeholder="Registre de commerce" />
-                                                            @error('registre_commerce')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
-                                                            @enderror
-                                                    </div>
-                                                </div>
-                                                --}}
-                                                <div class="mb-3">
-                                                    <label class="form-label">Logo de l'agence</label>
-                                                    <input type="file" class="form-control" required id="image_agence" class="form-control @error('image_agence') is-invalid @enderror" name="image_agence" value="{{ old('image_agence') }}" autocomplete="image_agence"
-                                                        placeholder="Logo de l'agence" />
-                                                          @error('image_agence')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
-                                                            @enderror
-                                                </div>
-                                                <div class="mb-3 row">
-                                                    <label class="form-label">Selectionner une region</label>
-                                                    <div class="col-md-12">
-                                                        <select  class="form-control @error('region') is-invalid @enderror" name="region" required autocomplete="region" required>
-                                                            @foreach($regions as $region)
-                                                                <option value="{{ $region->id }}">{{ $region->name }}</option>
-                                                            @endforeach
-                                                        </select>
-                                                        @error('region')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label class="form-label">Slogan de l'agence</label>
-                                                    <div>
-                                                        <textarea required id="slogan" class="form-control @error('slogan') is-invalid @enderror" name="slogan" value="{{ old('slogan') }}" autocomplete="slogan" class="form-control" rows="3"></textarea>
-                                                          @error('slogan')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
-                                                            @enderror
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex flex-wrap gap-2">
-                                                <button type="submit" class="btn btn-primary waves-effect waves-light btn-block">
-                                                    Enregistrer l'agence
-                                                </button>
-                                                <button type="reset" class="btn btn-secondary waves-effect btn-block">
-                                                    Anuller
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </p>
-                            </div>
-                    </div>
-                </div>
-            </div>
 
             @foreach($agences as $agence_edit)
             <!-- Static Backdrop Modal -->

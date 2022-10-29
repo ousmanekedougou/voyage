@@ -7,11 +7,11 @@ use App\Models\Admin\Agence;
 use App\Models\User;
 use App\Models\User\Notify;
 use App\Models\User\Region;
+use App\Notifications\AgenceRegisterd;
 use App\Notifications\Newsleter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use App\Notifications\RegisteredUser;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
@@ -38,19 +38,7 @@ class AgenceController extends Controller
     }
 
 
-    // public function confirm($id , $token){
-    //     define('ACTIVE',1);
-    //     $user = User::where('id',$id)->where('confirmation_token',$token)->first();
-    //     if ($user) {
-    //         $user->update(['confirmation_token' => null , 'is_active' => ACTIVE]);
-    //         $this->guard()->login($user);
-    //         Toastr::success('Votre compte a bien ete confirmer', 'Confirmation de compte', ["positionClass" => "toast-top-right"]);
-    //         return redirect($this->redirectPath());
-    //     }else {
-    //         Toastr::error('Ce lien ne semble plus valide', 'Error de connexion', ["positionClass" => "toast-top-right"]);
-    //         return redirect()->route('login');
-    //     }
-    // }
+ 
 
   
 
@@ -64,60 +52,7 @@ class AgenceController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $this->validate($request,[
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'phone' => 'required|string|max:255|unique:users',
-            // 'registre_commerce' => 'required|string|max:255|unique:users',
-            'adress' => 'required|string',
-            'slogan' => 'required|string',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
-            'region' => 'required|numeric'
-        ]);
-
-        $add_agence = new Agence();
-        $imageName = '';
-        if($request->hasFile('image'))
-        {
-            $imageName = $request->image->store('public/Agence');
-        }
-
-        
-        $add_agence->name = $request->name;
-        $add_agence->email = $request->email;
-        $add_agence->phone = $request->phone;
-        $add_agence->password = Hash::make('password');
-        // $add_agence->registre_commerce = $request->registre_commerce;
-        $add_agence->adress = $request->adress;
-        $add_agence->slogan = $request->slogan;
-        $add_agence->is_admin = 0;
-        $add_agence->is_active = 0;
-        $add_agence->logo = $imageName;
-        $add_agence->confirmation_token = str_replace('/','',Hash::make(Str::random(40)));
-        $add_agence->slug = str_replace('/','',Hash::make(Str::random(20).'agence'.$request->email));
-        $add_agence->user_id = Auth::user()->id;
-        $add_agence->region_id = $request->region;
-        $add_agence->save();
-
-        // Notification::route('mail',Auth::user()->email)
-        //     ->notify(new RegisteredUser($add_agence));
-
-        // $notifys = Notify::all();
-        // foreach ($notifys as $notify) {
-        //     Notification::route('mail','ousmanelaravel@gmail.com')
-        //     ->notify(new Newsleter($notify));
-        // }
-        Toastr::success('Votre agence a bien ete creer', 'Ajout agence', ["positionClass" => "toast-top-right"]);
-        return back();
-    }
+   
 
     /**
      * Display the specified resource.
@@ -154,21 +89,18 @@ class AgenceController extends Controller
         define('DESACTIVEAGENCE',0);
         define('ACTIVEAGENCE',1);
         $update_agence = Agence::where('id',$id)->first();
-        $agence_agents = Agence::where('user_id',$update_agence->id)->get();
         if ($request->is_active == 1) {
+
             $update_agence->is_active = DESACTIVEAGENCE;
             $update_agence->confirmation_token = str_replace('/','',Hash::make(Str::random(40)));
-            $update_agence->user_id = Auth::user()->id;
             $update_agence->save();
-            foreach ($agence_agents as $agent) {
-                $agent->is_active = DESACTIVEAGENCE;
-                $agent->save();
-            }
+
             $notifys = Notify::all();
             foreach ($notifys as $notify) {
                 Notification::route('mail','ousmanelaravel@gmail.com')
                     ->notify(new Newsleter($notify));
             }
+
             // $sendPhone = User::where('');
             // $config = array(
             //     'clientId' => config('app.clientId'),
@@ -194,17 +126,14 @@ class AgenceController extends Controller
 
             //     'TouCki'
             // );
+
             Toastr::success('Votre agence a bien ete desactiver', 'Desactivation', ["positionClass" => "toast-top-right"]);
             return back();
         }else{
             $update_agence->is_active = ACTIVEAGENCE;
             $update_agence->confirmation_token = null;
-            $update_agence->user_id = Auth::user()->id;
             $update_agence->save();
-            foreach ($agence_agents as $agent) {
-                $agent->is_active = ACTIVEAGENCE;
-                $agent->save();
-            }
+
             $notifys = Notify::all();
             foreach ($notifys as $notify) {
                 Notification::route('mail','ousmanelaravel@gmail.com')

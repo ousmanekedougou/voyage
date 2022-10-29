@@ -15,6 +15,7 @@ use App\Models\Admin\Historical;
 use App\Models\Admin\Itineraire;
 use App\Models\Admin\Siege;
 use App\Models\User;
+use App\Models\User\Customer;
 use App\Models\User\Notify;
 use App\Models\User\Region;
 use Brian2694\Toastr\Facades\Toastr;
@@ -30,7 +31,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('isAdmin');
     }
 
     /**
@@ -45,8 +46,9 @@ class HomeController extends Controller
             $user = Auth::guard('web')->user();
             $siegeCount = Siege::all();
             $newCount = Notify::all();
+            $customerCount = Customer::all();
             $regions = Region::where('status',1)->get();
-            return view('admin.homeAdmin.index',compact('agences','user','siegeCount','newCount','regions'));
+            return view('admin.home',compact('agences','user','siegeCount','newCount','regions','customerCount'));
         }else {
             Toastr::error('Vous n\'aviez pas le droit d\'acces sur cette page', 'Resultat Recherche', ["positionClass" => "toast-top-right"]);
             return back();

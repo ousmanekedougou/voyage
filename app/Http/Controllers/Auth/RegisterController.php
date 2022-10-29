@@ -72,6 +72,7 @@ class RegisterController extends Controller
 
         Notification::route('mail',Auth::user()->email)
             ->notify(new RegisteredUser($user));
+
         Toastr::success('Votre compte a bien ete creer', 'Creation de compte', ["positionClass" => "toast-top-right"]);
     }
 

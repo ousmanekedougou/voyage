@@ -48,8 +48,8 @@
 
                                             <div class="col-lg-8">
                                                 <div>
-                                                    <h6 class="text-truncate "><i class="fa fa-mobile"> {{$agent->phone}}</i></h6>
-                                                    <p class="d-flex"><i class="fa fa-envelope"> {{$agent->email}}</i></p>
+                                                    <h6 class="text-truncate "> <i class="fa fa-mobile"></i> {{$agent->phone}}</h6>
+                                                    <p class=""> <i class="fa fa-envelope"></i> {{$agent->email}} </p>
                                                     <p class=" d-flex">
                                                             <span class="badge bg-warning">
                                                         @if($agent->role == 1)
@@ -80,8 +80,8 @@
                                                             </div>
                                                         </li>
                                                         <li class="list-inline-item me-3">
+                                                            <a href="" style="margin-right: 8px;" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-warning" data-bs-target="#subscribeModalRole-{{ $agent->id }}"><i class="fa fa-pencil-ruler me-1 text-warning"></i></a>
                                                             <a href="" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-danger" data-bs-target="#subscribeModalagence-{{ $agent->id }}"><i class="bx bx-trash me-1 text-danger"></i></a>
-                                                            <a href="" style="margin-left: 8px;" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-warning" data-bs-target="#subscribeModalRole-{{ $agent->id }}"><i class="fa fa-pencil-ruler me-1 text-warning"></i></a>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -175,7 +175,7 @@
                                                     {{method_field('PUT')}}
                                                     <p class="text-muted font-size-14 mb-4">
                                                         <div class="d-flex text-center">
-                                                            <div style="margin-left: 30px;margin-right: 30px;">
+                                                            <div style="margin-left: 30px;margin-right: 20px;">
                                                                 <div class="form-check form-check-left">
                                                                     <input class="form-check-input" type="radio" 
                                                                         name="role" value="1" id="formRadiosRight1client" 
@@ -187,7 +187,7 @@
                                                                 </div>
                                                             </div>
 
-                                                            <div style="margin-left: 30px;">
+                                                            <div style="margin-left: 10px;">
                                                                 <div class="form-check form-check-right">
                                                                     <input class="form-check-input" type="radio" 
                                                                         name="role" value="2" id="formRadiosRight2bagage"
@@ -213,7 +213,7 @@
                                                         </div>
                                                     </p>
 
-                                                    <button type="submit" class="btn btn-success btn-xs" style="margin-left: 70px;margin-right:20px;"> Oui je veux bien </button> 
+                                                    <button type="submit" class="btn btn-success btn-xs" style="margin-left: 20px;margin-right:20px;"> Oui je veux bien </button> 
                                                     <button type="button" class="btn btn-danger btn-xs" data-bs-dismiss="modal" aria-label="Close"> x Anuller</button>
                                                 </form>
                                             </div>
@@ -295,6 +295,7 @@
                                 <p>
                                     <form class="custom-validation" action="{{ route('agence.agent.store') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
+                                        <input type="hidden" name="siege" value="{{ $siege->id }}">
                                         <div class="row">
                                             <div class="col-xl-12">
                                                 <div class="mb-3">
@@ -331,21 +332,6 @@
                                                                     <strong>{{ $message }}</strong>
                                                                 </span>
                                                             @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="mb-3 row">
-                                                    <label class="form-label">Selectionner une siege</label>
-                                                    <div class="col-md-12">
-                                                        <select class="form-select" class="form-control @error('siege') is-invalid @enderror" name="siege" required autocomplete="siege" required>
-                                                            @foreach($sieges as $siege)
-                                                                <option value="{{ $siege->id }}">{{$siege->name}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                        @error('siege')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <p class="text-muted font-size-14 mb-4">

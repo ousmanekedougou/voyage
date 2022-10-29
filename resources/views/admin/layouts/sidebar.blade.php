@@ -69,6 +69,7 @@
 
                         @if(Auth::guard('agent')->user())
                             @if(Auth::guard('agent')->user()->role == 1)
+                                {{--
                                 <li>
                                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                                         <i class="bx bxs-user-detail"></i>
@@ -78,6 +79,7 @@
                                         <li><a href="{{ route('agent.contact.index') }}" key="t-user-list">Vos Contacts</a></li>
                                     </ul>
                                 </li>
+                                --}}
                                 <hr>
                                 <li>
                                     <a href="javascript: void(0);" class="has-arrow waves-effect">

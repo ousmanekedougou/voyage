@@ -29,7 +29,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['isAgent']);
+        $this->middleware(['isAgent'])->except('confirm');
     }
 
     /**
@@ -113,6 +113,18 @@ class HomeController extends Controller
         }elseif ($this->middleware(['IsAgent']) && Auth::guard('agent')->user()->role == 3) {
             $clients = Colie::orderBy('id','DESC')->paginate(15);
             return view('agent.coli.index',compact('clients'));
+        }
+    }
+
+      public function confirm($id , $token){
+        define('ACTIVE',1);
+        $user = Agent::where('id',$id)->where('confirmation_token',$token)->first();
+        if ($user) {
+            $user->update(['confirmation_token' => null , 'is_active' => ACTIVE]);
+            $this->guard()->login($user);
+            return redirect($this->redirectPath())->with('success','Votre compte a bien ete confirmer');
+        }else {
+            return redirect('/agent/login')->with('error','Ce lien ne semble plus valide');
         }
     }
 }

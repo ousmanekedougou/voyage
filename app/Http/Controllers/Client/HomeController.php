@@ -58,4 +58,17 @@ class HomeController extends Controller
         return view('client.index',compact('agences','agenceCount','autre_regions'));
     }
     
+
+     public function confirm($id , $token){
+        define('ACTIVE',1);
+        $user = Customer::where('id',$id)->where('confirmation_token',$token)->first();
+        if ($user) {
+            $user->update(['confirmation_token' => null , 'is_active' => ACTIVE]);
+            Toastr::success('Votre compte a bien ete confirmer', 'Compte Confirmer', ["positionClass" => "toast-top-right"]);
+            return view('client.auth.login');
+        }else {
+            Toastr::success('Ce lien ne semble plus valide', 'Compte invalide', ["positionClass" => "toast-top-right"]);
+            return redirect()->route('index');
+        }
+    }
 }

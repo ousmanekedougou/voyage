@@ -31,7 +31,7 @@ class OrangeMoney{
         $data = [
             "merchant_key"=> $this->marchant_key,
             "currency"=> "XAF",
-            "order_id"=> $this->order_id, // "".time()."", // ce order_id depand de la l'algorithme de l'application
+            "order_id"=> $this->order_id, // "".time()."", // ce order_id depand de l'algorithme de l'application
             "amount" => $this->amount,
             "return_url"=> $returnUrl,
             "cancel_url"=> url("/home"),

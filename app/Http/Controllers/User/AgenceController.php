@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\User\Notify;
 use App\Models\User\Region;
+use App\Notifications\AgenceRegisterd;
 use App\Notifications\Newsleter;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -85,8 +86,8 @@ class AgenceController extends Controller
         $add_agence->password = Hash::make($request->password);
         $add_agence->save();
 
-        // Notification::route('mail',Auth::user()->email)
-        //     ->notify(new RegisteredUser($add_agence));
+        Notification::route('mail',Auth::user()->email)
+            ->notify(new AgenceRegisterd($add_agence));
 
        
          Toastr::success('Votre agence a bien ete creer', 'Ajout agence', ["positionClass" => "toast-top-right"]);

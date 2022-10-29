@@ -32,20 +32,14 @@ Route::get('/setting', [App\Http\Controllers\User\SettingController::class, 'ind
 Route::get('/contact', [App\Http\Controllers\User\ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact/store', [App\Http\Controllers\User\ContactController::class, 'store'])->name('contact.store');
 Route::post('/contact/post', [App\Http\Controllers\User\ContactController::class, 'post'])->name('contact.post');
+
 Route::get('/client', [App\Http\Controllers\User\ClientController::class, 'index'])->name('client.index');
 Route::get('/client/register', [App\Http\Controllers\User\ClientController::class, 'register'])->name('client.register');
-Route::get('/token/confirm/{id}/{token}', [App\Http\Controllers\User\ClientController::class, 'confirm'])->name('customer.confirm');
-
-
-Route::post('/client/post', [App\Http\Controllers\User\ClientController::class, 'post'])->name('client.post');
 Route::post('/client/store', [App\Http\Controllers\User\ClientController::class, 'store'])->name('client.store');
-Route::post('/client/sendmail/{id}', [App\Http\Controllers\User\ClientController::class, 'edit'])->name('client.edit');
-Route::get('/client/{id}', [App\Http\Controllers\User\ClientController::class, 'show'])->name('client.show');
-Route::put('/client/update/{id}', [App\Http\Controllers\User\ClientController::class, 'update'])->name('client.update');
+Route::get('/token/confirm/{id}/{token}', [App\Http\Controllers\User\ClientController::class, 'confirm'])->name('customer.confirm');
 Route::post('/client/colis', [App\Http\Controllers\User\ClientController::class, 'colis'])->name('client.colis');
 Route::put('/client/confirme/{id}', [App\Http\Controllers\User\ClientController::class, 'confirme'])->name('colis.confirme');
-Route::post('/client/bagage', [App\Http\Controllers\User\ClientController::class, 'bagage'])->name('client.bagage');
-Route::post('/client/ticket', [App\Http\Controllers\User\ClientController::class, 'ticket'])->name('client.ticket');
+
 Route::get('/store', [App\Http\Controllers\User\HomeController::class, 'store'])->name('store');
 
 Auth::routes();
@@ -55,7 +49,7 @@ Route::get('/paiment/{id}/{token}', [App\Http\Controllers\Admin\ClientController
 
 
 
-Route::prefix('/admin')->name('admin.')->group(function() 
+Route::middleware('isAdmin')->prefix('/admin')->name('admin.')->group(function() 
 {
     Route::get('/home', [App\Http\Controllers\Admin\HomeController::class, 'index'])->name('home');
     Route::resource('/admin', App\Http\Controllers\Admin\AdminController::class);
@@ -63,6 +57,8 @@ Route::prefix('/admin')->name('admin.')->group(function()
     Route::resource('/agence', App\Http\Controllers\Admin\AgenceController::class);
     Route::resource('/partenaire', App\Http\Controllers\Admin\PartController::class);
     Route::resource('/contact',App\Http\Controllers\Admin\ContactController::class);
+
+    
     
     Route::get('/profil/show/{slug}', [App\Http\Controllers\Admin\ProfilController::class,'show'])->name('profil.show'); 
     Route::put('/profil/update/{slug}', [App\Http\Controllers\Admin\ProfilController::class,'update'])->name('profil.update');   
@@ -71,10 +67,11 @@ Route::prefix('/admin')->name('admin.')->group(function()
 Route::prefix('/agence')->name('agence.')->group(function() 
 {
     Route::get('/home', [App\Http\Controllers\Agence\HomeController::class, 'index'])->name('agence.home');
+    
+
     Route::resource('/siege', App\Http\Controllers\Agence\SiegeController::class);
     Route::resource('/agent', App\Http\Controllers\Agence\AgentController::class);
     Route::put('/agent/edite/{id}', [App\Http\Controllers\Agence\AgentController::class,'edite'])->name('agent.edite');
-    // Route::get('/confirm/{id}/{token}', [App\Http\Controllers\Agence\Auth\RegisterController::class, 'confirm']);
     // Route::get('/paiment/{id}/{token}', [App\Http\Controllers\Agence\ClientController::class, 'paiment']);
 
     Route::get('/profil/show/{slug}', [App\Http\Controllers\Agence\ProfilController::class,'show'])->name('profil.show'); 
@@ -98,7 +95,7 @@ Route::prefix('/agence')->name('agence.')->group(function()
 Route::prefix('/agent')->name('agent.')->group(function() 
 {
     Route::get('/home', [App\Http\Controllers\Agent\HomeController::class, 'index'])->name('home');
-    // Route::get('/confirm/{id}/{token}', [App\Http\Controllers\Agent\Auth\RegisterController::class, 'confirm']);
+    Route::get('/confirm/{id}/{token}', [App\Http\Controllers\Agent\HomeController::class, 'confirm']);
     Route::get('/paiment/{id}/{token}', [App\Http\Controllers\Agent\ClientController::class, 'paiment']);
 
     Route::get('/historique/show/{id}', [App\Http\Controllers\Agent\HistoriqueController::class,'show'])->name('historique.show');
@@ -150,6 +147,7 @@ Route::prefix('/agent')->name('agent.')->group(function()
 Route::prefix('/customer')->name('customer.')->group(function() 
 {
     Route::get('/home', [App\Http\Controllers\Client\HomeController::class, 'index'])->name('home');
+    Route::get('/confirm/{id}/{token}', [App\Http\Controllers\Client\HomeController::class, 'confirm']);
     Route::get('/agence', [App\Http\Controllers\Client\AgenceController::class, 'index'])->name('agence.index');
     Route::get('/agence/about/{slug}', [App\Http\Controllers\Client\AgenceController::class, 'about'])->name('agence.about');
     Route::get('/agence/show/{slug}', [App\Http\Controllers\Client\AgenceController::class, 'show'])->name('agence.show');
@@ -166,8 +164,6 @@ Route::prefix('/customer')->name('customer.')->group(function()
     Route::resource('/bagage', App\Http\Controllers\Client\BagageController::class); 
     Route::resource('/colis', App\Http\Controllers\Client\ColiController::class);
     // Route::get('/store', [App\Http\Controllers\Client\HomeController::class, 'store'])->name('store');
-
-    // Route::get('/confirm/{id}/{token}', [App\Http\Controllers\Client\Auth\RegisterController::class, 'confirm']);
 
 
     Route::get('/profil/show/{slug}', [App\Http\Controllers\Client\ProfilController::class,'show'])->name('profil.show'); 

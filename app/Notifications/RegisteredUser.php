@@ -18,7 +18,7 @@ class RegisteredUser extends Notification
      *
      * @return void
      */
-      public function __construct(Agence $user)
+      public function __construct(User $user)
     {
         $this->user = $user;
     }

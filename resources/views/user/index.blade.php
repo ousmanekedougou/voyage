@@ -175,7 +175,7 @@
                     </div>
                 </div>
             </div> -->
-            <div class="row align-items-center">
+            <div class="row align-items-center p-1">
                 <div class="col-lg-5">
 
                     <div class="text-muted">
@@ -183,10 +183,10 @@
                         <p class="text-muted mb-4 text-justify">
                             Grâce à un réseau développé au Sénégal, de nombreux trajets en bus et car pas chers de courte et longue-distance vous sont proposés par des compagnies routières renommées. 
                             <br> Voyager en bus, c’est choisir des trajets à prix réduits dans tout le Sénégal, comparés au train et à l’avion.
-                            <br> Avec des itinéraires quotidiens vers les villes et capitales du pays, vous pouvez organiser des escapades parfaitement adaptées à tous les budgets !.
+                            <br> Avec des itinéraires quotidiens vers les villes et capitales du pays, vous pouvez organiser des escapades parfaitement adaptées à tous les budgets.
                         </p>
 
-                        <div class="button-items mb-3">
+                        <div class="button-items mb-3 home-about-lg-button">
                             <a href="{{ route('client.register') }}" class="btn btn-outline-primary">Creer votre copmte client</a>
                             <a href="{{ route('agence.create') }}" class="btn btn-outline-success">Creer votre compte agence</a>
                         </div> 
@@ -195,6 +195,11 @@
 
                 <div class="col-lg-6 ms-auto home-about-img">
                     <img src="{{('user/assets/images/dowload/setting2.png')}}" alt="" class="img-fluid mx-auto d-block">
+
+                    <div class="button-items mb-3 mt-3 home-about-sm-button">
+                        <a href="{{ route('client.register') }}" class="btn btn-outline-primary">Creer votre copmte client</a>
+                        <a href="{{ route('agence.create') }}" class="btn btn-outline-success">Creer votre compte agence</a>
+                    </div> 
                 </div>
             </div>
             <!-- end row -->
@@ -228,7 +233,7 @@
              <div class="row">
                 <div class="col-lg-12">
                     <div class="text-center mb-5">
-                        <h2 class="text-center text-primary text-uppercase">Pourquoi TouKi ?</h2>
+                        <h4 class="text-center text-primary text-uppercase">Pourquoi TouKi ?</h4>
                         <p class="text-mueted text-center fs-4">
                             Nous sommes convaincus que le digital est un facteur de croissance et de survie pour toutes entreprises quels que soient la taille et le secteur, c’est pourquoi nous nous engageons à vous accompagner à maximiser votre performance et vos résultats grâce à la digitalisation. 
                         </p>
@@ -249,7 +254,7 @@
                     <div class="mt-4 mt-md-auto">
                         <div class="d-flex align-items-center mb-2">
                            {{--<div class="features-number font-weight-semibold display-4 me-3">02</div>--}}
-                            <h1 class="mb-0">L'application incontournable des voyageurs</h1>
+                            <h4 class="mb-0">L'application incontournable des voyageurs</h4>
                         </div>
                         <p class="text-muted">
                             Téléchargez gratuitement l'application TouCki pour bénéficier d’une expertise de qualité et organiser de vos voyages en toute confiance.
@@ -267,8 +272,8 @@
                     <div>
                         <img src="{{('user/assets/images/updateClient.svg')}}" alt="" class="img-fluid mx-auto d-block">
                         <div class="button-items mb-3">
-                            <a href="" class="btn btn-primary"> <i class="bx bxl-play-store"></i> Telecharger sur Play Store</a>
-                            <a href="" class="btn btn-outline-success"> <i class="bx bxl-apple"></i> Telecharger sur App Store</a>
+                            <a href="" class="btn btn-primary"> <i class="bx bxl-play-store"></i> Télécharger sur Play Store</a>
+                            <a href="" class="btn btn-outline-success"> <i class="bx bxl-apple"></i> Télécharger sur App Store</a>
                         </div> 
                     </div>
                 </div>

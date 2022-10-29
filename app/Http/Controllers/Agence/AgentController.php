@@ -5,10 +5,9 @@ namespace App\Http\Controllers\Agence;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Agent;
 use Illuminate\Http\Request;
-use App\Models\User;
 use App\Models\Admin\Siege;
+use App\Notifications\AgentRegietsred;
 use Illuminate\Support\Str;
-use App\Notifications\RegisteredUser;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
@@ -31,17 +30,7 @@ class AgentController extends Controller
        
     }
 
-    // public function confirm($id , $token){
-    //     define('ACTIVE',1);
-    //     $user = User::where('id',$id)->where('confirmation_token',$token)->first();
-    //     if ($user) {
-    //         $user->update(['confirmation_token' => null , 'is_active' => ACTIVE]);
-    //         $this->guard()->login($user);
-    //         return redirect($this->redirectPath())->with('success','Votre compte a bien ete confirmer');
-    //     }else {
-    //         return redirect('/login')->with('error','Ce lien ne semble plus valide');
-    //     }
-    // }
+  
 
     /**
      * Show the form for creating a new resource.
@@ -82,8 +71,10 @@ class AgentController extends Controller
         $add_agent->siege_id = $request->siege;
         $add_agent->agence_id = Auth::guard('agence')->user()->id;
         $add_agent->save();
-        // Notification::route('mail',Auth::user()->email_agence)
-        //         ->notify(new RegisteredUser($add_agent));
+
+        Notification::route('mail',Auth::guard('agence')->user()->email)
+            ->notify(new AgentRegietsred($add_agent));
+
         Toastr::success('Votre agent a bien ete creer', 'Ajout agence', ["positionClass" => "toast-top-right"]);
         return back();
     }
