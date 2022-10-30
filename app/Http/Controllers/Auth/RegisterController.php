@@ -72,7 +72,7 @@ class RegisterController extends Controller
 
         Notification::route('mail',Auth::user()->email)
             ->notify(new RegisteredUser($user));
-
+        return back();
         Toastr::success('Votre compte a bien ete creer', 'Creation de compte', ["positionClass" => "toast-top-right"]);
     }
 
@@ -88,7 +88,6 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
     }
 
@@ -109,10 +108,12 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'phone' => $data['phone'],
-            'password' => Hash::make($data['password']),
+            'password' => Hash::make('password'),
             'adress' => $data['adress'],
             'logo' =>  $imageName,
             'is_admin' => 1,
+            'status' => 0,
+            'is_active' => 0,
             'confirmation_token' => str_replace('/','',Hash::make(Str::random(40))), 
             'slug' =>  str_replace('/','',Hash::make(Str::random(20).'admin'.$data['email'])),
         ]);

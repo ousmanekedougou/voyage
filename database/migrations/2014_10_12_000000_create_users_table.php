@@ -51,9 +51,9 @@ class CreateUsersTable extends Migration
             $table->string('phone')->unique();
             $table->string('password');
             $table->string('cni')->nullable();
-            $table->integer('status');
-            $table->boolean('is_admin');
-            $table->boolean('is_active');
+            $table->integer('status')->default(0);
+            $table->boolean('is_admin')->default(0);
+            $table->boolean('is_active')->default(0);
             $table->string('confirmation_token')->nullable();
             $table->string('slug')->nullable();
             $table->string('image')->nullable();

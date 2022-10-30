@@ -202,7 +202,7 @@
                         <div class="text-center mb-4">
                             <div class="avatar-md mx-auto mb-4">
                                 <div class="avatar-title bg-light rounded-circle text-primary h1">
-                                        <img src="{{ Storage::url($admin->logo) }}" alt="" class="img-thumbnail rounded-circle">
+                                        <img src="{{ Storage::url($admin->image) }}" alt="" class="img-thumbnail rounded-circle">
                                 </div>
                             </div>
 

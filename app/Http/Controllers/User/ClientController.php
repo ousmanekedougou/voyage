@@ -83,7 +83,7 @@ class ClientController extends Controller
          Notification::route('mail','ousmanelaravel@gmail.com')
         ->notify(new CustomerRegister($Customer));
         Toastr::success('Votre compte client a bien ete creer', 'Inscription', ["positionClass" => "toast-top-right"]);
-        return back();
+        return redirect()->route('index');
     }
 
     public function confirm($id , $token){

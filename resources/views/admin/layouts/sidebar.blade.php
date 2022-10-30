@@ -68,6 +68,7 @@
                         @endif
 
                         @if(Auth::guard('agent')->user())
+
                             @if(Auth::guard('agent')->user()->role == 1)
                                 {{--
                                 <li>
@@ -108,7 +109,7 @@
                                         <li><a href="{{ route('agent.bus.index') }}" key="t-products"><i class="fa fa-bus"></i>Vos Buses</a></li>
                                     </ul>
                                 </li>
-
+                                {{--
                                  <li>
                                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                                         <i class="fa fa-user-plus"></i>
@@ -118,6 +119,7 @@
                                         <li><a href="#" data-bs-toggle="modal" data-bs-target="#FooterstaticBackdrop" key="t-products" class=""> <i class="fa fa-user-plus"></i> Ajouter un client</a></li>
                                     </ul>
                                 </li>
+                                --}}
                                 <hr>
                                 <li class="menu-title" key="t-menu"> <i class="fa fa-user-check"></i> Listes de vos clients</li>
                                 @foreach(itineraire_all() as $itineraire)
@@ -172,6 +174,7 @@
                                 </li>
                                 
                             @endif
+
                             @if(Auth::guard('agent')->user()->role != 1)
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">

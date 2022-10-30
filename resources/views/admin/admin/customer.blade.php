@@ -46,7 +46,7 @@
                                         </div>
                                     </div>
                                     <div class="px-4 py-3 border-top">
-                                        <ul class="list-inline mb-0">
+                                        <ul class="list-inline mb-0 text-center">
                                             <li class="list-inline-item me-3">
                                                 @if($user->is_active == 1)
                                                 <span class="badge bg-success"><i class="bx bxs-check-circle me-1"></i>
@@ -129,10 +129,10 @@
                                                     <div class="text-muted mt-4">
                                                         <p><i class="bx bxs-envelope me-1 text-primary me-1"></i>{{$user_edit->email}} </p>
                                                         <p><i class="bx bxs-mobile text-primary me-1"></i>{{$user_edit->phone}}</p>
-                                                        <p><i class="bx bx-map-pin text-primary me-1"></i> {{ $user_edit->adress }}</p>
-                                                        <p><i class="bx bx-fingerprint text-primary me-1"></i> {{ $user_edit->registre_commerce }}</p>
+                                                        <p><i class="bx bx-map-pin text-primary me-1"></i> {{ $user_edit->region->name }}</p>
+                                                        <p><i class="bx bx-fingerprint text-primary me-1"></i> @if($user_edit->is_active == 1) Compte Actif @else Compte Inactif @endif</p>
                                                     </div>
-
+                                                    {{--
                                                     <div class="row task-dates">
                                                         <div class="col-sm-4 col-6">
                                                             <div class="mt-4">
@@ -151,6 +151,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    --}}
                                                 </div>
                                             </div>
                                         </div>

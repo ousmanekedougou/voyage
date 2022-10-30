@@ -3,6 +3,28 @@
                 <div class="d-flex">
                     <!-- LOGO -->
                     <div class="navbar-brand-box @if(Auth::guard('client')->user()) show-brand-box-bg @endif">
+
+                        @if(Auth::guard('web')->user())
+                            <a href="{{ route('admin.home') }}" class="logo logo-dark">
+                                <span class="logo-sm">
+                                    <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="22">
+                                </span>
+                                <span class="logo-lg">
+                                    <span class="text-bold text-uppercase text-white">TouCki Senegal</span>
+                                    <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="17">
+                            </a>
+
+                            <a href="{{ route('admin.home') }}" class="logo logo-light">
+                                <span class="logo-sm">
+                                    <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="22">
+                                </span>
+                                <span class="logo-lg">
+                                    <span class="text-bold text-uppercase text-white">TouCki Senegal</span>
+                                    <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="19">
+                                </span>
+                            </a>
+                        @endif
+
                         @if(Auth::guard('agent')->user())
                             <a href="{{ route('agent.home') }}" class="logo logo-dark">
                                 <span class="logo-sm">
@@ -43,6 +65,7 @@
                                 </span>
                             </a>
                         @endif
+
                         @if(Auth::guard('agence')->user())
                                <a href="{{ route('agence.agence.home') }}" class="logo logo-dark">
                                 <span class="logo-sm">
@@ -83,45 +106,9 @@
                                 </span>
                             </a>
                         @endif
-                        @if(Auth::guard('web')->user())
-                            <a href="{{ route('admin.home') }}" class="logo logo-dark">
-                                <span class="logo-sm">
-                                    @if(Auth::guard('web')->user()->logo == null)
-                                    <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="22">
-                                    @else
-                                    <img src="{{Storage::url(Auth::guard('web')->user()->logo)}}}" alt="" height="22">
-                                    @endif
-                                </span>
-                                <span class="logo-lg">
-                                    <span class="text-bold text-uppercase text-white">{{Auth::guard('web')->user()->name}}</span>
-                                    @if(Auth::guard('web')->user()->logo == null)
-                                    <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="17">
-                                    @else
-                                    <img src="{{Storage::url(Auth::guard('web')->user()->logo)}}}" alt="" height="17">
-                                    @endif
-                                </span>
-                            </a>
+                       
+                        @if(Auth::guard('client')->user())
 
-                            <a href="{{ route('admin.home') }}" class="logo logo-light">
-                                <span class="logo-sm">
-                                    @if(Auth::guard('web')->user()->logo == null)
-                                    <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="22">
-                                    @else
-                                    <img src="{{Storage::url(Auth::guard('web')->user()->logo)}}}" alt="" height="22">
-                                    @endif
-                                </span>
-                                <span class="logo-lg">
-                                    <span class="text-bold text-uppercase text-white">{{Auth::guard('web')->user()->name}}</span>
-                                    @if(Auth::guard('web')->user()->logo == null)
-                                    <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="19">
-                                    @else
-                                    <img src="{{Storage::url(Auth::guard('web')->user()->logo)}}}" alt="" height="19">
-                                    @endif
-                                </span>
-                            </a>
-                        @endif
-
-                        @if(Auth::guard('client')->user()) 
                             <a href="{{ route('customer.home') }}" class="logo logo-light show-logo-toucki">
                                 <span class="logo-sm">
                                     <img src="{{asset('admin/assets/images/logo-dark.png')}}" alt="" height="19" class="logo logo-light">    
@@ -154,13 +141,13 @@
                                     <img src="{{Storage::url(Auth::guard('client')->user()->image)}}" alt="" height="22">
                                     @endif
                                 </span>
+
+                               <span class="logo-sm">
+                                    <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="22">
+                                </span>
                                 <span class="logo-lg">
-                                    <span class="text-bold text-uppercase text-white">{{Auth::guard('client')->user()->name}}</span>
-                                    @if(Auth::guard('client')->user()->image == null)
-                                        <img src="{{ asset('admin/assets/images/users/profil.jpg') }}" alt="" height="19">
-                                    @else
-                                        <img src="{{Storage::url(Auth::guard('client')->user()->image)}}" alt="" height="19">
-                                    @endif
+                                    <span class="text-bold text-uppercase text-white">TouCki Senegal</span>
+                                    <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="19">
                                 </span>
                             </a>
 
@@ -175,11 +162,19 @@
                                     <a class="nav-link {{ set_active_roote('customer.colis.index') }} " href="{{ route('customer.colis.index') }}"><i class="fa fa-suitcase-rolling fa-fa-item"></i> </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link {{ set_active_roote('setting.index') }} " href=""><i class="bx bx-map fa-fa-item"></i></a>
+                                    <a class="nav-link {{ set_active_roote('setting.index') }} dropdown-toggle" href="" data-bs-toggle="dropdown" aria-expanded="false"><i class="bx bx-map fa-fa-item"></i></a>
+                                    <div class="dropdown-menu dropdown-menu scrollable-menu">
+                                        @foreach($autre_regions as $region)
+                                            <a href="" class="dropdown-item" >
+                                                <i class="fa fa-city text-primary"></i> {{$region->name}}
+                                            </a>
+                                        @endforeach
+                                    </div>
                                 </li>
 
                             </ul>
                         @endif
+
                     </div>
                     @if(!Auth::guard('client')->user()) 
                     <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect"
@@ -432,8 +427,8 @@
                         <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             @if(Auth::guard('web')->user())
-                                @if(Auth::guard('web')->user()->logo !== null)
-                                <img class="rounded-circle header-profile-user" src="{{ Storage::url(Auth::guard('web')->user()->logo) }}"
+                                @if(Auth::guard('web')->user()->image !== '')
+                                <img class="rounded-circle header-profile-user" src="{{ Storage::url(Auth::guard('web')->user()->image) }}"
                                     alt="Header Avatar">
                                     <span class="d-none d-xl-inline-block ms-1" key="t-henry"> {{ Auth::guard('web')->user()->name }}</span>
                                     <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>

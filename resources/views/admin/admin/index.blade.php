@@ -48,9 +48,6 @@
                                         <div class="card-footer bg-transparent border-top">
                                             <div class="contact-links d-flex font-size-20">
                                                 <div class="flex-fill">
-                                                    <a href="#" class="text-primary"><i class="bx bx-message-square-dots"></i></a>
-                                                </div>
-                                                <div class="flex-fill">
                                                     <a data-bs-toggle="modal" data-bs-target=".orderdetailsModal-{{$admin->id}}" class="text-success"><i class="bx bx-edit"></i></a>
                                                 </div>
                                                 <div class="flex-fill">
@@ -158,31 +155,6 @@
                                         <label for="manufacturerbrand">Adresse * </label>
                                         <input id="adress" name="adress" type="adress" class="form-control @error('adress') is-invalid @enderror" value="{{ old('adress') }}" required autocomplete="adress">
                                         @error('adress')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="manufacturerbrand">Password * </label>
-                                        <input id="password" name="password" type="password" class="form-control @error('password') is-invalid @enderror" value="{{ old('password') }}" required autocomplete="password">
-                                        @error('password')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-
-                                     <div class="mb-3">
-                                        <label for="manufacturerbrand">Confirm Password * </label>
-                                        <input id="password-confirm" name="password_confirmation" type="password" class="form-control @error('password') is-invalid @enderror" value="{{ old('password-confirm') }}" required autocomplete="password">
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="image">Image du membre *</label>
-                                            <input id="image" name="image" type="file" class="form-control @error('image') is-invalid @enderror" value="{{ old('image') }}" required autocomplete="image">
-                                        @error('image')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>

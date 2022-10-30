@@ -29,6 +29,7 @@ class User extends Authenticatable
         'is_admin',
         'slug',
         'confirmation_token',
+        'status'
     ];
 
     /**

@@ -16,6 +16,7 @@ class CreateNotifiesTable extends Migration
         Schema::create('notifies', function (Blueprint $table) {
             $table->id();
             $table->string('email')->unique();
+            $table->boolean('status')->default(1);
             $table->timestamps();
         });
     }

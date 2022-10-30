@@ -92,7 +92,7 @@ class ProfilController extends Controller
                     'phone' => 'required|string',
                 ]);
                 
-                $update_admin = User::Where('slug',Auth::user()->slug)->first();
+                $update_admin = User::Where('slug',Auth::guard('web')->user()->slug)->first();
                 $update_admin->name = $request->name;
                 $update_admin->email = $request->email;
                 $update_admin->phone = $request->phone;
@@ -103,29 +103,26 @@ class ProfilController extends Controller
                 $this->validate($request,[
                     'password' => 'required|string|confirmed',
                 ]);
-                $update_admin = User::Where('slug',Auth::user()->slug)->first();
+                $update_admin = User::Where('slug',Auth::guard('web')->user()->slug)->first();
                 $update_admin->password = Hash::make($request->password);
                 $update_admin->save();
                 Toastr::success('Votre mot de passe a bien ete mise a jour', 'Modifier Profile', ["positionClass" => "toast-top-right"]);
                 return back();
            }elseif ($request->hidden == 3) {
+                // dd($request->image);
                 $this->validate($request,[
                    'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
                 ]);
-               $update_admin = User::Where('slug',Auth::user()->slug)->first();
+               $update_admin = User::Where('slug',Auth::guard('web')->user()->slug)->first();
                 $imageName = '';
-                if($request->image == '')
+                if(!$request->hasFile('image'))
                 {
-                    $imageName = $update_admin->logo;
+                    $imageName = $update_admin->image;
                 }else{
-
-                    if($request->hasFile('image'))
-                    {
-                        $imageName = $request->image->store('public/Admins');
-                        Storage::delete($update_admin->image);
-                    }
+                    $imageName = $request->image->store('public/Admins');
+                    Storage::delete($update_admin->image);
                 }
-                $update_admin->logo = $imageName;
+                $update_admin->image = $imageName;
                 $update_admin->save();
                 Toastr::success('Votre image a bien ete mise a jour', 'Modifier Profile', ["positionClass" => "toast-top-right"]);
                 return back();

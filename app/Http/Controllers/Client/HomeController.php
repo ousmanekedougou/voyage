@@ -33,7 +33,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware(['isClient']);
+        $this->middleware(['isClient'])->except('confirm');
     }
 
     /**
@@ -55,7 +55,9 @@ class HomeController extends Controller
         ->orderBy('id','ASC')->paginate(12);
         $agenceAll = Agence::where('is_admin',0)->where('is_active',1)->orderBy('id','ASC')->get();
         $agenceCount = $agenceAll->count(); 
-        return view('client.index',compact('agences','agenceCount','autre_regions'));
+
+        $newsletters = Notify::all();
+        return view('client.index',compact('agences','agenceCount','autre_regions','newsletters'));
     }
     
 

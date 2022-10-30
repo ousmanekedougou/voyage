@@ -5,7 +5,7 @@ namespace App\Models\Admin;
 use App\Models\User;
 use App\Models\Admin\Agent;
 use App\Models\Admin\Siege;
-// use Illuminate\Auth\Authenticatable;
+use App\Models\User\Region;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
@@ -45,5 +45,9 @@ class Agence extends Authenticatable
 
     public function sieges(){
         return $this->hasMany(Siege::class);
+    }
+
+     public function region(){
+        return $this->belongsTo(Region::class);
     }
 }

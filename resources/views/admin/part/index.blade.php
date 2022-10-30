@@ -48,7 +48,7 @@
                                     <div class="card-footer bg-transparent border-top">
                                         <div class="contact-links d-flex font-size-20">
                                             <div class="flex-fill">
-                                                <a data-bs-toggle="modal" data-bs-target=".orderdetailsModal-{{$admin->id}}" class="text-primary"><i class="bx bx-message-square-dots"></i></a>
+                                                <a data-bs-toggle="modal" data-bs-target=".orderdetailsModal-{{$admin->id}}" class="text-primary"><i class="bx bx-show"></i></a>
                                             </div>
                                             <div class="flex-fill">
                                                 <a data-bs-toggle="modal" data-bs-target=".orderdetailsModalModification-{{$admin->id}}" class="text-success"><i class="bx bx-edit"></i></a>

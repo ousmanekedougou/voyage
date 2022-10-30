@@ -13,6 +13,7 @@
                 </div>
                 
             </footer>
+            {{--
             @if(Auth::guard('agent')->user())
             <!-- Static Backdrop Modal de l'ajout -->
             <div class="modal fade" id="FooterstaticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="FooterstaticBackdropLabel" aria-hidden="true">
@@ -121,33 +122,7 @@
                                                         @enderror
                                                     </div>
                                                 </div>
-                                                {{--
-                                                <div class="mb-3 row">
-                                                    <label class="form-label">Selectionner un bus</label>
-                                                    <div class="col-md-12">
-                                                        <select  class="form-control @error('bus') is-invalid @enderror" name="bus" required autocomplete="bus" required>
-                                                            @foreach(itineraire_all() as $itineraire)
-                                                                <optgroup label="{{$itineraire->name}}">
-                                                                    @foreach($itineraire->date_departs as $date)
-                                                                        <optgroup label="{{$date->depart_at}}" style="margin-left: 15px;">
-                                                                            @foreach($date->buses as $bus)
-                                                                                    @if($bus->plein == 0)
-                                                                                    <option value="{{ $bus->id }}"> bus {{ $bus->matricule }} N{{ $bus->number }}</option>
-                                                                                @endif
-                                                                            @endforeach
-                                                                        </optgroup>
-                                                                    @endforeach
-                                                                </optgroup>
-                                                            @endforeach
-                                                        </select>
-                                                        @error('bus')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                --}}
+                                               
                                             </div>
                                             <div class="d-flex flex-wrap gap-2">
                                                 <button type="submit" class="btn btn-primary waves-effect waves-light btn-block">
@@ -166,7 +141,7 @@
             </div>
             <!-- Fin du modal de l'ajout -->
             @endif
-           
+           --}}
 
             @section('footersection')
             @show

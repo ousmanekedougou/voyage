@@ -66,14 +66,9 @@
                                         </button>
                                         <div class="dropdown-menu dropdown-menu-end scrollable-menu" style="width: 100%;">
                                             @foreach($autre_regions as $region)
-                                                <form id="searchClients-{{$region->id}}"  action=" {{ route('agence.region',$region->slug) }} " method="post">
-                                                    @csrf 
-                                                    <input type="hidden" name="region" value="{{ $region->id }}">
-                                                </form>
-                                                <a href="#" class="dropdown-item" onclick="event.preventDefault();document.getElementById('searchClients-{{$region->id}}').submit();">
+                                                <a href="{{ route('agence.region',$region->slug) }}" class="dropdown-item" >
                                                     <i class="fa fa-city"></i> {{$region->name}}
                                                 </a>
-                                                 
                                             @endforeach
                                         </div>
                                     </div>

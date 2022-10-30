@@ -72,5 +72,9 @@ class Customer extends Authenticatable
     public function colie_clients(){
         return $this->hasMany(ColiClient::class);
     }
+
+    public function region(){
+        return $this->belongsTo(Region::class);
+    }
     
 }
