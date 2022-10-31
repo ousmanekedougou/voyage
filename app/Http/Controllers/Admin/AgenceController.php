@@ -95,11 +95,11 @@ class AgenceController extends Controller
             $update_agence->confirmation_token = str_replace('/','',Hash::make(Str::random(40)));
             $update_agence->save();
 
-            $notifys = Notify::all();
-            foreach ($notifys as $notify) {
-                Notification::route('mail','ousmanelaravel@gmail.com')
-                    ->notify(new Newsleter($notify));
-            }
+            // $notifys = Notify::where('status',1)->get();
+            // foreach ($notifys as $notify) {
+            //     Notification::route('mail','ousmanelaravel@gmail.com')
+            //         ->notify(new Newsleter($notify));
+            // }
 
             // $sendPhone = User::where('');
             // $config = array(
@@ -134,7 +134,7 @@ class AgenceController extends Controller
             $update_agence->confirmation_token = null;
             $update_agence->save();
 
-            $notifys = Notify::all();
+            $notifys = Notify::where('status',1)->get();
             foreach ($notifys as $notify) {
                 Notification::route('mail','ousmanelaravel@gmail.com')
                     ->notify(new Newsleter($notify));

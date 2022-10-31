@@ -225,6 +225,75 @@
                                                             </span>
                                                         @enderror
                                                     </div>
+                                                    <div class="mb-3">
+                                                        <label class="form-label mb-3">Choisissez les jours de voyage de cette ittineraire</label>
+                                                        <div class="row">
+                                                            <div class="col-md-3">
+                                                                <div class="form-check form-check-primary mb-3">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        id="formCheckcolor0" name="jour[]" value="0">
+                                                                    <label class="form-check-label" for="formCheckcolor0">
+                                                                        Dimanche
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3">    
+                                                                <div class="form-check form-check-success mb-3">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        id="formCheckcolor1" name="jour[]" value="1" >
+                                                                    <label class="form-check-label" for="formCheckcolor1">
+                                                                        Lundi
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <div class="form-check form-check-info mb-3">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        id="formCheckcolor2" name="jour[]" value="2" >
+                                                                    <label class="form-check-label" for="formCheckcolor2">
+                                                                        Mardi
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <div class="form-check form-check-warning mb-3">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        id="formCheckcolor3" name="jour[]" value="3" >
+                                                                    <label class="form-check-label" for="formCheckcolor3">
+                                                                        Mercredi
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <div class="col-md-3">
+                                                                <div class="form-check form-check-danger mb-3">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        id="formCheckcolor4" name="jour[]" value="4" >
+                                                                    <label class="form-check-label" for="formCheckcolor4">
+                                                                        Jeudi
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <div class="form-check form-check-pink mb-3">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        id="formCheckcolor5" name="jour[]" value="5" >
+                                                                    <label class="form-check-label" for="formCheckcolor5">
+                                                                        Vendredi
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <div class="form-check form-check-secondary mb-3">
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        id="formCheckcolor6" name="jour[]" value="6" >
+                                                                    <label class="form-check-label" for="formCheckcolor6">
+                                                                        Samdi
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="d-flex flex-wrap gap-2">
                                                     <button type="submit" class="btn btn-primary waves-effect waves-light btn-block">

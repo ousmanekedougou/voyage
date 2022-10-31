@@ -33,6 +33,9 @@ Route::get('/contact', [App\Http\Controllers\User\ContactController::class, 'ind
 Route::post('/contact/store', [App\Http\Controllers\User\ContactController::class, 'store'])->name('contact.store');
 Route::post('/contact/post', [App\Http\Controllers\User\ContactController::class, 'post'])->name('contact.post');
 
+Route::get('/contact/desaboner', [App\Http\Controllers\User\ContactController::class, 'desaboner'])->name('contact.desaboner');
+Route::put('/contact/dislogin', [App\Http\Controllers\User\ContactController::class, 'dislogin'])->name('contact.dislogin');
+
 Route::get('/client', [App\Http\Controllers\User\ClientController::class, 'index'])->name('client.index');
 Route::get('/client/register', [App\Http\Controllers\User\ClientController::class, 'register'])->name('client.register');
 Route::post('/client/store', [App\Http\Controllers\User\ClientController::class, 'store'])->name('client.store');

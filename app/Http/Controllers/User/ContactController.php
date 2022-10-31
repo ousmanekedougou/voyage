@@ -71,6 +71,20 @@ class ContactController extends Controller
         Toastr::success('Votre message a ete envoyer', 'Message', ["positionClass" => "toast-top-right"]);
         return back();
     }
+
+    public function desaboner()
+    {
+        return view('user.notification.desaboner');
+    }
+
+    public function dislogin(){
+        
+        Notify::where('email',request()->email)->update([
+            'status' => 0
+        ]);
+        Toastr::success('Votre desabonnement a bie reussie ', 'Message', ["positionClass" => "toast-top-right"]);
+        return redirect()->route('index');
+    }
 }
 
 

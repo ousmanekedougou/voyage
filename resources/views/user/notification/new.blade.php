@@ -46,7 +46,7 @@
                                         <div class="content" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; max-width: 600px; display: block; margin: 0 auto; padding: 20px;">
                                             <table class="main" width="100%" cellpadding="0" cellspacing="0" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; border-radius: 7px; background-color: #fff; color: #495057; margin: 0; box-shadow: 0 0.75rem 1.5rem rgba(18,38,63,.03);" bgcolor="#fff">
                                                 <td class="alert alert-success" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 16px; vertical-align: top; color: #fff; font-weight: 500; text-align: center; border-radius: 7px 7px 0 0; background-color: #556ee6; margin: 0; padding: 20px;" align="center" bgcolor="#71b6f9 display:flex;" valign="top">
-                                                    Activation de compte agence
+                                                    Activation d'une agence de transport
                                                 </td>
                                                 <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                                     <td class="content-wrap" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 20px;" valign="top">
@@ -62,20 +62,19 @@
                                                                     A locurence {{$user->name}} qui se trouve a {{$user->adresse}} 
                                                                 </td>
                                                             </tr>
+
                                                             <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                                                 <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
-                                                                    Vous pouvez payer votre ticker en ligne en cliquant sur le bouton ci-dessous
+                                                                    Pour toute question n'hesitez pas a nous contacter sur ce numero 77 000 00 00, ou sur <a href="http://localhost:8000/#contact" target="_blank" rel="noopener noreferrer" data-bs-toggle="modal"
+                                            data-bs-target=".bs-exampleLogin-modal-lg">le formulaire de contact</a>
+                                                                    <br>
+                                                                    Si vous ne souhaitez plus recevoire nos offres <a href="{{ route('contact.desaboner') }}" target="_blank" rel="noopener noreferrer">cliquez ici </a>
                                                                 </td>
                                                             </tr>
+
                                                             <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                                                 <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
                                                                     Merci d'avoir choisi Tocki.
-                                                                </td>
-                                                            </tr>
-                                                            <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
-                                                                <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
-                                                                    <b>Skote</b>
-                                                                    <p>Support Team</p>
                                                                 </td>
                                                             </tr>
 

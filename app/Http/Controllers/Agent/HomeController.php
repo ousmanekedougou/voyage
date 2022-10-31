@@ -88,7 +88,7 @@ class HomeController extends Controller
             // }
         }
 
-         DateDepart::where('depart_at','<',Carbon::today()->format('Y-m-d'))->delete();
+        DateDepart::where('depart_at','<',Carbon::today()->format('Y-m-d'))->delete();
 
         if ($this->middleware(['IsAgent']) && Auth::guard('agent')->user()->role == 2) {
             Bagage::where('created_at','<',Carbon::yesterday())->delete();
@@ -121,7 +121,7 @@ class HomeController extends Controller
         $user = Agent::where('id',$id)->where('confirmation_token',$token)->first();
         if ($user) {
             $user->update(['confirmation_token' => null , 'is_active' => ACTIVE]);
-            $this->guard()->login($user);
+            $this->guard('agent')->login($user);
             return redirect($this->redirectPath())->with('success','Votre compte a bien ete confirmer');
         }else {
             return redirect('/agent/login')->with('error','Ce lien ne semble plus valide');
