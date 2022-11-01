@@ -107,6 +107,7 @@
 
                 <!-- Modal de la modification -->
                 @foreach($itineraires as $edit_itineraire)
+
                     <div class="modal fade" id="staticBackdropedititineraire-{{$edit_itineraire->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-md modal-dialog-centered" role="document">
                             <div class="modal-content ">
@@ -131,6 +132,51 @@
                                                                 </span>
                                                             @enderror
                                                         </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label mb-3">Choisissez les jours de voyage de cette ittineraire</label>
+                                                            <div class="row">
+                                                                @foreach($jours as $jr)
+                                                                <div class="col-md-3">
+                                                                    <div class="form-check mb-3
+                                                                        @if($jr->index == 0)
+                                                                            form-check-primary
+                                                                        @elseif($jr->index == 1)
+                                                                            form-check-success
+                                                                        @elseif($jr->index == 2)
+                                                                            form-check-info
+                                                                        @elseif($jr->index == 3)
+                                                                            form-check-secondary
+                                                                        @elseif($jr->index == 4)
+                                                                            form-check-warning
+                                                                        @elseif($jr->index == 5)
+                                                                            form-check-danger
+                                                                        @elseif($jr->index == 6)
+                                                                            form-check-default
+                                                                        @endif
+                                                                    ">
+                                                                        <input class="form-check-input @error('name') is-invalid @enderror" type="checkbox"
+                                                                            id="formCheckcolor-{{$jr->id}}" name="jour[]" value="{{ old('name') ?? $jr->index }}"
+                                                                            
+                                                                            @foreach(unserialize($edit_itineraire->jours) as $jr_unserilize)
+                                                                                @if($jr->index == $jr_unserilize)
+                                                                                    checked
+                                                                                @endif
+                                                                            @endforeach
+
+                                                                            >
+                                                                        <label class="form-check-label" for="formCheckcolor-{{$jr->id}}">
+                                                                            {{$jr->name}}
+                                                                        </label>
+                                                                    </div>
+                                                                    @error('jour[]')
+                                                                        <span class="invalid-feedback" role="alert">
+                                                                            <strong>{{ $message }}</strong>
+                                                                        </span>
+                                                                    @enderror
+                                                                </div>
+                                                                @endforeach
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                     <div class="d-flex flex-wrap gap-2">
                                                         <button type="submit" class="btn btn-primary waves-effect waves-light btn-block">
@@ -147,6 +193,7 @@
                             </div>
                         </div>
                     </div>
+                    
                 @endforeach
                 <!-- Fin du modal de la modification -->
 
@@ -228,70 +275,22 @@
                                                     <div class="mb-3">
                                                         <label class="form-label mb-3">Choisissez les jours de voyage de cette ittineraire</label>
                                                         <div class="row">
+                                                            @foreach($jours as $jr)
                                                             <div class="col-md-3">
                                                                 <div class="form-check form-check-primary mb-3">
-                                                                    <input class="form-check-input" type="checkbox"
-                                                                        id="formCheckcolor0" name="jour[]" value="0">
-                                                                    <label class="form-check-label" for="formCheckcolor0">
-                                                                        Dimanche
+                                                                    <input class="form-check-input @error('name') is-invalid @enderror" type="checkbox"
+                                                                        id="formCheckcolor-{{$jr->id}}" name="jour[]" value="{{ old('name') ?? $jr->index }}">
+                                                                    <label class="form-check-label" for="formCheckcolor-{{$jr->id}}">
+                                                                        {{$jr->name}}
                                                                     </label>
                                                                 </div>
+                                                                @error('jour[]')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
                                                             </div>
-                                                            <div class="col-md-3">    
-                                                                <div class="form-check form-check-success mb-3">
-                                                                    <input class="form-check-input" type="checkbox"
-                                                                        id="formCheckcolor1" name="jour[]" value="1" >
-                                                                    <label class="form-check-label" for="formCheckcolor1">
-                                                                        Lundi
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <div class="form-check form-check-info mb-3">
-                                                                    <input class="form-check-input" type="checkbox"
-                                                                        id="formCheckcolor2" name="jour[]" value="2" >
-                                                                    <label class="form-check-label" for="formCheckcolor2">
-                                                                        Mardi
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <div class="form-check form-check-warning mb-3">
-                                                                    <input class="form-check-input" type="checkbox"
-                                                                        id="formCheckcolor3" name="jour[]" value="3" >
-                                                                    <label class="form-check-label" for="formCheckcolor3">
-                                                                        Mercredi
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            
-                                                            <div class="col-md-3">
-                                                                <div class="form-check form-check-danger mb-3">
-                                                                    <input class="form-check-input" type="checkbox"
-                                                                        id="formCheckcolor4" name="jour[]" value="4" >
-                                                                    <label class="form-check-label" for="formCheckcolor4">
-                                                                        Jeudi
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <div class="form-check form-check-pink mb-3">
-                                                                    <input class="form-check-input" type="checkbox"
-                                                                        id="formCheckcolor5" name="jour[]" value="5" >
-                                                                    <label class="form-check-label" for="formCheckcolor5">
-                                                                        Vendredi
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3">
-                                                                <div class="form-check form-check-secondary mb-3">
-                                                                    <input class="form-check-input" type="checkbox"
-                                                                        id="formCheckcolor6" name="jour[]" value="6" >
-                                                                    <label class="form-check-label" for="formCheckcolor6">
-                                                                        Samdi
-                                                                    </label>
-                                                                </div>
-                                                            </div>
+                                                            @endforeach
                                                         </div>
                                                     </div>
                                                 </div>

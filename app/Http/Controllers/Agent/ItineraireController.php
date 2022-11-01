@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Agent;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Itineraire;
+use App\Models\Admin\Jour;
 use App\Models\Admin\Ville;
 use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\Console\Input\Input;
 
 class ItineraireController extends Controller
 {
@@ -26,7 +28,8 @@ class ItineraireController extends Controller
     {
         $villes = Ville::all();
         $itineraires = Itineraire::where('siege_id',Auth::guard('agent')->user()->siege_id)->orderBy('id','ASC')->paginate(5);
-        return view('agent.itineraire.index',compact('itineraires','villes'));
+        $jours = Jour::all();
+        return view('agent.itineraire.index',compact('itineraires','villes','jours'));
     }
 
     /**
@@ -49,11 +52,15 @@ class ItineraireController extends Controller
     {
         $this->validate($request,[
             'name' => 'required|string|max:255|unique:itineraires',
+            // 'jour[]' => 'required|string',
         ]);
         $add_itineraire = new Itineraire();
         $add_itineraire->name = $request->name;
         // $add_itineraire->user_id = Auth::user()->id;
         $add_itineraire->siege_id = Auth::guard('agent')->user()->siege_id;
+
+        $add_itineraire->jours = serialize($request->jour);
+
         $add_itineraire->save();
         Toastr::success('Votre itineraire a bien ete creer', 'Ajout Itineraire', ["positionClass" => "toast-top-right"]);
         return back();
@@ -94,11 +101,15 @@ class ItineraireController extends Controller
     {
         $this->validate($request,[
             'name' => 'required|string',
+            // 'jour[]' => 'required|string',
         ]);
+        
         $update_itineraire = Itineraire::where('id',$id)->first();
+
         $update_itineraire->name = $request->name;
         // $update_itineraire->user_id = Auth::user()->id;
         $update_itineraire->siege_id = Auth::guard('agent')->user()->siege_id;
+        $update_itineraire->jours = serialize($request->jour);
         $update_itineraire->save();
         Toastr::success('Votre itineraire a bien ete modifier', 'Modifier Itineraire', ["positionClass" => "toast-top-right"]);
         return back();

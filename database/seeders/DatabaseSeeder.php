@@ -35,6 +35,7 @@ class DatabaseSeeder extends Seeder
                 'index' => $index
             ]);
        }
+
        $regions = [
             'Dakar','Kaolack','Thies',
             'Saint Louis','Diourbel',

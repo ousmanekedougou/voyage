@@ -17,7 +17,8 @@ class CreateJoursTable extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->integer('index')->unique();
-            // $table->dateTime('dateOfWeek')->unique();
+            // $table->integer('itineraire_id')->nullable();
+            // $table->integer('siege_id')->nullable();
             $table->timestamps();
         });
     }
