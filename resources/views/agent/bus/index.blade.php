@@ -15,7 +15,7 @@
                             <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                                 <h4 class="mb-sm-0 font-size-18">Liste des bus</h4>
                                 <div class="text-sm-end">
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-primary text-white button_ajout_client"
+                                    <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-success text-white button_ajout_client"
                                         class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2"><i
                                             class="mdi mdi-plus me-1"></i>Ajouter un bus</button>
                                 </div>
@@ -23,9 +23,10 @@
                         </div>
                     </div>
                     <!-- end page title -->
-
-                    <div class="row">
-                        @foreach($buses as $bus)
+                @foreach($itineraires as $itineraire)
+                <h4 class="mb-sm-0 btn btn-primary btn-sm btn-block font-size-12" style="width: 100%;">Les buses de {{ $itineraire->name }}</h4>
+                    <div class="row mt-3">
+                        @foreach($itineraire->buses as $bus)
                          <div class="col-xl-4 col-sm-6">
                             <div class="card">
                                 <div class="card-body">
@@ -39,33 +40,26 @@
                                         <div class="media-body overflow-hidden">
                                             <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">Bus : {{$bus->number}} | M :{{$bus->matricule}}</a></h5>
                                             <p class="text-muted mb-1">{{$bus->place}} Place</p>
-                                            <p class="text-muted mb-1"> Date : 
-                                                @if($bus->date_depart->depart_at != '')
-                                                    {{ $bus->date_depart->depart_at }}
+                                            <p class="text-muted mb-1">
+                                                {{$bus->itineraire->name}} 
+                                            </p>
+                                            <p class="text-muted mb-1">
+                                                @if($bus->inscrit == 0)
+                                                    <span class="badge bg-primary font-size-10"><i class="mdi mdi-star me-1"></i>0 / {{ $bus->place }}</span>
                                                 @else
-                                                    Pas de date
+                                                    <span class="badge bg-success font-size-10"><i class="mdi mdi-star me-1"></i>{{ $bus->inscrit }} / {{ $bus->place }}</span>
                                                 @endif
                                             </p>
-                                            <div class="avatar-group text-left">
-                                                {{$bus->itineraire->name}} 
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="px-4 py-3 border-top">
+                                <div class="px-4 py-3 border-top text-center">
                                     <ul class="list-inline mb-0">
                                         <li class="list-inline-item me-2">
                                             @if($bus->plein == 1)
                                                 <span class="badge bg-success">Plein</span>
                                             @else
                                                 <span class="badge bg-warning">En cours</span>
-                                            @endif
-                                        </li>
-                                        <li class="list-inline-item me-2">
-                                            @if($bus->inscrit == 0)
-                                                <span class="badge bg-primary font-size-12"><i class="mdi mdi-star me-1"></i>0 / {{ $bus->place }}</span>
-                                            @else
-                                                <span class="badge bg-success font-size-12"><i class="mdi mdi-star me-1"></i>{{ $bus->inscrit }} / {{ $bus->place }}</span>
                                             @endif
                                         </li>
                                         <li class="list-inline-item me-2">
@@ -121,9 +115,9 @@
                             </div>
                         </div>
                         @endforeach
-                         {{$buses->links()}}
+                        
                     </div>
-
+                @endforeach
                    
 
                 </div> <!-- container-fluid -->
@@ -181,31 +175,6 @@
                                                                 @enderror
                                                         </div>
                                                     </div>
-
-                                                    {{--
-                                                    <div class="mb-3 row">
-                                                        <label class="form-label">Selectionner un status</label>
-                                                        <div class="col-md-12">
-                                                            <select class="form-select" class="form-control @error('status') is-invalid @enderror" name="status" required autocomplete="status" required>
-                                                                    <option value="1"
-                                                                        @if($edit_bus->status == 1)
-                                                                        selected
-                                                                        @endif
-                                                                    >Va voyager</option>
-                                                                    <option value="2"
-                                                                            @if($edit_bus->status == 2)
-                                                                        selected
-                                                                        @endif
-                                                                    >Ne voyage pas</option>
-                                                            </select>
-                                                            @error('status')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-                                                    --}}
                                                     <div class="mb-3 row">
                                                         <label class="form-label">Selectionner un itineraire</label>
                                                         <div class="col-md-12">
@@ -219,23 +188,6 @@
                                                                     @endforeach
                                                             </select>
                                                             @error('itineraire')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
-                                                            @enderror
-                                                        </div>
-                                                    </div>
-                                                    <div class="mb-3 row">
-                                                        <label class="form-label">Selectionner une date</label>
-                                                        <div class="col-md-12">
-                                                            <select class="form-select" class="form-control @error('date') is-invalid @enderror" name="date" required autocomplete="date" required>
-                                                                @foreach($itineraires as $itineraire)
-                                                                    @foreach($itineraire->date_departs as $date)
-                                                                        <option value="{{ $date->id }}"> {{ $date->depart_at }}</option>
-                                                                    @endforeach
-                                                                @endforeach
-                                                            </select>
-                                                            @error('date')
                                                                 <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
                                                                 </span>
@@ -338,24 +290,6 @@
                                                             @enderror
                                                     </div>
                                                 </div>
-
-                                               
-                                                {{--
-                                                <div class="mb-3 row">
-                                                    <label class="form-label">Selectionner un status</label>
-                                                    <div class="col-md-12">
-                                                        <select class="form-select" class="form-control @error('status') is-invalid @enderror" name="status" required autocomplete="status" required>
-                                                                <option value="1">Va voyager</option>
-                                                                <option value="2">Ne voyage pas</option>
-                                                        </select>
-                                                        @error('status')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                --}}
                                                 <div class="mb-3 row">
                                                     <label class="form-label">Selectionner une itineraire</label>
                                                     <div class="col-md-12">
@@ -365,23 +299,6 @@
                                                             @endforeach
                                                         </select>
                                                         @error('itineraire')
-                                                            <span class="invalid-feedback" role="alert">
-                                                                <strong>{{ $message }}</strong>
-                                                            </span>
-                                                        @enderror
-                                                    </div>
-                                                </div>
-                                                <div class="mb-3 row">
-                                                    <label class="form-label">Selectionner une date</label>
-                                                    <div class="col-md-12">
-                                                        <select class="form-select" class="form-control @error('date') is-invalid @enderror" name="date" required autocomplete="date" required>
-                                                            @foreach($itineraires as $itineraire)
-                                                                @foreach($itineraire->date_departs as $date)
-                                                                    <option value="{{ $date->id }}"> {{ $date->depart_at }}</option>
-                                                                @endforeach
-                                                            @endforeach
-                                                        </select>
-                                                        @error('date')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
                                                             </span>

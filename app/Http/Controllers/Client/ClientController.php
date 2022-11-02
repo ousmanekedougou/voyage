@@ -1,30 +1,15 @@
 <?php
 
 namespace App\Http\Controllers\Client;
-
-use App\Helpers\OrangeMoney;
 use App\Http\Controllers\Controller;
-use App\Models\Admin\Bagage;
-use App\Models\Admin\BagageClient;
 use App\Models\Admin\Bus;
-use App\Models\Admin\ColiClient;
 use App\Models\Admin\Colie;
-use App\Models\Admin\Itineraire;
 use App\Models\User\Client;
-use App\Notifications\RegisteredClient;
-use Illuminate\Support\Str;
-use App\Models\Admin\DateDepart;
 use App\Models\Admin\Siege;
+use App\Models\Admin\Ville;
 use App\Models\User;
-use App\Models\User\Contact;
-use App\Models\User\Customer;
-use App\Models\User\Region;
-use App\Notifications\ContactSiegeEmail;
-use App\Notifications\CustomerRegister;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Notification;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
 
@@ -75,16 +60,29 @@ class ClientController extends Controller
         // dd($request->all());
         $this->validate($request,[
             'ville' => 'required|numeric',
-            'date' => 'required|string',
+            'date' => 'required|date',
         ]);
-        // $clients = Client::where('bus_id',$request->bus)->get();
-        // $buse = Bus::where('id',$request->bus)->first();
-        $date = DateDepart::where('id',$request->date)->first();
-        // dd($date->itineraire_id);
-        $buse = Bus::where('date_depart_id',$date->id)->where('itineraire_id',$date->itineraire_id)->where('plein',0)->first();
+        $ville = Ville::where('id',$request->ville)->first();
+        $buse = Bus::where('itineraire_id',$ville->itineraire_id)->where('plein',0)->first();
+
+        // dd($request->date);
+
+        $time = Carbon::today();
+
+        // dd($time->dayOfWeek);
+
+        // $userialize_buse = unserialize($buse->itineraire->jours);
+
+        // $date_today = $request->date;
         
-        $clients = Client::where('bus_id',$buse->id)->get();
-        $info_user = Client::where('registered_at',$buse->date_depart->depart_at)
+        // $dayOfweek = $date_today->dayOfWeek;
+
+        // dd($dayOfweek);
+        
+        // dd($userialize_buse);
+
+        $clients = Client::where('bus_id',$buse->id)->where('registered_at',$request->date)->get();
+        $info_user = Client::where('registered_at',$request->date)
         ->where('customer_id',Auth::guard('client')->user()->id)
         ->where('voyage_status',0)
         ->first();
@@ -94,28 +92,33 @@ class ClientController extends Controller
         }else {
             if ($clients->count() < $buse->place) {
 
-                $buse->update(['inscrit' => $buse->inscrit + 1]);
-                $add_client = new Client();
-                $add_client->ville_id = $request->ville;
-                $add_client->bus_id = $buse->id;
-                $add_client->siege_id = $buse->siege->id;
-                $add_client->customer_id = Auth::guard('client')->user()->id;
-                $add_client->position = $buse->inscrit;
-                $add_client->registered_at = $buse->date_depart->depart_at;
-                // $add_client->heure = $buse->date_depart->rendez_vous;
-                // $add_client->reference = reference();
-                $add_client->voyage_status = 0;
-                $add_client->save();
-                
-                // Notification::route('mail',$buse->siege->email)
-                // ->notify(new RegisteredClient($add_client,1));
-                Toastr::success('Votre inscription a bien ete enregistre sur '.$add_client->siege->agence->name, 'Inscription', ["positionClass" => "toast-top-right"]);
-                return back();
+                if ($request->date == Carbon::today() || $request->date > Carbon::today()) {
+
+                    $buse->update(['inscrit' => $buse->inscrit + 1]);
+                    $add_client = new Client();
+                    $add_client->ville_id = $request->ville;
+                    $add_client->bus_id = $buse->id;
+                    $add_client->siege_id = $buse->siege->id;
+                    $add_client->customer_id = Auth::guard('client')->user()->id;
+                    $add_client->position = $buse->inscrit;
+                    $add_client->registered_at = $request->date;
+                    $add_client->voyage_status = 0;
+                    $add_client->save();
+                    
+                    // Notification::route('mail',$buse->siege->email)
+                    // ->notify(new RegisteredClient($add_client,1));
+
+                    Toastr::success('Votre inscription a bien ete enregistre sur '.$add_client->siege->agence->name, 'Inscription', ["positionClass" => "toast-top-right"]);
+                    return back();
+
+                }else{
+                    Toastr::warning('Votre date doit etre aujourdhuit ou demain','Error Inscription', ["positionClass" => "toast-top-right"]);
+                    return back();
+                }
             }else if ($clients->count() == $buse->place){
+
                 $buse->update(['plein' =>  1]);
-                // $bus_plein = Bus::where('id',$buse->id)->first();
-                // $bus_plein->plein = 1;
-                // $bus_plein->save();
+
                 Toastr::warning('Ce bus est plein', 'Inscription', ["positionClass" => "toast-top-right"]);
                 return back();
             }
@@ -179,10 +182,10 @@ class ClientController extends Controller
             'ville' => 'required|numeric',
             'date' => 'required|string',
         ]);
-        $date = DateDepart::where('id',$request->date)->first();
-        $buse = Bus::where('date_depart_id',$date->id)->where('itineraire_id',$date->itineraire_id)->where('plein',0)->first();
+        $ville = Ville::where('id',$request->ville)->first();
+        $buse = Bus::where('itineraire_id',$ville->itineraire_id)->where('plein',0)->first();
         
-        $info_user = Client::where('registered_at',$buse->date_depart->depart_at)
+        $info_user = Client::where('registered_at',$request->date)
         ->where('customer_id',Auth::guard('client')->user()->id)
         ->where('voyage_status',0)
         ->where('amount',null)
@@ -190,8 +193,8 @@ class ClientController extends Controller
         if ($info_user) {
             Client::where('id',$id)->update([
                 'ville_id' => $request->ville,
-                'registered_at' => $buse->date_depart->depart_at,
-                'heure' => $buse->date_depart->rendez_vous
+                'registered_at' => $request->date,
+                // 'heure' => $buse->date_depart->rendez_vous
             ]);
             Toastr::success('Votre ticket a bien ete modifier', 'Modification Ticket', ["positionClass" => "toast-top-right"]);
             return back();

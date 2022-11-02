@@ -35,8 +35,5 @@ class Bus extends Model
         return $this->hasMany(Client::class);
     }
 
-      public function date_depart()
-    {
-        return $this->belongsTo(DateDepart::class);
-    }
+    
 }

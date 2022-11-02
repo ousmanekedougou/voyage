@@ -102,15 +102,15 @@ Route::prefix('/agent')->name('agent.')->group(function()
     Route::get('/historique/show/{id}', [App\Http\Controllers\Agent\HistoriqueController::class,'show'])->name('historique.show');
     Route::post('/historique/search', [App\Http\Controllers\Agent\HistoriqueController::class,'search'])->name('historique.search');
     Route::put('/historique/rembourser/{id}', [App\Http\Controllers\Agent\HistoriqueController::class,'rembourser'])->name('historique.rembourser');
+
+    Route::resource('/client', App\Http\Controllers\Agent\ClientController::class);
     Route::put('/client/presence/{id}', [App\Http\Controllers\Agent\ClientController::class,'presence'])->name('client.presence'); 
     Route::put('/client/payer/{id}', [App\Http\Controllers\Agent\ClientController::class, 'payer'])->name('payer');
     Route::get('/client/ticker/{id}', [App\Http\Controllers\Agent\ClientController::class, 'ticker'])->name('ticker');
 
     Route::resource('/bus', App\Http\Controllers\Agent\BusController::class);
     Route::resource('/itineraire', App\Http\Controllers\Agent\ItineraireController::class);
-    Route::resource('/depart', App\Http\Controllers\Agent\DepartController::class);
     Route::resource('/ville', App\Http\Controllers\Agent\VilleController::class);
-    Route::resource('/client', App\Http\Controllers\Agent\ClientController::class);
 
     Route::resource('/bagage', App\Http\Controllers\Agent\BagageController::class); 
     Route::resource('/colis', App\Http\Controllers\Agent\ColiController::class);
@@ -122,7 +122,7 @@ Route::prefix('/agent')->name('agent.')->group(function()
     Route::resource('/contact',App\Http\Controllers\Agent\ContactController::class);
 
 
-     Route::get('/profil/show/{slug}', [App\Http\Controllers\Agent\ProfilController::class,'show'])->name('profil.show'); 
+    Route::get('/profil/show/{slug}', [App\Http\Controllers\Agent\ProfilController::class,'show'])->name('profil.show'); 
     Route::put('/profil/update/{slug}', [App\Http\Controllers\Agent\ProfilController::class,'update'])->name('profil.update');
     
     Route::put('/profil/sendSms/{id}', [App\Http\Controllers\Agent\ProfilController::class,'sendSms'])->name('profil.sendSms');

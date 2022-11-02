@@ -93,15 +93,6 @@
                                 </li>
                                 <li>
                                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                        <i class="fa fa-clock"></i>
-                                        <span key="t-contacts">Dates</span>
-                                    </a>
-                                    <ul class="sub-menu" aria-expanded="false">
-                                        <li><a href="{{ route('agent.depart.index') }}" key="t-products"> <i class="fa fa-clock"></i> Vos Dates</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
                                         <i class="fa fa-bus"></i>
                                         <span key="t-contacts">Buses</span>
                                     </a>
@@ -130,30 +121,19 @@
                                         </a>
                                     
                                         <ul class="sub-menu" aria-expanded="false">
-                                            @foreach($itineraire->date_departs as $date)
                                                 
-                                                    <li>
-                                                        <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                                            <span key="" class="fa fa-clock">
-                                                                @if($date->depart_at == carbon_today())
-                                                                    <span class="text-success">Aujourd'huit</span>
-                                                                @elseif($date->depart_at == carbon_tomorrow())
-                                                                    <span class="text-primary">Demain</span>
-                                                                @elseif($date->depart_at == carbon_after_tomorrow())
-                                                                    <span class="text-warning">Apres demain</span>
-                                                                @elseif($date->depart_at > carbon_after_tomorrow())
-                                                                    Le {{ $date->depart_at }}
-                                                                @endif
-                                                            </span>
-                                                        </a>
-                                                        <ul class="sub-menu" aria-expanded="false">
-                                                            @foreach($date->buses as $bus)
-                                                                <li><a href="{{route('agent.client.show',$bus->id)}}" key="t-products"> <i class="bx bxs-bus Bus"></i>   Bus  {{ $bus->number }} | {{ $bus->matricule }}</a></li>
-                                                            @endforeach
-                                                        </ul>
-                                                    </li>
-                                                
-                                            @endforeach
+                                            <li>
+                                                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                                    <span key="" class="fa fa-bus">
+                                                            <span class="">Vos Buses</span>
+                                                    </span>
+                                                </a>
+                                                <ul class="sub-menu" aria-expanded="false">
+                                                    @foreach($itineraire->buses as $bus)
+                                                        <li><a href="{{route('agent.client.show',$bus->id)}}" key="t-products"> <i class="bx bxs-bus Bus"></i>   Bus  {{ $bus->number }} | {{ $bus->matricule }}</a></li>
+                                                    @endforeach
+                                                </ul>
+                                            </li>
                                         </ul>
                                     </li>
                                 @endforeach

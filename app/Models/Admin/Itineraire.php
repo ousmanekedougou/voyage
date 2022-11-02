@@ -26,8 +26,5 @@ class Itineraire extends Model
         return $this->belongsTo(Siege::class);
     }
 
-    public function date_departs()
-    {
-        return $this->hasMany(DateDepart::class);
-    }
+    
 }

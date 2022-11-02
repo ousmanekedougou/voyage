@@ -10,6 +10,7 @@ use App\Models\Admin\Bus;
 use App\Models\Admin\Siege;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\User\Notify;
 use App\Models\User\Region;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -50,6 +51,7 @@ class AgenceController extends Controller
 
     public function region($slug){
         $region = Region::where('slug',$slug)->first();
+        $newsletters = Notify::all();
         $agences = Agence::where('is_admin',0)
         ->where('is_active',1)
         ->where('region_id',$region->id)
@@ -62,7 +64,7 @@ class AgenceController extends Controller
             $sieges = Siege::all();
             $autre_regions = Region::where('name','!=',$get_user_geo->city)->orWhere('slug','!=',$get_user_geo->state_name)->get();
 
-            return view('client.index',compact('agences','sieges','agenceCount'));
+            return view('client.index',compact('agences','sieges','agenceCount','newsletters'));
         }else {
             Toastr::warning('Il n\'y a pas d\'agence de transport pour la region de '.$region->name, 'Pas d\'agence', ["positionClass" => "toast-top-right"]);
             return back();

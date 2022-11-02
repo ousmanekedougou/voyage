@@ -137,87 +137,7 @@ class ClientController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-         $this->validate($request,[
-            'name' => 'required|string',
-            'email' => 'required|string|email|max:255|unique:clients',
-            'phone' => 'required|string|max:255|unique:clients',
-            'cni' => 'required|string|max:255|unique:clients',
-            'ville' => 'required|numeric',
-            'date' => 'required|string',
-        ]);
-       
-        // $buse = Bus::where('id',$request->bus)->first();
-        $date = DateDepart::where('id',$request->date)->first();
-        $buse = Bus::where('date_depart_id',$date->id)->where('siege_id',Auth::guard('agent')->user()->siege_id)->where('plein',0)->first();
-        if ($buse) {
-            $clients = Client::where('bus_id',$buse->id)->get();
-            $info_email = Client::where('registered_at',$buse->date_depart->depart_at)->where('email',$request->email)->first();
-            $info_phone = Client::where('registered_at',$buse->date_depart->depart_at)->where('phone',$request->phone)->first();
-            $info_cni = Client::where('registered_at',$buse->date_depart->depart_at)->where('cni',$request->cni)->first();
-            if ($info_email == true) {
-                Toastr::error('Cette adresse email est utiliser pour cette date', 'Error email', ["positionClass" => "toast-top-right"]);
-                return back();
-            }elseif ($info_phone == true) {
-                Toastr::error('Ce numero de telephone est utiliser pour cette date', 'Error phone', ["positionClass" => "toast-top-right"]);
-                return back();
-            }elseif ($info_cni == true) {
-                Toastr::error('Ce numero de CNI est utiliser pour cette date', 'Error CNI', ["positionClass" => "toast-top-right"]);
-                return back();
-            }else {
-                if ($clients->count() < $buse->place) {
-                    $pl = $buse->inscrit;
-                    $buse->inscrit = $pl + 1;
-                    $buse->save();
-                    
-                    $phoneFinale = '';
-                    $phoneComplet = '221'.$request->phone;
-                    if (strlen($request->phone) == 12 ) {
-                        $phoneFinale = $request->phone;
-                    }elseif (strlen($request->phone) == 9) {
-                        $phoneFinale = $phoneComplet;
-                    }else {
-                        Toastr::error('votre numero de telephone est invalid', 'Error CNI', ["positionClass" => "toast-top-right"]);
-                        return back();
-                    }
-
-                     $cni_final = '';
-
-                    if (strlen($request->cni) == 13) {
-                        $cni_final = $request->cni;
-                    }else{
-                        return back()->with('error','votre numero de piece est invalide');
-                    }
-                    $amonut = Ville::where('id',$request->ville)->first();
-                    $add_client = new Client();
-                    $add_client->name = $request->name;
-                    $add_client->email = $request->email;
-                    $add_client->phone = $phoneFinale;
-                    $add_client->cni = $cni_final;
-                    $add_client->ville_id = $request->ville;
-                    $add_client->amount = $amonut->amount;
-                    $add_client->bus_id = $buse->id;
-                    $add_client->position = $buse->inscrit;
-                    $add_client->registered_at = $buse->date_depart->depart_at;
-                    $add_client->heure = $buse->date_depart->rendez_vous;
-                    $add_client->siege_id = Auth::guard('agent')->user()->siege_id;
-                    $add_client->save();
-                    Toastr::success('Votre client a ete bien ete ajoute', 'Ajout Client', ["positionClass" => "toast-top-right"]);
-                    return back();
-                }else if ($clients->count() == $buse->place){
-                    $bus_plein = Bus::where('id',$buse->id)->first();
-                    $bus_plein->plein = 1;
-                    $bus_plein->save();
-                    Toastr::error('Ce bus est pelin', 'Bus Plein', ["positionClass" => "toast-top-right"]);
-                    return back();
-                }
-            }
-         }else{
-            Toastr::error('Ce bus n\'existe pas', 'Error Bus', ["positionClass" => "toast-top-right"]);
-            return back();
-         }
-    }
+  
 
     /**
      * Display the specified resource.
@@ -227,10 +147,11 @@ class ClientController extends Controller
      */
     public function show($id)
     {
+        $getBuse = Bus::where('id',$id)->first();
         $itineraires = Itineraire::where('siege_id',Auth::guard('agent')->user()->siege_id)->orderBy('id','ASC')->get();
         $buses  = Bus::where('siege_id',Auth::guard('agent')->user()->siege_id)->orderBy('id','ASC')->get();
         $clients = Client::where('bus_id',$id)->where('siege_id',Auth::guard('agent')->user()->siege_id)->orderBy('id','ASC')->paginate(10);
-        return view('agent.client.show',compact('clients','itineraires','buses'));
+        return view('agent.client.show',compact('clients','itineraires','buses','getBuse'));
     }
 
     /**
@@ -254,60 +175,7 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-           $this->validate($request,[
-            'name' => 'required|string',
-            'email' => 'required|string',
-            'phone' => 'required|string',
-            'ville' => 'required|numeric',
-            'date' => 'required|string',
-            'cni' => 'required|numeric',
-        ]);
-
-        // $clients = Client::where('bus_id',$request->bus)->get();
-        // $buse = Bus::where('id',$request->bus)->first();
-        $date = DateDepart::where('id',$request->date)->first();
-        $buse = Bus::where('date_depart_id',$date->id)->where('itineraire_id',$date->itineraire_id)->where('siege_id',Auth::guard('agent')->user()->siege_id)->where('plein',0)->first();
-        $clients = Client::where('bus_id',$buse->id)->get();
-        $info_update_email = Client::where('registered_at',$buse->date_depart->depart_at)->where('email',$request->email)->first();
-        $info_update_phone = Client::where('registered_at',$buse->date_depart->depart_at)->where('phone',$request->phone)->first();
-        $info_update_cni = Client::where('registered_at',$buse->date_depart->depart_at)->where('cni',$request->cni)->first();
-        if ($info_update_email == true) {
-            Toastr::error('Cette adresse email est utiliser pour cette date', 'Error email', ["positionClass" => "toast-top-right"]);
-            return back();
-        }elseif ($info_update_phone == true) {
-            Toastr::error('Ce numero de telephone est utiliser pour cette date', 'Error phone', ["positionClass" => "toast-top-right"]);
-            return back();
-        }elseif ($info_update_cni == true) {
-            Toastr::error('Ce numero de CNI est utiliser pour cette date', 'Error CNI', ["positionClass" => "toast-top-right"]);
-            return back();
-        }else {
-            if ($clients->count() < $buse->place) {
-                $amonut = Ville::where('id',$request->ville)->first();
-                $update_client = Client::where('id',$id)->first();
-                $update_client->name = $request->name;
-                $update_client->email = $request->email;
-                $update_client->phone = $request->phone;
-                $update_client->cni = $request->cni;
-                $update_client->ville_id = $request->ville;
-                $update_client->bus_id = $request->bus;
-                $update_client->amount = $amonut->amount;
-                $update_client->registered_at = $buse->date_depart->depart_at;
-                $update_client->siege_id = Auth::guard('agent')->user()->siege_id;
-                $update_client->save();
-                // $update_client->notify(new RegisteredClient());
-                Toastr::success('Votre client a ete bien ete mise a jour', 'Modification Client', ["positionClass" => "toast-top-right"]);
-                return back();
-            }else if ($clients->count() == $buse->place){
-                $bus_plein = Bus::where('id',$request->bus)->first();
-                $bus_plein->plein = 1;
-                $bus_plein->save();
-                Toastr::error('Ce bus est plein', 'Error Bus', ["positionClass" => "toast-top-right"]);
-                return back();
-            }
-        }
-    }
+   
 
     public function presence(Request $request ,$id){
         $client_present = Client::where('id',$id)->first();

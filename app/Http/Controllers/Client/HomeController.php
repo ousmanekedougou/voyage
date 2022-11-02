@@ -57,7 +57,9 @@ class HomeController extends Controller
         $agenceCount = $agenceAll->count(); 
 
         $newsletters = Notify::all();
-        return view('client.index',compact('agences','agenceCount','autre_regions','newsletters'));
+
+        $siege_all = Siege::all();
+        return view('client.index',compact('agences','agenceCount','autre_regions','newsletters','siege_all'));
     }
     
 

@@ -73,22 +73,9 @@ class HomeController extends Controller
             if ($dayOfweek == 1) {
                 Historical::where('registered_at', '<', Carbon::today())->where('siege_id', Auth::guard('agent')->user()->siege_id)->delete();
             }
-
-            $dates = DateDepart::where('siege_id', Auth::guard('agent')->user()->siege_id)->where('depart_at', '<', Carbon::today())->get();
-            foreach ($dates as $date) {
-                Bus::where('date_depart_id', $date->id)->delete();
-            }
-
-            // foreach ($itineraires as $itineraire) {
-            //     $dates = DateDepart::where('itineraire_id',$itineraire->id)->where('depart_at','<',Carbon::today())->get();
-            //     foreach ($dates as $date) {
-            //         Bus::where('date_depart_id',$date->id)->delete();
-            //     }
-            //     DateDepart::where('itineraire_id',$itineraire->id)->where('depart_at','<',Carbon::today())->delete();
-            // }
         }
 
-        DateDepart::where('depart_at','<',Carbon::today()->format('Y-m-d'))->delete();
+       
 
         if ($this->middleware(['IsAgent']) && Auth::guard('agent')->user()->role == 2) {
             Bagage::where('created_at','<',Carbon::yesterday())->delete();

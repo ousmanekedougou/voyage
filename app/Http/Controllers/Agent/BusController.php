@@ -25,7 +25,7 @@ class BusController extends Controller
     public function index()
     {
         $itineraires = Itineraire::where('siege_id',Auth::guard('agent')->user()->siege_id)->orderBy('id','ASC')->get();
-        $buses = Bus::where('siege_id',Auth::guard('agent')->user()->siege_id)->orderBy('id','ASC')->paginate(5);
+        $buses = Bus::where('siege_id',Auth::guard('agent')->user()->siege_id)->orderBy('id','ASC')->get();
         return view('agent.bus.index',compact('buses','itineraires'));
     }
 
@@ -59,7 +59,6 @@ class BusController extends Controller
         $add_bus->status = 1;
         $add_bus->siege_id = Auth::guard('agent')->user()->siege_id;
         $add_bus->itineraire_id = $request->itineraire;
-        $add_bus->date_depart_id = $request->date;
         $add_bus->save();
         Toastr::success('Votre bus a bien ete creer', 'Ajout Bus', ["positionClass" => "toast-top-right"]);
         return back();
@@ -108,7 +107,6 @@ class BusController extends Controller
         $update_bus->status = 1;
         $update_bus->siege_id = Auth::guard('agent')->user()->siege_id;
         $update_bus->itineraire_id = $request->itineraire;
-        $update_bus->date_depart_id = $request->date;
         $update_bus->save();
         Toastr::success('Votre bus a bien ete modifier', 'Modifier Bus', ["positionClass" => "toast-top-right"]);
         return back();

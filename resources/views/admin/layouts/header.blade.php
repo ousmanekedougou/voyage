@@ -164,7 +164,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link {{ set_active_roote('setting.index') }} dropdown-toggle" href="" data-bs-toggle="dropdown" aria-expanded="false"><i class="bx bx-map fa-fa-item"></i></a>
                                     <div class="dropdown-menu dropdown-menu scrollable-menu">
-                                        @foreach($autre_regions as $region)
+                                        @foreach(region() as $region)
                                             <a href="" class="dropdown-item" >
                                                 <i class="fa fa-city text-primary"></i> {{$region->name}}
                                             </a>

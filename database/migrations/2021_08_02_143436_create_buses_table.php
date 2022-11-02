@@ -21,7 +21,6 @@ class CreateBusesTable extends Migration
             $table->boolean('plein')->default(0);
             $table->integer('itineraire_id');
             $table->integer('siege_id');
-            $table->integer('date_depart_id');
             $table->integer('inscrit')->nullable();
             $table->integer('number')->nullable();
             $table->integer('montant')->nullable();

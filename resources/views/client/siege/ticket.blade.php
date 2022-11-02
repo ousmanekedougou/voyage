@@ -6,13 +6,6 @@
         <div class="container-fluid">
 
             <!-- start page title -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0 font-size-18">Tableau de bord</h4>
-                    </div>
-                </div>
-            </div>
 
             <div class="row">
                 <div class="col-lg-12">
@@ -26,8 +19,8 @@
                                         </div>
                                         <div class="media-body align-self-center">
                                             <div class="text-muted">
-                                                <p class="mb-2">Bienvenue sur votre compte client</p>
                                                 <h5 class="mb-1">TouCki</h5>
+                                                <p class="mb-2">Gestion de vos tickets</p>
                                                 <p class="mb-0">
                                                     Client
                                                 </p>
@@ -38,27 +31,7 @@
     
                                 <div class="col-lg-4 align-self-center">
                                     <div class="text-lg-center mt-4 mt-lg-0">
-                                        <div class="row">
-                                            <div class="col-4">
-                                                <div>
-                                                    <p class="text-muted text-truncate mb-2">Total Agences</p>
-                                                    <h5 class="mb-0"></h5>
-                                                </div>
-                                            </div>
-                                            <div class="col-4">
-                                                <div>
-                                                    <p class="text-muted text-truncate mb-2">Total Sieges</p>
-                                                    <h5 class="mb-0">10</h5>
-                                                </div>
-                                            </div>
-                                            <div class="col-4">
-                                                <div>
-                                                    <p class="text-muted text-truncate mb-2">Newsletter</p>
-                                                    <h5 class="mb-0">10</h5>
-                                                    
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                 </div>
     
@@ -102,7 +75,7 @@
                                         style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                         <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;"
                                             valign="top">
-                                            <br style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif,;font-weight:bold; box-sizing: border-box; font-size: 14px; margin: 0;" />Date de depart : {{$ticket->registered_at}}
+                                            <br style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif,;font-weight:bold; box-sizing: border-box; font-size: 14px; margin: 0;" />Date : {{$ticket->registered_at}}
                                         </td>
                                     </tr>
                                     <tr
@@ -255,34 +228,20 @@
                                                 </div>
                                             </div>
                                         
-                                            <div class="mb-3 row">
-                                                <label class="form-label">Selectionner une date de votre voyage</label>
-                                                <div class="col-md-12">
-                                                    <select  class="form-control @error('date') is-invalid @enderror" name="date" required autocomplete="date" required>
-                                                        
-                                                            @foreach($ticket->siege->itineraires as $itineraire)
-                                                                <optgroup label="{{$itineraire->name}}">
-                                                                    @foreach($itineraire->date_departs as $date)
-                                                                        @if($date->depart_at >= carbon_today())
-                                                                            @if($date->buses->count() >= 1)
-                                                                                <option value="{{ $date->id }}"> le {{$date->depart_at}}</option>
-                                                                            @endif
-                                                                        @endif
-                                                                    @endforeach
-                                                                </optgroup>
-                                                            @endforeach
-                                                    </select>
-                                                    @error('date')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
+                                            <div class="mb-3">
+                                                <label class="form-label" for="example-date-input" >Votre date de voyage</label>
+                                                <input type="date" class="form-control @error('date') is-invalid @enderror" name="date" value="{{ old('date') }}" required autocomplete="date"
+                                                     id="example-date-input" />
+                                                @error('date')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="d-flex flex-wrap gap-2">
                                             <button type="submit" class="btn btn-primary waves-effect waves-light btn-block">
-                                                Enregistrer Ce Client
+                                                Modifier votre ticket
                                             </button>
                                             <button type="reset" class="btn btn-secondary waves-effect btn-block">
                                                 Anuller
