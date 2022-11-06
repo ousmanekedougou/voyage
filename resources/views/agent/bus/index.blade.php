@@ -50,6 +50,10 @@
                                                     <span class="badge bg-success font-size-10"><i class="mdi mdi-star me-1"></i>{{ $bus->inscrit }} / {{ $bus->place }}</span>
                                                 @endif
                                             </p>
+                                            <p class="text-muted mb-1">
+                                                <span class="badge bg-warning font-size-10 mr-3">Rv : <i class="mdi mdi-clock me-1"></i>{{ $bus->heure_rv }}</span>
+                                                <span class="badge bg-warning font-size-10 ml-3">Depart : <i class="mdi mdi-clock me-1"></i>{{ $bus->heure_depart }}</span>
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -194,6 +198,33 @@
                                                             @enderror
                                                         </div>
                                                     </div>
+                                                    <div class="mb-3 row">
+                                                        <div class="col-md-6">
+                                                            <label for="example-time-input" class="col-md-12 col-form-label">Heure Rendez-vous</label>
+                                                            <div class="col-md-10">
+                                                                <input class="form-control @error('rv_time') is-invalid @enderror" name="rv_time" type="time" value="{{old('rv_time') ?? $edit_bus->heure_rv}}"
+                                                                    id="example-time-input">
+                                                            </div>
+                                                             @error('rv_time')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
+                                                        </div>
+
+                                                        <div class="col-md-6">
+                                                            <label for="example-time-input" class="col-md-12 col-form-label">Heure de depart</label>
+                                                            <div class="col-md-10">
+                                                                <input class="form-control @error('depart_time') is-invalid @enderror" type="time" name="depart_time" value="{{old('depart_time') ?? $edit_bus->heure_depart}}"
+                                                                    id="example-time-input">
+                                                            </div>
+                                                             @error('depart_time')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <div class="d-flex flex-wrap gap-2">
                                                     <button type="submit" class="btn btn-primary waves-effect waves-light btn-block">
@@ -299,6 +330,33 @@
                                                             @endforeach
                                                         </select>
                                                         @error('itineraire')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3 row">
+                                                    <div class="col-md-6">
+                                                        <label for="example-time-input" class="col-md-12 col-form-label">Heure Rendez-vous</label>
+                                                        <div class="col-md-10">
+                                                            <input class="form-control @error('rv_time') is-invalid @enderror" name="rv_time" type="time" value="{{ old('rv_time') }}"
+                                                                id="example-time-input">
+                                                        </div>
+                                                            @error('rv_time')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <label for="example-time-input" class="col-md-12 col-form-label">Heure de depart</label>
+                                                        <div class="col-md-10">
+                                                            <input class="form-control @error('depart_time') is-invalid @enderror" type="time" name="depart_time" value="{{ old('depart_time') }}"
+                                                                id="example-time-input">
+                                                        </div>
+                                                        @error('depart_time')
                                                             <span class="invalid-feedback" role="alert">
                                                                 <strong>{{ $message }}</strong>
                                                             </span>

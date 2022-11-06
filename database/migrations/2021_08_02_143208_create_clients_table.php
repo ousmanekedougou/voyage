@@ -22,7 +22,7 @@ class CreateClientsTable extends Migration
             $table->integer('bus_id')->nullable();
             $table->integer('position')->nullable();
             $table->integer('amount')->nullable();
-            $table->dateTime('registered_at')->nullable();
+            $table->date('registered_at')->nullable();
             $table->date('payment_at')->nullable();
             $table->integer('remboursement')->nullable();
             $table->integer('voyage_status')->default(0);

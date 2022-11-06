@@ -56,7 +56,7 @@ class ItineraireController extends Controller
         ]);
         $add_itineraire = new Itineraire();
         $add_itineraire->name = $request->name;
-        // $add_itineraire->user_id = Auth::user()->id;
+        $add_itineraire->user_id = Auth::guard('agent')->user()->id;
         $add_itineraire->siege_id = Auth::guard('agent')->user()->siege_id;
 
         $add_itineraire->jours = serialize($request->jour);

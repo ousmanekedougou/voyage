@@ -33,7 +33,8 @@ class AgenceController extends Controller
 
       public function show($slug)
     {
-         $getip = UserSystemInfoHelper::get_ip();
+
+        $getip = UserSystemInfoHelper::get_ip();
         $get_user_geo = geoip()->getLocation($getip);
         $autre_regions = Region::where('name','!=',$get_user_geo->city)->orWhere('slug','!=',$get_user_geo->state_name)->get();
         // dd($region);

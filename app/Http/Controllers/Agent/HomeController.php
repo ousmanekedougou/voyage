@@ -65,6 +65,7 @@ class HomeController extends Controller
                     $add_client_htsto->siege_id = Auth::guard('agent')->user()->siege_id;
                     $add_client_htsto->save();
                 }
+                
                 Client::where('bus_id', $buse->id)->where('registered_at', '<', Carbon::today()->format('Y-m-d'))->delete();
             }
 

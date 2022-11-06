@@ -54,9 +54,9 @@
                         <div class="card-body">
                             <div class="media">
                                 <div class="avatar-md me-4">
-                                    <span class="avatar-title rounded-circle bg-light text-danger font-size-16">
+                                    <span class="avatar-title rounded-circle bg-light text-danger">
                                         <!-- height="30" pour l'image -->
-                                        <img src="{{Storage::url($ticket->siege->agence->logo)}}"  alt="" style="width: 100%;height:auto;border-radius:100%;">
+                                        <img src="{{Storage::url($ticket->siege->agence->logo)}}"  alt="" class="avatar-md rounded-circle img-thumbnail">
                                     </span>
                                 </div>
 

@@ -83,7 +83,7 @@
                                     <div class="avatar-md me-4">
                                         <span class="avatar-title rounded-circle bg-light text-danger font-size-16">
                                             @if($agence->logo != Null)
-                                            <img src="{{Storage::url($agence->logo)}}" alt="" height="30">
+                                            <img src="{{Storage::url($agence->logo)}}" alt="">
                                             @else
                                             <i class="fa fa-bus"></i>
                                             @endif
@@ -104,13 +104,13 @@
                             <div class="px-4 py-3 border-top bg-light">
                                 <ul class="list-inline mb-0 text-center">
                                     <li class="list-inline-item me-3">
-                                        <a href="{{ route('customer.agence.show',$agence->slug) }}" class="btn btn-success btn-xs"><i class="bx bx-show me-1"></i>Voir nos sieges</a>
+                                        <a href="{{ route('customer.agence.show',$agence->slug) }}" class="btn btn-success btn-xs"><i class="bx bx-show me-1"></i>Nos sieges</a>
                                     </li>
-                                    {{--
+                                    
                                     <li class="list-inline-item me-3">
-                                        <a href="{{ route('agence.about',$agence->slug) }}" class="btn btn-primary btn-xs"><i class="bx bx-file me-1"></i>A propos</a>
+                                        <a href="" class="btn btn-primary btn-xs"><i class="bx bx-file me-1"></i>A propos</a>
                                     </li>
-                                    --}}
+                                    
                                 </ul>
                             </div>
                         </div>

@@ -25,6 +25,8 @@ class CreateBusesTable extends Migration
             $table->integer('number')->nullable();
             $table->integer('montant')->nullable();
             $table->integer('valider')->nullable();
+            $table->time('heure_rv');
+            $table->time('heure_depart');
             $table->timestamps();
         });
     }

@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
+use LengthException;
 
 class ClientController extends Controller
 {
@@ -28,6 +29,7 @@ class ClientController extends Controller
      */
     public function index()
     {
+        
         $agences = User::where('is_admin',2)->where('is_active',1)->get();
         $sieges = Siege::all();
         return view('user.client.index',compact('agences','sieges'));
@@ -57,6 +59,7 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
+
         // dd($request->all());
         $this->validate($request,[
             'ville' => 'required|numeric',
@@ -65,21 +68,13 @@ class ClientController extends Controller
         $ville = Ville::where('id',$request->ville)->first();
         $buse = Bus::where('itineraire_id',$ville->itineraire_id)->where('plein',0)->first();
 
-        // dd($request->date);
-
-        $time = Carbon::today();
-
-        // dd($time->dayOfWeek);
-
-        // $userialize_buse = unserialize($buse->itineraire->jours);
-
-        // $date_today = $request->date;
+        $date=date_create($request->date);
+        $datef = (date_format($date,'Y-m-d H:i:s'));
+        $time_input = strtotime($datef) ; 
+        $date_input = getDate($time_input); 
+        // dd($date_input['wday']); 
         
-        // $dayOfweek = $date_today->dayOfWeek;
-
-        // dd($dayOfweek);
-        
-        // dd($userialize_buse);
+        $userialize_buse = unserialize($buse->itineraire->jours);
 
         $clients = Client::where('bus_id',$buse->id)->where('registered_at',$request->date)->get();
         $info_user = Client::where('registered_at',$request->date)
@@ -91,28 +86,33 @@ class ClientController extends Controller
             return back();
         }else {
             if ($clients->count() < $buse->place) {
+                if (in_array($date_input['wday'] , $userialize_buse)) {
 
-                if ($request->date == Carbon::today() || $request->date > Carbon::today()) {
+                    if ($request->date == Carbon::today() || $request->date > Carbon::today()) {
 
-                    $buse->update(['inscrit' => $buse->inscrit + 1]);
-                    $add_client = new Client();
-                    $add_client->ville_id = $request->ville;
-                    $add_client->bus_id = $buse->id;
-                    $add_client->siege_id = $buse->siege->id;
-                    $add_client->customer_id = Auth::guard('client')->user()->id;
-                    $add_client->position = $buse->inscrit;
-                    $add_client->registered_at = $request->date;
-                    $add_client->voyage_status = 0;
-                    $add_client->save();
-                    
-                    // Notification::route('mail',$buse->siege->email)
-                    // ->notify(new RegisteredClient($add_client,1));
+                        $buse->update(['inscrit' => $buse->inscrit + 1]);
+                        $add_client = new Client();
+                        $add_client->ville_id = $request->ville;
+                        $add_client->bus_id = $buse->id;
+                        $add_client->siege_id = $buse->siege->id;
+                        $add_client->customer_id = Auth::guard('client')->user()->id;
+                        $add_client->position = $buse->inscrit;
+                        $add_client->registered_at = date_format($date,'d-m-y');
+                        $add_client->voyage_status = 0;
+                        $add_client->save();
+                        
+                        // Notification::route('mail',$buse->siege->email)
+                        // ->notify(new RegisteredClient($add_client,1));
 
-                    Toastr::success('Votre inscription a bien ete enregistre sur '.$add_client->siege->agence->name, 'Inscription', ["positionClass" => "toast-top-right"]);
-                    return back();
+                        Toastr::success('Votre inscription a bien ete enregistre sur '.$add_client->siege->agence->name, 'Inscription', ["positionClass" => "toast-top-right"]);
+                        return back();
 
-                }else{
-                    Toastr::warning('Votre date doit etre aujourdhuit ou demain','Error Inscription', ["positionClass" => "toast-top-right"]);
+                    }else{
+                        Toastr::warning('Votre date doit etre aujourdhuit ou demain','Error Inscription', ["positionClass" => "toast-top-right"]);
+                        return back();
+                    }
+                }else {
+                    Toastr::warning('Ce siege ne voyage pas a cette date','Error Date', ["positionClass" => "toast-top-right"]);
                     return back();
                 }
             }else if ($clients->count() == $buse->place){

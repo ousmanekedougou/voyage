@@ -51,6 +51,8 @@ class BusController extends Controller
             'matricule' => 'required|string|max:255|unique:buses',
             'place' => 'required|string',
             'itineraire' => 'required|numeric',
+            'rv_time' => 'required|date_format:H:i',
+            'depart_time' => 'required|date_format:H:i|after:rv_time'
         ]);
         $add_bus = new Bus();
         $add_bus->matricule = $request->matricule;
@@ -59,6 +61,8 @@ class BusController extends Controller
         $add_bus->status = 1;
         $add_bus->siege_id = Auth::guard('agent')->user()->siege_id;
         $add_bus->itineraire_id = $request->itineraire;
+        $add_bus->heure_rv = $request->rv_time;
+        $add_bus->heure_depart = $request->depart_time;
         $add_bus->save();
         Toastr::success('Votre bus a bien ete creer', 'Ajout Bus', ["positionClass" => "toast-top-right"]);
         return back();
@@ -99,6 +103,8 @@ class BusController extends Controller
             'matricule' => 'required|string',
             'place' => 'required|string',
             'itineraire' => 'required|numeric',
+            'rv_time' => 'required|date_format:H:i:s',
+            'depart_time' => 'required|date_format:H:i:s|after:rv_time'
         ]);
         $update_bus = Bus::where('id',$id)->first();
         $update_bus->number = $request->numero;
@@ -107,6 +113,8 @@ class BusController extends Controller
         $update_bus->status = 1;
         $update_bus->siege_id = Auth::guard('agent')->user()->siege_id;
         $update_bus->itineraire_id = $request->itineraire;
+        $update_bus->heure_rv = $request->rv_time;
+        $update_bus->heure_depart = $request->depart_time;
         $update_bus->save();
         Toastr::success('Votre bus a bien ete modifier', 'Modifier Bus', ["positionClass" => "toast-top-right"]);
         return back();

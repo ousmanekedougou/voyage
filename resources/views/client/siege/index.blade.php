@@ -10,14 +10,14 @@
             
 
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-5">
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-lg-4">
+                                <div class="col-lg-12">
                                     <div class="media">
                                         <div class="me-3">
-                                            <img src="{{(Storage::url($agence->image))}}" alt="" class="avatar-md rounded-circle img-thumbnail">
+                                            <img src="{{(Storage::url($agence->logo))}}" alt="" class="avatar-md rounded-circle img-thumbnail">
                                         </div>
                                         <div class="media-body align-self-center">
                                             <div class="text-muted">
@@ -37,6 +37,19 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-lg-7">
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 style="font-weight: 900;">Informations importantes: </h6>
+                            <p class="mb-1">
+                                <span class="text-warning" style="font-weight: 900;"> <i class="fa fa-exclamation-circle"> </i> Attention : </span> Vous devez choisire une date superieure ou egale a aujourdhuit.
+                            </p>
+                            <p class="mb-1">
+                                <span class="text-warning" style="font-weight: 900;"> <i class="fa fa-exclamation-circle"> </i> Remarque : </span> Votre ticket n'est remboursable qu'avant le depart du bus.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- end row -->
 
@@ -46,12 +59,13 @@
                 <div class="col-xl-4 col-sm-6">
                     <div class="card">
                         <div class="card-body">
+                           
                             <div class="media">
                                 <div class="avatar-xs me-3">
                                     <span
                                         class="avatar-title rounded-circle bg-info bg-soft text-warning font-size-18">
                                         @if($siege->image == '')
-                                            <i class="mdi mdi-bus"></i>
+                                            <i class="bx bx-map"></i>
                                         @else
                                             <img src="{{Storage::url($siege->image)}}" alt="" style="width:100%;">
                                         @endif
@@ -61,6 +75,7 @@
                                     <h5>Siege de {{ $siege->name }}</h5>
                                     <p class="text-muted  mb-1"><i class="fa fa-envelope"></i> {{ $siege->email }} </p>
                                     <p class="text-muted  mb-2"><i class="fa fa-mobile"></i> {{ $siege->phone }} </p>
+                                    <p class="text-muted  mb-2"> <i class="fa fa-bus"> </i> {{ $siege->buses->count() }} bus a votre disposition </p>
                                     <ul class="list-inline mb-0 text-left">
                                         <li class="list-inline-item me-1">
                                             <a href="#" class="badge bg-success p-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$siege->id}}"> <i class="fa fa-user-plus"></i> S'inscrire</a>

@@ -57,10 +57,10 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="media">
-                                            @if($client->image !== null)
+                                            @if($client->image == null)
                                                 <div class="avatar-md me-4">
-                                                    <span class="avatar-title rounded-circle bg-light text-danger font-size-16">
-                                                        <img src="{{Storage::url($client->customer->image)}}" alt="" height="30">
+                                                    <span class="avatar-title rounded-circle bg-light text-danger">
+                                                        <img src="{{Storage::url($client->customer->image)}}" alt="">
                                                     </span>
                                                 </div>
                                             @else
@@ -80,7 +80,7 @@
                                                 <p class="text-muted mb-1"> <i class="fa fa-mobile"></i> {{ $client->phone }}</p>
                                                 <p class="text-muted mb-1"> <i class="fa fa-mobile"></i> {{ $client->cni }}</p>
                                                 @endif
-                                                {{--<p class="text-muted mb-1 font-size-10"><i class=""></i> </p>--}}
+                                                {{-- <p class="text-muted mb-1 font-size-10"><i class=""></i> </p> --}}
 
                                                 <div class="avatar-group">
                                                     <div class="avatar-group-item font-size-11">
@@ -440,7 +440,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="staticBackdropLabel">
-                                <span class="text-muted">Detail du client {{ $client_presence->name }}</span>
+                                <span class="text-muted">Detail du ticket de {{ $client_presence->customer->name }}</span>
                         </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
@@ -460,7 +460,8 @@
                                             <table class="main" width="100%" cellpadding="0" cellspacing="0"
                                                 style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; border-radius: 3px;  margin: 0; border: none;">
                                                 <tr
-                                                    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;
+                                                    ">
                                                     <td class="content-wrap aligncenter"
                                                         style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; color: #495057;background-color: #fff;"
                                                         align="center" valign="top">
@@ -473,15 +474,13 @@
                                                                     style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: center; margin: 0;"
                                                                     align="center" valign="top">
                                                                     <table class="invoice"
-                                                                        style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; text-align: left; width: 90%; margin: 10px auto;">
+                                                                        style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;  box-sizing: border-box; font-size: 14px; text-align: left; width: 90%; margin: -15px auto;margin-left:-4px;">
                                                                         <tr
                                                                             style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                                                             <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;"
                                                                                 valign="top">
-                                                                                <br
-                                                                                    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif,;font-weight:bold; box-sizing: border-box; font-size: 14px; margin: 0;" />Destination : {{$client_presence->ville->name}}
-                                                                                <br
-                                                                                    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif,;font-weight:bold; box-sizing: border-box; font-size: 14px; margin: 0;" />Date de depart : {{$client_presence->registered_at}}
+                                                                                <br style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif,;font-weight:bold; box-sizing: border-box; font-size: 14px; margin: 0;" />
+                                                                                <span style="float: left;">Destination : {{$client_presence->ville->name}}</span> <span style="float: right;">Date : {{$client_presence->registered_at}}</span>
                                                                             </td>
                                                                         </tr>
                                                                         <tr
@@ -542,12 +541,17 @@
                                                                                     <tr
                                                                                         style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                                                                         <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
-                                                                                            valign="top">Ticker
+                                                                                            valign="top">Ticket
                                                                                         </td>
                                                                                         <td class="alignright"
                                                                                             style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
                                                                                             align="right" valign="top">
-                                                                                            {{$client_presence->amount}} f
+                                                                                            @if($client_presence->amount == $client_presence->ville->amount)
+                                                                                                {{$client_presence->amount}}
+                                                                                            @else
+                                                                                                0.000
+                                                                                            @endif
+                                                                                            f
                                                                                         </td>
                                                                                     </tr>
                                                                                     <tr
