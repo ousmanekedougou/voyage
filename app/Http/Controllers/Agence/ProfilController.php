@@ -131,10 +131,12 @@ class ProfilController extends Controller
                $this->validate($request,[
                     'slogan' => 'required|string',
                     'adress' => 'required|string',
+                    'method_ticket' => 'required|boolean',
                 ]);
                 $update_admin = Agence::Where('slug',Auth::guard('agence')->user()->slug)->first();
                 $update_admin->slogan = $request->slogan;
                 $update_admin->adress = $request->adress;
+                $update_admin->method_ticket = $request->method_ticket;
                 $update_admin->save();
                 Toastr::success('Vos informations ont bien ete mise a jour', 'Modifier Profile', ["positionClass" => "toast-top-right"]);
                 return back();

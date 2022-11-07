@@ -211,69 +211,58 @@
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="orderdetailsModalLabel">Modifier un membre</h5>
+                                    <h5 class="modal-title" id="orderdetailsModalLabel">Modifier le status de {{ $admin->name }}</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                                           
-                                        <div class="card text-center">
-                                            <div class="card-body">
-                                                <div class="mb-4">
-                                                    <img class="rounded-circle avatar-sm" src="{{ Storage::url($admin->logo) }}" alt="">
-                                                </div>
-                                                <h5 class="font-size-15 mb-1"><a href="#" class="text-dark">{{$admin->name}}</a></h5>
-                                                <p class="text-muted">{{$admin->email}}</p>
-
-                                                <div>
-                                                    <a href="#" class="badge bg-primary font-size-11 m-1">{{$admin->phone}}</a>
-                                                    <a href="#" class="badge bg-primary font-size-11 m-1">{{$admin->adress}}</a>
-                                                    <!-- <a href="#" class="badge bg-primary font-size-11 m-1">2 + more</a> -->
-                                                </div>
-                                            </div>
-                                        </div>
                                 <form action="{{ route('admin.admin.update',$admin->id) }}" method="post">
-                                        {{csrf_field()}}
+                                     {{csrf_field()}}
                                         {{method_field('PUT')}}
-                                    <div class="modal-body">
-                                        <div class="mb-3">
-                                            <label for="image">Le status *</label>
-                                            <div class="d-flex text-center">
-                                                <div class="form-check form-radio-primary mb-3" style="margin: 0 20px;">
-                                                    <input class="form-check-input @error('radio') is-invalid @enderror" type="radio"
-                                                        @if($admin->is_active == 1)
-                                                            checked
-                                                        @endif
-                                                     name="radio" required value="{{ old('radio') ?? 1 }}" id="formRadioColor1" @if($admin->status == 1) checked @endif name="radio"  >
-                                                    <label class="form-check-label" for="formRadioColor1">
-                                                        Activer
-                                                    </label>
-                                                </div>
+                                    <div class="card text-center">
+                                        <div class="card-body">
+                                            <div class="mb-4">
+                                                <img class="rounded-circle avatar-sm" src="{{ Storage::url($admin->image) }}" alt="">
+                                            </div>
+                                            <h5 class="font-size-15 mb-1"><a href="#" class="text-dark">{{$admin->name}}</a></h5>
+                                            <p class="text-muted">{{$admin->email}}</p>
 
-                                                <div class="form-check form-radio-primary mb-3" style="margin: 0 20px;">
-                                                    <input class="form-check-input @error('radio') is-invalid @enderror" type="radio" 
-                                                        @if($admin->is_active == 0)
-                                                            checked
-                                                        @endif
-                                                    name="radio" required value="{{ old('radio') ?? 0 }}" id="formRadioColor2" @if($admin->status == 2) checked @endif name="radio"  >
-                                                    <label class="form-check-label" for="formRadioColor2">
-                                                        Desactiver
-                                                    </label>
+                                            <div>
+                                                <a href="#" class="badge bg-primary font-size-11 m-1">{{$admin->phone}}</a>
+                                                <a href="#" class="badge bg-primary font-size-11 m-1">{{$admin->adress}}</a>
+                                            </div>
+                                            <div class="mb-3 mt-3">
+                                                <label for="image">Le status *</label>
+                                                <div class="d-flex text-center pt-3" style="padding-left:10em;">
+                                                    <div class="form-check form-radio-primary">
+                                                        <input class="form-check-input @error('radio') is-invalid @enderror" type="radio"
+                                                            @if($admin->is_active == 1 || $admin->status == 1)
+                                                                checked
+                                                            @endif
+                                                        name="radio" required value="{{ old('radio') ?? 1 }}" id="formRadioColor1" name="radio"  >
+                                                        <label class="form-check-label" for="formRadioColor1">
+                                                            Activer
+                                                        </label>
+                                                    </div>
+
+                                                    <div class="form-check form-radio-danger mb-3" style="margin-left: 35px;">
+                                                        <input class="form-check-input @error('radio') is-invalid @enderror" type="radio" 
+                                                            @if($admin->is_active == 0 || $admin->status == 2)
+                                                                checked
+                                                            @endif
+                                                        name="radio" required value="{{ old('radio') ?? 0 }}" id="formRadioColor2" name="radio"  >
+                                                        <label class="form-check-label" for="formRadioColor2">
+                                                            Desactiver
+                                                        </label>
+                                                    </div>
+                                                    @error('radio')
+                                                    <div class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </div>
+                                                    @enderror
                                                 </div>
-                                                <!-- <div class="form-check form-radio-primary mb-3" style="margin: 0 20px;">
-                                                    <input class="form-check-input @error('image') is-invalid @enderror" type="radio" name="radio" required value="{{ old('radio') ?? 3 }}" id="formRadioColor3" @if($admin->status == 3) checked @endif name="radio"  >
-                                                    <label class="form-check-label" for="formRadioColor3">
-                                                        Editeur
-                                                    </label>
-                                                </div>  -->
-                                                @error('radio')
-                                                <div class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </div>
-                                                @enderror
                                             </div>
                                         </div>
-
                                         
-                                    
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-primary">Modifier</button>

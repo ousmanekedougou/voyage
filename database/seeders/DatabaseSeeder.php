@@ -91,7 +91,8 @@ class DatabaseSeeder extends Seeder
             'is_active' => 1,
             'logo' => null,
             'slogan' => 'Voyager en bonne compagnie',
-            'region_id' => 1
+            'region_id' => 1,
+            'method_ticket' => 0
         ]);
 
 
@@ -107,7 +108,8 @@ class DatabaseSeeder extends Seeder
             'is_active' => 1,
             'logo' => null,
             'slogan' => 'Votre bien etre notre priorite',
-            'region_id' => 1
+            'region_id' => 1,
+            'method_ticket' => 1
         ]);
 
         Agence::create([
@@ -122,7 +124,8 @@ class DatabaseSeeder extends Seeder
             'is_active' => 1,
             'logo' => null,
             'slogan' => 'Faire du voyage votre passion',
-            'region_id' => 1
+            'region_id' => 1,
+            'method_ticket' => 0
         ]);
 
           Agence::create([
@@ -137,7 +140,8 @@ class DatabaseSeeder extends Seeder
             'is_active' => 1,
             'logo' => null,
             'slogan' => 'Faire du voyage votre passion',
-            'region_id' => 6
+            'region_id' => 6,
+            'method_ticket' => 0
         ]);
 
 
@@ -153,7 +157,8 @@ class DatabaseSeeder extends Seeder
             'is_active' => 1,
             'logo' => null,
             'slogan' => 'Faire du voyage votre passion',
-            'region_id' => 6
+            'region_id' => 6,
+            'method_ticket' => 1
         ]);
 
          Agence::create([
@@ -168,7 +173,8 @@ class DatabaseSeeder extends Seeder
             'is_active' => 1,
             'logo' => null,
             'slogan' => 'Faire du voyage votre passion',
-            'region_id' => 6
+            'region_id' => 6,
+            'method_ticket' => 0
         ]);
 
         // Des agence sans sieges
@@ -184,7 +190,8 @@ class DatabaseSeeder extends Seeder
             'is_active' => 1,
             'logo' => null,
             'slogan' => 'Faire du voyage votre passion',
-            'region_id' => 1
+            'region_id' => 1,
+            'method_ticket' => 1
         ]);
 
           Agence::create([
@@ -199,7 +206,8 @@ class DatabaseSeeder extends Seeder
             'is_active' => 1,
             'logo' => null,
             'slogan' => 'Faire du voyage votre passion',
-            'region_id' => 1
+            'region_id' => 1,
+            'method_ticket' => 0
         ]);
 
         Agence::create([
@@ -214,7 +222,8 @@ class DatabaseSeeder extends Seeder
             'is_active' => 1,
             'logo' => null,
             'slogan' => 'Faire du voyage votre passion',
-            'region_id' => 1
+            'region_id' => 1,
+            'method_ticket' => 1
         ]);
         // Fin D'ajout des agences
 

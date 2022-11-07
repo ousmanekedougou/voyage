@@ -26,12 +26,12 @@
                                     <div class="col-7">
                                         <div class="text-primary p-3">
                                             <h5 class="text-primary">
-                                                Administrateur
+                                                Gestion des admins et agence de toucki
                                             </h5>
                                         </div>
                                     </div>
                                     <div class="col-5 align-self-end">
-                                        <img src="{{ Storage::url($admin->image_agence) }}" alt="" class="img-fluid">
+                                        <img src="{{ Storage::url($admin->image) }}" alt="" class="img-fluid">
                                     </div>
                                 </div>
                             </div>
@@ -225,10 +225,8 @@
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
+                                        <button  type="submit" class="btn btn-primary btn-block" style="width: 100%;"><i class="fa fa-camera-retro me-2"></i>Modifier votre image profile</button>
                                         </form>
-                                        <a  href="" onclick=" if(confirm('Etes Vous sure de modifier cette image ?')){  event.preventDefault();document.getElementById('update-form-{{$admin->id}}').submit();
-            
-                                        }else{event.preventDefault();} " class="btn btn-primary btn-block" style="width: 100%;"><i class="fa fa-camera-retro me-2"></i>Modifier votre image profile</a>
                                         
                                     </div>
                                     

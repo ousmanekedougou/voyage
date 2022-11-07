@@ -46,7 +46,8 @@ class ContactController extends Controller
      */
     public function create()
     {
-        return view('admin.news.index');
+        $notifys = Notify::all();
+        return view('admin.news.index',compact('notifys'));
     }
 
     /**

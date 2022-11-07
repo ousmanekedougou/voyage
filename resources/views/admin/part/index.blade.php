@@ -34,7 +34,10 @@
                                 <div class="card text-center @if($admin->is_active == 0) bg-danger @endif">
                                     <div class="card-body">
                                         <div class="mb-4">
-                                            <img class="rounded-circle avatar-sm" src="{{ Storage::url($admin->logo) }}" alt="">
+                                            <div class="client-images">
+                                                <img src="{{ Storage::url($admin->logo) }}" alt="client-img"
+                                                    class="mx-auto img-fluid d-block">
+                                            </div>
                                         </div>
                                         <h5 class="font-size-15 mb-1"><a href="{{ $admin->lien }}" class="text-dark">{{$admin->name}}</a></h5>
                                         <p class="text-muted">{{$admin->email}}</p>
@@ -48,7 +51,7 @@
                                     <div class="card-footer bg-transparent border-top">
                                         <div class="contact-links d-flex font-size-20">
                                             <div class="flex-fill">
-                                                <a data-bs-toggle="modal" data-bs-target=".orderdetailsModal-{{$admin->id}}" class="text-primary"><i class="bx bx-show"></i></a>
+                                                <a data-bs-toggle="modal" data-bs-target=".orderdetailsModal-{{$admin->id}}" class="text-primary"><i class="bx bx-edit-alt "></i></a>
                                             </div>
                                             <div class="flex-fill">
                                                 <a data-bs-toggle="modal" data-bs-target=".orderdetailsModalModification-{{$admin->id}}" class="text-success"><i class="bx bx-edit"></i></a>
@@ -292,20 +295,20 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                                           
-                                        <div class="card text-center">
-                                            <div class="card-body">
-                                                <div class="mb-4">
-                                                    <img class="rounded-circle avatar-sm" src="{{ Storage::url($admin->logo) }}" alt="">
-                                                </div>
-                                                <h5 class="font-size-15 mb-1"><a href="#" class="text-dark">{{$admin->name}}</a></h5>
-                                            </div>
+                                <div class="card text-center">
+                                    <div class="card-body">
+                                        <div class="mb-4">
+                                            <img class="rounded-circle avatar-sm" src="{{ Storage::url($admin->logo) }}" alt="">
                                         </div>
+                                        <h5 class="font-size-15 mb-1"><a href="#" class="text-dark">{{$admin->name}}</a></h5>
+                                    </div>
+                                </div>
                                 <form action="{{ route('admin.partenaire.update',$admin->id) }}"  method="post">
                                         {{csrf_field()}}
                                         {{method_field('PUT')}}
                                     <input type="hidden" name="hidden" value="2">
                                     <div class="modal-body ">
-                                        <div class="mb-3 text-center">
+                                        <div class="mb-3 text-center" style="padding-left:9em;">
                                             <div class="d-flex">
                                                 <div class="form-check form-radio-primary mb-3 text-center" style="margin: 0 20px;">
                                                     <input class="form-check-input @error('radio') is-invalid @enderror" type="radio"
@@ -318,7 +321,7 @@
                                                     </label>
                                                 </div>
 
-                                                <div class="form-check form-radio-primary mb-3" style="margin: 0 20px;">
+                                                <div class="form-check form-radio-danger mb-3" style="margin: 0 20px;">
                                                     <input class="form-check-input @error('radio') is-invalid @enderror" type="radio" 
                                                         @if($admin->is_active == 0)
                                                             checked

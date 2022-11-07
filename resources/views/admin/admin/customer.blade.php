@@ -27,7 +27,7 @@
                                         <div class="media">
                                             <div class="avatar-md me-4">
                                                 <span class="avatar-title rounded-circle bg-light text-danger font-size-16">
-                                                    <img src="{{Storage::url($user->logo)}}" alt="" height="30">
+                                                    <img src="{{Storage::url($user->image)}}" alt="">
                                                 </span>
                                             </div>
 
@@ -63,9 +63,6 @@
                                                 <!-- <a href=""><i class="bx bx-edit me-1"></i></a> -->
                                             </li>
                                             <li class="list-inline-item me-3">
-                                                <a href="" data-bs-toggle="modal" data-bs-target="#edit-agence-{{$user->id}}"><i class="bx bx-show me-1"></i></a>
-                                            </li>
-                                            <li class="list-inline-item me-3">
                                                 <!-- <a href=""><i class="bx bx-block me-1"></i></a> -->
                                                 <div class="form-check form-switch mb-3" dir="ltr">
                                                     <input class="form-check-input" type="checkbox"
@@ -99,69 +96,6 @@
                 </div> <!-- container-fluid -->
             </div>
             <!-- End Page-content -->
-
-            @foreach($users as $user_edit)
-            <!-- Static Backdrop Modal -->
-            <div class="modal fade" id="edit-agence-{{$user_edit->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-md modal-dialog-centered" role="document">
-                    <div class="modal-content ">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Detail du client</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                            <div class="modal-body">
-                                <p>
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <div class="media">
-                                                        <img src="{{Storage::url($user_edit->logo)}}" alt="" class="avatar-sm me-4">
-
-                                                        <div class="media-body overflow-hidden">
-                                                            <h5 class="text-truncate font-size-15">{{$user_edit->name}}</h5>
-                                                            <p class="text-muted">{{$user_edit->slogan}}</p>
-                                                        </div>
-                                                    </div>
-
-                                                    <h5 class="font-size-15 mt-4">Informations :</h5>
-
-                                                    <div class="text-muted mt-4">
-                                                        <p><i class="bx bxs-envelope me-1 text-primary me-1"></i>{{$user_edit->email}} </p>
-                                                        <p><i class="bx bxs-mobile text-primary me-1"></i>{{$user_edit->phone}}</p>
-                                                        <p><i class="bx bx-map-pin text-primary me-1"></i> {{ $user_edit->region->name }}</p>
-                                                        <p><i class="bx bx-fingerprint text-primary me-1"></i> @if($user_edit->is_active == 1) Compte Actif @else Compte Inactif @endif</p>
-                                                    </div>
-                                                    {{--
-                                                    <div class="row task-dates">
-                                                        <div class="col-sm-4 col-6">
-                                                            <div class="mt-4">
-                                                                <h5 class="font-size-14"><i
-                                                                        class="bx bx-calendar me-1 text-primary"></i> Start Date</h5>
-                                                                <p class="text-muted mb-0">08 Sept, 2019</p>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-sm-4 col-6">
-                                                            <div class="mt-4">
-                                                                <h5 class="font-size-14"><i
-                                                                        class="bx bx-calendar-check me-1 text-primary"></i> Due Date
-                                                                </h5>
-                                                                <p class="text-muted mb-0">12 Oct, 2019</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    --}}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </p>
-                            </div>
-                    </div>
-                </div>
-            </div>
-            @endforeach
 
             @foreach($users as $user)
             <!-- Modal pour la suppression de l'agence -->

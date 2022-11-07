@@ -88,9 +88,8 @@
                                         @enderror
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-xl-6">
-                           <div class="mb-3">
+
+                             <div class="mb-3">
                                 <label class="form-label">Votre image de profile</label>
                                 <input type="file" class="form-control" required id="image" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" autocomplete="image"
                                     placeholder="Votre image" />
@@ -100,7 +99,8 @@
                                             </span>
                                         @enderror
                             </div>
-
+                        </div>
+                        <div class="col-xl-6">
                              <div class="mb-3">
                                 <label class="form-label">Selectionner une region</label>
                                 <select  class="form-control @error('region') is-invalid @enderror" name="region" required autocomplete="region" required>
@@ -116,13 +116,28 @@
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Adresse de l'agence</label>
-                                <input type="text" class="form-control" required id="adress" class="form-control @error('adress') is-invalid @enderror" name="adress" value="{{ old('adress') }}" autocomplete="adress"
+                                <input type="text" required id="adress" class="form-control @error('adress') is-invalid @enderror" name="adress" value="{{ old('adress') }}" autocomplete="adress"
                                     placeholder="Adresse de l'agence" />
                                     @error('adress')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Status des tickets des clients</label>
+                                <div class="col-md-12">
+                                    <select name="method_ticket" class="form-select form-control @error('method_ticket') is-invalid @enderror" value="{{ old('method_ticket') }}">
+                                        <option value="0">Ticket remboursable apres le depart du bus</option>
+                                        <option value="1">Ticket non remboursable apres le depart du bus</option>
+                                    </select>
+                                    @error('method_ticket')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
                             </div>
                             
 

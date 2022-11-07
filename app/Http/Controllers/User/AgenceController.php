@@ -60,6 +60,7 @@ class AgenceController extends Controller
             'slogan' => 'required|string',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
             'region' => 'required|numeric',
+            'method_ticket' => 'required|boolean',
             'password' => 'required|string|min:6|confirmed',
         ]);
          $add_agence = new Agence();
@@ -82,11 +83,12 @@ class AgenceController extends Controller
         $add_agence->confirmation_token = str_replace('/','',Hash::make(Str::random(40)));
         $add_agence->slug = str_replace('/','',Hash::make(Str::random(20).'agence'.$request->email));
         // $add_agence->user_id = Auth::user()->id;
+        $add_agence->method_ticket = $request->method_ticket;
         $add_agence->region_id = $request->region;
         $add_agence->password = Hash::make($request->password);
         $add_agence->save();
 
-        Notification::route('mail',Auth::user()->email)
+        Notification::route('mail','ousmanelaravel@gmail.com')
             ->notify(new AgenceRegisterd($add_agence));
 
        

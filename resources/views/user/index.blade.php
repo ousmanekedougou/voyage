@@ -213,8 +213,10 @@
                         @foreach( part() as $part)
                             <div class="item">
                                 <div class="client-images">
+                                    <a href="{{ $part->lien }}" target="_blank" rel="noopener noreferrer">
                                     <img src="{{ Storage::url($part->logo) }}" alt="client-img"
                                         class="mx-auto img-fluid d-block">
+                                    </a>
                                 </div>
                             </div>
                         @endforeach

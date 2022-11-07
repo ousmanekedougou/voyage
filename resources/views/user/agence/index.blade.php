@@ -106,7 +106,7 @@
                                 </div>
 
                                 <div class="media-body overflow-hidden">
-                                    <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">{{ $agence->name }}</a></h5>
+                                    <h5 class="text-truncate font-size-15"><a href="{{ route('agence.about',$agence->slug) }}" class="text-dark">{{ $agence->name }}</a></h5>
                                     <p class="text-muted mb-1"> <i class="bx bx-envelope me-1"> {{ $agence->email }}</i> </p>
                                     <p class="text-muted mb-1"> <i class="bx bx-mobile me-1"> {{ $agence->phone }}</i> </p>
                                 </div>
@@ -117,17 +117,41 @@
                             <p class="text-muted text-center">{{ $agence->slogan }}</p>
                         </div>
                         <div class="px-4 py-3 border-top bg-light">
-                            <ul class="list-inline mb-0 text-center">
-                                
+                            <ul class="list-inline mb-0">
+
                                 <li class="list-inline-item me-3">
-                                    <a href="{{ route('agence.show',$agence->slug) }}" class="btn btn-success btn-xs"><i class="bx bx-show me-1"></i>Nos sieges</a>
+                                    <a href="{{ route('agence.about',$agence->slug) }}" class="btn btn-primary btn-xs"><i class="bx bx-file me-1"></i>Details</a>
                                 </li>
                                 
-                                
                                 <li class="list-inline-item me-3">
-                                    <a href="{{ route('agence.about',$agence->slug) }}" class="btn btn-primary btn-xs"><i class="bx bx-file me-1"></i>A propos</a>
+                                    <div class="d-flex flex-wrap gap-3">
+
+                                        <button type="button" class="btn btn-light position-relative p-0 avatar-xs rounded-circle bg-primary text-white">
+                                            <span class="avatar-title bg-transparent text-reset">
+                                                <i class="bx bxl-facebook "></i>
+                                            </span>
+                                        </button>
+
+                                        <button type="button" class="btn btn-light position-relative p-0 avatar-xs rounded-circle bg-success text-white">
+                                            <span class="avatar-title bg-transparent text-reset">
+                                                <i class="bx bxl-whatsapp "></i>
+                                            </span>
+                                        </button>
+
+                                        <button type="button" class="btn btn-light position-relative p-0 avatar-xs rounded-circle bg-secondary text-white">
+                                            <span class="avatar-title bg-transparent text-reset">
+                                                <i class="bx bxl-instagram"></i>
+                                            </span>
+                                        </button>
+
+                                        <button type="button" class="btn btn-light position-relative p-0 avatar-xs rounded-circle bg-info text-white">
+                                            <span class="avatar-title bg-transparent text-reset">
+                                                <i class="bx bxl-linkedin-square "></i>
+                                            </span>
+                                        </button>
+                                    </div>
                                 </li>
-                                
+
                             </ul>
                         </div>
                     </div>

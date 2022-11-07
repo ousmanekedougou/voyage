@@ -182,6 +182,21 @@
                                                 @enderror
                                         </div>
 
+                                        <div class="mb-3">
+                                            <label class="form-label">Status des tickets des clients</label>
+                                            <div class="col-md-12">
+                                                <select name="method_ticket" class="form-select form-control @error('method_ticket') is-invalid @enderror" value="{{ old('method_ticket') }}">
+                                                    <option value="0" @if($admin->method_ticket == 0) selected @endif>Ticket remboursable apres le depart du bus</option>
+                                                    <option value="1" @if($admin->method_ticket == 1) selected @endif>Ticket non remboursable apres le depart du bus</option>
+                                                </select>
+                                                @error('method_ticket')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+
                                             
                                         </div>
                                         <div class="modal-footer">
@@ -192,76 +207,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        {{--
-                        <!-- Les premiers informations -->
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title mb-4">Modifier les informations de l'agence</h4>
-                                <div class="table-responsive">
-                                    <form action="{{ route('agence.profil.update',Auth::guard('agence')->user()->slug) }}" method="post" enctype="multipart/form-data">
-                                        {{csrf_field()}}
-                                        {{method_field('PUT')}}
-                                        <div class="modal-body">
-                                            <input type="hidden" name="hidden" value="5">
-                                            <div class="mb-3">
-                                                <label for="name_agence">Nom de l'agence * </label>
-                                                <input id="name_agence" name="name_agence" type="text" class="form-control @error('name_agence') is-invalid @enderror"  value="{{ old('name_agence') ?? $admin->name_agence }}" required autocomplete="name_agence">
-                                                @error('name_agence')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="manufacturerbrand">adresse email de votre agence * </label>
-                                                <input id="email_agence" name="email_agence" type="email_agence" class="form-control @error('email_agence') is-invalid @enderror" value="{{ old('email_agence') ?? $admin->email_agence }}" required autocomplete="email_agence">
-                                                @error('email_agence')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-
-                                            <div class="mb-3 row">
-                                                <label class="form-label">Selectionner une region</label>
-                                                <div class="col-md-12">
-                                                    <select  class="form-control @error('region') is-invalid @enderror" name="region" required autocomplete="region" required>
-                                                        @foreach($regions as $region)
-                                                            <option value="{{ $region->id }}"
-                                                            @if($region->id == Auth::guard('agence')->user()->region_id) selected @endif
-                                                            >{{ $region->name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                    @error('region')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-                                            </div>
-
-                                            <div class="mb-3">
-                                                <label for="manufacturerbrand">Image de l'agence * </label>
-                                                <input id="image_agence" name="image_agence" type="file" class="form-control @error('image_agence') is-invalid @enderror" value="{{ old('image_agence') }}"  autocomplete="image_agence" style="width: 100%;">
-                                                @error('image_agence')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="submit" class="btn btn-primary btn-block">Enregistre</button>
-                                            <button type="button" class="btn btn-secondary btn-block" data-bs-dismiss="modal">Fermer</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Fin des premiers information -->
-                        --}}
-                        <!-- Fin Des modification consernant agence -->
 
 
                             <!-- Les seconds informations -->
@@ -343,10 +288,8 @@
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
+                                        <button type="submit" class="btn btn-primary btn-block" style="width: 100%;"><i class="fa fa-camera-retro me-2"></i>Modifier votre image profile</button>
                                         </form>
-                                        <a  href="" onclick=" if(confirm('Etes Vous sure de modifier cette image ?')){  event.preventDefault();document.getElementById('update-form-{{$admin->id}}').submit();
-            
-                                        }else{event.preventDefault();} " class="btn btn-primary btn-block" style="width: 100%;"><i class="fa fa-camera-retro me-2"></i>Modifier votre image profile</a>
                                         
                                     </div>
                                     
