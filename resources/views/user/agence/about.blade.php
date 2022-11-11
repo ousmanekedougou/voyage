@@ -330,65 +330,71 @@
                             <div class="row mt-5">
                                 <div class="col-lg-12">
                                     <div class="text-center mb-2">
-                                        <h4>Les horaires d'overure de nos sieges</h4>
+                                        <h4>Nos horaires de transport</h4>
                                     </div>
                                 </div>
-                                @foreach($agence->sieges as $siege_h)
-                                <div class="">
-                                    <div class="card-body">
-                                        <h4 class="card-title mb-4">Pour le siege de {{$siege_h->name}} </h4>
+                                @if($agence->sieges->count() > 1)
+                                    @foreach($agence->sieges as $siege_h)
+                                        <div class="">
+                                            <div class="card-body">
+                                                <h4 class="card-title mb-4">Pour le siege de {{$siege_h->name}} </h4>
 
-                                        <div class="table-responsive">
-                                            <table class="table table-nowrap align-middle mb-0">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">Jours</th>
-                                                        <th scope="col">Ouverture</th>
-                                                        <th scope="col">Fermeture</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach(unserialize($siege_h->jours) as $jour)
-                                                        <tr>
-                                                            <th scope="row">
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="avatar-xs me-3">
-                                                                    <span>
-                                                                        @if($jour == 0)
-                                                                            Dimanche
-                                                                        @elseif($jour == 1)
-                                                                            Lundi
-                                                                        @elseif($jour == 2)
-                                                                            Mardi
-                                                                        @elseif($jour == 3)
-                                                                            Mercredi
-                                                                        @elseif($jour == 4)
-                                                                            Jeudi
-                                                                        @elseif($jour == 5)
-                                                                            Vendredi
-                                                                        @elseif($jour == 6)
-                                                                            Samedi  
-                                                                        @endif
-                                                                    </span>
-                                                                    </div>
-                                                                </div>
-                                                            </th>
-                                                            <td>
-                                                                <div class="text-muted">
-                                                                    {{$siege_h->opened_at}}
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <div class="text-muted">{{$siege_h->closed_at}}</div>
-                                                            </td>
-                                                        </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
+                                                <div class="table-responsive">
+                                                    <table class="table table-nowrap align-middle mb-0">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">Jours</th>
+                                                                <th scope="col">Ouverture</th>
+                                                                <th scope="col">Fermeture</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach(unserialize($siege_h->jours) as $jour)
+                                                                <tr>
+                                                                    <th scope="row">
+                                                                        <div class="d-flex align-items-center">
+                                                                            <div class="avatar-xs me-3">
+                                                                            <span>
+                                                                                @if($jour == 0)
+                                                                                    Dimanche
+                                                                                @elseif($jour == 1)
+                                                                                    Lundi
+                                                                                @elseif($jour == 2)
+                                                                                    Mardi
+                                                                                @elseif($jour == 3)
+                                                                                    Mercredi
+                                                                                @elseif($jour == 4)
+                                                                                    Jeudi
+                                                                                @elseif($jour == 5)
+                                                                                    Vendredi
+                                                                                @elseif($jour == 6)
+                                                                                    Samedi  
+                                                                                @endif
+                                                                            </span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </th>
+                                                                    <td>
+                                                                        <div class="text-muted">
+                                                                            {{$siege_h->opened_at}}
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="text-muted">{{$siege_h->closed_at}}</div>
+                                                                    </td>
+                                                                </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
                                         </div>
+                                    @endforeach
+                                @else
+                                    <div class="text-center mb-2">
+                                        <h4>Cet agence n'a pas de siege</h4>
                                     </div>
-                                </div>
-                                @endforeach
+                                @endif
                             </div>
                         </div>
                     </div>
