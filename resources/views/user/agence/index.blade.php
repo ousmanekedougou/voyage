@@ -126,7 +126,7 @@
                                         <input type="hidden" name="slug" value="{{ $agence->slug }}">
                                     </form>
                                     <a href="{{ route('agence.about') }}" onclick="event.preventDefault();
-                                        document.getElementById('abouteAgence-{{ $agence->id }}').submit();" class="btn btn-primary btn-sm"><i class="bx bx-file me-1"></i>Details</a>
+                                        document.getElementById('abouteAgence-{{ $agence->id }}').submit();" class="btn btn-primary btn-sm"><i class="bx bx-file me-1"></i>A Propos</a>
                                 </li>
                                 
                                 <li class="list-inline-item me-3">
