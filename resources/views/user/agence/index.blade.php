@@ -149,12 +149,13 @@
                                                 <i class="bx bxl-instagram"></i>
                                             </span>
                                         </button>
-
+                                        {{--
                                         <button type="button" class="btn btn-light position-relative p-0 avatar-xs rounded-circle bg-info text-white">
                                             <span class="avatar-title bg-transparent text-reset">
                                                 <i class="bx bxl-linkedin-square "></i>
                                             </span>
                                         </button>
+                                        --}}
                                     </div>
                                 </li>
 
