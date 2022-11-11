@@ -126,7 +126,7 @@
                                         <input type="hidden" name="slug" value="{{ $agence->slug }}">
                                     </form>
                                     <a href="{{ route('agence.about') }}" onclick="event.preventDefault();
-                                        document.getElementById('abouteAgence-{{ $agence->id }}').submit();" class="btn btn-primary btn-xs"><i class="bx bx-file me-1"></i>Details</a>
+                                        document.getElementById('abouteAgence-{{ $agence->id }}').submit();" class="btn btn-primary btn-sm"><i class="bx bx-file me-1"></i>Details</a>
                                 </li>
                                 
                                 <li class="list-inline-item me-3">
@@ -149,13 +149,12 @@
                                                 <i class="bx bxl-instagram"></i>
                                             </span>
                                         </button>
-                                        {{--
+                                        
                                         <button type="button" class="btn btn-light position-relative p-0 avatar-xs rounded-circle bg-info text-white">
                                             <span class="avatar-title bg-transparent text-reset">
                                                 <i class="bx bxl-linkedin-square "></i>
                                             </span>
                                         </button>
-                                        --}}
                                     </div>
                                 </li>
 
