@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Agence;
 
 use App\Http\Controllers\Controller;
+use App\Models\Admin\Jour;
 use App\Models\Admin\Siege;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
@@ -20,8 +21,9 @@ class SiegeController extends Controller
     }
     public function index()
     {
+        $jours = Jour::all();
         $sieges = Siege::where('agence_id',Auth::guard('agence')->user()->id)->orderBy('id','DESC')->get(); 
-        return view('agence.siege.index',compact('sieges'));
+        return view('agence.siege.index',compact('sieges','jours'));
         
     }
 
@@ -48,6 +50,8 @@ class SiegeController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'phone' => 'required|string|max:255|unique:users',
             'adress' => 'required|string',
+             'opened_at' => 'required|date_format:H:i',
+            'closed_at' => 'required|date_format:H:i|after:opened_at'
         ]);
         $add_siege = new Siege();
         $add_siege->name = $request->name;
@@ -55,6 +59,9 @@ class SiegeController extends Controller
         $add_siege->phone = $request->phone;
         $add_siege->adress = $request->adress;
         $add_siege->agence_id = Auth::guard('agence')->user()->id;
+        $add_siege->jours = serialize($request->jour);
+        $add_siege->opened_at = $request->opened_at;
+        $add_siege->closed_at = $request->closed_at;
         $add_siege->save();
         Toastr::success('Votre siege a bien ete creer', 'Ajout Siege', ["positionClass" => "toast-top-right"]);
         return back();
@@ -96,6 +103,8 @@ class SiegeController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'phone' => 'required|string|max:255|unique:users',
             'adress' => 'required|string',
+            'opened_at' => 'required|date_format:H:i:s',
+            'closed_at' => 'required|date_format:H:i:s|after:opened_at'
         ]);
         $update_siege = Siege::where('id',$id)->first();
         $update_siege->name = $request->name;
@@ -103,6 +112,9 @@ class SiegeController extends Controller
         $update_siege->phone = $request->phone;
         $update_siege->adress = $request->adress;
         $update_siege->agence_id = Auth::guard('agence')->user()->id;
+        $update_siege->jours = serialize($request->jour);
+        $update_siege->opened_at = $request->oponed_at;
+        $update_siege->closed_at = $request->closed_at;
         $update_siege->save();
         Toastr::success('Votre siege a bien ete modifier', 'Modifier Siege', ["positionClass" => "toast-top-right"]);
         return back();

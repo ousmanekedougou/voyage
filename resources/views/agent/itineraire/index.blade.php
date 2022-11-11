@@ -105,97 +105,7 @@
                 </div>
                 <!-- End Page-content -->
 
-                <!-- Modal de la modification -->
-                @foreach($itineraires as $edit_itineraire)
-
-                    <div class="modal fade" id="staticBackdropedititineraire-{{$edit_itineraire->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-md modal-dialog-centered" role="document">
-                            <div class="modal-content ">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel">Modifier l'itineraire {{ $edit_itineraire->name }}</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                    <div class="modal-body">
-                                        <p>
-                                            <form class="custom-validation" action="{{ route('agent.itineraire.update',$edit_itineraire->id) }}" method="POST" enctype="multipart/form-data">
-                                                @csrf
-                                                {{Method_field('PUT')}}
-                                                <div class="row">
-                                                    <div class="col-xl-12">
-                                                        <div class="mb-3">
-                                                            <label class="form-label">Nom de l'itineraire</label>
-                                                            <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') ?? $edit_itineraire->name}}" required autocomplete="name"
-                                                                placeholder="Nom de l'itineraire" />
-                                                            @error('name')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
-                                                            @enderror
-                                                        </div>
-                                                        <div class="mb-3">
-                                                            <label class="form-label mb-3">Choisissez les jours de voyage de cette ittineraire</label>
-                                                            <div class="row">
-                                                                @foreach($jours as $jr)
-                                                                <div class="col-md-3">
-                                                                    <div class="form-check mb-3
-                                                                        @if($jr->index == 0)
-                                                                            form-check-primary
-                                                                        @elseif($jr->index == 1)
-                                                                            form-check-success
-                                                                        @elseif($jr->index == 2)
-                                                                            form-check-info
-                                                                        @elseif($jr->index == 3)
-                                                                            form-check-secondary
-                                                                        @elseif($jr->index == 4)
-                                                                            form-check-warning
-                                                                        @elseif($jr->index == 5)
-                                                                            form-check-danger
-                                                                        @elseif($jr->index == 6)
-                                                                            form-check-default
-                                                                        @endif
-                                                                    ">
-                                                                        <input class="form-check-input @error('name') is-invalid @enderror" type="checkbox"
-                                                                            id="formCheckcolor-{{$jr->id}}" name="jour[]" value="{{ old('name') ?? $jr->index }}"
-                                                                            
-                                                                            @foreach(unserialize($edit_itineraire->jours) as $jr_unserilize)
-                                                                                @if($jr->index == $jr_unserilize)
-                                                                                    checked
-                                                                                @endif
-                                                                            @endforeach
-
-                                                                            >
-                                                                        <label class="form-check-label" for="formCheckcolor-{{$jr->id}}">
-                                                                            {{$jr->name}}
-                                                                        </label>
-                                                                    </div>
-                                                                    @error('jour[]')
-                                                                        <span class="invalid-feedback" role="alert">
-                                                                            <strong>{{ $message }}</strong>
-                                                                        </span>
-                                                                    @enderror
-                                                                </div>
-                                                                @endforeach
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="d-flex flex-wrap gap-2">
-                                                        <button type="submit" class="btn btn-primary waves-effect waves-light btn-block">
-                                                            Enregistrer cette itineraire
-                                                        </button>
-                                                        <button type="reset" class="btn btn-secondary waves-effect btn-block">
-                                                            Anuller
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </p>
-                                    </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                @endforeach
-                <!-- Fin du modal de la modification -->
+               
 
              
 
@@ -272,27 +182,6 @@
                                                             </span>
                                                         @enderror
                                                     </div>
-                                                    <div class="mb-3">
-                                                        <label class="form-label mb-3">Choisissez les jours de voyage de cette ittineraire</label>
-                                                        <div class="row">
-                                                            @foreach($jours as $jr)
-                                                            <div class="col-md-3">
-                                                                <div class="form-check form-check-primary mb-3">
-                                                                    <input class="form-check-input @error('name') is-invalid @enderror" type="checkbox"
-                                                                        id="formCheckcolor-{{$jr->id}}" name="jour[]" value="{{ old('name') ?? $jr->index }}">
-                                                                    <label class="form-check-label" for="formCheckcolor-{{$jr->id}}">
-                                                                        {{$jr->name}}
-                                                                    </label>
-                                                                </div>
-                                                                @error('jour[]')
-                                                                    <span class="invalid-feedback" role="alert">
-                                                                        <strong>{{ $message }}</strong>
-                                                                    </span>
-                                                                @enderror
-                                                            </div>
-                                                            @endforeach
-                                                        </div>
-                                                    </div>
                                                 </div>
                                                 <div class="d-flex flex-wrap gap-2">
                                                     <button type="submit" class="btn btn-primary waves-effect waves-light btn-block">
@@ -311,6 +200,54 @@
                 </div>
             
             <!-- Fin du modal de l'ajout -->
+
+             <!-- Modal de la modification -->
+                @foreach($itineraires as $edit_itineraire)
+
+                    <div class="modal fade" id="staticBackdropedititineraire-{{$edit_itineraire->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+                            <div class="modal-content ">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Modifier l'itineraire {{ $edit_itineraire->name }}</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                    <div class="modal-body">
+                                        <p>
+                                            <form class="custom-validation" action="{{ route('agent.itineraire.update',$edit_itineraire->id) }}" method="POST" enctype="multipart/form-data">
+                                                @csrf
+                                                {{Method_field('PUT')}}
+                                                <div class="row">
+                                                    <div class="col-xl-12">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Nom de l'itineraire</label>
+                                                            <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') ?? $edit_itineraire->name}}" required autocomplete="name"
+                                                                placeholder="Nom de l'itineraire" />
+                                                            @error('name')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div class="d-flex flex-wrap gap-2">
+                                                        <button type="submit" class="btn btn-primary waves-effect waves-light btn-block">
+                                                            Enregistrer cette itineraire
+                                                        </button>
+                                                        <button type="reset" class="btn btn-secondary waves-effect btn-block">
+                                                            Anuller
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </p>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                @endforeach
+                <!-- Fin du modal de la modification -->
 
 
             <!-- _____________________________________________________________________ -->

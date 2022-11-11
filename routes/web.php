@@ -21,7 +21,7 @@ Route::get('/', [App\Http\Controllers\User\HomeController::class, 'index'])->nam
 Route::get('/about', [App\Http\Controllers\User\AboutController::class, 'index'])->name('about.index');
 
 Route::get('/agence', [App\Http\Controllers\User\AgenceController::class, 'index'])->name('agence.index');
-Route::get('/agence/about/{slug}', [App\Http\Controllers\User\AgenceController::class, 'about'])->name('agence.about');
+Route::get('/agence/about', [App\Http\Controllers\User\AgenceController::class, 'about'])->name('agence.about');
 Route::get('/agence/create', [App\Http\Controllers\User\AgenceController::class, 'create'])->name('agence.create');
 // Route::get('/agence/show/{slug}', [App\Http\Controllers\User\AgenceController::class, 'show'])->name('agence.show');
 Route::post('/agence/store', [App\Http\Controllers\User\AgenceController::class, 'store'])->name('agence.store');

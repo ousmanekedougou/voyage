@@ -20,6 +20,9 @@ class CreateSiegesTable extends Migration
             $table->string('phone')->unique();
             $table->integer('agence_id');
             $table->string('adress')->nullable();
+            $table->string('jours')->nullable();
+            $table->time('opened_at')->nullable();
+            $table->time('closed_at')->nullable();
             $table->timestamps();
         });
     }

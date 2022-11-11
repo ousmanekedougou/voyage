@@ -74,7 +74,7 @@ class ClientController extends Controller
         $date_input = getDate($time_input); 
         // dd($date_input['wday']); 
         
-        $userialize_buse = unserialize($buse->itineraire->jours);
+        $userialize_buse = unserialize($buse->siege->jours);
 
         $clients = Client::where('bus_id',$buse->id)->where('registered_at',$request->date)->get();
         $info_user = Client::where('registered_at',$request->date)

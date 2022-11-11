@@ -17,7 +17,7 @@ class Siege extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name','email','phone','adress','agence_id'];
+    protected $fillable = ['name','email','phone','adress','agence_id','jours'];
 
       public function agence()
     {

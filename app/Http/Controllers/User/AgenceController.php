@@ -44,9 +44,9 @@ class AgenceController extends Controller
         return view('user.agence.create',compact('regions'));
     }
 
-    public function about($sluge){
-        $slug = Agence::where('slug',$sluge)->first();
-        return view('user.agence.about',compact('slug'));
+    public function about(){
+        $agence = Agence::where('slug',request()->slug)->first();
+        return view('user.agence.about',compact('agence'));
     }
 
      public function store(Request $request)

@@ -120,7 +120,13 @@
                             <ul class="list-inline mb-0">
 
                                 <li class="list-inline-item me-3">
-                                    <a href="{{ route('agence.about',$agence->slug) }}" class="btn btn-primary btn-xs"><i class="bx bx-file me-1"></i>Details</a>
+                                    <form id="abouteAgence-{{ $agence->id }}" action="{{ route('agence.about') }}" method="POST">
+                                          {{csrf_field()}}
+                                        {{method_field('GET')}}
+                                        <input type="hidden" name="slug" value="{{ $agence->slug }}">
+                                    </form>
+                                    <a href="{{ route('agence.about') }}" onclick="event.preventDefault();
+                                        document.getElementById('abouteAgence-{{ $agence->id }}').submit();" class="btn btn-primary btn-xs"><i class="bx bx-file me-1"></i>Details</a>
                                 </li>
                                 
                                 <li class="list-inline-item me-3">

@@ -197,6 +197,56 @@
                                                     @enderror
                                                 </div>
 
+                                                <div class="mb-3">
+                                                    <label class="form-label mb-3">Choisissez les jours de voyage de cette ittineraire</label>
+                                                    <div class="row">
+                                                        @foreach($jours as $jr)
+                                                        <div class="col-md-3">
+                                                            <div class="form-check form-check-primary mb-3">
+                                                                <input class="form-check-input @error('name') is-invalid @enderror" type="checkbox"
+                                                                    id="formCheckcolor-{{$jr->id}}" name="jour[]" value="{{ old('name') ?? $jr->index }}">
+                                                                <label class="form-check-label" for="formCheckcolor-{{$jr->id}}">
+                                                                    {{$jr->name}}
+                                                                </label>
+                                                            </div>
+                                                            @error('jour[]')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
+                                                        </div>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-3 row">
+                                                    <div class="col-md-6">
+                                                        <label for="example-time-input" class="col-md-12 col-form-label">Heure d'ouverture</label>
+                                                        <div class="col-md-10">
+                                                            <input class="form-control @error('opened_at') is-invalid @enderror" name="opened_at" type="time" value="{{ old('opened_at') }}"
+                                                                id="example-time-input">
+                                                        </div>
+                                                            @error('opened_at')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <label for="example-time-input" class="col-md-12 col-form-label">Heure de fermeture</label>
+                                                        <div class="col-md-10">
+                                                            <input class="form-control @error('closed_at') is-invalid @enderror" type="time" name="closed_at" value="{{ old('closed_at') }}"
+                                                                id="example-time-input">
+                                                        </div>
+                                                        @error('closed_at')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+
                                              
                                               
                                             </div>
@@ -222,7 +272,7 @@
                 <div class="modal-dialog modal-md modal-dialog-centered" role="document">
                     <div class="modal-content ">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Ajouter un siege de votre agence</h5>
+                            <h5 class="modal-title" id="staticBackdropLabel">Modifier le siege {{ $edit_siege->name }}</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                             <div class="modal-body">
@@ -278,6 +328,82 @@
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
+                                                </div>
+
+
+                                                <div class="mb-3">
+                                                    <label class="form-label mb-3">Choisissez les jours de voyage de cette ittineraire</label>
+                                                    <div class="row">
+                                                        @foreach($jours as $jr)
+                                                        <div class="col-md-3">
+                                                            <div class="form-check mb-3
+                                                                @if($jr->index == 0)
+                                                                    form-check-primary
+                                                                @elseif($jr->index == 1)
+                                                                    form-check-success
+                                                                @elseif($jr->index == 2)
+                                                                    form-check-info
+                                                                @elseif($jr->index == 3)
+                                                                    form-check-secondary
+                                                                @elseif($jr->index == 4)
+                                                                    form-check-warning
+                                                                @elseif($jr->index == 5)
+                                                                    form-check-danger
+                                                                @elseif($jr->index == 6)
+                                                                    form-check-default
+                                                                @endif
+                                                            ">
+                                                                <input class="form-check-input @error('name') is-invalid @enderror" type="checkbox"
+                                                                    id="formCheckcolor-{{$jr->id}}" name="jour[]" value="{{ old('name') ?? $jr->index }}"
+                                                                    
+                                                                    @foreach(unserialize($edit_siege->jours) as $jr_unserilize)
+                                                                        @if($jr->index == $jr_unserilize)
+                                                                            checked
+                                                                        @endif
+                                                                    @endforeach
+
+                                                                    >
+                                                                <label class="form-check-label" for="formCheckcolor-{{$jr->id}}">
+                                                                    {{$jr->name}}
+                                                                </label>
+                                                            </div>
+                                                            @error('jour[]')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
+                                                        </div>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="mb-3 row">
+                                                    <div class="col-md-6">
+                                                        <label for="example-time-input" class="col-md-12 col-form-label">Heure D'ouverture</label>
+                                                        <div class="col-md-10">
+                                                            <input class="form-control @error('opened_at') is-invalid @enderror" name="opened_at" type="time" value="{{old('opened_at') ?? $edit_siege->opened_at }}"
+                                                                id="example-time-input">
+                                                        </div>
+                                                            @error('opened_at')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <label for="example-time-input" class="col-md-12 col-form-label">Heure de fermeture</label>
+                                                        <div class="col-md-10">
+                                                            <input class="form-control @error('closed_at') is-invalid @enderror" type="time" name="closed_at" value="{{old('closed_at') ?? $edit_siege->closed_at}}"
+                                                                id="example-time-input">
+                                                        </div>
+                                                            @error('closed_at')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
                                                 </div>
 
                                              

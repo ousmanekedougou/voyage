@@ -28,8 +28,7 @@ class ItineraireController extends Controller
     {
         $villes = Ville::all();
         $itineraires = Itineraire::where('siege_id',Auth::guard('agent')->user()->siege_id)->orderBy('id','ASC')->paginate(5);
-        $jours = Jour::all();
-        return view('agent.itineraire.index',compact('itineraires','villes','jours'));
+        return view('agent.itineraire.index',compact('itineraires','villes'));
     }
 
     /**
@@ -52,15 +51,12 @@ class ItineraireController extends Controller
     {
         $this->validate($request,[
             'name' => 'required|string|max:255|unique:itineraires',
-            // 'jour[]' => 'required|string',
+            
         ]);
         $add_itineraire = new Itineraire();
         $add_itineraire->name = $request->name;
         $add_itineraire->user_id = Auth::guard('agent')->user()->id;
         $add_itineraire->siege_id = Auth::guard('agent')->user()->siege_id;
-
-        $add_itineraire->jours = serialize($request->jour);
-
         $add_itineraire->save();
         Toastr::success('Votre itineraire a bien ete creer', 'Ajout Itineraire', ["positionClass" => "toast-top-right"]);
         return back();
@@ -101,7 +97,6 @@ class ItineraireController extends Controller
     {
         $this->validate($request,[
             'name' => 'required|string',
-            // 'jour[]' => 'required|string',
         ]);
         
         $update_itineraire = Itineraire::where('id',$id)->first();
@@ -109,7 +104,6 @@ class ItineraireController extends Controller
         $update_itineraire->name = $request->name;
         // $update_itineraire->user_id = Auth::user()->id;
         $update_itineraire->siege_id = Auth::guard('agent')->user()->siege_id;
-        $update_itineraire->jours = serialize($request->jour);
         $update_itineraire->save();
         Toastr::success('Votre itineraire a bien ete modifier', 'Modifier Itineraire', ["positionClass" => "toast-top-right"]);
         return back();

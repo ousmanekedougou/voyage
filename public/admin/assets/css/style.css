@@ -80,10 +80,12 @@
 
 
 
-.bg-ico-hero{
+.hero-section .bg-ico-hero{
     background-image:url(./user/assets/images/siege.jpg);background-size:cover;background-position:top;
     height: 100px;
  }
+
+  
  
 
  .home-section-mobile{

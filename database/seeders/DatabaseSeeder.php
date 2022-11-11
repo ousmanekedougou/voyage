@@ -236,21 +236,33 @@ class DatabaseSeeder extends Seeder
                 'email' => 'terrangadakar@gmail.com',
                 'phone' => '770702300',
                 'adress' => 'Medina Rue 19x26',
-                'agence_id' => 3
+                'agence_id' => 3,
+                'jours' => serialize($jours),
+                'opened_at' => "08:00:00",
+                'closed_at' => "18:00:00",
+
             ]);   
             Siege::create([
                 'name' => 'Kedougou',
                 'email' => 'terrangakedougou@gmail.com',
                 'phone' => '770002300',
                 'adress' => 'Dalaba',
-                'agence_id' => 3
+                'agence_id' => 3,
+                'jours' => serialize($jours),
+                'opened_at' => "08:00:00",
+                'closed_at' => "18:00:00",
+
             ]);
             Siege::create([
                 'name' => 'Ziguinchor',
                 'email' => 'terrangaZiguinchor@gmail.com',
                 'phone' => '770702901',
                 'adress' => 'Bingniona',
-                'agence_id' => 3
+                'agence_id' => 3,
+                'jours' => serialize($jours),
+                'opened_at' => "08:00:00",
+                'closed_at' => "18:00:00",
+
             ]);       
 
             // Pour Oriental
@@ -259,21 +271,33 @@ class DatabaseSeeder extends Seeder
             'email' => 'orientaldakar@gmail.com',
             'phone' => '730791300',
             'adress' => 'Medina Rue 19x26',
-            'agence_id' => 4
+            'agence_id' => 4,
+            'jours' => serialize($jours),
+            'opened_at' => "08:00:00",
+            'closed_at' => "18:00:00",
+
         ]);   
         Siege::create([
             'name' => 'Kedougou',
             'email' => 'orientalkedougou@gmail.com',
             'phone' => '700602300',
             'adress' => 'Dalaba',
-            'agence_id' => 4
+            'agence_id' => 4,
+            'jours' => serialize($jours),
+            'opened_at' => "08:00:00",
+            'closed_at' => "18:00:00",
+
         ]);
         Siege::create([
             'name' => 'Ziguinchor',
             'email' => 'orientalZiguinchor@gmail.com',
             'phone' => '870502301',
             'adress' => 'Bingniona',
-            'agence_id' => 4
+            'agence_id' => 4,
+            'jours' => serialize($jours),
+            'opened_at' => "08:00:00",
+            'closed_at' => "18:00:00",
+
         ]);  
 
         // Bassari
@@ -282,21 +306,33 @@ class DatabaseSeeder extends Seeder
             'email' => 'bassaridakar@gmail.com',
             'phone' => '740701300',
             'adress' => 'Medina Rue 19x26',
-            'agence_id' => 5
+            'agence_id' => 5,
+            'jours' => serialize($jours),
+            'opened_at' => "08:00:00",
+            'closed_at' => "18:00:00",
+
         ]);   
         Siege::create([
             'name' => 'Kedougou',
             'email' => 'bassarikedougou@gmail.com',
             'phone' => '730602300',
             'adress' => 'Dalaba',
-            'agence_id' => 5
+            'agence_id' => 5,
+            'jours' => serialize($jours),
+            'opened_at' => "08:00:00",
+            'closed_at' => "18:00:00",
+
         ]);
         Siege::create([
             'name' => 'Ziguinchor',
             'email' => 'bassariZiguinchor@gmail.com',
             'phone' => '750502301',
             'adress' => 'Bingniona',
-            'agence_id' => 5
+            'agence_id' => 5,
+            'jours' => serialize($jours),
+            'opened_at' => "08:00:00",
+            'closed_at' => "18:00:00",
+
         ]); 
 
         // Saloum Transpor
@@ -305,21 +341,33 @@ class DatabaseSeeder extends Seeder
             'email' => 'saloumdakar@gmail.com',
             'phone' => '710701300',
             'adress' => 'Medina Rue 19x26',
-            'agence_id' => 6
+            'agence_id' => 6,
+            'jours' => serialize($jours),
+            'opened_at' => "08:00:00",
+            'closed_at' => "18:00:00",
+
         ]);   
         Siege::create([
             'name' => 'Kedougou',
             'email' => 'saloumkedougou@gmail.com',
             'phone' => '720602300',
             'adress' => 'Dalaba',
-            'agence_id' => 6
+            'agence_id' => 6,
+            'jours' => serialize($jours),
+            'opened_at' => "08:00:00",
+            'closed_at' => "18:00:00",
+
         ]);
         Siege::create([
             'name' => 'Ziguinchor',
             'email' => 'saloumZiguinchor@gmail.com',
             'phone' => '790582301',
             'adress' => 'Bingniona',
-            'agence_id' => 6
+            'agence_id' => 6,
+            'jours' => serialize($jours),
+            'opened_at' => "08:00:00",
+            'closed_at' => "18:00:00",
+
         ]); 
 
         // Pour Niokolo
@@ -328,21 +376,33 @@ class DatabaseSeeder extends Seeder
             'email' => 'niokolodakar@gmail.com',
             'phone' => '760701303',
             'adress' => 'Medina Rue 19x26',
-            'agence_id' => 7
+            'agence_id' => 7,
+            'jours' => serialize($jours),
+            'opened_at' => "08:00:00",
+            'closed_at' => "18:00:00",
+
         ]);   
         Siege::create([
             'name' => 'Kedougou',
             'email' => 'niokolokedougou@gmail.com',
             'phone' => '721602303',
             'adress' => 'Dalaba',
-            'agence_id' => 7
+            'agence_id' => 7,
+            'jours' => serialize($jours),
+            'opened_at' => "08:00:00",
+            'closed_at' => "18:00:00",
+
         ]);
         Siege::create([
             'name' => 'Ziguinchor',
             'email' => 'niokoloZiguinchor@gmail.com',
             'phone' => '750582303',
             'adress' => 'Bingniona',
-            'agence_id' => 7
+            'agence_id' => 7,
+            'jours' => serialize($jours),
+            'opened_at' => "08:00:00",
+            'closed_at' => "18:00:00",
+
         ]); 
 
         // Warraba
@@ -351,21 +411,33 @@ class DatabaseSeeder extends Seeder
             'email' => 'warrabadakar@gmail.com',
             'phone' => '790701303',
             'adress' => 'Medina Rue 19x26',
-            'agence_id' => 8
+            'agence_id' => 8,
+            'jours' => serialize($jours),
+            'opened_at' => "08:00:00",
+            'closed_at' => "18:00:00",
+
         ]);   
         Siege::create([
             'name' => 'Kedougou',
             'email' => 'warrabakedougou@gmail.com',
             'phone' => '720609303',
             'adress' => 'Dalaba',
-            'agence_id' => 8
+            'agence_id' => 8,
+            'jours' => serialize($jours),
+            'opened_at' => "08:00:00",
+            'closed_at' => "18:00:00",
+
         ]);
         Siege::create([
             'name' => 'Ziguinchor',
             'email' => 'warrabaZiguinchor@gmail.com',
             'phone' => '750552303',
             'adress' => 'Bingniona',
-            'agence_id' => 8
+            'agence_id' => 8,
+            'jours' => serialize($jours),
+            'opened_at' => "08:00:00",
+            'closed_at' => "18:00:00",
+
         ]); 
 
 
