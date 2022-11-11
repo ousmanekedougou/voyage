@@ -125,8 +125,8 @@
                 </div>
                 <!-- end col -->
                 <div class="col-lg-10">
-                    <div class="card">
-                        <div class="card-body">
+                    <div class="">
+                        <div class="">
                             <div class="media">
                                 @if($agence->logo != '' )
                                     <img src="{{Storage::url($agence->logo)}}" alt="" class="avatar-sm me-4">
@@ -192,11 +192,11 @@
                                 @if($agence->sieges->count() > 1)
                                     @foreach($agence->sieges as $siege)
                                         <div class="col-xl-4 col-sm-6">
-                                            <div class="card">
+                                            <div class="">
                                                 <div class="card-body">
                                                     <div class="media">
                                                         <div class="media-body">
-                                                            <h5 class="text-center">{{ $siege->name }}</h5>
+                                                            <h5 class="">Siege de {{ $siege->name }}</h5>
                                                             <p class="text-muted  mb-1"><i class="fa fa-envelope"></i> {{ $siege->email }} </p>
                                                             <p class="text-muted  mb-2"><i class="fa fa-mobile"></i> {{ $siege->phone }} </p>
                                                             <ul class="list-inline mb-0">
@@ -396,6 +396,80 @@
                                     </div>
                                 @endif
                             </div>
+
+                            <div class="row mt-5">
+                                <div class="col-lg-12 ">
+                                    <div class="text-center mb-2">
+                                        <h4>Itineraire, villes, tickets et arrets</h4>
+                                    </div>
+                                </div>
+
+                                 @if($agence->sieges->count() > 1)
+                                    @foreach($agence->sieges as $siege)
+                                        <div class="">
+                                            <div class="">
+                                                <h4 class="card-title mb-4">Pour le siege de {{$siege->name}} </h4>
+                                                <div class="row">
+                                                    @foreach($siege->itineraires as $itineraire)
+                                                    <div class=" @if($siege->itineraires->count() > 1) col-xl-6 @else col-xl-12 @endif ">
+                                                        <div class="card">
+                                                            <div class="card-body">
+                                                                <h4 class="card-title">Itineraire de {{ $itineraire->name }}</h4>
+                                                                <p class="card-title-desc">
+                                                                    {{$itineraire->villes->count()}} villes
+                                                                </p>    
+                                                                
+                                                                <div class="table-responsive">
+                                                                    <table class="table mb-0">
+                                
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Villes</th>
+                                                                                <th></th>
+                                                                                <th>Prix</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            @foreach($itineraire->villes as $ville)
+                                                                            <tr>
+                                                                                <td> De {{ $ville->name }}</td>
+                                                                                <td></td>
+                                                                                <td>{{ $ville->amount }} f</td>
+                                                                            </tr>
+                                                                            @endforeach
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+
+                                                                <h6 class="card-title mt-4 mb-2">Les villes d'arrets :</h6>
+                                                                <p class="card-title-desc">
+                                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet soluta, provident ullam dolore debitis expedita vero laboriosam libero tempore, doloribus accusamus totam quo voluptas quae eum nulla voluptate delectus perspiciatis.
+                                                                </p> 
+                                        
+                                                                <h4 class="card-title">Geolocalisation du bus</h4>
+                                                                <p class="card-title-dsec">Google Maps</p>
+                                
+                                                                <div id="gmaps-markers" class="gmaps">
+                                                                    <iframe src="https://www.google.sn/maps/place/Rue+39,+Dakar/@14.6870931,-17.4510948,18.46z/data=!4m5!3m4!1s0xec172f42ba43de9:0x2131ba43a638922f!8m2!3d14.6869267!4d-17.4512127?hl=fr&authuser=0" frameborder="0"
+                                                                    style="width: 100%; height:100%;"
+                                                                    ></iframe>
+                                                                </div>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @else
+                                    <div class="text-center mb-2">
+                                        <h4>Cet agence n'a pas de siege</h4>
+                                    </div>
+                                @endif
+                                
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -410,11 +484,8 @@
 
     </section>
     
-    
-  
 
-    
-
- 
-           
+@endsection
+@section('footerSection')
+<script src="https://maps.google.com/maps/api/js?key=AIzaSyCtSAR45TFgZjOs4nBFFZnII-6mMHLfSYI"></script>
 @endsection
