@@ -38,7 +38,7 @@
 
                         @if(Auth::guard('agence')->user())
                             <li>
-                                <a href="" class="waves-effect">
+                                <a href="{{ route('agence.about.index') }}" class="waves-effect">
                                     <i class="bx bx-food-menu"></i>
                                     <span key="t-file-manager">Presentation</span>
                                 </a>

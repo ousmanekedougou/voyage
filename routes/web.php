@@ -68,8 +68,15 @@ Route::middleware('isAdmin')->prefix('/admin')->name('admin.')->group(function()
 Route::prefix('/agence')->name('agence.')->group(function() 
 {
     Route::get('/home', [App\Http\Controllers\Agence\HomeController::class, 'index'])->name('agence.home');
-    
 
+    Route::get('/about', [App\Http\Controllers\Agence\AboutController::class, 'index'])->name('about.index');
+    Route::put('/about', [App\Http\Controllers\Agence\AboutController::class, 'about'])->name('about.about');
+    Route::put('/motivation', [App\Http\Controllers\Agence\AboutController::class, 'motivation'])->name('about.motivation');
+    Route::put('/ticket', [App\Http\Controllers\Agence\AboutController::class, 'ticket'])->name('about.ticket');
+    Route::put('/bagagec', [App\Http\Controllers\Agence\AboutController::class, 'bagagec'])->name('about.bagagec');
+    Route::put('/personne', [App\Http\Controllers\Agence\AboutController::class, 'personne'])->name('about.personne');
+    Route::put('/villeArret', [App\Http\Controllers\Agence\AboutController::class, 'villeArret'])->name('about.villeArret');
+    
     Route::resource('/siege', App\Http\Controllers\Agence\SiegeController::class);
     Route::resource('/agent', App\Http\Controllers\Agence\AgentController::class);
     Route::put('/agent/edite/{id}', [App\Http\Controllers\Agence\AgentController::class,'edite'])->name('agent.edite');

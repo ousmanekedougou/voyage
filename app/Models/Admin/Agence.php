@@ -50,4 +50,8 @@ class Agence extends Authenticatable
      public function region(){
         return $this->belongsTo(Region::class);
     }
+
+    public function abouts(){
+        return $this->hasMany(About::class);
+    }
 }

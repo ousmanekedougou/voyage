@@ -1,4 +1,5 @@
 @extends('user.layouts.app',['title' => 'A propos de '])
+
 @section('main-content')
 
  
@@ -151,12 +152,9 @@
                                         For science, music, sport, etc,</p>
 
                                     <div class="text-muted mt-4">
-                                        <p><i class="mdi mdi-chevron-right text-primary me-1"></i> To achieve this, it
-                                            would be necessary</p>
-                                        <p><i class="mdi mdi-chevron-right text-primary me-1"></i> Separate existence is
-                                            a myth.</p>
-                                        <p><i class="mdi mdi-chevron-right text-primary me-1"></i> If several languages
-                                            coalesce</p>
+                                        <p><i class="bx bx-envelope text-muted me-1"></i> {{$agence->email}} </p>
+                                        <p><i class="bx bx-mobile text-muted me-1"></i> {{ $agence->phone }} </p>
+                                        <p><i class="bx bx-map text-muted me-1"></i> {{ $agence->region->name }} ( {{ $agence->adress }} ) </p>
                                     </div>
                                 </div>
 
@@ -172,8 +170,8 @@
 
                             <div class="row mt-5">
                                 <div class="col-lg-12">
-                                    <div class="text-center mb-5">
-                                        <h4>Pour Quoi {{ $agence->name }}</h4>
+                                    <div class=" mb-5">
+                                        <h4 class="btn btn-light btn-block btn-sm font-size-18 text-left text-black card-title" style="width: 100%;">Pour Quoi {{ $agence->name }}</h4>
                                         <p class="text-muted text-left">
                                             Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos tenetur amet asperiores sed iste, qui molestiae vero et voluptatem, fugit exercitationem atque esse ad, architecto possimus aliquid. Nesciunt, magni culpa.
                                         </p>
@@ -185,8 +183,8 @@
 
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <div class="text-center mb-5">
-                                        <h4>Nos differents sieges de transport</h4>
+                                    <div class=" mb-2">
+                                        <h4 class="btn btn-light btn-block btn-sm font-size-18 text-left text-black card-title" style="width: 100%;">Nos differents sieges de transport</h4>
                                     </div>
                                 </div>
                                 @if($agence->sieges->count() > 1)
@@ -212,15 +210,15 @@
                                     @endforeach
                                 @else
                                     <div class="text-center mb-5">
-                                        <p>Cet agence ne dispose pas de siege</p>
+                                        <p class="text-danger">Cet agence ne dispose pas de siege</p>
                                     </div>
                                 @endif
                             </div>
 
                             <div class="row mt-5">
                                 <div class="col-lg-12">
-                                    <div class="text-center mb-2">
-                                        <h4>Notre politique de travail</h4>
+                                    <div class="mb-2">
+                                        <h4 class="btn btn-light btn-block btn-sm font-size-18 text-left text-black card-title" style="width: 100%;">Notre politique de travail</h4>
                                     </div>
                                 </div>
 
@@ -329,8 +327,8 @@
 
                             <div class="row mt-5">
                                 <div class="col-lg-12">
-                                    <div class="text-center mb-2">
-                                        <h4>Nos horaires de transport</h4>
+                                    <div class="mb-2">
+                                        <h4 class="btn btn-light btn-block btn-sm font-size-18 text-left text-black card-title" style="width: 100%;">Nos horaires de transport</h4>
                                     </div>
                                 </div>
                                 @if($agence->sieges->count() > 1)
@@ -392,15 +390,15 @@
                                     @endforeach
                                 @else
                                     <div class="text-center mb-2">
-                                        <h4>Cet agence n'a pas de siege</h4>
+                                        <p class="text-danger">Cet agence n'a pas de siege</p>
                                     </div>
                                 @endif
                             </div>
 
                             <div class="row mt-5">
                                 <div class="col-lg-12 ">
-                                    <div class="text-center mb-2">
-                                        <h4>Itineraire, villes, tickets et arrets</h4>
+                                    <div class="mb-2">
+                                        <h4 class="btn btn-light btn-block btn-sm font-size-18 text-left text-black card-title" style="width: 100%;">Itineraire, villes, tickets et arrets</h4>
                                     </div>
                                 </div>
 
@@ -408,13 +406,13 @@
                                     @foreach($agence->sieges as $siege)
                                         <div class="">
                                             <div class="">
-                                                <h4 class="card-title mb-4">Pour le siege de {{$siege->name}} </h4>
+                                                <h5 class="card-title mb-4">Pour le siege de {{$siege->name}} </h5>
                                                 <div class="row">
                                                     @foreach($siege->itineraires as $itineraire)
                                                     <div class=" @if($siege->itineraires->count() > 1) col-xl-6 @else col-xl-12 @endif ">
                                                         <div class="card">
                                                             <div class="card-body">
-                                                                <h4 class="card-title">Itineraire de {{ $itineraire->name }}</h4>
+                                                                <h6 class="card-title">Itineraire de {{ $itineraire->name }}</h6>
                                                                 <p class="card-title-desc">
                                                                     {{$itineraire->villes->count()}} villes
                                                                 </p>    
