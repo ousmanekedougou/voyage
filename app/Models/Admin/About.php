@@ -14,6 +14,6 @@ class About extends Model
     ];
 
     public function agence(){
-        return $this->belongsTo(Agence::class);
+        return $this->hasOne(Agence::class);
     }
 }

@@ -3,7 +3,7 @@
 @section('main-content')
 
  
-
+{{--
    <!-- hero section start -->
     <section class="section hero-section bg-ico-hero bg-agence"  id="home">
         <!-- <div class="bg-overlay bg-primary"></div> -->
@@ -22,117 +22,22 @@
         <!-- end container -->
     </section>
     <!-- hero section end -->
-    {{--
-     <!-- currency price section start -->
-    <section class="section bg-white p-0">
-        <div class="container">
-            <div class="currency-price">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="media">
-                                    <div class="avatar-xs me-3">
-                                        <span
-                                            class="avatar-title rounded-circle bg-warning bg-soft text-warning font-size-18">
-                                            <i class="mdi mdi-bitcoin"></i>
-                                        </span>
-                                    </div>
-                                    <div class="media-body">
-                                        <p class="text-muted">Bitcoin</p>
-                                        <h5>$ 9134.39</h5>
-                                        <p class="text-muted text-truncate mb-0">+ 0.0012.23 ( 0.2 % ) <i
-                                                class="mdi mdi-arrow-up ms-1 text-success"></i></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- end row -->
-            </div>
-        </div>
-        <!-- end container -->
-    </section>
-    <!-- currency price section end -->
     --}}
 
-    {{--
-    <!-- about section start -->
-    <section class="section pt-4 bg-white" id="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="text-center mb-5">
-                        <div class="small-title">A Propos de nous</div>
-                        <h4>Qui sommes nous</h4>
-                    </div>
-                </div>
-            </div>
-            <div class="row align-items-center">
-                <div class="col-lg-12">
-
-                    <div class="text-muted">
-                        <h4>{{$agence->name}}</h4>
-                        <p>If several languages coalesce, the grammar of the resulting that of the individual new common
-                            language will be more simple and regular than the existing.</p>
-                        <p class="mb-4">It would be necessary to have uniform pronunciation.</p>
-
-                        <div class="button-items">
-                            <a href="#" class="btn btn-success">Read More</a>
-                            <a href="#" class="btn btn-outline-primary">How It work</a>
-                        </div>
-
-                        <div class="row mt-4">
-                            <div class="col-lg-4 col-6">
-                                <div class="mt-4">
-                                    <h4>$ 6.2 M</h4>
-                                    <p>Invest amount</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-6">
-                                <div class="mt-4">
-                                    <h4>16245</h4>
-                                    <p>Users</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <!-- end row -->
-
-            <hr class="my-5">
-        </div>
-        <!-- end container -->
-    </section>
-    <!-- about section end -->
-    --}}
-
-    <section class="section pt-4 bg-white" id="about">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="text-center mb-5">
-                        <div class="small-title">A Propos de nous</div>
-                        <h4>Qui sommes nous</h4>
-                    </div>
-                </div>
-            </div>
-
+    <section class="section pt-4 mt-4" id="about">
+        <div class="container mt-5 pt-5">
             <div class="row">
                 <div class="col-lg-1">
                 </div>
                 <!-- end col -->
                 <div class="col-lg-10">
-                    <div class="">
-                        <div class="">
+                    <div class="card">
+                        <div class="card-body">
                             <div class="media">
                                 @if($agence->logo != '' )
                                     <img src="{{Storage::url($agence->logo)}}" alt="" class="avatar-sm me-4">
                                 @else
-                                    <img src="{{ asset('user/assets/images/bus.svg') }}" alt="" class="avatar-sm me-4">
+                                    <img src="{{asset('user/assets/images/dowload/setting2.png')}}" alt="" class="avatar-sm me-4">
                                 @endif
 
                                 <div class="media-body overflow-hidden">
@@ -146,10 +51,7 @@
                                 <div class="col-sm-7">
                                     <h5 class="font-size-15 mt-4">Presentation et Historique :</h5>
 
-                                    <p class="text-muted">To an English person, it will seem like simplified English, as
-                                        a skeptical Cambridge friend of mine told me what Occidental is. The European
-                                        languages are members of the same family. Their separate existence is a myth.
-                                        For science, music, sport, etc,</p>
+                                    <p class="text-muted">{{ $agence->abaout->abaout }}</p>
 
                                     <div class="text-muted mt-4">
                                         <p><i class="bx bx-envelope text-muted me-1"></i> {{$agence->email}} </p>
@@ -162,7 +64,7 @@
                                     @if($agence->logo != '' )
                                         <img src="{{Storage::url($agence->logo)}}" alt="" class="avatar-sm me-4"  style="width: 100%;">
                                     @else
-                                        <img src="{{ asset('user/assets/images/bus.svg') }}" alt="" style="width: 100%;">
+                                        <img src="{{asset('user/assets/images/dowload/setting2.png')}}" alt="" style="width: 100%;">
                                     @endif
                                 </div>
 
@@ -173,7 +75,7 @@
                                     <div class=" mb-5">
                                         <h4 class="btn btn-light btn-block btn-sm font-size-18 text-left text-black card-title" style="width: 100%;">Pour Quoi {{ $agence->name }}</h4>
                                         <p class="text-muted text-left">
-                                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eos tenetur amet asperiores sed iste, qui molestiae vero et voluptatem, fugit exercitationem atque esse ad, architecto possimus aliquid. Nesciunt, magni culpa.
+                                            {{ $agence->abaout->motivation }}
                                         </p>
                                     </div>
                                 </div>
@@ -215,13 +117,34 @@
                                 @endif
                             </div>
 
-                            <div class="row mt-5">
-                                <div class="col-lg-12">
-                                    <div class="mb-2">
-                                        <h4 class="btn btn-light btn-block btn-sm font-size-18 text-left text-black card-title" style="width: 100%;">Notre politique de travail</h4>
-                                    </div>
-                                </div>
+                            
 
+                            
+
+                            
+                        </div>
+                    </div>
+                </div>
+                <!-- end col -->
+                <div class="col-lg-1">
+                </div>
+                <!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+        
+
+    </section>
+
+     <!-- Features start -->
+    <section class="section" id="features" style="margin-top: -85px;">
+        <div class="container">
+            <div class="row">
+                 <div class="col-lg-1"></div>
+                <div class="col-lg-10">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="text-center" style="font-weight: 600;">Notre politique de travail</h4>
                                 <div class="col-sm-12">
                                     <div class="">
                                         <div class="card-body">
@@ -245,11 +168,7 @@
                                                                 <div id="general-collapseOne" class="collapse show"
                                                                     data-bs-parent="#gen-ques-accordion">
                                                                     <div class="card-body">
-                                                                        <p class="mb-0">Everyone realizes why a new common
-                                                                            language would be desirable: one could refuse to
-                                                                            pay expensive translators. To achieve this, it
-                                                                            would be necessary to have uniform grammar,
-                                                                            pronunciation and more common words.</p>
+                                                                        <p class="mb-0">{{ $agence->abaout->politic_ticket }}</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -265,12 +184,7 @@
                                                                 <div id="general-collapseTwo" class="collapse"
                                                                     data-bs-parent="#gen-ques-accordion">
                                                                     <div class="card-body">
-                                                                        <p class="mb-0">If several languages coalesce, the
-                                                                            grammar of the resulting language is more simple
-                                                                            and regular than that of the individual
-                                                                            languages. The new common language will be more
-                                                                            simple and regular than the existing European
-                                                                            languages.</p>
+                                                                        <p class="mb-0">{{ $agence->abaout->politic_bc }}</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -286,11 +200,7 @@
                                                                 <div id="general-collapseThree" class="collapse"
                                                                     data-bs-parent="#gen-ques-accordion">
                                                                     <div class="card-body">
-                                                                        <p class="mb-0">It will be as simple as Occidental;
-                                                                            in fact, it will be Occidental. To an English
-                                                                            person, it will seem like simplified English, as
-                                                                            a skeptical Cambridge friend of mine told me
-                                                                            what Occidental.</p>
+                                                                        <p class="mb-0">{{ $agence->abaout->politic_apte }}</p>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -323,163 +233,181 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="row mt-5">
-                                <div class="col-lg-12">
-                                    <div class="mb-2">
-                                        <h4 class="btn btn-light btn-block btn-sm font-size-18 text-left text-black card-title" style="width: 100%;">Nos horaires de transport</h4>
-                                    </div>
-                                </div>
-                                @if($agence->sieges->count() > 1)
-                                    @foreach($agence->sieges as $siege_h)
-                                        <div class="">
-                                            <div class="card-body">
-                                                <h4 class="card-title mb-4">Pour le siege de {{$siege_h->name}} </h4>
-
-                                                <div class="table-responsive">
-                                                    <table class="table table-nowrap align-middle mb-0">
-                                                        <thead>
-                                                            <tr>
-                                                                <th scope="col">Jours</th>
-                                                                <th scope="col">Ouverture</th>
-                                                                <th scope="col">Fermeture</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            @foreach(unserialize($siege_h->jours) as $jour)
-                                                                <tr>
-                                                                    <th scope="row">
-                                                                        <div class="d-flex align-items-center">
-                                                                            <div class="avatar-xs me-3">
-                                                                            <span>
-                                                                                @if($jour == 0)
-                                                                                    Dimanche
-                                                                                @elseif($jour == 1)
-                                                                                    Lundi
-                                                                                @elseif($jour == 2)
-                                                                                    Mardi
-                                                                                @elseif($jour == 3)
-                                                                                    Mercredi
-                                                                                @elseif($jour == 4)
-                                                                                    Jeudi
-                                                                                @elseif($jour == 5)
-                                                                                    Vendredi
-                                                                                @elseif($jour == 6)
-                                                                                    Samedi  
-                                                                                @endif
-                                                                            </span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </th>
-                                                                    <td>
-                                                                        <div class="text-muted">
-                                                                            {{$siege_h->opened_at}}
-                                                                        </div>
-                                                                    </td>
-                                                                    <td>
-                                                                        <div class="text-muted">{{$siege_h->closed_at}}</div>
-                                                                    </td>
-                                                                </tr>
-                                                            @endforeach
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                @else
-                                    <div class="text-center mb-2">
-                                        <p class="text-danger">Cet agence n'a pas de siege</p>
-                                    </div>
-                                @endif
-                            </div>
-
-                            <div class="row mt-5">
-                                <div class="col-lg-12 ">
-                                    <div class="mb-2">
-                                        <h4 class="btn btn-light btn-block btn-sm font-size-18 text-left text-black card-title" style="width: 100%;">Itineraire, villes, tickets et arrets</h4>
-                                    </div>
-                                </div>
-
-                                 @if($agence->sieges->count() > 1)
-                                    @foreach($agence->sieges as $siege)
-                                        <div class="">
-                                            <div class="">
-                                                <h5 class="card-title mb-4">Pour le siege de {{$siege->name}} </h5>
-                                                <div class="row">
-                                                    @foreach($siege->itineraires as $itineraire)
-                                                    <div class=" @if($siege->itineraires->count() > 1) col-xl-6 @else col-xl-12 @endif ">
-                                                        <div class="card">
-                                                            <div class="card-body">
-                                                                <h6 class="card-title">Itineraire de {{ $itineraire->name }}</h6>
-                                                                <p class="card-title-desc">
-                                                                    {{$itineraire->villes->count()}} villes
-                                                                </p>    
-                                                                
-                                                                <div class="table-responsive">
-                                                                    <table class="table mb-0">
-                                
-                                                                        <thead>
-                                                                            <tr>
-                                                                                <th>Villes</th>
-                                                                                <th></th>
-                                                                                <th>Prix</th>
-                                                                            </tr>
-                                                                        </thead>
-                                                                        <tbody>
-                                                                            @foreach($itineraire->villes as $ville)
-                                                                            <tr>
-                                                                                <td> De {{ $ville->name }}</td>
-                                                                                <td></td>
-                                                                                <td>{{ $ville->amount }} f</td>
-                                                                            </tr>
-                                                                            @endforeach
-                                                                        </tbody>
-                                                                    </table>
-                                                                </div>
-
-                                                                <h6 class="card-title mt-4 mb-2">Les villes d'arrets :</h6>
-                                                                <p class="card-title-desc">
-                                                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet soluta, provident ullam dolore debitis expedita vero laboriosam libero tempore, doloribus accusamus totam quo voluptas quae eum nulla voluptate delectus perspiciatis.
-                                                                </p> 
-                                        
-                                                                <h4 class="card-title">Geolocalisation du bus</h4>
-                                                                <p class="card-title-dsec">Google Maps</p>
-                                
-                                                                <div id="gmaps-markers" class="gmaps">
-                                                                    <iframe src="https://www.google.sn/maps/place/Rue+39,+Dakar/@14.6870931,-17.4510948,18.46z/data=!4m5!3m4!1s0xec172f42ba43de9:0x2131ba43a638922f!8m2!3d14.6869267!4d-17.4512127?hl=fr&authuser=0" frameborder="0"
-                                                                    style="width: 100%; height:100%;"
-                                                                    ></iframe>
-                                                                </div>
-                                                                
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    @endforeach
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                @else
-                                    <div class="text-center mb-2">
-                                        <h4>Cet agence n'a pas de siege</h4>
-                                    </div>
-                                @endif
-                                
-                            </div>
                         </div>
                     </div>
                 </div>
                 <!-- end col -->
-                <div class="col-lg-1">
-                </div>
-                <!-- end col -->
+                 <div class="col-lg-1"></div>
             </div>
             <!-- end row -->
         </div>
-        
+    </section>
 
+     <!-- Features start -->
+    <section class="section" id="features" style="margin-top: -85px;">
+        <div class="container">
+            <div class="row">
+                 <div class="col-lg-1"></div>
+                <div class="col-lg-10">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="text-center" style="font-weight: 600;">Nos horaires de transport</h4>
+                            @if($agence->sieges->count() > 1)
+                                @foreach($agence->sieges as $siege_h)
+                                    <div class="">
+                                        <div class="card-body">
+                                            <h4 class="card-title mb-4">Pour le siege de {{$siege_h->name}} </h4>
+
+                                            <div class="table-responsive">
+                                                <table class="table table-nowrap align-middle mb-0">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Jours</th>
+                                                            <th scope="col">Ouverture</th>
+                                                            <th scope="col">Fermeture</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        @foreach(unserialize($siege_h->jours) as $jour)
+                                                            <tr>
+                                                                <th scope="row">
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="avatar-xs me-3">
+                                                                        <span>
+                                                                            @if($jour == 0)
+                                                                                Dimanche
+                                                                            @elseif($jour == 1)
+                                                                                Lundi
+                                                                            @elseif($jour == 2)
+                                                                                Mardi
+                                                                            @elseif($jour == 3)
+                                                                                Mercredi
+                                                                            @elseif($jour == 4)
+                                                                                Jeudi
+                                                                            @elseif($jour == 5)
+                                                                                Vendredi
+                                                                            @elseif($jour == 6)
+                                                                                Samedi  
+                                                                            @endif
+                                                                        </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </th>
+                                                                <td>
+                                                                    <div class="text-muted">
+                                                                        {{$siege_h->opened_at}}
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <div class="text-muted">{{$siege_h->closed_at}}</div>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @else
+                                <div class="text-center mb-2">
+                                    <p class="text-danger">Cet agence n'a pas de siege</p>
+                                </div>
+                            @endif
+                             
+                        </div>
+                    </div>
+                </div>
+                <!-- end col -->
+                 <div class="col-lg-1"></div>
+            </div>
+            <!-- end row -->
+        </div>
+    </section>
+
+
+     <!-- Features start -->
+    <section class="section" id="features" style="margin-top: -85px;">
+        <div class="container">
+            <div class="row">
+                 <div class="col-lg-1"></div>
+                <div class="col-lg-10">
+                    <div class="">
+                        <div class="card-body">
+
+                            <h4 class="text-center" style="font-weight: 600;">Itineraire, villes, tickets et arrets</h4>
+                            @if($agence->sieges->count() > 1)
+                                @foreach($agence->sieges as $siege)
+                                    <div class="">
+                                        <div class="">
+                                            <h5 class="card-title mb-4 btn btn-sm bg-white" style="width: 100%;">Pour le siege de {{$siege->name}} </h5>
+                                            <div class="row">
+                                                @foreach($siege->itineraires as $itineraire)
+                                                <div class=" @if($siege->itineraires->count() > 1) col-xl-6 @else col-xl-12 @endif ">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h6 class="card-title text-center">Itineraire de {{ $itineraire->name }}</h6>
+                                                            <p class="card-title-desc">
+                                                                {{$itineraire->villes->count()}} villes
+                                                            </p>    
+                                                            
+                                                            <div class="table-responsive">
+                                                                <table class="table mb-0">
+                            
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Villes</th>
+                                                                            <th></th>
+                                                                            <th>Prix</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        @foreach($itineraire->villes as $ville)
+                                                                        <tr>
+                                                                            <td> De {{ $ville->name }}</td>
+                                                                            <td></td>
+                                                                            <td>{{ $ville->amount }} f</td>
+                                                                        </tr>
+                                                                        @endforeach
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+
+                                                            <h6 class="card-title mt-4 mb-2">Les villes d'arrets :</h6>
+                                                            <p class="card-title-desc">
+                                                                {{ $agence->abaout->ville_arret }}
+                                    
+                                                            <h4 class="card-title">Geolocalisation du bus</h4>
+                                                            <p class="card-title-dsec">Google Maps</p>
+                            
+                                                            <div id="gmaps-markers" class="gmaps">
+                                                                <iframe src="https://www.google.sn/maps/place/Rue+39,+Dakar/@14.6870931,-17.4510948,18.46z/data=!4m5!3m4!1s0xec172f42ba43de9:0x2131ba43a638922f!8m2!3d14.6869267!4d-17.4512127?hl=fr&authuser=0" frameborder="0"
+                                                                style="width: 100%; height:100%;"
+                                                                ></iframe>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @else
+                                <div class="text-center mb-2">
+                                    <h4>Cet agence n'a pas de siege</h4>
+                                </div>
+                            @endif
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end col -->
+                 <div class="col-lg-1"></div>
+            </div>
+            <!-- end row -->
+        </div>
     </section>
     
 

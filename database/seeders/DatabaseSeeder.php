@@ -5,10 +5,14 @@ namespace Database\Seeders;
 use App\Models\Admin\About;
 use App\Models\Admin\Agence;
 use App\Models\Admin\Agent;
+use App\Models\Admin\Itineraire;
 use App\Models\Admin\Jour;
 use App\Models\Admin\Siege;
+use App\Models\Admin\Ville;
 use App\Models\User;
 use App\Models\User\Region;
+use Faker\Factory;
+use GuzzleHttp\Promise\Create;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -21,6 +25,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $faker = Factory::create();
         $jours = [
             'Diamache' => 0, 
             'Lundi' => 1,
@@ -510,5 +515,27 @@ class DatabaseSeeder extends Seeder
             'siege_id' => 3,
             'role' => 3
         ]);
+
+        $sieges = Siege::all();
+        foreach ($sieges as $siege) {
+            for ($i=0; $i < 4; $i++) { 
+                Itineraire::create([
+                    'name' => $faker->name,
+                    'siege_id' => $siege->id
+                ]);
+            }
+
+        }
+
+        $itineraires = Itineraire::all();
+        foreach ($itineraires as $itineraire) {
+            for ($i=0; $i < 6; $i++) { 
+                Ville::create([
+                    'name' => $faker->name,
+                    'amount' => $faker->numberBetween(30 , 900) * 100,
+                    'itineraire_id' => $itineraire->id,
+                ]);
+            }
+        }
     }
 }
