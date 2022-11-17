@@ -95,7 +95,7 @@
                             <div data-repeater-list="outer-group" class="outer">
                                 <div data-repeater-item class="outer">
                                     <div class="mb-3">
-                                        <label for="formmessage">Systeme de tickets :</label>
+                                        <label for="formmessage">Systeme de tickets : @if(Auth::guard('agence')->user()->method_ticket == 0) <span class="text-success">Ticket remboursable apres depart du bus</span> @else <span class="text-warning">Ticket non remboursable apres depart du bus</span> @endif</label>
                                         <textarea id="formmessage" name="politic_ticket" class="form-control text-left @error('politic_ticket') is-invalid @enderror" value="{{ old('politic_ticket') ?? $agence->politic_ticket }}" rows="3">
                                         {{ $agence->politic_ticket }}
                                         </textarea>

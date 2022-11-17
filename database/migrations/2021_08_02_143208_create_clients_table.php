@@ -30,6 +30,9 @@ class CreateClientsTable extends Migration
             $table->string('cni')->unique()->nullable();
             $table->integer('customer_id')->nullable();
             $table->integer('prix_total')->nullable();
+            $table->integer('status')->default(0);
+            $table->date('canceled_at')->nullable();
+            $table->time('canceled_time')->nullable();
             // $table->integer('reference')->unique()->nullable();
             // $table->string('image')->nullable();
             $table->timestamps();

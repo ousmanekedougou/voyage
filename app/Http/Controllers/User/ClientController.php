@@ -74,7 +74,7 @@ class ClientController extends Controller
             'email' => $request->email,
             'phone' => $request->phone,
             'password' => Hash::make($request->password),
-            'confirmation_token' => str_replace('/','',Hash::make(Str::random(40))),
+            'confirmation_token' => str_replace('/', '', Hash::make(Str::random(40))),
             'slug' => str_replace('/','',Hash::make(Str::random(20).'customers'.$request->email)),
             'cni' => $request->cni,
             'image' => $imageName,

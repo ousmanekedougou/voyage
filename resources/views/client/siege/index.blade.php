@@ -45,7 +45,7 @@
                                 <span class="text-warning" style="font-weight: 900;"> <i class="fa fa-exclamation-circle"> </i> Attention : </span> Vous devez choisire une date superieure ou egale a aujourdhuit.
                             </p>
                             <p class="mb-1">
-                                <span class="text-warning" style="font-weight: 900;"> <i class="fa fa-exclamation-circle"> </i> Remarque : </span> Votre ticket n'est remboursable qu'avant le depart du bus.
+                                <span class="text-warning" style="font-weight: 900;"> <i class="fa fa-exclamation-circle"> </i> Remarque : </span> @if($agence->method_ticket == 0) Votre tiket est remboursable meme apres le depart du bus.@else Votre tiket n'est remboursable @endif
                             </p>
                         </div>
                     </div>

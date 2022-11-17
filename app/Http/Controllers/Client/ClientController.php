@@ -215,6 +215,40 @@ class ClientController extends Controller
         return redirect()->route('client.index');
     }
 
+    public function annuler(Request $request , $id){
+        $mytime = Carbon::now();
+        // dd($mytime->toArray());
+        $time =  $mytime->hour.':'.$mytime->minute.':'.$mytime->second;
+        $client = Client::where('id',$id)->first();
+        if ($client->siege->agence->method_ticket == 0) {
+            $client->status = 1;
+            $client->canceled_at = $mytime->format('Y-m-d H:i:s');
+            $client->canceled_time = $time;
+            $client->save();
+            // Partie send sms au siege 
+            Toastr::success('Votre ticket a ete annuler', 'Annulation ticket', ["positionClass" => "toast-top-right"]);
+            return back();
+        }else {
+            if ($client->bus->heure_depart > $time ) {
+                $client->status = 1;
+                $client->canceled_at = $mytime->format('Y-m-d H:i:s');
+                $client->canceled_time = $time;
+                $client->save();
+                // Partie send sms au siege
+                Toastr::success('Votre ticket a ete annuler', 'Annulation ticket', ["positionClass" => "toast-top-right"]);
+                return back(); 
+            }else {
+                $client->status = 2;
+                $client->canceled_at = $mytime->format('Y-m-d H:i:s');
+                $client->canceled_time = $time;
+                $client->save();
+                // Partie send sms au siege
+                Toastr::success('Nous sommes desoler mais votre ticke n\'est plus remboursable', 'Annulation ticket', ["positionClass" => "toast-top-right"]);
+                return back(); 
+            }
+        }
+    }
+
     /**
      * Remove the specified resource from storage.
      *

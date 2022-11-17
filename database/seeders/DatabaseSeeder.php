@@ -5,11 +5,13 @@ namespace Database\Seeders;
 use App\Models\Admin\About;
 use App\Models\Admin\Agence;
 use App\Models\Admin\Agent;
+use App\Models\Admin\Bus;
 use App\Models\Admin\Itineraire;
 use App\Models\Admin\Jour;
 use App\Models\Admin\Siege;
 use App\Models\Admin\Ville;
 use App\Models\User;
+use App\Models\User\Customer;
 use App\Models\User\Region;
 use Faker\Factory;
 use GuzzleHttp\Promise\Create;
@@ -531,11 +533,52 @@ class DatabaseSeeder extends Seeder
         foreach ($itineraires as $itineraire) {
             for ($i=0; $i < 6; $i++) { 
                 Ville::create([
-                    'name' => $faker->name,
+                    'name' => $faker->city,
                     'amount' => $faker->numberBetween(30 , 900) * 100,
                     'itineraire_id' => $itineraire->id,
                 ]);
             }
+
+            for ($i=0; $i < 3; $i++) { 
+                Bus::create([
+                    'matricule' => 'MT'. $i + 1 .''. $itineraire->id,
+                    'place' => 80,
+                    'status' => 0,
+                    'itineraire_id' => $itineraire->id,
+                    'siege_id' => $itineraire->siege->id,
+                    'number' => $i,
+                    'heure_rv' => '15:30',
+                    'heure_depart' => '16:30',
+                ]);
+            }
         }
+
+        Customer::create([
+            'name' => 'Ousmane Diallo',
+            'email' => 'yabaye07@gmail.com',
+            'phone' => 770003003,
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', //password
+            'cni' => 1234567890456,
+            'slug' => str_replace('/','',Hash::make(Str::random(20).'customers'.'yabaye07@gmail.com')),
+            'confirmation_token' => null,
+            'region_id' => 1,
+            'is_admin' => 1,
+            'is_active' => 1,
+            'image' => null
+        ]);
+
+         Customer::create([
+            'name' => 'Ousmane Diallo',
+            'email' => 'yabaye075@gmail.com',
+            'phone' => 770103003,
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', //password
+            'cni' => 1234597890456,
+            'slug' => str_replace('/','',Hash::make(Str::random(20).'customers'.'yabaye075@gmail.com')),
+            'confirmation_token' => null,
+            'region_id' => 1,
+            'is_admin' => 1,
+            'is_active' => 1,
+            'image' => null
+        ]);
     }
 }
