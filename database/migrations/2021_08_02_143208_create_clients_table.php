@@ -25,7 +25,7 @@ class CreateClientsTable extends Migration
             $table->date('registered_at')->nullable();
             $table->date('payment_at')->nullable();
             $table->integer('remboursement')->nullable();
-            $table->integer('voyage_status')->default(0);
+            $table->boolean('voyage_status')->default(1);
             $table->integer('siege_id');
             $table->string('cni')->unique()->nullable();
             $table->integer('customer_id')->nullable();

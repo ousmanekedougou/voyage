@@ -148,10 +148,13 @@ class ClientController extends Controller
     public function show($id)
     {
         $getBuse = Bus::where('id',$id)->first();
-        $itineraires = Itineraire::where('siege_id',Auth::guard('agent')->user()->siege_id)->orderBy('id','ASC')->get();
-        $buses  = Bus::where('siege_id',Auth::guard('agent')->user()->siege_id)->orderBy('id','ASC')->get();
-        $clients = Client::where('bus_id',$id)->where('siege_id',Auth::guard('agent')->user()->siege_id)->orderBy('id','ASC')->paginate(10);
-        return view('agent.client.show',compact('clients','itineraires','buses','getBuse'));
+        $clients = Client::where('bus_id',$id)
+            ->where('siege_id',Auth::guard('agent')->user()->siege_id)
+            ->where('registered_at','<',Carbon::today())
+            ->where('status',0)->orderBy('id','ASC')
+            // ->where('amount','==',null)
+            ->paginate(10);
+        return view('agent.client.show',compact('clients','getBuse'));
     }
 
     /**
@@ -177,22 +180,44 @@ class ClientController extends Controller
      */
    
 
-    public function presence(Request $request ,$id){
-        $client_present = Client::where('id',$id)->first();
-        if ($client_present->amount == $client_present->ville->amount) {
-            $client_present->voyage_status = $request->presence;
-            $client_present->save();
+    public function presence(Request $request){
+        $client = Client::where('id',$request->client_id)
+            ->where('siege_id',Auth::guard('agent')->user()->siege_id)
+            // ->where('registered_at','>',Carbon::today())
+            ->where('status',0)->orderBy('id','ASC')
+            // ->where('amount','!=',null)
+            ->first();
+        if ($client) {
+
+            $client->voyage_status = $request->voyage_status;
+            $client->save();
+
+            if ($client->voyage_status == 0) {
+                if (Auth::guard('agent')->user()->agence->method_ticket == 1) {
+                    $client->status = 1;
+                    $client->save(); 
+                }
+            }
             Toastr::success('Votre client a ete attribuer', 'Presence Client', ["positionClass" => "toast-top-right"]);
             return back();
         }else {
-            Toastr::error('Vous ne pouvez pas modifier un client qui n\'a pas payer son ticker', 'Presence Client', ["positionClass" => "toast-top-right"]);
+            Toastr::danger('Votre client est peut etre pas d\'aujourdhuit ou n\'a pas payer le ticker', 'Presence Client', ["positionClass" => "toast-top-right"]);
             return back();
         }
+            
     }
 
     public function ticker(Request $request , $id){
         $client_ticker = Client::where('id',$id)->first();
         return view('admin.print.index',compact('client_ticker')); 
+    }
+
+    public function annuler(){
+        $clients = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
+            ->where('status',1)->orderBy('id','ASC')
+            ->where('voyage_status',0)
+            ->paginate(10);
+        return view('agent.client.annuler',compact('clients'));
     }
 
     /**

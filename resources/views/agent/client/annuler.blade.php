@@ -4,15 +4,13 @@
     <link href="{{asset('admin/assets/libs/admin-resources/rwd-table/rwd-table.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('admin/assets/libs/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('admin/assets/css/table.css')}}" rel="stylesheet" type="text/css" />
-    <script src="{{asset('admin/assets/js/bootstrap-toggle.min.js')}}" integrity="sha512-F636MAkMAhtTplahL9F6KmTfxTmYcAcjcCkyu0f0voT3N/6vzAuJ4Num55a0gEJ+hRLHhdz3vDvZpf6kqgEa5w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="stylesheet" href="{{asset('admin/assets/css/bootstrap-toggle.css')}}" integrity="sha512-9tISBnhZjiw7MV4a1gbemtB9tmPcoJ7ahj8QWIc0daBCdvlKjEA48oLlo6zALYm3037tPYYulT0YQyJIJJoyMQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-     <style>
-        /* .invoice-container{
+     {{-- <style>
+        .invoice-container{
             padding: 2mm;
             margin: 0 auto;
             width: 58mm;
-        } */
-    </style> 
+        }
+    </style> --}}
 @endsection
 
 @section('main-content')
@@ -52,103 +50,90 @@
 
 
 
-                    <div class="row" id="member_row">
-                        @foreach($clients as $client)
-                            <div class="col-xl-4 col-sm-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="media">
-                                            @if($client->image == null)
-                                                <div class="avatar-md me-4">
-                                                    <span class="avatar-title rounded-circle bg-light text-danger">
-                                                        <img src="{{Storage::url($client->customer->image)}}" alt="">
-                                                    </span>
-                                                </div>
-                                            @else
-                                                <div class="avatar-md me-4">
-                                                    <span class="avatar-title rounded-circle bg-light text-danger font-size-16">
-                                                        <img src="{{Storage::url($client->image)}}" alt="" height="30">
-                                                    </span>
-                                                </div>
-                                            @endif
-
-                                            <div class="media-body overflow-hidden">
-                                                @if($client->name == null)
-                                                    <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">{{ $client->customer->name }}</a></h5>
-                                                    <p class="text-muted mb-1"> <i class="fa fa-mobile"></i> {{ $client->customer->phone }}</p>
-                                                @else
-                                                    <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">{{ $client->name }}</a></h5>
-                                                    <p class="text-muted mb-1"> <i class="fa fa-mobile"></i> {{ $client->phone }}</p>
-                                                    <p class="text-muted mb-1"> <i class="fa fa-mobile"></i> {{ $client->cni }}</p>
-                                                @endif
-                                                <p class="text-muted mb-1 font-size-12"><i class="bx bxs-map"></i> Destination : {{ $client->ville->name }} </p> 
-                                                <p class="text-muted mb-1 font-size-12"><i class="fas fa-money-bill "></i> Prix : {{$client->ville->amount}} f </p> 
-                                                
+            <div class="row">
+                <form action="" method="post">
+                    @csrf
+                    @foreach($clients as $client)
+                        <div class="col-xl-4 col-sm-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="media">
+                                        @if($client->image == null)
+                                            <div class="avatar-md me-4">
+                                                <span class="avatar-title rounded-circle bg-light text-danger">
+                                                    <img src="{{Storage::url($client->customer->image)}}" alt="">
+                                                </span>
                                             </div>
+                                        @else
+                                            <div class="avatar-md me-4">
+                                                <span class="avatar-title rounded-circle bg-light text-danger font-size-16">
+                                                    <img src="{{Storage::url($client->image)}}" alt="" height="30">
+                                                </span>
+                                            </div>
+                                        @endif
+
+                                        <div class="media-body overflow-hidden">
+                                            @if($client->name == null)
+                                                <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">{{ $client->customer->name }}</a></h5>
+                                                <p class="text-muted mb-1"> <i class="fa fa-mobile"></i> {{ $client->customer->phone }}</p>
+                                            @else
+                                                <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">{{ $client->name }}</a></h5>
+                                                <p class="text-muted mb-1"> <i class="fa fa-mobile"></i> {{ $client->phone }}</p>
+                                                <p class="text-muted mb-1"> <i class="fa fa-mobile"></i> {{ $client->cni }}</p>
+                                            @endif
+                                            <p class="text-muted mb-1 font-size-12"><i class="bx bxs-map"></i> Destination : {{ $client->ville->name }} </p> 
+                                            <p class="text-muted mb-1 font-size-12"><i class="fas fa-money-bill "></i> Prix : {{$client->ville->amount}} f </p> 
+                                            
                                         </div>
                                     </div>
-                                    <div class="px-4 py-3 border-top">
-                                        <ul class="list-inline mb-0">
-                                            <li class="list-inline-item">
-                                                @if($client->amount != $client->ville->amount)
-                                                    <span class="badge bg-warning"><i class="bx bxs-user-x me-1"></i>
-                                                      Tecket  non Payer
-                                                    </span>
-                                                @elseif($client->amount == $client->ville->amount)
-                                                    <span class="badge bg-success"><i class="bx bxs-user-check me-1"></i>
-                                                        Ticket Payer
-                                                    </span>
-                                                @endif
-                                                
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a href="" data-bs-toggle="modal" data-bs-target="#subscribeModalagenceDetails-{{$client->id}}" class="text-muted"><i class="fa fa-eye me-1"></i></a>
-                                            </li>
-
-                                            <li class="list-inline-item">
-                                                <input data-id="{{ $client->id }}" class="toggle-class btn btn-xs" type="checkbox"
-                                                    data-onstyle="success"
-                                                    data-offstyle="danger"
-                                                    data-toggle="toggle"
-                                                    data-on="Present"
-                                                    data-off="Absent"
-                                                    {{$client->voyage_status == true ? 'checked' : ''}}
-                                                >
-                                            </li>
-
-                                            {{--
-                                            
-                                            <li class="list-inline-item">
-                                                <div class="form-check form-radio-primary mb-3">
-                                                    <input class="form-check-input @error('presence') is-invalid @enderror" type="radio"
-                                                        name="presence-{{ $client->id }}" id="formRadioColor-{{$client->id}}" value="1">
-                                                    <label class="form-check-label" for="formRadioColor-{{$client->id}}">
-                                                        Present
-                                                    </label>
-                                                </div>
-                                            </li>
-
-                                            <li class="list-inline-item">
-                                                <div class="form-check form-radio-danger mb-3">
-                                                    <input class="form-check-input @error('presence') is-invalid @enderror" type="radio"
-                                                        name="presence-{{ $client->id }}" id="formRadioColore-{{$client->id}}" value="2">
-                                                    <label class="form-check-label" for="formRadioColore-{{$client->id}}">
-                                                        Absent
-                                                    </label>
-                                                </div>
-                                            </li>
-                                            @error('presence')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
+                                </div>
+                                <div class="px-4 py-3 border-top">
+                                    <ul class="list-inline mb-0">
+                                        <li class="list-inline-item">
+                                            @if($client->amount != $client->ville->amount)
+                                                <span class="badge bg-warning"><i class="bx bxs-user-x me-1"></i>
+                                                    Ticket Non Payer
                                                 </span>
-                                            @enderror
-                                            --}}
-                                        </ul>
-                                    </div>
+                                            @elseif($client->amount == $client->ville->amount)
+                                                <span class="badge bg-success"><i class="bx bxs-user-check me-1"></i>
+                                                    Ticket Payer
+                                                </span>
+                                            @endif
+                                            
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a href="" data-bs-toggle="modal" data-bs-target="#subscribeModalagenceDetails-{{$client->id}}" class="text-muted"><i class="fa fa-eye me-1"></i></a>
+                                        </li>
+                                        
+                                        <li class="list-inline-item">
+                                            <div class="form-check form-radio-primary mb-3">
+                                                <input class="form-check-input" type="radio"
+                                                    name="formRadioColor-{{$client->id}}" id="formRadioColor-{{$client->id}}" >
+                                                <label class="form-check-label" for="formRadioColor-{{$client->id}}">
+                                                    Present
+                                                </label>
+                                            </div>
+                                        </li>
+
+                                        <li class="list-inline-item">
+                                            <div class="form-check form-radio-danger mb-3">
+                                                <input class="form-check-input" type="radio"
+                                                    name="formRadioColor-{{$client->id}}" id="formRadioColore-{{$client->id}}" >
+                                                <label class="form-check-label" for="formRadioColore-{{$client->id}}">
+                                                    Absent
+                                                </label>
+                                            </div>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
-                        @endforeach
+                        </div>
+                    @endforeach
+                    <div class="col-lg-12">
+                        <button type="submit" class="btn btn-primary btn-block" style="width: 100%;">Enregistre les absences</button>
                     </div>
+                </form>
+            </div>
             <!-- end row -->
 
             <div class="row">
@@ -339,6 +324,7 @@
     <!-- Fin du modal pour la presence du client -->
 @endsection
 
+
 @section('footersection')
 <!-- Responsive Table js -->
     <script src="{{asset('admin/assets/libs/admin-resources/rwd-table/rwd-table.min.js')}}"></script>
@@ -346,27 +332,4 @@
     <!-- Init js -->
     <script src="{{asset('admin/assets/js/pages/table-responsive.init.js')}}"></script>
     <script src="{{asset('admin/assets/js/table.js')}}"></script>
-
-
-     <script>
-        
-        $('.toggle-class').on('change' ,function(){
-            var voyage_status = $(this).prop('checked') == true ? 1 : 0;
-            var client_id = $(this).data('id');
-            $.ajax({
-                type: 'GET',
-                dataType: 'JSON',
-                url: "{{ route('agent.client.presence') }}",
-                data: 
-                    {
-                        'voyage_status': voyage_status,
-                        'client_id': client_id
-                    },
-                success: function(data){
-                    console.log('success')
-                }
-            });
-        });
-    </script>
-   
 @endsection

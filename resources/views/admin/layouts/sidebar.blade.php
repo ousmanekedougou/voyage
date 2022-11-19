@@ -139,6 +139,10 @@
                                 @endforeach
                                 <hr>
                                 <li>
+                                    <a href="{{ route('agent.annuler') }}" key="t-products" class=""> <i class="fas fa-money-bill "></i> Ticket annuler</a>
+                                </li>
+                                <hr>
+                                <li>
                                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                                         <i class="fa fa-folder-open"></i>
                                         <span key="t-ecommerce">Historiques</span>

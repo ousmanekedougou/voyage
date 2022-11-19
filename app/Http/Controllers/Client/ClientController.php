@@ -98,7 +98,7 @@ class ClientController extends Controller
                         $add_client->customer_id = Auth::guard('client')->user()->id;
                         $add_client->position = $buse->inscrit;
                         $add_client->registered_at = date_format($date,'d-m-y');
-                        $add_client->voyage_status = 0;
+                        $add_client->voyage_status = 1;
                         $add_client->save();
                         
                         // Notification::route('mail',$buse->siege->email)

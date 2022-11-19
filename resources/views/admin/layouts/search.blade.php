@@ -1,4 +1,4 @@
- <div class="search-box me-2 mb-2 d-inline-block">
+<div class="search-box me-2 mb-2 d-inline-block" style="width: 100%;">
     <div class="position-relative">
             <form id="searchClients"  action=" {{ route('agent.client.create') }} ">
                 <input  type="text" id="search" class="form-control @error('search') is-invalid @enderror" name="search"  required autocomplete="search" value="{{ request()->search ?? old('search') }}" placeholder="Rechercher un client">

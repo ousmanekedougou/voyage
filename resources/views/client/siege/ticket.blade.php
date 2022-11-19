@@ -50,7 +50,7 @@
             <div class="row">
                 @foreach($tickets as $ticket)
                 <div class="col-xl-4 col-sm-6">
-                    <div class="card @if($ticket->status == 1) bg-warning @elseif($ticket->status == 2) bg-light @endif">
+                    <div class="card @if($ticket->status == 1) bg-warning text-white @elseif($ticket->status == 2) bg-light @endif">
                         <div class="card-body ">
                             <div class="media">
                                 <div class="avatar-md me-4">
@@ -77,9 +77,11 @@
                                 <table class="invoice " style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; text-align: left; width: 90%; margin: 10px auto;">
                                     <tr
                                         style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
-                                        <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;"
+                                        <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; width:100%;"
                                             valign="top">
-                                            <br style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif,;font-weight:bold; box-sizing: border-box; font-size: 14px; margin: 0;" />Date : {{$ticket->registered_at}}
+                                            <br style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif,;font-weight:bold; box-sizing: border-box; font-size: 14px; margin: 0;" />
+                                            <span style="float:left;font-weight:600;">{{ $ticket->customer->name }}</span>
+                                            <span style="float:right;font-weight:600;">Date : {{$ticket->registered_at}}</span>
                                         </td>
                                     </tr>
                                     <tr
@@ -151,7 +153,7 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="border-top @if($ticket->status == 1) bg-warning @elseif($ticket->status == 2) bg-light @endif" style="margin-top: -30px;">
+                        <div class="border-top @if($ticket->status == 1) bg-warning text-white @elseif($ticket->status == 2) bg-light @endif" style="margin-top: -30px;">
                             @if($ticket->amount != $ticket->ville->amount)
                                 <p class="text-danger text-center" style="width: 100%;">Delais d'attente de paiment 24h</p>
                             @else
