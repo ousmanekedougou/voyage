@@ -4,19 +4,15 @@ namespace App\Http\Controllers\Agent;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Bus;
-use App\Models\Admin\DateDepart;
 use App\Models\Admin\Itineraire;
-use App\Models\Admin\Ville;
 use App\Models\User\Client;
+use App\Notifications\ClientAbsent;
 use App\Notifications\PaymentTicker;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 use Carbon\Carbon;
 use DateTime;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-use Laracasts\Flash\Flash;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
 
@@ -150,9 +146,9 @@ class ClientController extends Controller
         $getBuse = Bus::where('id',$id)->first();
         $clients = Client::where('bus_id',$id)
             ->where('siege_id',Auth::guard('agent')->user()->siege_id)
-            ->where('registered_at','<',Carbon::today())
-            ->where('status',0)->orderBy('id','ASC')
-            // ->where('amount','==',null)
+            ->where('registered_at','>',Carbon::today())
+            ->where('status',0)
+            ->orderBy('id','ASC')
             ->paginate(10);
         return view('agent.client.show',compact('clients','getBuse'));
     }
@@ -183,9 +179,10 @@ class ClientController extends Controller
     public function presence(Request $request){
         $client = Client::where('id',$request->client_id)
             ->where('siege_id',Auth::guard('agent')->user()->siege_id)
-            // ->where('registered_at','>',Carbon::today())
-            ->where('status',0)->orderBy('id','ASC')
-            // ->where('amount','!=',null)
+            ->where('registered_at','>',Carbon::today())
+            ->where('status',0)
+            // ->where('amount',$request->amount)
+            ->orderBy('id','ASC')
             ->first();
         if ($client) {
 
@@ -194,15 +191,16 @@ class ClientController extends Controller
 
             if ($client->voyage_status == 0) {
                 if (Auth::guard('agent')->user()->agence->method_ticket == 1) {
-                    $client->status = 1;
-                    $client->save(); 
+
+                     Notification::route('mail',Auth::guard('agent')->user()->siege->email)
+                    ->notify(new ClientAbsent($client));
+
+                    // Partie sms et notification sur son compte toucki
+                    // $client->status = 1;
+                    // $client->save(); 
+
                 }
             }
-            Toastr::success('Votre client a ete attribuer', 'Presence Client', ["positionClass" => "toast-top-right"]);
-            return back();
-        }else {
-            Toastr::danger('Votre client est peut etre pas d\'aujourdhuit ou n\'a pas payer le ticker', 'Presence Client', ["positionClass" => "toast-top-right"]);
-            return back();
         }
             
     }

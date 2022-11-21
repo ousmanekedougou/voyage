@@ -170,6 +170,11 @@
                             <div class="px-4 py-3 border-top">
                                 <ul class="list-inline mb-0 text-center">
                                     @if($ticket->amount == $ticket->ville->amount)
+                                        @if($ticket->voyage_status == 0)
+                                            <li class="list-inline-item me-3">
+                                                <a href="#" class="badge bg-info p-1" data-bs-toggle="modal" data-bs-target="#staticBackdropDate-{{$ticket->id}}"> <i class="fa fa-edit"></i> Renouveller la date</a>
+                                            </li>
+                                        @endif
                                         <li class="list-inline-item me-3">
                                             <a href="#" class="badge bg-danger p-1" data-bs-toggle="modal" data-bs-target="#staticBackdropArchiver-{{$ticket->id}}"> <i class="fa fa-trash"></i> Annuler</a>
                                         </li>
@@ -221,7 +226,7 @@
                                 <span class="text-warning">Attention:</span> la modification n'est possible qu'avant le paiement de votre ticker
                             </p>
                             <p>
-                                <form class="custom-validation" action="{{ route('customer.client.update',$ticket) }}" method="POST" enctype="multipart/form-data" name="myform" onsubmit="return validation()">
+                                <form class="custom-validation" action="{{ route('customer.client.update',$ticket->id) }}" method="POST" enctype="multipart/form-data" name="myform" onsubmit="return validation()">
                                       {{csrf_field()}}
                                     {{method_field('PUT')}}
                                     <div class="row">
@@ -243,7 +248,7 @@
                                                             @endforeach
                                                         
                                                     </select>
-                                                    @error('siege')
+                                                    @error('ville')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
@@ -265,6 +270,56 @@
                                         <div class="d-flex flex-wrap gap-2">
                                             <button type="submit" class="btn btn-primary waves-effect waves-light btn-block">
                                                 Modifier votre ticket
+                                            </button>
+                                            <button type="reset" class="btn btn-secondary waves-effect btn-block">
+                                                Anuller
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </p>
+                        </div>
+                </div>
+            </div>
+        </div>
+    <!-- Fin du modal de l'ajout -->
+    @endforeach
+
+    @foreach($tickets as $ticket)
+     <!-- Static Backdrop Modal de l'ajout -->
+        <div class="modal fade" id="staticBackdropDate-{{$ticket->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+                <div class="modal-content ">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel text-center">Renouvellement de la date ce ticket pour {{ $ticket->siege->name }} </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                        <div class="modal-body">
+                            <p class="text-bold text-center">
+                                <span class="text-warning">Attention:</span> vous ne pouvez modifier que la date de votre voayage
+                            </p>
+                            <p>
+                                <form class="custom-validation" action="{{ route('customer.client.renew',$ticket->id) }}" method="POST" enctype="multipart/form-data" name="myform" onsubmit="return validation()">
+                                      {{csrf_field()}}
+                                    {{method_field('PUT')}}
+                                    <div class="row">
+                                        <input type="hidden" name="current_date" value="{{ $ticket->registered_at }}">
+                                        <input type="hidden" name="amount" value="{{ $ticket->amount }}">
+                                        <div class="col-xl-12">
+                                            <div class="mb-3">
+                                                <label class="form-label" for="example-date-input" >Renouveller votre date de voyage</label>
+                                                <input type="date" class="form-control @error('date') is-invalid @enderror" name="date" value="{{ old('date') }}" required autocomplete="date"
+                                                     id="example-date-input" />
+                                                @error('date')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="d-flex flex-wrap gap-2">
+                                            <button type="submit" class="btn btn-primary waves-effect waves-light btn-block">
+                                                Renouvveler la date de ce ticket
                                             </button>
                                             <button type="reset" class="btn btn-secondary waves-effect btn-block">
                                                 Anuller
@@ -384,6 +439,7 @@
                                                     @csrf
                                                     <input type="hidden" name="siege" value="{{ $ticket->siege->id }}">
                                                     <input type="hidden" name="ville" value="{{ $ticket->ville->amount }}">
+                                                    <input type="hidden" name="registered_at" value="{{ $ticket->registered_at }}">
                                                     <div>
                                                         <div class="form-check form-check-inline font-size-16">
                                                             <input class="form-check-input" type="radio"

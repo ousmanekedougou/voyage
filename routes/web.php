@@ -115,6 +115,7 @@ Route::prefix('/agent')->name('agent.')->group(function()
     Route::put('/client/payer/{id}', [App\Http\Controllers\Agent\ClientController::class, 'payer'])->name('payer');
     Route::get('/client/ticker/{id}', [App\Http\Controllers\Agent\ClientController::class, 'ticker'])->name('ticker');
     Route::get('/client/annuler', [App\Http\Controllers\Agent\ClientController::class, 'annuler'])->name('annuler');
+    
 
     Route::resource('/bus', App\Http\Controllers\Agent\BusController::class);
     Route::resource('/itineraire', App\Http\Controllers\Agent\ItineraireController::class);
@@ -169,6 +170,7 @@ Route::prefix('/customer')->name('customer.')->group(function()
     Route::put('/client/update/{id}', [App\Http\Controllers\Client\ClientController::class, 'update'])->name('client.update');
     Route::get('client/paiment', [App\Http\Controllers\Client\ClientController::class, 'paiment'])->name('client.paiment');
     Route::put('/client/annuler/{id}', [App\Http\Controllers\Client\ClientController::class, 'annuler'])->name('client.annuler');
+    Route::put('/client/renew/{id}', [App\Http\Controllers\Client\ClientController::class, 'renew'])->name('client.renew');
     Route::delete('/client/destroy/{id}', [App\Http\Controllers\Client\ClientController::class, 'destroy'])->name('client.destroy');
 
     Route::resource('/bagage', App\Http\Controllers\Client\BagageController::class); 

@@ -77,10 +77,11 @@ class ClientController extends Controller
         $userialize_buse = unserialize($buse->siege->jours);
 
         $clients = Client::where('bus_id',$buse->id)->where('registered_at',$request->date)->get();
+
         $info_user = Client::where('registered_at',$request->date)
-        ->where('customer_id',Auth::guard('client')->user()->id)
-        ->where('voyage_status',0)
-        ->first();
+            ->where('customer_id',Auth::guard('client')->user()->id)
+            ->where('voyage_status',0)
+            ->first();
         if ($info_user) {
             Toastr::error('Vous etes deja inscrit pour cette date sur ce siege', 'Error date de voyage', ["positionClass" => "toast-top-right"]);
             return back();
@@ -161,7 +162,10 @@ class ClientController extends Controller
 
         $siege = request()->siege;
         $ville = request()->ville;
-        Client::where('customer_id',Auth::guard('client')->user()->id)->where('siege_id',$siege)
+        $registered_at = request()->registered_at;
+        Client::where('customer_id',Auth::guard('client')->user()->id)
+        ->where('siege_id',$siege)
+        ->where('registered_at',$registered_at)
         ->update([
             'amount' => $ville
         ]);
@@ -202,6 +206,26 @@ class ClientController extends Controller
             Toastr::error('Vous avez effectuer ou annuler ce votage', 'Error date de voyage', ["positionClass" => "toast-top-right"]);
             return back();
         }
+    }
+
+    public function renew(Request $request,$id){
+        $this->validate($request,['date' => 'required|date']);
+        $client = Client::where('id',$id)
+            ->where('customer_id',Auth::guard('client')->user()->id)
+            ->where('registered_at',$request->current_date)
+            ->where('amount',$request->amount)
+            ->first();
+        if ($client) {
+            if ($request->date == Carbon::today() || $request->date > Carbon::today()) {
+                $client->update(['voyage_status' => 1,'registered_at' => $request->date]);
+                Toastr::success('La date de votre voyage a ete renouveller', 'Renouvellement Date', ["positionClass" => "toast-top-right"]);
+                return back();
+            }else {
+                Toastr::warning('Votre date doit etre aujourdhuit ou demain','Error Inscription', ["positionClass" => "toast-top-right"]);
+                return back();
+            }
+        }
+        
     }
 
   

@@ -4,8 +4,8 @@
     <link href="{{asset('admin/assets/libs/admin-resources/rwd-table/rwd-table.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('admin/assets/libs/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('admin/assets/css/table.css')}}" rel="stylesheet" type="text/css" />
-    <script src="{{asset('admin/assets/js/bootstrap-toggle.min.js')}}" integrity="sha512-F636MAkMAhtTplahL9F6KmTfxTmYcAcjcCkyu0f0voT3N/6vzAuJ4Num55a0gEJ+hRLHhdz3vDvZpf6kqgEa5w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="stylesheet" href="{{asset('admin/assets/css/bootstrap-toggle.css')}}" integrity="sha512-9tISBnhZjiw7MV4a1gbemtB9tmPcoJ7ahj8QWIc0daBCdvlKjEA48oLlo6zALYm3037tPYYulT0YQyJIJJoyMQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="{{asset('admin/assets/js/bootstrap-toggle.min.js')}}" ></script>
+    <link rel="stylesheet" href="{{asset('admin/assets/css/bootstrap-toggle.css')}}" />
      <style>
         /* .invoice-container{
             padding: 2mm;
@@ -105,14 +105,16 @@
                                                 <a href="" data-bs-toggle="modal" data-bs-target="#subscribeModalagenceDetails-{{$client->id}}" class="text-muted"><i class="fa fa-eye me-1"></i></a>
                                             </li>
 
-                                            <li class="list-inline-item">
-                                                <input data-id="{{ $client->id }}" class="toggle-class btn btn-xs" type="checkbox"
+                                            <li class="list-inline-item" style="float: right;">
+                                                <input data-id="{{ $client->id }}" class="toggle-class btn btn-sm" type="checkbox"
                                                     data-onstyle="success"
                                                     data-offstyle="danger"
                                                     data-toggle="toggle"
                                                     data-on="Present"
                                                     data-off="Absent"
+                                                    data-value="{{ $client->ville->amount }}"
                                                     {{$client->voyage_status == true ? 'checked' : ''}}
+                                                
                                                 >
                                             </li>
 
@@ -353,6 +355,7 @@
         $('.toggle-class').on('change' ,function(){
             var voyage_status = $(this).prop('checked') == true ? 1 : 0;
             var client_id = $(this).data('id');
+            // var amount = $(this.data('value'));
             $.ajax({
                 type: 'GET',
                 dataType: 'JSON',
@@ -360,7 +363,8 @@
                 data: 
                     {
                         'voyage_status': voyage_status,
-                        'client_id': client_id
+                        'client_id': client_id,
+                        // 'amount': amount
                     },
                 success: function(data){
                     console.log('success')
