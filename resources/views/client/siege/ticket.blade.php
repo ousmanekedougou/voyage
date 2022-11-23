@@ -305,6 +305,7 @@
                                     <div class="row">
                                         <input type="hidden" name="current_date" value="{{ $ticket->registered_at }}">
                                         <input type="hidden" name="amount" value="{{ $ticket->amount }}">
+                                        <input type="hidden" name="ville" value="{{ $ticket->ville->id }}">
                                         <div class="col-xl-12">
                                             <div class="mb-3">
                                                 <label class="form-label" for="example-date-input" >Renouveller votre date de voyage</label>

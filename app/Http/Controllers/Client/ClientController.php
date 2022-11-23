@@ -188,6 +188,16 @@ class ClientController extends Controller
         ]);
         $ville = Ville::where('id',$request->ville)->first();
         $buse = Bus::where('itineraire_id',$ville->itineraire_id)->where('plein',0)->first();
+
+        $date=date_create($request->date);
+        $datef = (date_format($date,'Y-m-d H:i:s'));
+        $time_input = strtotime($datef) ; 
+        $date_input = getDate($time_input); 
+        // dd($date_input['wday']); 
+        
+        $userialize_buse = unserialize($buse->siege->jours);
+
+        $clients = Client::where('bus_id',$buse->id)->where('registered_at',$request->date)->get();
         
         $info_user = Client::where('registered_at',$request->date)
         ->where('customer_id',Auth::guard('client')->user()->id)
@@ -195,13 +205,35 @@ class ClientController extends Controller
         ->where('amount',null)
         ->first();
         if ($info_user) {
-            Client::where('id',$id)->update([
-                'ville_id' => $request->ville,
-                'registered_at' => $request->date,
-                // 'heure' => $buse->date_depart->rendez_vous
-            ]);
-            Toastr::success('Votre ticket a bien ete modifier', 'Modification Ticket', ["positionClass" => "toast-top-right"]);
-            return back();
+            if ($clients->count() < $buse->place) {
+                if (in_array($date_input['wday'] , $userialize_buse)) {
+
+                    if ($request->date == Carbon::today() || $request->date > Carbon::today()) {
+
+                        Client::where('id',$id)->update([
+                            'ville_id' => $request->ville,
+                            'registered_at' => $request->date,
+                            // 'heure' => $buse->date_depart->rendez_vous
+                        ]);
+                        Toastr::success('Votre ticket a bien ete modifier', 'Modification Ticket', ["positionClass" => "toast-top-right"]);
+                        return back();
+
+                    }else{
+                        Toastr::warning('Votre date doit etre aujourdhuit ou demain','Error Inscription', ["positionClass" => "toast-top-right"]);
+                        return back();
+                    }
+                }else {
+                    Toastr::warning('Ce siege ne voyage pas a cette date','Error Date', ["positionClass" => "toast-top-right"]);
+                    return back();
+                }
+            }else if ($clients->count() == $buse->place){
+
+                $buse->update(['plein' =>  1]);
+
+                Toastr::warning('Ce bus est plein', 'Inscription', ["positionClass" => "toast-top-right"]);
+                return back();
+            }
+
         }else {
             Toastr::error('Vous avez effectuer ou annuler ce votage', 'Error date de voyage', ["positionClass" => "toast-top-right"]);
             return back();
@@ -210,20 +242,57 @@ class ClientController extends Controller
 
     public function renew(Request $request,$id){
         $this->validate($request,['date' => 'required|date']);
+
+        $ville = Ville::where('id',$request->ville)->first();
+
+        $buse = Bus::where('itineraire_id',$ville->itineraire_id)->where('plein',0)->first();
+
+        $date=date_create($request->date);
+        $datef = (date_format($date,'Y-m-d H:i:s'));
+        $time_input = strtotime($datef) ; 
+        $date_input = getDate($time_input); 
+        // dd($date_input['wday']); 
+        
+        $userialize_buse = unserialize($buse->siege->jours);
+
+        $clients = Client::where('bus_id',$buse->id)->where('registered_at',$request->date)->get();
         $client = Client::where('id',$id)
             ->where('customer_id',Auth::guard('client')->user()->id)
             ->where('registered_at',$request->current_date)
             ->where('amount',$request->amount)
             ->first();
         if ($client) {
-            if ($request->date == Carbon::today() || $request->date > Carbon::today()) {
-                $client->update(['voyage_status' => 1,'registered_at' => $request->date]);
-                Toastr::success('La date de votre voyage a ete renouveller', 'Renouvellement Date', ["positionClass" => "toast-top-right"]);
-                return back();
-            }else {
-                Toastr::warning('Votre date doit etre aujourdhuit ou demain','Error Inscription', ["positionClass" => "toast-top-right"]);
+            if ($clients->count() < $buse->place) {
+                if (in_array($date_input['wday'] , $userialize_buse)) {
+
+                    if ($request->date == Carbon::today() || $request->date > Carbon::today()) {
+
+                        $client->update([
+                            'registered_at' => $request->date,
+                            'voyage_status' => 1
+                        ]);
+                        Toastr::success('Votre ticket a bien ete renouveller', 'Modification Ticket', ["positionClass" => "toast-top-right"]);
+                        return back();
+
+                    }else{
+                        Toastr::warning('Votre date doit etre aujourdhuit ou demain','Error Inscription', ["positionClass" => "toast-top-right"]);
+                        return back();
+                    }
+                }else {
+                    Toastr::warning('Ce siege ne voyage pas a cette date','Error Date', ["positionClass" => "toast-top-right"]);
+                    return back();
+                }
+            }else if ($clients->count() == $buse->place){
+
+                $buse->update(['plein' =>  1]);
+
+                Toastr::warning('Ce bus est plein', 'Inscription', ["positionClass" => "toast-top-right"]);
                 return back();
             }
+
+        }else {
+            Toastr::error('Vous avez effectuer ou annuler ce votage', 'Error date de voyage', ["positionClass" => "toast-top-right"]);
+            return back();
         }
         
     }
