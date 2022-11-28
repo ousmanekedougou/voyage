@@ -430,65 +430,65 @@
                 </div>
             <!-- Fin du modal pour la desactivation de l'admin -->
 
-                <!-- Modification des informatio api sms -->
-                <div class="modal fade" id="staticBackdropSmsClient-{{$sms->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
-                        <div class="modal-content ">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="staticBackdropLabel">Modifier vos information de Sms   </h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                                <div class="modal-body">
-                                    <p>
-                                        <form class="custom-validation" action="{{ route('agent.profil.sendApi',$sms->id) }}" method="POST" enctype="multipart/form-data">
-                                            {{csrf_field()}}
-                                            {{method_field('PUT')}}
-                                            <input type="hidden" name="status" value="2">
-                                            <div class="row">
-                                                <div class="col-xl-12">
-                                                    <div class="mb-3" >
-                                                        <label class="form-label">clientId</label>
-                                                        <div>
-                                                            <input data-parsley-type="number" type="text" id="clientId" class="form-control @error('clientId') is-invalid @enderror" name="clientId" value="{{ old('clientId') ?? $sms->clientId }}" autocomplete="clientId"
-                                                                required placeholder="Numero de clientId"  />
-                                                                <input type="hidden" name="indicatif" id="indicatif">
-                                                                @error('clientId')
-                                                                    <span class="invalid-feedback" role="alert">
-                                                                        <strong>{{ $message }}</strong>
-                                                                    </span>
-                                                                @enderror
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="mb-3">
-                                                        <label class="form-label">clientSecret</label>
-                                                        <div>
-                                                            <input data-parsley-type="number" type="text" id="clientSecret" class="form-control @error('clientSecret') is-invalid @enderror" name="clientSecret" value="{{ old('clientSecret') ?? $sms->clientSecret }}" autocomplete="clientSecret"
-                                                                required placeholder="Numero de votre clientSecret" />
-                                                                @error('clientSecret')
-                                                                    <span class="invalid-feedback" role="alert">
-                                                                        <strong>{{ $message }}</strong>
-                                                                    </span>
-                                                                @enderror
-                                                        </div>
+            <!-- Modification des informatio api sms -->
+            <div class="modal fade" id="staticBackdropSmsClient-{{$sms->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+                    <div class="modal-content ">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Modifier vos information de Sms   </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                            <div class="modal-body">
+                                <p>
+                                    <form class="custom-validation" action="{{ route('agent.profil.sendApi',$sms->id) }}" method="POST" enctype="multipart/form-data">
+                                        {{csrf_field()}}
+                                        {{method_field('PUT')}}
+                                        <input type="hidden" name="status" value="2">
+                                        <div class="row">
+                                            <div class="col-xl-12">
+                                                <div class="mb-3" >
+                                                    <label class="form-label">clientId</label>
+                                                    <div>
+                                                        <input data-parsley-type="number" type="text" id="clientId" class="form-control @error('clientId') is-invalid @enderror" name="clientId" value="{{ old('clientId') ?? $sms->clientId }}" autocomplete="clientId"
+                                                            required placeholder="Numero de clientId"  />
+                                                            <input type="hidden" name="indicatif" id="indicatif">
+                                                            @error('clientId')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
                                                     </div>
                                                 </div>
-                                                <div class="d-flex flex-wrap gap-2">
-                                                    <button type="submit" class="btn btn-primary waves-effect waves-light btn-block">
-                                                        Envoyer
-                                                    </button>
-                                                    <button type="reset" class="btn btn-secondary waves-effect btn-block">
-                                                        Anuller
-                                                    </button>
+
+                                                <div class="mb-3">
+                                                    <label class="form-label">clientSecret</label>
+                                                    <div>
+                                                        <input data-parsley-type="number" type="text" id="clientSecret" class="form-control @error('clientSecret') is-invalid @enderror" name="clientSecret" value="{{ old('clientSecret') ?? $sms->clientSecret }}" autocomplete="clientSecret"
+                                                            required placeholder="Numero de votre clientSecret" />
+                                                            @error('clientSecret')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </form>
-                                    </p>
-                                </div>
-                        </div>
+                                            <div class="d-flex flex-wrap gap-2">
+                                                <button type="submit" class="btn btn-primary waves-effect waves-light btn-block">
+                                                    Envoyer
+                                                </button>
+                                                <button type="reset" class="btn btn-secondary waves-effect btn-block">
+                                                    Anuller
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </p>
+                            </div>
                     </div>
                 </div>
-                <!--  -->
+            </div>
+            <!--  -->
             @endif
 
              <!-- Ajout des information api -->

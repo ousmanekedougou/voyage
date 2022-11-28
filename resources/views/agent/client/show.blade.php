@@ -213,7 +213,7 @@
                                                                             <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;"
                                                                                 valign="top">
                                                                                 <br style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif,;font-weight:bold; box-sizing: border-box; font-size: 14px; margin: 0;" />
-                                                                                <span style="float: left;">Destination : {{$client_presence->ville->name}}</span> <span style="float: right;">Date : {{$client_presence->registered_at}}</span>
+                                                                                <span style="float: left;">Destination : {{ $client_presence->ville->name }}</span> <span style="float: right;">Date : {{$client_presence->registered_at}}</span>
                                                                             </td>
                                                                         </tr>
                                                                         <tr
@@ -356,6 +356,7 @@
             var voyage_status = $(this).prop('checked') == true ? 1 : 0;
             var client_id = $(this).data('id');
             // var amount = $(this.data('value'));
+            
             $.ajax({
                 type: 'GET',
                 dataType: 'JSON',
@@ -370,6 +371,24 @@
                     console.log('success')
                 }
             });
+
+            if (voyage_status == 0) {
+                $.ajax({
+                type: 'GET',
+                dataType: 'JSON',
+                url: "{{ route('agent.sendmail') }}",
+                data: 
+                    {
+                        'voyage_status': voyage_status,
+                        'client_id': client_id,
+                        // 'amount': amount
+                    },
+                success: function(data){
+                    console.log('success')
+                }
+                });
+            }
+            
         });
     </script>
    

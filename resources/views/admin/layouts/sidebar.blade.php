@@ -139,7 +139,7 @@
                                 @endforeach
                                 <hr>
                                 <li>
-                                    <a href="{{ route('agent.annuler') }}" key="t-products" class=""> <i class="fas fa-money-bill "></i> Ticket annuler</a>
+                                    <a href="{{ route('agent.renoncer') }}" key="t-products" class=""> <i class="fas fa-money-bill "></i> Ticket annuler</a>
                                 </li>
                                 <hr>
                                 <li>

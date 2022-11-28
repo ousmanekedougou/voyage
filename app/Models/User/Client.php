@@ -30,6 +30,8 @@ class Client extends Model
         'siege_id',
         'reference',
         'cni',
+        'canceled_at',
+        'canceled_time'
     ];
 
      public function bus()

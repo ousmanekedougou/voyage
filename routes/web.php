@@ -114,7 +114,8 @@ Route::prefix('/agent')->name('agent.')->group(function()
     Route::get('/presence', [App\Http\Controllers\Agent\ClientController::class,'presence'])->name('client.presence'); 
     Route::put('/client/payer/{id}', [App\Http\Controllers\Agent\ClientController::class, 'payer'])->name('payer');
     Route::get('/client/ticker/{id}', [App\Http\Controllers\Agent\ClientController::class, 'ticker'])->name('ticker');
-    Route::get('/client/annuler', [App\Http\Controllers\Agent\ClientController::class, 'annuler'])->name('annuler');
+    Route::get('/renoncer', [App\Http\Controllers\Agent\ClientController::class, 'annuler'])->name('renoncer');
+    Route::get('/client/sendmail', [App\Http\Controllers\Agent\ClientController::class, 'sendmail'])->name('sendmail');
     
 
     Route::resource('/bus', App\Http\Controllers\Agent\BusController::class);

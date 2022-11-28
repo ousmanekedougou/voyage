@@ -59,7 +59,6 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-
         // dd($request->all());
         $this->validate($request,[
             'ville' => 'required|numeric',
@@ -76,7 +75,7 @@ class ClientController extends Controller
         
         $userialize_buse = unserialize($buse->siege->jours);
 
-        $clients = Client::where('bus_id',$buse->id)->where('registered_at',$request->date)->get();
+        $clients = Client::where('bus_id',$buse->id)->where('registered_at',$request->date)->where('amount','!=',null)->get();
 
         $info_user = Client::where('registered_at',$request->date)
             ->where('customer_id',Auth::guard('client')->user()->id)
@@ -186,6 +185,7 @@ class ClientController extends Controller
             'ville' => 'required|numeric',
             'date' => 'required|string',
         ]);
+
         $ville = Ville::where('id',$request->ville)->first();
         $buse = Bus::where('itineraire_id',$ville->itineraire_id)->where('plein',0)->first();
 
@@ -197,7 +197,7 @@ class ClientController extends Controller
         
         $userialize_buse = unserialize($buse->siege->jours);
 
-        $clients = Client::where('bus_id',$buse->id)->where('registered_at',$request->date)->get();
+        $clients = Client::where('bus_id',$buse->id)->where('registered_at',$request->date)->where('amount','!=',null)->get();
         
         $info_user = Client::where('registered_at',$request->date)
         ->where('customer_id',Auth::guard('client')->user()->id)
@@ -241,6 +241,7 @@ class ClientController extends Controller
     }
 
     public function renew(Request $request,$id){
+
         $this->validate($request,['date' => 'required|date']);
 
         $ville = Ville::where('id',$request->ville)->first();
@@ -250,12 +251,11 @@ class ClientController extends Controller
         $date=date_create($request->date);
         $datef = (date_format($date,'Y-m-d H:i:s'));
         $time_input = strtotime($datef) ; 
-        $date_input = getDate($time_input); 
-        // dd($date_input['wday']); 
+        $date_input = getDate($time_input);
         
         $userialize_buse = unserialize($buse->siege->jours);
 
-        $clients = Client::where('bus_id',$buse->id)->where('registered_at',$request->date)->get();
+        $clients = Client::where('bus_id',$buse->id)->where('registered_at',$request->date)->where('amount','!=',null)->get();
         $client = Client::where('id',$id)
             ->where('customer_id',Auth::guard('client')->user()->id)
             ->where('registered_at',$request->current_date)
@@ -271,6 +271,7 @@ class ClientController extends Controller
                             'registered_at' => $request->date,
                             'voyage_status' => 1
                         ]);
+
                         Toastr::success('Votre ticket a bien ete renouveller', 'Modification Ticket', ["positionClass" => "toast-top-right"]);
                         return back();
 
@@ -315,6 +316,7 @@ class ClientController extends Controller
         $client = Client::where('id',$id)->first();
         if ($client->siege->agence->method_ticket == 0) {
             $client->status = 1;
+            $client->voyage_status = 0;
             $client->canceled_at = $mytime->format('Y-m-d H:i:s');
             $client->canceled_time = $time;
             $client->save();
@@ -324,6 +326,7 @@ class ClientController extends Controller
         }else {
             if ($client->bus->heure_depart > $time ) {
                 $client->status = 1;
+                $client->voyage_status = 0;
                 $client->canceled_at = $mytime->format('Y-m-d H:i:s');
                 $client->canceled_time = $time;
                 $client->save();
@@ -332,6 +335,7 @@ class ClientController extends Controller
                 return back(); 
             }else {
                 $client->status = 2;
+                $client->voyage_status = 0;
                 $client->canceled_at = $mytime->format('Y-m-d H:i:s');
                 $client->canceled_time = $time;
                 $client->save();

@@ -146,7 +146,7 @@ class ClientController extends Controller
         $getBuse = Bus::where('id',$id)->first();
         $clients = Client::where('bus_id',$id)
             ->where('siege_id',Auth::guard('agent')->user()->siege_id)
-            ->where('registered_at','>',Carbon::today())
+            ->where('registered_at','<',Carbon::today())
             ->where('status',0)
             ->orderBy('id','ASC')
             ->paginate(10);
@@ -179,30 +179,32 @@ class ClientController extends Controller
     public function presence(Request $request){
         $client = Client::where('id',$request->client_id)
             ->where('siege_id',Auth::guard('agent')->user()->siege_id)
-            ->where('registered_at','>',Carbon::today())
+            ->where('registered_at','<',Carbon::today())
             ->where('status',0)
-            // ->where('amount',$request->amount)
-            ->orderBy('id','ASC')
+            ->where('voyage_status',1)
+            ->where('amount','!=',null)
+            ->first()->update(['voyage_status' => $request->voyage_status]);
+        
+    }
+
+    public function sendmail(){
+        $client = Client::where('id',request()->client_id)
+            ->where('siege_id',Auth::guard('agent')->user()->siege_id)
+            ->where('registered_at','<',Carbon::today())
+            ->where('voyage_status',request()->voyage_status)
+            ->where('amount','!=',null)
             ->first();
-        if ($client) {
+        if ($client){
+            if (Auth::guard('agent')->user()->agence->method_ticket == 1) {
+                Notification::route('mail',Auth::guard('agent')->user()->siege->email)
+                ->notify(new ClientAbsent($client));
 
-            $client->voyage_status = $request->voyage_status;
-            $client->save();
+                // Partie sms et notification sur son compte toucki
+                // $client->status = 1;
+                // $client->save(); 
 
-            if ($client->voyage_status == 0) {
-                if (Auth::guard('agent')->user()->agence->method_ticket == 1) {
-
-                     Notification::route('mail',Auth::guard('agent')->user()->siege->email)
-                    ->notify(new ClientAbsent($client));
-
-                    // Partie sms et notification sur son compte toucki
-                    // $client->status = 1;
-                    // $client->save(); 
-
-                }
             }
         }
-            
     }
 
     public function ticker(Request $request , $id){
@@ -212,8 +214,10 @@ class ClientController extends Controller
 
     public function annuler(){
         $clients = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
-            ->where('status',1)->orderBy('id','ASC')
+            ->where('status',1)
             ->where('voyage_status',0)
+            ->where('amount','!=',null)
+            ->orderBy('id','ASC')
             ->paginate(10);
         return view('agent.client.annuler',compact('clients'));
     }

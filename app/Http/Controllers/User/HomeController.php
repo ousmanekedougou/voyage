@@ -12,6 +12,7 @@ class HomeController extends Controller
 {
 
     public function index(){
+
         $agences = Agence::where('is_admin',0)
         ->where('is_active',1)
         ->orderBy('id','ASC')->get();

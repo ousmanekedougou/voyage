@@ -68,8 +68,13 @@ class HomeController extends Controller
                 
             //     Client::where('bus_id', $buse->id)->where('registered_at', '<', Carbon::today()->format('Y-m-d'))->delete();
             // }
-
             
+            Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
+            ->where('registered_at','<',Carbon::today())
+            ->where('status',0)
+            ->where('amount',null)
+            ->delete();
+           
             $date_today = Carbon::today();
             $dayOfweek = $date_today->dayOfWeek;
             if ($dayOfweek == 1) {
