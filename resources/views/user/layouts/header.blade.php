@@ -128,7 +128,7 @@
     --}}
     
 
-     <nav class="navbar navbar-expand-lg navigation fixed-top sticky bg-white">
+     <nav class="navbar navbar-expand-lg navigation fixed-top sticky">
         
         <div class="container">
             <a class="navbar-logo" href="/">
@@ -142,7 +142,7 @@
             </button>
             --}}
 
-            <ul class="navbar-mobile-show" >
+            <ul class="navbar-mobile-show">
                 <li class="nav-item">
                     <a class="nav-link {{ set_active_roote('index') }} " href="/"><i class="fa fa-home fa-fa-item"></i></a>
                 </li>
@@ -192,23 +192,23 @@
             <div class="collapse navbar-collapse" id="topnav-menu-content">
                 <ul class="navbar-nav ms-auto" id="topnav-menu">
                     <li class="nav-item">
-                        <a class="nav-link text-muted {{ set_active_roote('index') }} " href="/"><i class="fa fa-home"></i> acceuil</a>
+                        <a class="nav-link {{ set_active_roote('index') }} " href="/"><i class="fa fa-home"></i> acceuil</a>
                     </li>
                     <!-- <li class="nav-item">
                         <a class="nav-link {{ set_active_roote('about.index') }}" href="{{ route('about.index') }}">A propos</a>
                     </li> -->
                     <li class="nav-item">
-                        <a class="nav-link text-muted {{ set_active_roote('agence.index') }} " href="{{ route('agence.index') }}"><i class="fa fa-building"></i> agences</a>
+                        <a class="nav-link {{ set_active_roote('agence.index') }} " href="{{ route('agence.index') }}"><i class="fa fa-building"></i> agences</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-muted {{ set_active_roote('client.index') }} " href="{{ route('client.index') }}"><i class="fa fa-suitcase-rolling"></i> réservation</a>
+                        <a class="nav-link {{ set_active_roote('client.index') }} " href="{{ route('client.index') }}"><i class="fa fa-suitcase-rolling"></i> réservation</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-muted {{ set_active_roote('setting.index') }} " href="{{ route('setting.index') }}"><i class="fa fa-cog"></i> parametre</a>
+                        <a class="nav-link {{ set_active_roote('setting.index') }} " href="{{ route('setting.index') }}"><i class="fa fa-cog"></i> comment ça marche</a>
                     </li>
 
                      <li class="nav-item">
-                        <a class="nav-link text-muted {{ set_active_roote('contact.index') }} " href="#contact"
+                        <a class="nav-link {{ set_active_roote('contact.index') }} " href="#contact"
                         data-bs-toggle="modal"
                                             data-bs-target=".ContactUs"
                         ><i class="fa fa-at"></i> contact</a>

@@ -45,8 +45,7 @@
             <!-- end row -->
 
             <div class="row">
-                <div class="col-lg-1"></div>
-                <div class="col-lg-10">
+                <div class="col-lg-12">
                     <div class="vertical-nav">
                         <div class="row">
                             <div class="col-lg-2 col-sm-4">
@@ -364,7 +363,6 @@
                     </div>
                     <!-- end vertical nav -->
                 </div>
-                <div class="col-lg-1"></div>
             </div>
             <!-- end row -->
         </div>

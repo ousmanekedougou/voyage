@@ -150,7 +150,7 @@
                                     <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="19">
                                 </span>
                             </a>
-
+                            {{-- La partie responsive de la navebar du clien --}}
                             <ul class="navbar-admin-mobile-show" >
                                 <li class="nav-item">
                                     <a class="nav-link {{ set_active_roote('customer.client.show') }} " href="{{ route('customer.client.show') }}"><i class="fa fa-ticket-alt fa-fa-item"></i></a>
@@ -173,6 +173,7 @@
                                 </li>
 
                             </ul>
+                             {{-- Fin de la partie responsive de la navebar du clien --}}
                         @endif
 
                     </div>

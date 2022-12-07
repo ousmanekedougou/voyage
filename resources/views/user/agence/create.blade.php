@@ -1,5 +1,11 @@
 @extends('user.layouts.app',['title' => 'Create Agence'])
-
+    <style>
+        .bg-ico-hero{
+            background-image:url(./user/assets/images/agence.webp) !important;
+            background-size:cover;background-position:top !important;
+            height: 100px !important;
+        }
+    </style>
 @section('main-content')
 
  
@@ -12,9 +18,9 @@
                 <div class="col-lg-2"></div>
                 <div class="col-lg-8 card_show text-center">
                     <div class="text-white-50">
-                        <h1 class="text-white font-weight-semibold mb-3 hero-title ">Creer votre agence de transport</h1>
+                        <h1 class="text-white font-weight-semibold mb-3 hero-title ">Creer votre compte agence de transport</h1>
                         <p class="font-size-20 text-white" >
-                            Toutes les options de voyage sur une seule plateforme
+                            Digitaliser tous les activites de votre agence de transport sur une seule plateforme
                         </p>
                     </div>
                 </div>

@@ -66,7 +66,7 @@ class LoginController extends Controller
 
      protected function credentials(Request $request)
      {
-         $admin = Agence::where('email',$request->email)->first(); 
+         $admin = Agence::where('email',$request->email)->first();
          if($admin)
          {
              if($admin->is_active == 0 || $admin->confirmation_token != null)

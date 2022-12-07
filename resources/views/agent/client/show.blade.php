@@ -20,12 +20,29 @@
     <div class="page-content">
         <div class="container-fluid">
 
+             <!-- start page title -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                <h4 class="mb-sm-0 font-size-18"></h4>
+
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+                                        <li class="breadcrumb-item"><a href="{{ route('agent.send_sms') }}" class="btn btn-primary text-white">Envoyer un message aux absents</a></li>
+                                    </ol>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-lg-12">
                                     <div class="media">
                                         <div class="me-3">
                                             <img src="{{(Storage::url(Auth::guard('agent')->user()->agence->logo))}}" alt="" class="avatar-md rounded-circle img-thumbnail">
@@ -52,105 +69,105 @@
 
 
 
-                    <div class="row" id="member_row">
-                        @foreach($clients as $client)
-                            <div class="col-xl-4 col-sm-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="media">
-                                            @if($client->image == null)
-                                                <div class="avatar-md me-4">
-                                                    <span class="avatar-title rounded-circle bg-light text-danger">
-                                                        <img src="{{Storage::url($client->customer->image)}}" alt="">
-                                                    </span>
-                                                </div>
-                                            @else
-                                                <div class="avatar-md me-4">
-                                                    <span class="avatar-title rounded-circle bg-light text-danger font-size-16">
-                                                        <img src="{{Storage::url($client->image)}}" alt="" height="30">
-                                                    </span>
-                                                </div>
-                                            @endif
-
-                                            <div class="media-body overflow-hidden">
-                                                @if($client->name == null)
-                                                    <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">{{ $client->customer->name }}</a></h5>
-                                                    <p class="text-muted mb-1"> <i class="fa fa-mobile"></i> {{ $client->customer->phone }}</p>
-                                                @else
-                                                    <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">{{ $client->name }}</a></h5>
-                                                    <p class="text-muted mb-1"> <i class="fa fa-mobile"></i> {{ $client->phone }}</p>
-                                                    <p class="text-muted mb-1"> <i class="fa fa-mobile"></i> {{ $client->cni }}</p>
-                                                @endif
-                                                <p class="text-muted mb-1 font-size-12"><i class="bx bxs-map"></i> Destination : {{ $client->ville->name }} </p> 
-                                                <p class="text-muted mb-1 font-size-12"><i class="fas fa-money-bill "></i> Prix : {{$client->ville->amount}} f </p> 
-                                                
-                                            </div>
+            <div class="row" id="member_row">
+                @foreach($clients as $client)
+                    <div class="col-xl-4 col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="media">
+                                    @if($client->image == null)
+                                        <div class="avatar-md me-4">
+                                            <span class="avatar-title rounded-circle bg-light text-danger">
+                                                <img src="{{Storage::url($client->customer->image)}}" alt="">
+                                            </span>
                                         </div>
-                                    </div>
-                                    <div class="px-4 py-3 border-top">
-                                        <ul class="list-inline mb-0">
-                                            <li class="list-inline-item">
-                                                @if($client->amount != $client->ville->amount)
-                                                    <span class="badge bg-warning"><i class="bx bxs-user-x me-1"></i>
-                                                      Tecket  non Payer
-                                                    </span>
-                                                @elseif($client->amount == $client->ville->amount)
-                                                    <span class="badge bg-success"><i class="bx bxs-user-check me-1"></i>
-                                                        Ticket Payer
-                                                    </span>
-                                                @endif
-                                                
-                                            </li>
-                                            <li class="list-inline-item">
-                                                <a href="" data-bs-toggle="modal" data-bs-target="#subscribeModalagenceDetails-{{$client->id}}" class="text-muted"><i class="fa fa-eye me-1"></i></a>
-                                            </li>
+                                    @else
+                                        <div class="avatar-md me-4">
+                                            <span class="avatar-title rounded-circle bg-light text-danger font-size-16">
+                                                <img src="{{Storage::url($client->image)}}" alt="" height="30">
+                                            </span>
+                                        </div>
+                                    @endif
 
-                                            <li class="list-inline-item" style="float: right;">
-                                                <input data-id="{{ $client->id }}" class="toggle-class btn btn-sm" type="checkbox"
-                                                    data-onstyle="success"
-                                                    data-offstyle="danger"
-                                                    data-toggle="toggle"
-                                                    data-on="Present"
-                                                    data-off="Absent"
-                                                    data-value="{{ $client->ville->amount }}"
-                                                    {{$client->voyage_status == true ? 'checked' : ''}}
-                                                
-                                                >
-                                            </li>
-
-                                            {{--
-                                            
-                                            <li class="list-inline-item">
-                                                <div class="form-check form-radio-primary mb-3">
-                                                    <input class="form-check-input @error('presence') is-invalid @enderror" type="radio"
-                                                        name="presence-{{ $client->id }}" id="formRadioColor-{{$client->id}}" value="1">
-                                                    <label class="form-check-label" for="formRadioColor-{{$client->id}}">
-                                                        Present
-                                                    </label>
-                                                </div>
-                                            </li>
-
-                                            <li class="list-inline-item">
-                                                <div class="form-check form-radio-danger mb-3">
-                                                    <input class="form-check-input @error('presence') is-invalid @enderror" type="radio"
-                                                        name="presence-{{ $client->id }}" id="formRadioColore-{{$client->id}}" value="2">
-                                                    <label class="form-check-label" for="formRadioColore-{{$client->id}}">
-                                                        Absent
-                                                    </label>
-                                                </div>
-                                            </li>
-                                            @error('presence')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                            --}}
-                                        </ul>
+                                    <div class="media-body overflow-hidden">
+                                        @if($client->name == null)
+                                            <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">{{ $client->customer->name }}</a></h5>
+                                            <p class="text-muted mb-1"> <i class="fa fa-mobile"></i> {{ $client->customer->phone }}</p>
+                                        @else
+                                            <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">{{ $client->name }}</a></h5>
+                                            <p class="text-muted mb-1"> <i class="fa fa-mobile"></i> {{ $client->phone }}</p>
+                                            <p class="text-muted mb-1"> <i class="fa fa-mobile"></i> {{ $client->cni }}</p>
+                                        @endif
+                                        <p class="text-muted mb-1 font-size-12"><i class="bx bxs-map"></i> Destination : {{ $client->ville->name }} </p> 
+                                        <p class="text-muted mb-1 font-size-12"><i class="fas fa-money-bill "></i> Prix : {{$client->ville->amount}} f </p> 
+                                        
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
+                            <div class="px-4 py-3 border-top">
+                                <ul class="list-inline mb-0">
+                                    <li class="list-inline-item">
+                                        @if($client->amount != $client->ville->amount)
+                                            <span class="badge bg-warning"><i class="bx bxs-user-x me-1"></i>
+                                                Tecket  non Payer
+                                            </span>
+                                        @elseif($client->amount == $client->ville->amount)
+                                            <span class="badge bg-success"><i class="bx bxs-user-check me-1"></i>
+                                                Ticket Payer
+                                            </span>
+                                        @endif
+                                        
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <a href="" data-bs-toggle="modal" data-bs-target="#subscribeModalagenceDetails-{{$client->id}}" class="text-muted"><i class="fa fa-eye me-1"></i></a>
+                                    </li>
+
+                                    <li class="list-inline-item" style="float: right;">
+                                        <input data-id="{{ $client->id }}" class="toggle-class btn btn-sm" type="checkbox"
+                                            data-onstyle="success"
+                                            data-offstyle="danger"
+                                            data-toggle="toggle"
+                                            data-on="Present"
+                                            data-off="Absent"
+                                            data-value="{{ $client->ville->amount }}"
+                                            {{$client->voyage_status == true ? 'checked' : ''}}
+                                        
+                                        >
+                                    </li>
+
+                                    {{--
+                                    
+                                    <li class="list-inline-item">
+                                        <div class="form-check form-radio-primary mb-3">
+                                            <input class="form-check-input @error('presence') is-invalid @enderror" type="radio"
+                                                name="presence-{{ $client->id }}" id="formRadioColor-{{$client->id}}" value="1">
+                                            <label class="form-check-label" for="formRadioColor-{{$client->id}}">
+                                                Present
+                                            </label>
+                                        </div>
+                                    </li>
+
+                                    <li class="list-inline-item">
+                                        <div class="form-check form-radio-danger mb-3">
+                                            <input class="form-check-input @error('presence') is-invalid @enderror" type="radio"
+                                                name="presence-{{ $client->id }}" id="formRadioColore-{{$client->id}}" value="2">
+                                            <label class="form-check-label" for="formRadioColore-{{$client->id}}">
+                                                Absent
+                                            </label>
+                                        </div>
+                                    </li>
+                                    @error('presence')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    --}}
+                                </ul>
+                            </div>
+                        </div>
                     </div>
+                @endforeach
+            </div>
             <!-- end row -->
 
             <div class="row">
@@ -371,23 +388,6 @@
                     console.log('success')
                 }
             });
-
-            if (voyage_status == 0) {
-                $.ajax({
-                type: 'GET',
-                dataType: 'JSON',
-                url: "{{ route('agent.sendmail') }}",
-                data: 
-                    {
-                        'voyage_status': voyage_status,
-                        'client_id': client_id,
-                        // 'amount': amount
-                    },
-                success: function(data){
-                    console.log('success')
-                }
-                });
-            }
             
         });
     </script>

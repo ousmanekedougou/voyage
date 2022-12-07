@@ -14,16 +14,18 @@
          height: 0px;
      }
     .navbar-mobile-show{
-        display: flex;
+        display: none;
         visibility: hidden;
+        opacity: 0;
         width: 0px;
         height: 0px;
 
     }
 
     .navbar-admin-mobile-show{
-        display: flex;
+        display: none;
         visibility: hidden;
+        opacity: 0;
         width: 0px;
         height: 0px;
     }
@@ -349,32 +351,32 @@
     opacity: 1;
 }
  /* Pour le responsive admin client  */
- @media only screen and (max-width:1000px) {
+@media only screen and (max-width:1000px) {
     .show-logo-toucki{
-    visibility: visible;
-    opacity: 1;
-    z-index: 1;
-    background-color: none;
-    position: absolute;
-    top: -10px;
-   }
+        visibility: visible;
+        opacity: 1;
+        z-index: 1;
+        background-color: none;
+        position: absolute;
+        top: -10px;
+    }
    .show-brand-box-bg{
-    background: white !important;
-    width: 0px;
-    height: 0px;
-   }
+        background: white !important;
+        width: 0px;
+        height: 0px;
+    }
    .show-logo-a-toucki{
-    visibility: hidden;
-    opacity: 0;
-    z-index: 0;
-    width: 0px;
-    height: 0px;
-   }
+        visibility: hidden;
+        opacity: 0;
+        z-index: 0;
+        width: 0px;
+        height: 0px;
+    }
    .button-client-bar{
-    visibility: hidden;
-    opacity: 0;
-    width: 0px;
-    height: 0px;
+        visibility: hidden;
+        opacity: 0;
+        width: 0px;
+        height: 0px;
     }
 
     .navbar-admin-mobile-show{
@@ -382,6 +384,7 @@
         display: flex;
         margin-left: -45px;
         visibility: visible;
+        opacity: 1;
         width: 100%;
         height: auto;
     }
@@ -414,6 +417,6 @@
         max-height: 200px;
         overflow-x: hidden;
     }
- }
+}
  
 

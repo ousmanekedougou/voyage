@@ -178,6 +178,9 @@
                                         <li class="list-inline-item me-3">
                                             <a href="#" class="badge bg-danger p-1" data-bs-toggle="modal" data-bs-target="#staticBackdropArchiver-{{$ticket->id}}"> <i class="fa fa-trash"></i> Annuler</a>
                                         </li>
+                                        <li class="list-inline-item me-3">
+                                            <a href="#" class="badge bg-info p-1" data-bs-toggle="modal" data-bs-target="#staticBackdropDate-{{$ticket->id}}"> <i class="fa fa-edit"></i> Modifier</a>
+                                        </li>
                                     @else
                                         <li class="list-inline-item me-3">
                                             <a href="#" class="badge bg-info p-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$ticket->id}}"> <i class="fa fa-edit"></i> Modifier</a>

@@ -121,19 +121,9 @@
                                         </a>
                                     
                                         <ul class="sub-menu" aria-expanded="false">
-                                                
-                                            <li>
-                                                <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                                    <span key="" class="fa fa-bus">
-                                                            <span class="">Vos Buses</span>
-                                                    </span>
-                                                </a>
-                                                <ul class="sub-menu" aria-expanded="false">
-                                                    @foreach($itineraire->buses as $bus)
-                                                        <li><a href="{{route('agent.client.show',$bus->id)}}" key="t-products"> <i class="bx bxs-bus Bus"></i>   Bus  {{ $bus->number }} | {{ $bus->matricule }}</a></li>
-                                                    @endforeach
-                                                </ul>
-                                            </li>
+                                            @foreach($itineraire->buses as $bus)
+                                                <li><a href="{{route('agent.client.show',$bus->id)}}" key="t-products"> <i class="bx bxs-bus Bus"></i>   Bus  {{ $bus->number }} | {{ $bus->matricule }}</a></li>
+                                            @endforeach
                                         </ul>
                                     </li>
                                 @endforeach
@@ -141,21 +131,12 @@
                                 <li>
                                     <a href="{{ route('agent.renoncer') }}" key="t-products" class=""> <i class="fas fa-money-bill "></i> Ticket annuler</a>
                                 </li>
-                                <hr>
-                                <li>
-                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                        <i class="fa fa-folder-open"></i>
-                                        <span key="t-ecommerce">Historiques</span>
-                                    </a>
-                                    <ul class="sub-menu" aria-expanded="false">
-                                        @if(historical_hiere() != null)
-                                            <li><a href="{{route('agent.historique.show',historical_hiere()->siege_id)}}" key="t-products"> <i class="fa fa-clock"></i>Hiere</a></li>
-                                        @endif
-                                        @if(historical_avant_hiere() != null)
-                                            <li><a href="{{route('agent.historique.show',historical_avant_hiere()->siege_id)}}" key="t-products"> <i class="fa fa-clock"></i>Avant Hiere</a></li>
-                                        @endif
-                                    </ul>
-                                </li>
+                                @if(Auth::guard('agent')->user()->agence->method_ticket == 0)
+                                    <hr>
+                                    <li>
+                                        <a href="{{ route('agent.absent') }}" key="t-products" class=""> <i class="fas fa-users "></i>Clients absents</a>
+                                    </li>
+                                @endif
                                 
                             @endif
 

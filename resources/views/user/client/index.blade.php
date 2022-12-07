@@ -4,7 +4,7 @@
 	<link rel="stylesheet" href="{{asset('user/assets/build/css/intlTelInput.css')}}">
     <style>
         .bg-ico-hero{
-            background-image:url(./user/assets/images/client.jpg) !important;
+            background-image:url(./user/assets/images/client2.jpg) !important;
             background-size:cover;background-position:top !important;
             height: 100px !important;
         }
@@ -49,7 +49,7 @@
                                     <div class="media-body">
                                         <h5>Vérifiez toutes vos résérvations</h5>
                                         <p class="text-muted  mb-0"> Pour vous aider à retrouver vos colis saisissez ci-dessous votre le numero de telephone dont vous avez recu la notification et entrez le siege de la provenance du colis. </p>
-                                        <p class="text-muted  mb-0"> Accès facile à vos colis, peu importe sa destination </p>
+                                        <p class="text-muted  mb-0"> Accès facile à vos colis, peu importe la destination </p>
                                     </div>
                                 </div>
                             </div>
@@ -72,7 +72,7 @@
                 <div class="col-md-6 ms-auto">
                     <div class="mt-4 mt-md-auto">
                         <div class="d-flex align-items-center img-verification-mobile">
-                          <img src="{{('user/assets/images/updateClient.svg')}}" alt="" class="img-fluid mx-auto d-block">
+                          <img src="{{('user/assets/images/crypto/validate.jpg')}}" alt="" class="img-fluid mx-auto d-block" style="width:60%;">
                         </div>
                     </div>
                 </div>
@@ -81,6 +81,9 @@
                        <form class="custom-validation" action="{{ route('client.colis') }}" method="POST" enctype="multipart/form-data">
                           @csrf
                             <div class="row">
+                                <h5>Vérifiez toutes vos résérvations</h5>
+                                        <p class="text-muted  mb-0"> Pour vous aider à retrouver vos colis saisissez ci-dessous votre le numero de telephone dont vous avez recu la notification et entrez le siege de la provenance du colis. </p>
+                                        <p class="text-muted  mb-0"> Accès facile à vos colis, peu importe la destination </p>
                                 <div class="col-xl-12">
                                     <div class="mb-3" >
                                         <label class="form-label">Votre numero de telephone</label>

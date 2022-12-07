@@ -3,7 +3,7 @@
 @section('main-content')
 
  
-{{--
+    {{--
    <!-- hero section start -->
     <section class="section hero-section bg-ico-hero bg-agence"  id="home">
         <!-- <div class="bg-overlay bg-primary"></div> -->

@@ -36,8 +36,8 @@
                                 <div class="row">
                                     <div class="col-7">
                                         <div class="text-primary p-4">
-                                            <h5 class="text-primary">Agent password resete</h5>
-                                            <p>Re-Password with Skote.</p>
+                                            <h5 class="text-primary">Réinitialisation du mot de passe de l'agent</h5>
+                                            <p></p>
                                         </div>
                                     </div>
                                     <div class="col-5 align-self-end">

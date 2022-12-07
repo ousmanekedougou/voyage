@@ -42,44 +42,46 @@ class HomeController extends Controller
         // return view('agent.index');
         if ($this->middleware(['IsAgent']) && Auth::guard('agent')->user()->role == 1) {
             $buses = Bus::where('siege_id', Auth::guard('agent')->user()->siege_id)->orderBy('id', 'ASC')->get();
-            $itineraires = Itineraire::where('siege_id', Auth::guard('agent')->user()->siege_id)->where('user_id', Auth::guard('agent')->user()->id)->orderBy('id', 'ASC')->get();
-
-            // foreach ($buses as $buse) {
-            //     $client_historiques = Client::where('bus_id', $buse->id)->where('siege_id', Auth::guard('agent')->user()->siege_id)->where('amount', '>', 2)->where('registered_at', '<', Carbon::today()->format('Y-m-d'))->get();
-            //     foreach ($client_historiques as $client_hsto) {
-            //         $add_client_htsto = new Historical();
-            //         $add_client_htsto->name = $client_hsto->name;
-            //         $add_client_htsto->email = $client_hsto->email;
-            //         $add_client_htsto->phone = $client_hsto->phone;
-            //         $add_client_htsto->cni = $client_hsto->cni;
-            //         $add_client_htsto->ville_name = $client_hsto->ville->name;
-            //         $add_client_htsto->bus_matricule = $client_hsto->bus->matricule;
-            //         $add_client_htsto->position = $client_hsto->bus->inscrit;
-            //         $add_client_htsto->registered_at = $client_hsto->registered_at;
-            //         $add_client_htsto->heure = $client_hsto->heure;
-            //         $add_client_htsto->amount = $client_hsto->amount;
-            //         $add_client_htsto->payment_at = $client_hsto->payment_at;
-            //         $add_client_htsto->voyage_status = $client_hsto->voyage_status;
-            //         $add_client_htsto->agence = $client_hsto->agence;
-            //         $add_client_htsto->agence_logo = $client_hsto->agence_logo;
-            //         $add_client_htsto->siege_id = Auth::guard('agent')->user()->siege_id;
-            //         $add_client_htsto->save();
-            //     }
-                
-            //     Client::where('bus_id', $buse->id)->where('registered_at', '<', Carbon::today()->format('Y-m-d'))->delete();
-            // }
+            $itineraires = Itineraire::where('siege_id', Auth::guard('agent')->user()->siege_id)->where('user_id', Auth::guard('agent')->user()->id)->get();
+            $user = Agent::where('id',Auth::guard('agent')->user()->id)->first() ; 
+            $clientCount = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)->where('registered_at',carbon_today())->get();
+            $busCount = Bus::where('siege_id',Auth::guard('agent')->user()->siege_id)->get();
             
+            // Suppression des clients qui n'ont pas payer dans les 24h
             Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
-            ->where('registered_at','<',Carbon::today())
+            ->where('registered_at','<',Carbon::today()->format('Y-m-d'))
             ->where('status',0)
             ->where('amount',null)
+            ->delete();
+
+            // Suppresion des clients dont le voyage est effectuer avec success
+            Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
+            ->where('registered_at','<',Carbon::today()->format('Y-m-d'))
+            ->where('status',0)
+            ->where('voyage_status',1)
+            ->where('amount','!=',null)
             ->delete();
            
             $date_today = Carbon::today();
             $dayOfweek = $date_today->dayOfWeek;
             if ($dayOfweek == 1) {
-                Historical::where('registered_at', '<', Carbon::today())->where('siege_id', Auth::guard('agent')->user()->siege_id)->delete();
+                Historical::where('registered_at', '<', Carbon::today()->format('Y-m-d'))->where('siege_id', Auth::guard('agent')->user()->siege_id)->delete();
             }
+
+            return view('agent.index',compact('itineraires','user','clientCount','busCount'));
+
+        }elseif ($this->middleware(['IsAgent']) && Auth::guard('agent')->user()->role == 2) {
+
+            $clients = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
+            ->where('registered_at',Carbon::today()->format('Y-m-d'))
+            ->where('amount','!=',null)
+            ->paginate(15);
+            return view('agent.bagage.index',compact('clients'));
+
+        }elseif ($this->middleware(['IsAgent']) && Auth::guard('agent')->user()->role == 3) {
+
+            $clients = Colie::orderBy('id','DESC')->paginate(15);
+            return view('agent.coli.index',compact('clients'));
         }
 
        
@@ -94,24 +96,10 @@ class HomeController extends Controller
             ColiClient::where('created_at','<',Carbon::yesterday())->delete();
         }
 
-        if ($this->middleware(['IsAgent']) && Auth::guard('agent')->user()->role == 1) {
-            $user = Agent::where('id',Auth::guard('agent')->user()->id)->first() ; 
-            $clientCount = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)->where('registered_at',carbon_today())->get();
-            $busCount = Bus::where('siege_id',Auth::guard('agent')->user()->siege_id)->get();
-            return view('agent.index',compact('itineraires','user','clientCount','busCount'));
-        }elseif ($this->middleware(['IsAgent']) && Auth::guard('agent')->user()->role == 2) {
-            $clients = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
-            ->where('registered_at',Carbon::today()->format('Y-m-d'))
-            ->where('amount','!=',null)
-            ->paginate(15);
-            return view('agent.bagage.index',compact('clients'));
-        }elseif ($this->middleware(['IsAgent']) && Auth::guard('agent')->user()->role == 3) {
-            $clients = Colie::orderBy('id','DESC')->paginate(15);
-            return view('agent.coli.index',compact('clients'));
-        }
+        
     }
 
-      public function confirm($id , $token){
+    public function confirm($id , $token){
         define('ACTIVE',1);
         $user = Agent::where('id',$id)->where('confirmation_token',$token)->first();
         if ($user) {

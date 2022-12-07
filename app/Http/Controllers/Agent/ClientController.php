@@ -146,8 +146,9 @@ class ClientController extends Controller
         $getBuse = Bus::where('id',$id)->first();
         $clients = Client::where('bus_id',$id)
             ->where('siege_id',Auth::guard('agent')->user()->siege_id)
-            ->where('registered_at','<',Carbon::today())
+            ->where('registered_at','>=',Carbon::today()->format('Y-m-d'))
             ->where('status',0)
+            ->where('amount','!=',null)
             ->orderBy('id','ASC')
             ->paginate(10);
         return view('agent.client.show',compact('clients','getBuse'));
@@ -177,31 +178,31 @@ class ClientController extends Controller
    
 
     public function presence(Request $request){
-        $client = Client::where('id',$request->client_id)
+        Client::where('id',$request->client_id)
             ->where('siege_id',Auth::guard('agent')->user()->siege_id)
-            ->where('registered_at','<',Carbon::today())
+            ->where('registered_at','>=',Carbon::today()->format('Y-m-d'))
             ->where('status',0)
-            ->where('voyage_status',1)
             ->where('amount','!=',null)
-            ->first()->update(['voyage_status' => $request->voyage_status]);
-        
+            ->update(['voyage_status' => $request->voyage_status]);
     }
 
-    public function sendmail(){
-        $client = Client::where('id',request()->client_id)
-            ->where('siege_id',Auth::guard('agent')->user()->siege_id)
-            ->where('registered_at','<',Carbon::today())
-            ->where('voyage_status',request()->voyage_status)
-            ->where('amount','!=',null)
+    public function send_sms(){
+        // dd('fjjjkf');
+        $client = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
+            // ->where('registered_at','>=',Carbon::today()->format('Y-m-d'))
+            // ->where('voyage_status',0)
+            // ->where('amount','!=',null)
             ->first();
         if ($client){
-            if (Auth::guard('agent')->user()->agence->method_ticket == 1) {
+            if (Auth::guard('agent')->user()->agence->method_ticket == 0) {
                 Notification::route('mail',Auth::guard('agent')->user()->siege->email)
                 ->notify(new ClientAbsent($client));
 
                 // Partie sms et notification sur son compte toucki
-                // $client->status = 1;
-                // $client->save(); 
+                $client->status = 1;
+                $client->save(); 
+                Toastr::success('Vos messages ont bien ete envoye', 'Error lien', ["positionClass" => "toast-top-right"]);
+                return back();
 
             }
         }
@@ -214,12 +215,23 @@ class ClientController extends Controller
 
     public function annuler(){
         $clients = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
-            ->where('status',1)
-            ->where('voyage_status',0)
-            ->where('amount','!=',null)
-            ->orderBy('id','ASC')
+            // ->where('status',1)
+            // ->where('voyage_status',0)
+            // ->where('amount','!=',null)
+            // ->orderBy('id','ASC')
             ->paginate(10);
         return view('agent.client.annuler',compact('clients'));
+    }
+
+     public function absent(){
+        $clients = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
+            // ->where('registered_at','<',Carbon::today()->format('Y-m-d'))
+            // ->where('status',0)
+            // ->where('voyage_status',0)
+            // ->where('amount','!=',null)
+            // ->orderBy('id','ASC')
+            ->paginate(10);
+        return view('agent.client.absent',compact('clients'));
     }
 
     /**

@@ -21,8 +21,8 @@ Route::get('/', [App\Http\Controllers\User\HomeController::class, 'index'])->nam
 Route::get('/about', [App\Http\Controllers\User\AboutController::class, 'index'])->name('about.index');
 
 Route::get('/agence', [App\Http\Controllers\User\AgenceController::class, 'index'])->name('agence.index');
-Route::get('/agence/aboute', [App\Http\Controllers\User\AgenceController::class, 'about'])->name('agence.about');
-Route::get('/agence/create', [App\Http\Controllers\User\AgenceController::class, 'create'])->name('agence.create');
+Route::get('/agence/a-propos', [App\Http\Controllers\User\AgenceController::class, 'about'])->name('agence.about');
+Route::get('/agence-create', [App\Http\Controllers\User\AgenceController::class, 'create'])->name('agence.create');
 // Route::get('/agence/show/{slug}', [App\Http\Controllers\User\AgenceController::class, 'show'])->name('agence.show');
 Route::post('/agence/store', [App\Http\Controllers\User\AgenceController::class, 'store'])->name('agence.store');
 Route::post('/agence/search', [App\Http\Controllers\User\AgenceController::class, 'search'])->name('agence.search');
@@ -37,7 +37,7 @@ Route::get('/contact/desaboner', [App\Http\Controllers\User\ContactController::c
 Route::put('/contact/dislogin', [App\Http\Controllers\User\ContactController::class, 'dislogin'])->name('contact.dislogin');
 
 Route::get('/client', [App\Http\Controllers\User\ClientController::class, 'index'])->name('client.index');
-Route::get('/client/register', [App\Http\Controllers\User\ClientController::class, 'register'])->name('client.register');
+Route::get('/client-create', [App\Http\Controllers\User\ClientController::class, 'register'])->name('client.register');
 Route::post('/client/store', [App\Http\Controllers\User\ClientController::class, 'store'])->name('client.store');
 Route::get('/token/confirm/{id}/{token}', [App\Http\Controllers\User\ClientController::class, 'confirm'])->name('customer.confirm');
 Route::post('/client/colis', [App\Http\Controllers\User\ClientController::class, 'colis'])->name('client.colis');
@@ -106,16 +106,13 @@ Route::prefix('/agent')->name('agent.')->group(function()
     Route::get('/confirm/{id}/{token}', [App\Http\Controllers\Agent\HomeController::class, 'confirm']);
     Route::get('/paiment/{id}/{token}', [App\Http\Controllers\Agent\ClientController::class, 'paiment']);
 
-    Route::get('/historique/show/{id}', [App\Http\Controllers\Agent\HistoriqueController::class,'show'])->name('historique.show');
-    Route::post('/historique/search', [App\Http\Controllers\Agent\HistoriqueController::class,'search'])->name('historique.search');
-    Route::put('/historique/rembourser/{id}', [App\Http\Controllers\Agent\HistoriqueController::class,'rembourser'])->name('historique.rembourser');
-
     Route::resource('/client', App\Http\Controllers\Agent\ClientController::class);
     Route::get('/presence', [App\Http\Controllers\Agent\ClientController::class,'presence'])->name('client.presence'); 
     Route::put('/client/payer/{id}', [App\Http\Controllers\Agent\ClientController::class, 'payer'])->name('payer');
     Route::get('/client/ticker/{id}', [App\Http\Controllers\Agent\ClientController::class, 'ticker'])->name('ticker');
     Route::get('/renoncer', [App\Http\Controllers\Agent\ClientController::class, 'annuler'])->name('renoncer');
-    Route::get('/client/sendmail', [App\Http\Controllers\Agent\ClientController::class, 'sendmail'])->name('sendmail');
+    Route::get('/absent', [App\Http\Controllers\Agent\ClientController::class, 'absent'])->name('absent');
+    Route::get('/send-message', [App\Http\Controllers\Agent\ClientController::class, 'send_sms'])->name('send_sms');
     
 
     Route::resource('/bus', App\Http\Controllers\Agent\BusController::class);
