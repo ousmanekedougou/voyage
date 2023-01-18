@@ -6,13 +6,12 @@
 <head>
         
         <meta charset="utf-8" />
-        <title>Agence|Connexion</title>
+        <title>Agent|Connexion</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
         <meta content="Themesbrand" name="author" />
         <!-- App favicon -->
-        <!-- <link rel="shortcut icon" href="{{asset('user/assets/images/favicon.ico')}}"> -->
-        <link rel="shortcut icon" href="{{ asset('user/assets/images/bus.png') }}">
+        <link rel="shortcut icon" href="{{ asset('admin/assets/images/bus.svg') }}" style="width:100%;">
 
         <!-- Bootstrap Css -->
         <link href="{{asset('user/assets/css/bootstrap.min.css')}}" id="bootstrap-style" rel="stylesheet" type="text/css" />
@@ -33,8 +32,7 @@
                                 <div class="row">
                                     <div class="col-7">
                                         <div class="text-primary p-4">
-                                            <h5 class="text-primary">Compte Agent</h5>
-                                            <p>Connectez-vous pour continuer vers TouCKi.</p>
+                                            <h5 class="text-primary">Compte agent TouCki</h5>
                                         </div>
                                     </div>
                                     <div class="col-5 align-self-end">
@@ -66,7 +64,7 @@
         
                                         <div class="mb-3">
                                             <label for="username" class="form-label">Votre adresse email</label>
-                                            <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus id="username" placeholder="Enter username">
+                                            <input type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus id="username" placeholder="Entrer votre adresse email">
                                             @error('email')
                                                 <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -77,7 +75,7 @@
                                         <div class="mb-3">
                                             <label class="form-label">Votre mot de passe</label>
                                             <div class="input-group auth-pass-inputgroup">
-                                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Enter password" aria-label="Password" aria-describedby="password-addon">
+                                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Entrer votre mot de passe" aria-label="Password" aria-describedby="password-addon">
                                                 <button class="btn btn-light " type="button" id="password-addon"><i class="mdi mdi-eye-outline"></i></button>
                                                 @error('password')
                                                     <span class="invalid-feedback" role="alert">
@@ -86,14 +84,6 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                      {{--
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}  id="remember-check">
-                                            <label class="form-check-label" for="remember-check">
-                                                Se souvenir de moi
-                                            </label>
-                                        </div>
-                                      --}}
                                         <div class="mt-3 d-grid">
                                             <button class="btn btn-primary waves-effect waves-light" type="submit">Se Connecter</button>
                                         </div>

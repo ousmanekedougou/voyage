@@ -21,14 +21,20 @@ use Illuminate\Support\Facades\Notification;
 
 class AgenceController extends Controller
 {
-     public function index(){
+
+     public function __construct()
+    {
+        $this->middleware(['isClient'])->except('confirm');
+    }
+    
+    public function index(){
      
     }
 
 
-    public function about($sluge){
-        $slug = User::where('slug',$sluge)->first();
-        return view('user.agence.about',compact('slug'));
+    public function about(){
+        $agence = Agence::where('slug',request()->slug)->first();
+        return view('client.agence.about',compact('agence'));
     }
 
       public function show($slug)
@@ -62,10 +68,10 @@ class AgenceController extends Controller
             $agenceCount = $agenceAll->count(); 
             $getip = UserSystemInfoHelper::get_ip();
             $get_user_geo = geoip()->getLocation($getip);
-            $sieges = Siege::all();
+            $siege_all = Siege::all();
             $autre_regions = Region::where('name','!=',$get_user_geo->city)->orWhere('slug','!=',$get_user_geo->state_name)->get();
 
-            return view('client.index',compact('agences','sieges','agenceCount','newsletters'));
+            return view('client.index',compact('agences','siege_all','agenceCount','newsletters'));
         }else {
             Toastr::warning('Il n\'y a pas d\'agence de transport pour la region de '.$region->name, 'Pas d\'agence', ["positionClass" => "toast-top-right"]);
             return back();

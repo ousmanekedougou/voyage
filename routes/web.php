@@ -104,14 +104,12 @@ Route::prefix('/agent')->name('agent.')->group(function()
 {
     Route::get('/home', [App\Http\Controllers\Agent\HomeController::class, 'index'])->name('home');
     Route::get('/confirm/{id}/{token}', [App\Http\Controllers\Agent\HomeController::class, 'confirm']);
-    Route::get('/paiment/{id}/{token}', [App\Http\Controllers\Agent\ClientController::class, 'paiment']);
 
     Route::resource('/client', App\Http\Controllers\Agent\ClientController::class);
     Route::get('/presence', [App\Http\Controllers\Agent\ClientController::class,'presence'])->name('client.presence'); 
-    Route::put('/client/payer/{id}', [App\Http\Controllers\Agent\ClientController::class, 'payer'])->name('payer');
     Route::get('/client/ticker/{id}', [App\Http\Controllers\Agent\ClientController::class, 'ticker'])->name('ticker');
     Route::get('/renoncer', [App\Http\Controllers\Agent\ClientController::class, 'annuler'])->name('renoncer');
-    Route::get('/absent', [App\Http\Controllers\Agent\ClientController::class, 'absent'])->name('absent');
+    // Route::get('/absent', [App\Http\Controllers\Agent\ClientController::class, 'absent'])->name('absent');
     Route::get('/send-message', [App\Http\Controllers\Agent\ClientController::class, 'send_sms'])->name('send_sms');
     
 

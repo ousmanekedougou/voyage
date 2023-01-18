@@ -4,7 +4,7 @@
 	<link rel="stylesheet" href="{{asset('user/assets/build/css/intlTelInput.css')}}">
     <style>
         .bg-ico-hero{
-            background-image:url(./user/assets/images/client2.jpg) !important;
+            background-image:url(./user/assets/images/agence.webp) !important;
             background-size:cover;background-position:top !important;
             height: 100px !important;
         }

@@ -39,20 +39,16 @@
 
                                         <div class="media-body overflow-hidden">
                                             <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">Bus : {{$bus->number}} | M :{{$bus->matricule}}</a></h5>
-                                            <p class="text-muted mb-1">{{$bus->place}} Place</p>
-                                            <p class="text-muted mb-1">
-                                                {{$bus->itineraire->name}} 
-                                            </p>
                                             <p class="text-muted mb-1">
                                                 @if($bus->inscrit == 0)
-                                                    <span class="badge bg-primary font-size-10"><i class="mdi mdi-star me-1"></i>0 / {{ $bus->place }}</span>
+                                                    <span class="badge bg-primary font-size-10"><i class="mdi mdi-star me-1"></i>0 / {{ $bus->place }} places</span>
                                                 @else
-                                                    <span class="badge bg-success font-size-10"><i class="mdi mdi-star me-1"></i>{{ $bus->inscrit }} / {{ $bus->place }}</span>
+                                                    <span class="badge bg-success font-size-10"><i class="mdi mdi-star me-1"></i>{{ $bus->inscrit }} / {{ $bus->place }} places</span>
                                                 @endif
                                             </p>
                                             <p class="text-muted mb-1">
                                                 <span class="badge bg-warning font-size-10 mr-3">Rv : <i class="mdi mdi-clock me-1"></i>{{ $bus->heure_rv }}</span>
-                                                <span class="badge bg-warning font-size-10 ml-3">Depart : <i class="mdi mdi-clock me-1"></i>{{ $bus->heure_depart }}</span>
+                                                <span class="badge bg-warning font-size-10 ml-3">Dpt : <i class="mdi mdi-clock me-1"></i>{{ $bus->heure_depart }}</span>
                                             </p>
                                         </div>
                                     </div>

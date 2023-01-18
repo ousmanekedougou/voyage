@@ -167,7 +167,7 @@ class ClientController extends Controller
         ->where('registered_at',$registered_at)
         ->first();
         if ($user) {
-            if ($user->registered_at >= Carbon::today()) {
+            if ($user->registered_at >= carbon_today()) {
                 $user->update([
                     'amount' =>  $user->ville->amount,
                     'payment_at' => new DateTime()
@@ -290,7 +290,8 @@ class ClientController extends Controller
 
                         $client->update([
                             'registered_at' => $request->date,
-                            'voyage_status' => 1
+                            'voyage_status' => 1,
+                            'status' => 0
                         ]);
 
                         Toastr::success('Votre ticket a bien ete renouveller', 'Modification Ticket', ["positionClass" => "toast-top-right"]);

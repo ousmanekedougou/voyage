@@ -146,9 +146,11 @@
                 <li class="nav-item">
                     <a class="nav-link {{ set_active_roote('index') }} " href="/"><i class="fa fa-home fa-fa-item"></i></a>
                 </li>
+                {{--
                 <li class="nav-item">
                     <a class="nav-link {{ set_active_roote('agence.index') }} " href="{{ route('agence.index') }}"><i class="fa fa-building fa-fa-item"></i></a>
                 </li>
+                --}}
                 <li class="nav-item">
                     <a class="nav-link {{ set_active_roote('client.index') }} " href="{{ route('client.index') }}"><i class="fa fa-suitcase-rolling fa-fa-item"></i> </a>
                 </li>
@@ -157,10 +159,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {{ set_active_roote('contact.index') }} " href="#contact"
-                    data-bs-toggle="modal"
-                                        data-bs-target=".ContactUs"
-                    ><i class="fa fa-at fa-fa-item"></i></a>
+                    <a class="nav-link {{ set_active_roote('contact.index') }} " href="{{ route('contact.index') }}"><i class="fa fa-at fa-fa-item"></i></a>
                 </li>
 
                 <li class="nav-item drop-down-mobile">
@@ -194,12 +193,14 @@
                     <li class="nav-item">
                         <a class="nav-link {{ set_active_roote('index') }} " href="/"><i class="fa fa-home"></i> acceuil</a>
                     </li>
-                    <!-- <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link {{ set_active_roote('about.index') }}" href="{{ route('about.index') }}">A propos</a>
-                    </li> -->
+                    </li> --}}
+                    {{--
                     <li class="nav-item">
                         <a class="nav-link {{ set_active_roote('agence.index') }} " href="{{ route('agence.index') }}"><i class="fa fa-building"></i> agences</a>
                     </li>
+                    --}}
                     <li class="nav-item">
                         <a class="nav-link {{ set_active_roote('client.index') }} " href="{{ route('client.index') }}"><i class="fa fa-suitcase-rolling"></i> réservation</a>
                     </li>
@@ -208,9 +209,8 @@
                     </li>
 
                      <li class="nav-item">
-                        <a class="nav-link {{ set_active_roote('contact.index') }} " href="#contact"
-                        data-bs-toggle="modal"
-                                            data-bs-target=".ContactUs"
+                        <a class="nav-link {{ set_active_roote('contact.index') }} " href="{{ route('contact.index') }}"
+                        
                         ><i class="fa fa-at"></i> contact</a>
                     </li>
 

@@ -13,11 +13,14 @@
         <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
             <div class="row align-items-center row_pricipal" style="margin-top: -70px;">
-                <div class="col-lg-offset-8 card_show">
+                <div class="col-lg-12 card_show">
                     <div class="text-white-50">
-                        <h1 class="text-white font-weight-semibold mb-3 hero-title text-center">Yombalal Toucki Thi Biir Réwmi</h1>
-                        <p class="font-size-16 text-white text-center">
+                        <h1 class="text-white font-weight-semibold mb-3 hero-title"> Comment marche notre plateforme</h1>
+                        <p class="font-size-16 text-white">
                             Le secteur du tourisme a fort à faire dans une conjoncture économique pleine de défis. Pour vous démarquer, en tant qu’agence de voyages.
+                        </p>
+                        <p class="font-size-16 text-white">
+                            Comment marche notre structure
                         </p>
                     </div>
                 </div>
@@ -37,8 +40,7 @@
                 <div class="col-lg-12">
                     <div class="text-center mb-5">
                         <img class="setting-img" src="{{asset('user/assets/images/faqs-bus.webp') }}" alt="" srcset="">
-                        <div class="small-title">Informations</div>
-                        <h4>Comment marche notre structure</h4>
+                        
                     </div>
                 </div>
             </div>

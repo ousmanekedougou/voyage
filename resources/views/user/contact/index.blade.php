@@ -11,9 +11,9 @@
                 <div class="row align-items-center row_pricipal" style="margin-top: -70px;" >
                 <div class="col-lg-8 card_show">
                     <div class="text-white-50">
-                        <h1 class="text-white font-weight-semibold mb-3 hero-title ">Réservez vos billets de bus au meilleur prix</h1>
-                        <p class="font-size-20" >
-                            Réservez des billets selon votre agence de choix
+                        <h1 class="text-white font-weight-semibold mb-3 hero-title ">Nous contacter</h1>
+                        <p class="font-size-18 text-white" >
+                            Vous souhaitez des renseignements complémentaires,prendre un rendez-vous, n’hésitez pas à nous contacter
                         </p>
                     </div>
                 </div>
@@ -29,40 +29,6 @@
     <!-- about section start -->
     <section class="section pt-4 bg-white" id="about">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="text-muted">
-                    <h4 class="text-center">Nous contacter</h4>
-                    <p class=" text-center">Vous souhaitez des renseignements complémentaires,prendre un rendez-vous, n’hésitez pas à nous contacter</p>
-                        
-                    <!-- <div class="button-items">
-                        <a href="#" class="btn btn-success">Read More</a>
-                        <a href="#" class="btn btn-outline-primary">How It work</a>
-                    </div> -->
-
-                    <div class="row mt-4 text-center">
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                                   
-                                <p class=""> <span class="avatar-title rounded-circle bg-white bg-soft text-primary fs-1" style="font-size: 6em;">
-                                        <i class="mdi mdi-email"></i>
-                                    </span> email@gmail.com</p>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                                   
-                                <p class=""> <span class="avatar-title rounded-circle bg-white bg-soft text-primary fs-1" style="font-size: 6em;">
-                                        <i class="mdi mdi-phone"></i> 
-                                        <!-- mdi-cellphone-android -->
-                                    </span> 339876456 / 339098752</p>
-                        </div>
-                       <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                                   
-                                <p class=""> <span class="avatar-title rounded-circle bg-white bg-soft text-primary fs-1" style="font-size: 6em;">
-                                        <i class="mdi mdi-map-marker"></i>
-                                    </span> Kedougou</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- end row -->
 
             <div class="row align-items-center">
                 <div class="mt-4 mt-lg-0">
@@ -72,10 +38,25 @@
                             <form  class="custom-validation" action="{{ route('contact.store') }}" method="POST">
                                 @csrf
                                 <div class="row align-items-center">
-                                   <div class="col-md-6">
-                                        <img src="{{asset('user/assets/images/profile-img.png')}}" style="width: 100%;" alt="" srcset="">
+                                   <div class="col-md-4 text-center">
+                                        <p class=""> 
+                                            <span class="avatar-title rounded-circle bg-white bg-soft text-primary fs-1" style="font-size: 6em;">
+                                                <i class="mdi mdi-email"></i>
+                                            </span> email@gmail.com
+                                        </p>
+                                     <p class=""> 
+                                        <span class="avatar-title rounded-circle bg-white bg-soft text-primary fs-1" style="font-size: 6em;">
+                                        <i class="mdi mdi-phone"></i> 
+                                            <!-- mdi-cellphone-android -->
+                                        </span> 339876456 / 339098752
+                                        </p>
+                                    <p class=""> 
+                                        <span class="avatar-title rounded-circle bg-white bg-soft text-primary fs-1" style="font-size: 6em;">
+                                            <i class="mdi mdi-map-marker"></i>
+                                        </span> Kedougou
+                                    </p>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-8">
                                         <div class="mb-3">
                                             <label class="form-label">Prenom et Nom</label>
                                             <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name"

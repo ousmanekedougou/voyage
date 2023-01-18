@@ -6,16 +6,15 @@
         <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
             <div class="row align-items-center row_pricipal" style="margin-top: -70px;" >
-                <div class="col-lg-offset-8  card_show">
+                <div class="card_show">
                     <div class="text-white-50">
-                        <h1 class="text-white font-weight-semibold mb-3 hero-title text-center">Yombalal Toucki Thi Biir Réwmi</h1>
-                        <p class="font-size-16 text-white text-center">
+                        <h1 class="text-white font-weight-semibold mb-3 hero-title">Yombalal Toucki Thi Biir Réwmi</h1>
+                        <p class="font-size-16 text-white">
                             Toutes les options de voyage sur une seule plateforme
                         </p>
 
-                        <div class="button-items mt-4 text-center">
-                            <a href="{{ route('agence.create') }}" class="btn btn-success">Creer votre compte agence</a>
-                            <a href="{{ route('client.register') }}" class="btn btn-light">Creer votre compte client</a>
+                        <div class="button-items mt-4">
+                            <a href="{{ route('setting.index') }}" class="btn btn-light"><i class="fa fa-cog"></i> Comment ça marche</a>
                         </div>
                     </div>
                 </div>
@@ -35,68 +34,68 @@
     </section>
 
 
-    
- <!-- currency price section start version desktop-->
-    <section class="section bg-white p-0 section_lg">
-        <div class="container">
-            <div class="currency-price">
-                <div class="row">
-                    <div class="col-xl-4 col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                           <img src="{{ asset('user/assets/images/app.webp') }}" style="width:100%;" alt="" srcset="">
-                                       </div>
-                                    <div class="col-md-8">
-                                        <h5>Billets sur votre mobile</h5>
-                                        Accès facile à vos billets, peu importe votre destination, même hors connexion
+    {{--
+    <!-- currency price section start version desktop-->
+        <section class="section bg-white p-0 section_lg">
+            <div class="container">
+                <div class="currency-price">
+                    <div class="row">
+                        <div class="col-xl-4 col-sm-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <img src="{{ asset('user/assets/images/app.webp') }}" style="width:100%;" alt="" srcset="">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h5>Billets sur votre mobile</h5>
+                                            Accès facile à vos billets, peu importe votre destination, même hors connexion
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-sm-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <img src="{{ asset('user/assets/images/planing.webp') }}" style="width:100%;" alt="" srcset="">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h5>Planificateur de voyages à portée de main</h5>
+                                        Tout ce dont vous avez besoin dans une seule application
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-sm-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <img src="{{ asset('user/assets/images/notify.webp') }}" style="width:100%;" alt="" srcset="">
+                                        </div>
+                                        <div class="col-md-8">
+                                            <h5>Notifications en temps réel</h5>
+                                            Mises à jour et rappels tout au long du trajet pour un voyage réussi
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                     <div class="col-xl-4 col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                           <img src="{{ asset('user/assets/images/planing.webp') }}" style="width:100%;" alt="" srcset="">
-                                       </div>
-                                    <div class="col-md-8">
-                                        <h5>Planificateur de voyages à portée de main</h5>
-                                       Tout ce dont vous avez besoin dans une seule application
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                     <div class="col-xl-4 col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                           <img src="{{ asset('user/assets/images/notify.webp') }}" style="width:100%;" alt="" srcset="">
-                                       </div>
-                                    <div class="col-md-8">
-                                        <h5>Notifications en temps réel</h5>
-                                        Mises à jour et rappels tout au long du trajet pour un voyage réussi
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- end row -->
                 </div>
-                <!-- end row -->
             </div>
-        </div>
-        <!-- end container -->
-    </section>
-<!-- currency price section end -->
+            <!-- end container -->
+        </section>
+    <!-- currency price section end -->
+    --}}
 
-
- <!-- currency price section start Version mobile-->
-    <section class="section p-0 section_sm">
+ <!-- currency price section start Version mobile  // section_sm-->
+    <section class="section p-0 bg-white">
         <div class="container">
             <div class="currency-price">
                 <div class="row">
@@ -129,7 +128,7 @@
                                         </span>
                                     </div>
                                     <div class="media-body">
-                                        <h5>Planificateur de voyages à portée de main</h5>
+                                        <h5>Planificateur de voyages</h5>
                                         <p class="text-muted  mb-0">Tout ce dont vous avez besoin dans une seule application</p>
                                     </div>
                                 </div>
@@ -194,8 +193,7 @@
                 </div>
 
                 <div class="col-lg-6 ms-auto home-about-img">
-                    <img src="{{('user/assets/images/dowload/setting2.png')}}" alt="" class="img-fluid mx-auto d-block">
-
+                    <img src="{{('user/assets/images/bus.svg')}}" alt="" class="img-fluid mx-auto d-block">
                     <div class="button-items mb-3 mt-3 home-about-sm-button">
                         <a href="{{ route('client.register') }}" class="btn btn-outline-primary">Creer votre copmte client</a>
                         <a href="{{ route('agence.create') }}" class="btn btn-outline-success">Creer votre compte agence</a>
@@ -246,33 +244,102 @@
         </div>
     </section>
 
+    <!-- Features start -->
+    <section class="section bg-white" id="features">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="text-center mb-5">
+                        <div class="small-title">Features</div>
+                        <h4>Key features of the product</h4>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+
+            <div class="row align-items-center pt-4">
+                <div class="col-md-6 col-sm-8">
+                    <div>
+                        <img src="{{('user/assets/images/dowload/compteAgence.png')}}" alt="" class="img-fluid mx-auto d-block">
+                    </div>
+                </div>
+                <div class="col-md-5 ms-auto">
+                    <div class="mt-4 mt-md-auto">
+                        <div class="d-flex align-items-center mb-2">
+                            <div class="features-number font-weight-semibold display-4 me-3">01</div>
+                            <h4 class="mb-0">Vous avez une agence de transport</h4>
+                        </div>
+                        <p class="text-muted">If several languages coalesce, the grammar of the resulting language is
+                            more simple and regular than of the individual will be more simple and regular than the
+                            existing.</p>
+                        <div class="text-muted mt-4">
+                            <p class="mb-2"><i class="mdi mdi-circle-medium text-success me-1"></i>Donec pede justo vel
+                                aliquet</p>
+                            <p><i class="mdi mdi-circle-medium text-success me-1"></i>Aenean et nisl sagittis</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+
+            <div class="row align-items-center mt-5 pt-md-5">
+                <div class="col-md-5">
+                    <div class="mt-4 mt-md-0">
+                        <div class="d-flex align-items-center mb-2">
+                            <div class="features-number font-weight-semibold display-4 me-3">02</div>
+                            <h4 class="mb-0">Un client</h4>
+                        </div>
+                        <p class="text-muted">It will be as simple as Occidental; in fact, it will be Occidental. To an
+                            English person, it will seem like simplified English, as a skeptical Cambridge friend.</p>
+                        <div class="text-muted mt-4">
+                            <p class="mb-2"><i class="mdi mdi-circle-medium text-success me-1"></i>Donec pede justo vel
+                                aliquet</p>
+                            <p><i class="mdi mdi-circle-medium text-success me-1"></i>Aenean et nisl sagittis</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6  col-sm-8 ms-md-auto">
+                    <div class="mt-4 me-md-0">
+                        <img src="{{('user/assets/images/dowload/compteClient.png')}}" alt="" class="img-fluid mx-auto d-block">
+                    </div>
+                </div>
+
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </section>
+    <!-- Features end -->
 
 
-      <!-- Features start -->
+
+    <!-- Features start -->
     <section class="section " id="features">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6 ms-auto">
                     <div class="mt-4 mt-md-auto">
                         <div class="d-flex align-items-center mb-2">
-                           {{--<div class="features-number font-weight-semibold display-4 me-3">02</div>--}}
-                            <h4 class="mb-0">L'application incontournable des voyageurs</h4>
+                            <h4 class="mb-0">L'application TouCki facilite la planification de voyage</h4>
                         </div>
+                        <p class="text-muted">
+                            Nous méttons à votre disposition une multitude d'agences de transport. Des mises à jour de bus en direct aux billets mobiles, notre application innovante est le moyen idéal pour planifier et suivre votre voyage.
+                        </p>
                         <p class="text-muted">
                             Téléchargez gratuitement l'application TouCki pour bénéficier d’une expertise de qualité et organiser de vos voyages en toute confiance.
                         </p>
-                        {{--
+                        
                         <div class="text-muted mt-4">
                             <p class="mb-2"><i class="mdi mdi-circle-medium text-success me-1"></i>Donec pede justo vel
                                 aliquet</p>
                             <p><i class="mdi mdi-circle-medium text-success me-1"></i>Aenean et nisl sagittis</p>
                         </div>
-                        --}}
+                        
                     </div>
                 </div>
                  <div class="col-md-6">
                     <div>
-                        <img src="{{('user/assets/images/updateClient.svg')}}" alt="" class="img-fluid mx-auto d-block">
+                        <img src="{{('user/assets/images/updateClient.svg')}}" style="width: 80%;" alt="" class="img-fluid mx-auto d-block">
                         <div class="button-items mb-3">
                             <a href="" class="btn btn-primary"> <i class="bx bxl-play-store"></i> Télécharger sur Play Store</a>
                             <a href="" class="btn btn-outline-success"> <i class="bx bxl-apple"></i> Télécharger sur App Store</a>

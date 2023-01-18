@@ -104,7 +104,15 @@
                             <div class="px-4 py-3 border-top bg-light">
                                 <ul class="list-inline mb-0 text-center">
                                     <li class="list-inline-item me-3">
-                                        <a href="{{ route('customer.agence.show',$agence->slug) }}" class="btn btn-primary btn-sm"><i class="bx bx-show me-1"></i>Sieges</a>
+                                        <a href="{{ route('customer.agence.about',$agence->slug) }}" class="btn btn-primary btn-sm"><i class="bx bx-show me-1"></i>Details</a>
+                                    </li>
+
+                                    <li class="list-inline-item me-3">
+                                        <a href="{{ route('customer.agence.show',$agence->slug) }}" class="btn btn-light position-relative p-0 avatar-xs rounded-circle bg-primary text-white">
+                                            <span class="avatar-title bg-transparent text-reset">
+                                                <i class="bx bx-map"></i>
+                                            </span>
+                                        </a>
                                     </li>
                                     
                                     <li class="list-inline-item me-3">
@@ -125,12 +133,6 @@
                                             <button type="button" class="btn btn-light position-relative p-0 avatar-xs rounded-circle bg-secondary text-white">
                                                 <span class="avatar-title bg-transparent text-reset">
                                                     <i class="bx bxl-instagram"></i>
-                                                </span>
-                                            </button>
-                                            
-                                            <button type="button" class="btn btn-light position-relative p-0 avatar-xs rounded-circle bg-info text-white">
-                                                <span class="avatar-title bg-transparent text-reset">
-                                                    <i class="bx bxl-linkedin-square "></i>
                                                 </span>
                                             </button>
                                         </div>

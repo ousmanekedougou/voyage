@@ -25,76 +25,18 @@ class ClientController extends Controller
      */
      public function __construct()
     {
-        $this->middleware(['isAgent'])->except('paiment');
-    }
-    public function index()
-    {
-        $client_todays = Client::all();
-        $itineraires  = Itineraire::where('user_id',Auth::guard('agent')->user()->id)->where('siege_id',Auth::guard('agent')->user()->siege_id)->orderBy('id','ASC')->get();
-        $buses  = Bus::where('user_id',Auth::guard('agent')->user()->id)->where('siege_id',Auth::guard('agent')->user()->siege_id)->orderBy('id','ASC')->get();
-        return view('agent.client.index',compact('client_todays','itineraires','buses'));
+        $this->middleware(['isAgent']);
     }
 
+    // public function index()
+    // {
+    //     $client_todays = Client::all();
+    //     $itineraires  = Itineraire::where('user_id',Auth::guard('agent')->user()->id)->where('siege_id',Auth::guard('agent')->user()->siege_id)->orderBy('id','ASC')->get();
+    //     $buses  = Bus::where('user_id',Auth::guard('agent')->user()->id)->where('siege_id',Auth::guard('agent')->user()->siege_id)->orderBy('id','ASC')->get();
+    //     return view('agent.client.index',compact('client_todays','itineraires','buses'));
+    // }
 
-    public function paiment($id , $token){
-        define('ACTIVE',1);
-        $user = Client::where('id',$id)->where('confirmation_token',$token)->first();
-        if ($user) {
-            if ($user->registered_at >= Carbon::today()) {
-                $user->update([
-                    'confirmation_token' => null,
-                    'amount' =>  $user->ville->amount,
-                    'payment_at' => new DateTime()
-                ]);
-                $montant_bus = Bus::where('id',$user->bus_id)->where('plein',0)->first();
-                $montan = $montant_bus->montant + $user->ville->amount;
-                $montant_bus->montant = $montan;
-                $montant_bus->valider = $montant_bus->valider + 1;
-                $montant_bus->save();
 
-                Notification::route('mail',$user->bus->siege->email)
-                    ->notify(new PaymentTicker($user));
-                Toastr::success('Salut cher client votre billet a ete payer avec succes,accedez sur votre compte gmail', 'Paiement Ticker', ["positionClass" => "toast-top-right"]);
-                return redirect()->route('index');
-            }else{
-                Toastr::error('Cette date de voyage est passer', 'Paiement Ticker', ["positionClass" => "toast-top-right"]);
-                return redirect()->route('index');
-            }
-
-        }else {
-            Toastr::error('Salut cher client il semble que ce ticker a deja ete payer', 'Paiement Ticker', ["positionClass" => "toast-top-right"]);
-            return redirect()->route('index');
-        }
-    }
-
-    public function payer(Request $request, $id)
-    {
-        $user = Client::where('id',$id)->where('confirmation_token',$request->confirmation_token)->first();
-        if ($user->confirmation_token == $request->confirmation_token) {
-            if ($user->amount == null) {
-                $user->update([
-                    'confirmation_token' => null,
-                    'amount' =>  $user->ville->amount,
-                    'payment_at' => new DateTime()
-                ]);
-
-                $montant_bus = Bus::where('id',$user->bus_id)->where('plein',0)->first();
-                $montan = $montant_bus->montant + $user->ville->amount;
-                $montant_bus->montant = $montan;
-                $montant_bus->valider = $montant_bus->valider + 1;
-                $montant_bus->save();
-
-                Notification::route('mail',Auth::guard('agent')->user()->siege->email)
-                ->notify(new PaymentTicker($user));
-                Toastr::success('Salut votre billet a ete payer avec succes', 'Paiement Ticker', ["positionClass" => "toast-top-right"]);
-                return back();
-            }
-        }
-        else {
-            Toastr::error('Ce client ne semble plus valide', 'Error lien', ["positionClass" => "toast-top-right"]);
-            return back();
-        }
-    }
 
 
     /**
@@ -178,12 +120,29 @@ class ClientController extends Controller
    
 
     public function presence(Request $request){
-        Client::where('id',$request->client_id)
+        $client = Client::where('id',$request->client_id)
             ->where('siege_id',Auth::guard('agent')->user()->siege_id)
             ->where('registered_at','>=',Carbon::today()->format('Y-m-d'))
             ->where('status',0)
-            ->where('amount','!=',null)
-            ->update(['voyage_status' => $request->voyage_status]);
+            ->where('amount','!=',null);
+            if ($request->voyage_status == 0) {
+                if (Auth::guard('agent')->user()->agence->method_ticket == 0) {
+                    $client->update([
+                        'voyage_status' => 0,
+                        'status' => 1
+                    ]);
+                }elseif (Auth::guard('agent')->user()->agence->method_ticket == 1) {
+                    $client->update([
+                        'voyage_status' => 0,
+                        'status' => 2
+                    ]);
+                }
+            }elseif ($request->voyage_status == 1) {
+                $client->update([
+                    'voyage_status' => 1,
+                    'status' => 0
+                ]);
+            }
     }
 
     public function send_sms(){
@@ -223,16 +182,16 @@ class ClientController extends Controller
         return view('agent.client.annuler',compact('clients'));
     }
 
-     public function absent(){
-        $clients = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
-            // ->where('registered_at','<',Carbon::today()->format('Y-m-d'))
-            // ->where('status',0)
-            // ->where('voyage_status',0)
-            // ->where('amount','!=',null)
-            // ->orderBy('id','ASC')
-            ->paginate(10);
-        return view('agent.client.absent',compact('clients'));
-    }
+    //  public function absent(){
+    //     $clients = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
+    //         ->where('registered_at','<',Carbon::today()->format('Y-m-d'))
+    //         ->where('status',1)
+    //         ->where('voyage_status',0)
+    //         ->where('amount','!=',null)
+    //         ->orderBy('id','ASC')
+    //         ->paginate(10);
+    //     return view('agent.client.absent',compact('clients'));
+    // }
 
     /**
      * Remove the specified resource from storage.
@@ -242,30 +201,6 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        $user = Client::where('id',$id)->where('siege_id',Auth::guard('agent')->user()->siege_id)->first();
-        $montant_bus = Bus::where('id',$user->bus_id)->where('siege_id',Auth::guard('agent')->user()->siege_id)->where('plein',0)->first();
-        if ($montant_bus->montant >= $user->ville->amount) {
-            $montan = $montant_bus->montant - $user->ville->amount;
-        }else {
-            $montan = $user->ville->amount - $montant_bus->montant;
-        }
-        $montant_bus->montant = $montan;
-
-        if ($montant_bus->inscrit >= 1) {
-            $montant_bus->inscrit = $montant_bus->inscrit - 1;
-        }else {
-            $montant_bus->inscrit = 0;
-        }
-
-        if ($montant_bus->valider >= 1) {
-            $montant_bus->valider = $montant_bus->valider - 1;
-        }else {
-            $montant_bus->valider = 0;
-        }
-        $montant_bus->save();
-        Storage::delete($user->image);
-        $user->delete();
-        Toastr::success('Votre client a ete supprimer', 'Suppression Client', ["positionClass" => "toast-top-right"]);
-        return back();
+       
     }
 }
