@@ -1,5 +1,9 @@
 @extends('user.layouts.app',['title' => 'Acceuil'])
-
+<style>
+.btn-block-for-agence-create,.btn-block-for-client-create{
+    width: 100%;
+}
+</style>
 @section('main-content')
   <!-- hero section start -->
     <section class="section hero-section bg-ico-hero section-responsive">
@@ -166,17 +170,8 @@
    <!-- about section start -->
     <section class="section pt-4 mb-5 bg-white" id="about">
         <div class="container">
-            <!-- <div class="row">
-                <div class="col-lg-12">
-                    <div class="text-center mb-5">
-                        <div class="small-title">A propos de TouCki</div>
-                        <h4>TouCki est l’application tout-en-un des voyageurs</h4>
-                    </div>
-                </div>
-            </div> -->
             <div class="row align-items-center p-1">
                 <div class="col-lg-5">
-
                     <div class="text-muted">
                         <h4 class="mb-4">Toutes les options de voyage sur TouCki</h4>
                         <p class="text-muted mb-4 text-justify">
@@ -184,11 +179,11 @@
                             <br> Voyager en bus, c’est choisir des trajets à prix réduits dans tout le Sénégal, comparés au train et à l’avion.
                             <br> Avec des itinéraires quotidiens vers les villes et capitales du pays, vous pouvez organiser des escapades parfaitement adaptées à tous les budgets.
                         </p>
-
-                        <div class="button-items mb-3 home-about-lg-button">
-                            <a href="{{ route('client.register') }}" class="btn btn-outline-primary">Creer votre copmte client</a>
-                            <a href="{{ route('agence.create') }}" class="btn btn-outline-success">Creer votre compte agence</a>
-                        </div> 
+                    </div>
+                    <div class="text-muted mt-4">
+                        <p class="mb-2"><i class="mdi mdi-circle-medium text-success me-1"></i>Donec pede justo vel
+                            aliquet</p>
+                        <p><i class="mdi mdi-circle-medium text-success me-1"></i>Aenean et nisl sagittis</p>
                     </div>
                 </div>
 
@@ -278,16 +273,19 @@
                             <p><i class="mdi mdi-circle-medium text-success me-1"></i>Aenean et nisl sagittis</p>
                         </div>
                     </div>
+                    <div class="button-items mb-3">
+                        <a href="{{ route('agence.create') }}" class="btn btn-primary btn-block-for-agence-create"> <i class="bx bxs-institution "> </i> Créer votre compte agence TouCki</a>
+                    </div> 
                 </div>
             </div>
-            <!-- end row -->
+            <!-- end row  -->
 
             <div class="row align-items-center mt-5 pt-md-5">
                 <div class="col-md-5">
                     <div class="mt-4 mt-md-0">
                         <div class="d-flex align-items-center mb-2">
                             <div class="features-number font-weight-semibold display-4 me-3">02</div>
-                            <h4 class="mb-0">Un client</h4>
+                            <h4 class="mb-0">Pourquoi est-il avantageux de creer un compte client ?</h4>
                         </div>
                         <p class="text-muted">It will be as simple as Occidental; in fact, it will be Occidental. To an
                             English person, it will seem like simplified English, as a skeptical Cambridge friend.</p>
@@ -296,6 +294,9 @@
                                 aliquet</p>
                             <p><i class="mdi mdi-circle-medium text-success me-1"></i>Aenean et nisl sagittis</p>
                         </div>
+                        <div class="button-items mb-3">
+                            <a href="{{ route('client.register') }}" class="btn btn-primary btn-block-for-client-create"> <i class="bx bx-user-circle"> </i> Créer votre compte client TouCki</a>
+                        </div> 
                     </div>
                 </div>
                 <div class="col-md-6  col-sm-8 ms-md-auto">

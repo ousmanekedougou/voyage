@@ -161,30 +161,54 @@
                 <li class="nav-item">
                     <a class="nav-link {{ set_active_roote('contact.index') }} " href="{{ route('contact.index') }}"><i class="fa fa-at fa-fa-item"></i></a>
                 </li>
-
                 <li class="nav-item drop-down-mobile">
-                   <div class="dropdown d-inline-block">
-                    <span id="page-header-user-dropdown"
-                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="d-xl-inline-block ms-1 btn btn-outline-primary" key="t-henry">
-                    <i class="mdi mdi-login d-xl-inline-block"></i>
-                    </span>
-                    <div class="dropdown-menu dropdown-menu-end">
-                        <!-- item-->
-                        <a class="dropdown-item {{ set_active_roote('customer.login') }}" href="{{ route('customer.customer.login') }}"><i
-                                class="bx bx-user font-size-16 align-middle me-1"></i> <span key="t-my-wallet">Espace Client</span>
-                        </a>
+                    @if(!Auth::guard('web')->user() && !Auth::guard('agence')->user() && !Auth::guard('agent')->user() && !Auth::guard('client')->user())
+                        <div class="dropdown d-inline-block">
+                            <span id="page-header-user-dropdown"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="d-xl-inline-block ms-1 btn btn-outline-primary" key="t-henry">
+                                <i class="mdi mdi-login fa-fa-item d-xl-inline-block"></i>
+                            </span>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <!-- item-->
+                                <a class="dropdown-item {{ set_active_roote('customer.login') }}" href="{{ route('customer.customer.login') }}"><i
+                                        class="bx bx-user font-size-16 align-middle me-1"></i> <span key="t-my-wallet">Espace Client</span>
+                                </a>
 
-                        <a class="dropdown-item {{ set_active_roote('agent.agent.login') }}" href="{{ route('agent.agent.login') }}"><i class="bx bx-user-circle  font-size-16 align-middle me-1"></i>
-                            <span key="t-profile">Espace Agent</span>
-                        </a>
-                        
-                        <a class="dropdown-item {{ set_active_roote('agence.agence.login') }}" href="{{ route('agence.agence.login') }}">
-                            <i class="bx bx-building font-size-16 align-middle me-1"></i><span
-                                key="t-settings">Espace Agence</span>
-                        </a>
-                    </div>
-                </div>
+                                <a class="dropdown-item {{ set_active_roote('agent.agent.login') }}" href="{{ route('agent.agent.login') }}"><i class="bx bx-user-circle  font-size-16 align-middle me-1"></i>
+                                    <span key="t-profile">Espace Agent</span>
+                                </a>
+                                
+                                <a class="dropdown-item {{ set_active_roote('agence.agence.login') }}" href="{{ route('agence.agence.login') }}">
+                                    <i class="bx bx-building font-size-16 align-middle me-1"></i><span
+                                        key="t-settings">Espace Agence</span>
+                                </a>
+                            </div>
+                        </div>
+                    @else
+                        @if(Auth::guard('web')->user())
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-outline-danger"><i class="mdi mdi-logout fa-fa-item d-xl-inline-block"></i></button>
+                            </form>
+                        @elseif(Auth::guard('agence')->user())
+                            <form id="logout-form-agence" action="{{ route('agence.agence.logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-outline-danger"><i class="mdi mdi-logout fa-fa-item d-xl-inline-block"></i></button>
+                            </form>
+                        @elseif(Auth::guard('agent')->user())
+                            <form id="logout-form-agent" action="{{ route('agent.agent.logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-outline-danger"><i class="mdi mdi-logout fa-fa-item d-xl-inline-block"></i></button>
+                            </form>
+                        @elseif(Auth::guard('client')->user())
+                            <form id="logout-form-customer" action="{{ route('customer.customer.logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-outline-danger"><i class="mdi mdi-logout fa-fa-item d-xl-inline-block"></i></button>
+                            </form>
+                        @endif
+                    @endif
                 </li>
+
 
             </ul>
 
@@ -247,12 +271,6 @@
                 @else
                     @if(Auth::guard('web')->user())
                         <div class="my-2 ms-lg-2 btn-sign-ine">
-                            {{--
-                            <a href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();"
-                            class="btn btn-outline-danger  w-xs"> Se Deconnecter <i class="fa fa-sign-up-alt"></i>  <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i></a>
-                            --}}
                             <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                 @csrf
                                 <button type="submit" class="btn btn-outline-danger  w-xs"> Se Deconnecter <i class="fa fa-sign-up-alt"></i> </button>

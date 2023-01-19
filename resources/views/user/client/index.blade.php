@@ -8,6 +8,12 @@
             background-size:cover;background-position:top !important;
             height: 100px !important;
         }
+        .section .container .row_pricipal{
+            margin-top:-70px;
+        }
+        .img-fluid{
+            width: 70%;
+        }
     </style>
 @endsection
 @section('main-content')
@@ -16,15 +22,12 @@
     <section class="section hero-section bg-ico-hero section-responsive" id="home">
         <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
-            <div class="row align-items-center row_pricipal" style="margin-top: -70px;">
-                <div class="col-lg-offset-8 card_show">
+            <div class="row align-items-center row_pricipal">
+                <div class="col-lg-12 card_show text-center">
                     <div class="text-white-50">
-                        <h1 class="text-white font-weight-semibold mb-3 hero-title">Vérifiez toutes vos résérvations</h1>
+                        <h1 class="text-white font-weight-semibold mb-3 hero-title text-center">Vérifiez toutes vos résérvations</h1>
                         <p class="font-size-16 text-white">
-                            Pour vous aider à retrouver vos colis saisissez ci-dessous votre le numero de telephone dont vous avez recu la notification et entrez le siege de la provenance du colis. 
-                        </p>
-                        <p class="font-size-16 text-white">
-                            Accès facile à vos colis, peu importe sa destination
+                            
                         </p>
                     
                     </div>
@@ -72,18 +75,18 @@
                 <div class="col-md-6 ms-auto">
                     <div class="mt-4 mt-md-auto">
                         <div class="d-flex align-items-center img-verification-mobile">
-                          <img src="{{('user/assets/images/crypto/validate.jpg')}}" alt="" class="img-fluid mx-auto d-block" style="width:60%;">
+                          <img src="{{('user/assets/images/crypto/payment.jpg')}}" alt="" class="img-fluid mx-auto d-block">
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div>
-                       <form class="custom-validation" action="{{ route('client.colis') }}" method="POST" enctype="multipart/form-data">
+                       <form class="custom-validation bg-white p-3" action="{{ route('client.colis') }}" method="POST" enctype="multipart/form-data">
                           @csrf
                             <div class="row">
-                                <h5>Vérifiez toutes vos résérvations</h5>
-                                        <p class="text-muted  mb-0"> Pour vous aider à retrouver vos colis saisissez ci-dessous votre le numero de telephone dont vous avez recu la notification et entrez le siege de la provenance du colis. </p>
-                                        <p class="text-muted  mb-0"> Accès facile à vos colis, peu importe la destination </p>
+                                <h5 class="text-reserve-on-mobile">Vérifiez toutes vos résérvations</h5>
+                                <p class="text-muted  mb-0 text-reserve-on-mobile"> Pour vous aider à retrouver vos colis saisissez ci-dessous votre le numero de telephone dont vous avez recu la notification et entrez le siege de la provenance du colis. </p>
+                                <p class="text-muted  mb-0 text-reserve-on-mobile"> Accès facile à vos colis, peu importe la destination </p>
                                 <div class="col-xl-12">
                                     <div class="mb-3" >
                                         <label class="form-label">Votre numero de telephone</label>

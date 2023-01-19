@@ -1,18 +1,20 @@
 @extends('user.layouts.app',['title' => 'Setting'])
 <style>
      .bg-ico-hero{
-            background-image:url(./user/assets/images/siege.jpg) !important;
-            background-size:cover;background-position:top !important;
-            height: 100px !important;
-        }
+        background-image:url(./user/assets/images/siege.jpg) !important;
+        background-size:cover;background-position:top !important;
+        height: 100px !important;
+    }
+    .section .container .row_pricipal{
+        margin-top:-70px;
+    }
 </style>
 @section('main-content')
 
      <!-- hero section start -->
     <section class="section hero-section bg-ico-hero section-responsive" id="home">
-        <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
-            <div class="row align-items-center row_pricipal" style="margin-top: -70px;">
+            <div class="row align-items-center row_pricipal">
                 <div class="col-lg-12 card_show">
                     <div class="text-white-50">
                         <h1 class="text-white font-weight-semibold mb-3 hero-title"> Comment marche notre plateforme</h1>
@@ -33,7 +35,7 @@
 
 
 
-     <!-- Faqs start -->
+    <!-- Faqs start -->
     <section class="section settings-section-mobile" id="faqs">
         <div class="container">
             <div class="row">
