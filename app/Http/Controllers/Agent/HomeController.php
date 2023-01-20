@@ -46,6 +46,8 @@ class HomeController extends Controller
             $user = Agent::where('id',Auth::guard('agent')->user()->id)->first() ; 
             $clientCount = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)->where('registered_at',carbon_today())->get();
             $busCount = Bus::where('siege_id',Auth::guard('agent')->user()->siege_id)->get();
+
+            // Les client
             
             // Suppression des clients qui n'ont pas payer dans les 24h
             $clientDelais = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
@@ -67,7 +69,7 @@ class HomeController extends Controller
             ->where('voyage_status',1)
             ->where('amount','!=',null)
             ->get();
-            
+
             foreach ($clientSuccessVoyages as $clientSuccessVoyage) {
                 $buseClientSuccess = Bus::where('itineraire_id',$clientSuccessVoyage->ville->itineraire_id)->first();
                 $buseClientSuccess->update(['inscrit' => $buseClientSuccess->inscrit - 1]);

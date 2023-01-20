@@ -99,7 +99,7 @@ class ClientController extends Controller
                         $add_client->customer_id = Auth::guard('client')->user()->id;
                         $add_client->position = $buse->inscrit;
                         $add_client->registered_at = date_format($date,'d-m-y');
-                        $add_client->voyage_status = 1;
+                        $add_client->voyage_status = 0;
                         $add_client->save();
                         
                         // Notification::route('mail',$buse->siege->email)
@@ -220,8 +220,7 @@ class ClientController extends Controller
 
         $clients = Client::where('bus_id',$buse->id)->where('registered_at',$request->date)->where('amount','!=',null)->get();
         
-        $info_user = Client::where('registered_at',$request->date)
-        ->where('customer_id',Auth::guard('client')->user()->id)
+        $info_user = Client::where('customer_id',Auth::guard('client')->user()->id)
         ->where('voyage_status',0)
         ->where('amount',null)
         ->first();
@@ -290,7 +289,7 @@ class ClientController extends Controller
 
                         $client->update([
                             'registered_at' => $request->date,
-                            'voyage_status' => 1,
+                            'voyage_status' => 0,
                             'status' => 0
                         ]);
 

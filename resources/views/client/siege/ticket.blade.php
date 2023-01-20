@@ -102,7 +102,7 @@
                                                         align="right" valign="top">
                                                         @if($ticket->voyage_status == 1)
                                                             <span class="badge bg-success">Effectue</span>
-                                                        @else
+                                                        @elseif($ticket->voyage_status == 0)
                                                             <span class="badge bg-warning">Non effectue</span>
                                                         @endif
                                                     </td>
@@ -166,21 +166,25 @@
                                 @endif
                             @endif
                         </div>
-                        @if($ticket->status != 1 && $ticket->status != 2)
+                        @if($ticket->status == 0)
                             <div class="px-4 py-3 border-top">
                                 <ul class="list-inline mb-0 text-center">
                                     @if($ticket->amount == $ticket->ville->amount)
                                         @if($ticket->voyage_status == 0)
                                             <li class="list-inline-item me-3">
-                                                <a href="#" class="badge bg-info p-1" data-bs-toggle="modal" data-bs-target="#staticBackdropDate-{{$ticket->id}}"> <i class="fa fa-edit"></i> Renouveller la date</a>
+                                                <a href="#" class="badge bg-info p-1" data-bs-toggle="modal" data-bs-target="#staticBackdropDate-{{$ticket->id}}"> <i class="fa fa-edit"></i> Repporter</a>
+                                            </li>
+                                            <li class="list-inline-item me-3">
+                                                <a href="#" class="badge bg-success p-1"> <i class="fa fa-download"></i> Ticket</a>
+                                            </li>
+                                            <li class="list-inline-item me-3">
+                                                <a href="#" class="badge bg-danger p-1" data-bs-toggle="modal" data-bs-target="#staticBackdropArchiver-{{$ticket->id}}"> <i class="fa fa-trash"></i> Annuler</a>
+                                            </li>
+                                        @elseif($ticket->voyage_status == 1)
+                                            <li class="list-inline-item me-3">
+                                                <a href="#" class="badge bg-info p-1" data-bs-toggle="modal" data-bs-target="#staticBackdropDate-{{$ticket->id}}"> <i class="fa fa-edit"></i> Modifier</a>
                                             </li>
                                         @endif
-                                        <li class="list-inline-item me-3">
-                                            <a href="#" class="badge bg-danger p-1" data-bs-toggle="modal" data-bs-target="#staticBackdropArchiver-{{$ticket->id}}"> <i class="fa fa-trash"></i> Annuler</a>
-                                        </li>
-                                        <li class="list-inline-item me-3">
-                                            <a href="#" class="badge bg-info p-1" data-bs-toggle="modal" data-bs-target="#staticBackdropDate-{{$ticket->id}}"> <i class="fa fa-edit"></i> Modifier</a>
-                                        </li>
                                     @else
                                         <li class="list-inline-item me-3">
                                             <a href="#" class="badge bg-info p-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$ticket->id}}"> <i class="fa fa-edit"></i> Modifier</a>
