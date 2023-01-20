@@ -174,10 +174,10 @@ class ClientController extends Controller
 
     public function annuler(){
         $clients = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
-            // ->where('status',1)
-            // ->where('voyage_status',0)
-            // ->where('amount','!=',null)
-            // ->orderBy('id','ASC')
+            ->where('status','>',0)
+            ->where('voyage_status',0)
+            ->where('amount','!=',null)
+            ->orderBy('id','ASC')
             ->paginate(10);
         return view('agent.client.annuler',compact('clients'));
     }

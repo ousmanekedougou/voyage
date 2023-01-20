@@ -37,69 +37,8 @@
         </div>
     </section>
 
-
-    {{--
-    <!-- currency price section start version desktop-->
-        <section class="section bg-white p-0 section_lg">
-            <div class="container">
-                <div class="currency-price">
-                    <div class="row">
-                        <div class="col-xl-4 col-sm-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <img src="{{ asset('user/assets/images/app.webp') }}" style="width:100%;" alt="" srcset="">
-                                        </div>
-                                        <div class="col-md-8">
-                                            <h5>Billets sur votre mobile</h5>
-                                            Accès facile à vos billets, peu importe votre destination, même hors connexion
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-sm-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <img src="{{ asset('user/assets/images/planing.webp') }}" style="width:100%;" alt="" srcset="">
-                                        </div>
-                                        <div class="col-md-8">
-                                            <h5>Planificateur de voyages à portée de main</h5>
-                                        Tout ce dont vous avez besoin dans une seule application
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-sm-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <img src="{{ asset('user/assets/images/notify.webp') }}" style="width:100%;" alt="" srcset="">
-                                        </div>
-                                        <div class="col-md-8">
-                                            <h5>Notifications en temps réel</h5>
-                                            Mises à jour et rappels tout au long du trajet pour un voyage réussi
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end row -->
-                </div>
-            </div>
-            <!-- end container -->
-        </section>
-    <!-- currency price section end -->
-    --}}
-
  <!-- currency price section start Version mobile  // section_sm-->
-    <section class="section p-0 bg-white">
+    <section class="section p-0 bg-white section-collumn">
         <div class="container">
             <div class="currency-price">
                 <div class="row">
@@ -168,7 +107,7 @@
 
   
    <!-- about section start -->
-    <section class="section pt-4 mb-5 bg-white" id="about">
+    <section class="section pt-0 mb-5 bg-white" id="about">
         <div class="container">
             <div class="row align-items-center p-1">
                 <div class="col-lg-5">
@@ -189,10 +128,6 @@
 
                 <div class="col-lg-6 ms-auto home-about-img">
                     <img src="{{('user/assets/images/bus.svg')}}" alt="" class="img-fluid mx-auto d-block">
-                    <div class="button-items mb-3 mt-3 home-about-sm-button">
-                        <a href="{{ route('client.register') }}" class="btn btn-outline-primary">Creer votre copmte client</a>
-                        <a href="{{ route('agence.create') }}" class="btn btn-outline-success">Creer votre compte agence</a>
-                    </div> 
                 </div>
             </div>
             <!-- end row -->
@@ -227,9 +162,9 @@
         <div class="container">
              <div class="row">
                 <div class="col-lg-12">
-                    <div class="text-center mb-5">
-                        <h4 class="text-center text-primary text-uppercase">Pourquoi TouKi ?</h4>
-                        <p class="text-mueted text-center fs-4">
+                    <div class="mb-5">
+                        <h4 class="text-center mb-4 text-uppercase">Pourquoi TouKi ?</h4>
+                        <p class="text-mueted text-justify">
                             Nous sommes convaincus que le digital est un facteur de croissance et de survie pour toutes entreprises quels que soient la taille et le secteur, c’est pourquoi nous nous engageons à vous accompagner à maximiser votre performance et vos résultats grâce à la digitalisation. 
                         </p>
                     </div>
@@ -341,9 +276,9 @@
                  <div class="col-md-6">
                     <div>
                         <img src="{{('user/assets/images/updateClient.svg')}}" style="width: 80%;" alt="" class="img-fluid mx-auto d-block">
-                        <div class="button-items mb-3">
+                        <div class="button-items mb-3 text-center">
                             <a href="" class="btn btn-primary"> <i class="bx bxl-play-store"></i> Télécharger sur Play Store</a>
-                            <a href="" class="btn btn-outline-success"> <i class="bx bxl-apple"></i> Télécharger sur App Store</a>
+                            <a href="" class="btn btn-success"> <i class="bx bxl-apple"></i> Télécharger sur App Store</a>
                         </div> 
                     </div>
                 </div>

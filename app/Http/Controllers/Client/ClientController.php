@@ -345,7 +345,7 @@ class ClientController extends Controller
             // Partie send sms au siege 
             Toastr::success('Votre ticket a ete annuler', 'Annulation ticket', ["positionClass" => "toast-top-right"]);
             return back();
-        }else {
+        }elseif ($client->siege->agence->method_ticket == 1) {
             if ($client->bus->heure_depart > $time ) {
                 $client->status = 1;
                 $client->voyage_status = 0;

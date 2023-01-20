@@ -83,25 +83,24 @@
                                         @endif
                                         <p class="text-muted mb-1 font-size-12"><i class="bx bxs-map"></i> Destination : {{ $client->ville->name }} </p> 
                                         <p class="text-muted mb-1 font-size-12"><i class="fa fa-clock"></i> Date : {{ $client->registered_at }} </p> 
-                                        <p class="text-muted mb-1 font-size-12"><i class="fas fa-money-bill "></i> Prix : {{$client->ville->amount}} f </p> 
+                                        <p class="text-muted font-size-12"><i class="fas fa-money-bill "></i> Prix : {{$client->ville->amount}} f </p> 
                                         
                                     </div>
                                 </div>
                             </div>
                             <div class="px-4 py-3 border-top">
                                 <ul class="list-inline mb-0 text-center">
-
-                                    <li class="list-inline-item">
-                                        <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdropPayer-{{$client->id}}" class="text-muted"><span class="badge bg-success"><i class="fas fa-money-bill me-1"></i>
-                                                Rembourser le ticket
-                                            </span></a>
-                                    </li>
-
-                                    @error('presence')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                                    @if(Auth::guard('agent')->user()->agence->mathod_tiket == 0)
+                                        @if($client->status == 1)
+                                            <li class="list-inline-item">
+                                                <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdropPayer-{{$client->id}}" class="btn btn-success btn-sm btn-block"><i class="fas fa-money-bill me-1"></i> Rembourser le ticket de {{$client->ville->amount}} f </a>
+                                            </li>
+                                        @elseif($client->status == 2)
+                                            <p class="text-primary mb-1 font-size-15">Le ticket n'est plus remboursable</p> 
+                                        @endif
+                                    @else
+                                            <p class="text-primary mb-1 font-size-15">Le ticket n'est plus remboursable</p> 
+                                    @endif
                                 </ul>
                             </div>
                         </div>

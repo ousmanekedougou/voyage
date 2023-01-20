@@ -48,19 +48,31 @@ class HomeController extends Controller
             $busCount = Bus::where('siege_id',Auth::guard('agent')->user()->siege_id)->get();
             
             // Suppression des clients qui n'ont pas payer dans les 24h
-            Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
+            $clientDelais = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
             ->where('registered_at','<',Carbon::today()->format('Y-m-d'))
             ->where('status',0)
             ->where('amount',null)
-            ->delete();
+            ->get();
+
+            foreach ($clientDelais as $clientDelai) {
+                $buseClientDelai = Bus::where('itineraire_id',$clientDelai->ville->itineraire_id)->first();
+                $buseClientDelai->update(['inscrit' => $buseClientDelai->inscrit - 1]);
+                $clientDelai->delete();
+            }
 
             // Suppresion des clients dont le voyage est effectuer avec success
-            Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
+            $clientSuccessVoyages = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
             ->where('registered_at','<',Carbon::today()->format('Y-m-d'))
             ->where('status',0)
             ->where('voyage_status',1)
             ->where('amount','!=',null)
-            ->delete();
+            ->get();
+            
+            foreach ($clientSuccessVoyages as $clientSuccessVoyage) {
+                $buseClientSuccess = Bus::where('itineraire_id',$clientSuccessVoyage->ville->itineraire_id)->first();
+                $buseClientSuccess->update(['inscrit' => $buseClientSuccess->inscrit - 1]);
+                $clientSuccessVoyage->delete();
+            }
            
             $date_today = Carbon::today();
             $dayOfweek = $date_today->dayOfWeek;

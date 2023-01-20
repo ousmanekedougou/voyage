@@ -15,7 +15,10 @@
                                     <span key="t-blog">Administrateur</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
-                                    <li><a href="{{ route('admin.agence.index') }}" key="t-blog-list"> <i class="fa fa-project-diagram"></i> Agences</a></li>
+                                    <li><a href="{{ route('admin.agence.index') }}" key="t-blog-list"> <i class="fa fa-project-diagram"></i> Agences Transport</a></li>
+                                    <li><a href="" key="t-blog-list"> <i class="fa fa-project-diagram"></i> Agences Touristique</a></li>
+                                    <li><a href="" key="t-blog-list"> <i class="fa fa-project-diagram"></i> Parcs Automobile</a></li>
+                                    <li><a href="" key="t-blog-list"> <i class="fa fa-project-diagram"></i> Location Voiture</a></li>
                                     @if(Auth::guard('web')->user()->is_admin == 0)
                                         <li><a href="{{ route('admin.admin.index') }}" key="t-blog-list">Admins</a></li>
                                         <li><a href="{{ route('admin.partenaire.index') }}" key="t-blog-list">Partenaires</a></li>

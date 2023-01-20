@@ -428,7 +428,7 @@
                         <button type="button" class="btn header-item waves-effect" id="page-header-user-dropdown"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             @if(Auth::guard('web')->user())
-                                @if(Auth::guard('web')->user()->image !== '')
+                                @if(Auth::guard('web')->user()->image !== null)
                                 <img class="rounded-circle header-profile-user" src="{{ Storage::url(Auth::guard('web')->user()->image) }}"
                                     alt="Header Avatar">
                                     <span class="d-none d-xl-inline-block ms-1" key="t-henry"> {{ Auth::guard('web')->user()->name }}</span>

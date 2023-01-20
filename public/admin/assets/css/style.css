@@ -7,12 +7,8 @@
          margin-top: 5px;
      }
      .bagage_show{ width: 50%;box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;padding:10px;margin-left:13em;}
-     .section_sm{
-         opacity: 0;
-         visibility: hidden;
-         width: 0px;
-         height: 0px;
-     }
+     
+    
     .navbar-mobile-show{
         display: none;
         visibility: hidden;
@@ -216,12 +212,7 @@
         width: 100%;
         margin-left:0px;
     }
-     .section_sm{
-         opacity: 1;
-         visibility: visible;
-         width: 100%;
-         height: 100%;
-     }
+     
     .text-reserve-on-mobile{
         width: 0px;
         height: 0px;
@@ -321,16 +312,18 @@
         opacity: 1;
         z-index: 1;
         width: 100%;
-        height: 100%;
-        padding-top: 10px;
-        margin-top: -30px;
-        margin-bottom: 50px;
+        height: auto;
+        margin-top: -35px;
+        padding: 0px;
     }
     .home-section-mobile .container .row img{
         width: 100%;
     }
+    .section-collumn{
+        margin-top: 50px;
+    }
 
-   section #agenceBtn{
+    section #agenceBtn{
         position: fixed;
         bottom: 40px;
         right: 40px;
@@ -357,6 +350,21 @@
         width: 100%;
         height: 100%;
     }
+    .home-about-img{
+        width: 0px;
+        height: 0px;
+        visibility: hidden;
+        opacity: 0;
+    }
+    .home-about-img img{
+        width: 0px;
+        height: 0px;
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    
+   
  }
 
 
