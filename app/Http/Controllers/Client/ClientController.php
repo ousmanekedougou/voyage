@@ -45,13 +45,6 @@ class ClientController extends Controller
     {
         
     }
-
-  
-
-   
-
-    
-
     /**
      * Store a newly created resource in storage.
      *
@@ -101,9 +94,6 @@ class ClientController extends Controller
                         $add_client->registered_at = date_format($date,'d-m-y');
                         $add_client->voyage_status = 0;
                         $add_client->save();
-                        
-                        // Notification::route('mail',$buse->siege->email)
-                        // ->notify(new RegisteredClient($add_client,1));
 
                         Toastr::success('Votre inscription a bien ete enregistre sur '.$add_client->siege->agence->name, 'Inscription', ["positionClass" => "toast-top-right"]);
                         return back();
@@ -334,36 +324,56 @@ class ClientController extends Controller
         $mytime = Carbon::now();
         // dd($mytime->toArray());
         $time =  $mytime->hour.':'.$mytime->minute.':'.$mytime->second;
-        $client = Client::where('id',$id)->first();
-        if ($client->siege->agence->method_ticket == 0) {
-            $client->status = 1;
-            $client->voyage_status = 0;
-            $client->canceled_at = $mytime->format('Y-m-d H:i:s');
-            $client->canceled_time = $time;
-            $client->save();
-            // Partie send sms au siege 
-            Toastr::success('Votre ticket a ete annuler', 'Annulation ticket', ["positionClass" => "toast-top-right"]);
-            return back();
-        }elseif ($client->siege->agence->method_ticket == 1) {
-            if ($client->bus->heure_depart > $time ) {
-                $client->status = 1;
-                $client->voyage_status = 0;
-                $client->canceled_at = $mytime->format('Y-m-d H:i:s');
-                $client->canceled_time = $time;
-                $client->save();
-                // Partie send sms au siege
-                Toastr::success('Votre ticket a ete annuler', 'Annulation ticket', ["positionClass" => "toast-top-right"]);
-                return back(); 
+        $client = Client::where('id',$id)
+            ->where('customer_id',Auth::guard('client')->user()->id)
+            ->first();
+        if ($client) {
+            if ($client->ville->amount == $client->amount) {
+                if ($client->siege->agence->method_ticket == 0) {
+                    $client->status = 1;
+                    $client->voyage_status = 0;
+                    $client->canceled_at = $mytime->format('Y-m-d H:i:s');
+                    $client->canceled_time = $time;
+                    $client->save();
+                    $buseDecrementeInscrit = Bus::where('itineraire_id',$client->ville->itineraire_id)->first();
+                    $buseDecrementeInscrit->update(['inscrit' => $buseDecrementeInscrit->inscrit - 1]);
+                    // Partie send sms au siege 
+                    Toastr::success('Votre ticket a ete annuler', 'Annulation ticket', ["positionClass" => "toast-top-right"]);
+                    return back();
+                }elseif ($client->siege->agence->method_ticket == 1) {
+
+                    if ($client->bus->heure_depart > $time ) {
+                        $client->status = 1;
+                        $client->voyage_status = 0;
+                        $client->canceled_at = $mytime->format('Y-m-d H:i:s');
+                        $client->canceled_time = $time;
+                        $client->save();
+                        $buseDecrementeInscrit = Bus::where('itineraire_id',$client->ville->itineraire_id)->first();
+                        $buseDecrementeInscrit->update(['inscrit' => $buseDecrementeInscrit->inscrit - 1]);
+                        // Partie send sms au siege
+                        Toastr::success('Votre ticket a ete annuler', 'Annulation ticket', ["positionClass" => "toast-top-right"]);
+                        return back(); 
+                    }else {
+                        $client->status = 2;
+                        $client->voyage_status = 0;
+                        $client->canceled_at = $mytime->format('Y-m-d H:i:s');
+                        $client->canceled_time = $time;
+                        $client->save();
+                        $buseDecrementeInscrit = Bus::where('itineraire_id',$client->ville->itineraire_id)->first();
+                        $buseDecrementeInscrit->update(['inscrit' => $buseDecrementeInscrit->inscrit - 1]);
+                        // Partie send sms au siege
+                        Toastr::success('Nous sommes desoler mais votre ticke n\'est plus remboursable', 'Annulation ticket', ["positionClass" => "toast-top-right"]);
+                        return back(); 
+                    }
+                }
+                
             }else {
-                $client->status = 2;
-                $client->voyage_status = 0;
-                $client->canceled_at = $mytime->format('Y-m-d H:i:s');
-                $client->canceled_time = $time;
-                $client->save();
-                // Partie send sms au siege
-                Toastr::success('Nous sommes desoler mais votre ticke n\'est plus remboursable', 'Annulation ticket', ["positionClass" => "toast-top-right"]);
-                return back(); 
+                Toastr::error('Votre ticket doit etre payer pour etre anuller', 'Ticket non payer', ["positionClass" => "toast-top-right"]);
+                return back();
             }
+        }else {
+            Toastr::error('C\'est pas votre ticket', 'Error de ticket', ["positionClass" => "toast-top-right"]);
+            return back();
         }
     }
 
@@ -375,8 +385,18 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        Client::where('id',$id)->delete();
-        Toastr::success('Votre ticket a ete supprimer avec sucess', 'Error date de voyage', ["positionClass" => "toast-top-right"]);
-        return back();
+        $deleteClient = Client::where('id',$id)
+            ->where('customer_id',Auth::guard('client')->user()->id)
+            ->first();
+        if ($deleteClient->amount == 0) {
+            $buseDecrementeInscrit = Bus::where('itineraire_id',$deleteClient->ville->itineraire_id)->first();
+            $buseDecrementeInscrit->update(['inscrit' => $buseDecrementeInscrit->inscrit - 1]);
+            $deleteClient->delete();
+            Toastr::success('Votre ticket a ete supprimer avec sucess', 'Error date de voyage', ["positionClass" => "toast-top-right"]);
+            return back();
+        }else {
+            Toastr::error('Votre ticket n\'a pas ete rembourser', 'Remoursement Ticket', ["positionClass" => "toast-top-right"]);
+            return back();
+        }
     }
 }

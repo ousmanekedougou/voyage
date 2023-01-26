@@ -41,7 +41,7 @@
 
 
      <!-- currency price section start Version mobile-->
-    <section class="section p-0 section_sm verification-text-mobile">
+    <section class="section p-0 verification-text-mobile">
         <div class="container">
             <div class="currency-price">
                 <div class="row">

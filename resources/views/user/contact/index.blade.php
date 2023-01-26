@@ -1,14 +1,21 @@
 @extends('user.layouts.app',['title' => 'Contact'])
-@section('headsection')
-
-@endsection
+<style>
+     /* .bg-ico-hero{
+        background-image:url(./user/assets/images/dowload/siege.jpg) !important;
+        background-size:cover;background-position:top !important;
+        height: 100px !important;
+    }
+    .section .container .row_pricipal{
+        margin-top:-70px;
+    } */
+</style>
 @section('main-content')
 
    <!-- hero section start -->
     <section class="section hero-section bg-ico-hero"  id="home">
         <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
-                <div class="row align-items-center row_pricipal" style="margin-top: -70px;" >
+                <div class="row align-items-center row_pricipal">
                 <div class="col-lg-8 card_show">
                     <div class="text-white-50">
                         <h1 class="text-white font-weight-semibold mb-3 hero-title ">Nous contacter</h1>

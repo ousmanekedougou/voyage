@@ -65,11 +65,11 @@
                                 </div>
 
                                 <div class="media-body overflow-hidden">
-                                    <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">
+                                    <h5 class="text-truncate font-size-15"><a href="#" class="text-white">
                                         {{$ticket->siege->agence->name}}</a>
                                     </h5>
-                                    <p class="text-muted mb-1"> Siege de {{ $ticket->siege->name }}</p>
-                                    <p class="text-muted mb-1"> Destination {{ $ticket->ville->name }}</p>
+                                    <p class="text-white mb-1"> Siege de {{ $ticket->siege->name }}</p>
+                                    <p class="text-white mb-1"> Destination {{ $ticket->ville->name }}</p>
                                     
                                 </div>
                             </div>
@@ -140,6 +140,9 @@
                                                         align="right" valign="top">
                                                         @if($ticket->amount == $ticket->ville->amount)
                                                             <span class="badge bg-success">Ticket Paye</span>
+                                                            @if($ticket->status > 0)
+                                                                <span class="badge bg-danger">Anuller</span>
+                                                            @endif
                                                         @else
                                                             <span class="badge bg-warning">Tiket Non Paye</span>
                                                         @endif
@@ -158,11 +161,11 @@
                                 <p class="text-danger text-center" style="width: 100%;">Delais d'attente de paiment 24h</p>
                             @else
                                 @if($ticket->status == 1)
-                                    <p class="text-muted text-center" style="width: 100%;">Votre ticket a ete annuler le remboursement sera fait dans l'immedia</p>
+                                    <p class="text-white text-center mt-3" style="width: 100%; font-weight:700;">Votre ticket a ete annuler le remboursement sera fait dans l'immedia</p>
                                 @elseif($ticket->status == 2)
-                                    <p class="text-danger text-center" style="width: 100%;">Votre ticket a ete annuler mais ne sera pas rembourser, car vous avez depasser le delais d'attente d'annulation</p>
+                                    <p class="text-danger text-center mt-3" style="width: 100%; font-weight:700;">Votre ticket a ete annuler mais ne sera pas rembourser, car vous avez depasser le delais d'attente d'annulation</p>
                                 @else
-                                    <p class="text-success text-center" style="width: 100%;">Votre ticket a ete payer</p>
+                                    <p class="text-success text-center mt-3" style="width: 100%; font-weight:700;">Votre ticket a ete payer</p>
                                 @endif
                             @endif
                         </div>

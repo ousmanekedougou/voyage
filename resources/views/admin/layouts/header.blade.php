@@ -118,9 +118,9 @@
                             <a href="{{ route('customer.home') }}" class="logo logo-dark show-logo-a-toucki">
                                 <span class="logo-sm">
                                     @if(Auth::guard('client')->user()->image == null)
-                                    <img src="{{ asset('admin/assets/images/users/profil.jpg') }}" alt="" height="22">
+                                        <img  src="{{ asset('admin/assets/images/users/profil.jpg') }}" alt="" height="22">
                                     @else
-                                    <img src="{{Storage::url(Auth::guard('client')->user()->image)}}" alt="" height="22">
+                                        <img  src="{{Storage::url(Auth::guard('client')->user()->image)}}" alt="" height="22">
                                     @endif
                                 </span>
                                 <span class="logo-lg">
@@ -136,22 +136,19 @@
                             <a href="{{ route('customer.home') }}" class="logo logo-light show-logo-a-toucki">
                                 <span class="logo-sm">
                                     @if(Auth::guard('client')->user()->image == null)
-                                    <img src="{{ asset('admin/assets/images/users/profil.jpg') }}" alt="" height="22">
+                                        <img class="rounded-circle" src="{{ asset('admin/assets/images/bus.svg') }}" alt="" height="22">
                                     @else
-                                    <img src="{{Storage::url(Auth::guard('client')->user()->image)}}" alt="" height="22">
+                                        <img class="rounded-circle" src="{{Storage::url(Auth::guard('client')->user()->image)}}" alt="" height="22">
                                     @endif
                                 </span>
 
-                               <span class="logo-sm">
-                                    <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="22">
-                                </span>
                                 <span class="logo-lg">
                                     <span class="text-bold text-uppercase text-white">TouCki Senegal</span>
                                     <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="19">
                                 </span>
                             </a>
                             {{-- La partie responsive de la navebar du clien --}}
-                            <ul class="navbar-admin-mobile-show" >
+                            <ul class="navbar-admin-mobile-show">
                                 <li class="nav-item">
                                     <a class="nav-link {{ set_active_roote('customer.client.show') }} " href="{{ route('customer.client.show') }}"><i class="fa fa-ticket-alt fa-fa-item"></i></a>
                                 </li>
@@ -162,11 +159,11 @@
                                     <a class="nav-link {{ set_active_roote('customer.colis.index') }} " href="{{ route('customer.colis.index') }}"><i class="fa fa-suitcase-rolling fa-fa-item"></i> </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link {{ set_active_roote('setting.index') }} dropdown-toggle" href="" data-bs-toggle="dropdown" aria-expanded="false"><i class="bx bx-map fa-fa-item"></i></a>
-                                    <div class="dropdown-menu dropdown-menu scrollable-menu">
+                                    <a class="nav-link {{ set_active_roote('setting.index') }} dropdown-toggle" href="" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-map fa-fa-item"></i></a>
+                                    <div class="dropdown-menu drop-down-mobile scrollable-menu">
                                         @foreach(region() as $region)
                                             <a href="{{ route('customer.agence.region',$region->slug) }}" class="dropdown-item" >
-                                                <i class="fa fa-city text-primary"></i> {{$region->name}}
+                                                <i class="fa fa-city text-mueted"></i> {{$region->name}}
                                             </a>
                                         @endforeach
                                     </div>

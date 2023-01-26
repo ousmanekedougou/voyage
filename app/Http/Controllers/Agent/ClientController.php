@@ -124,7 +124,9 @@ class ClientController extends Controller
             ->where('siege_id',Auth::guard('agent')->user()->siege_id)
             ->where('registered_at','>=',Carbon::today()->format('Y-m-d'))
             ->where('status',0)
-            ->where('amount','!=',null);
+            ->where('voyage_status',0)
+            ->where('amount',$request->amount);
+            
             if ($request->voyage_status == 0) {
                 if (Auth::guard('agent')->user()->agence->method_ticket == 0) {
                     $client->update([

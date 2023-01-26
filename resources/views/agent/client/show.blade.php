@@ -129,7 +129,7 @@
                                             data-toggle="toggle"
                                             data-on="Present"
                                             data-off="Absent"
-                                            data-value="{{ $client->ville->amount }}"
+                                            data-amount="{{ $client->ville->amount }}"
                                             {{$client->voyage_status == true ? 'checked' : ''}}
                                         
                                         >
@@ -372,7 +372,7 @@
         $('.toggle-class').on('change' ,function(){
             var voyage_status = $(this).prop('checked') == true ? 1 : 0;
             var client_id = $(this).data('id');
-            // var amount = $(this.data('value'));
+            var amount = $(this.data('amount'));
             
             $.ajax({
                 type: 'GET',
@@ -382,7 +382,7 @@
                     {
                         'voyage_status': voyage_status,
                         'client_id': client_id,
-                        // 'amount': amount
+                        'amount': amount
                     },
                 success: function(data){
                     console.log('success')

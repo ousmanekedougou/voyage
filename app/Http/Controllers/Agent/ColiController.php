@@ -51,6 +51,7 @@ class ColiController extends Controller
                 'customer_id' => $customer->id
             ]);
             Toastr::success('Votre client colis ont bien ete ajouter', 'Ajout Client', ["positionClass" => "toast-top-right"]);
+            return back();
         }else {
             Toastr::error('Ce client n\'a pas de compte', 'Absence de compte', ["positionClass" => "toast-top-right"]);
             return back();
@@ -71,7 +72,7 @@ class ColiController extends Controller
             'cni' => 'required|numeric|unique:colies',
         ]);
         // dd($request->all());
-         $cni_final = '';
+        $cni_final = '';
         $r_cni = intval($request->cni);
 
         if (strlen($r_cni) == 13) {
@@ -80,14 +81,29 @@ class ColiController extends Controller
             Toastr::error('Votre numero d\'identite est invalide', 'Error phone', ["positionClass" => "toast-top-right"]);
             return back();
         }
-        $coli_client = new Colie();
-        $coli_client->name = $request->name; 
-        $coli_client->phone = $request->phone; 
-        $coli_client->cni = $cni_final;  
-        $coli_client->siege_id = Auth::guard('agent')->user()->siege_id;
-        $coli_client->save();
-        Toastr::success('Votre client ont bien ete ajouter', 'Ajout Client', ["positionClass" => "toast-top-right"]);
-        return back();
+        $customer = Customer::where('phone',$request->phone)
+            ->where('cni',$cni_final)
+            ->first();
+        if ($customer) {
+            Colie::Create([
+                'name' => $customer->name,
+                'phone' => $customer->phone,
+                'cni' => $customer->cni,
+                'siege_id' => Auth::guard('agent')->user()->siege_id,
+                'customer_id' => $customer->id
+            ]);
+            Toastr::success('Votre client colis ont bien ete ajouter', 'Ajout Client', ["positionClass" => "toast-top-right"]);
+            return back();
+        }else {
+            $coli_client = new Colie();
+            $coli_client->name = $request->name; 
+            $coli_client->phone = $request->phone; 
+            $coli_client->cni = $cni_final;  
+            $coli_client->siege_id = Auth::guard('agent')->user()->siege_id;
+            $coli_client->save();
+            Toastr::success('Votre client ont bien ete ajouter', 'Ajout Client', ["positionClass" => "toast-top-right"]);
+            return back();
+        }
     }
 
     /**

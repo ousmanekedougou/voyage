@@ -1,4 +1,6 @@
-
+*{
+    box-sizing: border-box;
+}
     .agance_show{
          margin-top: -80px;
      }
@@ -15,8 +17,9 @@
         opacity: 0;
         width: 0px;
         height: 0px;
-
     }
+
+   
 
     .navbar-admin-mobile-show{
         display: none;
@@ -33,9 +36,9 @@
         height: 0px;
    }
    .show-logo-a-toucki{
-    visibility: visible;
-    opacity: 1;
-    z-index: 1;
+        visibility: visible;
+        opacity: 1;
+        z-index: 1;
    }
 
     .section-agence-information{
@@ -121,6 +124,12 @@
  .media .avatar-md span img{
     width: 100%;height:100%;border-radius: 100%;
  }
+ .verification-text-mobile{
+        width: 0px;
+        height: 0px;
+        visibility: none;
+        opacity: 0;
+    }
 @media only screen and (max-width:1000px) {
    
      .row_pricipal{
@@ -149,6 +158,10 @@
     .verification-text-mobile{
         margin-top: 30px;
         margin-bottom: -9rem;
+        width: 100%;
+        height: auto;
+        visibility: visible;
+        opacity: 1;
     }
     .img-verification-mobile{
         visibility: hidden;
@@ -369,12 +382,22 @@
 
 
 
-.button-client-bar{
-    visibility: visible;
-    opacity: 1;
-}
+   
  /* Pour le responsive admin client  */
-@media only screen and (max-width:1000px) {
+    .button-client-bar{
+        visibility: visible;
+        opacity: 1;
+    }
+   .navbar-admin-mobile-show{
+        display: none;
+        visibility: hidden;
+        opacity: 0;
+        z-index: 0;
+        width: 0px;
+        height: 0px;
+    }
+
+@media only screen and (max-width:1000px){
     .show-logo-toucki{
         visibility: visible;
         opacity: 1;
@@ -404,10 +427,11 @@
 
     .navbar-admin-mobile-show{
         padding-top: 8px;
-        display: flex;
+        display:flex;
         margin-left: -45px;
         visibility: visible;
         opacity: 1;
+        z-index: 1;
         width: 100%;
         height: auto;
     }
@@ -426,7 +450,7 @@
         margin-top: -8px;
         margin-right: 20px;
     }
-    .nav-item .nav-link.active{color:#556ee6}
+    .navbar-admin-mobile-show .nav-item .nav-link.active{color:#556ee6}
     .navbar-admin-mobile-show .drop-down-mobile .dropdown .dropdown-menu{
         position: absolute;
         right: 0;
@@ -435,11 +459,13 @@
         font-size: 15px;
     }
 
-    .scrollable-menu {
+    .navbar-admin-mobile-show .nav-item .scrollable-menu {
         height: auto;
         max-height: 200px;
         overflow-x: hidden;
     }
 }
+
+
  
 

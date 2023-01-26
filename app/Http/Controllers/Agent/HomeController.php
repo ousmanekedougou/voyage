@@ -40,7 +40,7 @@ class HomeController extends Controller
     public function index()
     {
         // return view('agent.index');
-        if ($this->middleware(['IsAgent']) && Auth::guard('agent')->user()->role == 1) {
+        if ($this->middleware(['IsAgent']) && Auth::guard('agent')->user()->role == 1 || Auth::guard('agent')->user()->role == 4) {
             $buses = Bus::where('siege_id', Auth::guard('agent')->user()->siege_id)->orderBy('id', 'ASC')->get();
             $itineraires = Itineraire::where('siege_id', Auth::guard('agent')->user()->siege_id)->where('user_id', Auth::guard('agent')->user()->id)->get();
             $user = Agent::where('id',Auth::guard('agent')->user()->id)->first() ; 
@@ -84,7 +84,7 @@ class HomeController extends Controller
 
             return view('agent.index',compact('itineraires','user','clientCount','busCount'));
 
-        }elseif ($this->middleware(['IsAgent']) && Auth::guard('agent')->user()->role == 2) {
+        }elseif ($this->middleware(['IsAgent']) && Auth::guard('agent')->user()->role == 2 || Auth::guard('agent')->user()->role == 4) {
 
             $clients = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
             ->where('registered_at',Carbon::today()->format('Y-m-d'))
@@ -92,7 +92,7 @@ class HomeController extends Controller
             ->paginate(15);
             return view('agent.bagage.index',compact('clients'));
 
-        }elseif ($this->middleware(['IsAgent']) && Auth::guard('agent')->user()->role == 3) {
+        }elseif ($this->middleware(['IsAgent']) && Auth::guard('agent')->user()->role == 3 || Auth::guard('agent')->user()->role == 4) {
 
             $clients = Colie::orderBy('id','DESC')->paginate(15);
             return view('agent.coli.index',compact('clients'));
@@ -100,14 +100,14 @@ class HomeController extends Controller
 
        
 
-        if ($this->middleware(['IsAgent']) && Auth::guard('agent')->user()->role == 2) {
+        if ($this->middleware(['IsAgent']) && Auth::guard('agent')->user()->role == 2 || Auth::guard('agent')->user()->role == 4) {
             Bagage::where('created_at','<',Carbon::yesterday())->delete();
             BagageClient::where('created_at','<',Carbon::yesterday())->delete();
         }
 
-        if ($this->middleware(['IsAgent']) && Auth::guard('agent')->user()->role == 3) {
-            Colie::where('created_at','<',Carbon::yesterday())->delete();
-            ColiClient::where('created_at','<',Carbon::yesterday())->delete();
+        if ($this->middleware(['IsAgent']) && Auth::guard('agent')->user()->role == 3 || Auth::guard('agent')->user()->role == 4) {
+            Colie::where('created_at','<',Carbon::yesterday())->where('status',1)->delete();
+            ColiClient::where('created_at','<',Carbon::yesterday())->where('status',1)->delete();
         }
 
         

@@ -13,10 +13,10 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                    <h4 class="mb-sm-0 font-size-18">Bagages</h4>
+                                    <h4 class="mb-sm-0 font-size-18">Colis</h4>
                                     <div class="page-title-right">
                                         <ol class="breadcrumb m-0">
-                                            <li class="breadcrumb-item"><a href="javascript: void(0);" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-primary text-white">Ajouter des colis</a></li>
+                                            <li class="breadcrumb-item"><a href="javascript: void(0);" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-primary text-white"> <div class="fa fa-plus"></div> Ajouter des colis</a></li>
                                         </ol>
                                     </div>
                                 </div>
@@ -25,7 +25,7 @@
                         <!-- end page title -->
                         <div class="row">
                             <div class="col-xl-12">
-                                <p class="text-muted mb-2 text-center font-size-15">Auteur des colis {{ $coli->name }} : {{ $coli->phone }}</p>
+                                <p class="mb-2 text-center font-size-15 btn bnt-block btn-light btn-xs" style="width: 100%;">Auteur des colis {{ $coli->name }} : {{ $coli->phone }}</p>
                             </div>
                            
                             <div class="col-xl-9">
@@ -41,6 +41,7 @@
                                                         <th>Recveveur</th>
                                                         <th>Ville</th>
                                                         <th>Prix</th>
+                                                        <th>Status</th>
                                                         <th colspan="2">Actions</th>
                                                     </tr>
                                                 </thead>
@@ -66,8 +67,46 @@
                                                             {{$bag->prix}} f
                                                         </td>
                                                         <td>
+                                                            <a href="javascript:void(0);" class="action-icon text-success" data-bs-toggle="modal" data-bs-target="#ColiRecue-{{$bag->id}}"> Bien Recu <i class="bx bx-check font-size-18"></i></a>
+                                                            <div class="modal modal-xs fade" id="ColiRecue-{{ $bag->id }}" tabindex="-1" aria-labelledby="subscribeModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog modal-dialog-centered modal-xs">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header border-bottom-0">
+                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            <div class="text-center mb-4">
+                                                                                <div class="avatar-md mx-auto mb-4">
+                                                                                    <div class="avatar-title bg-success rounded-circle text-white h1">
+                                                                                        <i class="fa fa-suitcase-rolling"></i>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div class="row justify-content-center">
+                                                                                    <div class="col-xl-10">
+                                                                                        <h4 class="text-success text-uppercase">Attention !</h4>
+                                                                                        <p class="text-muted font-size-14 mb-4">Etes vous sure de bien que {{ $bag->name_recept }} a bien recu le colie</p>
+
+                                                                                        <div class="input-group bg-white rounded text-center" style="text-align:center;">
+                                                                                            <form method="post" action=""  style="display:flex;text-align:center;width:100%;">
+                                                                                                <input type="hidden" name="colId" value="{{ $bag->id }}">
+                                                                                                {{csrf_field()}}
+                                                                                                {{method_field('delete')}}
+                                                                                                <button type="submit" class="btn btn-danger btn-xs" style="margin-left: 70px;margin-right:20px;"> Oui bien sur </button> 
+                                                                                                <button type="button" class="btn btn-success btn-xs" data-bs-dismiss="modal" aria-label="Close"> x Anuller</button>
+                                                                                            </form>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </td>
+                                                        <td>
                                                             <a href="javascript:void(0);" class="action-icon text-primary" data-bs-toggle="modal" data-bs-target="#EditBagage-{{$bag->id}}"> <i class="bx bx-edit font-size-18"></i></a>
-                                                            <a href="javascript:void(0);" class="action-icon text-primary" data-bs-toggle="modal" data-bs-target="#ColiRecue-{{$bag->id}}"> <i class="bx bx-check font-size-18"></i></a>
+                                                            
                                                             <a href="javascript:void(0);" class="action-icon text-danger" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-danger" data-bs-target="#subscribeModalBag-{{ $bag->id }}"> <i class="mdi mdi-trash-can font-size-18"></i></a>
                                                             <div class="modal modal-xs fade" id="subscribeModalBag-{{ $bag->id }}" tabindex="-1" aria-labelledby="subscribeModalLabel" aria-hidden="true">
                                                                 <div class="modal-dialog modal-dialog-centered modal-xs">
@@ -90,7 +129,7 @@
 
                                                                                         <div class="input-group bg-white rounded text-center" style="text-align:center;">
                                                                                             <form method="post" action="{{ route('agent.colis.delete',$bag->id) }}"  style="display:flex;text-align:center;width:100%;">
-                                                                                                <input type="hidden" name="colId" value="{{ $bag->colie->id }}">
+                                                                                                <input type="hidden" name="colId" value="{{ $bag->id }}">
                                                                                                 {{csrf_field()}}
                                                                                                 {{method_field('delete')}}
                                                                                                 <button type="submit" class="btn btn-danger btn-xs" style="margin-left: 70px;margin-right:20px;"> Oui je veux bien </button> 

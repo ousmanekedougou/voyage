@@ -58,6 +58,8 @@
                                                             Gestion Bagages
                                                         @elseif($agent->role == 3)
                                                             Gestion Colis
+                                                        @elseif($agent->role == 4)
+                                                            Tous les roles
                                                         @endif
                                                     </span>
                                                     </p>
@@ -175,6 +177,20 @@
                                                     {{method_field('PUT')}}
                                                     <p class="text-muted font-size-14 mb-4">
                                                         <div class="d-flex text-center">
+
+                                                             <div style="margin-left: 30px;margin-right: 20px;">
+                                                                <div class="form-check form-check-left">
+                                                                    <input class="form-check-input" type="radio" 
+                                                                        name="role" value="4" id="formRadiosRight1Tous" 
+                                                                            @if($agent_role->role == 4) checked @endif
+                                                                        >
+                                                                    <label class="form-check-label" for="formRadiosRight1Tous">
+                                                                        Tous
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+
+
                                                             <div style="margin-left: 30px;margin-right: 20px;">
                                                                 <div class="form-check form-check-left">
                                                                     <input class="form-check-input" type="radio" 
@@ -337,6 +353,18 @@
                                                 <p class="text-muted font-size-14 mb-4">
                                                     <label class="form-label">Assigner un role</label>
                                                     <div class="d-flex text-center">
+
+                                                        <div style="margin-left: 30px;margin-right: 30px;">
+                                                            <div class="form-check form-check-left">
+                                                                <input class="form-check-input" type="radio" 
+                                                                    name="role" value="4" id="formRadiosRight1Tous">
+                                                                <label class="form-check-label" for="formRadiosRight1Tous">
+                                                                    Tous
+                                                                </label>
+                                                            </div>
+                                                        </div>
+
+
                                                         <div style="margin-left: 30px;margin-right: 30px;">
                                                             <div class="form-check form-check-left">
                                                                 <input class="form-check-input" type="radio" 

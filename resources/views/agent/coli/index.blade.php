@@ -15,9 +15,9 @@
                                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                                         <h4 class="mb-sm-0 font-size-18">Clients Colis</h4>
                                         <div class="text-sm-end">
-                                            <button type="button" class="btn btn-primary btn-rounded waves-effect waves-light mb-2 me-2" data-bs-toggle="modal" data-bs-target="#NewClientBagage"><i class="fa fa-user"></i> Ajouter un client simple</button>
+                                            <button type="button" class="btn btn-primary btn-rounded waves-effect waves-light mb-2 me-2" data-bs-toggle="modal" data-bs-target="#NewClientBagage"><i class="fa fa-user"></i> Ajouter</button>
                                         
-                                            <button type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2" data-bs-toggle="modal" data-bs-target="#NewClientCustomer"><i class="fa fa-user-plus"></i> Ajouter un client confirme</button>
+                                            {{--<button type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2" data-bs-toggle="modal" data-bs-target="#NewClientCustomer"><i class="fa fa-user-plus"></i> Ajouter un client confirme</button>--}}
                                         </div>
                                     </div>
                                 </div>
@@ -31,7 +31,7 @@
                                     <div class="card-body">
                                         <div class="media">
                                             <div class="avatar-md me-4">
-                                                @if($client->customer_id == '')
+                                                @if($client->customer_id == null)
                                                     <span class="avatar-title rounded-circle bg-light text-danger font-size-16">
                                                         <img src="{{ asset('admin/assets/images/users/profil.jpg') }}" alt="" height="30">
                                                     </span>

@@ -72,7 +72,7 @@
 
                         @if(Auth::guard('agent')->user())
 
-                            @if(Auth::guard('agent')->user()->role == 1)
+                            @if(Auth::guard('agent')->user()->role == 1 || Auth::guard('agent')->user()->role == 4)
                                 {{--
                                 <li>
                                     <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -145,17 +145,17 @@
                                 
                             @endif
 
-                            @if(Auth::guard('agent')->user()->role != 1)
+                            @if(Auth::guard('agent')->user()->role != 1 || Auth::guard('agent')->user()->role == 4 )
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
                                     <i class="fa fa-store-alt"></i>
                                     <span key="t-ecommerce">Bagages et Colis</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
-                                    @if(Auth::guard('agent')->user()->role == 2)
+                                    @if(Auth::guard('agent')->user()->role == 2 || Auth::guard('agent')->user()->role == 4 )
                                         <li><a href="{{route('agent.bagage.index')}}" key="t-products"> <i class="fa fa-luggage-cart"></i>Bagages</a></li>
                                     @endif
-                                    @if(Auth::guard('agent')->user()->role == 3)
+                                    @if(Auth::guard('agent')->user()->role == 3 || Auth::guard('agent')->user()->role == 4 )
                                         <li><a href="{{route('agent.colis.index')}}" key="t-products"> <i class="fa fa-suitcase-rolling"></i>Colis</a></li>
                                     @endif
                                 </ul>
