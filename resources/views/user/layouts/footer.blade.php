@@ -1,12 +1,12 @@
      
        <!-- Roadmap start -->
-    <section class="section bg-white" id="roadmap">
+    <section class="section section-newsletter" id="roadmap">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-12">
                     <div class="text-center mb-3 p-4">
                         <div class="small-title">LE MONDE DE TouCki</div>
-                        <h1 class="text-center">Recevez des réductions exclusives et des mises à jour de voyage directement dans votre boîte de réception.</h1>
+                        <h1 class="text-center h1-newsletter">Recevez des réductions exclusives et des mises à jour de voyage directement dans votre boîte de réception.</h1>
                         <form action="{{ route('contact.post') }}" method="post" class="">
                             @csrf
                             <div class="row text-center mt-4">

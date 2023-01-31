@@ -96,6 +96,30 @@
                             </div>
                         </div>
                     </div>
+
+                     <div class="col-md-12 sectionCompteMobile">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="media">
+                                    <div class="media-body">
+                                         <div class="mt-4 me-md-0">
+                                            <img src="{{('user/assets/images/dowload/compteClient.svg')}}" alt="" class="img-fluid mx-auto d-block" style="width: 60%;">
+                                        </div>
+                                        <h5 class="text-center">Creer votre compte TouCki</h5>
+                                        <div class="mt-4 mt-md-auto">
+                                            <p class="text-muted">If several languages coalesce, the grammar of the resulting language is
+                                                more simple and regular than of the individual will be more simple and regular than the
+                                                existing.</p>
+                                        </div>
+                                        <div class="button-items mb-3 d-flex">
+                                            <a href="{{ route('client.register') }}" class="btn btn-success btn-block-for-client-create"> <i class="bx bx-user-circle"> </i> Compte Client</a>
+                                            <a href="{{ route('agence.create') }}" class="btn btn-primary btn-block-for-agence-create"> <i class="bx bxs-institution "> </i> Compte Agence</a>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <!-- end row -->
             </div>
@@ -107,7 +131,7 @@
 
   
    <!-- about section start -->
-    <section class="section pt-0 mb-5 bg-white" id="about">
+    <section class="section pt-0 mb-5 bg-white sectionCompteDesktope" id="about">
         <div class="container">
             <div class="row align-items-center p-1">
                 <div class="col-lg-5">
@@ -118,11 +142,6 @@
                             <br> Voyager en bus, c’est choisir des trajets à prix réduits dans tout le Sénégal, comparés au train et à l’avion.
                             <br> Avec des itinéraires quotidiens vers les villes et capitales du pays, vous pouvez organiser des escapades parfaitement adaptées à tous les budgets.
                         </p>
-                    </div>
-                    <div class="text-muted mt-4">
-                        <p class="mb-2"><i class="mdi mdi-circle-medium text-success me-1"></i>Donec pede justo vel
-                            aliquet</p>
-                        <p><i class="mdi mdi-circle-medium text-success me-1"></i>Aenean et nisl sagittis</p>
                     </div>
                     <div class="button-items mb-3">
                         <a href="#whileAgence" class="btn btn-primary btn-block-for-agence-create text-uppercase"> <i class="bx bxs-institution"></i> Pour Quoi avoir un compte agence ou client sur TouCki ?</a>
@@ -161,7 +180,7 @@
     <!-- about section end -->
 
      <!-- Features start -->
-    <section class="section p-1" id="whileAgence">
+    <section class="section p-1 sectionCompteDesktope" id="whileAgence">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -176,101 +195,10 @@
                                             Nous sommes convaincus que le digital est un facteur de croissance et de survie pour toutes entreprises quels que soient la taille et le secteur, c’est pourquoi nous nous engageons à vous accompagner à maximiser votre performance et vos résultats grâce à la digitalisation. 
                                         </p>
 
-                                        <div class="accordion" id="accordionExample">
-                                            <div class="accordion-item">
-                                                <h2 class="accordion-header" id="headingOne">
-                                                    <button class="accordion-button fw-medium" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                    Accordion Item #1
-                                                    </button>
-                                                </h2>
-                                                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                                    <div class="accordion-body">
-                                                        <div class="text-muted">
-                                                            <strong class="text-dark">This is the first item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="accordion-item">
-                                                <h2 class="accordion-header" id="headingTwo">
-                                                    <button class="accordion-button fw-medium collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                                    Accordion Item #2
-                                                    </button>
-                                                </h2>
-                                                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                                    <div class="accordion-body">
-                                                        <div class="text-muted">
-                                                            <strong class="text-dark">This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                                                    
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="accordion-item">
-                                                <h2 class="accordion-header" id="headingThree">
-                                                    <button class="accordion-button fw-medium collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                                    Accordion Item #3
-                                                    </button>
-                                                </h2>
-                                                <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                                                    <div class="accordion-body">
-                                                        <div class="text-muted">
-                                                            <strong class="text-dark">This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                                                    
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        <p class="text-muted">
+                                            Nous méttons à votre disposition une multitude d'agences de transport. Des mises à jour de bus en direct aux billets mobiles, notre application innovante est le moyen idéal pour planifier et suivre votre voyage.
+                                        </p>
 
-                                            <div class="accordion-item">
-                                                <h2 class="accordion-header" id="headingThree4">
-                                                    <button class="accordion-button fw-medium collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree4" aria-expanded="false" aria-controls="collapseThree4">
-                                                    Accordion Item #4
-                                                    </button>
-                                                </h2>
-                                                <div id="collapseThree4" class="accordion-collapse collapse" aria-labelledby="headingThree4" data-bs-parent="#accordionExample">
-                                                    <div class="accordion-body">
-                                                        <div class="text-muted">
-                                                            <strong class="text-dark">This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                                                    
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="accordion-item">
-                                                <h2 class="accordion-header" id="headingThree5">
-                                                    <button class="accordion-button fw-medium collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree5" aria-expanded="false" aria-controls="collapseThree5">
-                                                    Accordion Item #5
-                                                    </button>
-                                                </h2>
-                                                <div id="collapseThree5" class="accordion-collapse collapse" aria-labelledby="headingThree5" data-bs-parent="#accordionExample">
-                                                    <div class="accordion-body">
-                                                        <div class="text-muted">
-                                                            <strong class="text-dark">This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                                                    
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="accordion-item">
-                                                <h2 class="accordion-header" id="headingThree6">
-                                                    <button class="accordion-button fw-medium collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree6" aria-expanded="false" aria-controls="collapseThree6">
-                                                    Accordion Item #6
-                                                    </button>
-                                                </h2>
-                                                <div id="collapseThree6" class="accordion-collapse collapse" aria-labelledby="headingThree6" data-bs-parent="#accordionExample">
-                                                    <div class="accordion-body">
-                                                        <div class="text-muted">
-                                                            <strong class="text-dark">This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                                                    
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- end accordion -->
                                     </div>
                                 </div>
                                 <!-- end col -->
@@ -284,8 +212,60 @@
         </div>
     </section>
 
+    <section class="section p-1 sectionCompteDesktope" id="whileAgence">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card card-body">
+                        <h4 class="card-title mt-0">Special title treatment</h4>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional
+                            content.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card card-body">
+                        <h4 class="card-title mt-0">Special title treatment</h4>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional
+                            content.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card card-body">
+                        <h4 class="card-title mt-0">Special title treatment</h4>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional
+                            content.</p>
+                    </div>
+                </div>
+                 <div class="col-lg-4">
+                    <div class="card card-body">
+                        <h4 class="card-title mt-0">Special title treatment</h4>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional
+                            content.</p>
+                    </div>
+                </div>
+
+                 <div class="col-lg-4">
+                    <div class="card card-body">
+                        <h4 class="card-title mt-0">Special title treatment</h4>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional
+                            content.</p>
+                    </div>
+                </div>
+
+                 <div class="col-lg-4">
+                    <div class="card card-body">
+                        <h4 class="card-title mt-0">Special title treatment</h4>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional
+                            content.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- end row -->
+        </div>
+    </section>
+
     <!-- Features start -->
-    <section class="section bg-white" id="features">
+    <section class="section bg-white sectionCompteDesktope" id="features">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 bg-primary">
@@ -324,15 +304,24 @@
                 </div>
             </div>
             <!-- end row  -->
+        </div>
+        <!-- end container -->
+    </section>
+    <!-- Features end -->
 
-            <div class="row align-items-center mt-5 pt-md-5">
-                    <div class="col-lg-12 bg-primary">
-                        <div class="text-center">
-                            <h4 class="text-white pt-2">Créer votre compte client de voyage sur TouCki</h4>
-                            <div class="small-title text-white">Features</div>
-                        </div>
+
+     <section class="section bg-white sectionCompteDesktope" id="features">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 bg-primary">
+                    <div class="text-center">
+                        <h4 class="text-white pt-2">Créer votre compte client de voyage sur TouCki</h4>
+                        <div class="small-title text-white">Features</div>
                     </div>
-                <!-- end row -->
+                </div>
+            </div>
+            <!-- end row -->
+            <div class="row align-items-center mt-5 pt-md-5">
                 <div class="col-md-5">
                     <div class="mt-4 mt-md-0">
                         <div class="d-flex align-items-center mb-2">
@@ -358,18 +347,15 @@
                         <img src="{{('user/assets/images/dowload/compteClient.svg')}}" alt="" class="img-fluid mx-auto d-block">
                     </div>
                 </div>
-
             </div>
             <!-- end row -->
         </div>
-        <!-- end container -->
-    </section>
-    <!-- Features end -->
+     </section>
 
-
-
+    
+    
     <!-- Features start -->
-    <section class="section " id="features">
+    <section class="section sectionCompteDesktope" id="features">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6 ms-auto">
@@ -383,12 +369,6 @@
                         <p class="text-muted">
                             Téléchargez gratuitement l'application TouCki pour bénéficier d’une expertise de qualité et organiser de vos voyages en toute confiance.
                         </p>
-                        
-                        <div class="text-muted mt-4">
-                            <p class="mb-2"><i class="mdi mdi-circle-medium text-success me-1"></i>Donec pede justo vel
-                                aliquet</p>
-                            <p><i class="mdi mdi-circle-medium text-success me-1"></i>Aenean et nisl sagittis</p>
-                        </div>
                         
                     </div>
                 </div>

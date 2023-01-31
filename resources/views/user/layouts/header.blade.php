@@ -144,18 +144,19 @@
 
             <ul class="navbar-mobile-show">
                 <li class="nav-item">
-                    <a class="nav-link {{ set_active_roote('index') }} " href="/"><i class="fa fa-home fa-fa-item"></i></a>
+                    <a class="nav-link {{ set_active_roote('index') }} " href="{{ route('index') }}" ><i class="fa fa-home fa-fa-item"></i></a>
                 </li>
-                {{--
+                
                 <li class="nav-item">
-                    <a class="nav-link {{ set_active_roote('agence.index') }} " href="{{ route('agence.index') }}"><i class="fa fa-building fa-fa-item"></i></a>
+                    <a class="nav-link {{ set_active_roote('about.index') }}" href="{{ route('about.index') }}"><i class="fa fa-bookmark "></i></a>
                 </li>
-                --}}
+
                 <li class="nav-item">
                     <a class="nav-link {{ set_active_roote('client.index') }} " href="{{ route('client.index') }}"><i class="fa fa-suitcase-rolling fa-fa-item"></i> </a>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link {{ set_active_roote('setting.index') }} " href="{{ route('setting.index') }}"><i class="fa fa-cog fa-fa-item"></i></a>
+                    <a class="nav-link {{ set_active_roote('setting.index') }} " href="{{ route('setting.index') }}"><i class="fa fa-cogs fa-fa-item"></i></a>
                 </li>
 
                 <li class="nav-item">

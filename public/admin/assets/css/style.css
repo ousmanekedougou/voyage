@@ -129,10 +129,40 @@
         height: 0px;
         visibility: none;
         opacity: 0;
-    }
+}
+.sectionCompteMobile{
+    width: 0px;
+    height: 0px;
+    visibility: hidden;
+    opacity: 0;
+    overflow: hidden;
+}
+
+.sectionCompteDesktope{
+    width: 100%;
+    height: auto;
+    visibility: visible;
+    opacity: 1;
+    overflow: visible;
+}
+
+ .button-client-bar{
+        visibility: visible;
+        opacity: 1;
+}
+.navbar-admin-mobile-show{
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 0;
+    width: 0px;
+    height: 0px;
+}
+
+
 @media only screen and (max-width:1000px) {
    
-     .row_pricipal{
+    .row_pricipal{
          padding-top: 35px;
      }
      .row_pricipal .card_show{
@@ -309,11 +339,8 @@
     }
     .setting-img{
         visibility: visible;
-        width: 100%;
-        height: 100%;
-    }
-    .setting-mobile{
-        padding-left: 5px;
+        width: 80%;
+        height: auto;
     }
     .setting-a-m{
         margin-left: 10px;
@@ -376,7 +403,30 @@
         opacity: 0;
     }
 
-    
+  .sectionCompteMobile{
+    width: 100%;
+    height: auto;
+    visibility: visible;
+    opacity: 1;
+    overflow: visible;
+  }
+
+  .sectionCompteDesktope{
+    width: 0px;
+    height: 0px;
+    visibility: hidden;
+    opacity: 0;
+    overflow: hidden;
+    }
+    /* .section-newsletter{
+        margin-top: -43rem;
+        padding-top: 1px;
+        background-color: white;
+    } */
+    .h1-newsletter{
+        font-size: 12px;
+        font-weight: 500;
+    }
    
  }
 
@@ -384,18 +434,7 @@
 
    
  /* Pour le responsive admin client  */
-    .button-client-bar{
-        visibility: visible;
-        opacity: 1;
-    }
-   .navbar-admin-mobile-show{
-        display: none;
-        visibility: hidden;
-        opacity: 0;
-        z-index: 0;
-        width: 0px;
-        height: 0px;
-    }
+   
 
 @media only screen and (max-width:1000px){
     .show-logo-toucki{
