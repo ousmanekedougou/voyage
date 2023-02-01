@@ -159,6 +159,22 @@
     height: 0px;
 }
 
+.footer-mobile{
+    width: 0px;
+    height: 0px;
+    opacity: 0;
+    visibility: hidden;
+    overflow: hidden;
+}
+
+.footer-desktop{
+    width: 100%;
+    height: auto;
+    opacity: 1;
+    visibility: visible;
+    overflow: visible;
+}
+
 
 @media only screen and (max-width:1000px) {
    
@@ -361,6 +377,7 @@
     }
     .section-collumn{
         margin-top: 50px;
+        margin-bottom: -45rem;
     }
 
     section #agenceBtn{
@@ -418,14 +435,30 @@
     opacity: 0;
     overflow: hidden;
     }
-    /* .section-newsletter{
-        margin-top: -43rem;
-        padding-top: 1px;
+    .section-newsletter{
+        padding-bottom: -30rem;
+        margin-bottom: -7rem;
         background-color: white;
-    } */
+    }
     .h1-newsletter{
         font-size: 12px;
         font-weight: 500;
+    }
+
+    .footer-mobile{
+        width: 100%;
+        height: auto;
+        opacity: 1;
+        visibility: visible;
+        overflow: visible;
+    }
+
+    .footer-desktop{
+        width: 0px;
+        height: 0px;
+        opacity: 0;
+        visibility: hidden;
+        overflow: hidden;
     }
    
  }

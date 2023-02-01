@@ -97,7 +97,7 @@
                         </div>
                     </div>
 
-                     <div class="col-md-12 sectionCompteMobile">
+                    <div class="col-md-12 sectionCompteMobile">
                         <div class="card">
                             <div class="card-body">
                                 <div class="media">

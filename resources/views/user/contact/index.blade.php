@@ -1,18 +1,18 @@
 @extends('user.layouts.app',['title' => 'Contact'])
 <style>
-     /* .bg-ico-hero{
+    .bg-ico-hero{
         background-image:url(./user/assets/images/dowload/siege.jpg) !important;
         background-size:cover;background-position:top !important;
         height: 100px !important;
     }
     .section .container .row_pricipal{
         margin-top:-70px;
-    } */
+    }
 </style>
 @section('main-content')
 
    <!-- hero section start -->
-    <section class="section hero-section bg-ico-hero"  id="home">
+    <section class="section hero-section bg-ico-hero section-responsive"  id="home">
         <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
                 <div class="row align-items-center row_pricipal">
@@ -34,8 +34,16 @@
 
  
     <!-- about section start -->
-    <section class="section pt-4 bg-white" id="about">
+    <section class="section bg-white settings-section-mobile" id="about">
         <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="text-center mb-5">
+                        <img class="setting-img" src="{{asset('user/assets/images/profile-img.png') }}" alt="" srcset="">
+                    </div>
+                </div>
+            </div>
 
             <div class="row align-items-center">
                 <div class="mt-4 mt-lg-0">
@@ -118,7 +126,7 @@
             </div>
             <!-- end row -->
 
-            <div class="row mb-5 pb-5">
+            <div class="row">
                 <div class="card-body">
                     <div id="panorama" class="gmaps-panaroma">
                         <iframe src="https://www.google.sn/maps/place/EMPRO+SN/@14.7111341,-17.4506503,699m/data=!3m2!1e3!4b1!4m5!3m4!1s0xec173eabb264a3f:0x3b03193b00bf067c!8m2!3d14.7111343!4d-17.4484441" style="width: 100%;height:100%;"></iframe>

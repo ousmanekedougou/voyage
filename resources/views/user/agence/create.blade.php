@@ -5,6 +5,12 @@
             background-size:cover;background-position:top !important;
             height: 100px !important;
         }
+        .section .container .row_pricipal{
+            margin-top:-70px;
+        }
+        .settings-section-mobile{
+            margin-top: -70px;
+        }
     </style>
 @section('main-content')
 
@@ -33,13 +39,16 @@
     <!-- hero section end -->
 
 
-        <section class="section bg-default" id="agence">
+        <section class="section bg-default settings-section-mobile" id="agence">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="text-center mb-5">
+                            <div class="text-center mb-1">
+                                <img class="setting-img" src="{{asset('user/assets/images/dowload/compteAgence.svg') }}" alt="" srcset="">
+                                
+                            </div>
                             <h4>Creer votre compte agence</h4>
-                            <!-- <div class="small-title">Fait votre choix</div> -->
                         </div>
                     </div>
                 </div>

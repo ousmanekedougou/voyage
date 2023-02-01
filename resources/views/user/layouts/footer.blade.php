@@ -43,7 +43,7 @@
     <!-- Roadmap end -->
      
      <!-- Footer start -->
-    <footer class="landing-footer">
+    <footer class="landing-footer footer-desktop">
         <div class="container">
             {{--
             <div class="row">
@@ -122,7 +122,20 @@
         </div>
         <!-- end container -->
     </footer>
-    <!-- Footer end -->
+
+    
+            <div class="container-fluid">
+                <footer class="footer footer-mobile">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <img src="{{asset('admin/assets/images/logo-dark.png')}}" alt="" height="20" class=""> <script>document.write(new Date().getFullYear())</script> Design & Develop by Themesbrand
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+                <!-- Footer end -->
+            </div>
    
     <!--  Large modal example -->
     <div class="modal fade bs-exampleLogin-modal-lg" tabindex="-1" role="dialog"
