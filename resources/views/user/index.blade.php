@@ -3,13 +3,16 @@
 .btn-block-for-agence-create,.btn-block-for-client-create{
     width: 100%;
 }
+.section .container .row_pricipal{
+    margin-top:-70px;
+}
 </style>
 @section('main-content')
   <!-- hero section start -->
     <section class="section hero-section bg-ico-hero section-responsive">
         <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
-            <div class="row align-items-center row_pricipal" style="margin-top: -70px;" >
+            <div class="row align-items-center row_pricipal">
                 <div class="card_show">
                     <div class="text-white-50">
                         <h1 class="text-white font-weight-semibold mb-3 hero-title">Yombalal Toucki Thi Biir Réwmi</h1>

@@ -150,6 +150,9 @@
                             {{-- La partie responsive de la navebar du clien --}}
                             <ul class="navbar-admin-mobile-show">
                                 <li class="nav-item">
+                                    <a class="nav-link {{ set_active_roote('customer.home') }} " href="{{ route('customer.home') }}"><i class="fa fa-home fa-fa-item"></i></a>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link {{ set_active_roote('customer.client.show') }} " href="{{ route('customer.client.show') }}"><i class="fa fa-ticket-alt fa-fa-item"></i></a>
                                 </li>
                                 <li class="nav-item">

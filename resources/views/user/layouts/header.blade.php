@@ -148,7 +148,7 @@
                 </li>
                 
                 <li class="nav-item">
-                    <a class="nav-link {{ set_active_roote('about.index') }}" href="{{ route('about.index') }}"><i class="fa fa-bookmark "></i></a>
+                    <a class="nav-link {{ set_active_roote('about.index') }}" href="{{ route('about.index') }}"><i class="fa fa-bookmark fa-fa-item"></i></a>
                 </li>
 
                 <li class="nav-item">
@@ -165,9 +165,9 @@
                 <li class="nav-item drop-down-mobile">
                     @if(!Auth::guard('web')->user() && !Auth::guard('agence')->user() && !Auth::guard('agent')->user() && !Auth::guard('client')->user())
                         <div class="dropdown d-inline-block">
-                            <span id="page-header-user-dropdown"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="d-xl-inline-block ms-1 btn btn-outline-primary" key="t-henry">
-                                <i class="mdi mdi-login fa-fa-item d-xl-inline-block"></i>
+                            <span class="d-xl-inline-block ms-1 login-user-button" id="page-header-user-dropdown"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" key="t-henry">
+                                <i class="fas fa-sign-in-alt fa-fa-item d-xl-inline-block"></i>
                             </span>
                             <div class="dropdown-menu dropdown-menu-end">
                                 <!-- item-->
@@ -204,13 +204,11 @@
                         @elseif(Auth::guard('client')->user())
                             <form id="logout-form-customer" action="{{ route('customer.customer.logout') }}" method="POST">
                                 @csrf
-                                <button type="submit" class="btn btn-outline-danger"><i class="mdi mdi-logout fa-fa-item d-xl-inline-block"></i></button>
+                                <button type="submit" class="btn btn-outline-danger"><i class="fas fa-sign-out-alt fa-fa-item d-xl-inline-block"></i></button>
                             </form>
                         @endif
                     @endif
                 </li>
-
-
             </ul>
 
             <div class="collapse navbar-collapse" id="topnav-menu-content">

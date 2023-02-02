@@ -1,13 +1,13 @@
 @extends('user.layouts.app',['title' => 'Contact'])
 <style>
-    .bg-ico-hero{
+    /* .bg-ico-hero{
         background-image:url(./user/assets/images/dowload/siege.jpg) !important;
         background-size:cover;background-position:top !important;
         height: 100px !important;
     }
     .section .container .row_pricipal{
         margin-top:-70px;
-    }
+    } */
 </style>
 @section('main-content')
 
