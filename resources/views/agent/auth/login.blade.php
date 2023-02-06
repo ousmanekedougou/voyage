@@ -59,6 +59,15 @@
                                     </a>
                                 </div>
                                 <div class="p-2">
+                                    @if(count($errors) > 0)
+                                        @foreach($errors->all() as $error)
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            <i class="mdi mdi-block-helper me-2"></i>
+                                                {{ $error }}
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                        @endforeach
+                                    @endif
                                     <form class="form-horizontal" action="{{ route('agent.agent.login') }}" method="POST">
                                         @csrf
         
@@ -92,7 +101,7 @@
                                         @if (Route::has('password.request'))
                                             <div class="mt-4 text-center">
                                               <a href="{{ route('agent.password.reset') }}" class="text-primary"><i class="mdi mdi-lock me-1"></i> J'ai oublier mon mot de passe ?</a>
-                                              <p>© <script>document.write(new Date().getFullYear())</script> TouCki. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand</p>
+                                              <p>© TouCki <script>document.write(new Date().getFullYear())</script></p>
                                             </div>
                                          @endif
                                     </form>

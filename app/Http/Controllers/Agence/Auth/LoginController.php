@@ -71,7 +71,7 @@ class LoginController extends Controller
          {
              if($admin->is_active == 0 || $admin->confirmation_token != null)
              {
-                 return ['email' => 'inactive','password' => 'Votre Compte n\'est pas actif veillez contacter le President de l\'AEERK  '];
+                 return ['email' => 'inactive','password' => 'Votre Compte n\'est pas actif. Nous allons éfféctuer quelques vérifications avant de l\'activer.Mércie de votre compréhension pour cette atente.'];
              }
              else
                 {

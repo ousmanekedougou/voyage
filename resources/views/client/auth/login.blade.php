@@ -58,6 +58,15 @@
                                     </a>
                                 </div>
                                 <div class="p-2">
+                                    @if(count($errors) > 0)
+                                        @foreach($errors->all() as $error)
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            <i class="mdi mdi-block-helper me-2"></i>
+                                                {{ $error }}
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                        @endforeach
+                                    @endif
                                     <form class="form-horizontal" action="{{ route('customer.customer.login') }}" method="POST">
                                         @csrf
         
@@ -91,8 +100,8 @@
                                         @if (Route::has('password.request'))
                                             <div class="mt-4 text-center">
                                               <a href="{{ route('customer.password.reset') }}" class="text-primary"><i class="mdi mdi-lock me-1"></i> J'ai oublier mon mot de passe ?</a>
-                                               <p class="mt-2">Creer votre compte client <a href="{{route('client.register')}}" class="fw-medium text-primary"> S'inscrire </a> </p>
-                                              <p>© <script>document.write(new Date().getFullYear())</script> TouCki. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand</p>
+                                               <p class="mt-2"><a href="{{route('client.register')}}" class="fw-medium text-primary"> Créer votre compte client TouCki </a> </p>
+                                              <p style="font-weight: 500;">© TouCki <script>document.write(new Date().getFullYear())</script></p>
                                             </div>
                                          @endif
                                     </form>
