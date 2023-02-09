@@ -541,7 +541,7 @@ class DatabaseSeeder extends Seeder
 
             for ($i=0; $i < 3; $i++) { 
                 Bus::create([
-                    'matricule' => 'MT'. $i + 1 .''. $itineraire->id,
+                    'matricule' => 'MT'. $i .'/'. $itineraire->id,
                     'place' => 80,
                     'status' => 0,
                     'itineraire_id' => $itineraire->id,
