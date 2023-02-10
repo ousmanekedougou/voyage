@@ -148,6 +148,7 @@
                                 </span>
                             </a>
                             {{-- La partie responsive de la navebar du clien --}}
+                            {{--
                             <ul class="navbar-admin-mobile-show">
                                 <li class="nav-item">
                                     <a class="nav-link {{ set_active_roote('customer.home') }} " href="{{ route('customer.home') }}"><i class="fa fa-home fa-fa-item"></i></a>
@@ -173,23 +174,17 @@
                                 </li>
 
                             </ul>
+                            --}}
                              {{-- Fin de la partie responsive de la navebar du clien --}}
                         @endif
 
                     </div>
-                    @if(!Auth::guard('client')->user()) 
-                    <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect"
+
+                    <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect button-client-bar"
                         id="vertical-menu-btn">
                         <i class="fa fa-fw fa-bars"></i>
                     </button>
-                    @endif
-
-                    @if(Auth::guard('client')->user()) 
-                        <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect button-client-bar"
-                            id="vertical-menu-btn">
-                            <i class="fa fa-fw fa-bars"></i>
-                        </button>
-                    @endif
+                    
                     
                     {{--
                     <!-- App Search-->
@@ -553,7 +548,6 @@
             </div>
             
         </header>
-
          {!! Toastr::message() !!}
 
        

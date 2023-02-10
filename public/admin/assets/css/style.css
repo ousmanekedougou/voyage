@@ -146,9 +146,9 @@
     overflow: visible;
 }
 
- .button-client-bar{
-        visibility: visible;
-        opacity: 1;
+.button-client-bar{
+    visibility: visible;
+    opacity: 1;
 }
 .navbar-admin-mobile-show{
     display: none;
@@ -498,12 +498,12 @@
         width: 0px;
         height: 0px;
     }
-   .button-client-bar{
+   /* .button-client-bar{
         visibility: hidden;
         opacity: 0;
         width: 0px;
         height: 0px;
-    }
+    } */
 
     .navbar-admin-mobile-show{
         padding-top: 8px;
