@@ -545,7 +545,10 @@
         overflow-x: hidden;
     }
 }
-nav
+
+
+/* le bottom bar du admin client */
+main
 {
     width: 0px;
     height: 0px;
@@ -553,8 +556,6 @@ nav
     opacity: 0;
     overflow: hidden;
 }
-
-/* le bottom bar */
 @media screen and (max-width: 767px) {
     :root{
         --main-color:#5352ed;
@@ -574,7 +575,7 @@ nav
         margin: 0 auto;
     }
 
-    nav{
+    main{
         position: fixed;
         visibility: visible;
         opacity: 1;
@@ -591,15 +592,15 @@ nav
                     rgb(0, 0, 0 / 30%) 0 30px 60px -30px;
     }
 
-    nav ul{
+    main ul{
         display: flex;
         align-items: center;
     }
 
-    nav :where(li , a){
+    main :where(li , a){
         position: relative;
     }
-    nav ul li a{
+    main ul li a{
         display: flex;
         align-items: center;
         justify-content: center;
@@ -613,19 +614,19 @@ nav
         transition: all .3s ease-out;
     }
 
-    nav ul li a:hover{
+    main ul li a:hover{
         color: var(--main-color);
     }
 
-    nav ul li a span{
+    main ul li a span{
         font-size: 10px;
 
     }
 
     /* Animation */
     /* 
-    nav li::before,
-    nav li::after{
+    main li::before,
+    main li::after{
         content: '';
         position: absolute;
         top: 1px;
@@ -634,23 +635,23 @@ nav
         background-color: red;
     }
 
-    nav li.active::before{
+    main li.active::before{
         left: -20px;
         border-radius: 0 0 30px 0;
     }
 
-    nav li.active::after{
+    main li.active::after{
         right: -20px;
         border-radius: 0 0 0 30px;
     }
 
-    nav li.active::before,
-    nav li.active::after{
+    main li.active::before,
+    main li.active::after{
         background-color: var(--lighter-color);
     }
 
-    nav li.active a::before, 
-    nav li.active a::after{
+    main li.active a::before, 
+    main li.active a::after{
         content: '';
         position: absolute;
         background-color: var(--main-color);
@@ -659,7 +660,7 @@ nav
 
 
 
-    nav li.active a::before{
+    main li.active a::before{
         top: 10px;
         left: 10px;
         width: calc(100% - 20px);
@@ -667,14 +668,14 @@ nav
         border-radius: 30px 30px 0 0;
     }
 
-    nav li.active a::after{
+    main li.active a::after{
         left: -10px;
         bottom: 0;
         width: 100px;
         height: 40px;
     }
 
-    nav li.active a{
+    main li.active a{
         color: var(--lighter-color);
     } */
 
@@ -699,7 +700,7 @@ nav
         margin: 0 auto;
     }
 
-    nav{
+    main{
         position: fixed;
         visibility: visible;
         opacity: 1;
@@ -716,15 +717,15 @@ nav
                     rgb(0, 0, 0 / 30%) 0 30px 60px -30px;
     }
 
-    nav ul{
+    main ul{
         display: flex;
         align-items: center;
     }
 
-    nav :where(li , a){
+    main :where(li , a){
         position: relative;
     }
-    nav ul li a{
+    main ul li a{
         display: flex;
         align-items: center;
         justify-content: center;
@@ -738,19 +739,19 @@ nav
         transition: all .3s ease-out;
     }
 
-    nav ul li a:hover{
+    main ul li a:hover{
         color: var(--main-color);
     }
 
-    nav ul li a span{
+    main ul li a span{
         font-size: 10px;
 
     }
 
     /* Animation */
     /* 
-    nav li::before,
-    nav li::after{
+    main li::before,
+    main li::after{
         content: '';
         position: absolute;
         top: 1px;
@@ -759,23 +760,23 @@ nav
         background-color: red;
     }
 
-    nav li.active::before{
+    main li.active::before{
         left: -20px;
         border-radius: 0 0 30px 0;
     }
 
-    nav li.active::after{
+    main li.active::after{
         right: -20px;
         border-radius: 0 0 0 30px;
     }
 
-    nav li.active::before,
-    nav li.active::after{
+    main li.active::before,
+    main li.active::after{
         background-color: var(--lighter-color);
     }
 
-    nav li.active a::before, 
-    nav li.active a::after{
+    main li.active a::before, 
+    main li.active a::after{
         content: '';
         position: absolute;
         background-color: var(--main-color);
@@ -784,7 +785,7 @@ nav
 
 
 
-    nav li.active a::before{
+    main li.active a::before{
         top: 10px;
         left: 10px;
         width: calc(100% - 20px);
@@ -792,14 +793,14 @@ nav
         border-radius: 30px 30px 0 0;
     }
 
-    nav li.active a::after{
+    main li.active a::after{
         left: -10px;
         bottom: 0;
         width: 100px;
         height: 40px;
     }
 
-    nav li.active a{
+    main li.active a{
         color: var(--lighter-color);
     } */
 

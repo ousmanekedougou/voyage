@@ -3,7 +3,7 @@
                     <div class="row">
                         @if(Auth::guard('client')->user())
                         <div class="container">
-                            <nav>
+                            <main>
                                 <ul>
                                     <li class="">
                                         <a class="{{ set_active_roote('customer.home') }} " href="{{ route('customer.home') }}" id="home">
@@ -47,7 +47,7 @@
                                         </div>
                                     </li>
                                 </ul>
-                            </nav>
+                            </main>
                         </div>
                         @else
                         
