@@ -1,14 +1,66 @@
             <footer class="footer">
                 <div class="container-fluid">
                     <div class="row">
+                        @if(Auth::guard('client')->user())
+                        <div class="container">
+                            <nav>
+                                <ul>
+                                    <li class="">
+                                        <a class="{{ set_active_roote('customer.home') }} " href="{{ route('customer.home') }}" id="home">
+                                            <span> Home</span>
+                                            <i class="bx bx-home-circle   fa-fa-item"></i>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a class="{{ set_active_roote('customer.client.show') }} " href="{{ route('customer.client.show') }}" id="drop">
+                                            <span>Ticket</span>
+                                            <i class="bx bx-credit-card  fa-fa-item"></i>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a class="{{ set_active_roote('customer.bagage.index') }} " href="{{ route('customer.bagage.index') }}" id="store">
+                                            <span>Colis</span>
+                                            <i class="bx bx-store-alt  fa-fa-item"></i>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a class="{{ set_active_roote('customer.colis.index') }} " href="{{ route('customer.colis.index') }}" id="wishlist">
+                                            <span>Bagages</span>
+                                            <i class="bx bx-package  fa-fa-item"></i>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a class="{{ set_active_roote('setting.index') }} dropdown-toggle" id="cart"  data-bs-toggle="dropdown" aria-expanded="false">
+                                            <span>Regions</span>
+                                            <i class="bx bx-map  fa-fa-item"></i>
+                                        </a>
+                                        <div class="dropdown-menu drop-down-mobile scrollable-menu">
+                                            @foreach(region() as $region)
+                                                <a href="{{ route('customer.agence.region',$region->slug) }}" class="dropdown-item" >
+                                                    <i class="fa fa-city text-mueted"></i> {{$region->name}}
+                                                </a>
+                                            @endforeach
+                                        </div>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        @else
+                        
                         <div class="col-sm-6">
                             <script>document.write(new Date().getFullYear())</script> © TouCki
                         </div>
                         <div class="col-sm-6">
                             <div class="text-sm-end d-none d-sm-block">
-                                Design & Develop by KdgWeb
+                                Develop by KdgWeb
                             </div>
                         </div>
+                        @endif
+                        
                     </div>
                 </div>
                 

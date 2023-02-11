@@ -17,9 +17,12 @@
         <link href='//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet'>
         --}}
          <link href="{{asset('admin/assets/css/style.css')}}"  rel="stylesheet" type="text/css" />
-         
         <script src="{{asset('admin/assets/css/jquery-3.6.0.min.js')}}"></script>
-        <link rel="stylesheet" href="{{asset('admin/assets/toastr/toastr.min.css')}}">zz
+        <link rel="stylesheet" href="{{asset('admin/assets/toastr/toastr.min.css')}}">
+
+         <!-- <link href="{{asset('admin/assets/css/line.min.css')}}"  rel="stylesheet" type="text/css" /> -->
+         <!-- <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"> -->
+         
 
         @section('headsection')
         @show

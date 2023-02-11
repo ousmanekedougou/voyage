@@ -67,7 +67,7 @@
                         @endif
 
                         @if(Auth::guard('agence')->user())
-                            <a href="{{ route('agence.agence.home') }}" class="logo logo-dark">
+                               <a href="{{ route('agence.agence.home') }}" class="logo logo-dark">
                                 <span class="logo-sm">
                                     <!-- <span class="text-bold text-uppercase text-white"></span> -->
                                     @if(Auth::guard('agence')->user()->logo == null)

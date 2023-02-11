@@ -23,7 +23,8 @@
         <script src="{{asset('admin/assets/js/pages/form-validation.init.js')}}"></script>
         
         <!-- App js -->
-        <script src="{{asset('admin/assets/js/app.js')}}"></script>z
+        <script src="{{asset('admin/assets/js/app.js')}}"></script>
+        <script src="{{asset('admin/assets/js/main.js')}}"></script>
 
         <script>
         function validation()
