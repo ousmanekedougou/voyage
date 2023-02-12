@@ -114,7 +114,8 @@
                                     <img src="{{asset('admin/assets/images/logo-dark.png')}}" alt="" height="19" class="logo logo-light">    
                                 </span>
                             </a>
-                            --}}                   
+                            --}}
+                                               
                             <a href="{{ route('customer.home') }}" class="logo logo-dark show-logo-a-toucki">
                                 <span class="logo-sm">
                                     @if(Auth::guard('client')->user()->image == null)

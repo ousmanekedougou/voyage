@@ -65,11 +65,11 @@
                                 </div>
 
                                 <div class="media-body overflow-hidden">
-                                    <h5 class="text-truncate font-size-15"><a href="#" class="text-white">
+                                    <h5 class="text-truncate font-size-15"><a href="#" class="@if($ticket->status == 1) text-white @else text-muted @endif">
                                         {{$ticket->siege->agence->name}}</a>
                                     </h5>
-                                    <p class="text-white mb-1"> Siege de {{ $ticket->siege->name }}</p>
-                                    <p class="text-white mb-1"> Destination {{ $ticket->ville->name }}</p>
+                                    <p class="@if($ticket->status == 1) text-white @else text-muted @endif mb-1"> Siege de {{ $ticket->siege->name }}</p>
+                                    <p class="@if($ticket->status == 1) text-white @else text-muted @endif mb-1"> Destination {{ $ticket->ville->name }}</p>
                                     
                                 </div>
                             </div>

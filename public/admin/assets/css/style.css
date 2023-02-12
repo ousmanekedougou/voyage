@@ -34,6 +34,11 @@
         opacity: 1;
         z-index: 1;
    }
+   .show-logo-toucki{
+        visibility: hidden;
+        opacity: 0;
+        z-index: 0;
+   }
 
     .section-agence-information{
         visibility: hidden;
@@ -547,10 +552,16 @@ main
    
 
     /* Animation */
-    .activeButton{
-        border-radius: 100%;
-        background-color: blue;
-        color: wheat;
+    .activeButton a i{
+       background-color:#556ee6;
+       color: white;
+       border-radius: 100%;
+       padding: 2px;
+       text-align: center;
+    }
+    .activeButton a span{
+        color: #556ee6;
+        font-weight: 500;
     }
     /* Fin  */
 
