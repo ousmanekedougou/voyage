@@ -67,7 +67,7 @@
                         @endif
 
                         @if(Auth::guard('agence')->user())
-                               <a href="{{ route('agence.agence.home') }}" class="logo logo-dark">
+                            <a href="{{ route('agence.agence.home') }}" class="logo logo-dark">
                                 <span class="logo-sm">
                                     <!-- <span class="text-bold text-uppercase text-white"></span> -->
                                     @if(Auth::guard('agence')->user()->logo == null)
@@ -147,43 +147,25 @@
                                     <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="19">
                                 </span>
                             </a>
-                            {{-- La partie responsive de la navebar du clien --}}
-                            {{--
-                            <ul class="navbar-admin-mobile-show">
-                                <li class="nav-item">
-                                    <a class="nav-link {{ set_active_roote('customer.home') }} " href="{{ route('customer.home') }}"><i class="fa fa-home fa-fa-item"></i></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link {{ set_active_roote('customer.client.show') }} " href="{{ route('customer.client.show') }}"><i class="fa fa-ticket-alt fa-fa-item"></i></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link {{ set_active_roote('customer.bagage.index') }} " href="{{ route('customer.bagage.index') }}"><i class="fa fa-luggage-cart fa-fa-item"></i></a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link {{ set_active_roote('customer.colis.index') }} " href="{{ route('customer.colis.index') }}"><i class="fa fa-suitcase-rolling fa-fa-item"></i> </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link {{ set_active_roote('setting.index') }} dropdown-toggle" href="" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-map fa-fa-item"></i></a>
-                                    <div class="dropdown-menu drop-down-mobile scrollable-menu">
-                                        @foreach(region() as $region)
-                                            <a href="{{ route('customer.agence.region',$region->slug) }}" class="dropdown-item" >
-                                                <i class="fa fa-city text-mueted"></i> {{$region->name}}
-                                            </a>
-                                        @endforeach
-                                    </div>
-                                </li>
-
-                            </ul>
-                            --}}
-                             {{-- Fin de la partie responsive de la navebar du clien --}}
                         @endif
 
                     </div>
-                    
-                    <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect button-client-bar"
-                        id="vertical-menu-btn">
-                        <i class="fa fa-fw fa-bars"></i>
-                    </button>
+                    @if(Auth::guard('client')->user())
+                        <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect button-client-bar"
+                            id="vertical-menu-btn">
+                            <i class="fa fa-fw fa-bars"></i>
+                        </button>
+                        <a href="{{ route('customer.home') }}" class="logo logo-light show-logo-toucki">
+                            <span class="logo-sm">
+                                <img src="{{asset('admin/assets/images/logo-dark.png')}}" alt="" height="19" class="logo logo-light">    
+                            </span>
+                        </a>
+                    @else
+                        <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect"
+                            id="vertical-menu-btn">
+                            <i class="fa fa-fw fa-bars"></i>
+                        </button>
+                    @endif
                     
                     
                     {{--

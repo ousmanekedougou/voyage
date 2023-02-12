@@ -28,13 +28,7 @@
         width: 0px;
         height: 0px;
     }
-    .show-logo-toucki{
-        visibility: hidden;
-        opacity: 0;
-        z-index: 0;
-        width: 0px;
-        height: 0px;
-   }
+   
    .show-logo-a-toucki{
         visibility: visible;
         opacity: 1;
@@ -146,10 +140,7 @@
     overflow: visible;
 }
 
-.button-client-bar{
-    visibility: visible;
-    opacity: 1;
-}
+
 .navbar-admin-mobile-show{
     display: none;
     visibility: hidden;
@@ -174,7 +165,10 @@
     visibility: visible;
     overflow: visible;
 }
-
+.button-client-bar{
+    visibility: visible;
+    opacity: 1;
+}
 
 @media only screen and (max-width:1000px) {
    
@@ -472,82 +466,8 @@
  }
 
 
-
-   
- /* Pour le responsive admin client  */
-   
-
-@media only screen and (max-width:1000px){
-    .show-logo-toucki{
-        visibility: visible;
-        opacity: 1;
-        z-index: 1;
-        background-color: none;
-        position: absolute;
-        top: -10px;
-    }
-   .show-brand-box-bg{
-        background: white !important;
-        width: 0px;
-        height: 0px;
-    }
-   .show-logo-a-toucki{
-        visibility: hidden;
-        opacity: 0;
-        z-index: 0;
-        width: 0px;
-        height: 0px;
-    }
-   /* .button-client-bar{
-        visibility: hidden;
-        opacity: 0;
-        width: 0px;
-        height: 0px;
-    } */
-
-    .navbar-admin-mobile-show{
-        padding-top: 8px;
-        display:flex;
-        margin-left: -45px;
-        visibility: visible;
-        opacity: 1;
-        z-index: 1;
-        width: 100%;
-        height: auto;
-    }
-    .navbar-admin-mobile-show .nav-item{
-        list-style: none;
-        color: #74788d;
-    }
-    .navbar-admin-mobile-show .nav-item a{
-        color: #74788d;
-    }
-    
-    .navbar-admin-mobile-show .drop-down-mobile  {
-        position: absolute;
-        right: 0;
-        /* top: 10px; */
-        margin-top: -8px;
-        margin-right: 20px;
-    }
-    .navbar-admin-mobile-show .nav-item .nav-link.active{color:#556ee6}
-    .navbar-admin-mobile-show .drop-down-mobile .dropdown .dropdown-menu{
-        position: absolute;
-        right: 0;
-    }
-    .navbar-admin-mobile-show .nav-item .fa-fa-item{
-        font-size: 15px;
-    }
-
-    .navbar-admin-mobile-show .nav-item .scrollable-menu {
-        height: auto;
-        max-height: 200px;
-        overflow-x: hidden;
-    }
-}
-
-
 /* le bottom bar du admin client */
+
 main
 {
     width: 0px;
@@ -563,17 +483,7 @@ main
         --dark-color:#2f3542
     }
 
-    a{
-        text-decoration: none;
-        color: inherit;
-    }
-    ul{
-        list-style: none;
-    }
-    .container{
-        max-width: 100%;
-        margin: 0 auto;
-    }
+    
 
     main{
         position: fixed;
@@ -590,6 +500,19 @@ main
         border-radius: 40px;
         box-shadow: rgb(50, 50, 93 / 25%) 0 50px 100px -20px,
                     rgb(0, 0, 0 / 30%) 0 30px 60px -30px;
+    }
+
+   
+    main ul{
+        list-style: none;
+    }
+     main ul a{
+        text-decoration: none;
+        color: inherit;
+    }
+    .container{
+        max-width: 100%;
+        margin: 0 auto;
     }
 
     main ul{
@@ -678,6 +601,18 @@ main
     main li.active a{
         color: var(--lighter-color);
     } */
+
+    .button-client-bar{
+    visibility: hidden;
+    opacity: 0;
+    width: 0px;
+    height: 0px;
+    }
+     .show-logo-toucki{
+        visibility: visible;
+        opacity: 1;
+        z-index: 1;
+   }
 
 }
 
@@ -803,5 +738,18 @@ main
     main li.active a{
         color: var(--lighter-color);
     } */
+
+
+    .button-client-bar{
+    visibility: hidden;
+    opacity: 0;
+    width: 0px;
+    height: 0px;
+    }
+     .show-logo-toucki{
+        visibility: visible;
+        opacity: 1;
+        z-index: 1;
+   }
 
 }
