@@ -33,6 +33,13 @@ if (!function_exists('set_active_roote')) {
     }
 }
 
+if (!function_exists('set_active_roote_bottom_bar')) {
+    function set_active_roote_bottom_bar($route)
+    {
+        return Route::is($route) ? 'activeButton' : '';
+    }
+}
+
 if (!function_exists('all_siege')) {
     function all_siege()
     {

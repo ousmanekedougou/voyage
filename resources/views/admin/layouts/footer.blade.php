@@ -5,36 +5,36 @@
                         <div class="container">
                             <main>
                                 <ul>
-                                    <li class="">
-                                        <a class="{{ set_active_roote('customer.home') }} " href="{{ route('customer.home') }}" id="home">
+                                    <li class="{{ set_active_roote_bottom_bar('customer.home') }} ">
+                                        <a  href="{{ route('customer.home') }}" id="home">
                                             <span> Home</span>
                                             <i class="bx bx-home-circle   fa-fa-item"></i>
                                         </a>
                                     </li>
 
-                                    <li>
-                                        <a class="{{ set_active_roote('customer.client.show') }} " href="{{ route('customer.client.show') }}" id="drop">
+                                    <li class="{{ set_active_roote_bottom_bar('customer.client.show') }} ">
+                                        <a  href="{{ route('customer.client.show') }}" id="drop">
                                             <span>Ticket</span>
                                             <i class="bx bx-credit-card  fa-fa-item"></i>
                                         </a>
                                     </li>
 
-                                    <li>
-                                        <a class="{{ set_active_roote('customer.bagage.index') }} " href="{{ route('customer.bagage.index') }}" id="store">
+                                    <li class="{{ set_active_roote_bottom_bar('customer.bagage.index') }} ">
+                                        <a  href="{{ route('customer.bagage.index') }}" id="store">
                                             <span>Colis</span>
                                             <i class="bx bx-store-alt  fa-fa-item"></i>
                                         </a>
                                     </li>
 
-                                    <li>
-                                        <a class="{{ set_active_roote('customer.colis.index') }} " href="{{ route('customer.colis.index') }}" id="wishlist">
+                                    <li class="{{ set_active_roote_bottom_bar('customer.colis.index') }} ">
+                                        <a  href="{{ route('customer.colis.index') }}" id="wishlist">
                                             <span>Bagages</span>
                                             <i class="bx bx-package  fa-fa-item"></i>
                                         </a>
                                     </li>
 
-                                    <li>
-                                        <a class="{{ set_active_roote('setting.index') }} dropdown-toggle" id="cart"  data-bs-toggle="dropdown" aria-expanded="false">
+                                    <li class="{{ set_active_roote_bottom_bar('setting.index') }}">
+                                        <a class=" dropdown-toggle" id="cart"  data-bs-toggle="dropdown" aria-expanded="false">
                                             <span>Regions</span>
                                             <i class="bx bx-map  fa-fa-item"></i>
                                         </a>
