@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   @include('admin.layouts.head')
-  
+  @section('headSection')
+  @show
 </head>
 <body data-sidebar="dark">
   <div id="layout-wrapper">
@@ -21,6 +22,8 @@
         <!-- END layout-wrapper -->
 
       @include('admin.layouts.setting')
+      @section('footerSection')
+      @show
 
 
 

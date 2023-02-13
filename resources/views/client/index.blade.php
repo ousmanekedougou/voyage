@@ -103,6 +103,7 @@
                             </div>
                             <div class="px-4 py-3 border-top bg-light">
                                 <ul class="list-inline mb-0 text-center">
+                                    
                                     <li class="list-inline-item me-3">
                                         <a href="{{ route('customer.agence.about',$agence->slug) }}" title="Detail" class="btn btn-primary position-relative p-0 avatar-xs rounded-circle ">
                                              <span class="avatar-title bg-transparent text-reset">

@@ -69,7 +69,7 @@
 
 
 
-            <div class="row" id="member_row">
+            <div class="row list-client-sm" id="member_row">
                 @foreach($clients as $client)
                     <div class="col-xl-4 col-sm-6">
                         <div class="card">
@@ -134,39 +134,104 @@
                                         
                                         >
                                     </li>
-
-                                    {{--
-                                    
-                                    <li class="list-inline-item">
-                                        <div class="form-check form-radio-primary mb-3">
-                                            <input class="form-check-input @error('presence') is-invalid @enderror" type="radio"
-                                                name="presence-{{ $client->id }}" id="formRadioColor-{{$client->id}}" value="1">
-                                            <label class="form-check-label" for="formRadioColor-{{$client->id}}">
-                                                Present
-                                            </label>
-                                        </div>
-                                    </li>
-
-                                    <li class="list-inline-item">
-                                        <div class="form-check form-radio-danger mb-3">
-                                            <input class="form-check-input @error('presence') is-invalid @enderror" type="radio"
-                                                name="presence-{{ $client->id }}" id="formRadioColore-{{$client->id}}" value="2">
-                                            <label class="form-check-label" for="formRadioColore-{{$client->id}}">
-                                                Absent
-                                            </label>
-                                        </div>
-                                    </li>
-                                    @error('presence')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                    --}}
                                 </ul>
                             </div>
                         </div>
                     </div>
                 @endforeach
+            </div>
+            <!-- end row -->
+
+            <div class="row list-client-lg">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row mb-2">
+                                <div class="col-sm-12">
+                                    <div class="search-box me-2 mb-2 d-inline-block">
+                                        <div class="position-relative">
+                                            <input type="text" class="form-control" placeholder="Search...">
+                                            <i class="bx bx-search-alt search-icon"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="table-responsive">
+                                <table class="table align-middle table-nowrap table-check">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th class="align-middle">Image</th>
+                                            <th class="align-middle">Prenom & Nom</th>
+                                            <th class="align-middle">Telephone</th>
+                                            <th class="align-middle">Destination</th>
+                                            <th class="align-middle">Date</th>
+                                            <th class="align-middle">Prix</th>
+                                            <th class="align-middle">Status Ticket</th>
+                                            <th class="align-middle">Methode de paiment</th>
+                                            <th class="align-middle">Details</th>
+                                            <th class="align-middle">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($clients as $client)
+                                            <tr>
+                                                <td>
+                                                    @if($client->image == null)
+                                                        <img src="{{Storage::url($client->customer->image)}}" alt=""
+                                                            class="avatar-sm">
+                                                    @else
+                                                        <img src="{{Storage::url($client->image)}}" alt=""
+                                                            class="avatar-sm">
+                                                    @endif
+                                                </td>
+                                                @if($client->name == null)
+                                                <td>{{ $client->customer->name }}</td>
+                                                <td>{{ $client->customer->phone }}</td>
+                                                @else
+                                                <td>{{ $client->name }}</td>
+                                                <td>{{ $client->phone }}</td>
+                                                @endif
+                                                <td>
+                                                   {{ $client->ville->name }}
+                                                </td>
+                                                <td>
+                                                    {{$client->registered_at}}
+                                                </td>
+                                                <td>
+                                                    <span class="badge badge-pill badge-soft-info font-size-12">{{ $client->ville->amount }} f</span>
+                                                </td>
+                                                <td>
+                                                    @if($client->amount == $client->ville->amount)
+                                                        <span class="badge badge-pill badge-soft-success font-size-12">Payer</span>
+                                                    @elseif($client->amount != $client->ville->amount)
+                                                        <span class="badge badge-pill badge-soft-danger font-size-12">Non Payer</span>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    <i class="fab fa-cc-mastercard me-1"></i> Wave
+                                                </td>
+                                                <td>
+                                                    <!-- Button trigger modal -->
+                                                    <button type="button" class="btn btn-primary btn-sm btn-rounded" data-bs-toggle="modal" data-bs-target="#subscribeModalagenceDetails-{{$client->id}}">
+                                                        Details
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex gap-3">
+                                                        <a href="javascript:void(0);" class="text-success"><i class="mdi mdi-pencil font-size-18"></i></a>
+                                                        <a href="javascript:void(0);" class="text-danger"><i class="mdi mdi-delete font-size-18"></i></a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <!-- end row -->
 

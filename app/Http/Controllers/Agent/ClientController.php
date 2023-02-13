@@ -88,9 +88,9 @@ class ClientController extends Controller
         $getBuse = Bus::where('id',$id)->first();
         $clients = Client::where('bus_id',$id)
             ->where('siege_id',Auth::guard('agent')->user()->siege_id)
-            ->where('registered_at','>=',Carbon::today()->format('Y-m-d'))
+            // ->where('registered_at','>=',Carbon::today()->format('Y-m-d'))
             ->where('status',0)
-            ->where('amount','!=',null)
+            // ->where('amount','!=',null)
             ->orderBy('id','ASC')
             ->paginate(10);
         return view('agent.client.show',compact('clients','getBuse'));
