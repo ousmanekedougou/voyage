@@ -149,7 +149,7 @@
                                             </div>
                                         </div>
                                     
-                                        <div class="mb-3">
+                                        <div class="mb-3 row">
                                             <label class="form-label" for="example-date-input" >Votre date de voyage</label>
                                             <div class="col-md-12">
                                                 <input name="date" class="form-control @error('date') is-invalid @enderror " type="date" value="{{ old('date') }}"

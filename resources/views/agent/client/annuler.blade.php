@@ -1,18 +1,21 @@
 @extends('admin.layouts.app')
 
-@section('headsection')
-    <link href="{{asset('admin/assets/libs/admin-resources/rwd-table/rwd-table.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('admin/assets/libs/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('admin/assets/css/table.css')}}" rel="stylesheet" type="text/css" />
-    <script src="{{asset('admin/assets/js/bootstrap-toggle.min.js')}}" ></script>
-    <link rel="stylesheet" href="{{asset('admin/assets/css/bootstrap-toggle.css')}}" />
-     <style>
-        /* .invoice-container{
-            padding: 2mm;
-            margin: 0 auto;
-            width: 58mm;
-        } */
-    </style> 
+@section('headSection')
+   <!-- DataTables -->
+    <link href="{{asset('admin/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('admin/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css')}}" rel="stylesheet"
+        type="text/css" />
+
+    <!-- Responsive datatable examples -->
+    <link href="{{asset('admin/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css')}}" rel="stylesheet"
+        type="text/css" />
+
+    <!-- Bootstrap Css -->
+    <link href="{{asset('admin/assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="{{asset('admin/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="{{asset('admin/assets/css/app.min.css')}}"  rel="stylesheet" type="text/css" />
 @endsection
 
 @section('main-content')
@@ -33,10 +36,7 @@
                                         <div class="media-body align-self-center">
                                             <div class="text-muted">
                                                 <h5 class="mb-1">Agence {{Auth::guard('agent')->user()->agence->name}}</h5>
-                                                <p class="mb-2">Itineraire de </p>
-                                                <p class="mb-0">
-                                                    La liste des clients qui ont annuler leurs tickets
-                                                </p>
+                                                <p class="mb-2">Siege de {{Auth::guard('agent')->user()->siege->name}}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -51,7 +51,7 @@
             
 
 
-
+            {{--
             <div class="row" id="member_row">
                 @foreach($clients as $client)
                     <div class="col-xl-4 col-sm-6">
@@ -108,13 +108,93 @@
                 @endforeach
             </div>
             <!-- end row -->
+            --}}
 
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title text-center"> La liste des clients qui ont annuler leurs tickets</h4>
+                            <table id="datatable-buttons"
+                                class="table table-bordered dt-responsive nowrap w-100">
+                                <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Prenom & nom</th>
+                                        <th>Telephone</th>
+                                        <th>Prix</th>
+                                        <th>Ticket</th>
+                                        <th>Detail</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+
+
+                                <tbody>
+                                    @foreach($clients as $client)
+                                        <tr>
+                                            <td>
+                                                @if($client->image != null)
+                                                    <img src="{{Storage::url($client->customer->image)}}" style="width: 40px;height:40px;" alt=""
+                                                        class="avatar-sm rounded-circle header-profile-user">
+                                                @else
+                                                    <img src="{{ asset('admin/assets/images/users/profil.jpg') }}" style="width: 40px;height:40px;" alt=""
+                                                        class="avatar-sm rounded-circle header-profile-user">
+                                                @endif
+                                            </td>
+                                            @if($client->name == null)
+                                            <td>{{ $client->customer->name }}</td>
+                                            <td>{{ $client->customer->phone }}</td>
+                                            @else
+                                            <td>{{ $client->name }}</td>
+                                            <td>{{ $client->phone }}</td>
+                                            @endif
+                                            <td>
+                                                <span class="badge badge-pill badge-soft-info font-size-12">{{ $client->ville->amount }} f</span>
+                                            </td>
+                                            <td>
+                                                @if($client->amount == $client->ville->amount)
+                                                    <span class="badge badge-pill badge-soft-primary font-size-12"><i class="fab fa-cc-mastercard me-1"></i> Wave</span>
+                                                @elseif($client->amount != $client->ville->amount)
+                                                    <span class="badge badge-pill badge-soft-danger font-size-12">Non Payer</span>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <!-- Button trigger modal -->
+                                                <button type="button" class="btn btn-primary btn-sm btn-rounded" data-bs-toggle="modal" data-bs-target="#subscribeModalagenceDetails-{{$client->id}}">
+                                                    Details
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex gap-3 text-center">
+                                                    @if(Auth::guard('agent')->user()->agence->mathod_tiket == 0)
+                                                        @if($client->status == 1)
+                                                                <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdropPayer-{{$client->id}}" class="btn btn-success btn-sm btn-block"><i class="fas fa-money-bill me-1"></i> Rembourser le ticket de {{$client->ville->amount}} f </a>
+                                                            
+                                                        @elseif($client->status == 2)
+                                                            <p class="text-primary mb-1 font-size-15">Le ticket n'est plus remboursable</p> 
+                                                        @endif
+                                                    @else
+                                                            <p class="text-primary mb-1 font-size-15">Le ticket n'est plus remboursable</p> 
+                                                    @endif
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div> <!-- end col -->
+            </div> <!-- end row -->
+            {{--
             <div class="row">
                 <div class="col-lg-12">
                     {{$clients->links()}}
                 </div>
             </div>
             <!-- end row -->
+            --}}
 
         </div> <!-- container-fluid -->
     </div>
@@ -307,102 +387,101 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                         <div class="modal-body">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="tab-content" id="v-pills-tabContent">
-                                            <div class="" id="v-pills-payment" role="tabpanel"
-                                                aria-labelledby="v-pills-payment-tab">
-                                                <div>
-                                                    <h4 class="card-title">Payment information</h4>
-                                                    <p class="card-title-desc">Fill all information below</p>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="tab-content" id="v-pills-tabContent">
+                                        <div class="" id="v-pills-payment" role="tabpanel"
+                                            aria-labelledby="v-pills-payment-tab">
+                                            <div>
+                                                <h4 class="card-title">Payment information</h4>
+                                                <p class="card-title-desc">Fill all information below</p>
 
-                                                    <form action="{{ route('customer.client.paiment') }}" method="GET">
-                                                        @csrf
-                                                        <input type="hidden" name="siege" value="{{ $ticket->siege->id }}">
-                                                        <input type="hidden" name="ville" value="{{ $ticket->ville->amount }}">
-                                                        <input type="hidden" name="registered_at" value="{{ $ticket->registered_at }}">
-                                                        <div>
-                                                            <div class="form-check form-check-inline font-size-16">
-                                                                <input class="form-check-input" type="radio"
-                                                                    name="paymentoptionsRadio" id="paymentoptionsRadio1"
-                                                                    checked>
-                                                                <label class="form-check-label font-size-13"
-                                                                    for="paymentoptionsRadio1"><i
-                                                                        class="fab fa-cc-mastercard me-1 font-size-20 align-top"></i>
-                                                                    Credit / Debit Card</label>
-                                                            </div>
-                                                            <div class="form-check form-check-inline font-size-16">
-                                                                <input class="form-check-input" type="radio"
-                                                                    name="paymentoptionsRadio" id="paymentoptionsRadio2">
-                                                                <label class="form-check-label font-size-13"
-                                                                    for="paymentoptionsRadio2"><i
-                                                                        class="fab fa-cc-paypal me-1 font-size-20 align-top"></i>
-                                                                    Paypal</label>
-                                                            </div>
-                                                            <div class="form-check form-check-inline font-size-16">
-                                                                <input class="form-check-input" type="radio"
-                                                                    name="paymentoptionsRadio" id="paymentoptionsRadio3">
-                                                                <label class="form-check-label font-size-13"
-                                                                    for="paymentoptionsRadio3"><i
-                                                                        class="far fa-money-bill-alt me-1 font-size-20 align-top"></i>
-                                                                    Cash on Delivery</label>
-                                                            </div>
+                                                <form action="{{ route('customer.client.paiment') }}" method="GET">
+                                                    @csrf
+                                                    <input type="hidden" name="siege" value="{{ $ticket->siege->id }}">
+                                                    <input type="hidden" name="ville" value="{{ $ticket->ville->amount }}">
+                                                    <input type="hidden" name="registered_at" value="{{ $ticket->registered_at }}">
+                                                    <div>
+                                                        <div class="form-check form-check-inline font-size-16">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="paymentoptionsRadio" id="paymentoptionsRadio1"
+                                                                checked>
+                                                            <label class="form-check-label font-size-13"
+                                                                for="paymentoptionsRadio1"><i
+                                                                    class="fab fa-cc-mastercard me-1 font-size-20 align-top"></i>
+                                                                Credit / Debit Card</label>
                                                         </div>
+                                                        <div class="form-check form-check-inline font-size-16">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="paymentoptionsRadio" id="paymentoptionsRadio2">
+                                                            <label class="form-check-label font-size-13"
+                                                                for="paymentoptionsRadio2"><i
+                                                                    class="fab fa-cc-paypal me-1 font-size-20 align-top"></i>
+                                                                Paypal</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline font-size-16">
+                                                            <input class="form-check-input" type="radio"
+                                                                name="paymentoptionsRadio" id="paymentoptionsRadio3">
+                                                            <label class="form-check-label font-size-13"
+                                                                for="paymentoptionsRadio3"><i
+                                                                    class="far fa-money-bill-alt me-1 font-size-20 align-top"></i>
+                                                                Cash on Delivery</label>
+                                                        </div>
+                                                    </div>
 
-                                                        <h5 class="mt-5 mb-3 font-size-15">For card Payment</h5>
-                                                        <div class="p-4 border">
-                                                            <div class="form-group mb-0">
-                                                                <label for="cardnumberInput">Card Number</label>
-                                                                <input type="text" class="form-control"
-                                                                    id="cardnumberInput"
-                                                                    placeholder="0000 0000 0000 0000">
+                                                    <h5 class="mt-5 mb-3 font-size-15">For card Payment</h5>
+                                                    <div class="p-4 border">
+                                                        <div class="form-group mb-0">
+                                                            <label for="cardnumberInput">Card Number</label>
+                                                            <input type="text" class="form-control"
+                                                                id="cardnumberInput"
+                                                                placeholder="0000 0000 0000 0000">
+                                                        </div>
+                                                        <div class="row">
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group mt-4 mb-0">
+                                                                    <label for="cardnameInput">Name on card</label>
+                                                                    <input type="text" class="form-control"
+                                                                        id="cardnameInput"
+                                                                        placeholder="Name on Card">
+                                                                </div>
                                                             </div>
-                                                            <div class="row">
-                                                                <div class="col-lg-6">
-                                                                    <div class="form-group mt-4 mb-0">
-                                                                        <label for="cardnameInput">Name on card</label>
-                                                                        <input type="text" class="form-control"
-                                                                            id="cardnameInput"
-                                                                            placeholder="Name on Card">
-                                                                    </div>
+                                                            <div class="col-lg-3">
+                                                                <div class="form-group mt-4 mb-0">
+                                                                    <label for="expirydateInput">Expiry date</label>
+                                                                    <input type="text" class="form-control"
+                                                                        id="expirydateInput" placeholder="MM/YY">
                                                                 </div>
-                                                                <div class="col-lg-3">
-                                                                    <div class="form-group mt-4 mb-0">
-                                                                        <label for="expirydateInput">Expiry date</label>
-                                                                        <input type="text" class="form-control"
-                                                                            id="expirydateInput" placeholder="MM/YY">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-lg-3">
-                                                                    <div class="form-group mt-4 mb-0">
-                                                                        <label for="cvvcodeInput">CVV Code</label>
-                                                                        <input type="text" class="form-control"
-                                                                            id="cvvcodeInput"
-                                                                            placeholder="Enter CVV Code">
-                                                                    </div>
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <div class="form-group mt-4 mb-0">
+                                                                    <label for="cvvcodeInput">CVV Code</label>
+                                                                    <input type="text" class="form-control"
+                                                                        id="cvvcodeInput"
+                                                                        placeholder="Enter CVV Code">
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                            <div class="row mt-4">
-                                                            <div class="col-sm-6">
-                                                            <button type="button" data-bs-dismiss="modal"
-                                                                    class="btn text-muted d-none d-sm-inline-block btn-link">
-                                                                    <i class="mdi mdi-arrow-left me-1"></i> Back to Shopping Cart </button>
-                                                            </div> <!-- end col -->
-                                                            <div class="col-sm-6">
-                                                                <div class="text-end">
-                                                                    <button type="submit" class="btn btn-success">
-                                                                        <i class="mdi mdi-truck-fast me-1"></i> Proceed to Shipping </button>
-                                                                </div>
-                                                            </div> <!-- end col -->
-                                                        </div>
-                                                    </form>
-                                                </div>
+                                                    </div>
+                                                        <div class="row mt-4">
+                                                        <div class="col-sm-6">
+                                                        <button type="button" data-bs-dismiss="modal"
+                                                                class="btn text-muted d-none d-sm-inline-block btn-link">
+                                                                <i class="mdi mdi-arrow-left me-1"></i> Back to Shopping Cart </button>
+                                                        </div> <!-- end col -->
+                                                        <div class="col-sm-6">
+                                                            <div class="text-end">
+                                                                <button type="submit" class="btn btn-success">
+                                                                    <i class="mdi mdi-truck-fast me-1"></i> Proceed to Shipping </button>
+                                                            </div>
+                                                        </div> <!-- end col -->
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            
+                            </div>
                         </div>
                 </div>
             </div>
@@ -411,38 +490,28 @@
     @endforeach
 @endsection
 
-@section('footersection')
+@section('footerSection')
 <!-- Responsive Table js -->
-    <script src="{{asset('admin/assets/libs/admin-resources/rwd-table/rwd-table.min.js')}}"></script>
-    <script src="{{asset('admin/assets/libs/select2/js/select2.min.js')}}"></script>
-    <!-- Init js -->
-    <script src="{{asset('admin/assets/js/pages/table-responsive.init.js')}}"></script>
-    <script src="{{asset('admin/assets/js/table.js')}}"></script>
+    <script src="{{asset('admin/assets/libs/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('admin/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+    <!-- Buttons examples -->
+    <script src="{{asset('admin/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
+    <script src="{{asset('admin/assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('admin/assets/libs/jszip/jszip.min.js')}}"></script>
+    <script src="{{asset('admin/assets/libs/pdfmake/build/pdfmake.min.js')}}"></script>
+    <script src="{{asset('admin/assets/libs/pdfmake/build/vfs_fonts.js')}}"></script>
+    <script src="{{asset('admin/assets/libs/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
+    <script src="{{asset('admin/assets/libs/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
+    <script src="{{asset('admin/assets/libs/datatables.net-buttons/js/buttons.colVis.min.js')}}"></script>
 
+    <!-- Responsive examples -->
+    <script src="{{asset('admin/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
+    <script src="{{asset('admin/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js')}}"></script>
 
-     <script>
-        
-        $('.toggle-class').on('change' ,function(){
-            var voyage_status = $(this).prop('checked') == true ? 1 : 0;
-            var client_id = $(this).data('id');
-            // var amount = $(this.data('value'));
-            
-            $.ajax({
-                type: 'GET',
-                dataType: 'JSON',
-                url: "{{ route('agent.client.presence') }}",
-                data: 
-                    {
-                        'voyage_status': voyage_status,
-                        'client_id': client_id,
-                        // 'amount': amount
-                    },
-                success: function(data){
-                    console.log('success')
-                }
-            });
-            
-        });
-    </script>
+    <!-- Datatable init js -->
+    <script src="{{asset('admin/assets/js/pages/datatables.init.js')}}"></script>
+
+    <script src="{{asset('admin/assets/js/app.js')}}"></script>
+
    
 @endsection

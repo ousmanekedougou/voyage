@@ -174,20 +174,6 @@
     visibility: visible;
     opacity: 1;
 }
-.list-client-lg{
-    visibility: visible;
-    opacity: 1;
-    width: 102%;
-    height: auto;
-    overflow: visible;
-}
-.list-client-sm{
-    visibility: hidden;
-    opacity: 0;
-    width: 0px;
-    height: 0px;
-    overflow: hidden;
-}
 
 @media only screen and (max-width:1000px) {
    
@@ -597,21 +583,7 @@ main
     opacity: 0;
    }
 
-   .list-client-sm{
-    visibility: visible;
-    opacity: 1;
-    width: 107%;
-    height: auto;
-    overflow: visible;
-    }
-    .list-client-lg{
-        visibility: hidden;
-        opacity: 0;
-        width: 0px;
-        height: 0px;
-        overflow: hidden;
-    }
-
+   
 }
 
 /* @media screen and (max-width: 350px) {

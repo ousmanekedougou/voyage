@@ -1,18 +1,21 @@
 @extends('admin.layouts.app')
 
-@section('headsection')
-    <link href="{{asset('admin/assets/libs/admin-resources/rwd-table/rwd-table.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('admin/assets/libs/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('admin/assets/css/table.css')}}" rel="stylesheet" type="text/css" />
-    <script src="{{asset('admin/assets/js/bootstrap-toggle.min.js')}}" ></script>
-    <link rel="stylesheet" href="{{asset('admin/assets/css/bootstrap-toggle.css')}}" />
-     <style>
-        /* .invoice-container{
-            padding: 2mm;
-            margin: 0 auto;
-            width: 58mm;
-        } */
-    </style> 
+@section('headSection')
+   <!-- DataTables -->
+    <link href="{{asset('admin/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('admin/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css')}}" rel="stylesheet"
+        type="text/css" />
+
+    <!-- Responsive datatable examples -->
+    <link href="{{asset('admin/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css')}}" rel="stylesheet"
+        type="text/css" />
+
+    <!-- Bootstrap Css -->
+    <link href="{{asset('admin/assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+    <!-- Icons Css -->
+    <link href="{{asset('admin/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
+    <!-- App Css-->
+    <link href="{{asset('admin/assets/css/app.min.css')}}"  rel="stylesheet" type="text/css" />
 @endsection
 
 @section('main-content')
@@ -20,22 +23,6 @@
     <div class="page-content">
         <div class="container-fluid">
 
-             <!-- start page title -->
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                <h4 class="mb-sm-0 font-size-18"></h4>
-
-                                <div class="page-title-right">
-                                    <ol class="breadcrumb m-0">
-                                        <li class="breadcrumb-item"><a href="{{ route('agent.send_sms') }}" class="btn btn-primary text-white">Envoyer un message aux absents</a></li>
-                                    </ol>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end page title -->
 
             <div class="row">
                 <div class="col-lg-12">
@@ -51,10 +38,15 @@
                                             <div class="text-muted">
                                                 <h5 class="mb-1">Agence {{Auth::guard('agent')->user()->agence->name}}</h5>
                                                 <p class="mb-2">Itineraire de {{ $getBuse->itineraire->name }}</p>
-                                                <p class="mb-0">
-                                                    La liste des client du buse {{ $getBuse->matricule }}
-                                                </p>
                                             </div>
+                                        </div>
+                                        <div class="page-title-right">
+                                            <ol class="breadcrumb m-0">
+                                                <li class="breadcrumb-item">
+                                                    <a data-bs-toggle="modal" data-bs-target="#staticBackdropAjoutClient" class="btn btn-success text-white btn-rounded waves-effect waves-light mb-2 me-2"><i
+                                                        class="mdi mdi-plus me-1"></i> Ajouter un client</a>
+                                                </li>
+                                            </ol>
                                         </div>
                                     </div>
                                 </div>
@@ -65,182 +57,116 @@
                 </div>
             </div>
             <!-- end row -->
-            
 
 
-
-            <div class="row list-client-sm" id="member_row">
-                @foreach($clients as $client)
-                    <div class="col-xl-4 col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="media">
-                                    @if($client->image == null)
-                                        <div class="avatar-md me-4">
-                                            <span class="avatar-title rounded-circle bg-light text-danger">
-                                                <img src="{{Storage::url($client->customer->image)}}" alt="">
-                                            </span>
-                                        </div>
-                                    @else
-                                        <div class="avatar-md me-4">
-                                            <span class="avatar-title rounded-circle bg-light text-danger font-size-16">
-                                                <img src="{{Storage::url($client->image)}}" alt="" height="30">
-                                            </span>
-                                        </div>
-                                    @endif
-
-                                    <div class="media-body overflow-hidden">
-                                        @if($client->name == null)
-                                            <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">{{ $client->customer->name }}</a></h5>
-                                            <p class="text-muted mb-1"> <i class="fa fa-mobile"></i> {{ $client->customer->phone }}</p>
-                                        @else
-                                            <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">{{ $client->name }}</a></h5>
-                                            <p class="text-muted mb-1"> <i class="fa fa-mobile"></i> {{ $client->phone }}</p>
-                                            <p class="text-muted mb-1"> <i class="fa fa-mobile"></i> {{ $client->cni }}</p>
-                                        @endif
-                                        <p class="text-muted mb-1 font-size-12"><i class="bx bxs-map"></i> Destination : {{ $client->ville->name }} </p> 
-                                        <p class="text-muted mb-1 font-size-12"><i class="fas fa-money-bill "></i> Prix : {{$client->ville->amount}} f </p> 
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="px-4 py-3 border-top">
-                                <ul class="list-inline mb-0">
-                                    <li class="list-inline-item">
-                                        @if($client->amount != $client->ville->amount)
-                                            <span class="badge bg-warning"><i class="bx bxs-user-x me-1"></i>
-                                                Tecket  non Payer
-                                            </span>
-                                        @elseif($client->amount == $client->ville->amount)
-                                            <span class="badge bg-success"><i class="bx bxs-user-check me-1"></i>
-                                                Ticket Payer
-                                            </span>
-                                        @endif
-                                        
-                                    </li>
-                                    <li class="list-inline-item">
-                                        <a href="" data-bs-toggle="modal" data-bs-target="#subscribeModalagenceDetails-{{$client->id}}" class="text-muted"><i class="fa fa-eye me-1"></i></a>
-                                    </li>
-
-                                    <li class="list-inline-item" style="float: right;">
-                                        <input data-id="{{ $client->id }}" class="toggle-class btn btn-sm" type="checkbox"
-                                            data-onstyle="success"
-                                            data-offstyle="danger"
-                                            data-toggle="toggle"
-                                            data-on="Present"
-                                            data-off="Absent"
-                                            data-amount="{{ $client->ville->amount }}"
-                                            {{$client->voyage_status == true ? 'checked' : ''}}
-                                        
-                                        >
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-            <!-- end row -->
-
-            <div class="row list-client-lg">
-                <div class="col-lg-12">
+            <div class="row">
+                <div class="col-12">
                     <div class="card">
-                        <div class="card-body">
-                            <div class="row mb-2">
-                                <div class="col-sm-12">
-                                    <div class="search-box me-2 mb-2 d-inline-block">
-                                        <div class="position-relative">
-                                            <input type="text" class="form-control" placeholder="Search...">
-                                            <i class="bx bx-search-alt search-icon"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-    
-                            <div class="table-responsive">
-                                <table class="table align-middle table-nowrap table-check">
-                                    <thead class="table-light">
-                                        <tr>
-                                            <th class="align-middle">Image</th>
-                                            <th class="align-middle">Prenom & Nom</th>
-                                            <th class="align-middle">Telephone</th>
-                                            <th class="align-middle">Destination</th>
-                                            <th class="align-middle">Date</th>
-                                            <th class="align-middle">Prix</th>
-                                            <th class="align-middle">Status Ticket</th>
-                                            <th class="align-middle">Methode de paiment</th>
-                                            <th class="align-middle">Details</th>
-                                            <th class="align-middle">Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($clients as $client)
-                                            <tr>
-                                                <td>
-                                                    @if($client->image == null)
-                                                        <img src="{{Storage::url($client->customer->image)}}" alt=""
-                                                            class="avatar-sm">
-                                                    @else
-                                                        <img src="{{Storage::url($client->image)}}" alt=""
-                                                            class="avatar-sm">
-                                                    @endif
-                                                </td>
-                                                @if($client->name == null)
-                                                <td>{{ $client->customer->name }}</td>
-                                                <td>{{ $client->customer->phone }}</td>
-                                                @else
-                                                <td>{{ $client->name }}</td>
-                                                <td>{{ $client->phone }}</td>
-                                                @endif
-                                                <td>
-                                                   {{ $client->ville->name }}
-                                                </td>
-                                                <td>
-                                                    {{$client->registered_at}}
-                                                </td>
-                                                <td>
-                                                    <span class="badge badge-pill badge-soft-info font-size-12">{{ $client->ville->amount }} f</span>
-                                                </td>
-                                                <td>
-                                                    @if($client->amount == $client->ville->amount)
-                                                        <span class="badge badge-pill badge-soft-success font-size-12">Payer</span>
-                                                    @elseif($client->amount != $client->ville->amount)
-                                                        <span class="badge badge-pill badge-soft-danger font-size-12">Non Payer</span>
-                                                    @endif
-                                                </td>
-                                                <td>
-                                                    <i class="fab fa-cc-mastercard me-1"></i> Wave
-                                                </td>
-                                                <td>
-                                                    <!-- Button trigger modal -->
-                                                    <button type="button" class="btn btn-primary btn-sm btn-rounded" data-bs-toggle="modal" data-bs-target="#subscribeModalagenceDetails-{{$client->id}}">
-                                                        Details
-                                                    </button>
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex gap-3">
-                                                        <a href="javascript:void(0);" class="text-success"><i class="mdi mdi-pencil font-size-18"></i></a>
-                                                        <a href="javascript:void(0);" class="text-danger"><i class="mdi mdi-delete font-size-18"></i></a>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                        
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- end row -->
+                            <div class="card-body">
+                                <form action="{{ route('agent.client.presence') }}" method="post">
+                                @csrf
+                                @method('PUT')
+                                    <h4 class="card-title text-center"> La liste des client du buse {{ $getBuse->matricule }} </h4>
 
+                                    <table id="datatable-buttons"
+                                        class="table table-bordered dt-responsive nowrap w-100">
+                                        <thead>
+                                            <tr>
+                                                <th>Image</th>
+                                                <th>Prenom & nom</th>
+                                                <th>Telephone</th>
+                                                <th>Destination</th>
+                                                <th>Date</th>
+                                                <th>Prix</th>
+                                                <th>Ticket</th>
+                                                <th>Detail</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+
+
+                                        <tbody>
+                                            @foreach($clients as $client)
+                                                <tr>
+                                                    <td>
+                                                        @if($client->image != null)
+                                                            <img src="{{Storage::url($client->customer->image)}}" style="width: 40px;height:40px;" alt=""
+                                                                class="avatar-sm rounded-circle header-profile-user">
+                                                        @else
+                                                            <img src="{{ asset('admin/assets/images/users/profil.jpg') }}" style="width: 40px;height:40px;" alt=""
+                                                                class="avatar-sm rounded-circle header-profile-user">
+                                                        @endif
+                                                    </td>
+                                                    @if($client->name == null)
+                                                    <td>{{ $client->customer->name }}</td>
+                                                    <td>{{ $client->customer->phone }}</td>
+                                                    @else
+                                                    <td>{{ $client->name }}</td>
+                                                    <td>{{ $client->phone }}</td>
+                                                    @endif
+                                                    <td>
+                                                    {{ $client->ville->name }}
+                                                    </td>
+                                                    <td>
+                                                        {{$client->registered_at}}
+                                                    </td>
+                                                    <td>
+                                                        <span class="badge badge-pill badge-soft-info font-size-12">{{ $client->ville->amount }} f</span>
+                                                    </td>
+                                                    <td>
+                                                        @if($client->amount == $client->ville->amount)
+                                                            <span class="badge badge-pill badge-soft-primary font-size-12"><i class="fab fa-cc-mastercard me-1"></i> Wave</span>
+                                                        @elseif($client->amount != $client->ville->amount)
+                                                            <span class="badge badge-pill badge-soft-danger font-size-12">Non Payer</span>
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        <!-- Button trigger modal -->
+                                                        <button type="button" class="btn btn-primary btn-sm btn-rounded" data-bs-toggle="modal" data-bs-target="#subscribeModalagenceDetails-{{$client->id}}">
+                                                            Details
+                                                        </button>
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex gap-3">
+                                                            @if($client->customer_id == null)
+                                                                <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#staticBackdropUpdateClient-{{ $client->id }}" class="text-success"><i class="mdi mdi-pencil font-size-18"></i></a>
+                                                                <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#staticBackdropDeleteClient-{{ $client->id }}" class="text-danger"><i class="mdi mdi-delete font-size-18"></i></a>
+                                                            @endif
+                                                            <div class="form-check form-switch form-switch-md mt-1"> 
+                                                                <input class="form-check-input" type="checkbox" name="presence[ {{ $client->id }} ]"
+                                                                    id="SwitchCheckSizemd-{{ $client->id }}" @if($client->voyage_status == 1) checked @endif  value="{{ $client->id }}">
+                                                                <label class="form-check-label" for="SwitchCheckSizemd-{{ $client->id }}">
+                                                                    @if($client->voyage_status == 1)
+                                                                        <span class="text-success">Presence</span>
+                                                                    @else
+                                                                        <spans class="text-danger">Absent</spans>
+                                                                    @endif
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                
+                                                
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                    <input type="hidden" name="client_id" value="{{ $client->id }}">
+                                    <input type="hidden" name="amount" value="{{ $client->amount }}">
+                                    <button type="submit" class="btn btn-primary text-white mt-2" style="width:100%;"> <i class="bx bxs-chat"> </i> Enregistre la liste de presence</button>
+                                </form>
+                            </div>
+                    </div>
+                </div> <!-- end col -->
+            </div> <!-- end row -->
+            {{--
             <div class="row">
                 <div class="col-lg-12">
                     {{$clients->links()}}
                 </div>
             </div>
             <!-- end row -->
+            --}}
 
         </div> <!-- container-fluid -->
     </div>
@@ -255,7 +181,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="staticBackdropLabel">
-                                <span class="text-muted">Detail du ticket de {{ $client_presence->customer->name }}</span>
+                                <span class="text-muted">Detail du ticket de @if($client_presence->name == null) {{ $client_presence->customer->name }} @else {{ $client_presence->name }} @endif</span>
                         </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
@@ -313,7 +239,11 @@
                                                                                         <td class="alignright"
                                                                                             style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
                                                                                             align="right" valign="top">
-                                                                                            {{$client_presence->customer->email}}
+                                                                                            @if($client_presence->email == null)
+                                                                                                {{$client_presence->customer->email}}
+                                                                                            @else
+                                                                                                {{$client_presence->email}}
+                                                                                            @endif
                                                                                         </td>
                                                                                     </tr>
                                                                                     <tr
@@ -324,7 +254,11 @@
                                                                                         <td class="alignright"
                                                                                             style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
                                                                                             align="right" valign="top">
-                                                                                            {{$client_presence->customer->phone}}
+                                                                                            @if($client_presence->phone == null)
+                                                                                                {{$client_presence->customer->phone}}
+                                                                                            @else
+                                                                                                {{$client_presence->phone}}
+                                                                                            @endif
                                                                                         </td>
                                                                                     </tr>
                                                                                     <tr
@@ -335,7 +269,11 @@
                                                                                         <td class="alignright"
                                                                                             style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
                                                                                             align="right" valign="top">
-                                                                                            {{$client_presence->customer->cni}}
+                                                                                            @if($client_presence->cni == null)
+                                                                                                {{$client_presence->customer->cni}}
+                                                                                            @else
+                                                                                                {{$client_presence->cni}}
+                                                                                            @endif
                                                                                         </td>
                                                                                     </tr>
                                                                                     <tr
@@ -421,15 +359,298 @@
         </div>
     @endforeach
     <!-- Fin du modal pour la presence du client -->
+
+
+    @foreach($clients as $client)
+        {{-- La partie suppression des clients --}}
+        <div class="modal modal-xs fade" id="staticBackdropDeleteClient-{{ $client->id }}" tabindex="-1" aria-labelledby="subscribeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header border-bottom-0">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="text-center mb-4">
+                            <div class="avatar-md mx-auto mb-4">
+                                <div class="avatar-title bg-warning rounded-circle text-white h1">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-center">
+                                <div class="col-xl-10">
+                                    <h4 class="text-danger">Attention !</h4>
+                                    <p class="text-muted font-size-14 mb-4">Etes vous sure de bien vouloire supprimer {{ $client->name }}</p>
+
+                                    <div class="input-group bg-white rounded text-center" style="text-align:center;">
+                                        <form method="post" action="{{ route('agent.client.destroy',$client->id) }}"  style="display:flex;text-align:center;width:100%;">
+                                            {{csrf_field()}}
+                                            {{method_field('delete')}}
+                                            <button type="submit" class="btn btn-danger btn-xs" style="margin-left: 70px;margin-right:20px;"> Oui je veux bient </button> 
+                                            <button type="button" class="btn btn-success btn-xs" data-bs-dismiss="modal" aria-label="Close"> x Anuller</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+
+        {{-- la partie de la modification des clients --}}
+        <div class="modal fade" id="staticBackdropUpdateClient-{{ $client->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+                <div class="modal-content ">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Modifier le client {{ $client->name }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>
+                            <form class="custom-validation" action="{{ route('agent.client.update',$client->id) }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
+                                <div class="row">
+                                    <div class="col-xl-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">Prenom et nom du client</label>
+                                            <div>
+                                                <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') ?? $client->name }}" required autocomplete="name"
+                                                placeholder="Prenom et nom du client" />
+                                                    @error('name')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Adresse email du client (facultatif)</label>
+                                            <input type="email" id="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') ?? $client->email }}" required autocomplete="email"
+                                                placeholder="Adresse email du client (facultatif)" />
+                                            @error('email')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label">Numero de telephone</label>
+                                            <div>
+                                                <input data-parsley-type="number" type="number" id="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') ?? $client->phone }}" autocomplete="phone"
+                                                    required placeholder="Numero de telephone" />
+                                                    @error('phone')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label">Le numero CNI du client</label>
+                                            <div>
+                                                <input data-parsley-type="number" type="number" id="cni" class="form-control @error('cni') is-invalid @enderror" name="cni" value="{{ old('cni') ?? $client->cni }}" autocomplete="cni"
+                                                    required placeholder="Le numero CNI du client" />
+                                                    @error('cni')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                            </div>
+                                        </div>
+                                        <div class="mb-3 row">
+                                                <label class="form-label">Entre la ville de voyage</label>
+                                                <div class="col-md-12">
+                                                    <select class="form-control select2 @error('ville') is-invalid @enderror" name="ville" required autocomplete="ville" required>
+                                                        <option>Entre une ville</option>
+                                                            @foreach($getBuse->siege->itineraires as $itineraire)
+                                                                <optgroup label="{{$itineraire->name}}">
+                                                                    @foreach($itineraire->villes as $ville)
+                                                                        <option value="{{ $ville->id }}" @if($ville->id == $client->ville->id) selected @endif>{{$ville->name}}</option>
+                                                                    @endforeach
+                                                                </optgroup>
+                                                            @endforeach
+                                                        
+                                                    </select>
+                                                    @error('ville')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+                                        
+                                            <div class="mb-3 row">
+                                                <label class="form-label" for="example-date-input" >Votre date de voyage</label>
+                                                <div class="col-md-12">
+                                                    <input name="date" class="form-control @error('date') is-invalid @enderror " type="date" value="{{ old('date') }}"
+                                                        id="example-date-input">
+                                                </div>
+                                                @error('date')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                    </div>
+                                    <div class="d-flex flex-wrap gap-2">
+                                        <button type="submit" class="btn btn-primary waves-effect waves-light btn-block">
+                                            Enregistrer le bus
+                                        </button>
+                                        <button type="reset" class="btn btn-secondary waves-effect btn-block">
+                                            Anuller
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
+
+
+    <div class="modal fade" id="staticBackdropAjoutClient" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Ajouter un nouveau client</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        <form class="custom-validation" action="{{ route('agent.client.store') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <div class="mb-3">
+                                        <label class="form-label">Prenom et nom du client</label>
+                                        <div>
+                                            <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name"
+                                            placeholder="Prenom et nom du client" />
+                                                @error('name')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Adresse email du client (facultatif)</label>
+                                        <input type="email" id="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email"
+                                            placeholder="Adresse email du client (facultatif)" />
+                                        @error('email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
+                                    </div>
+
+                                     <div class="mb-3">
+                                        <label class="form-label">Numero de telephone</label>
+                                        <div>
+                                            <input data-parsley-type="number" type="number" id="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" autocomplete="phone"
+                                                required placeholder="Numero de telephone" />
+                                                @error('phone')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Le numero CNI du client</label>
+                                        <div>
+                                            <input data-parsley-type="number" type="number" id="cni" class="form-control @error('cni') is-invalid @enderror" name="cni" value="{{ old('cni') }}" autocomplete="cni"
+                                                required placeholder="Le numero CNI du client" />
+                                                @error('cni')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                            <label class="form-label">Entre la ville de voyage</label>
+                                            <div class="col-md-12">
+                                                <select class="form-control select2 @error('ville') is-invalid @enderror" name="ville" required autocomplete="ville" required>
+                                                    <option>Entre une ville</option>
+                                                        @foreach($getBuse->siege->itineraires as $itineraire)
+                                                            <optgroup label="{{$itineraire->name}}">
+                                                                @foreach($itineraire->villes as $ville)
+                                                                    <option value="{{ $ville->id }}">{{$ville->name}}</option>
+                                                                @endforeach
+                                                            </optgroup>
+                                                        @endforeach
+                                                    
+                                                </select>
+                                                @error('ville')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="mb-3 row">
+                                            <label class="form-label" for="example-date-input" >Votre date de voyage</label>
+                                            <div class="col-md-12">
+                                                <input name="date" class="form-control @error('date') is-invalid @enderror " type="date" value="{{ old('date') }}"
+                                                    id="example-date-input">
+                                            </div>
+                                            @error('date')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                </div>
+                                <div class="d-flex flex-wrap gap-2">
+                                    <button type="submit" class="btn btn-primary waves-effect waves-light btn-block">
+                                        Enregistrer le bus
+                                    </button>
+                                    <button type="reset" class="btn btn-secondary waves-effect btn-block">
+                                        Anuller
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
-@section('footersection')
+@section('footerSection')
 <!-- Responsive Table js -->
-    <script src="{{asset('admin/assets/libs/admin-resources/rwd-table/rwd-table.min.js')}}"></script>
-    <script src="{{asset('admin/assets/libs/select2/js/select2.min.js')}}"></script>
-    <!-- Init js -->
-    <script src="{{asset('admin/assets/js/pages/table-responsive.init.js')}}"></script>
-    <script src="{{asset('admin/assets/js/table.js')}}"></script>
+  <!-- Required datatable js -->
+    <script src="{{asset('admin/assets/libs/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('admin/assets/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+    <!-- Buttons examples -->
+    <script src="{{asset('admin/assets/libs/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
+    <script src="{{asset('admin/assets/libs/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('admin/assets/libs/jszip/jszip.min.js')}}"></script>
+    <script src="{{asset('admin/assets/libs/pdfmake/build/pdfmake.min.js')}}"></script>
+    <script src="{{asset('admin/assets/libs/pdfmake/build/vfs_fonts.js')}}"></script>
+    <script src="{{asset('admin/assets/libs/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
+    <script src="{{asset('admin/assets/libs/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
+    <script src="{{asset('admin/assets/libs/datatables.net-buttons/js/buttons.colVis.min.js')}}"></script>
+
+    <!-- Responsive examples -->
+    <script src="{{asset('admin/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
+    <script src="{{asset('admin/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js')}}"></script>
+
+    <!-- Datatable init js -->
+    <script src="{{asset('admin/assets/js/pages/datatables.init.js')}}"></script>
+
+    <script src="{{asset('admin/assets/js/app.js')}}"></script>
 
 
      <script>

@@ -106,7 +106,7 @@ Route::prefix('/agent')->name('agent.')->group(function()
     Route::get('/confirm/{id}/{token}', [App\Http\Controllers\Agent\HomeController::class, 'confirm']);
 
     Route::resource('/client', App\Http\Controllers\Agent\ClientController::class);
-    Route::get('/presence', [App\Http\Controllers\Agent\ClientController::class,'presence'])->name('client.presence'); 
+    Route::put('/presence', [App\Http\Controllers\Agent\ClientController::class,'presence'])->name('client.presence'); 
     Route::get('/client/ticker/{id}', [App\Http\Controllers\Agent\ClientController::class, 'ticker'])->name('ticker');
     Route::get('/renoncer', [App\Http\Controllers\Agent\ClientController::class, 'annuler'])->name('renoncer');
     // Route::get('/absent', [App\Http\Controllers\Agent\ClientController::class, 'absent'])->name('absent');
