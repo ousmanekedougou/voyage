@@ -20,14 +20,14 @@
                                     </li>
 
                                     <li class="{{ set_active_roote_bottom_bar('customer.bagage.index') }} ">
-                                        <a  href="{{ route('customer.bagage.index') }}" id="store">
+                                        <a  href="{{ route('customer.colis.index') }}" id="store">
                                             <span>Colis</span>
                                             <i class="bx bx-store-alt  fa-fa-item"></i>
                                         </a>
                                     </li>
 
                                     <li class="{{ set_active_roote_bottom_bar('customer.colis.index') }} ">
-                                        <a  href="{{ route('customer.colis.index') }}" id="wishlist">
+                                        <a  href="{{ route('customer.bagage.index') }}" id="wishlist">
                                             <span>Bagages</span>
                                             <i class="bx bx-package  fa-fa-item"></i>
                                         </a>

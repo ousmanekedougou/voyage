@@ -80,7 +80,7 @@ class BagageController extends Controller
                 return back();
             }
         }else {
-            Toastr::error('Votre client n\'etes pas inscrit pour aujourdhuit', 'Error client', ["positionClass" => "toast-top-right"]);
+            Toastr::error('Votre client n\'est pas inscrit pour aujourdhuit', 'Error client', ["positionClass" => "toast-top-right"]);
             return back();
         }
     }
