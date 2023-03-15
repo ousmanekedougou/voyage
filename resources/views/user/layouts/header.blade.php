@@ -272,14 +272,14 @@
                         <div class="my-2 ms-lg-2 btn-sign-ine">
                             <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                 @csrf
-                                <button type="submit" class="btn btn-outline-danger  w-xs"> Se Deconnecter <i class="fa fa-sign-up-alt"></i> </button>
+                                <button type="submit" class="btn btn-outline-danger w-xs mt-2"> Se Deconnecter <i class="fa fa-sign-up-alt"></i> </button>
                             </form>
                         </div>
                     @elseif(Auth::guard('agence')->user())
                         <div class="my-2 ms-lg-2 btn-sign-ine">
                             <form id="logout-form-agence" action="{{ route('agence.agence.logout') }}" method="POST">
                                 @csrf
-                                <button type="submit" class="btn btn-outline-danger  w-xs"> Se Deconnecter <i class="fa fa-sign-up-alt"></i> </button>
+                                <button type="submit" class="btn btn-outline-danger w-xs mt-2"> Se Deconnecter <i class="fa fa-sign-up-alt"></i> </button>
                             </form>
                         </div>
                     @elseif(Auth::guard('agent')->user())
@@ -287,14 +287,14 @@
                            
                             <form id="logout-form-agent" action="{{ route('agent.agent.logout') }}" method="POST" >
                                 @csrf
-                                <button type="submit" class="btn btn-outline-danger  w-xs"> Se Deconnecter <i class="fa fa-sign-up-alt"></i> </button>
+                                <button type="submit" class="btn btn-outline-danger w-xs mt-2"> Se Deconnecter <i class="fa fa-sign-up-alt"></i> </button>
                             </form>
                         </div>
                     @elseif(Auth::guard('client')->user())
                         <div class="my-2 ms-lg-2 btn-sign-ine">
                             <form id="logout-form-customer" action="{{ route('customer.customer.logout') }}" method="POST">
                                 @csrf
-                                <button type="submit" class="btn btn-outline-danger  w-xs"> Se Deconnecter <i class="fa fa-sign-up-alt"></i> </button>
+                                <button type="submit" class="btn btn-outline-danger w-xs mt-2"> Se Deconnecter <i class="fa fa-sign-up-alt"></i> </button>
                             </form>
                         </div>
                     @endif

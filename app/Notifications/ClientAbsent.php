@@ -46,12 +46,10 @@ class ClientAbsent extends Notification
      */
     public function toMail($notifiable)
     {
-        $user = Customer::where('id',$this->client->customer_id)->first();
         return (new MailMessage)->view('client.notification.clientAbsent',[
-                'client' => $this->client,
-                'agent'=> $this->agent,
-                'user' => $user
-            ]);
+            'client' => $this->client,
+            'agent'=> $this->agent,
+        ]);
     }
 
     /**

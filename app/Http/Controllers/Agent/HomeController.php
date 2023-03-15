@@ -42,10 +42,20 @@ class HomeController extends Controller
         // return view('agent.index');
         if ($this->middleware(['IsAgent']) && Auth::guard('agent')->user()->role == 1 || Auth::guard('agent')->user()->role == 4) {
             $buses = Bus::where('siege_id', Auth::guard('agent')->user()->siege_id)->orderBy('id', 'ASC')->get();
-            $itineraires = Itineraire::where('siege_id', Auth::guard('agent')->user()->siege_id)->where('user_id', Auth::guard('agent')->user()->id)->get();
+            $itineraires = Itineraire::where('siege_id', Auth::guard('agent')->user()->siege_id)
+            // ->where('user_id', Auth::guard('agent')->user()->id)
+            ->get();
             $user = Agent::where('id',Auth::guard('agent')->user()->id)->first() ; 
             $clientCount = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)->where('registered_at',carbon_today())->get();
             $busCount = Bus::where('siege_id',Auth::guard('agent')->user()->siege_id)->get();
+
+            // La liste des client du jour
+            $clients = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
+            ->where('registered_at','<',Carbon::today()->format('Y-m-d'))
+            ->where('status',0)
+            ->where('amount','!=',null)
+            ->orderBy('id','ASC')
+            ->paginate(10);
 
             // Les client
             
@@ -82,7 +92,7 @@ class HomeController extends Controller
                 Historical::where('registered_at', '<', Carbon::today()->format('Y-m-d'))->where('siege_id', Auth::guard('agent')->user()->siege_id)->delete();
             }
 
-            return view('agent.index',compact('itineraires','user','clientCount','busCount'));
+            return view('agent.index',compact('itineraires','user','clientCount','busCount','clients'));
 
         }elseif ($this->middleware(['IsAgent']) && Auth::guard('agent')->user()->role == 2 || Auth::guard('agent')->user()->role == 4) {
 
@@ -115,13 +125,15 @@ class HomeController extends Controller
 
     public function confirm($id , $token){
         define('ACTIVE',1);
-        $user = Agent::where('id',$id)->where('confirmation_token',$token)->first();
-        if ($user) {
-            $user->update(['confirmation_token' => null , 'is_active' => ACTIVE]);
-            $this->guard('agent')->login($user);
-            return redirect($this->redirectPath())->with('success','Votre compte a bien ete confirmer');
+        $agent = Agent::where('id',$id)->where('confirmation_token',$token)->first();
+        if ($agent) {
+            $agent->update(['confirmation_token' => null , 'is_active' => ACTIVE]);
+            $this->guard('agent')->login($agent);
+            Toastr::success('Votre compte a bien ete confirmer', 'Confirmation de compte', ["positionClass" => "toast-top-right"]);
+            return redirect($this->redirectPath());
         }else {
-            return redirect('/agent/login')->with('error','Ce lien ne semble plus valide');
+            Toastr::error('Ce lien ne semble plus valide', 'Error de connexion', ["positionClass" => "toast-top-right"]);
+            return redirect()->route('agent.agent.login');
         }
     }
 }

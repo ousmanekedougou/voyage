@@ -164,18 +164,18 @@ if (!function_exists('reference')) {
 if (!function_exists('montant_today')) {
     function montant_today()
     {
-        // $itineraires = Itineraire::where('siege_id',  Auth::guard('agent')->user()->siege_id)->where('user_id',  Auth::guard('agent')->user()->id)->orderBy('id', 'ASC')->get();
-        // foreach ($itineraires as $itineraire) {
-        //     foreach ($itineraire->date_departs as $iti_date) {
-        //         $somme_buse = Bus::where('itineraire_id', $iti_date->itineraire_id)->get();
-        //         foreach ($somme_buse as $buse_som) {
-        //             if ($buse_som->date_depart->depart_at == Carbon::today()->format('Y-m-d')) {
-        //                 $somme_total_today =  Bus::where('id', $buse_som->id)->sum('montant');
-        //                 return $somme_total_today;
-        //             }
-        //         }
-        //     }
-        // }
+        $itineraires = Itineraire::where('siege_id',Auth::guard('agent')->user()->siege_id)->where('user_id',  Auth::guard('agent')->user()->id)->orderBy('id', 'ASC')->get();
+        foreach ($itineraires as $itineraire) {
+            foreach ($itineraire->date_departs as $iti_date) {
+                $somme_buse = Bus::where('itineraire_id', $iti_date->itineraire_id)->get();
+                foreach ($somme_buse as $buse_som) {
+                    if ($buse_som->date_depart->depart_at == Carbon::today()->format('Y-m-d')) {
+                        $somme_total_today =  Bus::where('id', $buse_som->id)->sum('montant');
+                        return $somme_total_today;
+                    }
+                }
+            }
+        }
     }
 }
 

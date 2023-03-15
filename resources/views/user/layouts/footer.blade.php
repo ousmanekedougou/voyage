@@ -129,7 +129,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-sm-12">
-                                <img src="{{asset('admin/assets/images/logo-dark.png')}}" alt="" height="20" class=""> <script>document.write(new Date().getFullYear())</script> Design & Develop by Themesbrand
+                                <img src="{{asset('admin/assets/images/logo-dark.png')}}" alt="" height="20" class=""> <script>document.write(new Date().getFullYear())</script>  Develop by KdgWeb
                             </div>
                         </div>
                     </div>

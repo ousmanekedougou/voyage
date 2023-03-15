@@ -94,6 +94,7 @@ class ClientController extends Controller
                         $add_client->position = $buse->inscrit;
                         $add_client->registered_at = date_format($date,'d-m-y');
                         $add_client->voyage_status = 0;
+                        $add_client->status = 0;
                         $add_client->save();
 
                         /* 
@@ -171,10 +172,10 @@ class ClientController extends Controller
     public function show($id)
     {
         $getBuse = Bus::where('id',$id)->where('siege_id',Auth::guard('agent')->user()->siege_id)->first();
-        $clients = Client::where('bus_id',$id)
+        $clients = Client::where('bus_id',$getBuse->id)
             ->where('siege_id',Auth::guard('agent')->user()->siege_id)
             // ->where('registered_at','>=',Carbon::today()->format('Y-m-d'))
-            ->where('status',0)
+            // ->where('status',0)
             // ->where('amount','!=',null)
             ->orderBy('id','ASC')
             ->paginate(10);
@@ -187,9 +188,17 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function jour($id)
     {
-       
+       $getBuse = Bus::where('id',$id)->where('siege_id',Auth::guard('agent')->user()->siege_id)->first();
+        $clients = Client::where('bus_id',$getBuse->id)
+            ->where('siege_id',Auth::guard('agent')->user()->siege_id)
+            ->where('registered_at','>=',Carbon::today()->format('Y-m-d'))
+            ->where('status',0)
+            ->where('amount','!=',null)
+            ->orderBy('id','ASC')
+            ->paginate(10);
+        return view('agent.client.jour',compact('clients','getBuse'));
     }
 
 
@@ -197,8 +206,8 @@ class ClientController extends Controller
     {
         $this->validate($request,[
             'name' => 'required|string|max:255',
-            'phone' => 'required|numeric|unique:clients',
-            'cni' => 'required|numeric|unique:clients',
+            'phone' => 'required|numeric',
+            'cni' => 'required|numeric',
             'ville' => 'required|numeric',
             'date' => 'required|date',
         ]);
@@ -277,51 +286,67 @@ class ClientController extends Controller
     public function presence(Request $request){
         $client = Client::where('id',$request->client_id)
             ->where('siege_id',Auth::guard('agent')->user()->siege_id)
-            ->where('registered_at','>=',Carbon::today()->format('Y-m-d'))
+            ->where('registered_at',Carbon::today()->format('Y-m-d'))
             ->where('status',0)
-            ->where('voyage_status',0)
-            ->where('amount',$request->amount);
+            ->where('amount',$request->amount)
+            ->first();
             
-            if ($request->voyage_status == 0) {
+        if ($client) {
+            if ($request->voyage_status == 1) {
                 if (Auth::guard('agent')->user()->agence->method_ticket == 0) {
                     $client->update([
                         'voyage_status' => 0,
                         'status' => 1
                     ]);
+                    return back();
                 }elseif (Auth::guard('agent')->user()->agence->method_ticket == 1) {
                     $client->update([
                         'voyage_status' => 0,
                         'status' => 2
                     ]);
+                    return back();
                 }
-            }elseif ($request->voyage_status == 1) {
+            }elseif ($request->voyage_status == 0) {
                 $client->update([
                     'voyage_status' => 1,
                     'status' => 0
                 ]);
+                return back();
             }
+        }else {
+            Toastr::warning('Ce client n\'est pas pour aujourd\'hui', 'Error lien', ["positionClass" => "toast-top-right"]);
+            return back();
+        }
+            
     }
 
     public function send_sms(){
-        // dd('fjjjkf');
-        $client = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
-            // ->where('registered_at','>=',Carbon::today()->format('Y-m-d'))
-            // ->where('voyage_status',0)
-            // ->where('amount','!=',null)
-            ->first();
-        if ($client){
-            if (Auth::guard('agent')->user()->agence->method_ticket == 0) {
-                Notification::route('mail',Auth::guard('agent')->user()->siege->email)
-                ->notify(new ClientAbsent($client));
+        $clients = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
+            ->where('registered_at',Carbon::today()->format('Y-m-d'))
+            ->where('voyage_status',0)
+            ->where('status',0)
+            ->where('amount','!=',null)
+            ->get();
+            if ($clients->count() > 0) {
+                foreach ($clients as $client){
 
-                // Partie sms et notification sur son compte toucki
-                $client->status = 1;
-                $client->save(); 
-                Toastr::success('Vos messages ont bien ete envoye', 'Error lien', ["positionClass" => "toast-top-right"]);
+                    if (Auth::guard('agent')->user()->agence->method_ticket == 0) {
+                        $client->update(['status' => 1]);
+                        // Partie sms et notification sur son compte toucki
+                    }elseif(Auth::guard('agent')->user()->agence->method_ticket == 1) {
+                        $client->update(['status' => 2]);
+                        // Partie sms et notification sur son compte toucki
+                    }
+
+                    Notification::route('mail',Auth::guard('agent')->user()->siege->email)
+                    ->notify(new ClientAbsent($client));
+                    Toastr::success('Vos messages ont bien ete envoye', 'Error lien', ["positionClass" => "toast-top-right"]);
+                    return back();
+                }
+            }else {
+                Toastr::warning('Vous n\'aviez pas de clients absent', 'Error lien', ["positionClass" => "toast-top-right"]);
                 return back();
-
             }
-        }
     }
 
     public function ticker(Request $request , $id){

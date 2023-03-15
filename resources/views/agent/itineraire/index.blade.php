@@ -28,78 +28,78 @@
 
 
                         <div class="row">
-                        @foreach($itineraires as $itineraire)
-                         <div class="col-xl-4 col-sm-6">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="media">
-                                        <div class="avatar-md me-4">
-                                            <span class="avatar-title rounded-circle bg-light text-muted">
-                                                <i class="fa fa-road" style="font-size: 50px;"></i>
-                                            </span>
-                                        </div>
+                            @foreach($itineraires as $itineraire)
+                                <div class="col-xl-4 col-sm-6">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="media">
+                                                <div class="avatar-md me-4">
+                                                    <span class="avatar-title rounded-circle bg-light text-muted">
+                                                        <i class="fa fa-road" style="font-size: 50px;"></i>
+                                                    </span>
+                                                </div>
 
-                                        <div class="media-body overflow-hidden">
-                                            <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">{{$itineraire->name}}</a></h5>
-                                            
+                                                <div class="media-body overflow-hidden">
+                                                    <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">{{$itineraire->name}}</a></h5>
+                                                    
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="px-4 py-3 border-top text-center">
-                                    <ul class="list-inline mb-0">
-                                        <li class="list-inline-item me-2">
-                                           <a href="javascript:void(0);" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-primary" data-bs-target="#staticBackdropprenicpaleVille-{{$itineraire->id}}"><i class="fas fa-building mt-1 font-size-18"></i></a>
-                                        </li>
-                                        <li class="list-inline-item me-2">
-                                           <a href="javascript:void(0);" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-primary" data-bs-target="#staticBackdropedititineraire-{{$itineraire->id}}"><i class="bx bx-edit mt-1 font-size-18"></i></a>
-                                        </li>
-                                        <li class="list-inline-item me-2">
-                                           <a href="javascript:void(0);" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-primary" data-bs-target="#staticBackdropAjouteVille-{{$itineraire->id}}"><i class="fas fa-plus mt-1 font-size-18"></i></a>
-                                        </li>
-                                        <li class="list-inline-item me-2">
-                                            <a href="javascript:void(0);" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-danger" data-bs-target="#subscribeModalitineraire-{{ $itineraire->id }}"><i class="mdi mdi-delete font-size-18"></i></a>
-                                            <div class="modal modal-xs fade" id="subscribeModalitineraire-{{ $itineraire->id }}" tabindex="-1" aria-labelledby="subscribeModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header border-bottom-0">
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="text-center mb-4">
-                                                                <div class="avatar-md mx-auto mb-4">
-                                                                    <div class="avatar-title bg-warning rounded-circle text-white h1">
-                                                                        <i class="fa fa-exclamation-circle"></i>
-                                                                    </div>
+                                        <div class="px-4 py-3 border-top text-center">
+                                            <ul class="list-inline mb-0">
+                                                <li class="list-inline-item me-2">
+                                                <a href="javascript:void(0);" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-primary" data-bs-target="#staticBackdropprenicpaleVille-{{$itineraire->id}}"><i class="fas fa-building mt-1 font-size-18"></i></a>
+                                                </li>
+                                                <li class="list-inline-item me-2">
+                                                <a href="javascript:void(0);" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-primary" data-bs-target="#staticBackdropedititineraire-{{$itineraire->id}}"><i class="bx bx-edit mt-1 font-size-18"></i></a>
+                                                </li>
+                                                <li class="list-inline-item me-2">
+                                                <a href="javascript:void(0);" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-primary" data-bs-target="#staticBackdropAjouteVille-{{$itineraire->id}}"><i class="fas fa-plus mt-1 font-size-18"></i></a>
+                                                </li>
+                                                <li class="list-inline-item me-2">
+                                                    <a href="javascript:void(0);" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-danger" data-bs-target="#subscribeModalitineraire-{{ $itineraire->id }}"><i class="mdi mdi-delete font-size-18"></i></a>
+                                                    <div class="modal modal-xs fade" id="subscribeModalitineraire-{{ $itineraire->id }}" tabindex="-1" aria-labelledby="subscribeModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header border-bottom-0">
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
+                                                                <div class="modal-body">
+                                                                    <div class="text-center mb-4">
+                                                                        <div class="avatar-md mx-auto mb-4">
+                                                                            <div class="avatar-title bg-warning rounded-circle text-white h1">
+                                                                                <i class="fa fa-exclamation-circle"></i>
+                                                                            </div>
+                                                                        </div>
 
-                                                                <div class="row justify-content-center">
-                                                                    <div class="col-xl-10">
-                                                                        <h4 class="text-danger">Attention !</h4>
-                                                                        <p class="text-muted font-size-14 mb-4">Etes vous sure de bien vouloire supprimer ce itineraire</p>
+                                                                        <div class="row justify-content-center">
+                                                                            <div class="col-xl-10">
+                                                                                <h4 class="text-danger">Attention !</h4>
+                                                                                <p class="text-muted font-size-14 mb-4">Etes vous sure de bien vouloire supprimer ce itineraire</p>
 
-                                                                        <div class="input-group bg-white rounded text-center" style="text-align:center;">
-                                                                            <form method="post" action="{{ route('agent.itineraire.destroy',$itineraire->id) }}"  style="display:flex;text-align:center;width:100%;">
-                                                                                {{csrf_field()}}
-                                                                                {{method_field('delete')}}
-                                                                                <button type="submit" class="btn btn-danger btn-xs" style="margin-left: 70px;margin-right:20px;"> Oui je veux bient </button> 
-                                                                                <button type="button" class="btn btn-success btn-xs" data-bs-dismiss="modal" aria-label="Close"> x Anuller</button>
-                                                                            </form>
+                                                                                <div class="input-group bg-white rounded text-center" style="text-align:center;">
+                                                                                    <form method="post" action="{{ route('agent.itineraire.destroy',$itineraire->id) }}"  style="display:flex;text-align:center;width:100%;">
+                                                                                        {{csrf_field()}}
+                                                                                        {{method_field('delete')}}
+                                                                                        <button type="submit" class="btn btn-danger btn-xs" style="margin-left: 70px;margin-right:20px;"> Oui je veux bient </button> 
+                                                                                        <button type="button" class="btn btn-success btn-xs" data-bs-dismiss="modal" aria-label="Close"> x Anuller</button>
+                                                                                    </form>
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </div>
-                                            </div> 
-                                        </li>
-                                    </ul>
+                                                    </div> 
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            @endforeach
+                            {{$itineraires->links()}}
                         </div>
-                        @endforeach
-                         {{$itineraires->links()}}
-                    </div>
 
                     </div> <!-- container-fluid -->
                 </div>

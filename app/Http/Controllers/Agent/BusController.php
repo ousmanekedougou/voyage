@@ -60,6 +60,7 @@ class BusController extends Controller
         $add_bus->place = $request->place;
         $add_bus->status = 1;
         $add_bus->siege_id = Auth::guard('agent')->user()->siege_id;
+        $add_bus->user_id = Auth::guard('agent')->user()->id;
         $add_bus->itineraire_id = $request->itineraire;
         $add_bus->heure_rv = $request->rv_time;
         $add_bus->heure_depart = $request->depart_time;
@@ -112,6 +113,7 @@ class BusController extends Controller
         $update_bus->matricule = $request->matricule;
         $update_bus->status = 1;
         $update_bus->siege_id = Auth::guard('agent')->user()->siege_id;
+        $update_bus->user_id = Auth::guard('agent')->user()->id;
         $update_bus->itineraire_id = $request->itineraire;
         $update_bus->heure_rv = $request->rv_time;
         $update_bus->heure_depart = $request->depart_time;

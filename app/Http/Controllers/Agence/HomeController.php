@@ -41,12 +41,12 @@ class HomeController extends Controller
         $agence = Agence::where('id',$id)->where('confirmation_token',$token)->first();
         if ($agence) {
             $agence->update(['confirmation_token' => null , 'is_active' => ACTIVE]);
-            $this->guard()->login($agence);
+            $this->guard('agence')->login($agence);
             Toastr::success('Votre compte a bien ete confirmer', 'Confirmation de compte', ["positionClass" => "toast-top-right"]);
             return redirect($this->redirectPath());
         }else {
             Toastr::error('Ce lien ne semble plus valide', 'Error de connexion', ["positionClass" => "toast-top-right"]);
-            return redirect()->route('login');
+            return redirect()->route('agence.agence.login');
         }
     }
 }

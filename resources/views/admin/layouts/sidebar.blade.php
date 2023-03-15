@@ -88,18 +88,10 @@
                                 <li>
                                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                                         <i class="fa fa-road"></i>
-                                        <span key="t-contacts">Itineraires</span>
+                                        <span key="t-contacts">Itineraires & Buses</span>
                                     </a>
                                     <ul class="sub-menu" aria-expanded="false">
                                         <li><a href="{{ route('agent.itineraire.index') }}" key="t-products"> <i class="fa fa-road"></i>Vos Itineraires</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                        <i class="fa fa-bus"></i>
-                                        <span key="t-contacts">Buses</span>
-                                    </a>
-                                    <ul class="sub-menu" aria-expanded="false">
                                         <li><a href="{{ route('agent.bus.index') }}" key="t-products"><i class="fa fa-bus"></i>Vos Buses</a></li>
                                     </ul>
                                 </li>

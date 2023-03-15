@@ -59,11 +59,12 @@
             <!-- end row -->
 
 
-            <div class="row">
+           
+             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title text-center"> La liste de tout les client du buse {{ $getBuse->matricule }} </h4>
+                            <h4 class="card-title text-center"> La liste des client du jour </h4>
                             <table id="datatable-buttons"
                                 class="table table-bordered dt-responsive nowrap w-100">
                                 <thead>
@@ -127,10 +128,7 @@
                                                     @if($client->customer_id == null)
                                                         <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#staticBackdropUpdateClient-{{ $client->id }}" class="text-success"><i class="mdi mdi-pencil font-size-18"></i></a>
                                                         <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#staticBackdropDeleteClient-{{ $client->id }}" class="text-danger"><i class="mdi mdi-delete font-size-18"></i></a>
-                                                    @else
-                                                        <span class="badge badge-pill badge-soft-success font-size-12 mt-1"><i class="bx bx-bell bx-tada me-1"></i> abonné</span>
                                                     @endif
-                                                    {{--
                                                         <input 
                                                         onclick="event.preventDefault();
                                                         document.getElementById('updatePresence-{{ $client->id }}').submit();" 
@@ -144,7 +142,6 @@
                                                             <input type="hidden" name="voyage_status" value="{{ $client->voyage_status }}">
                                                             <input type="hidden" name="amount" value="{{ $client->amount }}">
                                                         </form>
-                                                    --}}
                                                 </div>
                                             </td>
                                         </tr>
@@ -152,9 +149,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        {{--
                         <a href="{{ route('agent.send_sms') }}" class="btn btn-primary text-white mt-2" style="width:100%;"> <i class="bx bxs-chat"> </i> Un message au absent du jour</a>
-                        --}}
                     </div>
                 </div> <!-- end col -->
             </div> <!-- end row -->

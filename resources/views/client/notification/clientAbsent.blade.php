@@ -36,13 +36,19 @@
                                                         <table width="100%" cellpadding="0" cellspacing="0" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                                             <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                                                 <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
-                                                                    Salut <span class="text-uppercase text-bolde">{{ $user->name }}</span>,
+                                                                    Salut <span class="text-uppercase text-bolde">
+                                                                        @if($client->customer_id == null)
+                                                                            {{$client->name}}
+                                                                        @else
+                                                                            {{$client->customer->name}}
+                                                                        @endif
+                                                                    </span>,
                                                                 </td>
                                                             </tr>
                                                             <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                                                 <td class="content-block" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
                                                                     Vous venez de rater votre buse de l'agence {{$agent->agence->name}} du siege de {{$agent->siege->name}} pour la destination de {{$client->ville->name}},
-                                                                    a la date d'aujourdhuit.
+                                                                    a la date d'aujourd'hui.
                                                                     Vous pouvez annuler ou renouveler la date de votre ticket.
                                                                 </td>
                                                             </tr>
