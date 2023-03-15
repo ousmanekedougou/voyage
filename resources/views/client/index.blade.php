@@ -101,11 +101,17 @@
                                 <h6 class="text-center"> <i class="fa fa-blog badge bg-success"> Slogan</i></h6>
                                 <p class="text-muted text-center">{{ $agence->slogan }}</p>
                             </div>
-                            <div class="px-4 py-3 border-top bg-light">
+                            <div class="px-1 py-1 border-top bg-light">
                                 <ul class="list-inline mb-0 text-center">
-                                    
                                     <li class="list-inline-item me-3">
-                                        <a href="{{ route('customer.agence.about',$agence->slug) }}" title="Detail" class="btn btn-primary position-relative p-0 avatar-xs rounded-circle ">
+                                        <a href="{{ route('customer.agence.about',$agence->slug) }}" class="btn btn-primary btn-xs text-center"> <i class="bx bx-file"></i> Details</a>
+                                    </li>
+                                    <li class="list-inline-item me-3">
+                                        <a href="{{ route('customer.agence.show',$agence->slug) }}" class="btn btn-primary btn-xs text-center"> <i class="bx bx-map"></i> Sieges</a>
+                                    </li>
+                                   {{--
+                                    <li class="list-inline-item me-3">
+                                        <a href="{{ route('customer.agence.about',$agence->slug) }}" title="Detail" class="btn btn-primary position-relative rounded-circle p-0 avatar-xs  ">
                                              <span class="avatar-title bg-transparent text-reset">
                                                 <i class="bx bx-file"></i>  
                                             </span>
@@ -119,7 +125,7 @@
                                             </span>
                                         </a>
                                     </li>
-                                    
+
                                     <li class="list-inline-item me-3">
                                         <div class="d-flex flex-wrap gap-3">
 
@@ -142,7 +148,7 @@
                                             </button>
                                         </div>
                                     </li>
-                                    
+                                    --}}
                                 </ul>
                             </div>
                         </div>
