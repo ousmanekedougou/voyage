@@ -702,9 +702,6 @@ main
         border-radius: 1.2rem 1.2rem 0 0;
         transition: .3s;
     }
-    .nav__item{
-        text-align: center;
-    }
 }
 
 .nav__list {
@@ -743,8 +740,8 @@ main
 
 @media screen and (max-width: 350px) { 
     .nav__menu {
-        /* padding: 2rem .25rem 4rem; */
-        padding: 5px 35px 5px 5px;
+        padding: 2rem .25rem 4rem;
+        /* padding: 5px 35px 5px 5px; */
     }
 
     .nav__list {
