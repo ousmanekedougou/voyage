@@ -37,7 +37,7 @@
                                         <div class="nav__btns">
                                             <a class="nav__toggle" id="nav-toggle">
                                                 <span>Regions</span>
-                                                <i class="bx bx-grid-alt fa-fa-item"></i>
+                                                <i class="bx bx-map fa-fa-item"></i>
                                             </a>
                                         </div>
 
@@ -46,7 +46,7 @@
                                                 @foreach(region() as $region)
                                                     <li class="nav__item btn btn-light waves-effect waves-light w-xs">
                                                         <a href="{{ route('customer.agence.region',$region->slug) }}" class="nav__link">
-                                                            <i class="mdi mdi-city d-block"></i> {{$region->name}}
+                                                            <i class="bx bx-map d-block"></i> {{$region->name}}
                                                         </a>
                                                     </li>
                                                 @endforeach
