@@ -248,7 +248,7 @@
                             La formule est connue : "un homme informé en vaut deux’".
 
                             C’est transposable dans le commerce. Connaître ses clients apporte de meilleures chances de conclure des ventes.
-                            "grâce aux statistiques fournies par le site, l’agence de voyages accède à de multiples informations : qui fréquente le site, à quel moment, quels sont les produits qui sont recherchés et comment ils sont achetés, qui consulte, quelles sont les informations qui intéresse, etc. 
+                            "grâce aux statistiques fournies par le site, l’agence de voyages accède à de multiples informations. 
                         </p>
                     </div>
                 </div>
@@ -261,7 +261,6 @@
                             Accompagnez cette tendance avec un simple formulaire de contact, un espace témoignage, un forum, etc. 
                             Les personnes et pas seulement les jeunes ont pris l’habitude de partager leurs impressions et leurs opinions sur le net. 
                             Récupérez, pour le profit de votre commerce, ces habitudes qui sont aujourd’hui ancrées dans notre culture.
-                            Et ne craignez pas des commentaires négatifs, ils sont rares et de toutes les façons vous pouvez les modérer. En définitive vous allez créer un profil identifiable et personnalisé à votre agence. 
                         </p>
                     </div>
                 </div>
@@ -283,9 +282,9 @@
                         <p class="card-text">
                             À partir de 19 heures, en général, l’agence est fermée.
 
-                            Pourtant, c’est le soir, à leur domicile, que les clients prennent du temps pour la préparation de leurs vacances. Laurie Larchez précise : "C’est tellement facile de mettre en place une rubrique spécifique qui permet aux clients de retrouver ses réservations, à tout moment, en dehors des horaires d’ouverture".
+                            Pourtant, c’est le soir, à leur domicile, que les clients prennent du temps pour la préparation de leurs vacances.C’est tellement facile de mettre en place une rubrique spécifique qui permet aux clients de retrouver ses réservations, à tout moment, en dehors des horaires d’ouverture.
 
-                            Dans la vente de produit touristique, il n’y pas que la notion de prix qui compte. Le service arrive en deuxième critère. Ne pas l’oublier. 
+                            Dans l'activite du transport,le service est un critère important.
                         </p>
                     </div>
                 </div>
@@ -297,15 +296,6 @@
     <!-- Features start -->
     <section class="section bg-white sectionCompteDesktope" id="features">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12 bg-primary">
-                    <div class="text-center">
-                        <h4 class="text-white pt-2">Créer votre compte agence de transport sur TouCki</h4>
-                        <div class="small-title text-white">Features</div>
-                    </div>
-                </div>
-            </div>
-            <!-- end row -->
 
             <div class="row align-items-center pt-4">
                 <div class="col-md-6 col-sm-8">
@@ -342,15 +332,6 @@
 
      <section class="section bg-white sectionCompteDesktope" id="features">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12 bg-primary">
-                    <div class="text-center">
-                        <h4 class="text-white pt-2">Créer votre compte client de voyage sur TouCki</h4>
-                        <div class="small-title text-white">Features</div>
-                    </div>
-                </div>
-            </div>
-            <!-- end row -->
             <div class="row align-items-center mt-5 pt-md-5">
                 <div class="col-md-5">
                     <div class="mt-4 mt-md-0">
