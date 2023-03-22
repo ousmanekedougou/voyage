@@ -327,7 +327,17 @@
         margin-right: 20px;
         padding: 1px;
         padding-right: 3px;
-        border: 1px solid silver;
+        /* border: 1px solid silver; */
+        border-radius: 10%;
+    }
+     .navbar-mobile-show .logout-button .logout-a {
+        position: absolute;
+        right: 0;
+        /* top: 10px; */
+        margin-top: 2px;
+        margin-right: 20px;
+        padding: 3px;
+        /* border: 1px solid silver; */
         border-radius: 10%;
     }
     .nav-item .nav-link.active{color:#556ee6}
@@ -462,11 +472,11 @@
         visibility: hidden;
         overflow: hidden;
     }
-    /* .drop-down-mobile .dropdown .login-user-button{
-        border: 1px solid red;
-        margin-top: 10px;
-        margin-bottom: -10rem;
-    } */
+    .drop-down-mobile .dropdown .login-user-button{
+        font-size: 10px;
+        margin-top: -4px;
+        padding: 3px;
+    }
    
  }
 

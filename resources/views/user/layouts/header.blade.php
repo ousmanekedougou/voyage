@@ -164,10 +164,10 @@
                 </li>
                 <li class="nav-item drop-down-mobile">
                     @if(!Auth::guard('web')->user() && !Auth::guard('agence')->user() && !Auth::guard('agent')->user() && !Auth::guard('client')->user())
-                        <div class="dropdown d-inline-block">
-                            <span class="d-xl-inline-block ms-1 login-user-button" id="page-header-user-dropdown"
+                        <div class="dropdown d-inline-block ">
+                            <span class="d-xl-inline-block login-user-button btn btn-outline-secondary" id="page-header-user-dropdown"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" key="t-henry">
-                                <i class="fas fa-sign-in-alt fa-fa-item d-xl-inline-block"></i>
+                                <i class="fa fa-sign-in-alt fa-fa-item d-xl-inline-block"></i>
                             </span>
                             <div class="dropdown-menu dropdown-menu-end">
                                 <!-- item-->
@@ -185,28 +185,33 @@
                                 </a>
                             </div>
                         </div>
-                    @else
-                        @if(Auth::guard('web')->user())
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                                @csrf
-                                <button type="submit" class="btn btn-outline-danger"><i class="mdi mdi-logout fa-fa-item d-xl-inline-block"></i></button>
-                            </form>
-                        @elseif(Auth::guard('agence')->user())
-                            <form id="logout-form-agence" action="{{ route('agence.agence.logout') }}" method="POST">
-                                @csrf
-                                <button type="submit" class="btn btn-outline-danger"><i class="mdi mdi-logout fa-fa-item d-xl-inline-block"></i></button>
-                            </form>
-                        @elseif(Auth::guard('agent')->user())
-                            <form id="logout-form-agent" action="{{ route('agent.agent.logout') }}" method="POST">
-                                @csrf
-                                <button type="submit" class="btn btn-outline-danger"><i class="mdi mdi-logout fa-fa-item d-xl-inline-block"></i></button>
-                            </form>
-                        @elseif(Auth::guard('client')->user())
-                            <form id="logout-form-customer" action="{{ route('customer.customer.logout') }}" method="POST">
-                                @csrf
-                                <button type="submit" class="btn btn-outline-danger"><i class="fas fa-sign-out-alt fa-fa-item d-xl-inline-block"></i></button>
-                            </form>
-                        @endif
+                    @endif
+                </li>
+                <li class="nav-item logout-button">
+                    @if(Auth::guard('web')->user())
+                    <a class="nav-link btn btn-outline-danger text-danger logout-a" href="" onclick="event.preventDefault(); document.getElementById('logout-form-web').submit();"><i
+                            class="fa fa-sign-out-alt fa-fa-item"></i></a>
+                        <form id="logout-form-web" action="{{ route('logout') }}" method="POST">
+                            @csrf
+                        </form>
+                    @elseif(Auth::guard('agence')->user())
+                    <a class="nav-link btn btn-outline-danger text-danger logout-a" href="" onclick="event.preventDefault(); document.getElementById('logout-form-agence').submit();"><i
+                            class="fa fa-sign-out-alt fa-fa-item"></i></a>
+                        <form id="logout-form-agence" action="{{ route('agence.agence.logout') }}" method="POST">
+                            @csrf
+                        </form>
+                    @elseif(Auth::guard('agent')->user())
+                    <a class="nav-link btn btn-outline-danger text-danger logout-a" href="" onclick="event.preventDefault(); document.getElementById('logout-form-agent').submit();"><i
+                            class="fa fa-sign-out-alt fa-fa-item"></i></a>
+                        <form id="logout-form-agent" action="{{ route('agent.agent.logout') }}" method="POST">
+                            @csrf
+                        </form>
+                    @elseif(Auth::guard('client')->user())
+                    <a class="nav-link btn btn-outline-danger text-danger logout-a" href="" onclick="event.preventDefault(); document.getElementById('logout-form-customer').submit();"><i
+                            class="fa fa-sign-out-alt fa-fa-item"></i></a>
+                        <form id="logout-form-customer" action="{{ route('customer.customer.logout') }}" method="POST">
+                            @csrf
+                        </form>
                     @endif
                 </li>
             </ul>
