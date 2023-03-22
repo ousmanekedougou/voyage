@@ -34,27 +34,10 @@
                                     </li>
 
                                     <li class="{{ set_active_roote_bottom_bar('setting.index') }}">
-                                        <div class="nav__btns">
-                                            <a class="nav__toggle" id="nav-toggle">
+                                            <a class="header-item noti-icon right-bar-toggle" id="nav-toggle">
                                                 <span>Regions</span>
                                                 <i class="bx bx-map fa-fa-item"></i>
                                             </a>
-                                        </div>
-
-                                        <div class="nav__menu" id="nav-menu">
-                                            <ul class="nav__list button-items">
-                                                @foreach(region() as $region)
-                                                    <li class="nav__item btn btn-light waves-effect waves-light w-xs">
-                                                        <a href="{{ route('customer.agence.region',$region->slug) }}" class="nav__link">
-                                                            <i class="bx bx-map d-block"></i> {{$region->name}}
-                                                        </a>
-                                                    </li>
-                                                @endforeach
-                                            </ul>
-                                            <i class="dripicons-cross  nav__close" id="nav-close"></i>
-                                        </div>
-
-                                       
                                     </li>
                                 </ul>
                             </main>
@@ -72,6 +55,30 @@
                         
                         
                     </div>
+                </div>
+
+                <div class="right-bar">
+                    <div data-simplebar class="h-100">
+                        <div class="rightbar-title d-flex align-items-center px-3 py-4">
+
+                            <h5 class="m-0 me-2">Agences d'autres regions</h5>
+
+                            <a href="javascript:void(0);" class="right-bar-toggle ms-auto">
+                                <i class="mdi mdi-close noti-icon"></i>
+                            </a>
+                        </div>
+
+                        <!-- Settings -->
+                        @foreach(region() as $region)
+                            <hr class="" />
+                            <div class="p-1">
+                                <a href="{{ route('customer.agence.region',$region->slug) }}" class="region-list">
+                                    <i class="bx bx-map align-middle me-2"></i> {{$region->name}}
+                                </a>
+                            </div>
+                        @endforeach
+
+                    </div> <!-- end slimscroll-menu-->
                 </div>
                 
             </footer>
