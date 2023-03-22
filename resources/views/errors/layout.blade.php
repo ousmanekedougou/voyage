@@ -1,57 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <meta charset="utf-8" />
+        <title>{{ page_title($title ?? '') }}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+        <meta content="Themesbrand" name="author" />
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="assets/images/favicon.ico">
 
-        <title>@yield('title')</title>
+        <!-- Bootstrap Css -->
+        <link href="{{asset('admin/assets/css/bootstrap.min.css')}}" yy rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="{{asset('admin/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="{{asset('admin/assets/css/app.min.css')}}"  rel="stylesheet" type="text/css" />
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 36px;
-                padding: 20px;
-            }
-        </style>
     </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            <div class="content">
-                <div class="title">
-                    @yield('message')
-                </div>
-            </div>
-        </div>
-    </body>
+<body data-bs-spy="scroll" data-bs-target="#topnav-menu" data-bs-offset="60">
+  @section('main-content')
+
+  
+
+  @show
+  <!-- JAVASCRIPT -->
+    <script src="{{asset('admin/assets/libs/jquery/jquery.min.js')}}"></script>
+    <script src="{{asset('admin/assets/libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('admin/assets/libs/metismenu/metisMenu.min.js')}}"></script>
+    <script src="{{asset('admin/assets/libs/simplebar/simplebar.min.js')}}"></script>
+    <script src="{{asset('admin/assets/libs/node-waves/waves.min.js')}}"></script>
+
+    <script src="{{asset('admin/assets/js/app.js')}}"></script>
+</body>
 </html>

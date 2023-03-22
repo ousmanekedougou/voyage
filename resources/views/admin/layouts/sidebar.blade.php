@@ -159,33 +159,30 @@
                             <li>
                                 <a href="{{ route('customer.client.show') }}" class="waves-effect">
                                     <i class="fa fa-ticket-alt"></i>
-                                    <span class="badge rounded-pill bg-success float-end" key="t-new">New</span>
                                     <span key="t-file-manager">Tickets</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('customer.colis.index') }}" class="waves-effect">
                                     <i class="fa fa-suitcase-rolling"></i>
-                                    <span class="badge rounded-pill bg-success float-end" key="t-new">New</span>
                                     <span key="t-file-manager">Colis Evoyer</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="{{ route('customer.bagage.index') }}" class="waves-effect">
                                     <i class="fa fa-luggage-cart"></i>
-                                    <span class="badge rounded-pill bg-success float-end" key="t-new">New</span>
                                     <span key="t-file-manager">Bagages</span>
                                 </a>
                             </li>
 
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="bx bx-map"></i>
-                                    <span key="t-maps">D'autres agences</span>
+                                    <i class="fa fa-map-marker-alt "></i>
+                                    <span key="t-maps">D'autres regions</span>
                                 </a>
                                 <ul class="sub-menu" aria-expanded="false">
                                     @foreach(region() as $region)
-                                    <li><a href="{{ route('customer.agence.region',$region->slug) }}" key="t-g-maps-{{$region->id}}"><i class="fa fa-suitcase-rolling"></i> {{$region->name}}</a></li>
+                                    <li><a href="{{ route('customer.agence.region',$region->slug) }}" key="t-g-maps-{{$region->id}}"><i class="bx bx-map"></i> {{$region->name}}</a></li>
                                     @endforeach
                                 </ul>
                             </li>
