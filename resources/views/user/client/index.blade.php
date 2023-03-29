@@ -92,7 +92,7 @@
                                         <label class="form-label">Votre numero de telephone</label>
                                         <div>
                                             <input data-parsley-type="number" type="number" id="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" autocomplete="phone"
-                                            required placeholder="Numero de telephone"  />
+                                            required placeholder="Numero de telephone" style="width:100%;" />
                                             <input type="hidden" name="indicatif" id="indicatif">
                                             @error('phone')
                                                 <span class="invalid-feedback" role="alert">

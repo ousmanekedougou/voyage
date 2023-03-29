@@ -147,7 +147,7 @@
                         </p>
                     </div>
                     <div class="button-items mb-3">
-                        <a href="#whileAgence" class="btn btn-primary btn-block-for-agence-create text-uppercase"> <i class="bx bxs-institution"></i> Pour Quoi avoir un compte agence ou client sur TouCki ?</a>
+                        <a href="#whileAgence" class="btn btn-primary btn-block-for-agence-create"> <i class="bx bxs-institution"></i> Pour Quoi avoir un compte agence ou client sur TouCki ?</a>
                     </div> 
                 </div>
 
@@ -189,7 +189,7 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title mb-0 text-center">Pour Quoi avoir un compte agence ou client sur TouCki ?</h4>
+                            <h5 class="text-center">Pour Quoi avoir un compte agence ou client sur TouCki ?</h5>
 
                             <div class="row">
                                 <div class="col-xl-12">
@@ -219,8 +219,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4">
-                    <div class="card card-body">
-                        <h4 class="card-title mt-0">Avoir une vitrine sur la boutique en ligne de Google</h4>
+                    <div class="card card-body bg-primary text-white">
+                        <h5 class="mt-0 mb-3 text-white"><i class="mdi mdi-check-all me-1"></i> Avoir une vitrine sur la boutique en ligne de Google</h5>
                         <p class="card-text">
                             <span>C’est gratuit !</span> <br>
                             Avoir un site permet, à tout internaute qui cherche une agence de voyages à proximité de son domicile ou de son travail, d’apparaitre sur Google qui devient, par la force des choses, une sorte d’annuaire universel. 
@@ -228,8 +228,8 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="card card-body">
-                        <h4 class="card-title mt-0">Votre identité</h4>
+                    <div class="card card-body bg-success text-white">
+                        <h5 class="mt-0 mb-3 text-white"><i class="mdi mdi-check-all me-1"></i> Votre identité</h5>
                         <p class="card-text">
                             Le site de votre agence est votre identité.
 
@@ -242,8 +242,8 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="card card-body">
-                        <h4 class="card-title mt-0">Être informé sur sa clientèle</h4>
+                    <div class="card card-body bg-warning text-white">
+                        <h5 class="mt-0 mb-3 text-white"><i class="mdi mdi-check-all me-1"></i> Être informé sur sa clientèle</h5>
                         <p class="card-text">
                             La formule est connue : "un homme informé en vaut deux’".
 
@@ -253,8 +253,8 @@
                     </div>
                 </div>
                  <div class="col-lg-4">
-                    <div class="card card-body">
-                        <h4 class="card-title mt-0">Interactivité</h4>
+                    <div class="card card-body bg-secondary text-white">
+                        <h5 class="mt-0 mb-3 text-white"><i class="mdi mdi-check-all me-1"></i> Interactivité</h5>
                         <p class="card-text">
 
                             Penser interactivité. Vos clients s’expriment sur la Toile.
@@ -266,8 +266,8 @@
                 </div>
 
                  <div class="col-lg-4">
-                    <div class="card card-body">
-                        <h4 class="card-title mt-0">Avis</h4>
+                    <div class="card card-body bg-info text-white">
+                        <h5 class="mt-0 mb-3 text-white"><i class="mdi mdi-check-all me-1"></i> Avis</h5>
                         <p class="card-text">
                             La dernière enquête Ebay/Médiamétrie nous informe que les avis sur internet continuent à bien se porter : +8% de consultation et + 7% d’avis publiés.
 
@@ -278,7 +278,7 @@
 
                  <div class="col-lg-4">
                     <div class="card card-body">
-                        <h4 class="card-title mt-0">Maintenir le contact avec le client</h4>
+                        <h5 class="mt-0 mb-3"><i class="mdi mdi-check-all me-1"></i> Maintenir le contact avec le client</h5>
                         <p class="card-text">
                             À partir de 19 heures, en général, l’agence est fermée.
 
@@ -330,7 +330,7 @@
     <!-- Features end -->
 
 
-     <section class="section bg-white sectionCompteDesktope" id="features">
+     <section class="section sectionCompteDesktope" id="features">
         <div class="container">
             <div class="row align-items-center mt-5 pt-md-5">
                 <div class="col-md-5">
@@ -366,7 +366,7 @@
     
     
     <!-- Features start -->
-    <section class="section sectionCompteDesktope" id="features">
+    <section class="section sectionCompteDesktope bg-white" id="features">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6 ms-auto">

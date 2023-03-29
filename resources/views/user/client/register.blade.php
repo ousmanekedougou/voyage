@@ -1,4 +1,4 @@
-@extends('user.layouts.app',['title' => 'Create Client'])
+@extends('user.layouts.app',['title' => 'Creation de compte client'])
     <style>
         .bg-ico-hero{
             background-image:url(./user/assets/images/client.jpg) !important;

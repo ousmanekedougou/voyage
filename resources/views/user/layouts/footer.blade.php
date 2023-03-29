@@ -112,9 +112,9 @@
 
                     <p class="mb-2">
                         2021 - <script>document.write(new Date().getFullYear())</script> © TouCki. Design & Develop by
-                        KdgWeb
+                         <a href="{{ route('login') }}" target="_blank" rel="noopener noreferrer" class="text-white-50">KdgWeb</a>
                     </p>
-                    <p>Ce sera aussi simple qu'occidental en fait, ce sera pour un anglais, cela ressemblera à un anglais simplifié, pour un sceptique</p>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, reiciendis! Assumenda omnis ipsum fuga quae quidem molestias quaerat consequuntur! Alias voluptates ipsa eum repudiandae, rerum ex consequatur ratione temporibus omnis.</p>
                 </div>
 
             </div>
@@ -129,7 +129,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-sm-12">
-                                <img src="{{asset('admin/assets/images/logo-dark.png')}}" alt="" height="20" class=""> <script>document.write(new Date().getFullYear())</script>  Develop by KdgWeb
+                                <img src="{{asset('admin/assets/images/logo-dark.png')}}" alt="" height="13" class=""> <script>document.write(new Date().getFullYear())</script>  <span style="float:right;">Develop by KdgWeb</span>
                             </div>
                         </div>
                     </div>

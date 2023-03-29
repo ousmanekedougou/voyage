@@ -1,4 +1,4 @@
-@extends('user.layouts.app',['title' => 'Create Agence'])
+@extends('user.layouts.app',['title' => 'Creation de compte agence'])
     <style>
         .bg-ico-hero{
             background-image:url(./user/assets/images/agence.webp) !important;
