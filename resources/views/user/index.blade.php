@@ -1,5 +1,10 @@
 @extends('user.layouts.app',['title' => 'Acceuil'])
 <style>
+     .bg-ico-hero{
+        background-image:url(./user/assets/images/dowload/home.jpg) !important;
+        background-size:cover;background-position:top !important;
+        height: 100px !important;
+    }
 .btn-block-for-agence-create,.btn-block-for-client-create{
     width: 100%;
 }
@@ -355,7 +360,8 @@
                 </div>
                 <div class="col-md-6  col-sm-8 ms-md-auto">
                     <div class="mt-4 me-md-0">
-                        <img src="{{('user/assets/images/dowload/compteClient.svg')}}" alt="" class="img-fluid mx-auto d-block">
+                        <img src="{{('user/assets/images/dowload/mobile.svg')}}" alt="" class="img-fluid mx-auto d-block" style="width:
+                        70%;height:auto;">
                     </div>
                 </div>
             </div>

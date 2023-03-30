@@ -25,7 +25,7 @@
             <div class="row align-items-center row_pricipal">
                 <div class="col-lg-12 card_show text-center">
                     <div class="text-white-50">
-                        <h1 class="text-white font-weight-semibold mb-3 hero-title text-center">Vérifiez toutes vos résérvations</h1>
+                        <h1 class="text-white font-weight-semibold mb-3 hero-title text-center">Vérifiez toutes vos résérvations : <br> Tickets , Bagages & Colis</h1>
                         <p class="font-size-16 text-white">
                             
                         </p>
@@ -75,7 +75,7 @@
                 <div class="col-md-6 ms-auto">
                     <div class="mt-4 mt-md-auto">
                         <div class="d-flex align-items-center img-verification-mobile">
-                          <img src="{{('user/assets/images/crypto/payment.jpg')}}" alt="" class="img-fluid mx-auto d-block">
+                          <img src="{{('user/assets/images/dowload/email-tickets.svg')}}" alt="" class="img-fluid mx-auto d-block">
                         </div>
                     </div>
                 </div>

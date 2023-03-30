@@ -111,7 +111,7 @@
                     </div>
 
                     <p class="mb-2">
-                        2021 - <script>document.write(new Date().getFullYear())</script> © TouCki. Design & Develop by
+                        2021 - <script>document.write(new Date().getFullYear())</script> © TouCki. Développé par
                          <a href="{{ route('login') }}" target="_blank" rel="noopener noreferrer" class="text-white-50">KdgWeb</a>
                     </p>
                     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, reiciendis! Assumenda omnis ipsum fuga quae quidem molestias quaerat consequuntur! Alias voluptates ipsa eum repudiandae, rerum ex consequatur ratione temporibus omnis.</p>
