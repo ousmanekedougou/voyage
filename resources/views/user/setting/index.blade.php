@@ -14,7 +14,7 @@
     }
     .h2-title{
         margin-bottom: 15px;
-        font-size: 2rem;
+        font-size: 1.5rem;
         font-weight: 900;
     }
     .h3-title{
