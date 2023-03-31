@@ -314,13 +314,19 @@
                             <div class="features-number font-weight-semibold display-4 me-3">01</div>
                             <h4 class="mb-0">Vous avez une agence de transport routier</h4>
                         </div>
-                        <p class="text-muted">If several languages coalesce, the grammar of the resulting language is
-                            more simple and regular than of the individual will be more simple and regular than the
-                            existing.</p>
+                        <p class="text-muted">
+                            La technologie a bouleversé le monde des affaires au point que si une entreprise de transporteur n'a pas de visibilité sur le web, elle n'existe pas. Dans le marché concurrentiel d'aujourd'hui, le référencement est plus important que jamais.
+                        </p>
+                        <p class="text-muted">
+                            Avec notre site web, une agence de voyages pourra bien se familiariser avec les différentes étapes de l'évolution du marché qui est en perpétuelle mutation. Ainsi, ce renseignement dont vous pouvez faire permettra d'adapter vos tarifs et votre méthode à la réalité du marché tout en étant très compétitif.
+                        </p>
                         <div class="text-muted mt-4">
-                            <p class="mb-2"><i class="mdi mdi-circle-medium text-success me-1"></i>Donec pede justo vel
-                                aliquet</p>
-                            <p><i class="mdi mdi-circle-medium text-success me-1"></i>Aenean et nisl sagittis</p>
+                            <p class="mb-2"><i class="mdi mdi-circle-medium text-success me-1"></i>
+                                Un bon positionnement de votre agence de transporteur sur les moteurs de recherche
+                            </p>
+                            <p><i class="mdi mdi-circle-medium text-success me-1"></i>
+                                Accroître la visibilité et le trafic sur votre agence de transporteur
+                            </p>
                         </div>
                     </div>
                     <div class="button-items mb-3">
@@ -346,12 +352,15 @@
                         </div>
                         <p class="text-muted">
                             Profitez pleinement de l'expérience TouCki, <br>
-                            Profitez de réservations et de remboursements plus rapides ainsi que d'un accès à des réductions grâce à notre programme de parrainage.
+                            Profitez des réservations et des remboursements plus rapides ainsi que d'un accès à des réductions grâce à des agences de transport dans tout le pays.
                         </p>
                         <div class="text-muted mt-4">
-                            <p class="mb-2"><i class="mdi mdi-circle-medium text-success me-1"></i>Donec pede justo vel
-                                aliquet</p>
-                            <p><i class="mdi mdi-circle-medium text-success me-1"></i>Aenean et nisl sagittis</p>
+                            <p class="mb-2"><i class="mdi mdi-circle-medium text-success me-1"></i>
+                                Horaires et billets pour tous vos déplacements.
+                            </p>
+                            <p><i class="mdi mdi-circle-medium text-success me-1"></i>A
+                                Il n'a jamais été aussi simple de réserver un billet de bus au senegal.
+                            </p>
                         </div>
                         <div class="button-items mb-3">
                             <a href="{{ route('client.register') }}" class="btn btn-primary btn-block-for-client-create"> <i class="bx bx-user-circle"> </i> Créer votre compte client TouCki</a>
