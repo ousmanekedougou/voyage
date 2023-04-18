@@ -1,21 +1,21 @@
 @extends('admin.layouts.app')
-@section('headSection')
-   <!-- DataTables -->
-    <link href="{{asset('admin/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('admin/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css')}}" rel="stylesheet"
-        type="text/css" />
+    @section('headSection')
+        <!-- DataTables -->
+        <link href="{{asset('admin/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
+        <link href="{{asset('admin/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css')}}" rel="stylesheet"
+            type="text/css" />
 
-    <!-- Responsive datatable examples -->
-    <link href="{{asset('admin/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css')}}" rel="stylesheet"
-        type="text/css" />
+        <!-- Responsive datatable examples -->
+        <link href="{{asset('admin/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css')}}" rel="stylesheet"
+            type="text/css" />
 
-    <!-- Bootstrap Css -->
-    <link href="{{asset('admin/assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
-    <!-- Icons Css -->
-    <link href="{{asset('admin/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
-    <!-- App Css-->
-    <link href="{{asset('admin/assets/css/app.min.css')}}"  rel="stylesheet" type="text/css" />
-@endsection
+        <!-- Bootstrap Css -->
+        <link href="{{asset('admin/assets/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+        <!-- Icons Css -->
+        <link href="{{asset('admin/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
+        <!-- App Css-->
+        <link href="{{asset('admin/assets/css/app.min.css')}}"  rel="stylesheet" type="text/css" />
+    @endsection
 @section('main-content')
 
     <div class="page-content">
@@ -68,7 +68,6 @@
                                                 <div>
                                                     <p class="text-muted text-truncate mb-2">Clients du jour</p>
                                                     <h5 class="mb-0">{{ $clientCount->count() }} </h5>
-                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -104,7 +103,7 @@
                 @foreach($itineraires as $itineraire)
                     <div class="col-lg-12">
                         <div class="p-0">
-                            <div class="card-body">
+                            <div class="">
                                 <h5 class="btn btn-soft-white bg-white text-center" style="width: 100%;font-weight:bold;"> <i class="fa fa-arrow-down"></i> Itineraire de {{ $itineraire->name }}</h5>
                                 
                                 <div class="row">

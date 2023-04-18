@@ -16,8 +16,14 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="media">
-                                        <div class="me-3">
-                                            <img src="{{(Storage::url($agence->logo))}}" alt="" class="avatar-md rounded-circle img-thumbnail">
+                                        <div class="me-2">
+                                            @if($agence->logo != '')
+                                                <img src="{{(Storage::url($agence->logo))}}" alt="" class="avatar-md rounded-circle img-thumbnail">
+                                            @else
+                                                <span class="avatar-md rounded-circle text-muted font-size-16">
+                                                    <i class="fa fa-bus"></i>
+                                                </span>
+                                            @endif
                                         </div>
                                         <div class="media-body align-self-center">
                                             <div class="text-muted">
@@ -54,16 +60,16 @@
             <!-- end row -->
 
             <!-- currency price section start-->
-            <div class="row">
+            <div class="row mb-4">
                 @foreach($sieges as $siege)
                 <div class="col-xl-4 col-sm-6">
                     <div class="card">
                         <div class="card-body">
                            
                             <div class="media">
-                                <div class="avatar-xs me-3">
+                                <div class="avatar-xs me-2">
                                     <span
-                                        class="avatar-title rounded-circle bg-info bg-soft text-warning font-size-18">
+                                        class="avatar-title rounded-circle bg-info bg-soft text-warning font-size-16">
                                         @if($siege->image == '')
                                             <i class="bx bx-map"></i>
                                         @else

@@ -22,15 +22,16 @@
                                 <div class="col-lg-4">
                                     <div class="media">
                                         <div class="me-3">
-                                            <img src="{{(Storage::url(Auth::guard('client')->user()->image))}}" alt="" class="avatar-md rounded-circle img-thumbnail">
+                                            @if(Auth::guard('client')->user()->image != '')
+                                                <img src="{{(Storage::url(Auth::guard('client')->user()->image))}}" alt="" class="avatar-md rounded-circle img-thumbnail">
+                                            @else
+                                                <img src="{{ asset('admin/assets/images/users/profil.jpg') }}" alt="" class="avatar-md rounded-circle img-thumbnail">
+                                            @endif
                                         </div>
                                         <div class="media-body align-self-center">
                                             <div class="text-muted">
-                                                <p class="mb-2">Bienvenue sur votre compte client</p>
+                                                <p class="mb-2">Bienvenue sur votre compte</p>
                                                 <h5 class="mb-1">TouCki</h5>
-                                                <p class="mb-0">
-                                                    Client
-                                                </p>
                                             </div>
                                         </div>
                                     </div>
@@ -74,88 +75,88 @@
             <!-- end row -->
 
             <!-- Blog start -->
-                <div class="row">
+                <div class="row mb-1">
                     @foreach($agences as $agence)
-                    <div class="col-xl-4 col-sm-6">
-                        <div class="card" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
-                            <div class="card-body">
-                                <div class="media">
-                                    <div class="avatar-md me-4">
-                                        <span class="avatar-title rounded-circle bg-light text-danger font-size-16">
-                                            @if($agence->logo != Null)
-                                            <img src="{{Storage::url($agence->logo)}}" alt="">
-                                            @else
-                                            <i class="fa fa-bus"></i>
-                                            @endif
-                                        </span>
-                                    </div>
+                        <div class="col-xl-4 col-sm-6">
+                            <div class="card" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
+                                <div class="card-body">
+                                    <div class="media">
+                                        <div class="avatar-md me-4">
+                                            <span class="avatar-title rounded-circle bg-light text-danger font-size-16">
+                                                @if($agence->logo != Null)
+                                                <img src="{{Storage::url($agence->logo)}}" alt="">
+                                                @else
+                                                <i class="fa fa-bus"></i>
+                                                @endif
+                                            </span>
+                                        </div>
 
-                                    <div class="media-body overflow-hidden">
-                                        <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">{{ $agence->name }}</a></h5>
-                                        <p class="text-muted mb-1"> <i class="bx bx-envelope me-1"> {{ $agence->email }}</i> </p>
-                                        <p class="text-muted mb-1"> <i class="bx bx-mobile me-1"> {{ $agence->phone }}</i> </p>
+                                        <div class="media-body overflow-hidden">
+                                            <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">{{ $agence->name }}</a></h5>
+                                            <p class="text-muted mb-1"> <i class="bx bx-envelope me-1"> {{ $agence->email }}</i> </p>
+                                            <p class="text-muted mb-1"> <i class="bx bx-mobile me-1"> {{ $agence->phone }}</i> </p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row p-0" style="margin-top: -15px;">
-                                <h6 class="text-center"> <i class="fa fa-blog badge bg-success"> Slogan</i></h6>
-                                <p class="text-muted text-center">{{ $agence->slogan }}</p>
-                            </div>
-                            <div class="px-1 py-1 border-top bg-light">
-                                <ul class="list-inline mb-0 text-center">
-                                    <li class="list-inline-item me-3">
-                                        <a href="{{ route('customer.agence.about',$agence->slug) }}" class="btn btn-primary btn-xs text-center"> <i class="bx bx-file"></i> Details</a>
-                                    </li>
-                                    <li class="list-inline-item me-3">
-                                        <a href="{{ route('customer.agence.show',$agence->slug) }}" class="btn btn-primary btn-xs text-center"> <i class="bx bx-map"></i> Sieges</a>
-                                    </li>
-                                   {{--
-                                    <li class="list-inline-item me-3">
-                                        <a href="{{ route('customer.agence.about',$agence->slug) }}" title="Detail" class="btn btn-primary position-relative rounded-circle p-0 avatar-xs  ">
-                                             <span class="avatar-title bg-transparent text-reset">
-                                                <i class="bx bx-file"></i>  
-                                            </span>
-                                        </a>
-                                    </li>
-
-                                    <li class="list-inline-item me-3">
-                                        <a href="{{ route('customer.agence.show',$agence->slug) }}" title="Sieges" class="btn btn-light position-relative p-0 avatar-xs rounded-circle bg-primary text-white">
-                                            <span class="avatar-title bg-transparent text-reset">
-                                                <i class="bx bx-map"></i>
-                                            </span>
-                                        </a>
-                                    </li>
-
-                                    <li class="list-inline-item me-3">
-                                        <div class="d-flex flex-wrap gap-3">
-
-                                            <button type="button" class="btn btn-light position-relative p-0 avatar-xs rounded-circle bg-primary text-white">
+                                <div class="row p-0" style="margin-top: -15px;">
+                                    <h6 class="text-center"> <i class="fa fa-blog badge bg-success"> Slogan</i></h6>
+                                    <p class="text-muted text-center">{{ $agence->slogan }}</p>
+                                </div>
+                                <div class="px-1 py-1 border-top bg-light">
+                                    <ul class="list-inline mb-0 text-center">
+                                        <li class="list-inline-item me-3">
+                                            <a href="{{ route('customer.agence.about',$agence->slug) }}" class="btn btn-primary btn-xs text-center"> <i class="bx bx-file"></i> Details</a>
+                                        </li>
+                                        <li class="list-inline-item me-3">
+                                            <a href="{{ route('customer.agence.show',$agence->slug) }}" class="btn btn-primary btn-xs text-center"> <i class="bx bx-map"></i> Sieges</a>
+                                        </li>
+                                    {{--
+                                        <li class="list-inline-item me-3">
+                                            <a href="{{ route('customer.agence.about',$agence->slug) }}" title="Detail" class="btn btn-primary position-relative rounded-circle p-0 avatar-xs  ">
                                                 <span class="avatar-title bg-transparent text-reset">
-                                                    <i class="bx bxl-facebook "></i>
+                                                    <i class="bx bx-file"></i>  
                                                 </span>
-                                            </button>
+                                            </a>
+                                        </li>
 
-                                            <button type="button" class="btn btn-light position-relative p-0 avatar-xs rounded-circle bg-success text-white">
+                                        <li class="list-inline-item me-3">
+                                            <a href="{{ route('customer.agence.show',$agence->slug) }}" title="Sieges" class="btn btn-light position-relative p-0 avatar-xs rounded-circle bg-primary text-white">
                                                 <span class="avatar-title bg-transparent text-reset">
-                                                    <i class="bx bxl-whatsapp "></i>
+                                                    <i class="bx bx-map"></i>
                                                 </span>
-                                            </button>
+                                            </a>
+                                        </li>
 
-                                            <button type="button" class="btn btn-light position-relative p-0 avatar-xs rounded-circle bg-secondary text-white">
-                                                <span class="avatar-title bg-transparent text-reset">
-                                                    <i class="bx bxl-instagram"></i>
-                                                </span>
-                                            </button>
-                                        </div>
-                                    </li>
-                                    --}}
-                                </ul>
+                                        <li class="list-inline-item me-3">
+                                            <div class="d-flex flex-wrap gap-3">
+
+                                                <button type="button" class="btn btn-light position-relative p-0 avatar-xs rounded-circle bg-primary text-white">
+                                                    <span class="avatar-title bg-transparent text-reset">
+                                                        <i class="bx bxl-facebook "></i>
+                                                    </span>
+                                                </button>
+
+                                                <button type="button" class="btn btn-light position-relative p-0 avatar-xs rounded-circle bg-success text-white">
+                                                    <span class="avatar-title bg-transparent text-reset">
+                                                        <i class="bx bxl-whatsapp "></i>
+                                                    </span>
+                                                </button>
+
+                                                <button type="button" class="btn btn-light position-relative p-0 avatar-xs rounded-circle bg-secondary text-white">
+                                                    <span class="avatar-title bg-transparent text-reset">
+                                                        <i class="bx bxl-instagram"></i>
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </li>
+                                        --}}
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
                     @endforeach
                     <!-- end container -->
-                    <div class="row ">
+                    <div class="row mb-3">
                         <div class="col-12">
                             <div class="" style="margin-right:40%;">
                                 <a href="javascript:void(0);" class="text-success"> {{$agences->links()}} </a>

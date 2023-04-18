@@ -27,7 +27,7 @@
                 @foreach($itineraires as $itineraire)
                     <div class="col-lg-12">
                         <div class="p-0">
-                            <div class="card-body">
+                            <div class="">
                                 <h5 class="btn btn-soft-white bg-white text-center" style="width: 100%;font-weight:bold;"> <i class="fa fa-arrow-down"></i> Itineraire de {{ $itineraire->name }}</h5>
                                 
                                 <div class="row">

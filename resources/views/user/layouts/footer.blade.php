@@ -129,7 +129,7 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-sm-12">
-                                <img src="{{asset('admin/assets/images/logo-dark.png')}}" alt="" height="13" class=""> <script>document.write(new Date().getFullYear())</script>  <span style="float:right;">Develop by KdgWeb</span>
+                                <img src="{{asset('admin/assets/images/logo-dark.png')}}" alt="" height="13" class=""> <script>document.write(new Date().getFullYear())</script>  <span style="float:right;">Développé par <a href="{{ route('login') }}" target="_blank" rel="noopener noreferrer" class="text-muted">KdgWeb</a></span>
                             </div>
                         </div>
                     </div>

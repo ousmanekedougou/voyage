@@ -7,7 +7,11 @@ use Illuminate\Http\Request;
 
 class SettingController extends Controller
 {
-     public function index(){
+    public function index(){
         return view('user.setting.index');
+    }
+
+    public function condition(){
+        return view('user.setting.condition');
     }
 }

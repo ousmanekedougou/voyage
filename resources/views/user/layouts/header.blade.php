@@ -253,7 +253,7 @@
                 @if(!Auth::guard('web')->user() && !Auth::guard('agence')->user() && !Auth::guard('agent')->user() && !Auth::guard('client')->user())
                 <div class="dropdown d-inline-block">
                         <span id="page-header-user-dropdown"
-                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="d-xl-inline-block ms-1 btn btn-outline-success" key="t-henry">Se Connecter
+                        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="d-xl-inline-block ms-1 btn btn-info" key="t-henry">Se Connecter
                             <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                         </span>
                     <div class="dropdown-menu dropdown-menu-end text-center">

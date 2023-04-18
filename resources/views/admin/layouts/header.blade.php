@@ -28,7 +28,6 @@
                         @if(Auth::guard('agent')->user())
                             <a href="{{ route('agent.home') }}" class="logo logo-dark">
                                 <span class="logo-sm">
-                                    <!-- <span class="text-bold text-uppercase text-white"></span> -->
                                     @if(Auth::guard('agent')->user()->agence->logo == null)
                                         <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="22">
                                     @else
@@ -47,8 +46,7 @@
 
                             <a href="{{ route('agent.home') }}" class="logo logo-light">
                                 <span class="logo-sm">
-                                    <!-- <span class="text-bold text-uppercase text-white">{{Auth::guard('agent')->user()->logo}}</span> -->
-                                    @if(Auth::guard('agent')->user()->agence->logo == null)
+                                    @if(Auth::guard('agent')->user()->agence->logo == '')
                                         <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="22">
                                     @else
                                         <img src="{{Storage::url(Auth::guard('agent')->user()->agence->logo)}}" alt="" height="22">
@@ -57,7 +55,7 @@
                                 <span class="logo-lg">
                                      <span class="text-bold text-uppercase text-white" style="font-size: 14px;margin-left:-25px;">{{Auth::guard('agent')->user()->agence->name}}</span>
                                     
-                                    @if(Auth::guard('agent')->user()->agence->logo == null)
+                                    @if(Auth::guard('agent')->user()->agence->logo == 'null')
                                         <img src="{{asset('admin/assets/images/bus.svg')}}" alt=""  style="width: 50px;height:50px;border-radius:100%;">
                                     @else
                                         <img src="{{Storage::url(Auth::guard('agent')->user()->agence->logo)}}" alt="" style="width: 50px;height:50px;border-radius:100%;">
@@ -69,8 +67,7 @@
                         @if(Auth::guard('agence')->user())
                             <a href="{{ route('agence.agence.home') }}" class="logo logo-dark">
                                 <span class="logo-sm">
-                                    <!-- <span class="text-bold text-uppercase text-white"></span> -->
-                                    @if(Auth::guard('agence')->user()->logo == null)
+                                    @if(Auth::guard('agence')->user()->logo == '')
                                         <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="22">
                                     @else
                                         <img src="{{Storage::url(Auth::guard('agence')->user()->logo)}}" alt="" height="22">
@@ -78,7 +75,7 @@
                                 </span>
                                 <span class="logo-lg">
                                     <span class="text-bold text-uppercase text-white">{{Auth::guard('agence')->user()->name}}</span>
-                                     @if(Auth::guard('agence')->user()->logo == null)
+                                     @if(Auth::guard('agence')->user()->logo == '')
                                         <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="17">
                                     @else
                                         <img src="{{Storage::url(Auth::guard('agence')->user()->logo)}}" alt="" height="17">
@@ -88,7 +85,6 @@
 
                             <a href="{{ route('agence.agence.home') }}" class="logo logo-light">
                                 <span class="logo-sm">
-                                    <!-- <span class="text-bold text-uppercase text-white">{{Auth::guard('agence')->user()->agence_name}}</span> -->
                                     @if(Auth::guard('agence')->user()->logo == null)
                                         <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="22">
                                     @else
@@ -108,13 +104,6 @@
                         @endif
                        
                         @if(Auth::guard('client')->user())
-                            {{--
-                            <a href="{{ route('customer.home') }}" class="logo logo-light show-logo-toucki">
-                                <span class="logo-sm">
-                                    <img src="{{asset('admin/assets/images/logo-dark.png')}}" alt="" height="19" class="logo logo-light">    
-                                </span>
-                            </a>
-                            --}}
                                                
                             <a href="{{ route('customer.home') }}" class="logo logo-dark show-logo-a-toucki">
                                 <span class="logo-sm">
@@ -162,10 +151,24 @@
                             </span>
                         </a>
                     @else
-                        <button type="button" class="btn btn-sm px-3 font-size-16 header-item waves-effect"
+                        <button type="button" class="btn btn-sm px-3 font-size-16 mr-3 header-item waves-effect"
                             id="vertical-menu-btn">
                             <i class="fa fa-fw fa-bars"></i>
                         </button>
+                        <a href="
+                        @if(Auth::guard('agent')->user())
+                            {{ route('agent.home') }}
+                        @elseif(Auth::guard('agence')->user())
+                            {{ route('agence.home') }}
+                        @elseif(Auth::guard('web')->user())
+                            {{ route('admin.home') }}
+                        @endif
+                            " 
+                            class="logo logo-light show-logo-toucki">
+                            <span class="logo-sm">
+                                <img src="{{asset('admin/assets/images/logo-dark.png')}}" alt="" height="16" class="logo logo-light">    
+                            </span>
+                        </a>
                     @endif
                     
                     
@@ -434,16 +437,16 @@
                             @endif
 
                              @if(Auth::guard('agent')->user())
-                                @if(Auth::guard('agent')->user()->logo !== null)
-                                <img class="rounded-circle header-profile-user" src="{{ Storage::url(Auth::guard('agent')->user()->logo) }}"
+                                @if(Auth::guard('agent')->user()->logo != null)
+                                    <img class="rounded-circle header-profile-user" src="{{ Storage::url(Auth::guard('agent')->user()->logo) }}"
                                     alt="Header Avatar">
                                     <span class="d-none d-xl-inline-block ms-1" key="t-henry"> {{ Auth::guard('agent')->user()->name }}</span>
                                     <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                                 @else
-                                 <img class="rounded-circle header-profile-user" src="{{ asset('admin/assets/images/users/profil.jpg') }}"
-                                alt="Header Avatar">
-                                <span class="d-none d-xl-inline-block ms-1" key="t-henry"> {{ Auth::guard('agent')->user()->name }}</span>
-                                <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+                                    <img class="rounded-circle header-profile-user" src="{{ asset('admin/assets/images/users/profil.jpg') }}"
+                                    alt="Header Avatar">
+                                    <span class="d-none d-xl-inline-block ms-1" key="t-henry"> {{ Auth::guard('agent')->user()->name }}</span>
+                                    <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
                                 @endif
                             @endif
 

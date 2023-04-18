@@ -42,19 +42,18 @@
                                 </ul>
                             </main>
                         </div>
-                        @endif
+                        
+                        @else
 
-                        <div class="col-sm-6 footer-info-mobile">
+                        <div class="col-sm-4 footer-info-mobile">
                             <script>
                                 document.write(new Date().getFullYear())
                             </script> © TouCki
                         </div>
-                        <div class="col-sm-6 footer-info-mobile">
-                            <div class="text-sm-end d-none d-sm-block">
+                        <div class="col-sm-8 footer-info-mobile text-sm-end d-none d-sm-block">
                                 Développé par KdgWeb
-                            </div>
                         </div>
-
+                        @endif
 
                     </div>
                 </div>

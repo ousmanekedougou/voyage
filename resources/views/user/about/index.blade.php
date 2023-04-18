@@ -70,77 +70,75 @@
             <!-- end row -->
 
             <div class="row">
-                <div class="col-sm-12">
-                    <div class="row" data-masonry='{"percentPosition": true }'>
-                        <div class="col-lg-4">
-                            <div class="card border border-primary">
-                                <div class="card-header bg-transparent border-primary">
-                                    <h5 class="my-0 text-primary">1<i class="mdi mdi-bullseye-arrow me-3"></i>Primary outline Card</h5>
-                                </div>
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4">
-                            <div class="card border border-primary">
-                                <div class="card-header bg-transparent border-primary">
-                                    <h5 class="my-0 text-primary">2<i class="mdi mdi-bullseye-arrow me-3"></i>Primary outline Card</h5>
-                                </div>
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4">
-                            <div class="card border border-primary">
-                                <div class="card-header bg-transparent border-primary">
-                                    <h5 class="my-0 text-primary">3<i class="mdi mdi-bullseye-arrow me-3"></i>Primary outline Card</h5>
-                                </div>
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4">
-                            <div class="card border border-primary">
-                                <div class="card-header bg-transparent border-primary">
-                                    <h5 class="my-0 text-primary">4<i class="mdi mdi-bullseye-arrow me-3"></i>Primary outline Card</h5>
-                                </div>
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4">
-                            <div class="card border border-primary">
-                                <div class="card-header bg-transparent border-primary">
-                                    <h5 class="my-0 text-primary">5<i class="mdi mdi-bullseye-arrow me-3"></i>Primary outline Card</h5>
-                                </div>
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4">
-                            <div class="card border border-primary">
-                                <div class="card-header bg-transparent border-primary">
-                                    <h5 class="my-0 text-primary">6<i class="mdi mdi-bullseye-arrow me-3"></i>Primary outline Card</h5>
-                                </div>
-                                <div class="card-body">
-                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        
+                <div class="col-lg-4">
+                    <div class="card card-body bg-primary text-white">
+                        <h5 class="mt-0 mb-3 text-white"><i class="mdi mdi-check-all me-1"></i> Avoir une vitrine sur la boutique en ligne de Google</h5>
+                        <p class="card-text">
+                            <span>C’est gratuit !</span> <br>
+                            Avoir un site permet, à tout internaute qui cherche une agence de voyages à proximité de son domicile ou de son travail, d’apparaitre sur Google qui devient, par la force des choses, une sorte d’annuaire universel. 
+                        </p>
                     </div>
-                    <!-- end row -->
+                </div>
+                <div class="col-lg-4">
+                    <div class="card card-body bg-success text-white">
+                        <h5 class="mt-0 mb-3 text-white"><i class="mdi mdi-check-all me-1"></i> Votre identité</h5>
+                        <p class="card-text">
+                            Le site de votre agence est votre identité.
+
+                            Donner un visage à celui-ci : photos des vendeurs, du chef d’agence, des langues que vous parlez, des outils dont vous disposez.
+
+                            Les agences, avec les nouvelles technologies ont changé depuis 10 ans. Les clients ne le savent pas toujours.
+
+                            Votre site est un moyen d’en apporter la preuve. 
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card card-body bg-warning text-white">
+                        <h5 class="mt-0 mb-3 text-white"><i class="mdi mdi-check-all me-1"></i> Être informé sur sa clientèle</h5>
+                        <p class="card-text">
+                            La formule est connue : "un homme informé en vaut deux’".
+
+                            C’est transposable dans le commerce. Connaître ses clients apporte de meilleures chances de conclure des ventes.
+                            "grâce aux statistiques fournies par le site, l’agence de voyages accède à de multiples informations. 
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card card-body bg-secondary text-white">
+                        <h5 class="mt-0 mb-3 text-white"><i class="mdi mdi-check-all me-1"></i> Interactivité</h5>
+                        <p class="card-text">
+
+                            Penser interactivité. Vos clients s’expriment sur la Toile.
+                            Accompagnez cette tendance avec un simple formulaire de contact, un espace témoignage, un forum, etc. 
+                            Les personnes et pas seulement les jeunes ont pris l’habitude de partager leurs impressions et leurs opinions sur le net. 
+                            Récupérez, pour le profit de votre commerce, ces habitudes qui sont aujourd’hui ancrées dans notre culture.
+                        </p>
+                    </div>
+                </div>
+
+                 <div class="col-lg-4">
+                    <div class="card card-body bg-info text-white">
+                        <h5 class="mt-0 mb-3 text-white"><i class="mdi mdi-check-all me-1"></i> Avis</h5>
+                        <p class="card-text">
+                            La dernière enquête Ebay/Médiamétrie nous informe que les avis sur internet continuent à bien se porter : +8% de consultation et + 7% d’avis publiés.
+
+                            C’est une tendance lourde. Pourtant on peut dénoncer l’existence de faux avis. Justement les avis de vos clients sont authentiques et permettent de crédibiliser votre rôle tout en valorisant l’excellence de votre profession.
+                        </p>
+                    </div>
+                </div>
+
+                 <div class="col-lg-4">
+                    <div class="card card-body">
+                        <h5 class="mt-0 mb-3"><i class="mdi mdi-check-all me-1"></i> Maintenir le contact avec le client</h5>
+                        <p class="card-text">
+                            À partir de 19 heures, en général, l’agence est fermée.
+
+                            Pourtant, c’est le soir, à leur domicile, que les clients prennent du temps pour la préparation de leurs vacances.C’est tellement facile de mettre en place une rubrique spécifique qui permet aux clients de retrouver ses réservations, à tout moment, en dehors des horaires d’ouverture.
+
+                            Dans l'activite du transport,le service est un critère important.
+                        </p>
+                    </div>
                 </div>
             </div>
             <!-- end row -->

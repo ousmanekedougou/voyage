@@ -115,9 +115,9 @@
                                         </div>
                                         <h5 class="text-center">Creer votre compte TouCki</h5>
                                         <div class="mt-4 mt-md-auto">
-                                            <p class="text-muted">If several languages coalesce, the grammar of the resulting language is
-                                                more simple and regular than of the individual will be more simple and regular than the
-                                                existing.</p>
+                                            <p class="text-muted">
+                                                Profitez de réservations et de remboursements plus rapides ainsi que d'un accès à agences de transport qui repondent à tout vos attentes partout dans le pays .
+                                            </p>
                                         </div>
                                         <div class="button-items mb-3 d-flex">
                                             <a href="{{ route('client.register') }}" class="btn btn-success btn-block-for-client-create"> <i class="bx bx-user-circle"> </i> Compte Client</a>

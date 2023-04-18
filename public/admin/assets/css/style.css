@@ -175,6 +175,14 @@
     opacity: 1;
 }
 
+
+.ajout-client-xs{
+    visibility: hidden;
+    opacity: 0;
+    width: 0px;
+    height: 0px;
+}
+
 @media only screen and (max-width:1000px) {
    
     .row_pricipal{
@@ -589,13 +597,28 @@ main
         height: auto;
    }
    .footer-info-mobile{
-    visibility: hidden;
-    opacity: 0;
+        visibility: visible;
+        opacity: 1;
+        width: 100%;
    }
 
    .region-list{
     padding-left: -12px;
    }
+
+   .ajout-client-xs{
+        visibility: visible;
+        opacity: 1;
+        width: 100%;
+        height: auto;
+        margin-top: 10px;
+   }
+    .ajout-client-lg{
+        visibility: hidden;
+        opacity: 0;
+        width: 0px;
+        height: 0px;
+    }
 
    
 }
