@@ -39,10 +39,14 @@
                                                         class="avatar-sm me-3 mx-lg-auto mb-3 mt-1 float-start float-lg-none">
                                                         <span
                                                             class="avatar-title rounded-circle bg-primary bg-soft text-primary font-size-16">
-                                                            <img src="{{Storage::url($agent->logo)}}" alt="" style="width:100%;border-radius:100%;">
+                                                            @if($agent->logo != '')
+                                                                <img src="{{Storage::url($agent->logo)}}" alt="" style="width:100%;border-radius:100%;">
+                                                            @else
+                                                                <img src="{{ asset('admin/assets/images/users/profil.jpg') }}" alt="" style="width:100%;border-radius:100%;">
+                                                            @endif
                                                         </span>
                                                     </div>
-                                                    <h5 class="mb-1 font-size-10">{{ $agent->name }}</h5>
+                                                    <h5 class="">{{ $agent->name }}</h5>
                                                 </div>
                                             </div>
 
@@ -178,27 +182,39 @@
                                                     <p class="text-muted font-size-14 mb-4">
                                                         <div class="d-flex text-center">
 
-                                                             <div style="margin-left: 30px;margin-right: 20px;">
+                                                             <div style="margin-left: 30px;">
                                                                 <div class="form-check form-check-left">
                                                                     <input class="form-check-input" type="radio" 
-                                                                        name="role" value="4" id="formRadiosRight1Tous" 
+                                                                        name="role" value="4" id="formRadiosRightTous-5-{{ $agent_role->id }}" 
                                                                             @if($agent_role->role == 4) checked @endif
                                                                         >
-                                                                    <label class="form-check-label" for="formRadiosRight1Tous">
+                                                                    <label class="form-check-label" for="formRadiosRightTous-5-{{ $agent_role->id }}">
                                                                         Tous
                                                                     </label>
                                                                 </div>
                                                             </div>
 
 
-                                                            <div style="margin-left: 30px;margin-right: 20px;">
+                                                            <div style="margin-left: 10px;margin-right: 20px;">
                                                                 <div class="form-check form-check-left">
                                                                     <input class="form-check-input" type="radio" 
-                                                                        name="role" value="1" id="formRadiosRight1client" 
+                                                                        name="role" value="1" id="formRadiosRightclient-6-{{ $agent_role->id }}" 
                                                                             @if($agent_role->role == 1) checked @endif
                                                                         >
-                                                                    <label class="form-check-label" for="formRadiosRight1client">
+                                                                    <label class="form-check-label" for="formRadiosRightclient-6-{{ $agent_role->id }}">
                                                                         Clients
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        
+                                                            <div style="margin-left: 5px;">
+                                                                <div class="form-check form-check-right">
+                                                                    <input class="form-check-input" type="radio" 
+                                                                        name="role" value="2" id="formRadiosRightbagage-7-{{ $agent_role->id }}"
+                                                                        @if($agent_role->role == 2) checked @endif
+                                                                        >
+                                                                    <label class="form-check-label" for="formRadiosRightbagage-7-{{ $agent_role->id }}">
+                                                                        Bagages
                                                                     </label>
                                                                 </div>
                                                             </div>
@@ -206,22 +222,10 @@
                                                             <div style="margin-left: 10px;">
                                                                 <div class="form-check form-check-right">
                                                                     <input class="form-check-input" type="radio" 
-                                                                        name="role" value="2" id="formRadiosRight2bagage"
-                                                                        @if($agent_role->role == 2) checked @endif
-                                                                        >
-                                                                    <label class="form-check-label" for="formRadiosRight2bagage">
-                                                                        Bagages
-                                                                    </label>
-                                                                </div>
-                                                            </div>
-
-                                                            <div style="margin-left: 30px;">
-                                                                <div class="form-check form-check-right">
-                                                                    <input class="form-check-input" type="radio" 
-                                                                        name="role" value="3" id="formRadiosRight2colis"
+                                                                        name="role" value="3" id="formRadiosRightcolis-8-{{ $agent_role->id }}"
                                                                         @if($agent_role->role == 3) checked @endif
                                                                         >
-                                                                    <label class="form-check-label" for="formRadiosRight2colis">
+                                                                    <label class="form-check-label" for="formRadiosRightcolis-8-{{ $agent_role->id }}">
                                                                         Colis
                                                                     </label>
                                                                 </div>
@@ -354,42 +358,42 @@
                                                     <label class="form-label">Assigner un role</label>
                                                     <div class="d-flex text-center">
 
-                                                        <div style="margin-left: 30px;margin-right: 30px;">
+                                                        <div style="margin-left: 30px;">
                                                             <div class="form-check form-check-left">
                                                                 <input class="form-check-input" type="radio" 
-                                                                    name="role" value="4" id="formRadiosRight1Tous">
-                                                                <label class="form-check-label" for="formRadiosRight1Tous">
+                                                                    name="role" value="4" id="formRadiosRightTous-1">
+                                                                <label class="form-check-label" for="formRadiosRightTous-1">
                                                                     Tous
                                                                 </label>
                                                             </div>
                                                         </div>
 
 
-                                                        <div style="margin-left: 30px;margin-right: 30px;">
+                                                        <div style="margin-left: 10px;margin-right: 10px;">
                                                             <div class="form-check form-check-left">
                                                                 <input class="form-check-input" type="radio" 
-                                                                    name="role" value="1" id="formRadiosRight1client">
-                                                                <label class="form-check-label" for="formRadiosRight1client">
+                                                                    name="role" value="1" id="formRadiosRightclient-2">
+                                                                <label class="form-check-label" for="formRadiosRightclient-2">
                                                                     Clients
                                                                 </label>
                                                             </div>
                                                         </div>
 
-                                                        <div style="margin-left: 30px;">
+                                                        <div style="margin-left: 5px;">
                                                             <div class="form-check form-check-right">
                                                                 <input class="form-check-input" type="radio" 
-                                                                    name="role" value="2" id="formRadiosRight2bagage">
-                                                                <label class="form-check-label" for="formRadiosRight2bagage">
+                                                                    name="role" value="2" id="formRadiosRightbagage-3">
+                                                                <label class="form-check-label" for="formRadiosRightbagage-3">
                                                                     Bagages
                                                                 </label>
                                                             </div>
                                                         </div>
 
-                                                        <div style="margin-left: 30px;">
+                                                        <div style="margin-left: 10px;">
                                                             <div class="form-check form-check-right">
                                                                 <input class="form-check-input" type="radio" 
-                                                                    name="role" value="3" id="formRadiosRight2colis">
-                                                                <label class="form-check-label" for="formRadiosRight2colis">
+                                                                    name="role" value="3" id="formRadiosRightcolis-4">
+                                                                <label class="form-check-label" for="formRadiosRightcolis-4">
                                                                     Colis
                                                                 </label>
                                                             </div>

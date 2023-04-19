@@ -242,6 +242,56 @@
                                                     @enderror
                                                 </div>
 
+                                                <div class="mb-3">
+                                                    <label class="form-label mb-3">Choisissez les jours de voyage de cette ittineraire</label>
+                                                    <div class="row">
+                                                        @foreach($jours as $jr)
+                                                        <div class="col-md-3">
+                                                            <div class="form-check form-check-primary mb-3">
+                                                                <input class="form-check-input @error('name') is-invalid @enderror" type="checkbox"
+                                                                    id="formCheckcolor-{{$jr->id}}" name="jour[]" value="{{ old('name') ?? $jr->index }}">
+                                                                <label class="form-check-label" for="formCheckcolor-{{$jr->id}}">
+                                                                    {{$jr->name}}
+                                                                </label>
+                                                            </div>
+                                                            @error('jour[]')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
+                                                        </div>
+                                                        @endforeach
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-3 row">
+                                                    <div class="col-md-6">
+                                                        <label for="example-time-input" class="col-md-12 col-form-label">Heure d'ouverture</label>
+                                                        <div class="col-md-10">
+                                                            <input class="form-control @error('opened_at') is-invalid @enderror" name="opened_at" type="time" value="{{ old('opened_at') }}"
+                                                                id="example-time-input">
+                                                        </div>
+                                                            @error('opened_at')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <label for="example-time-input" class="col-md-12 col-form-label">Heure de fermeture</label>
+                                                        <div class="col-md-10">
+                                                            <input class="form-control @error('closed_at') is-invalid @enderror" type="time" name="closed_at" value="{{ old('closed_at') }}"
+                                                                id="example-time-input">
+                                                        </div>
+                                                        @error('closed_at')
+                                                            <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $message }}</strong>
+                                                            </span>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+
                                              
                                               
                                             </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Agence;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Agence;
 use App\Models\Admin\Agent;
+use App\Models\Admin\Jour;
 use App\Models\Admin\Siege;
 use Carbon\Carbon;
 use App\Models\User\Notify;
@@ -30,9 +31,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $jours = Jour::all();
         $agents = Agent::where('agence_id',Auth::guard('agence')->user()->id)->orderBy('id','DESC')->get();
         $sieges = Siege::where('agence_id', Auth::guard('agence')->user()->id)->get();
-        return view('agence.index',compact('agents','sieges'));
+        return view('agence.index',compact('agents','sieges','jours'));
     }
     
 

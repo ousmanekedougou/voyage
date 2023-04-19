@@ -40,7 +40,7 @@
                                                 <p class="mb-2">Itineraire de {{ $getBuse->itineraire->name }}</p>
                                             </div>
                                         </div>
-                                        <div class="page-title-right">
+                                        <div class="page-title-right ajout-client-lg">
                                             <ol class="breadcrumb m-0">
                                                 <li class="breadcrumb-item">
                                                     <a data-bs-toggle="modal" data-bs-target="#staticBackdropAjoutClient" class="btn btn-success text-white btn-rounded waves-effect waves-light mb-2 me-2"><i
@@ -49,6 +49,8 @@
                                             </ol>
                                         </div>
                                     </div>
+                                    <a data-bs-toggle="modal" data-bs-target="#staticBackdropAjoutClient" class="btn btn-success text-white ajout-client-xs btn-rounded waves-effect waves-light mb-2 me-2"><i
+                                                        class="mdi mdi-plus me-1"></i> Ajouter un client</a>
                                 </div>
                             </div>
                             <!-- end row -->

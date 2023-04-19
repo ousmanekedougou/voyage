@@ -1,4 +1,4 @@
-@extends('user.layouts.app',['title' => 'Setting'])
+@extends('user.layouts.app',['title' => 'Termes et conditions'])
 <link rel="stylesheet" href="{{asset('user/assets/build/css/intlTelInput.css')}}">
 <style>
      .bg-ico-hero{
@@ -39,13 +39,8 @@
             <div class="row align-items-center row_pricipal">
                 <div class="col-lg-12 card_show">
                     <div class="text-white-50">
-                        <h1 class="text-white font-weight-semibold mb-3 hero-title"> Comment marche notre plateforme</h1>
-                        <p class="font-size-16 text-white">
-                            Le secteur du tourisme a fort à faire dans une conjoncture économique pleine de défis. Pour vous démarquer, en tant qu’agence de voyages.
-                        </p>
-                        <p class="font-size-16 text-white">
-                            Comment marche notre structure
-                        </p>
+                        <h1 class="text-white font-weight-semibold mb-3 hero-title"> Termes et conditions d'utilisation</h1>
+                       
                     </div>
                 </div>
             </div>

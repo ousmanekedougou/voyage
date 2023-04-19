@@ -65,7 +65,7 @@
                         @endif
 
                         @if(Auth::guard('agence')->user())
-                            <a href="{{ route('agence.agence.home') }}" class="logo logo-dark">
+                            <a href="{{ route('agence.home') }}" class="logo logo-dark">
                                 <span class="logo-sm">
                                     @if(Auth::guard('agence')->user()->logo == '')
                                         <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="22">
@@ -83,7 +83,7 @@
                                 </span>
                             </a>
 
-                            <a href="{{ route('agence.agence.home') }}" class="logo logo-light">
+                            <a href="{{ route('agence.home') }}" class="logo logo-light">
                                 <span class="logo-sm">
                                     @if(Auth::guard('agence')->user()->logo == null)
                                         <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" height="22">

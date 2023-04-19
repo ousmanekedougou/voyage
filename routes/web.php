@@ -68,7 +68,7 @@ Route::middleware('isAdmin')->prefix('/admin')->name('admin.')->group(function()
 
 Route::prefix('/agence')->name('agence.')->group(function() 
 {
-    Route::get('/home', [App\Http\Controllers\Agence\HomeController::class, 'index'])->name('agence.home');
+    Route::get('/home', [App\Http\Controllers\Agence\HomeController::class, 'index'])->name('home');
 
     Route::get('/about', [App\Http\Controllers\Agence\AboutController::class, 'index'])->name('about.index');
     Route::put('/about', [App\Http\Controllers\Agence\AboutController::class, 'about'])->name('about.about');
