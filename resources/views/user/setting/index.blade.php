@@ -39,13 +39,8 @@
             <div class="row align-items-center row_pricipal">
                 <div class="col-lg-12 card_show">
                     <div class="text-white-50">
-                        <h1 class="text-white font-weight-semibold mb-3 hero-title"> Comment marche notre plateforme</h1>
-                        <p class="font-size-16 text-white">
-                            Le secteur du tourisme a fort à faire dans une conjoncture économique pleine de défis. Pour vous démarquer, en tant qu’agence de voyages.
-                        </p>
-                        <p class="font-size-16 text-white">
-                            Comment marche notre structure
-                        </p>
+                        <h1 class="text-white font-weight-semibold mb-3 hero-title"> Tout savoir sur l’utilisation de votre application de TouCki</h1>
+                        
                     </div>
                 </div>
             </div>
@@ -82,83 +77,185 @@
                                                 <div>
                                                     <div id="gen-ques-accordion" class="accordion custom-accordion">
                                                         <div class="mb-3">
-                                                            <a href="#general-collapseOne" class="accordion-list"
+                                                            <a href="#general-collapse1Client" class="accordion-list"
                                                                 data-bs-toggle="collapse" aria-expanded="true"
-                                                                aria-controls="general-collapseOne">
+                                                                aria-controls="general-collapse1Client">
 
-                                                                <div>C'est qoi TouCki ?</div>
+                                                                <div>Comment créer un compte client TouCki ?</div>
                                                                 <i class="mdi mdi-minus accor-plus-icon"></i>
 
                                                             </a>
 
-                                                            <div id="general-collapseOne" class="collapse show"
+                                                            <div id="general-collapse1Client" class="collapse show"
                                                                 data-bs-parent="#gen-ques-accordion">
                                                                 <div class="card-body">
-                                                                    <p class="mb-0">
-                                                                        TouCki est une application cree 
-                                                                    </p>
+                                                                    <h5>Pour créer un compte client chez TouCki</h5>
+                                                                    <div>
+                                                                        <ul class="verti-timeline list-unstyled">
+                                                                            <li class="event-list">
+                                                                                <div class="event-timeline-dot">
+                                                                                   <i class="">1</i>
+                                                                                </div>
+                                                                                <p class="text-muted">Allez sur https://www.toucki.aeerk-sn.com/client-create ou téléchargez notre application TouCki sur play-Stor ou App-Stor.</p>
+                                                                            </li>
+
+                                                                            <li class="event-list">
+                                                                                <div class="event-timeline-dot">
+                                                                                   <i class="">2</i>
+                                                                                </div>
+                                                                                <p class="text-muted">Saisissez votre nom prénom et nom, une adresse électronique valide, mettez votre numéro de téléphone, mettez votre numéro identification nationale.séléctione votre région,mettez votre image de profil (facultatif) et créez un mot de passe.</p>
+                                                                            </li>
+
+                                                                            <li class="event-list">
+                                                                                <div class="event-timeline-dot">
+                                                                                   <i class="">3</i>
+                                                                                </div>
+                                                                                <p class="text-muted">
+
+                                                                                Lisez attentivement les conditions d’utilisation
+                                                                                </p>
+                                                                            </li>
+
+                                                                            <li class="event-list">
+                                                                                <div class="event-timeline-dot">
+                                                                                   <i class="">4</i>
+                                                                                </div>
+                                                                                <p class="text-muted">
+                                                                                    Cochez sur “Accepter” en bas des conditions d’utilisation et cliquez sur “Créer mon compte”
+                                                                                </p>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
 
                                                         <div class="mb-3">
-                                                            <a href="#general-collapseTwo"
+                                                            <a href="#general-collapse2Client"
                                                                 class="accordion-list collapsed"
                                                                 data-bs-toggle="collapse" aria-expanded="false"
-                                                                aria-controls="general-collapseTwo">
-                                                                <div>Pourquoi l'utilisons-nous ?</div>
+                                                                aria-controls="general-collapse2Client">
+                                                                <div>Comment activer mon compte client TouCki ?</div>
                                                                 <i class="mdi mdi-minus accor-plus-icon"></i>
                                                             </a>
-                                                            <div id="general-collapseTwo" class="collapse"
+                                                            <div id="general-collapse2Client" class="collapse"
                                                                 data-bs-parent="#gen-ques-accordion">
                                                                 <div class="card-body">
-                                                                    <p class="mb-0">If several languages coalesce, the
-                                                                        grammar of the resulting language is more simple
-                                                                        and regular than that of the individual
-                                                                        languages. The new common language will be more
-                                                                        simple and regular than the existing European
-                                                                        languages.</p>
+                                                                    <h5>La procédure d’activation d’un compte business se fait en deux étapes: </h5>
+                                                                    <div>
+                                                                        <ul class="verti-timeline list-unstyled">
+                                                                            <li class="event-list">
+                                                                                <div class="event-timeline-dot">
+                                                                                   <i class="">1</i>
+                                                                                </div>
+                                                                                <p class="text-muted">La validation par mail. <br> <br>
+
+                                                                                    Connectez-vous à votre boîte mail et ouvrez le mail de notification envoyé par TouCki <br> <br>
+                                                                                    Cliquez sur le lien de validation et marquez vos premiers pas chez TouCki
+
+                                                                                </p>
+                                                                            </li>
+
+                                                                            <li class="event-list">
+                                                                                <div class="event-timeline-dot">
+                                                                                   <i class="">2</i>
+                                                                                </div>
+                                                                                <p class="text-muted">
+                                                                                    Important <br> <br>
+                                                                                    Merci de bien vérifier que le numéro de téléphone renseigné lors de la création de votre compte PayDunya est fonctionnel et qu’il s’agit bien d’un numéro de téléphone mobile.
+                                                                                </p>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
 
                                                         <div class="mb-3">
-                                                            <a href="#general-collapseThree"
+                                                            <a href="#general-collapse3Client"
                                                                 class="accordion-list collapsed"
                                                                 data-bs-toggle="collapse" aria-expanded="false"
-                                                                aria-controls="general-collapseThree">
-                                                                <div>D'où est ce que ça vient ?</div>
+                                                                aria-controls="general-collapse3Client">
+                                                                <div>Quelles sonts les fonctonnalites disponibles votre client TouCki</div>
                                                                 <i class="mdi mdi-minus accor-plus-icon"></i>
                                                             </a>
-                                                            <div id="general-collapseThree" class="collapse"
+                                                            <div id="general-collapse3Client" class="collapse"
                                                                 data-bs-parent="#gen-ques-accordion">
                                                                 <div class="card-body">
-                                                                    <p class="mb-0">It will be as simple as Occidental;
-                                                                        in fact, it will be Occidental. To an English
-                                                                        person, it will seem like simplified English, as
-                                                                        a skeptical Cambridge friend of mine told me
-                                                                        what Occidental.</p>
+                                                                    <h5>Les fonctionnalités disponibles au niveau du compte client TouCki sont les suivantes : </h5>
+                                                                    
                                                                 </div>
                                                             </div>
                                                         </div>
 
-                                                        <div>
-                                                            <a href="#general-collapseFour"
+                                                        <div class="mb-3">
+                                                            <a href="#general-collapse4Client"
                                                                 class="accordion-list collapsed"
                                                                 data-bs-toggle="collapse" aria-expanded="false"
-                                                                aria-controls="general-collapseFour">
-                                                                <div>Où puis-je m'en procurer ?</div>
+                                                                aria-controls="general-collapse4Client">
+                                                                <div>Comment puis je faire un reservation de ticket</div>
                                                                 <i class="mdi mdi-minus accor-plus-icon"></i>
                                                             </a>
-                                                            <div id="general-collapseFour" class="collapse"
+                                                            <div id="general-collapse4Client" class="collapse"
                                                                 data-bs-parent="#gen-ques-accordion">
                                                                 <div class="card-body">
-                                                                    <p class="mb-0">To an English person, it will seem
-                                                                        like simplified English, as a skeptical
-                                                                        Cambridge friend of mine told me what Occidental
-                                                                        is. The European languages are members of the
-                                                                        same family. Their separate existence is a myth.
-                                                                    </p>
+                                                                    <div class="card-body">
+                                                                        <h5>Systeme de reservation de ticket </h5>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <a href="#general-collapse6Client"
+                                                                class="accordion-list collapsed"
+                                                                data-bs-toggle="collapse" aria-expanded="false"
+                                                                aria-controls="general-collapse6Client">
+                                                                <div>Reception et envoi de colis ou bagage</div>
+                                                                <i class="mdi mdi-minus accor-plus-icon"></i>
+                                                            </a>
+                                                            <div id="general-collapse6Client" class="collapse"
+                                                                data-bs-parent="#gen-ques-accordion">
+                                                                <div class="card-body">
+                                                                    <div class="card-body">
+                                                                        <h5>Vérifiez toutes vos résérvations : Tickets , Bagages & Colis </h5>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="mb-3">
+                                                            <a href="#general-collapse7Client"
+                                                                class="accordion-list collapsed"
+                                                                data-bs-toggle="collapse" aria-expanded="false"
+                                                                aria-controls="general-collapse7Client">
+                                                                <div>Comment paye vos ticket de bus en ligne</div>
+                                                                <i class="mdi mdi-minus accor-plus-icon"></i>
+                                                            </a>
+                                                            <div id="general-collapse7Client" class="collapse"
+                                                                data-bs-parent="#gen-ques-accordion">
+                                                                <div class="card-body">
+                                                                    <div class="card-body">
+                                                                        <h5>Vérifiez toutes vos résérvations : Tickets , Bagages & Colis </h5>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                          <div class="mb-3">
+                                                            <a href="#general-collapse8Client"
+                                                                class="accordion-list collapsed"
+                                                                data-bs-toggle="collapse" aria-expanded="false"
+                                                                aria-controls="general-collapse8Client">
+                                                                <div>Systeme de remboursement de ticket en cas d'absence</div>
+                                                                <i class="mdi mdi-minus accor-plus-icon"></i>
+                                                            </a>
+                                                            <div id="general-collapse8Client" class="collapse"
+                                                                data-bs-parent="#gen-ques-accordion">
+                                                                <div class="card-body">
+                                                                    <div class="card-body">
+                                                                        <h5>Vérifiez toutes vos résérvations : Tickets , Bagages & Colis </h5>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
