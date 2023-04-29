@@ -78,7 +78,7 @@
                                                     <div id="gen-ques-accordion" class="accordion custom-accordion">
                                                         <div class="mb-3">
                                                             <a href="#general-collapse1Client" class="accordion-list"
-                                                                data-bs-toggle="collapse" aria-expanded="true"
+                                                                data-bs-toggle="collapse" aria-expanded="false"
                                                                 aria-controls="general-collapse1Client">
 
                                                                 <div>Comment créer un compte client TouCki ?</div>
@@ -86,7 +86,7 @@
 
                                                             </a>
 
-                                                            <div id="general-collapse1Client" class="collapse show"
+                                                            <div id="general-collapse1Client" class="collapse"
                                                                 data-bs-parent="#gen-ques-accordion">
                                                                 <div class="card-body">
                                                                     <h5>Pour créer un compte client chez TouCki</h5>
@@ -141,7 +141,7 @@
                                                             <div id="general-collapse2Client" class="collapse"
                                                                 data-bs-parent="#gen-ques-accordion">
                                                                 <div class="card-body">
-                                                                    <h5>La procédure d’activation d’un compte business se fait en deux étapes: </h5>
+                                                                    <h5>La procédure d’activation d’un compte client TouCki se fait en deux étapes: </h5>
                                                                     <div>
                                                                         <ul class="verti-timeline list-unstyled">
                                                                             <li class="event-list">
@@ -162,7 +162,7 @@
                                                                                 </div>
                                                                                 <p class="text-muted">
                                                                                     Important <br> <br>
-                                                                                    Merci de bien vérifier que le numéro de téléphone renseigné lors de la création de votre compte PayDunya est fonctionnel et qu’il s’agit bien d’un numéro de téléphone mobile.
+                                                                                    Merci de bien vérifier que le numéro de téléphone renseigné lors de la création de votre compte client TouCKi est fonctionnel et qu’il s’agit bien d’un numéro de téléphone mobile.
                                                                                 </p>
                                                                             </li>
                                                                         </ul>
@@ -176,14 +176,52 @@
                                                                 class="accordion-list collapsed"
                                                                 data-bs-toggle="collapse" aria-expanded="false"
                                                                 aria-controls="general-collapse3Client">
-                                                                <div>Quelles sonts les fonctonnalites disponibles votre client TouCki</div>
+                                                                <div>Quelles sonts les services disponibles sur votre compte client TouCki</div>
                                                                 <i class="mdi mdi-minus accor-plus-icon"></i>
                                                             </a>
                                                             <div id="general-collapse3Client" class="collapse"
                                                                 data-bs-parent="#gen-ques-accordion">
                                                                 <div class="card-body">
-                                                                    <h5>Les fonctionnalités disponibles au niveau du compte client TouCki sont les suivantes : </h5>
-                                                                    
+                                                                    <h5>Les services disponibles au niveau du compte client TouCki sont les suivantes : </h5>
+                                                                    <div>
+                                                                        <ul class="verti-timeline list-unstyled">
+                                                                            <li class="event-list">
+                                                                                <div class="event-timeline-dot">
+                                                                                   <i class="">1</i>
+                                                                                </div>
+                                                                                <p class="text-muted">
+                                                                                    Une reservation de ticket de voyage avec une multitude d'agence de voyage a votre disposition
+                                                                                </p>
+                                                                            </li>
+
+                                                                            <li class="event-list">
+                                                                                <div class="event-timeline-dot">
+                                                                                   <i class="">2</i>
+                                                                                </div>
+                                                                                <p class="text-muted">
+                                                                                   Vous avez la possibilite d'ergistrer vos colis ou bagages et de voire cette liste sur votre compte TouCki
+                                                                                </p>
+                                                                            </li>
+
+                                                                            <li class="event-list">
+                                                                                <div class="event-timeline-dot">
+                                                                                   <i class="">3</i>
+                                                                                </div>
+                                                                                <p class="text-muted">
+                                                                                   Vous avez la possibilite de modifier, de ropporer, d'annuler, de supprimer ou de transfere votre ticket en toute securite
+                                                                                </p>
+                                                                            </li>
+
+                                                                            <li class="event-list">
+                                                                                <div class="event-timeline-dot">
+                                                                                   <i class="">4</i>
+                                                                                </div>
+                                                                                <p class="text-muted">
+                                                                                   Vous avez aussi le privillege de payer tous ces sevices en ligne via nos cannaux de paiement mobile tel Wave ou Orange Money 
+                                                                                </p>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -193,32 +231,37 @@
                                                                 class="accordion-list collapsed"
                                                                 data-bs-toggle="collapse" aria-expanded="false"
                                                                 aria-controls="general-collapse4Client">
-                                                                <div>Comment puis je faire un reservation de ticket</div>
+                                                                <div>Comment puis je faire une résérvation de tickét</div>
                                                                 <i class="mdi mdi-minus accor-plus-icon"></i>
                                                             </a>
                                                             <div id="general-collapse4Client" class="collapse"
                                                                 data-bs-parent="#gen-ques-accordion">
                                                                 <div class="card-body">
                                                                     <div class="card-body">
-                                                                        <h5>Systeme de reservation de ticket </h5>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                                        <h5>Systéme de résérvation de tickét</h5>
+                                                                        <div>
+                                                                            <ul class="verti-timeline list-unstyled">
+                                                                                <li class="event-list">
+                                                                                    <div class="event-timeline-dot">
+                                                                                    <i class="">1</i>
+                                                                                    </div>
+                                                                                    <p class="text-muted">
+                                                                                        Pour reserver un ticket sur TouCki, il vous faut d'abord vous connectez sur votre compte client. <br>
+                                                                                        Arriver sur votre tableau de board vous aurez une liste de differentes agence de transport qui se trouvent dans votre localite.
+                                                                                    </p>
+                                                                                </li>
 
-                                                        <div class="mb-3">
-                                                            <a href="#general-collapse6Client"
-                                                                class="accordion-list collapsed"
-                                                                data-bs-toggle="collapse" aria-expanded="false"
-                                                                aria-controls="general-collapse6Client">
-                                                                <div>Reception et envoi de colis ou bagage</div>
-                                                                <i class="mdi mdi-minus accor-plus-icon"></i>
-                                                            </a>
-                                                            <div id="general-collapse6Client" class="collapse"
-                                                                data-bs-parent="#gen-ques-accordion">
-                                                                <div class="card-body">
-                                                                    <div class="card-body">
-                                                                        <h5>Vérifiez toutes vos résérvations : Tickets , Bagages & Colis </h5>
+                                                                                <li class="event-list">
+                                                                                    <div class="event-timeline-dot">
+                                                                                    <i class="">2</i>
+                                                                                    </div>
+                                                                                    <p class="text-muted">
+                                                                                        Apres le choix de votre agence, vous allez cliquer sur le boutton siege pour acceder a la liste des sieges de l'agence conserne.
+                                                                                        <br> Ainsi vous allez aussi cliquer sur le botton s'inscrire ensuite renseigner la date et la ville de votre destination.  
+                                                                                    </p>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -229,20 +272,33 @@
                                                                 class="accordion-list collapsed"
                                                                 data-bs-toggle="collapse" aria-expanded="false"
                                                                 aria-controls="general-collapse7Client">
-                                                                <div>Comment paye vos ticket de bus en ligne</div>
+                                                                <div>Comment payé vos tickét de bus en ligne</div>
                                                                 <i class="mdi mdi-minus accor-plus-icon"></i>
                                                             </a>
                                                             <div id="general-collapse7Client" class="collapse"
                                                                 data-bs-parent="#gen-ques-accordion">
                                                                 <div class="card-body">
                                                                     <div class="card-body">
-                                                                        <h5>Vérifiez toutes vos résérvations : Tickets , Bagages & Colis </h5>
+                                                                        <h5>Systéme de paiement de tickét en ligne</h5>
+                                                                        <div>
+                                                                            <ul class="verti-timeline list-unstyled">
+                                                                                <li class="event-list">
+                                                                                    <div class="event-timeline-dot">
+                                                                                    <i class="">1</i>
+                                                                                    </div>
+                                                                                    <p class="text-muted">
+                                                                                        Vous avez la possibilite de payer vos tickets en ligne a partire de votre compte. <br>
+                                                                                        Dans partie ticket vous aurez la liste de vos reservations (recente ou anciennes), ainsi avec le boutton paye vous pouver paye vos ticket via Wave ou Orange Money
+                                                                                    </p>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
 
-                                                          <div class="mb-3">
+                                                        <div class="mb-3">
                                                             <a href="#general-collapse8Client"
                                                                 class="accordion-list collapsed"
                                                                 data-bs-toggle="collapse" aria-expanded="false"
@@ -254,7 +310,21 @@
                                                                 data-bs-parent="#gen-ques-accordion">
                                                                 <div class="card-body">
                                                                     <div class="card-body">
-                                                                        <h5>Vérifiez toutes vos résérvations : Tickets , Bagages & Colis </h5>
+                                                                        <h5>Se faire rembourser en cas d'anullation du ticket</h5>
+                                                                        <div>
+                                                                            <ul class="verti-timeline list-unstyled">
+                                                                                <li class="event-list">
+                                                                                    <div class="event-timeline-dot">
+                                                                                    <i class="">1</i>
+                                                                                    </div>
+                                                                                    <p class="text-muted">
+                                                                                        Si toute fois votre ticket vient d'une agence qui choisi l'option de remboursement du ticket meme apres le depart du bus votre ticket est remboursable a tout moment.
+                                                                                        <br> <br>
+                                                                                        Si non dans le cas ou loption choisi est "Ticket non remboursable apres depart du bus" votre ticket ne sera remboursable qu'avant le depart du bus. 
+                                                                                    </p>
+                                                                                </li>
+                                                                            </ul>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -290,7 +360,7 @@
                                         <div class="tab-content">
                                             <div class="tab-pane fade show active" id="v-pills-gen-ques"
                                                 role="tabpanel">
-                                                <h4 class="h4-title" class="card-title mb-4 btn btn-primary text-center" style="width: 100%;">Pour les agences</h4>
+                                                <h4 class="h4-title" class="card-title mb-4 btn btn-primary text-center" style="width: 100%;">Pour les agences de vente et location de voiture</h4>
                                                 <div>
                                                     <div id="gen-ques-accordion" class="accordion custom-accordion">
                                                         <div class="mb-3">

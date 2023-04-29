@@ -109,12 +109,13 @@
                     <div class="mb-4">
                         <img src="{{asset('admin/assets/images/logo-light.png')}}" alt="" height="20" class="">
                     </div>
-
-                    <p class="mb-2">
+                    <p>
+                         Grâce à un réseau développé au Sénégal, de nombreux trajets en bus et car pas chers de courte et longue-distance vous sont proposés par des compagnies routières renommées. 
+                    </p>
+                     <p class="mb-2">
                         2021 - <script>document.write(new Date().getFullYear())</script> © TouCki. Développé par
                          <a href="{{ route('login') }}" target="_blank" rel="noopener noreferrer" class="text-white-50">KdgWeb</a>
                     </p>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Aliquid, reiciendis! Assumenda omnis ipsum fuga quae quidem molestias quaerat consequuntur! Alias voluptates ipsa eum repudiandae, rerum ex consequatur ratione temporibus omnis.</p>
                 </div>
 
             </div>

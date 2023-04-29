@@ -133,7 +133,8 @@ class DatabaseSeeder extends Seeder
             'logo' => null,
             'slogan' => 'Faire du voyage votre passion',
             'region_id' => 1,
-            'method_ticket' => 0
+            'method_ticket' => 0,
+            'terme' => 1
         ]);
 
           Agence::create([
@@ -149,7 +150,8 @@ class DatabaseSeeder extends Seeder
             'logo' => null,
             'slogan' => 'Faire du voyage votre passion',
             'region_id' => 6,
-            'method_ticket' => 0
+            'method_ticket' => 0,
+            'terme' => 1
         ]);
 
 
@@ -166,7 +168,8 @@ class DatabaseSeeder extends Seeder
             'logo' => null,
             'slogan' => 'Faire du voyage votre passion',
             'region_id' => 6,
-            'method_ticket' => 1
+            'method_ticket' => 1,
+            'terme' => 1
         ]);
 
          Agence::create([
@@ -182,7 +185,8 @@ class DatabaseSeeder extends Seeder
             'logo' => null,
             'slogan' => 'Faire du voyage votre passion',
             'region_id' => 6,
-            'method_ticket' => 0
+            'method_ticket' => 0,
+            'terme' => 1
         ]);
 
         // Des agence sans sieges
@@ -199,7 +203,8 @@ class DatabaseSeeder extends Seeder
             'logo' => null,
             'slogan' => 'Faire du voyage votre passion',
             'region_id' => 1,
-            'method_ticket' => 1
+            'method_ticket' => 1,
+            'terme' => 1
         ]);
 
           Agence::create([
@@ -215,7 +220,8 @@ class DatabaseSeeder extends Seeder
             'logo' => null,
             'slogan' => 'Faire du voyage votre passion',
             'region_id' => 1,
-            'method_ticket' => 0
+            'method_ticket' => 0,
+            'terme' => 1
         ]);
 
         Agence::create([
@@ -231,7 +237,8 @@ class DatabaseSeeder extends Seeder
             'logo' => null,
             'slogan' => 'Faire du voyage votre passion',
             'region_id' => 1,
-            'method_ticket' => 1
+            'method_ticket' => 1,
+            'terme' => 1
         ]);
         // Fin D'ajout des agences
 
@@ -564,10 +571,11 @@ class DatabaseSeeder extends Seeder
             'region_id' => 1,
             'is_admin' => 1,
             'is_active' => 1,
-            'image' => null
+            'image' => null,
+            'terme' => 1
         ]);
 
-         Customer::create([
+        Customer::create([
             'name' => 'Ousmane Diallo',
             'email' => 'yabaye075@gmail.com',
             'phone' => 770103003,
@@ -578,7 +586,8 @@ class DatabaseSeeder extends Seeder
             'region_id' => 1,
             'is_admin' => 1,
             'is_active' => 1,
-            'image' => null
+            'image' => null,
+            'terme' => 1
         ]);
     }
 }

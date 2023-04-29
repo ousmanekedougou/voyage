@@ -62,7 +62,10 @@ class AgenceController extends Controller
             'region' => 'required|numeric',
             'method_ticket' => 'required|boolean',
             'password' => 'required|string|min:6|confirmed',
+            'terme' => 'required',
         ]);
+
+        // dd($request->terme);
          $add_agence = new Agence();
         $imageName = '';
         if($request->hasFile('image'))
@@ -86,13 +89,14 @@ class AgenceController extends Controller
         $add_agence->method_ticket = $request->method_ticket;
         $add_agence->region_id = $request->region;
         $add_agence->password = Hash::make($request->password);
+        $add_agence->terme = 1;
         $add_agence->save();
 
         Notification::route('mail','ousmanelaravel@gmail.com')
             ->notify(new AgenceRegisterd($add_agence));
 
        
-         Toastr::success('Votre agence a bien ete creer', 'Ajout agence', ["positionClass" => "toast-top-right"]);
+        Toastr::success('Votre agence a bien ete creer', 'Ajout agence', ["positionClass" => "toast-top-right"]);
         return back();
     }
 

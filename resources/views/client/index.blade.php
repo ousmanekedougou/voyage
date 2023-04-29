@@ -52,13 +52,6 @@
                                                     <h5 class="mb-0">{{ $siege_all->count() }}</h5>
                                                 </div>
                                             </div>
-                                            <div class="col-4">
-                                                <div>
-                                                    <p class="text-muted text-truncate mb-2">Newsletter</p>
-                                                    <h5 class="mb-0">{{ $newsletters->count() }}</h5>
-                                                    
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>

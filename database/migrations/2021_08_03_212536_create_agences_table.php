@@ -35,6 +35,7 @@ class CreateAgencesTable extends Migration
             $table->string('confirmation_token')->unique()->nullable();
             $table->string('logo')->nullable();
             $table->boolean('method_ticket')->default(1);
+            $table->boolean('terme')->default(0);
             //  $table->string('image')->nullable();
             $table->timestamps();
         });

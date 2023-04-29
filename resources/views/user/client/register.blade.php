@@ -47,7 +47,7 @@
                             <img class="setting-img" src="{{asset('user/assets/images/register.svg') }}" alt="" srcset="">
                             
                         </div>
-                        <h4>Creer votre compte client</h4>
+                        <h4 class="text-center">Creer votre compte client</h4>
                     </div>
                 </div>
                 <form class="custom-validation card" action="{{ route('client.store') }}" method="POST" enctype="multipart/form-data">
@@ -82,7 +82,7 @@
                                 <div>
                                     <input data-parsley-type="number" type="number" id="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" autocomplete="phone"
                                         required placeholder="Numero de telephone" />
-                                            @error('phone')
+                                        @error('phone')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -146,6 +146,19 @@
                                     <input type="password" id="password-confirm" class="form-control" name="password_confirmation" required autocomplete="new-password"
                                         data-parsley-equalto="#pass2" placeholder="Confirmer le mot de passe" />
                                 </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6">
+                            <div class="form-check">
+                                <input class="form-check-input @error('terme') is-invalid @enderror" name="terme" value="{{ old('terme') ?? 1 }}" required type="checkbox" id="remember-check">
+                                <label class="form-check-label" for="remember-check">
+                                    <p class="mb-0">Acceptez  <a href="{{ route('setting.condition') }}" target="_blank" class="text-primary">les conditions d'utilisation de TouCki</a></p>
+                                </label>
+                                @error('terme')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                     </div>

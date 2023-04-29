@@ -68,11 +68,11 @@ class HomeController extends Controller
         $customer = Customer::where('id',$id)->where('confirmation_token',$token)->first();
         if ($customer) {
             $customer->update(['confirmation_token' => null , 'is_active' => ACTIVE]);
-            $this->guard('client')->login($customer);
-            Toastr::success('Votre compte a bien ete confirmer', 'Confirmation de compte', ["positionClass" => "toast-top-right"]);
-            return redirect($this->redirectPath());
-            // Toastr::success('Votre compte a bien ete confirmer', 'Compte Confirmer', ["positionClass" => "toast-top-right"]);
-            // return view('client.auth.login');
+            // $this->guard('client')->login($customer);
+            // Toastr::success('Votre compte a bien ete confirmer', 'Confirmation de compte', ["positionClass" => "toast-top-right"]);
+            // return redirect($this->redirectPath());
+            Toastr::success('Votre compte a bien ete confirmer', 'Compte Confirmer', ["positionClass" => "toast-top-right"]);
+            return view('client.auth.login');
         }else {
             Toastr::success('Ce lien ne semble plus valide', 'Compte invalide', ["positionClass" => "toast-top-right"]);
             return redirect()->route('customer.customer.login');

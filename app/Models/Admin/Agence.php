@@ -32,6 +32,7 @@ class Agence extends Authenticatable
         'confirmation_token',
         'region_id',
         'is_admin',
+        'terme'
     ];
 
     public function user()

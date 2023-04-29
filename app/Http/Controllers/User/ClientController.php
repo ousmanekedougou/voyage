@@ -61,6 +61,7 @@ class ClientController extends Controller
             'region' => 'required|numeric',
             'cni' => 'required|numeric',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
+            'terme' => 'required',
         ]);
         
         $imageName = '';
@@ -79,7 +80,8 @@ class ClientController extends Controller
             'cni' => $request->cni,
             'image' => $imageName,
             'region_id' => $request->region,
-            'is_admin' => 1 
+            'is_admin' => 1,
+            'terme' => 1 
         ]);
          Notification::route('mail','ousmanelaravel@gmail.com')
         ->notify(new CustomerRegister($Customer));

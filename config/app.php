@@ -134,6 +134,11 @@ return [
     |
     */
 
+     /*  Les informations du send sms  */
+        'clientId' => '',
+        'clientSecret' => '',
+     /* ___________________________   */
+
     'providers' => [
 
         /*
