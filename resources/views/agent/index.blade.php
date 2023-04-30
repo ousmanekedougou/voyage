@@ -104,10 +104,12 @@
                     <div class="col-lg-12">
                         <div class="p-0">
                             <div class="">
-                                <h5 class="btn btn-soft-white bg-white text-center" style="width: 100%;font-weight:bold;"> <i class="fa fa-arrow-down"></i> Itineraire de {{ $itineraire->name }}</h5>
+                                <h5 class="btn btn-soft-white bg-white text-center" style="width: 100%;font-weight:bold;"> <i class="fa fa-road"></i> Itineraire de {{ $itineraire->name }}</h5>
                                 
                                 <div class="row">
                                     @foreach($itineraire->buses as $bus)
+                                    
+                                    @if(getBusToday() > 0)
                                         <div class="col-xl-4">
                                             <div class="card bg-soft bg-white" style="width:100%;">
                                                 <div>
@@ -125,12 +127,13 @@
                                                         </div>
                                                         <div class="col-5 align-self-start">
                                                             <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" class="img-fluid">
-                                                            <a href="{{ route('agent.client.jour',$bus->id) }}" class="btn btn-info  font-size-10 text-center mt-2"> <i class="fa fa-user-plus"></i> Clients</a>
+                                                            <a href="{{ route('agent.client.jour',$bus->id) }}" class="btn btn-info  font-size-10 text-center mt-2"> <i class="fa fa-user-plus"></i> Clients du jour</a>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                    @endif
                                     @endforeach
                                 </div>
                             </div>

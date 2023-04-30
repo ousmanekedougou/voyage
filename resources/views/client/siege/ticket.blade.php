@@ -20,7 +20,7 @@
                                         <div class="media-body align-self-center">
                                             <div class="text-muted">
                                                 <h5 class="mb-1">TouCki</h5>
-                                                <p class="mb-2">Gestion de vos tickets</p>
+                                                <p class="mb-2">Géstion de vos tickets</p>
                                                 <p class="mb-0">
                                                     Client
                                                 </p>
@@ -69,7 +69,6 @@
                                         {{$ticket->siege->agence->name}}</a>
                                     </h5>
                                     <p class="@if($ticket->status == 1) text-white @else text-muted @endif mb-1"> Siege de {{ $ticket->siege->name }}</p>
-                                    <p class="@if($ticket->status == 1) text-white @else text-muted @endif mb-1"> Destination {{ $ticket->ville->name }}</p>
                                     
                                 </div>
                             </div>
@@ -95,7 +94,42 @@
                                                 <tr
                                                     style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                                     <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
-                                                        valign="top">Voyage
+                                                        valign="top">Déstination
+                                                    </td>
+                                                    <td class="alignright"
+                                                        style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                        align="right" valign="top">
+                                                        {{ $ticket->ville->name }}
+                                                    </td>
+                                                </tr>
+                                                
+                                               
+                                                <tr
+                                                    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                    <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                        valign="top">Bus {{$ticket->bus->number}} , Matricule : {{$ticket->bus->matricule}}
+                                                    </td>
+                                                    <td class="alignright"
+                                                        style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                        align="right" valign="top">
+                                                         {{$ticket->position}}{{ $ticket->position == 1 ? 'ere' : 'eme' }} place
+                                                    </td>
+                                                </tr>
+                                                <tr
+                                                    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                    <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                        valign="top">Prix
+                                                    </td>
+                                                    <td class="alignright"
+                                                        style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                        align="right" valign="top">
+                                                        {{$ticket->ville->getAmount()}}
+                                                    </td>
+                                                </tr>
+                                                <tr
+                                                    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                    <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                        valign="top">Status Voyage
                                                     </td>
                                                     <td class="alignright"
                                                         style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
@@ -107,33 +141,10 @@
                                                         @endif
                                                     </td>
                                                 </tr>
-                                               
                                                 <tr
                                                     style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                                     <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
-                                                        valign="top">Bus
-                                                    </td>
-                                                    <td class="alignright"
-                                                        style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
-                                                        align="right" valign="top">
-                                                        N : {{$ticket->bus->number}} | {{$ticket->position}} place
-                                                    </td>
-                                                </tr>
-                                                 <tr
-                                                    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
-                                                    <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
-                                                        valign="top">Prix
-                                                    </td>
-                                                    <td class="alignright"
-                                                        style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
-                                                        align="right" valign="top">
-                                                        {{$ticket->ville->amount}} f
-                                                    </td>
-                                                </tr>
-                                                <tr
-                                                    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
-                                                    <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
-                                                        valign="top">Status
+                                                        valign="top">Status Tiket
                                                     </td>
                                                     <td class="alignright"
                                                         style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
@@ -158,7 +169,7 @@
                         </div>
                         <div class="border-top @if($ticket->status == 1) bg-warning text-white @elseif($ticket->status == 2) bg-light @endif" style="margin-top: -30px;">
                             @if($ticket->amount != $ticket->ville->amount)
-                                <p class="text-danger text-center" style="width: 100%;">Delais d'attente de paiment 24h</p>
+                                <p class="text-success text-center pt-3" style="width: 100%;font-weight:600;">Délais d'attente de paiment du ticket est de 24h</p>
                             @else
                                 @if($ticket->status == 1)
                                     <p class="text-white text-center mt-3" style="width: 100%; font-weight:700;">Votre ticket a ete annuler le remboursement sera fait dans l'immedia</p>
@@ -268,7 +279,7 @@
                                         
                                             <div class="mb-3">
                                                 <label class="form-label" for="example-date-input" >Votre date de voyage</label>
-                                                <input type="date" class="form-control @error('date') is-invalid @enderror" name="date" value="{{ old('date') }}" required autocomplete="date"
+                                                <input type="date" class="form-control @error('date') is-invalid @enderror" name="date" value="{{ old('date') ?? $ticket->registered_at}}" required autocomplete="date"
                                                      id="example-date-input" />
                                                 @error('date')
                                                     <span class="invalid-feedback" role="alert">
@@ -319,7 +330,7 @@
                                         <div class="col-xl-12">
                                             <div class="mb-3">
                                                 <label class="form-label" for="example-date-input" >Renouveller votre date de voyage</label>
-                                                <input type="date" class="form-control @error('date') is-invalid @enderror" name="date" value="{{ old('date') }}" required autocomplete="date"
+                                                <input type="date" class="form-control @error('date') is-invalid @enderror" name="date" value="{{ old('date') ?? $ticket->registered_at}}" required autocomplete="date"
                                                      id="example-date-input" />
                                                 @error('date')
                                                     <span class="invalid-feedback" role="alert">
@@ -443,7 +454,7 @@
                                         <div class="" id="v-pills-payment" role="tabpanel"
                                             aria-labelledby="v-pills-payment-tab">
                                             <div>
-                                                <h4 class="card-title">Methodes de paiement disponibles</h4>
+                                                <h4 class="card-title">Les methodes de paiement disponibles</h4>
                                                 <div class="mt-5 mb-2">
 
                                                 <div class="row">
@@ -452,7 +463,7 @@
                                                             <div class="card-radio">
                                                                 <a href="#">
                                                                     <img src="{{asset('user/assets/images/wave.png')}}" alt="" class="rounded avatar-sm">
-                                                                    <span class="text-muted">Wave Senegal</span>
+                                                                    <span class="text-muted">Wave Sénégal</span>
                                                                 </a>
                                                             </div>
                                                         </label>

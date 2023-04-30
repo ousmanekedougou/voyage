@@ -150,7 +150,7 @@
                                             <td>{{ $client->phone }}</td>
                                             @endif
                                             <td>
-                                                <span class="badge badge-pill badge-soft-info font-size-12">{{ $client->ville->amount }} f</span>
+                                                <span class="badge badge-pill badge-soft-info font-size-12">{{ $client->getAmount() }}</span>
                                             </td>
                                             <td>
                                                 @if($client->amount == $client->ville->amount)
@@ -316,9 +316,9 @@
                                                                                             style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
                                                                                             align="right" valign="top">
                                                                                             @if($client_presence->amount == $client_presence->ville->amount)
-                                                                                                {{$client_presence->amount}}
+                                                                                                {{$client_presence->getAmount()}}
                                                                                             @else
-                                                                                                0.000
+                                                                                                0.000,00
                                                                                             @endif
                                                                                             f
                                                                                         </td>

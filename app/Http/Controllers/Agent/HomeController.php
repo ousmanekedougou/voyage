@@ -51,7 +51,7 @@ class HomeController extends Controller
 
             // La liste des client du jour
             $clients = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
-            ->where('registered_at','<',Carbon::today()->format('Y-m-d'))
+            ->where('registered_at',Carbon::today()->format('Y-m-d'))
             ->where('status',0)
             ->where('amount','!=',null)
             ->orderBy('id','ASC')

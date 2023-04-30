@@ -20,8 +20,12 @@ class IsClient
     {
         if (Auth::guard('client')->user()) {
             return $next($request);
+        }elseif(!Auth::guard('client')->user()) {
+            return redirect()->route('customer.customer.login');
+        }else {
+            Toastr::error('Vous n\'aviez pas acces a cette page', 'Message', ["positionClass" => "toast-top-right"]);
+            return back();
         }
-        Toastr::error('Vous n\'aviez pas acces a cette page', 'Message', ["positionClass" => "toast-top-right"]);
-        return back();
+        
     }
 }

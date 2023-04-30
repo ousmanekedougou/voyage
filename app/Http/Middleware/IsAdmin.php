@@ -17,10 +17,14 @@ class IsAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (Auth::user()->is_admin == 0 || Auth::user()->is_admin == 1 && Auth::user()->role == null) {
+        if (Auth::guard('web')->user()->is_admin == 0 || Auth::guard('web')->user()->is_admin == 1 && Auth::guard('web')->user()->role == null) {
             return $next($request);
+        }elseif(!Auth::guard('web')->user()) {
+            return redirect()->route('login');
+        }else {
+            Toastr::error('Vous n\'aviez pas acces a cette page', 'Message', ["positionClass" => "toast-top-right"]);
+            return back();
         }
-        Toastr::error('Vous n\'aviez pas acces a cette page', 'Message', ["positionClass" => "toast-top-right"]);
-        return back();
+        
     }
 }

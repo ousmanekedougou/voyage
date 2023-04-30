@@ -13,6 +13,10 @@ class Ville extends Model
 
     protected $fillable = ['name','itineraire_id','amount'];
 
+    public function getAmount(){
+        return number_format($this->amount,2, ',','.'). ' CFA';
+    }
+
     public function itineraire()
     {
         return $this->belongsTo(Itineraire::class);

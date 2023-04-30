@@ -193,7 +193,7 @@ class ClientController extends Controller
        $getBuse = Bus::where('id',$id)->where('siege_id',Auth::guard('agent')->user()->siege_id)->first();
         $clients = Client::where('bus_id',$getBuse->id)
             ->where('siege_id',Auth::guard('agent')->user()->siege_id)
-            ->where('registered_at','>=',Carbon::today()->format('Y-m-d'))
+            ->where('registered_at',Carbon::today()->format('Y-m-d'))
             ->where('status',0)
             ->where('amount','!=',null)
             ->orderBy('id','ASC')

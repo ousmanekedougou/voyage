@@ -50,7 +50,7 @@
                                                             <p class="mb-0">{{$bag->detail}} : <span class="fw-medium">Maroon</span></p>
                                                         </td>
                                                         <td>
-                                                            {{$bag->prix}} f
+                                                            {{$bag->getAmount()}}
                                                         </td>
                                                         <td>
                                                             <a href="javascript:void(0);" class="action-icon text-primary" data-bs-toggle="modal" data-bs-target="#EditBagage-{{$bag->id}}"> <i class="bx bx-edit font-size-18"></i></a>
@@ -119,7 +119,7 @@
                                                     </tr>
                                                     <tr>
                                                         <th>Total :</th>
-                                                        <th>{{$client->prix_total}} f</th>
+                                                        <th>{{$client->getAmountTotal()}}</th>
                                                     </tr>
                                                 </tbody>
                                             </table>

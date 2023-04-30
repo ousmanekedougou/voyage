@@ -54,11 +54,9 @@ class ColiController extends Controller
      */
     public function show($id)
     {
-        $getColi = Colie::where('id',$id)->first();
-        // dd($getColi);
+        $getColi = Colie::where('id',$id)->where('customer_id',Auth::guard('client')->user()->id)->first();
         $colis = ColiClient::where('colie_id',$getColi->id)
         ->where('siege_id',$getColi->siege_id)
-        ->where('customer_id',Auth::guard('client')->user()->id)
         ->get();
         if ($colis->count() > 0) {
             return view('client.colis.show',compact('colis','getColi'));
@@ -76,7 +74,8 @@ class ColiController extends Controller
      */
     public function edit($id)
     {
-        $getColi = Colie::where('siege_id',$id)->first();
+        $getColi = Colie::where('siege_id',$id)->where('customer_id',Auth::guard('client')->user()->id)->first();
+        dd($getColi);
         if ($getColi) {
             $colis = ColiClient::where('siege_id',$id)
             ->where('customer_id',Auth::guard('client')->user()->id)

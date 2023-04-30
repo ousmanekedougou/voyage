@@ -11,6 +11,12 @@ use App\Models\User\Customer;
 class ColiClient extends Model
 {
     use HasFactory;
+
+    public function getAmount(){
+        return number_format($this->prix,2, ',','.'). ' CFA';
+    }
+
+    
     public function colie(){
         return $this->belongsTo(Colie::class);
     }

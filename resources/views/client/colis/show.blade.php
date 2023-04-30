@@ -57,7 +57,7 @@
                                                             {{ $bag->ville->name }}
                                                         </td>
                                                         <td>
-                                                            {{$bag->prix}} f
+                                                            {{$bag->colie->getAmountTotal()}}
                                                         </td>
                                                     </tr>
                                                     @endforeach
@@ -87,7 +87,7 @@
                                                     </tr>
                                                     <tr>
                                                         <th>Total :</th>
-                                                        <th>{{$getColi->prix_total}} f</th>
+                                                        <th>{{$getColi->getAmountTotal()}}</th>
                                                     </tr>
                                                 </tbody>
                                             </table>

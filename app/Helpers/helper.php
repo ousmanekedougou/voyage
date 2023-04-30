@@ -190,3 +190,22 @@ if (!function_exists('region')) {
 
     }
 }
+
+if (!function_exists('getBusToday')) {
+    function getBusToday()
+    {
+        $getBusToday = '';
+        $buses = Bus::where('siege_id', Auth::guard('agent')->user()->siege_id)->orderBy('id', 'ASC')->get();
+        foreach ($buses as $bus) {
+            foreach ($bus->clients as $client) {
+              if ($client->registered_at == Carbon::today()->format('Y-m-d')) {
+                $getBusToday = 1;
+              }else {
+                $getBusToday = 0;
+              }
+              return $getBusToday;
+            }
+        }
+
+    }
+}

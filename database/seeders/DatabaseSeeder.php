@@ -541,7 +541,7 @@ class DatabaseSeeder extends Seeder
             for ($i=0; $i < 6; $i++) { 
                 Ville::create([
                     'name' => $faker->city,
-                    'amount' => $faker->numberBetween(30 , 900) * 100,
+                    'amount' => $faker->numberBetween(3000 , 10000),
                     'itineraire_id' => $itineraire->id,
                 ]);
             }

@@ -56,6 +56,7 @@ class HomeController extends Controller
         $agenceAll = Agence::where('is_admin',0)->where('is_active',1)->orderBy('id','ASC')->get();
         $agenceCount = $agenceAll->count(); 
 
+
         $newsletters = Notify::all();
 
         $siege_all = Siege::all();

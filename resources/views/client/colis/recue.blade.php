@@ -50,8 +50,8 @@
                                                             <p class="mb-0">{{$bag->detail}} </span></p>
                                                         </td>
                                                         <td>
-                                                            <h5 class="font-size-14 text-truncate"><a href="ecommerce-product-detail.html" class="text-dark">{{$bag->colie->customer->name}}</a></h5>
-                                                            <p class="mb-0"> {{$bag->colie->customer->phone}}</span></p>
+                                                            <h5 class="font-size-14 text-truncate"><a href="ecommerce-product-detail.html" class="text-dark">{{$bag->customer->name}}</a></h5>
+                                                            <p class="mb-0"> {{$bag->customer->phone}}</span></p>
                                                         </td>
                                                         <td class="text-center">
                                                             {{ $bag->ville->name }}
@@ -87,7 +87,7 @@
                                                     </tr>
                                                     <tr>
                                                         <th>Total :</th>
-                                                        <th>{{$getColi->prix_total}} f</th>
+                                                        <th>{{$getColi->getAmountTotal()}}</th>
                                                     </tr>
                                                 </tbody>
                                             </table>

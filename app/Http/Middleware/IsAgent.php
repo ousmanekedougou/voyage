@@ -19,8 +19,12 @@ class IsAgent
     {
         if (Auth::guard('agent')->user() ) {
             return $next($request);
+        }elseif(!Auth::guard('agent')->user()) {
+            return redirect()->route('agent.agent.login');
+        }else {
+            Toastr::error('Vous n\'aviez pas acces a cette page', 'Message', ["positionClass" => "toast-top-right"]);
+            return back();
         }
-        Toastr::error('Vous n\'aviez pas acces a cette page', 'Message', ["positionClass" => "toast-top-right"]);
-        return back();
+        
     }
 }

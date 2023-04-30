@@ -34,6 +34,10 @@ class Client extends Model
         'canceled_time'
     ];
 
+    public function getAmount(){
+        return number_format($this->amount,2, ',','.'). ' CFA';
+    }
+
      public function bus()
     {
         return $this->belongsTo(Bus::class);

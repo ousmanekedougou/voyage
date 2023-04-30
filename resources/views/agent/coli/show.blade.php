@@ -64,7 +64,7 @@
                                                             {{ $bag->ville->name }}
                                                         </td>
                                                         <td>
-                                                            {{$bag->prix}} f
+                                                            {{$bag->getAmount()}}
                                                         </td>
                                                         <td>
                                                             <a href="javascript:void(0);" class="action-icon text-success" data-bs-toggle="modal" data-bs-target="#ColiRecue-{{$bag->id}}"> Bien Recu <i class="bx bx-check font-size-18"></i></a>
@@ -172,7 +172,7 @@
                                                     </tr>
                                                     <tr>
                                                         <th>Total :</th>
-                                                        <th>{{$coli->prix_total}} f</th>
+                                                        <th>{{$coli->getAmountTotal()}}</th>
                                                     </tr>
                                                 </tbody>
                                             </table>
