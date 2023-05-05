@@ -18,7 +18,9 @@ class Bus extends Model
         'inscrit',
     ];
 
-   
+   public function getAmount(){
+        return number_format($this->montant,2, ',','.'). ' CFA';
+    }
 
     public function itineraire()
     {

@@ -9,6 +9,10 @@ use Illuminate\Database\Eloquent\Model;
 class Bagage extends Model
 {
     use HasFactory;
+
+    public function getAmount(){
+        return number_format($this->prix,2, ',','.'). ' CFA';
+    }
     
     public function client(){
         return $this->belongsTo(Client::class);

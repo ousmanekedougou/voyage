@@ -9,6 +9,7 @@ use App\Models\Admin\ColiClient;
 use App\Models\Admin\Colie;
 use Illuminate\Support\Str;
 use App\Models\Admin\Siege;
+use App\Models\User\Client;
 use App\Models\User\Customer;
 use App\Models\User\Region;
 use App\Notifications\CustomerRegister;
@@ -16,6 +17,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
 use Brian2694\Toastr\Facades\Toastr;
+use Carbon\Carbon;
 
 class ClientController extends Controller
 {
@@ -105,18 +107,38 @@ class ClientController extends Controller
     public function colis(){
         request()->validate([
             'phone' => 'required|numeric',
-            'siege' => 'required|string',
+            'phone' => 'required|numeric',
+            'verify' => 'required|numeric',
         ]);
         $phone = request()->input('phone');
         $siege = request()->input('siege');
-        $coli_clients = ColiClient::where('phone_recept',$phone)->where('siege_id',$siege)->get();
+        $verify = request()->input('verify');
+        if ($verify == 1) {
 
-        if ($coli_clients->count() > 0) {
-            return view('user.client.colie',compact('coli_clients'));
-        }else {
-            Toastr::error('Vous n\'aviez pas de colie', 'Error Colie', ["positionClass" => "toast-top-right"]);
-            return back();
+            $coli_clients = ColiClient::where('phone_recept',$phone)->where('siege_id',$siege)->get();
+            if ($coli_clients->count() > 0) {
+                return view('user.client.colie',compact('coli_clients'));
+            }else {
+                Toastr::error('Vous n\'aviez pas de colie sur ce siege', 'Error Colie', ["positionClass" => "toast-top-right"]);
+                return back();
+            }
+
+        }elseif ($verify == 2) {
+            $ticket = Client::where('phone',$phone)
+                ->where('siege_id',$siege)
+                ->where('registered_at','>=',Carbon::today()->format('Y-m-d'))
+                ->where('status',0)
+                ->where('amount','!=',null)
+                ->where('voyage_status',0)->first();
+            if ($ticket) {
+                return view('user.client.ticket',compact('ticket'));
+            }else {
+                Toastr::error('Vous n\'aviez pas de ticket sur ce siege', 'Error Colie', ["positionClass" => "toast-top-right"]);
+                return back();
+            }
+            
         }
+        
     }
 
    

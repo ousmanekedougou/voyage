@@ -169,6 +169,7 @@ Route::prefix('/customer')->name('customer.')->group(function()
     Route::get('client/paiment', [App\Http\Controllers\Client\ClientController::class, 'paiment'])->name('client.paiment');
     Route::put('/client/annuler/{id}', [App\Http\Controllers\Client\ClientController::class, 'annuler'])->name('client.annuler');
     Route::put('/client/renew/{id}', [App\Http\Controllers\Client\ClientController::class, 'renew'])->name('client.renew');
+    Route::put('/client/revente/{id}', [App\Http\Controllers\Client\ClientController::class, 'revente'])->name('client.revente');
     Route::delete('/client/destroy/{id}', [App\Http\Controllers\Client\ClientController::class, 'destroy'])->name('client.destroy');
 
     Route::resource('/bagage', App\Http\Controllers\Client\BagageController::class); 

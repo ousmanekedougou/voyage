@@ -38,6 +38,10 @@ class Client extends Model
         return number_format($this->amount,2, ',','.'). ' CFA';
     }
 
+    public function getAmountTotal(){
+        return number_format($this->prix_total,2, ',','.'). ' CFA';
+    }
+
      public function bus()
     {
         return $this->belongsTo(Bus::class);

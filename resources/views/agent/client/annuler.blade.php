@@ -209,7 +209,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="staticBackdropLabel">
-                                <span class="text-muted">Detail du ticket de {{ $client_presence->customer->name }}</span>
+                                <span class="text-muted">Detail du ticket annuler de {{ $client_presence->customer->name }}</span>
                         </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                             aria-label="Close"></button>
@@ -326,7 +326,7 @@
                                                                                     <tr
                                                                                         style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                                                                         <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
-                                                                                            valign="top">Bus
+                                                                                            valign="top">Bus {{$client_presence->bus->number}}
                                                                                         </td>
                                                                                         <td class="alignright"
                                                                                             style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"

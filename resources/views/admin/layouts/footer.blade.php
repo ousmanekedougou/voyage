@@ -19,14 +19,14 @@
                                         </a>
                                     </li>
 
-                                    <li class="{{ set_active_roote_bottom_bar('customer.bagage.index') }} ">
+                                    <li class="{{ set_active_roote_bottom_bar('customer.colis.index') }} ">
                                         <a href="{{ route('customer.colis.index') }}" id="store">
                                             <span>Colis</span>
                                             <i class="bx bx-store-alt  fa-fa-item"></i>
                                         </a>
                                     </li>
 
-                                    <li class="{{ set_active_roote_bottom_bar('customer.colis.index') }} ">
+                                    <li class="{{ set_active_roote_bottom_bar('customer.bagage.index') }} ">
                                         <a href="{{ route('customer.bagage.index') }}" id="wishlist">
                                             <span>Bagages</span>
                                             <i class="bx bx-package  fa-fa-item"></i>
@@ -36,7 +36,7 @@
                                     <li class="{{ set_active_roote_bottom_bar('setting.index') }}">
                                         <a href="#" class="header-item noti-icon right-bar-toggle" id="nav-toggle">
                                             <span>Regions</span>
-                                            <i class="bx bx-map fa-fa-item"></i>
+                                            <i class="bx bx-map fa-item"></i>
                                         </a>
                                     </li>
                                 </ul>

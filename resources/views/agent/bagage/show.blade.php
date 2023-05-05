@@ -108,7 +108,7 @@
                             <div class="col-xl-4">
                                  <div class="card">
                                     <div class="card-body">
-                                        <h4 class="card-title mb-3">Order Summary</h4>
+                                        <h4 class="card-title mb-3">Récapitulatif de la commande</h4>
 
                                         <div class="table-responsive">
                                             <table class="table mb-0">

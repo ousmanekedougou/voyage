@@ -41,26 +41,15 @@
                                             <div class="media-body overflow-hidden">
                                                 @if($client->name == null)
                                                 <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">{{ $client->customer->name }}</a></h5>
-                                                <p class="text-muted mb-1"> <i class="fa fa-mobile"></i> {{ $client->customer->phone }}</p>
+                                                <p class="text-muted mb-1 font-size-11"> <i class="fa fa-mobile"></i> {{ $client->customer->phone }}</p>
+                                                <p class="text-muted mb-1 font-size-11"> <i class="fa fa-envelope"></i> {{ $client->customer->email }}</p>
                                                 @else
                                                 <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">{{ $client->name }}</a></h5>
-                                                <p class="text-muted mb-1"> <i class="fa fa-mobile"></i> {{ $client->phone }}</p>
+                                                <p class="text-muted mb-1 font-size-11"> <i class="fa fa-mobile"></i> {{ $client->phone }}</p>
+                                                <p class="text-muted mb-1 font-size-11"> <i class="fa fa-envelope"></i> {{ $client->email }}</p>
                                                 @endif
-                                                <p class="text-muted mb-1 font-size-10"><i class="fa fa-mobile"></i> {{ $client->ville->name }} | {{$client->ville->amount}} f</p>
-                                                <p class="text-muted mb-3 font-size-10"><i class="fa fa-mobile"></i> Date : {{$client->bus->date_depart->depart_at}}</p>
-                                                {{--
-                                                <div class="avatar-group">
-                                                    <div class="avatar-group-item font-size-11">
-                                                         <span>Rv : {{$client->bus->date_depart->rendez_vous}} | Depart : {{ $client->bus->date_depart->depart_time }}</span>
-                                                    </div>
-                                                </div>
-                                                --}}
+                                                <p class="text-muted mb-1 font-size-10"><i class="fa fa-map-marker-alt"></i> Destination : {{ $client->ville->name }}</p>
                                                 
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="font-size-11 text-center">
-                                                    <span>Rv : {{$client->bus->date_depart->rendez_vous}} | Depart : {{ $client->bus->date_depart->depart_time }}</span>
                                             </div>
                                         </div>
                                     </div>

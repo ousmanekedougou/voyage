@@ -109,13 +109,13 @@
                                                 {{$client->registered_at}}
                                             </td>
                                             <td>
-                                                <span class="badge badge-pill badge-soft-info font-size-12">{{ $client->ville->getAmount() }} f</span>
+                                                <span class="badge badge-pill badge-soft-info font-size-12">{{ $client->ville->getAmount() }}</span>
                                             </td>
                                             <td>
                                                 @if($client->amount == $client->ville->amount)
-                                                    <span class="badge badge-pill badge-soft-primary font-size-12"><i class="fab fa-cc-mastercard me-1"></i> Wave</span>
+                                                    <span class="badge badge-pill badge-soft-success font-size-12"><i class="fab fa-cc-mastercard me-1"></i> Wave</span>
                                                 @elseif($client->amount != $client->ville->amount)
-                                                    <span class="badge badge-pill badge-soft-danger font-size-12">Non Payer</span>
+                                                    <span class="badge badge-pill badge-soft-primary font-size-12">Envoye lien</span>
                                                 @endif
                                             </td>
                                             <td>

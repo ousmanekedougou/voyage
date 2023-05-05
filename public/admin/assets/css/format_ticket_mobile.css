@@ -1,0 +1,190 @@
+
+    @import url(https://fonts.googleapis.com/css?family=Roboto:400,100,500,300italic,500italic,700italic,900,300);
+
+    figure {
+        margin: 0;
+    }
+    .ul_fomat_mobile{
+        padding: 0;
+        margin: 0;
+    }
+    .li_fomat_mobile {
+        list-style: none;
+    }
+    .aside {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: transparent;	
+    }
+    .app {
+        width: 100%;
+        height: 100%;
+        /* border: 1px solid #efefef; */
+        position: relative;
+        background-color: transparent;
+        /* border-radius: 10px; */
+        overflow: hidden;
+    }
+
+    
+    /* ========== Bus ========== */
+    .screen-bus {
+        opacity: 0;
+    }
+    .screen-bus__location-filter-row {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #66A1F3;
+        overflow: hidden;
+    }
+    .screen-bus__location {
+        padding: 1.3rem 15px;
+        color: #ffffff;
+    }
+    .screen-bus__filter {
+        padding-right: 1rem;
+    }
+    .screen-bus__location-row {
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        font-size: 0.9rem;
+    }
+    .screen-bus__date-row {
+        font-size: 0.7rem;
+    }
+    .screen-bus__center-arrow{
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        background-color: #ffffff;
+        border-radius: 100px;
+        margin: 0 1.2rem;
+    }
+    .screen-bus__travels-wrap {
+        padding: 1rem 0.5rem 0.5rem 0.5rem;
+    }
+    .screen-bus__travels-col {
+        width: 100%;
+        box-shadow: 0px 1px 4px rgba(170, 170, 170, 0.25);
+        border-radius: 3px;
+        padding: 12px;
+        border: 1px solid whitesmoke;
+        margin-bottom: 1rem;
+        opacity: 0;
+        transform: translateY(5px);
+        background-color: white;
+    }
+    .screen-bus__name-time-seat {
+        display: flex;
+        justify-content: space-between;
+    }
+    .screen-bus__name-wrap,
+    .screen-bus__time-wrap,
+    .screen-bus__seat-wrap {
+        width: 33.333%;
+    }
+    .screen-bus__name-wrap {
+        display: flex;
+        flex-direction: column;
+        font-size: 0.7rem;
+    }
+    .screen-bus__name {
+        margin-bottom: 0.3rem;
+    }
+    .screen-bus__type,
+    .screen-bus__hrs span {
+        font-size: 0.6rem;
+        color: #4d4848;
+    }
+    .screen-bus__seat-wrap {
+        text-align: right;
+        font-size: 0.7rem;
+    }
+    .screen-bus__count {
+        font-size: 0.9rem;
+        color: #81e276;
+    }
+    .screen-bus__time-wrap {
+        font-size: 0.7rem;
+        display: flex;
+        flex-direction: column;
+    }
+    .screen-bus__time {
+        display: flex;
+        margin-bottom: 0.3rem;
+    }
+    .screen-bus__time-arrow-wrap {
+        margin: 0 0.7rem;
+    }
+    .screen-bus__time-arrow {
+        display: inline-block;
+        width: 15px;
+        height: 1px;
+        background-color: red;
+        position: relative;
+    }
+    .screen-bus__time-arrow:after,
+    .screen-bus__time-arrow:before {
+        content: "";
+        width: 5px;
+        height: 1px;
+        background-color: red;
+        position: absolute;
+        right: 0;
+    }
+    .screen-bus__time-arrow:after {
+        transform: rotate(-45deg);
+        top: 2px;
+    }
+    .screen-bus__time-arrow:before {
+        transform: rotate(45deg);
+        top: -2px;
+    }
+    .screen-bus__rating-price-row {
+        display: flex;
+        justify-content: space-between;
+    }
+    .screen-bus__rating-price {
+        margin-top: 0.5rem;
+    }
+    .screen-bus__rating-row {
+        display: flex;
+    }
+    .screen-bus__rating-row li {
+        margin-right: 5px;
+    }
+    .screen-bus__rating-row li:last-child {
+        margin-right: 0;
+    }
+    .screen-home__inside-wave {
+        width: 0%;
+        height: 0%;
+        position: absolute;
+        border-radius: 100px;
+        background-color: #ffffff7d;
+        cursor: pointer;
+    }
+
+
+    @media screen and (max-width: 420px) {
+        .page-content{
+            width: 0px;
+            height: 0px;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .aside{
+            margin-top: -5.1rem;
+            width: 100%;
+            height: auto;
+            opacity: 1;
+            visibility: visible;
+        }
+    }

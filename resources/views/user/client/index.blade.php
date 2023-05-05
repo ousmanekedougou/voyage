@@ -51,8 +51,8 @@
                                 <div class="media">
                                     <div class="media-body">
                                         <h5>Vérifiez toutes vos résérvations</h5>
-                                        <p class="text-muted  mb-0"> Pour vous aider à retrouver vos colis saisissez ci-dessous votre le numero de telephone dont vous avez recu la notification et entrez le siege de la provenance du colis. </p>
-                                        <p class="text-muted  mb-0"> Accès facile à vos colis, peu importe la destination </p>
+                                        <p class="text-muted  mb-0"> <i class="mdi mdi-circle-medium text-success me-1"></i>Pour vous aider à retrouver vos colis ou ticket saisissez ci-dessous votre le numero de telephone dont vous avez recu la notification, entrez le siege conserne et choisissez le type de votre verification. </p>
+                                        <p class="text-muted  mb-0"> <i class="mdi mdi-circle-medium text-success me-1"></i> Accès facile à vos colis et ticke, peu importe la destination </p>
                                     </div>
                                 </div>
                             </div>
@@ -64,7 +64,7 @@
         </div>
         <!-- end container -->
     </section>
-<!-- currency price section end -->
+    <!-- currency price section end -->
 
 
 
@@ -84,9 +84,9 @@
                        <form class="custom-validation bg-white p-3" action="{{ route('client.colis') }}" method="POST" enctype="multipart/form-data">
                           @csrf
                             <div class="row">
-                                <h5 class="text-reserve-on-mobile">Vérifiez toutes vos résérvations</h5>
-                                <p class="text-muted  mb-0 text-reserve-on-mobile"> Pour vous aider à retrouver vos colis saisissez ci-dessous votre le numero de telephone dont vous avez recu la notification et entrez le siege de la provenance du colis. </p>
-                                <p class="text-muted  mb-0 text-reserve-on-mobile"> Accès facile à vos colis, peu importe la destination </p>
+                                <h5 class="text-reserve-on-mobile">Pour vous aider à retrouver vos colis ou ticket</h5>
+                                <p class="text-muted  mb-0 text-reserve-on-mobile"> <i class="mdi mdi-circle-medium text-success me-1"></i> Saisissez ci-dessous votre le numero de telephone dont vous avez recu la notification, entrez le siege conserne et choisissez le type de votre verification. </p>
+                                <p class="text-muted  mb-0 text-reserve-on-mobile"> <i class="mdi mdi-circle-medium text-success me-1"></i> Accès facile à vos colis et ticke, peu importe la destination </p>
                                 <div class="col-xl-12">
                                     <div class="mb-3" >
                                         <label class="form-label">Votre numero de telephone</label>
@@ -102,7 +102,7 @@
                                         </div>
                                     </div>
 
-                                     <div class="mb-3 row">
+                                    <div class="mb-3 row">
                                         <label class="form-label">Selectionner le siege de l'agence</label>
                                         <div class="col-md-12">
                                             <select  class="form-control @error('siege') is-invalid @enderror" name="siege" required autocomplete="siege" required>
@@ -122,6 +122,24 @@
                                                 </span>
                                             @enderror
                                         </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="d-block mb-3">Type de verifications :</label>
+
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input @error('verify') is-invalid @enderror" type="radio" name="verify" id="inlineRadio1" value="1">
+                                            <label class="form-check-label" for="inlineRadio1">Colis</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input @error('verify') is-invalid @enderror" type="radio" name="verify" id="inlineRadio2" value="2">
+                                            <label class="form-check-label" for="inlineRadio2">Tickets</label>
+                                        </div>
+                                        @error('verify')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror                                                          
                                     </div>
                                 </div>
                                 <div class="d-flex flex-wrap gap-2">

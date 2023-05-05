@@ -73,13 +73,13 @@
                                         </div>
                                     </div>
                                 </div>
-    
+                                    
                                 <div class="col-lg-4 d-lg-block">
                                     <!-- d-none -->
                                     <div class="media">
                                         <div class="media-body">
                                             <p class="text-muted fw-medium text-center">Montant Total du jour</p>
-                                            <h4 class="mb-0 text-center">@if(montant_today()) > 0 {{montant_today()}} @else 0 @endif f</h4>
+                                            <h4 class="mb-0 text-center">{{ montant_today() }} </h4>
                                         </div>
 
                                         <div class="avatar-sm rounded-circle bg-primary align-self-center mini-stat-icon">
@@ -121,7 +121,7 @@
                                                                 <ul class="ps-0 mb-0">
                                                                     <li class="py-1 text-muted" style="list-style: none;"><i class="fa fa-user-plus"></i> Inscrits : {{ $bus->clients->count() }}</li>
                                                                     <li class="py-1 text-success" style="list-style: none;"><i class="fa fa-check-double"></i> Valider : {{ $bus->valider }}</li>
-                                                                    <li class="py-1 text-primary" style="list-style: none;"><i class="fa fa-coins"></i> {{ $bus->montant }} f</li>
+                                                                    <li class="py-1 text-primary" style="list-style: none;"><i class="fa fa-coins"></i> {{ $bus->getAmount() }}</li>
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -200,6 +200,7 @@
             });
             
         });
+        
     </script>
    
 @endsection

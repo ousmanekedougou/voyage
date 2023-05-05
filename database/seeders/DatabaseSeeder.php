@@ -190,7 +190,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         // Des agence sans sieges
-         Agence::create([
+        Agence::create([
             'name' => 'Tamba Transport',
             'email' => 'tamba@gmail.com',
             'phone' => '22378104000',
@@ -207,7 +207,7 @@ class DatabaseSeeder extends Seeder
             'terme' => 1
         ]);
 
-          Agence::create([
+        Agence::create([
             'name' => 'Louga Transport',
             'email' => 'louga@gmail.com',
             'phone' => '2247810111',
@@ -500,7 +500,7 @@ class DatabaseSeeder extends Seeder
             'adress' => 'Dakar',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', //password
             'is_admin' => 0,
-            'slug' => str_replace('/','',Hash::make(Str::random(5).'Terrange Transport')),
+            'slug' => str_replace('/','',Hash::make(Str::random(5).'Terranga Transport')),
             'confirmation_token' => null,
             'is_active' => 1,
             'logo' => null,

@@ -38,19 +38,19 @@
                                 <div class="row">
                                     <div class="col-4">
                                         <div>
-                                            <p class="text-muted text-truncate mb-2">Total Agences</p>
-                                            <h5 class="mb-0"></h5>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div>
                                             <p class="text-muted text-truncate mb-2">Total Sieges</p>
-                                            <h5 class="mb-0"></h5>
+                                            <h5 class="mb-0">{{ $agence->sieges->count() }}</h5>
                                         </div>
                                     </div>
                                     <div class="col-4">
                                         <div>
-                                            <p class="text-muted text-truncate mb-2">Newsletter</p>
+                                            <p class="text-muted text-truncate mb-2">Total Agent</p>
+                                            <h5 class="mb-0">{{ $agence->agents->count() }}</h5>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div>
+                                            <p class="text-muted text-truncate mb-2">Autres</p>
                                             <h5 class="mb-0"></h5>
                                             
                                         </div>
@@ -105,9 +105,9 @@
 
                                 <div class="col-sm-5 ">
                                     @if($agence->logo != '' )
-                                        <img src="{{Storage::url($agence->logo)}}" alt="" class="avatar-sm me-4"  style="width: 100%;">
+                                        <img src="{{Storage::url($agence->logo)}}" alt="" class="avatar-sm me-4"  style="width: 100%; height:auto;">
                                     @else
-                                        <img src="{{asset('user/assets/images/dowload/setting2.png')}}" alt="" style="width: 100%;">
+                                        <img src="{{asset('user/assets/images/dowload/setting2.png')}}" alt="" style="width: 100%; height:auto;">
                                     @endif
                                 </div>
 

@@ -92,7 +92,8 @@ class ClientController extends Controller
                         $add_client->bus_id = $buse->id;
                         $add_client->siege_id = $buse->siege->id;
                         $add_client->position = $buse->inscrit;
-                        $add_client->registered_at = date_format($date,'d-m-y');
+                        $add_client->registered_at = $request->date;
+                        // $add_client->registered_at = date_format($date,'d-m-y');
                         $add_client->voyage_status = 0;
                         $add_client->status = 0;
                         $add_client->save();
