@@ -40,7 +40,6 @@
                 <div class="col-lg-12 card_show">
                     <div class="text-white-50">
                         <h1 class="text-white font-weight-semibold mb-3 hero-title"> Termes et conditions d'utilisation</h1>
-                       
                     </div>
                 </div>
             </div>
@@ -275,13 +274,13 @@
                 <div class="col-lg-8 offset-lg-2">
                     <h2 class="text-bold h2-title">I.À propos de TouCki</h2>
                     <p>
-                        Les marques TouCki et Omio font partie de TouCki Corp. (ci-après "TouCki", "Omio", "nous"). Pour plus d'informations sur TouCki, veuillez consulter notre Mentions légales.
+                        L'application TouCki et Omio font partie de TouCki Corp. (ci-après "TouCki", "Omio", "nous"). Pour plus d'informations sur TouCki, veuillez consulter notre Mentions légales.
                     </p>
                     <p>
-                        Sous les bannières TouCki et Omio, TouCki exploite des plateformes Internet dans différentes langues ainsi que des applications mobiles.
+                        Sous les bannières du web, TouCki exploite des plateformes Internet dans différentes langues ainsi que des applications mobiles.
                     </p>
                     <p>
-                        Nos services comprennent l'identification, la comparaison et l'intermédiation des services de transport. Pour certaines offres, nous proposons également d'autres options de service (agences de vente et location de vehiculles). Nous ne proposons pas de forfaits vacances. TouCki est une société indépendante. Nous ne fournissons pas nos propres services de transport et n'organisons pas nos propres circuits ; nous ne possédons aucun des fournisseurs (agences) (Agences de transport ou de vente et location de vehiculle) et nous ne sommes pas sous le contrôle économique de l'un de ces fournisseurs (agences).
+                        Nos services comprennent l'identification, la comparaison et l'intermédiation des services de transport. Pour certaines offres, nous proposons également d'autres options de service (agences de vente et location de vehiculles,agence immobilier). Nous ne proposons pas de forfaits vacances. TouCki est une société indépendante. Nous ne fournissons pas nos propres services de transport et n'organisons pas nos propres circuits; nous ne possédons aucun des fournisseurs (Agences de transport ou de vente et location de vehiculle , ni agence immobilier) et nous ne sommes pas sous le contrôle économique de l'un de ces fournisseurs (agences).
                     </p>
                 </div>
 
@@ -291,20 +290,20 @@
                         Avec notre politique de confidentialité, les présentes conditions d'utilisation (« CG ») régissent l'utilisation des services, sites Web et applications mobiles de TouCki et constituent la base de l'accord d'utilisation entre TouCki et l'utilisateur. Les accords individuels entre l'utilisateur et TouCki, par exemple dans le cadre d'une réservation, prévaudront. Les conditions générales de vente divergentes ou opposées détenues par l'utilisateur ne sont pas applicables.
                     </p>
                     <p>
-                        Nonobstant ce qui précède, si vous êtes un utilisateur qui achète un billet auprès d'une agence de transport, la filiale senegalaise de TouCki, agira en tant que partie contractante en ce qui concerne votre réservation. Aux fins de ces réservations, « TouCki » désigne l'entité juridique, le cas échéant.
+                        Si vous êtes un utilisateur qui achète un billet auprès d'une agence de transport, la filiale senegalaise de TouCki, agira en tant que partie contractante en ce qui concerne votre réservation. Aux fins de ces réservations, « TouCki » désigne l'entité juridique, le cas échéant.
                     </p>
                     <p>
-                        Ces CG s'appliquent exclusivement aux services de TouCki, à savoir l'identification des correspondances de voyage et notre intermédiation de services proposés par des prestataires (agences) (transporteurs et autres prestataires de services). En outre, et indépendamment de celles-ci, les conditions générales de chaque fournisseur (agences) s'appliqueront à tous les billets et services proposés par lesdits fournisseurs (par exemple, transport, agence de ventes et location de vehiculle). En outre, des conditions générales supplémentaires peuvent s'appliquer aux plateformes de réservation tierces vers lesquelles vous êtes redirigé. TouCki n'a aucune influence sur les conditions fournies par des fournisseurs (agences).
+                        Ces CG s'appliquent exclusivement aux services de TouCki, à savoir l'identification des correspondances de voyage et notre intermédiation de services proposés par des prestataires (agences) (transporteurs et autres prestataires de services). En outre, et indépendamment de celles-ci, les conditions générales de chaque fournisseur (agences) s'appliqueront à tous les billets et services proposés par les dits fournisseurs (par exemple, transport, agence de ventes et location de vehiculle, agence immobilier). En outre, des conditions générales supplémentaires peuvent s'appliquer aux plateformes de réservation tierces vers lesquelles vous êtes redirigé. TouCki n'a aucune influence sur les conditions fournies par des fournisseurs (agences).
                     </p>
                 </div>
 
                 <div class="col-lg-8 offset-lg-2">
                     <h2 class="text-bold h2-title">III. Services offerts par TouCki</h2>
                     <p>
-                        Les services TouCki sont conçus pour vous faciliter la planification de votre voyage en vous fournissant les informations dont vous avez besoin et en vous fournissant une comparaison claire des options de voyage présentées par differentes aences de transport.
+                        Les services TouCki sont conçus pour vous faciliter la planification de votre voyage, de votre vehicule a louer ou l'immeuble de votre choix en vous fournissant les informations dont vous avez besoin et en vous fournissant une comparaison claire des options de votre demande.
                     </p>
                     <p>
-                        Les services de voyage proprement dits (par exemple, le transport de A à B) ne font pas partie du service TouCki mais font plutôt partie d'un contrat séparé conclu entre vous et le (agences) concerné. TouCki agit en tant qu'intermédiaire ou courtier entre l'utilisateur et chaque (agences). Nous ne sommes donc pas responsables du service de voyage fourni par le (agences) ni de la manière dont ce service de voyage est fourni.
+                        Les services de voyage proprement dits (par exemple, le transport de A à B) ne font pas partie du service TouCki mais font plutôt partie d'un contrat séparé conclu entre vous et le fournisseur (agences) concerné. TouCki agit en tant qu'intermédiaire ou courtier entre l'utilisateur et chaque (agences). Nous ne sommes donc pas responsables du service de voyage fourni par l'agences ni de la manière dont ce service de voyage est fourni.
                     </p>
 
                     <h3 class="h3-title">TouCki services include:</h3>

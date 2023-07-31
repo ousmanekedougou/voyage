@@ -37,13 +37,13 @@
                                 <div class="col-lg-4">
                                     <div class="media">
                                         <div class="me-3">
-                                            <img src="{{Storage::url($user->agence->logo)}}" alt="" class="avatar-md rounded-circle img-thumbnail">
+                                            <img src="{{Storage::url(Auth::guard('agent')->user()->agence->logo)}}" alt="" class="avatar-md rounded-circle img-thumbnail">
                                         </div>
                                         <div class="media-body align-self-center">
                                             <div class="text-muted">
-                                                <h5 class="mb-2">Bienvenue sur {{$user->agence->name}}</h5>
-                                                <p class="mb-1">Siege de {{$user->siege->name}}</p>
-                                                <p class="mb-0">Agent {{$user->name}}</p>
+                                                <h5 class="mb-2">Bienvenue sur {{Auth::guard('agent')->user()->agence->name}}</h5>
+                                                <p class="mb-1">Siege de {{Auth::guard('agent')->user()->siege->name}}</p>
+                                                <p class="mb-0">Agent {{Auth::guard('agent')->user()->name}}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -79,7 +79,7 @@
                                     <div class="media">
                                         <div class="media-body">
                                             <p class="text-muted fw-medium text-center">Montant Total du jour</p>
-                                            <h4 class="mb-0 text-center">{{ montant_today() }} </h4>
+                                            <h4 class="mb-0 text-center">700.000 f </h4>
                                         </div>
 
                                         <div class="avatar-sm rounded-circle bg-primary align-self-center mini-stat-icon">
@@ -108,32 +108,31 @@
                                 
                                 <div class="row">
                                     @foreach($itineraire->buses as $bus)
-                                    
-                                    @if(getBusToday() > 0)
-                                        <div class="col-xl-4">
-                                            <div class="card bg-soft bg-white" style="width:100%;">
-                                                <div>
-                                                    <div class="row">
-                                                        <div class="col-7">
-                                                            <div class="text-primary p-3">
-                                                                <h6 class="text-default font-size-13">Bus {{$bus->number}} | {{ $bus->matricule }} </h6>
+                                        @if(getBusToday() > 0)
+                                            <div class="col-xl-4">
+                                                <div class="card bg-soft bg-white" style="width:100%;">
+                                                    <div>
+                                                        <div class="row">
+                                                            <div class="col-7">
+                                                                <div class="text-primary p-3">
+                                                                    <h6 class="text-default font-size-13">Bus {{$bus->number}} | {{ $bus->matricule }} </h6>
 
-                                                                <ul class="ps-0 mb-0">
-                                                                    <li class="py-1 text-muted" style="list-style: none;"><i class="fa fa-user-plus"></i> Inscrits : {{ $bus->clients->count() }}</li>
-                                                                    <li class="py-1 text-success" style="list-style: none;"><i class="fa fa-check-double"></i> Valider : {{ $bus->valider }}</li>
-                                                                    <li class="py-1 text-primary" style="list-style: none;"><i class="fa fa-coins"></i> {{ $bus->getAmount() }}</li>
-                                                                </ul>
+                                                                    <ul class="ps-0 mb-0">
+                                                                        <li class="py-1 text-muted" style="list-style: none;"><i class="fa fa-user-plus"></i> Inscrits : {{ $bus->clients->count() }}</li>
+                                                                        <li class="py-1 text-success" style="list-style: none;"><i class="fa fa-check-double"></i> Valider : {{ $bus->valider }}</li>
+                                                                        <li class="py-1 text-primary" style="list-style: none;"><i class="fa fa-coins"></i> {{ $bus->getAmount() }}</li>
+                                                                    </ul>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-5 align-self-start">
-                                                            <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" class="img-fluid">
-                                                            <a href="{{ route('agent.client.jour',$bus->id) }}" class="btn btn-info  font-size-10 text-center mt-2"> <i class="fa fa-user-plus"></i> Clients du jour</a>
+                                                            <div class="col-5 align-self-start">
+                                                                <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" class="img-fluid">
+                                                                <a href="{{ route('agent.client.jour',$bus->id) }}" class="btn btn-info  font-size-10 text-center mt-2"> <i class="fa fa-user-plus"></i> Clients du jour</a>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    @endif
+                                        @endif
                                     @endforeach
                                 </div>
                             </div>

@@ -513,6 +513,8 @@ main
     opacity: 0;
     overflow: hidden;
 }
+
+
 @media screen and (max-width: 420px) {
     :root{
         --main-color:#5352ed;
@@ -520,7 +522,8 @@ main
         --dark-color:#2f3542
     }
 
-    main{
+    main
+    {
         position: fixed;
         visibility: visible;
         opacity: 1;
@@ -534,7 +537,7 @@ main
         padding: 0 2em;
         border-radius: 40px;
         box-shadow: rgb(50, 50, 93 / 25%) 0 50px 100px -20px,
-                    rgb(0, 0, 0 / 30%) 0 30px 60px -30px;
+            rgb(0, 0, 0 / 30%) 0 30px 60px -30px;
     }
 
    
@@ -634,6 +637,25 @@ main
         height: 0px;
     }
     
+
+
+    /* La partie du ticket en mode mobile responsive */
+
+        .page-content{
+            width: 0px;
+            height: 0px;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .aside{
+            margin-top: -5.1rem;
+            width: 100%;
+            height: auto;
+            opacity: 1;
+            visibility: visible;
+        }
+    /* Fin de la partie du ticket en mode mobile responsive */
 
    
 }

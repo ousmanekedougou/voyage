@@ -24,6 +24,7 @@ class Client extends Model
         'amount',
         'registered_at',
         'payment_at',
+        'payment_methode',
         'confirmation_token',
         'remboursement',
         'voyage_status',

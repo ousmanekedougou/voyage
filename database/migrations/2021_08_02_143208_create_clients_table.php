@@ -33,6 +33,7 @@ class CreateClientsTable extends Migration
             $table->integer('status')->default(0);
             $table->date('canceled_at')->nullable();
             $table->time('canceled_time')->nullable();
+            $table->integer('payment_methode')->nullable();
             // $table->integer('reference')->unique()->nullable();
             // $table->string('image')->nullable();
             $table->timestamps();

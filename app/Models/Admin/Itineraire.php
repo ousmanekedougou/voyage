@@ -12,6 +12,8 @@ class Itineraire extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name','siege_id'];
+
      public function buses()
     {
         return $this->hasMany(Bus::class);

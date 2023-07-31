@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Agent;
 
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Agent;
+use App\Models\Admin\Agence;
 use App\Models\Admin\Bagage;
 use App\Models\Admin\BagageClient;
 use App\Models\Admin\Bus;
@@ -43,9 +44,8 @@ class HomeController extends Controller
         if ($this->middleware(['IsAgent']) && Auth::guard('agent')->user()->role == 1 || Auth::guard('agent')->user()->role == 4) {
             $buses = Bus::where('siege_id', Auth::guard('agent')->user()->siege_id)->orderBy('id', 'ASC')->get();
             $itineraires = Itineraire::where('siege_id', Auth::guard('agent')->user()->siege_id)
-            // ->where('user_id', Auth::guard('agent')->user()->id)
             ->get();
-            $user = Agent::where('id',Auth::guard('agent')->user()->id)->first() ; 
+            
             $clientCount = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)->where('registered_at',carbon_today())->get();
             $busCount = Bus::where('siege_id',Auth::guard('agent')->user()->siege_id)->get();
 
@@ -92,7 +92,7 @@ class HomeController extends Controller
                 Historical::where('registered_at', '<', Carbon::today()->format('Y-m-d'))->where('siege_id', Auth::guard('agent')->user()->siege_id)->delete();
             }
 
-            return view('agent.index',compact('itineraires','user','clientCount','busCount','clients'));
+            return view('agent.index',compact('itineraires','clientCount','busCount','clients'));
 
         }elseif ($this->middleware(['IsAgent']) && Auth::guard('agent')->user()->role == 2 || Auth::guard('agent')->user()->role == 4) {
 

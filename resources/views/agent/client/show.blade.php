@@ -76,7 +76,7 @@
                                         <th>Ville</th>
                                         <th>Date</th>
                                         <th>Prix</th>
-                                        <th>Ticket</th>
+                                        <th>Status ticket</th>
                                         <th>Detail</th>
                                         <th>Actions</th>
                                     </tr>
@@ -112,11 +112,16 @@
                                                 <span class="badge badge-pill badge-soft-info font-size-12">{{ $client->ville->getAmount() }}</span>
                                             </td>
                                             <td>
+                                            @if($client->customer_id != null)
                                                 @if($client->amount == $client->ville->amount)
                                                     <span class="badge badge-pill badge-soft-success font-size-12"><i class="fab fa-cc-mastercard me-1"></i> Wave</span>
                                                 @elseif($client->amount != $client->ville->amount)
-                                                    <span class="badge badge-pill badge-soft-primary font-size-12">Envoye lien</span>
+                                                    <a class="badge badge-pill badge-soft-warning font-size-12">Non payer <i class="fab fa-cc-mastercard me-1"></i></a>
                                                 @endif
+                                            @elseif($client->customer_id == null)
+                                                    {{-- <span class="badge badge-pill badge-soft-primary font-size-12"></span>--}}
+                                                    <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#staticBackdropSenSmsClient-{{ $client->id }}" class="text-success">Envoye lien<i class="mdi mdi-pencil font-size-18"></i></a>
+                                            @endif
                                             </td>
                                             <td>
                                                 <!-- Button trigger modal -->
@@ -512,6 +517,42 @@
                 </div>
             </div>
         </div>
+
+        {{-- Partie pour envoyer des lien de paiment en ligne --}}
+        <div class="modal modal-xs fade" id="staticBackdropSendSmsClient-{{ $client->id }}" tabindex="-1" aria-labelledby="subscribeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header border-bottom-0">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="text-center mb-4">
+                            <div class="avatar-md mx-auto mb-4">
+                                <div class="avatar-title bg-warning rounded-circle text-white h1">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-center">
+                                <div class="col-xl-10">
+                                    <h4 class="text-danger">Attention !</h4>
+                                    <p class="text-muted font-size-14 mb-4">Etes vous sure de bien vouloire supprimer {{ $client->name }}</p>
+
+                                    <div class="input-group bg-white rounded text-center" style="text-align:center;">
+                                        <form method="post" action="{{ route('agent.client.destroy',$client->id) }}"  style="display:flex;text-align:center;width:100%;">
+                                            {{csrf_field()}}
+                                            {{method_field('delete')}}
+                                            <button type="submit" class="btn btn-danger btn-xs" style="margin-left: 70px;margin-right:20px;"> Oui je veux bient </button> 
+                                            <button type="button" class="btn btn-success btn-xs" data-bs-dismiss="modal" aria-label="Close"> x Anuller</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
     @endforeach
 
 
@@ -578,7 +619,7 @@
                                         </div>
                                     </div>
                                     <div class="mb-3 row">
-                                            <label class="form-label">Entre la ville de voyage</label>
+                                            <label class="form-label">Entrez la ville de voyage</label>
                                             <div class="col-md-12">
                                                 <select class="form-control select2 @error('ville') is-invalid @enderror" name="ville" required autocomplete="ville" required>
                                                     <option>Entre une ville</option>

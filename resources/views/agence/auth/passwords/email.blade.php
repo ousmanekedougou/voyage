@@ -90,7 +90,7 @@
                         </div>
                         <div class="mt-5 text-center">
                             <p>Si vous vous souvenez ? <a href="{{ route('agence.agence.login') }}" class="fw-medium text-primary"> Se Connecter ici</a> </p>
-                            <p>© <script>document.write(new Date().getFullYear())</script> Voyage. Crafted with <i class="mdi mdi-heart text-danger"></i> by Themesbrand</p>
+                            <p>© <script>document.write(new Date().getFullYear())</script> TouCki</p>
                         </div>
 
                     </div>

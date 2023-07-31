@@ -188,13 +188,13 @@
                                         @if($ticket->amount == $ticket->ville->amount)
                                             @if($ticket->voyage_status == 0)
                                                 <li class="list-inline-item me-3">
-                                                    <a href="#" class="badge bg-info p-1" data-bs-toggle="modal" data-bs-target="#staticBackdropDate-{{$ticket->id}}"> <i class="fa fa-edit"></i> Repporter</a>
+                                                    <a href="#" class="badge bg-info p-1" data-bs-toggle="modal" data-bs-target="#staticBackdropDate-{{$ticket->id}}"> <i class="fa fa-calendar-alt"></i> Repporter</a>
                                                 </li>
                                                 <li class="list-inline-item me-3">
                                                     <a href="#" class="badge bg-primary p-1" data-bs-toggle="modal" data-bs-target="#staticBackdropRevendre-{{$ticket->id}}"> <i class="fa fa-reply-all "></i> Revendre</a>
                                                 </li>
                                                 <li class="list-inline-item me-3">
-                                                    <a href="#" class="badge bg-danger p-1" data-bs-toggle="modal" data-bs-target="#staticBackdropArchiver-{{$ticket->id}}"> <i class="fa fa-trash"></i> Annuler</a>
+                                                    <a href="#" class="badge bg-warning p-1" data-bs-toggle="modal" data-bs-target="#staticBackdropArchiver-{{$ticket->id}}"> <i class="fa fa-trash-restore-alt "></i> Annuler</a>
                                                 </li>
                                             @elseif($ticket->voyage_status == 1)
                                                 <li class="list-inline-item me-3">
@@ -245,7 +245,7 @@
                         </div>
                         <div class="screen-bus__filter">
                             <figure>
-                            <img src="https://i.ibb.co/ZJt9tkM/filter.png">
+                                <img src="https://i.ibb.co/ZJt9tkM/filter.png">
                             </figure>
                         </div>
                         </div>
@@ -255,22 +255,24 @@
                     <div class="screen-bus__travels-wrap">
                         <div class="screen-bus__travels-row">
                             @foreach($tickets as $ticket)
-                                <div class="screen-bus__travels-col">
+                                <div class="screen-bus__travels-col
+                                    @if($ticket->voyage_status == 1) bg-success text-white @endif
+                                ">
                                     <div class="screen-bus__name-time-seat">
                                         <div class="screen-bus__name-wrap">
                                             <span class="screen-bus__name">{{ $ticket->siege->agence->name }}</span>
-                                            <span class="screen-bus__type"><i class="bx bx-map fa-item"></i> {{ $ticket->siege->name }}</span>
+                                            <span class="screen-bus__type @if($ticket->voyage_status == 1) bg-success text-white @endif"><i class="bx bx-map fa-item"></i> {{ $ticket->siege->name }}</span>
                                         </div>
                                         <div class="screen-bus__time-wrap">
                                             <div class="screen-bus__time">
-                                                <div class="screen-bus__start">{{ $ticket->bus->heure_rv }}</div>
+                                                <div class="screen-bus__start">{{ $ticket->bus->getTimeStart() }}</div>
                                                 <div class="screen-bus__time-arrow-wrap">
                                                     <span class="screen-bus__time-arrow"></span>
                                                 </div>
-                                                <div class="screen-bus__end">{{ $ticket->bus->heure_depart }}</div>
+                                                <div class="screen-bus__end">{{ $ticket->bus->getTimeEnd() }}</div>
                                             </div>
                                             <div class="screen-bus__hrs">
-                                                <span> <i class="fa fa-road fa-item"></i> {{ $ticket->ville->name }}</span>
+                                                <span class="@if($ticket->voyage_status == 1) bg-success text-white @endif"> <i class="fa fa-road fa-item "></i> {{ $ticket->ville->name }}</span>
                                             </div>
                                         </div>
                                         <div class="screen-bus__seat-wrap">
@@ -281,23 +283,68 @@
                                     </div>
                                     <div class="screen-bus__rating-price">
                                         <div class="screen-bus__rating-price-row">
-                                            <div class="screen-bus__rating">
-                                                <ul class="screen-bus__rating-row ul_fomat_mobile">
-                                                    <li class="li_fomat_mobile"><figure><img src="https://i.ibb.co/pxtdTrM/star.png"></figure></li>
-                                                    <li class="li_fomat_mobile"><figure><img src="https://i.ibb.co/pxtdTrM/star.png"></figure></li>
-                                                    <li class="li_fomat_mobile"><figure><img src="https://i.ibb.co/pxtdTrM/star.png"></figure></li>
-                                                    <li class="li_fomat_mobile"><figure><img src="https://i.ibb.co/pxtdTrM/star.png"></figure></li>
-                                                    <li class="li_fomat_mobile"><figure><img src="https://i.ibb.co/WPLcC1D/star-grey.png"></figure></li>
-                                                    <li class="li_fomat_mobile"><figure><img src="https://i.ibb.co/WPLcC1D/star-grey.png"></figure></li>
-                                                    <li class="li_fomat_mobile"><figure><img src="https://i.ibb.co/WPLcC1D/star-grey.png"></figure></li>
-                                                    <li class="li_fomat_mobile"><figure><img src="https://i.ibb.co/WPLcC1D/star-grey.png"></figure></li>
-                                                    <li class="li_fomat_mobile"><figure><img src="https://i.ibb.co/WPLcC1D/star-grey.png"></figure></li>
-                                                    <li class="li_fomat_mobile"><figure><img src="https://i.ibb.co/WPLcC1D/star-grey.png"></figure></li>
-                                                </ul>
-                                            </div>
-                                            <div class="screen-bus__price">
-                                                <span>{{ $ticket->getAmount() }}</span>
-                                            </div>
+                                            {{--
+                                                <div class="screen-bus__rating">
+                                                    <ul class="screen-bus__rating-row ul_fomat_mobile">
+                                                        <li class="li_fomat_mobile"><figure><a href="#" title="Details ticket" class="p-1 @if($ticket->voyage_status == 1) bg-success text-white @endif text-success " data-bs-toggle="modal" data-bs-target="#staticBackdropView-{{$ticket->id}}"> <i class="fa fa-eye"></i></a></figure></li>
+                                                        @if($ticket->voyage_status == 0) 
+                                                            @if($ticket->amount == $ticket->ville->amount)
+                                                                @if($ticket->voyage_status == 0)
+                                                                    <li class="li_fomat_mobile"><figure><a href="#" title="Renouvellement date" class="p-1 text-info" data-bs-toggle="modal" data-bs-target="#staticBackdropDate-{{$ticket->id}}"> <i class="fa fa-calendar-alt"></i></a></figure></li>
+                                                                    <li class="li_fomat_mobile"><figure><a href="#" title="Transferer ticket" class="p-1 text-primary" data-bs-toggle="modal" data-bs-target="#staticBackdropRevendre-{{$ticket->id}}"> <i class="fa fa-reply-all"></i></a></figure></li>
+                                                                    <li class="li_fomat_mobile"><figure><a href="#" title="Anuller ticket" class="p-1 text-warning" data-bs-toggle="modal" data-bs-target="#staticBackdropArchiver-{{$ticket->id}}"> <i class="fa fa-trash-restore-alt "></i></a></figure></li>
+                                                                @elseif($ticket->voyage_status == 1)
+                                                                    <li class="li_fomat_mobile"><figure><a href="#" class="p-1 text-primary" data-bs-toggle="modal" data-bs-target="#staticBackdropDate-{{$ticket->id}}"> <i class="fa fa-edit"></i></a></figure></li>
+                                                                @endif
+                                                            @else
+                                                                <li class="li_fomat_mobile"><figure><a href="#" title="Modifier ticket"  class="p-1 text-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$ticket->id}}"> <i class="fa fa-edit"></i></a></figure></li>
+                                                                <li class="li_fomat_mobile"><figure><a href="#" title="Payer ticket" class="p-1 text-success" data-bs-toggle="modal" data-bs-target="#staticBackdropPayer-{{$ticket->id}}"> <i class="fa fa-ticket-alt"></i></a></figure></li>
+                                                                <li class="li_fomat_mobile"><figure><a href="#" title="Supprimer ticket" class="p-1 text-danger" data-bs-toggle="modal" data-bs-target="#staticBackdropSupprimer-{{$ticket->id}}"> <i class="fa fa-trash"> </i> </a></figure></li>
+                                                            @endif
+                                                        @elseif($ticket->voyage_status == 1)
+                                                            <span class="text-white">Voyage effectuer avec success</span>
+                                                        @endif
+
+                                                    </ul>
+                                                </div>
+                                            --}}
+                                            @if($ticket->status == 0)
+                                                <div class="screen-bus__rating">
+                                                    <ul class="screen-bus__rating-row ul_fomat_mobile">
+                                                        <li class="li_fomat_mobile"><figure><a href="#" title="Details ticket" class="p-1 @if($ticket->voyage_status == 1) bg-success text-white @endif text-success " data-bs-toggle="modal" data-bs-target="#staticBackdropView-{{$ticket->id}}"> <i class="fa fa-eye"></i></a></figure></li>
+                                                        @if($ticket->amount == $ticket->ville->amount)
+                                                            @if($ticket->voyage_status == 0)
+                                                                <li class="li_fomat_mobile"><figure><a href="#" title="Renouvellement date" class="p-1 text-info" data-bs-toggle="modal" data-bs-target="#staticBackdropDate-{{$ticket->id}}"> <i class="fa fa-calendar-alt"></i></a></figure></li>
+                                                                <li class="li_fomat_mobile"><figure><a href="#" title="Transferer ticket" class="p-1 text-primary" data-bs-toggle="modal" data-bs-target="#staticBackdropRevendre-{{$ticket->id}}"> <i class="fa fa-reply-all"></i></a></figure></li>
+                                                                <li class="li_fomat_mobile"><figure><a href="#" title="Anuller ticket" class="p-1 text-warning" data-bs-toggle="modal" data-bs-target="#staticBackdropArchiver-{{$ticket->id}}"> <i class="fa fa-trash-restore-alt "></i></a></figure></li>
+                                                            @elseif($ticket->voyage_status == 1)
+                                                                <li class="li_fomat_mobile"><figure><a href="#" class="p-1 text-primary" data-bs-toggle="modal" data-bs-target="#staticBackdropDate-{{$ticket->id}}"> <i class="fa fa-edit"></i></a></figure></li>
+                                                            @endif
+                                                        @else
+                                                            <li class="li_fomat_mobile"><figure><a href="#" title="Modifier ticket"  class="p-1 text-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$ticket->id}}"> <i class="fa fa-edit"></i></a></figure></li>
+                                                            <li class="li_fomat_mobile"><figure><a href="#" title="Payer ticket" class="p-1 text-success" data-bs-toggle="modal" data-bs-target="#staticBackdropPayer-{{$ticket->id}}"> <i class="fa fa-ticket-alt"></i></a></figure></li>
+                                                            <li class="li_fomat_mobile"><figure><a href="#" title="Supprimer ticket" class="p-1 text-danger" data-bs-toggle="modal" data-bs-target="#staticBackdropSupprimer-{{$ticket->id}}"> <i class="fa fa-trash"> </i> </a></figure></li>
+                                                        @endif
+                                                    </ul>
+                                                </div>
+                                                <div class="screen-bus__price">
+                                                    <span class="badge p-1 @if( $ticket->getAmount() == $ticket->ville->getAmount()) bg-success @else bg-warning @endif ">
+                                                        @if($ticket->getAmount() == $ticket->ville->getAmount())
+                                                            Ticket payé : {{$ticket->getAmount()}}
+                                                        @else
+                                                            {{$ticket->getAmount()}} : Ticket non payé
+                                                        @endif
+                                                    </span>
+                                                </div>
+                                            @else
+                                                <div class="screen-bus__rating">
+                                                    <ul class="screen-bus__rating-row ul_fomat_mobile">
+                                                        <li class="li_fomat_mobile"><figure><a href="#" title="Details ticket" class="p-1 @if($ticket->voyage_status == 1) bg-success text-white @endif text-success " data-bs-toggle="modal" data-bs-target="#staticBackdropView-{{$ticket->id}}"> <i class="fa fa-eye"></i></a></figure></li>
+                                                        <li class="li_fomat_mobile text-center"><figure class="badge p-1 bg-warning"> Vous avez anuller ce ticket de {{ $ticket->getAmount()}} </figure></li>
+                                                        <li class="li_fomat_mobile text-center"><figure class="badge p-1 bg-primary"> Ticket payé </figure></li>
+                                                    </ul>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -496,26 +543,26 @@
                     <div class="modal-body">
                         <div class="text-center mb-4">
                             <div class="avatar-md mx-auto mb-4">
-                                <div class="avatar-title bg-danger rounded-circle text-white h1">
+                                <div class="avatar-title bg-warning rounded-circle text-white h1">
                                     <i class="fa fa-trash"></i>
                                 </div>
                             </div>
 
                             <div class="row justify-content-center">
                                 <div class="col-xl-10">
-                                    <h4 class="text-danger text-uppercase">Attention !</h4>
+                                    <h4 class="text-warning text-uppercase">Attention !</h4>
                                     <p class="text-muted font-size-14 mb-4 text-left">Etes vous sure de bien vouloire anuller votre ticket de {{ $ticket->ville->name }}</p>
                                     @if($ticket->siege->agence->method_ticket == 0)
                                         <p class="text-success font-size-14 mb-4 text-left">NB : Votre ticket sera rembourser apres votre annulation, et meme si vous avez reter le bus</p>
                                     @else
-                                        <p class="text-danger font-size-14 mb-4 text-left">NB : Votre ticket sera rembourser si toute fois vous l'avez annuler avant le depart du bus</p>
+                                        <p class="text-warning font-size-14 mb-4 text-left">NB : Votre ticket sera rembourser si toute fois vous l'avez annuler avant le depart du bus</p>
                                     @endif
 
                                     <div class="input-group bg-white rounded text-center" style="text-align:center;">
                                         <form method="post" action="{{ route('customer.client.annuler',$ticket->id) }}"  style="display:flex;text-align:center;width:100%;">
                                             {{csrf_field()}}
                                             {{method_field('PUT')}}
-                                            <button type="submit" class="btn btn-danger btn-xs" style="margin-left: 70px;margin-right:20px;"> Oui je veux bien </button> 
+                                            <button type="submit" class="btn btn-warning btn-xs" style="margin-left: 70px;margin-right:20px;"> Oui je veux bien </button> 
                                             <button type="button" class="btn btn-success btn-xs" data-bs-dismiss="modal" aria-label="Close"> x Anuller</button>
                                         </form>
                                     </div>
@@ -567,6 +614,155 @@
 
 
     @foreach($tickets as $ticket)
+    <!-- Static Backdrop Modal de l'ajout -->
+        <div class="modal fade" id="staticBackdropView-{{$ticket->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+                <div class="modal-content ">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel text-center">Details de votre ticket </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                        <div class="modal-body">
+                            <p>
+                                <div class="card @if($ticket->status == 1) bg-warning text-white @elseif($ticket->status == 2) bg-light @endif">
+                                    <div class="card-body ">
+                                        <div class="media">
+                                            <div class="avatar-md me-4">
+                                                <span class="avatar-title rounded-circle bg-light text-danger">
+                                                    @if($ticket->siege->agence->logo != '')
+                                                        <!-- height="30" pour l'image -->
+                                                        <img src="{{Storage::url($ticket->siege->agence->logo)}}"  alt="" class="avatar-md rounded-circle img-thumbnail">
+                                                    @else
+                                                        <i class="fa fa-bus"></i>
+                                                    @endif
+                                                </span>
+                                            </div>
+
+                                            <div class="media-body overflow-hidden">
+                                                <h5 class="text-truncate font-size-15"><a href="#" class="@if($ticket->status == 1) text-white @else text-muted @endif">
+                                                    {{$ticket->siege->agence->name}}</a>
+                                                </h5>
+                                                <p class="@if($ticket->status == 1) text-white @else text-muted @endif mb-1"> Siege de {{ $ticket->siege->name }}</p>
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <table class="invoice " style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; text-align: left; width: 90%; margin: 10px auto;">
+                                                <tr
+                                                    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                    <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; width:100%;"
+                                                        valign="top">
+                                                        <br style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif,;font-weight:bold; box-sizing: border-box; font-size: 14px; margin: 0;" />
+                                                        <span style="float:left;font-weight:600;">{{ $ticket->customer->name }}</span>
+                                                        <span style="float:right;font-weight:600;">Date : {{$ticket->registered_at}}</span>
+                                                    </td>
+                                                </tr>
+                                                <tr
+                                                    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                    <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 5px 0;"
+                                                        valign="top">
+                                                        <table class="invoice-items"
+                                                            cellpadding="0" cellspacing="0"
+                                                            style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; margin: 0;">
+                                                        
+                                                            <tr
+                                                                style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                                <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                    valign="top">Déstination
+                                                                </td>
+                                                                <td class="alignright"
+                                                                    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                    align="right" valign="top">
+                                                                    {{ $ticket->ville->name }}
+                                                                </td>
+                                                            </tr>
+                                                            
+                                                        
+                                                            <tr
+                                                                style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                                <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                    valign="top">Bus {{$ticket->bus->number}} , Matricule : {{$ticket->bus->matricule}}
+                                                                </td>
+                                                                <td class="alignright"
+                                                                    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                    align="right" valign="top">
+                                                                    {{$ticket->position}}{{ $ticket->position == 1 ? 'ere' : 'eme' }} place
+                                                                </td>
+                                                            </tr>
+                                                            <tr
+                                                                style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                                <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                    valign="top">Prix
+                                                                </td>
+                                                                <td class="alignright"
+                                                                    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                    align="right" valign="top">
+                                                                    {{$ticket->ville->getAmount()}}
+                                                                </td>
+                                                            </tr>
+                                                            <tr
+                                                                style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                                <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                    valign="top">Status Voyage
+                                                                </td>
+                                                                <td class="alignright"
+                                                                    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                    align="right" valign="top">
+                                                                    @if($ticket->voyage_status == 1)
+                                                                        <span class="badge bg-success">Effectue</span>
+                                                                    @elseif($ticket->voyage_status == 0)
+                                                                        <span class="badge bg-warning">Non effectue</span>
+                                                                    @endif
+                                                                </td>
+                                                            </tr>
+                                                            <tr
+                                                                style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                                <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                    valign="top">Status Ticket
+                                                                </td>
+                                                                <td class="alignright"
+                                                                    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                    align="right" valign="top">
+                                                                    @if($ticket->amount == $ticket->ville->amount)
+                                                                        <span class="badge bg-success">Ticket Paye</span>
+                                                                        @if($ticket->status > 0)
+                                                                            <span class="badge bg-danger">Anuller</span>
+                                                                        @endif
+                                                                    @else
+                                                                        <span class="badge bg-warning">Tiket Non Paye</span>
+                                                                    @endif
+                                                                </td>
+                                                                
+                                                            </tr>
+                                                            
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="border-top @if($ticket->status == 1) bg-warning text-white @elseif($ticket->status == 2) bg-light @endif" style="margin-top: -30px;">
+                                        @if($ticket->amount != $ticket->ville->amount)
+                                            <p class="text-success text-center pt-3" style="width: 100%;font-weight:600;">Délais d'attente de paiment du ticket est de 24h</p>
+                                        @else
+                                            @if($ticket->status == 1)
+                                                <p class="text-white text-center pt-3" style="width: 100%; font-weight:600;">Votre ticket a ete annuler le remboursement sera fait dans l'immedia</p>
+                                            @elseif($ticket->status == 2)
+                                                <p class="text-danger text-center pt-3" style="width: 100%; font-weight:600;">Votre ticket a ete annuler mais ne sera pas rembourser, car vous avez depasser le delais d'attente d'annulation</p>
+                                            @endif
+                                        @endif
+                                    </div>
+                                </div>
+                            </p>
+                        </div>
+                </div>
+            </div>
+        </div>
+    <!-- Fin du modal de l'ajout -->
+    @endforeach
+
+
+    @foreach($tickets as $ticket)
         <!-- Static Backdrop Modal de l'ajout -->
             <div class="modal fade" id="staticBackdropPayer-{{$ticket->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-md modal-dialog-centered" role="document">
@@ -596,7 +792,6 @@
                                                                 </label>
                                                             </div>
 
-
                                                             <div class="col-xl-6 col-sm-4">
                                                                 <label class="card-radio-label mb-3">
                                                                     <div class="card-radio">
@@ -608,6 +803,38 @@
                                                                 </label>
                                                             </div>
                                                         </div>
+                                                        
+                                                        <div class="mb-2">
+                                                            <label>Payment method :</label>
+                                                            <div class="row">
+                                                                <div class="col-xl-6 col-sm-4">
+                                                                    <label class="card-radio-label mb-3">
+                                                                        <input type="radio" name="pay-method" id="pay-methodoption1" class="card-radio-input">
+            
+                                                                        <div class="card-radio">
+                                                                            <i class="fab fa-cc-mastercard font-size-24 text-primary align-middle me-2"></i>
+            
+                                                                            <span>Credit / Debit Card</span>
+                                                                        </div>
+                                                                    </label>
+                                                                </div>
+            
+            
+                                                                <div class="col-xl-6 col-sm-4">
+                                                                    <label class="card-radio-label mb-3">
+                                                                        <input type="radio" name="pay-method" id="pay-methodoption3" class="card-radio-input" checked>
+            
+                                                                        <div class="card-radio">
+                                                                            <i class="fab fa-cc-paypal font-size-24 text-primary align-middle me-2"></i>
+            
+                                                                            <span>Paypal</span>
+                                                                        </div>
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                            
+                                                        
                                                     </div>
                                                         <form action="{{ route('customer.client.paiment') }}" method="GET">
                                                             @csrf
@@ -642,7 +869,7 @@
 @endsection
 
 @section('footerSection')
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js'></script>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+    <script src="{{asset('admin/assets/js/TweenMax.min.js')}}"></script>
+    <script src="{{asset('admin/assets/js/TweenMax-jquery.min.js')}}"></script>
     <script src="{{asset('admin/assets/js/format_ticket_mobile.js')}}"></script>
 @endsection

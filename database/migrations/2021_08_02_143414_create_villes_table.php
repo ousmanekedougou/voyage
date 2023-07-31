@@ -19,6 +19,8 @@ class CreateVillesTable extends Migration
             $table->integer('itineraire_id');
             $table->integer('amount');
             $table->timestamps();
+
+            // $table->foreign('itineraire_id')->references('id')->on('itineraires')->onDelete('cascade');
         });
     }
 

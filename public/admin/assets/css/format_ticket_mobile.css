@@ -10,6 +10,7 @@
     }
     .li_fomat_mobile {
         list-style: none;
+        padding: 5px;
     }
     .aside {
         width: 100%;
@@ -33,13 +34,14 @@
     /* ========== Bus ========== */
     .screen-bus {
         opacity: 0;
+        padding-bottom: 5rem;
     }
     .screen-bus__location-filter-row {
         width: 100%;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background-color: #66A1F3;
+        background-color: #556ee6;
         overflow: hidden;
     }
     .screen-bus__location {
@@ -96,6 +98,7 @@
     }
     .screen-bus__name {
         margin-bottom: 0.3rem;
+        font-weight: 600;
     }
     .screen-bus__type,
     .screen-bus__hrs span {
@@ -105,6 +108,7 @@
     .screen-bus__seat-wrap {
         text-align: right;
         font-size: 0.7rem;
+        font-weight: 500;
     }
     .screen-bus__count {
         font-size: 0.9rem;
@@ -169,22 +173,4 @@
         border-radius: 100px;
         background-color: #ffffff7d;
         cursor: pointer;
-    }
-
-
-    @media screen and (max-width: 420px) {
-        .page-content{
-            width: 0px;
-            height: 0px;
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        .aside{
-            margin-top: -5.1rem;
-            width: 100%;
-            height: auto;
-            opacity: 1;
-            visibility: visible;
-        }
     }

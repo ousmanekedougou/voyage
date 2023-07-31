@@ -26,7 +26,7 @@
                         </p>
 
                         <div class="button-items mt-4">
-                            <a href="{{ route('setting.index') }}" class="btn btn-light"><i class="fa fa-cog"></i> Comment ça marche</a>
+                            <a target="_blank" href="{{ route('setting.condition') }}" class="btn btn-light text-bold"><i class="fa fa-pencil-ruler"></i> Termes & Conditions</a>
                         </div>
                     </div>
                 </div>

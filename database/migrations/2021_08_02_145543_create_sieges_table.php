@@ -24,6 +24,8 @@ class CreateSiegesTable extends Migration
             $table->time('opened_at')->nullable();
             $table->time('closed_at')->nullable();
             $table->timestamps();
+
+            
         });
     }
 

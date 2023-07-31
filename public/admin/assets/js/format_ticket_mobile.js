@@ -24,7 +24,7 @@ $(document).ready(function(){
                 Tl.to('.screen-home', 0.6, {opacity: 0})
                 Tl.to('.screen-home', 0, {display: 'none'})
                 function visibleBox() {
-                Tl.staggerTo('.screen-bus__travels-col', 0.4, {opacity: 1, y: 0, ease: Expo.easeIn}, '0.1'); 
+                Tl.staggerTo('.screen-bus__travels-col', 0.4, {opacity: 1, y: 0, ease: Expo.easeIn}, '0.2'); 
                 console.log('start');
                 } 
             }

@@ -39,7 +39,7 @@
             <div class="row align-items-center row_pricipal">
                 <div class="col-lg-12 card_show">
                     <div class="text-white-50">
-                        <h1 class="text-white font-weight-semibold mb-3 hero-title"> Tout savoir sur l’utilisation de votre application de TouCki</h1>
+                        <h1 class="text-white font-weight-semibold mb-3 hero-title"> Tout savoir sur l’utilisation de votre application TouCki</h1>
                         
                     </div>
                 </div>

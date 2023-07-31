@@ -29,6 +29,8 @@ class CreateBusesTable extends Migration
             $table->time('heure_rv');
             $table->time('heure_depart');
             $table->timestamps();
+            
+            // $table->foreign('itineraire_id')->references('id')->on('itineraires')->onDelete('cascade');
         });
     }
 
