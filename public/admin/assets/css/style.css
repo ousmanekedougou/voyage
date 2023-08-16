@@ -641,7 +641,7 @@ main
 
     /* La partie du ticket en mode mobile responsive */
 
-        .page-content{
+        #ticket-contente-page{
             width: 0px;
             height: 0px;
             opacity: 0;

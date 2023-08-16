@@ -4,7 +4,7 @@
 @endsection
 @section('main-content')
 
-    <div class="page-content">
+    <div class="page-content" id="ticket-contente-page">
         <div class="container-fluid">
 
             <!-- start page title -->
@@ -230,7 +230,7 @@
         <aside class="app">
             <div class="screen-wrap">
                 <section class="screen-bus">
-
+                {{--
                     <div class="screen-bus__location-filter-wrap">
                         <div class="screen-bus__location-filter-row">
                         <div class="screen-bus__location">
@@ -250,7 +250,7 @@
                         </div>
                         </div>
                     </div>
-
+                --}}
 
                     <div class="screen-bus__travels-wrap">
                         <div class="screen-bus__travels-row">
@@ -265,7 +265,7 @@
                                         </div>
                                         <div class="screen-bus__time-wrap">
                                             <div class="screen-bus__time">
-                                                <div class="screen-bus__start">{{ $ticket->bus->getTimeStart() }}</div>
+                                                <div class="screen-bus__start"> {{ $ticket->bus->getTimeStart() }}</div>
                                                 <div class="screen-bus__time-arrow-wrap">
                                                     <span class="screen-bus__time-arrow"></span>
                                                 </div>
@@ -279,35 +279,21 @@
                                             <div>
                                                 {{ $ticket->registered_at }}
                                             </div>
+                                            <div class="screen-bus__payment">
+                                                <span class="@if($ticket->voyage_status == 1) bg-success text-white @endif">
+                                                    @if($ticket->payment_methode == 1)
+                                                        <i class="fab fa-cc-mastercard font-size-24 text-primary align-middle me-2"></i>Wave
+                                                    @elseif($ticket->payment_methode == 2)
+                                                        <i class="fab fa-cc-paypal font-size-24 text-primary align-middle me-2"></i>Orange Money
+                                                    @else
+                                                        <i class="mdi mdi-bitcoin font-size-24 text-warning align-middle me-2"></i>Methode
+                                                    @endif
+                                                </span>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="screen-bus__rating-price">
                                         <div class="screen-bus__rating-price-row">
-                                            {{--
-                                                <div class="screen-bus__rating">
-                                                    <ul class="screen-bus__rating-row ul_fomat_mobile">
-                                                        <li class="li_fomat_mobile"><figure><a href="#" title="Details ticket" class="p-1 @if($ticket->voyage_status == 1) bg-success text-white @endif text-success " data-bs-toggle="modal" data-bs-target="#staticBackdropView-{{$ticket->id}}"> <i class="fa fa-eye"></i></a></figure></li>
-                                                        @if($ticket->voyage_status == 0) 
-                                                            @if($ticket->amount == $ticket->ville->amount)
-                                                                @if($ticket->voyage_status == 0)
-                                                                    <li class="li_fomat_mobile"><figure><a href="#" title="Renouvellement date" class="p-1 text-info" data-bs-toggle="modal" data-bs-target="#staticBackdropDate-{{$ticket->id}}"> <i class="fa fa-calendar-alt"></i></a></figure></li>
-                                                                    <li class="li_fomat_mobile"><figure><a href="#" title="Transferer ticket" class="p-1 text-primary" data-bs-toggle="modal" data-bs-target="#staticBackdropRevendre-{{$ticket->id}}"> <i class="fa fa-reply-all"></i></a></figure></li>
-                                                                    <li class="li_fomat_mobile"><figure><a href="#" title="Anuller ticket" class="p-1 text-warning" data-bs-toggle="modal" data-bs-target="#staticBackdropArchiver-{{$ticket->id}}"> <i class="fa fa-trash-restore-alt "></i></a></figure></li>
-                                                                @elseif($ticket->voyage_status == 1)
-                                                                    <li class="li_fomat_mobile"><figure><a href="#" class="p-1 text-primary" data-bs-toggle="modal" data-bs-target="#staticBackdropDate-{{$ticket->id}}"> <i class="fa fa-edit"></i></a></figure></li>
-                                                                @endif
-                                                            @else
-                                                                <li class="li_fomat_mobile"><figure><a href="#" title="Modifier ticket"  class="p-1 text-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$ticket->id}}"> <i class="fa fa-edit"></i></a></figure></li>
-                                                                <li class="li_fomat_mobile"><figure><a href="#" title="Payer ticket" class="p-1 text-success" data-bs-toggle="modal" data-bs-target="#staticBackdropPayer-{{$ticket->id}}"> <i class="fa fa-ticket-alt"></i></a></figure></li>
-                                                                <li class="li_fomat_mobile"><figure><a href="#" title="Supprimer ticket" class="p-1 text-danger" data-bs-toggle="modal" data-bs-target="#staticBackdropSupprimer-{{$ticket->id}}"> <i class="fa fa-trash"> </i> </a></figure></li>
-                                                            @endif
-                                                        @elseif($ticket->voyage_status == 1)
-                                                            <span class="text-white">Voyage effectuer avec success</span>
-                                                        @endif
-
-                                                    </ul>
-                                                </div>
-                                            --}}
                                             @if($ticket->status == 0)
                                                 <div class="screen-bus__rating">
                                                     <ul class="screen-bus__rating-row ul_fomat_mobile">
@@ -345,6 +331,7 @@
                                                     </ul>
                                                 </div>
                                             @endif
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -777,80 +764,33 @@
                                                 <div class="" id="v-pills-payment" role="tabpanel"
                                                     aria-labelledby="v-pills-payment-tab">
                                                     <div>
-                                                        <h4 class="card-title">Les methodes de paiement disponibles</h4>
+                                                        <h4 class="card-title text-center">Payer votre ticket avec !</h4>
                                                         <div class="mt-5 mb-2">
 
-                                                        <div class="row">
-                                                            <div class="col-xl-6 col-sm-4">
-                                                                <label class="card-radio-label mb-3">
-                                                                    <div class="card-radio">
-                                                                        <a href="#">
-                                                                            <img src="{{asset('user/assets/images/wave.png')}}" alt="" class="rounded avatar-sm">
-                                                                            <span class="text-muted">Wave Sénégal</span>
-                                                                        </a>
-                                                                    </div>
-                                                                </label>
-                                                            </div>
-
-                                                            <div class="col-xl-6 col-sm-4">
-                                                                <label class="card-radio-label mb-3">
-                                                                    <div class="card-radio">
-                                                                        <a href="#">
-                                                                            <img src="{{asset('user/assets/images/orange-money.png')}}" alt="" class="rounded avatar-sm">
-                                                                        <span class="text-muted">Orange Money</span>
-                                                                        </a>
-                                                                    </div>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                        
-                                                        <div class="mb-2">
-                                                            <label>Payment method :</label>
                                                             <div class="row">
                                                                 <div class="col-xl-6 col-sm-4">
                                                                     <label class="card-radio-label mb-3">
-                                                                        <input type="radio" name="pay-method" id="pay-methodoption1" class="card-radio-input">
-            
                                                                         <div class="card-radio">
-                                                                            <i class="fab fa-cc-mastercard font-size-24 text-primary align-middle me-2"></i>
-            
-                                                                            <span>Credit / Debit Card</span>
+                                                                            <a href="{{ route('customer.ticket.show',$ticket->id) }}">
+                                                                                <img src="{{asset('user/assets/images/wave.png')}}" alt="" class="rounded avatar-sm">
+                                                                                <span class="text-muted">Wave Sénégal</span>
+                                                                            </a>
                                                                         </div>
                                                                     </label>
                                                                 </div>
-            
-            
+
                                                                 <div class="col-xl-6 col-sm-4">
                                                                     <label class="card-radio-label mb-3">
-                                                                        <input type="radio" name="pay-method" id="pay-methodoption3" class="card-radio-input" checked>
-            
                                                                         <div class="card-radio">
-                                                                            <i class="fab fa-cc-paypal font-size-24 text-primary align-middle me-2"></i>
-            
-                                                                            <span>Paypal</span>
+                                                                            <a href="{{ route('customer.ticket.edit',$ticket->id) }}">
+                                                                                <img src="{{asset('user/assets/images/orange-money.png')}}" alt="" class="rounded avatar-sm">
+                                                                            <span class="text-muted">Orange Money</span>
+                                                                            </a>
                                                                         </div>
                                                                     </label>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                            
-                                                        
-                                                    </div>
-                                                        <form action="{{ route('customer.client.paiment') }}" method="GET">
-                                                            @csrf
-                                                            <input type="hidden" name="siege" value="{{ $ticket->siege->id }}">
-                                                            <input type="hidden" name="ville" value="{{ $ticket->ville->amount }}">
-                                                            <input type="hidden" name="registered_at" value="{{ $ticket->registered_at }}">
-                                                        
-                                                            <div class="row mt-4">
-                                                                <div class="col-sm-12">
-                                                                    <div class="text-center">
-                                                                        <button type="submit" class="btn btn-success">
-                                                                            <i class="mdi mdi-truck-fast me-1"></i> Finaliser le paiement de votre ticket </button>
-                                                                    </div>
-                                                                </div> <!-- end col -->
-                                                            </div>
-                                                        </form>
                                                     </div>
                                                     
                                                 </div>

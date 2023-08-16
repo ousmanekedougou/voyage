@@ -22,7 +22,7 @@ class CreateBusesTable extends Migration
             $table->integer('itineraire_id');
             $table->integer('siege_id');
             $table->integer('user_id')->nullable();
-            $table->integer('inscrit')->nullable();
+            $table->integer('inscrit')->default(0);
             $table->integer('number')->nullable();
             $table->integer('montant')->nullable();
             $table->integer('valider')->nullable();

@@ -396,7 +396,7 @@
                                                 <h4 class="card-title">Payment information</h4>
                                                 <p class="card-title-desc">Fill all information below</p>
 
-                                                <form action="{{ route('customer.client.paiment') }}" method="GET">
+                                                <form action="{{ route('agent.rembourser') }}" method="POST">
                                                     @csrf
                                                     <input type="hidden" name="siege" value="{{ $ticket->siege->id }}">
                                                     <input type="hidden" name="ville" value="{{ $ticket->ville->amount }}">

@@ -73,7 +73,7 @@ class ClientController extends Controller
             if ($clients->count() < $buse->place) {
                 if (in_array($date_input['wday'] , $userialize_buse)) {
 
-                    if ($request->date == Carbon::today() || $request->date > Carbon::today()) {
+                    if ($request->date >= Carbon::today()) {
 
                         $email = '';
                         if ($request->email != null) {
@@ -99,7 +99,7 @@ class ClientController extends Controller
                         $add_client->save();
 
                         /* 
-                            Envoi automatique du lien de paiment ou orange money wave par meil ou sms
+                            Envoi automatique du lien de paiment par Orange Money ou par Wave via mail ou sms
                         */
 
                         Toastr::success('Votre inscription a bien ete enregistre sur '.$add_client->siege->agence->name, 'Inscription', ["positionClass" => "toast-top-right"]);
@@ -195,8 +195,8 @@ class ClientController extends Controller
         $clients = Client::where('bus_id',$getBuse->id)
             ->where('siege_id',Auth::guard('agent')->user()->siege_id)
             ->where('registered_at',Carbon::today()->format('Y-m-d'))
-            ->where('status',0)
-            ->where('amount','!=',null)
+            // ->where('status',0)
+            // ->where('amount','!=',null)
             ->orderBy('id','ASC')
             ->paginate(10);
         return view('agent.client.jour',compact('clients','getBuse'));
@@ -375,6 +375,15 @@ class ClientController extends Controller
     //         ->paginate(10);
     //     return view('agent.client.absent',compact('clients'));
     // }
+
+
+    public function rembourser(){
+        return 'true';
+    }
+
+
+
+
 
     /**
      * Remove the specified resource from storage.

@@ -66,7 +66,13 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title text-center"> La liste de tout les client du buse {{ $getBuse->matricule }} </h4>
-                            <table id="datatable-buttons"
+                            <p class="card-title-desc">
+                                <div class="button-items">
+                                    <button type="button" class="btn btn-primary waves-effect btn-label waves-light"><i class="fa fa-file-excel label-icon"></i> EXCEL <i class="mdi mdi-download font-size-16"></i></button>
+                                    <button type="button" class="btn btn-success waves-effect btn-label waves-light"><i class="fa fa-file-pdf label-icon"></i> PDF <i class="mdi mdi-download font-size-16"></i></button>
+                                </div>
+                            </p>
+                            <table id="datatable"
                                 class="table table-bordered dt-responsive nowrap w-100">
                                 <thead>
                                     <tr>
@@ -78,6 +84,7 @@
                                         <th>Prix</th>
                                         <th>Status ticket</th>
                                         <th>Detail</th>
+                                        <th>Presence</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -114,13 +121,30 @@
                                             <td>
                                             @if($client->customer_id != null)
                                                 @if($client->amount == $client->ville->amount)
-                                                    <span class="badge badge-pill badge-soft-success font-size-12"><i class="fab fa-cc-mastercard me-1"></i> Wave</span>
+                                                    @if($client->payment_methode == 1)
+                                                        <span class="badge badge-pill badge-soft-success font-size-12"><i class="fab fa-cc-mastercard me-1"></i> Wave</span>
+                                                    @elseif($client->payment_methode == 2)
+                                                        <span class="badge badge-pill badge-soft-success font-size-12"><i class="fab fa-cc-mastercard me-1"></i> Orange Money</span>
+                                                    @else
+                                                        <span class="badge badge-pill badge-soft-success font-size-12"><i class="fab fa-cc-mastercard me-1"></i> Free Money</span>
+                                                    @endif
                                                 @elseif($client->amount != $client->ville->amount)
                                                     <a class="badge badge-pill badge-soft-warning font-size-12">Non payer <i class="fab fa-cc-mastercard me-1"></i></a>
                                                 @endif
                                             @elseif($client->customer_id == null)
-                                                    {{-- <span class="badge badge-pill badge-soft-primary font-size-12"></span>--}}
-                                                    <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#staticBackdropSenSmsClient-{{ $client->id }}" class="text-success">Envoye lien<i class="mdi mdi-pencil font-size-18"></i></a>
+                                                @if($client->amount != $client->ville->amount)
+                                                    <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#staticBackdropSenSmsClient-{{ $client->id }}">
+                                                        <span class="badge badge-pill badge-soft-warning font-size-12">Envoi sms <i class="mdi mdi-pencil font-size-18"></i></span>
+                                                    </a>
+                                                @elseif($client->amount == $client->ville->amount)
+                                                    @if($client->payment_methode == 1)
+                                                        <span class="badge badge-pill badge-soft-success font-size-12"><i class="fab fa-cc-mastercard me-1"></i> Wave</span>
+                                                    @elseif($client->payment_methode == 2)
+                                                        <span class="badge badge-pill badge-soft-success font-size-12"><i class="fab fa-cc-mastercard me-1"></i> Orange Money</span>
+                                                    @else
+                                                        <span class="badge badge-pill badge-soft-success font-size-12"><i class="fab fa-cc-mastercard me-1"></i> Free Money</span>
+                                                    @endif
+                                                @endif
                                             @endif
                                             </td>
                                             <td>
@@ -130,14 +154,8 @@
                                                 </button>
                                             </td>
                                             <td>
-                                                <div class="d-flex gap-3">
-                                                    @if($client->customer_id == null)
-                                                        <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#staticBackdropUpdateClient-{{ $client->id }}" class="text-success"><i class="mdi mdi-pencil font-size-18"></i></a>
-                                                        <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#staticBackdropDeleteClient-{{ $client->id }}" class="text-danger"><i class="mdi mdi-delete font-size-18"></i></a>
-                                                    @else
-                                                        <span class="badge badge-pill badge-soft-success font-size-12 mt-1"><i class="bx bx-bell bx-tada me-1"></i> abonné</span>
-                                                    @endif
-                                                    {{--
+                                                @if($client->status == 0)
+                                                    <div class="d-flex gap-3">
                                                         <input 
                                                         onclick="event.preventDefault();
                                                         document.getElementById('updatePresence-{{ $client->id }}').submit();" 
@@ -145,13 +163,29 @@
                                                         {{ $client->voyage_status ? 'checked' : '' }} />
                                                         <label for="switch-{{ $client->id }}" data-on-label="Oui" data-off-label="Non"></label>
                                                         <form id="updatePresence-{{ $client->id }}" action="{{ route('agent.client.presence') }}" method="POST">
-                                                            @csrf
+                                                            @csrf  
                                                             @method('PUT')
                                                             <input type="hidden" name="client_id" value="{{ $client->id }}">
                                                             <input type="hidden" name="voyage_status" value="{{ $client->voyage_status }}">
                                                             <input type="hidden" name="amount" value="{{ $client->amount }}">
                                                         </form>
-                                                    --}}
+                                                    </div>
+                                                @elseif($client->status == 1)
+                                                    <span class="badge badge-pill badge-soft-warning font-size-12 mt-1"><i class="dripicons-cross"></i> Annuler</span>
+                                                @endif
+                                                </td>
+                                            <td>
+                                                <div class="d-flex gap-3">
+                                                    @if($client->customer_id == null)
+                                                        @if($client->status == 1)
+                                                            <span class="badge badge-pill badge-soft-warning font-size-12 mt-1"><i class="dripicons-cross"></i> Annuler</span>
+                                                        @else
+                                                            <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#staticBackdropUpdateClient-{{ $client->id }}" class="text-success"><i class="mdi mdi-pencil font-size-18"></i></a>
+                                                            <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#staticBackdropDeleteClient-{{ $client->id }}" class="text-danger"><i class="mdi mdi-delete font-size-18"></i></a>
+                                                        @endif
+                                                    @else
+                                                        <span class="badge badge-pill badge-soft-success font-size-12 mt-1"><i class="bx bx-bell bx-tada me-1"></i> abonné</span>
+                                                    @endif
                                                 </div>
                                             </td>
                                         </tr>

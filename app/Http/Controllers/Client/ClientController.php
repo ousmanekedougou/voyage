@@ -83,7 +83,7 @@ class ClientController extends Controller
             if ($clients->count() < $buse->place) {
                 if (in_array($date_input['wday'] , $userialize_buse)) {
 
-                    if ($request->date == Carbon::today() || $request->date > Carbon::today()) {
+                    if ($request->date >= Carbon::today()) {
 
                         $buse->update(['inscrit' => $buse->inscrit + 1]);
                         $add_client = new Client();
@@ -146,44 +146,6 @@ class ClientController extends Controller
     {
     }
 
-    public function paiment(){
-        // $order = Str::random(4);
-        // $om = new OrangeMoney(500 , $order);
-        // $orangePayment = $om->getPaymentUrl('return_url_here');
-        // return redirect($orangePayment->payment_url);
-        $siege = request()->siege;
-        // $ville = request()->ville;
-        $registered_at = request()->registered_at;
-        $user = Client::where('customer_id',Auth::guard('client')->user()->id)
-        ->where('siege_id',$siege)
-        ->where('registered_at',$registered_at)
-        ->first();
-        if ($user) {
-            if ($user->registered_at >= carbon_today()) {
-                $user->update([
-                    'amount' =>  $user->ville->amount,
-                    'payment_at' => new DateTime()
-                ]);
-                $montant_bus = Bus::where('id',$user->bus_id)->where('plein',0)->first();
-                $montan = $montant_bus->montant + $user->ville->amount;
-                $montant_bus->montant = $montan;
-                $montant_bus->valider = $montant_bus->valider + 1;
-                $montant_bus->save();
-                Toastr::success('Votre ticket a ete paye avec success', 'Paiement Ticket', ["positionClass" => "toast-top-right"]);
-                return back();
-            }else{
-                Toastr::error('Cette date de voyage est passer', 'Paiement Ticker', ["positionClass" => "toast-top-right"]);
-                return back();
-            }
-
-        }else {
-            Toastr::error('Salut cher client il semble que ce ticker a deja ete payer', 'Paiement Ticker', ["positionClass" => "toast-top-right"]);
-            return back();
-        }
-
-       
-        
-    }
 
     /**
      * Update the specified resource in storage.

@@ -5,7 +5,8 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-        "php": "^8.0.2",
+        "php": "^8.0.5",
+        "barryvdh/laravel-dompdf": "^2.0",
         "brian2694/laravel-toastr": "^5.56",
         "fakerphp/faker": "^1.9.1",
         "fideloper/proxy": "^4.4",
@@ -14,6 +15,7 @@
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.2",
+        "maatwebsite/excel": "^1.1",
         "mercuryseries/flashy": "^1.0",
         "torann/geoip": "^3.0"
     },

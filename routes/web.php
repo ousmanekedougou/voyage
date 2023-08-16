@@ -110,7 +110,8 @@ Route::prefix('/agent')->name('agent.')->group(function()
     Route::get('/client/ticker/{id}', [App\Http\Controllers\Agent\ClientController::class, 'ticker'])->name('ticker');
     Route::get('/client/jour/{id}', [App\Http\Controllers\Agent\ClientController::class, 'jour'])->name('client.jour');
     Route::put('/presence', [App\Http\Controllers\Agent\ClientController::class,'presence'])->name('client.presence'); 
-    Route::get('/renoncer', [App\Http\Controllers\Agent\ClientController::class, 'annuler'])->name('renoncer');
+    Route::get('/annuler', [App\Http\Controllers\Agent\ClientController::class, 'annuler'])->name('renoncer');
+    Route::post('/remboursement', [App\Http\Controllers\Agent\ClientController::class, 'rembourser'])->name('rembourser');
     // Route::get('/absent', [App\Http\Controllers\Agent\ClientController::class, 'absent'])->name('absent');
     Route::get('/send-message', [App\Http\Controllers\Agent\ClientController::class, 'send_sms'])->name('send_sms');
     
@@ -166,11 +167,14 @@ Route::prefix('/customer')->name('customer.')->group(function()
     Route::post('/client/sendmail/{id}', [App\Http\Controllers\Client\ClientController::class, 'edit'])->name('client.edit');
     Route::get('/client/show', [App\Http\Controllers\Client\ClientController::class, 'show'])->name('client.show');
     Route::put('/client/update/{id}', [App\Http\Controllers\Client\ClientController::class, 'update'])->name('client.update');
-    Route::get('client/paiment', [App\Http\Controllers\Client\ClientController::class, 'paiment'])->name('client.paiment');
+    // Route::get('client/paiment', [App\Http\Controllers\Client\ClientController::class, 'paiment'])->name('client.paiment');
     Route::put('/client/annuler/{id}', [App\Http\Controllers\Client\ClientController::class, 'annuler'])->name('client.annuler');
     Route::put('/client/renew/{id}', [App\Http\Controllers\Client\ClientController::class, 'renew'])->name('client.renew');
     Route::put('/client/revente/{id}', [App\Http\Controllers\Client\ClientController::class, 'revente'])->name('client.revente');
     Route::delete('/client/destroy/{id}', [App\Http\Controllers\Client\ClientController::class, 'destroy'])->name('client.destroy');
+
+    // Controller de payment des ticket
+    Route::resource('/ticket', App\Http\Controllers\Client\PaymentController::class);
 
     Route::resource('/bagage', App\Http\Controllers\Client\BagageController::class); 
     Route::resource('/colis', App\Http\Controllers\Client\ColiController::class);

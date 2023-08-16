@@ -104,6 +104,7 @@
     .screen-bus__hrs span {
         font-size: 0.6rem;
         color: #4d4848;
+        font-weight: 600;
     }
     .screen-bus__seat-wrap {
         text-align: right;
@@ -173,4 +174,13 @@
         border-radius: 100px;
         background-color: #ffffff7d;
         cursor: pointer;
+    }
+    .screen-bus__start{
+        margin-left: 10px;
+    }
+    .screen-bus__payment{
+        padding-top: 5px;
+    }
+    .screen-bus__price{
+        padding-top: 3px;
     }

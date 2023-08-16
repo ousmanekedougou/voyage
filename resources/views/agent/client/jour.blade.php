@@ -66,8 +66,14 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title text-center"> La liste des client du jour </h4>
-                            <table id="datatable-buttons"
+                            <h4 class="card-title text-center"> La liste des clients du jour </h4>
+                            <p class="card-title-desc">
+                                <div class="button-items">
+                                    <button type="button" class="btn btn-primary waves-effect btn-label waves-light"><i class="fa fa-file-excel label-icon"></i> EXCEL <i class="mdi mdi-download font-size-16"></i></button>
+                                    <button type="button" class="btn btn-success waves-effect btn-label waves-light"><i class="fa fa-file-pdf label-icon"></i> PDF <i class="mdi mdi-download font-size-16"></i></button>
+                                </div>
+                            </p>
+                            <table id="datatable"
                                 class="table table-bordered dt-responsive nowrap w-100">
                                 <thead>
                                     <tr>
