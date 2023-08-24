@@ -149,7 +149,7 @@
                                                                     Tarif
                                                                 </div>
                                                                 <div class="content-block2" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">
-                                                                    {{$client_ticker->ville->amount}} f
+                                                                    {{$client_ticker->ville->getAmount()}}
                                                                 </div>
                                                             </div>
 
@@ -169,12 +169,6 @@
                                                             <div style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                                                 <div class="" style="text-align: center;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0;" valign="top">
                                                                     © <script>document.write(new Date().getFullYear())</script> <span style="font-weight: 900;">TouCKi</span>
-                                                                </div>
-                                                            </div>
-
-                                                            <div style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
-                                                                <div class="" style="text-align: center;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0;" valign="top">
-                                                                    <button  class="btn btn-success btn-xs" style="margin-left: 70px;margin-right:20px;" id="print_Button" onclick="printDiv()"><i class="fa fa-print"> Imprimer le ticker</i></button> 
                                                                 </div>
                                                             </div>
                                                             
@@ -198,17 +192,6 @@
 
 
     </div>
-
-    <script type="text/javascript">
-        function printDiv(){
-            var printContents = document.getElementById('print').innerHTML;
-            var originalContents = document.body.innerHTML;
-            document.body.innerHTML = printContents;
-            window.print();
-            document.body.innerHTML = originalContents;
-            location.reload();
-        }
-    </script>
 
 </body>
 

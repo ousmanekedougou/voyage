@@ -175,7 +175,7 @@ return [
         Brian2694\Toastr\ToastrServiceProvider::class,
         Torann\GeoIP\GeoIPServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-        Maatwebsite\Excel\ExcelServiceProvider::class,
+        // Maatwebsite\Excel\ExcelServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -243,8 +243,7 @@ return [
         'Toastr'  => Brian2694\Toastr\Facades\Toastr::class,
         'GeoIP' => \Torann\GeoIP\Facades\GeoIP::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
-        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-
+        // 'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];

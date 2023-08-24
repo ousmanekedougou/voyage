@@ -16,7 +16,7 @@ use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Storage;
-
+use PDF;
 class ClientController extends Controller
 {
     /**
@@ -195,8 +195,8 @@ class ClientController extends Controller
         $clients = Client::where('bus_id',$getBuse->id)
             ->where('siege_id',Auth::guard('agent')->user()->siege_id)
             ->where('registered_at',Carbon::today()->format('Y-m-d'))
-            // ->where('status',0)
-            // ->where('amount','!=',null)
+            ->where('status',0)
+            ->where('amount','!=',null)
             ->orderBy('id','ASC')
             ->paginate(10);
         return view('agent.client.jour',compact('clients','getBuse'));
@@ -350,10 +350,7 @@ class ClientController extends Controller
             }
     }
 
-    public function ticker(Request $request , $id){
-        $client_ticker = Client::where('id',$id)->first();
-        return view('admin.print.index',compact('client_ticker')); 
-    }
+    
 
     public function annuler(){
         $clients = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
@@ -375,6 +372,31 @@ class ClientController extends Controller
     //         ->paginate(10);
     //     return view('agent.client.absent',compact('clients'));
     // }
+
+    public function createPDF($id){
+
+
+        $getBuse = Bus::where('id',$id)->where('siege_id',Auth::guard('agent')->user()->siege_id)->first();
+
+        $clients = Client::where('bus_id',$getBuse->id)
+            ->where('siege_id',Auth::guard('agent')->user()->siege_id)
+            // ->where('registered_at','>=',Carbon::today()->format('Y-m-d'))
+            ->where('status',0)
+            ->where('amount','!=',null)
+            ->orderBy('id','ASC')->get();
+        if ($clients->count() > 0) {
+            $pdf = PDF::loadView('agent.client.client_pdf', compact('clients', 'getBuse'))
+            ->setPaper('a4', 'landscape')
+            ->setWarnings(false);
+            return $pdf->stream();
+            // return $pdf->download('client.pdf');
+        }else{
+            Toastr::warning('Vous n\'aviez pas de clients', 'Pas de clients', ["positionClass" => "toast-top-right"]);
+            return back();
+        }
+        
+
+    }
 
 
     public function rembourser(){

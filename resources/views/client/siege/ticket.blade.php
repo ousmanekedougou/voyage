@@ -178,7 +178,7 @@
                                     @elseif($ticket->status == 2)
                                         <p class="text-danger text-center mt-3" style="width: 100%; font-weight:700;">Votre ticket a ete annuler mais ne sera pas rembourser, car vous avez depasser le delais d'attente d'annulation</p>
                                     @else
-                                        <p class="text-success text-center mt-3" style="width: 100%; font-weight:700;">Votre ticket a ete payer  <a href="#" class="badge bg-success p-1"> <i class="fa fa-download"></i> Ticket</a> </p>
+                                        <p class="text-success text-center mt-3" style="width: 100%; font-weight:700;">Votre ticket a ete payer  <a href="{{ route('customer.ticker_pdf',$ticket->id) }}" class="badge bg-success p-1"> <i class="fa fa-download"></i> Ticket</a> </p>
                                     @endif
                                 @endif
                             </div>
@@ -316,7 +316,7 @@
                                                 <div class="screen-bus__price">
                                                     <span class="badge p-1 @if( $ticket->getAmount() == $ticket->ville->getAmount()) bg-success @else bg-warning @endif ">
                                                         @if($ticket->getAmount() == $ticket->ville->getAmount())
-                                                            Ticket payé : {{$ticket->getAmount()}}
+                                                        <a href="{{ route('customer.ticker_pdf',$ticket->id) }}" class="badge bg-success p-1"> Ticket payé : {{$ticket->getAmount()}}  <i class="fa fa-download"></i></a>
                                                         @else
                                                             {{$ticket->getAmount()}} : Ticket non payé
                                                         @endif
@@ -538,9 +538,9 @@
                             <div class="row justify-content-center">
                                 <div class="col-xl-10">
                                     <h4 class="text-warning text-uppercase">Attention !</h4>
-                                    <p class="text-muted font-size-14 mb-4 text-left">Etes vous sure de bien vouloire anuller votre ticket de {{ $ticket->ville->name }}</p>
+                                    <p class="text-warning font-size-14 mb-4 text-left">Etes vous sure de bien vouloire anuller votre ticket de {{ $ticket->ville->name }}, car il ne sera plus utilisable apres l'annulation.</p>
                                     @if($ticket->siege->agence->method_ticket == 0)
-                                        <p class="text-success font-size-14 mb-4 text-left">NB : Votre ticket sera rembourser apres votre annulation, et meme si vous avez reter le bus</p>
+                                        <p class="text-success font-size-14 mb-4 text-left">NB : Ce ticket est remborsable apres votre annulation</p>
                                     @else
                                         <p class="text-warning font-size-14 mb-4 text-left">NB : Votre ticket sera rembourser si toute fois vous l'avez annuler avant le depart du bus</p>
                                     @endif

@@ -75,7 +75,6 @@ class ColiController extends Controller
     public function edit($id)
     {
         $getColi = Colie::where('siege_id',$id)->where('customer_id',Auth::guard('client')->user()->id)->first();
-        dd($getColi);
         if ($getColi) {
             $colis = ColiClient::where('siege_id',$id)
             ->where('customer_id',Auth::guard('client')->user()->id)

@@ -15,7 +15,7 @@ use Brian2694\Toastr\Facades\Toastr;
 use DateTime;
 use Illuminate\Support\Facades\Auth;
 use LengthException;
-
+use PDF;
 class ClientController extends Controller
 {
 
@@ -387,6 +387,24 @@ class ClientController extends Controller
             Toastr::error('C\'est pas votre ticket', 'Error de ticket', ["positionClass" => "toast-top-right"]);
             return back();
         }
+    }
+
+    public function download(Request $request , $id){
+        $client_ticker = Client::where('id',$id)
+            ->where('amount','!=',null)
+            ->where('status',0)
+            // ->where('registered_at','>=',Carbon::today()->format('Y-m-d'))
+            ->first();
+            if ($client_ticker) {
+                $pdf = PDF::loadView('client.print.index', compact('client_ticker'));
+                // ->setPaper('a4', 'landscape')
+                // ->setWarnings(false);
+                return $pdf->stream();
+                // return $pdf->download('ticket.pdf');
+            }else{
+                Toastr::warning('Vous n\'aviez pas de clients', 'Pas de clients', ["positionClass" => "toast-top-right"]);
+                return back();
+            }
     }
 
     /**

@@ -107,8 +107,8 @@ Route::prefix('/agent')->name('agent.')->group(function()
     Route::get('/confirm/{id}/{token}', [App\Http\Controllers\Agent\HomeController::class, 'confirm']);
 
     Route::resource('/client', App\Http\Controllers\Agent\ClientController::class);
-    Route::get('/client/ticker/{id}', [App\Http\Controllers\Agent\ClientController::class, 'ticker'])->name('ticker');
     Route::get('/client/jour/{id}', [App\Http\Controllers\Agent\ClientController::class, 'jour'])->name('client.jour');
+    Route::get('/createPDF/{id}', [App\Http\Controllers\Agent\ClientController::class, 'createPDF'])->name('client.pdf');
     Route::put('/presence', [App\Http\Controllers\Agent\ClientController::class,'presence'])->name('client.presence'); 
     Route::get('/annuler', [App\Http\Controllers\Agent\ClientController::class, 'annuler'])->name('renoncer');
     Route::post('/remboursement', [App\Http\Controllers\Agent\ClientController::class, 'rembourser'])->name('rembourser');
@@ -172,7 +172,7 @@ Route::prefix('/customer')->name('customer.')->group(function()
     Route::put('/client/renew/{id}', [App\Http\Controllers\Client\ClientController::class, 'renew'])->name('client.renew');
     Route::put('/client/revente/{id}', [App\Http\Controllers\Client\ClientController::class, 'revente'])->name('client.revente');
     Route::delete('/client/destroy/{id}', [App\Http\Controllers\Client\ClientController::class, 'destroy'])->name('client.destroy');
-
+    Route::get('/client/ticker/{id}', [App\Http\Controllers\Client\ClientController::class, 'download'])->name('ticker_pdf');
     // Controller de payment des ticket
     Route::resource('/ticket', App\Http\Controllers\Client\PaymentController::class);
 
