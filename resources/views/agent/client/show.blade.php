@@ -69,7 +69,7 @@
                             <p class="card-title-desc">
                                 <div class="button-items">
                                     <a target="_blank" href="" class="btn btn-primary waves-effect btn-label waves-light"><i class="fa fa-file-excel label-icon"></i> EXCEL <i class="mdi mdi-download font-size-16"></i></a>
-                                    <a target="_blank" href="{{ route('agent.client.pdf',$getBuse->id) }}" class="btn btn-success waves-effect btn-label waves-light"><i class="fa fa-file-pdf label-icon"></i> PDF <i class="mdi mdi-download font-size-16"></i></a>
+                                    <a target="_blank" href="{{ route('agent.client.pdf',$getBuse->id) }}" class="btn btn-success waves-effect btn-label waves-light"><i class="fa fa-file-pdf label-icon"></i> Télécharger le PDF <i class="mdi mdi-download font-size-16"></i></a>
                                 </div>
                             </p>
                             <table id="datatable"

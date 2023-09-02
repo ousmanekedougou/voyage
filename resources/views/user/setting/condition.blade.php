@@ -28,7 +28,7 @@
     p{
         font-size: 14px;
         margin-bottom: 5px;
-        text-align: left;
+        text-align: justify;
     }
 </style>
 @section('main-content')

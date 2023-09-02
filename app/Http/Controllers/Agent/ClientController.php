@@ -388,8 +388,9 @@ class ClientController extends Controller
             $pdf = PDF::loadView('agent.client.client_pdf', compact('clients', 'getBuse'))
             ->setPaper('a4', 'landscape')
             ->setWarnings(false);
-            return $pdf->stream();
+            // return $pdf->stream();
             // return $pdf->download('client.pdf');
+            return view('agent.client.client_pdf', compact('clients', 'getBuse'));
         }else{
             Toastr::warning('Vous n\'aviez pas de clients', 'Pas de clients', ["positionClass" => "toast-top-right"]);
             return back();
