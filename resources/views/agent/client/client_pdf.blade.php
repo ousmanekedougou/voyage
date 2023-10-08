@@ -131,6 +131,24 @@
         .siege{
             text-align:right;
         }
+        .wave-png{
+            width:20px;
+            height:auto;
+            overflow:hidden;
+            margin-bottom:-4px;
+        }
+        .om-png{
+            width:20px;
+            height:auto;
+            overflow:hidden;
+            margin-bottom:-4px;
+        }
+        .free-png{
+            width:50px;
+            height:auto;
+            overflow:hidden;
+            /* margin-bottom:-4px; */
+        }
 
     </style>
 </head>
@@ -173,7 +191,7 @@
             <div class="row">
                 <h3 class="heading-title">Liste des clients</h3>
                 <div class="button">
-                    <button  class="btn" id="print_Button" onclick="printDiv()"><i class="fa fa-print">Télécharger le reçu</i></button> 
+                    <button  class="btn" id="print_Button" onclick="printDiv()"><i class="fa fa-print"> Télécharger le reçu </i> <i class="fa-solid fa-download"></i></button> 
                 </div>
             </div>
             <br>
@@ -215,11 +233,11 @@
                             <td>
                                 @if($client->amount == $client->ville->amount)
                                     @if($client->payment_methode == 1)
-                                        <span class="badge badge-pill badge-soft-success font-size-12"><i class="fab fa-cc-mastercard me-1"></i> Wave</span>
+                                        <span class="badge badge-pill badge-soft-success font-size-12"> <img class="wave-png" src="{{ asset('admin/assets/images/wave.png') }}" alt="" sizes="" srcset=""> Wave</span>
                                     @elseif($client->payment_methode == 2)
-                                        <span class="badge badge-pill badge-soft-success font-size-12"><i class="fab fa-cc-mastercard me-1"></i> Orange Money</span>
+                                        <span class="badge badge-pill badge-soft-success font-size-12"> <img class="om-png" src="{{ asset('admin/assets/images/om.png') }}" alt="" sizes="" srcset=""> Orange Money</span>
                                     @else
-                                        <span class="badge badge-pill badge-soft-success font-size-12"><i class="fab fa-cc-mastercard me-1"></i> Free Money</span>
+                                        <span class="badge badge-pill badge-soft-success font-size-12"><img class="free-png" src="{{ asset('admin/assets/images/free.png') }}" alt="" sizes="" srcset=""> Free Money</span>
                                     @endif
                                 @else
                                     <a class="badge badge-pill badge-soft-warning font-size-12">Non payer <i class="fab fa-cc-mastercard me-1"></i></a>

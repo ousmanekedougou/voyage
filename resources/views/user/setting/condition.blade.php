@@ -274,7 +274,7 @@
                 <div class="col-lg-8 offset-lg-2">
                     <h2 class="text-bold h2-title">I.À propos de TouCki</h2>
                     <p>
-                        L'application TouCki et Omio font partie de TouCki Corp. (ci-après "TouCki", "Omio", "nous"). Pour plus d'informations sur TouCki, veuillez consulter notre Mentions légales.
+                        La plateforme TouCki.
                     </p>
                     <p>
                         Sous les bannières du web, TouCki exploite des plateformes Internet dans différentes langues ainsi que des applications mobiles.
