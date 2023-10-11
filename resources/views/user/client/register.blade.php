@@ -21,16 +21,14 @@
         <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
             <div class="row align-items-center row_pricipal" style="margin-top: -70px;" >
-                <div class="col-lg-2"></div>
-                <div class="col-lg-8 card_show text-center">
+                <div class="col-lg-12 card_show ">
                     <div class="text-white-50">
-                        <h1 class="text-white font-weight-semibold mb-3 hero-title ">Creer votre compte client</h1>
+                        <h1 class="text-white font-weight-semibold mb-3 hero-title ">Créer votre compte client</h1>
                         <p class="font-size-20 text-white" >
                             Toutes les options de voyage sur une seule plateforme
                         </p>
                     </div>
                 </div>
-                <div class="col-lg-2"></div>
             </div>
             <!-- end row -->
         </div>
@@ -47,7 +45,7 @@
                             <img class="setting-img" src="{{asset('user/assets/images/register.svg') }}" alt="" srcset="">
                             
                         </div>
-                        <h4 class="text-center">Creer votre compte client</h4>
+                        <h4 class="text-center">Créer votre compte client</h4>
                     </div>
                 </div>
                 <form class="custom-validation card" action="{{ route('client.store') }}" method="POST" enctype="multipart/form-data">
@@ -55,7 +53,7 @@
                     <div class="row card-body">
                         <div class="col-xl-6">
                             <div class="mb-3">
-                                <label class="form-label">Prenom et nom</label>
+                                <label class="form-label">Prénom et nom</label>
                                 <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name"
                                     placeholder="Prenom et nom" />
                                 @error('name')
@@ -66,7 +64,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label">Votre adresse email</label>
+                                <label class="form-label">Votre adrésse email</label>
                                 <div>
                                     <input type="email" id="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" parsley-type="email"
                                         placeholder="Votre adresse email" />
@@ -78,7 +76,7 @@
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Numero de telephone</label>
+                                <label class="form-label">Numero de téléphone</label>
                                 <div>
                                     <input data-parsley-type="number" type="number" id="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" autocomplete="phone"
                                         required placeholder="Numero de telephone" />
@@ -90,7 +88,7 @@
                                 </div>
                             </div>
                              <div class="mb-3">
-                                <label class="form-label">Votre carte d'identite nationale</label>
+                                <label class="form-label">Votre carte d'identité nationale</label>
                                 <div>
                                     <input data-parsley-type="number" type="number" id="cni" class="form-control @error('cni') is-invalid @enderror" name="cni" value="{{ old('cni') }}" autocomplete="cni"
                                         required placeholder="Votre carte d'idente nationale" />

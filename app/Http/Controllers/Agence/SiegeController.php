@@ -50,9 +50,10 @@ class SiegeController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'phone' => 'required|string|max:255|unique:users',
             'adress' => 'required|string',
-             'opened_at' => 'required|date_format:H:i',
+            'opened_at' => 'required|date_format:H:i',
             'closed_at' => 'required|date_format:H:i|after:opened_at'
         ]);
+        
         $add_siege = new Siege();
         $add_siege->name = $request->name;
         $add_siege->email = $request->email;

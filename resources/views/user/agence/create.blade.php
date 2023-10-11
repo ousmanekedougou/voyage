@@ -21,16 +21,14 @@
         <!-- <div class="bg-overlay bg-primary"></div> -->
         <div class="container">
             <div class="row align-items-center row_pricipal" style="margin-top: -70px;" >
-                <div class="col-lg-2"></div>
-                <div class="col-lg-8 card_show text-center">
+                <div class="col-lg-12 card_show ">
                     <div class="text-white-50">
-                        <h1 class="text-white font-weight-semibold mb-3 hero-title ">Creer votre compte agence de transport</h1>
-                        <p class="font-size-20 text-white" >
-                            Digitaliser tous les activites de votre agence de transport sur une seule plateforme
+                        <h1 class="text-white font-weight-semibold mb-3 hero-title">Créer votre compte agence de transport</h1>
+                        <p class="font-size-20 text-white">
+                            Digitaliser tous les activités de votre agence de transport sur une seule plateforme
                         </p>
                     </div>
                 </div>
-                <div class="col-lg-2"></div>
             </div>
             <!-- end row -->
         </div>
@@ -48,7 +46,7 @@
                                 <img class="setting-img" src="{{asset('user/assets/images/dowload/compteAgence.svg') }}" alt="" srcset="">
                                 
                             </div>
-                            <h4>Creer votre compte agence</h4>
+                            <h4>Créer votre compte agence</h4>
                         </div>
                     </div>
                 </div>
@@ -105,7 +103,7 @@
                             </div>
 
                              <div class="mb-3">
-                                <label class="form-label">Votre image de profile</label>
+                                <label class="form-label">Le logo de votre entreprise</label>
                                 <input type="file" class="form-control" required id="image" class="form-control @error('image') is-invalid @enderror" name="image" value="{{ old('image') }}" autocomplete="image"
                                     placeholder="Votre image" />
                                         @error('image')

@@ -38,7 +38,6 @@ class ForgotPasswordController extends Controller
             $admin_email->notify(new ForgotAgencePassword());
             Toastr::success('Un email vous a ete envoyer merci de verifier', 'Notification Message', ["positionClass" => "toast-top-right"]);
             return redirect()->route('index');
-            // return back()->with('message','Un email vous a ete envoyer merci de verifier');
         }else {
             return back()->with('error_email','Cet adresse email n\' existe');
         }
@@ -65,10 +64,9 @@ class ForgotPasswordController extends Controller
                 $update_admin_email->update(['password' => Hash::make($request->password)]);
                 return redirect()->route('agence.agence.login')->with('message','Votre mot de passe a ete modifier avec success,veuillez vous connecter a nouveu');
             }else {
-                return back()->with('error_email','Adress email ou mot de passe non valide');
+                return back()->with('Error email','Adress email ou mot de passe non valide');
             }
         }
-        return back()->with('error_email','Cette requette semble plus valide');
-
+        return back()->with('Error email','Cette requette semble plus valide');
     }
 }

@@ -222,7 +222,7 @@
         <div class="container py-2">
             <article class="postcard  blue card card-body light">
                 <a class="postcard__img_link" href="#">
-                    <img class="postcard__img" src="{{asset('admin/assets/images/bus.svg')}}" alt="Image Title" />
+                    <img class="postcard__img" src="{{asset('admin/assets/images/identity.jpg')}}" alt="Image Title" />
                 </a>
                 <div class="postcard__text t-dark">
                     <h5 class="postcard__title blue"><a href="#">Votre identité</a></h5>
@@ -240,7 +240,7 @@
             </article>
             <article class="postcard  red card card-body light">
                 <a class="postcard__img_link" href="#">
-                    <img class="postcard__img" src="{{asset('admin/assets/images/bus.svg')}}" alt="Image Title" />	
+                    <img class="postcard__img" src="{{asset('admin/assets/images/vitrine.png')}}" alt="Image Title" />	
                 </a>
                 <div class="postcard__text t-dark">
                     <h5 class="postcard__title red"><a href="#">Avoir une vitrine en ligne</a></h5>
@@ -253,7 +253,7 @@
             </article>
             <article class="postcard  green card card-body light">
                 <a class="postcard__img_link" href="#">
-                    <img class="postcard__img" src="{{asset('admin/assets/images/bus.svg')}}" alt="Image Title" />
+                    <img class="postcard__img" src="{{asset('admin/assets/images/information1.png')}}" alt="Image Title" />
                 </a>
                 <div class="postcard__text t-dark">
                     <h5 class="postcard__title green"><a href="#">Être informé sur sa clientèle</a></h5>
@@ -268,7 +268,7 @@
             </article>
             <article class="postcard  yellow card card-body light">
                 <a class="postcard__img_link" href="#">
-                    <img class="postcard__img" src="{{asset('admin/assets/images/bus.svg')}}" alt="Image Title" />
+                    <img class="postcard__img" src="{{asset('admin/assets/images/Interactivité.jpg')}}" alt="Image Title" />
                 </a>
                 <div class="postcard__text t-dark">
                     <h5 class="postcard__title yellow"><a href="#">Interactivité</a></h5>
@@ -283,7 +283,7 @@
             </article>
             <article class="postcard  green card card-body light">
                 <a class="postcard__img_link" href="#">
-                    <img class="postcard__img" src="{{asset('admin/assets/images/bus.svg')}}" alt="Image Title" />
+                    <img class="postcard__img" src="{{asset('admin/assets/images/avis.png')}}" alt="Image Title" />
                 </a>
                 <div class="postcard__text t-dark">
                     <h5 class="postcard__title green"><a href="#">Avis</a></h5>
@@ -297,7 +297,7 @@
             </article>
             <article class="postcard  yellow card card-body light">
                 <a class="postcard__img_link" href="#">
-                    <img class="postcard__img" src="{{asset('admin/assets/images/bus.svg')}}" alt="Image Title" />
+                    <img class="postcard__img" src="{{asset('admin/assets/images/contact.png')}}" alt="Image Title" />
                 </a>
                 <div class="postcard__text t-dark">
                     <h5 class="postcard__title yellow"><a href="#">Maintenir le contact avec le client</a></h5>
