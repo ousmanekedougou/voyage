@@ -88,7 +88,8 @@
 
 
 .hero-section .bg-ico-hero{
-    background-image:url(./user/assets/images/siege.jpg);background-size:cover;background-position:top;
+    /* background-image:url(./user/assets/images/siege.jpg);background-size:cover;background-position:top; */
+    background-color: #0404d7;
     height: 100px;
  }
 

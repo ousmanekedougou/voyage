@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                    <h4 class="mb-sm-0 font-size-18">Lire l'email</h4>
+                    <h4 class="mb-sm-0 font-size-18">Detail notification</h4>
                 </div>
             </div>
         </div>
@@ -76,7 +76,15 @@
                             </div>
                         </div>
 
-                        <h4 class="mt-0 font-size-16"> Objet : {{$show->subject}}</h4>
+                        <h4 class="mt-0 font-size-16"> Objet :
+                            <span class="font-size-12"> 
+                                @if($show->subject != null)
+                                    {{$show->subject}}
+                                @else
+                                    Pas d'objet
+                                @endif
+                            </span>
+                        </h4>
 
                         <p>{!! $show->msg !!}</p>
                         <a href="{{route('admin.contact.index')}}" class="btn btn-info waves-effect mt-4"><i class="mdi mdi-arrow-left"></i> Retour</a>

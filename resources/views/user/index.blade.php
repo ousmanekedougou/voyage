@@ -4,7 +4,8 @@
         background-image:url(./user/assets/images/dowload/home.jpg) !important;
         background-size:cover;background-position:top !important;
         height: 100px !important;
-        /* background:black !important; */
+        background:#586ce4 !important;
+        /* background:#0404d7 !important; */
     }
     .btn-block-for-agence-create,.btn-block-for-client-create{
         width: 100%;

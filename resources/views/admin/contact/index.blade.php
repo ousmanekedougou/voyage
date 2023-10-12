@@ -78,29 +78,31 @@
                                     </div>
                                     <ul class="message-list">
                                         @foreach($contacts as $contact)
-                                            <li class="@if($contact->status == 0) unread @endif">
-                                                <div class="col-mail col-mail-1">
-                                                    <div class="checkbox-wrapper-mail">
-                                                        <input type="checkbox" id="chk3-{{$contact->id}}">
-                                                        <label for="chk3-{{$contact->id}}" class="toggle"></label>
+                                        <li class="@if($contact->status == 0) unread @endif">
+                                            <a href="{{ route('admin.contact.show',$contact->id) }}" class="title t-bold">
+                                            <div class="col-mail col-mail-1">
+                                                        <div class="checkbox-wrapper-mail">
+                                                            <input type="checkbox" id="chk3-{{$contact->id}}">
+                                                            <label for="chk3-{{$contact->id}}" class="toggle"></label>
+                                                        </div>
+                                                        <span>{{$contact->name}}</span><span
+                                                            class="star-toggle far fa-star"></span>
                                                     </div>
-                                                    <a href="{{ route('admin.contact.show',$contact->id) }}" class="title">{{$contact->name}}</a><span
-                                                        class="star-toggle far fa-star"></span>
-                                                </div>
-                                                <div class="col-mail col-mail-2">
-                                                    <a href="#" class="subject"><span
-                                                            class="bg-success badge me-2">
-                                                                @if($contact->subject != null)
-                                                                {{$contact->subject}}
-                                                                @else
-                                                                Pas d'objet
-                                                                @endif
-                                                            </span> - 
-                                                        <span class="teaser">{{$contact->msg}}</span>
-                                                    </a>
-                                                    <div class="date"> <span style="margin-left: -30px;">{{ $contact->created_at->diffForHumans() }}</span> </div>
-                                                </div>
-                                            </li>
+                                                    <div class="col-mail col-mail-2">
+                                                        <span
+                                                                class="bg-success  badge me-2">
+                                                                    @if($contact->subject != null)
+                                                                    {{$contact->subject}}
+                                                                    @else
+                                                                    Pas d'objet
+                                                                    @endif
+                                                                </span> - 
+                                                            <span class="teaser">{{$contact->msg}}</span>
+                                                        
+                                                        <div class="date"> <span style="margin-left: -30px;">{{ $contact->created_at->diffForHumans() }}</span> </div>
+                                                    </div>
+                                                </a>
+                                                </li>
                                         @endforeach
                                        
                                     </ul>
