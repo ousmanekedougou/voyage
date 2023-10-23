@@ -1,7 +1,7 @@
 @extends('user.layouts.app',['title' => 'Setting'])
 <link rel="stylesheet" href="{{asset('user/assets/build/css/intlTelInput.css')}}">
 <style>
-     .bg-ico-hero{
+    .bg-ico-hero{
         background-image:url(./user/assets/images/setting.webp) !important;
         background-size:cover;background-position:top !important;
         height: 100px !important;
