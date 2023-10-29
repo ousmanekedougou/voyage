@@ -13,10 +13,11 @@
     .section .container .row_pricipal{
         margin-top:-70px;
     }
-    .card-first{
+    /* .card-first{
         background-image:url(./admin/assets/images/carte-monde.png) !important;
         background-size:cover;background-position:center !important;
-    }
+    } */
+    
 </style>
 @section('headSection')
 <link rel="stylesheet" href="{{asset('admin/assets/css/card.css')}}">
@@ -45,7 +46,7 @@
         <!-- end container -->
     </section>
     <!-- hero section end -->
-
+    {{--
     <section class="section p-0 home-section-mobile">
         <div class="container">
             <div class="row">
@@ -53,12 +54,12 @@
             </div>
         </div>
     </section>
-
+    --}}
  <!-- currency price section start Version mobile  // section_sm-->
     <section class="section p-0 bg-white section-collumn">
         <div class="container">
             <div class="currency-price">
-                <div class="row">
+                <div class="row collumn-bg-img">
                     <div class="col-md-4">
                         <div class="card">
                             <div class="card-body">
@@ -114,12 +115,16 @@
                         </div>
                     </div>
 
+                    
+                </div>
+                <!-- end row -->
+                <div class="row">
                     <div class="col-md-12 sectionCompteMobile">
                         <div class="card">
                             <div class="card-body">
                                 <div class="media">
                                     <div class="media-body">
-                                         <div class="mt-4 me-md-0">
+                                            <div class="mt-4 me-md-0">
                                             <img src="{{('user/assets/images/dowload/compteClient.svg')}}" alt="" class="img-fluid mx-auto d-block" style="width: 60%;">
                                         </div>
                                         <h5 class="text-center">Creer votre compte TouCki</h5>
@@ -138,7 +143,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- end row -->
             </div>
         </div>
         <!-- end container -->

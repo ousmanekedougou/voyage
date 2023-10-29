@@ -79,9 +79,11 @@
                                 </div>
                                 <div class="media-body">
                                     <h5>Siege de {{ $siege->name }}</h5>
-                                    <p class="text-muted  mb-1"><i class="fa fa-envelope"></i> {{ $siege->email }} </p>
                                     <p class="text-muted  mb-2"><i class="fa fa-mobile"></i> {{ $siege->phone }} </p>
-                                    <p class="text-muted  mb-2"> <i class="fa fa-bus"> </i> {{ $siege->buses->count() }} bus a votre disposition </p>
+                                    {{--
+                                        <p class="text-muted  mb-1"><i class="fa fa-envelope"></i> {{ $siege->email }} </p>
+                                        <p class="text-muted  mb-2"> <i class="fa fa-bus"> </i> {{ $siege->buses->count() }} bus a votre disposition </p>
+                                    --}}
                                     <ul class="list-inline mb-0 text-left">
                                         <li class="list-inline-item me-1">
                                             <a href="#" class="badge bg-success p-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$siege->id}}"> <i class="fa fa-user-plus"></i> S'inscrire</a>

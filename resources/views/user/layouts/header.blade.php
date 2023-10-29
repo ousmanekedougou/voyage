@@ -135,12 +135,6 @@
                 <img src="{{asset('admin/assets/images/logo-dark.png')}}" alt="" height="19" class="logo logo-dark">
                 <img src="{{asset('admin/assets/images/logo-light.png')}}" alt="" height="19" class="logo logo-light">
             </a>
-            {{--
-            <button type="button" class="btn btn-sm px-3 font-size-16 d-lg-none header-item waves-effect waves-light"
-                data-bs-toggle="collapse" data-bs-target="#topnav-menu-content">
-                <i class="fa fa-fw fa-bars"></i>
-            </button>
-            --}}
 
             <ul class="navbar-mobile-show">
                 <li class="nav-item">
@@ -162,8 +156,8 @@
                 <li class="nav-item">
                     <a class="nav-link {{ set_active_roote('contact.index') }} " href="{{ route('contact.index') }}"><i class="fa fa-at fa-fa-item"></i></a>
                 </li>
-                <li class="nav-item drop-down-mobile">
-                    @if(!Auth::guard('web')->user() && !Auth::guard('agence')->user() && !Auth::guard('agent')->user() && !Auth::guard('client')->user())
+                @if(!Auth::guard('web')->user() && !Auth::guard('agence')->user() && !Auth::guard('agent')->user() && !Auth::guard('client')->user())
+                    <li class="nav-item drop-down-mobile">
                         <div class="dropdown d-inline-block ">
                             <span class="d-xl-inline-block login-user-button btn btn-outline-secondary" id="page-header-user-dropdown"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" key="t-henry">
@@ -185,35 +179,26 @@
                                 </a>
                             </div>
                         </div>
-                    @endif
-                </li>
-                <li class="nav-item logout-button">
-                    @if(Auth::guard('web')->user())
-                    <a class="nav-link btn btn-outline-danger text-danger logout-a" href="" onclick="event.preventDefault(); document.getElementById('logout-form-web').submit();"><i
-                            class="fa fa-sign-out-alt fa-fa-item"></i></a>
-                        <form id="logout-form-web" action="{{ route('logout') }}" method="POST">
+                    </li>
+                @else
+                    <li class="nav-item logout-button">
+                        <a class="nav-link btn btn-outline-danger text-danger logout-a" href="" title="Se Deconnecter" onclick="event.preventDefault(); document.getElementById('logout-form-web').submit();"><i
+                        class="fa fa-sign-out-alt fa-fa-item"></i></a>
+                        <form id="logout-form-web" action="
+                            @if(Auth::guard('web')->user())
+                                {{ route('logout') }}
+                            @elseif(Auth::guard('agence')->user())
+                                {{ route('agence.agence.logout') }}
+                            @elseif(Auth::guard('agent')->user())
+                                {{ route('agent.agent.logout') }}
+                            @elseif(Auth::guard('client')->user())
+                                {{ route('customer.customer.logout') }}
+                            @endif
+                        " method="POST">
                             @csrf
                         </form>
-                    @elseif(Auth::guard('agence')->user())
-                    <a class="nav-link btn btn-outline-danger text-danger logout-a" href="" onclick="event.preventDefault(); document.getElementById('logout-form-agence').submit();"><i
-                            class="fa fa-sign-out-alt fa-fa-item"></i></a>
-                        <form id="logout-form-agence" action="{{ route('agence.agence.logout') }}" method="POST">
-                            @csrf
-                        </form>
-                    @elseif(Auth::guard('agent')->user())
-                    <a class="nav-link btn btn-outline-danger text-danger logout-a" href="" onclick="event.preventDefault(); document.getElementById('logout-form-agent').submit();"><i
-                            class="fa fa-sign-out-alt fa-fa-item"></i></a>
-                        <form id="logout-form-agent" action="{{ route('agent.agent.logout') }}" method="POST">
-                            @csrf
-                        </form>
-                    @elseif(Auth::guard('client')->user())
-                    <a class="nav-link btn btn-outline-danger text-danger logout-a" href="" onclick="event.preventDefault(); document.getElementById('logout-form-customer').submit();"><i
-                            class="fa fa-sign-out-alt fa-fa-item"></i></a>
-                        <form id="logout-form-customer" action="{{ route('customer.customer.logout') }}" method="POST">
-                            @csrf
-                        </form>
-                    @endif
-                </li>
+                    </li>
+                @endif
             </ul>
 
             <div class="collapse navbar-collapse" id="topnav-menu-content">
@@ -243,13 +228,6 @@
                     </li>
 
                 </ul>
-                {{--
-                <div class="my-2 ms-lg-2 btn-sign-ine">
-                    <!-- <a href="{{ route('agence.create') }}" class="btn btn-outline-primary w-xs {{ set_active_roote('agence.create') }}"><i class="fa fa-user-plus"></i> Creer un compte agence</a> -->
-                    <a href="{{ route('login') }}" class="btn btn-outline-success  w-xs {{ set_active_roote('login') }}" data-bs-toggle="modal"
-                                            data-bs-target=".bs-exampleLogin-modal-lg"> Se connecter <i class="fa fa-sign-in-alt"></i>  <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i></a>
-                </div>
-                --}}
                 @if(!Auth::guard('web')->user() && !Auth::guard('agence')->user() && !Auth::guard('agent')->user() && !Auth::guard('client')->user())
                 <div class="dropdown d-inline-block">
                         <span id="page-header-user-dropdown"
@@ -273,36 +251,23 @@
                     </div>
                 </div>
                 @else
-                    @if(Auth::guard('web')->user())
-                        <div class="my-2 ms-lg-2 btn-sign-ine">
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                                @csrf
-                                <button type="submit" class="btn btn-outline-danger w-xs mt-2"> Se Deconnecter <i class="fa fa-sign-up-alt"></i> </button>
-                            </form>
-                        </div>
-                    @elseif(Auth::guard('agence')->user())
-                        <div class="my-2 ms-lg-2 btn-sign-ine">
-                            <form id="logout-form-agence" action="{{ route('agence.agence.logout') }}" method="POST">
-                                @csrf
-                                <button type="submit" class="btn btn-outline-danger w-xs mt-2"> Se Deconnecter <i class="fa fa-sign-up-alt"></i> </button>
-                            </form>
-                        </div>
-                    @elseif(Auth::guard('agent')->user())
-                        <div class="my-2 ms-lg-2 btn-sign-ine">
-                           
-                            <form id="logout-form-agent" action="{{ route('agent.agent.logout') }}" method="POST" >
-                                @csrf
-                                <button type="submit" class="btn btn-outline-danger w-xs mt-2"> Se Deconnecter <i class="fa fa-sign-up-alt"></i> </button>
-                            </form>
-                        </div>
-                    @elseif(Auth::guard('client')->user())
-                        <div class="my-2 ms-lg-2 btn-sign-ine">
-                            <form id="logout-form-customer" action="{{ route('customer.customer.logout') }}" method="POST">
-                                @csrf
-                                <button type="submit" class="btn btn-outline-danger w-xs mt-2"> Se Deconnecter <i class="fa fa-sign-up-alt"></i> </button>
-                            </form>
-                        </div>
-                    @endif
+                    <div class="my-2 ms-lg-2 btn-sign-ine">
+                        <form id="logout-form" 
+                        action="
+                            @if(Auth::guard('web')->user())
+                                {{ route('logout') }}
+                            @elseif(Auth::guard('agence')->user())
+                                {{ route('agence.agence.logout') }}
+                            @elseif(Auth::guard('agent')->user())
+                                {{ route('agent.agent.logout') }}
+                            @elseif(Auth::guard('client')->user())
+                                {{ route('customer.customer.logout') }}
+                            @endif
+                        " method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-outline-danger w-xs mt-2"> Se Deconnecter <i class="fa fa-sign-up-alt"></i> </button>
+                        </form>
+                    </div>
                 @endif
 
             </div>

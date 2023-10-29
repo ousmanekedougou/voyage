@@ -362,6 +362,9 @@
         /* border: 1px solid silver; */
         border-radius: 10%;
     }
+    .navbar-mobile-show .logout-button .logout-a i:hover{
+        color: white;
+    }
     .nav-item .nav-link.active{color:#556ee6}
     .navbar-mobile-show .drop-down-mobile .dropdown .dropdown-menu{
         position: absolute;
@@ -412,6 +415,10 @@
     .section-collumn{
         margin-top: 50px;
         margin-bottom: -45rem;
+    }
+
+    section .container .currency-price .collumn-bg-img{
+        background-image:url(./user/assets/images/bus.svg);
     }
 
     section #agenceBtn{

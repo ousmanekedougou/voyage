@@ -126,14 +126,6 @@
             </div>
             <!-- end row -->
 
-            <div class="row">
-                <div class="card-body">
-                    <div id="panorama" class="gmaps-panaroma">
-                        <iframe src="https://www.google.sn/maps/place/EMPRO+SN/@14.7111341,-17.4506503,699m/data=!3m2!1e3!4b1!4m5!3m4!1s0xec173eabb264a3f:0x3b03193b00bf067c!8m2!3d14.7111343!4d-17.4484441" style="width: 100%;height:100%;"></iframe>
-                    </div>
-                </div>
-            </div> <!-- end row -->
-
         </div>
         <!-- end container -->
     </section>
