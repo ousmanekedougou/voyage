@@ -129,9 +129,53 @@
                 <footer class="footer footer-mobile">
                     <div class="container-fluid">
                         <div class="row">
+                            {{--
                             <div class="col-sm-12">
                                 <img src="{{asset('admin/assets/images/logo-dark.png')}}" alt="" height="13" class=""> <script>document.write(new Date().getFullYear())</script>  <span style="float:right;">Développé par <a href="{{ route('login') }}" target="_blank" rel="noopener noreferrer" class="text-muted">KdgWeb</a></span>
                             </div>
+                            --}}
+                            <div class="container">
+                                <main>
+                                    <ul>
+                                        <li class="{{ set_active_roote_bottom_bar('index') }} ">
+                                            <a href="{{ route('index') }}" id="home">
+                                                <span> Acceuil</span>
+                                                <i class="bx bx-home-circle   fa-fa-item"></i>
+                                            </a>
+                                        </li>
+
+                                        <li class="{{ set_active_roote_bottom_bar('about.index') }} ">
+                                            <a href="{{ route('about.index') }}" id="drop">
+                                                <span>A Propos</span>
+                                                <i class="bx bxs-file   fa-fa-item"></i>
+                                            </a>
+                                        </li>
+
+                                        <li class="{{ set_active_roote_bottom_bar('client.index') }} ">
+                                            <a href="{{ route('client.index') }}" id="store">
+                                                <span>Colis</span>
+                                                <i class="bx bx-store-alt  fa-fa-item"></i>
+                                            </a>
+                                        </li>
+
+                                        <li class="{{ set_active_roote_bottom_bar('setting.index') }} ">
+                                            <a href="{{ route('setting.index') }}" id="wishlist">
+                                                <span>Infos</span>
+                                                <i class="bx bx-cog  fa-fa-item"></i>
+                                            </a>
+                                        </li>
+
+                                        <li class="{{ set_active_roote_bottom_bar('customer.customer.login') }}">
+                                            <a href="{{ route('customer.customer.login') }}" class="header-item noti-icon right-bar-toggle" id="nav-toggle">
+                                                <span>Connexion</span>
+                                                <i class="bx bx-log-in  fa-item"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </main>
+                            </div>
+
+
                         </div>
                     </div>
                 </footer>

@@ -340,6 +340,7 @@
     .navbar-logo{
         margin-top: 15px;
         margin-bottom: 15px;
+        text-align: center;
     }
     .navbar-mobile-show .drop-down-mobile  {
         position: absolute;
@@ -523,7 +524,7 @@ main
 }
 
 
-@media screen and (max-width: 420px) {
+@media only screen and (max-width: 1000px) {
     :root{
         --main-color:#5352ed;
         --lighter-color:#f7f7ff;
@@ -546,6 +547,7 @@ main
         border-radius: 40px;
         box-shadow: rgb(50, 50, 93 / 25%) 0 50px 100px -20px,
             rgb(0, 0, 0 / 30%) 0 30px 60px -30px;
+            z-index: 22;
     }
 
    
@@ -596,7 +598,7 @@ main
 
     /* Animation */
     .activeButton a i{
-       background-color:#556ee6;
+       background-color:#586ce4;
        color: white;
        border-radius: 100%;
        padding: 2px;
@@ -665,88 +667,12 @@ main
         }
     /* Fin de la partie du ticket en mode mobile responsive */
 
+    .login-client{
+
+        padding: 5px;
+        padding-top: 100px;
+    }
+
    
 }
 
-/* @media screen and (max-width: 350px) {
-    :root{
-        --main-color:#5352ed;
-        --lighter-color:#f7f7ff;
-        --dark-color:#2f3542
-    }
-
-    a{
-        text-decoration: none;
-        color: inherit;
-    }
-    ul{
-        list-style: none;
-    }
-    .container{
-        max-width: 100%;
-        margin: 0 auto;
-    }
-
-    main{
-        position: fixed;
-        visibility: visible;
-        opacity: 1;
-        overflow: visible;
-        bottom: 0;
-        width: 500px;
-        height: auto;
-        background-color: white;
-        left: 50%;
-        margin-left: -228px;
-        padding: 0 2em;
-        border-radius: 40px;
-        box-shadow: rgb(50, 50, 93 / 25%) 0 50px 100px -20px,
-                    rgb(0, 0, 0 / 30%) 0 30px 60px -30px;
-    }
-
-    main ul{
-        display: flex;
-        align-items: center;
-    }
-
-    main :where(li , a){
-        position: relative;
-    }
-    main ul li a{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column-reverse;
-        padding: 3px;
-        font-size: 1.5em;
-        line-height: 1.4;
-        width: 65px;
-        height: 65px;
-        -webkit-transition: all .3s ease-out;
-        transition: all .3s ease-out;
-    }
-
-    main ul li a:hover{
-        color: var(--main-color);
-    }
-
-    main ul li a span{
-        font-size: 10px;
-
-    }
-
-    .button-client-bar{
-    visibility: hidden;
-    opacity: 0;
-    width: 0px;
-    height: 0px;
-    }
-     .show-logo-toucki{
-        visibility: visible;
-        opacity: 1;
-        z-index: 1;
-   }
-
-} */
-
-/* Fin du bottom bar  */

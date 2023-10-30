@@ -120,7 +120,123 @@
                 <!-- end row -->
                 <div class="row">
                     <div class="col-md-12 sectionCompteMobile">
-                        <div class="card">
+                        <div class="">
+                            <div class="blog-slider">
+                                <div class="blog-slider__wrp swiper-wrapper">
+
+                                    <div class="blog-slider__item swiper-slide">
+                                        <div class="blog-slider__img">
+                                        <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759871/alessandro-capuzzi-799180-unsplash.webp" alt="">
+                                        </div>
+                                        <div class="blog-slider__content">
+                                        <div class="blog-slider__title">Pour quoi avoir un compte TouCki ?</div>
+                                        <div class="blog-slider__text">
+                                            Nous sommes convaincus que le digital est un facteur de croissance et de survie pour toutes entreprises quels que soient la taille et le secteur, c’est pourquoi nous nous engageons à vous accompagner à maximiser votre performance et vos résultats grâce à la digitalisation. 
+                                            
+                                            Nous méttons à votre disposition une multitude d'agences de transport. Des mises à jour de bus en direct aux billets mobiles, notre application innovante est le moyen idéal pour planifier et suivre votre voyage.
+                                        </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="blog-slider__item swiper-slide">
+                                        <div class="blog-slider__img">
+                                            
+                                            <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759872/kuldar-kalvik-799168-unsplash.webp" alt="">
+                                        </div>
+                                        <div class="blog-slider__content">
+                                            <div class="blog-slider__title">Votre identité</div>
+                                            <div class="blog-slider__text">
+                                                Le site de votre agence est votre identité.
+
+                                                Donner un visage à celui-ci : photos des vendeurs, du chef d’agence, des langues que vous parlez, des outils dont vous disposez.
+
+                                                Les agences, avec les nouvelles technologies ont changé depuis 10 ans. Les clients ne le savent pas toujours.
+
+                                                Votre site est un moyen d’en apporter la preuve.
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="blog-slider__item swiper-slide">
+                                        <div class="blog-slider__img">
+                                        <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759871/jason-leung-798979-unsplash.webp" alt="">
+                                        </div>
+                                        <div class="blog-slider__content">
+                                        <div class="blog-slider__title">Avoir une vitrine en ligne</div>
+                                        <div class="blog-slider__text">
+                                            Avoir un site permet, à tout internaute qui cherche une agence de voyages à proximité de son domicile ou de son travail, d’apparaitre sur Google qui devient, par la force des choses, une sorte d’annuaire universel.
+                                        </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="blog-slider__item swiper-slide">
+                                        <div class="blog-slider__img">
+                                        <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759871/alessandro-capuzzi-799180-unsplash.webp" alt="">
+                                        </div>
+                                        <div class="blog-slider__content">
+                                        <div class="blog-slider__title">Être informé sur sa clientèle</div>
+                                        <div class="blog-slider__text">
+                                            La formule est connue : "un homme informé en vaut deux’".
+
+                                            C’est transposable dans le commerce. Connaître ses clients apporte de meilleures chances de conclure des ventes.
+                                            "grâce aux statistiques fournies par le site, l’agence de voyages accède à de multiples informations.
+                                        </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="blog-slider__item swiper-slide">
+                                        <div class="blog-slider__img">
+                                        <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759871/alessandro-capuzzi-799180-unsplash.webp" alt="">
+                                        </div>
+                                        <div class="blog-slider__content">
+                                        <div class="blog-slider__title">Interactivité</div>
+                                        <div class="blog-slider__text">
+                                            Penser interactivité. Vos clients s’expriment sur la Toile.
+                                            Accompagnez cette tendance avec un simple formulaire de contact, un espace témoignage, un forum, etc. 
+                                            Les personnes et pas seulement les jeunes ont pris l’habitude de partager leurs impressions et leurs opinions sur le net. 
+                                            Récupérez, pour le profit de votre commerce, ces habitudes qui sont aujourd’hui ancrées dans notre culture.
+                                        </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="blog-slider__item swiper-slide">
+                                        <div class="blog-slider__img">
+                                        <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759871/alessandro-capuzzi-799180-unsplash.webp" alt="">
+                                        </div>
+                                        <div class="blog-slider__content">
+                                        <div class="blog-slider__title">Avis</div>
+                                        <div class="blog-slider__text">
+                                            La dernière enquête Ebay/Médiamétrie nous informe que les avis sur internet continuent à bien se porter : +8% de consultation et + 7% d’avis publiés.
+
+                                            C’est une tendance lourde. Pourtant on peut dénoncer l’existence de faux avis. Justement les avis de vos clients sont authentiques et permettent de crédibiliser votre rôle tout en valorisant l’excellence de votre profession.
+                                        </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="blog-slider__item swiper-slide">
+                                        <div class="blog-slider__img">
+                                        <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759871/alessandro-capuzzi-799180-unsplash.webp" alt="">
+                                        </div>
+                                        <div class="blog-slider__content">
+                                        <div class="blog-slider__title">Maintenir le contact avec le client</div>
+                                        <div class="blog-slider__text">
+                                            À partir de 19 heures, en général, l’agence est fermée.
+
+                                            Pourtant, c’est le soir, à leur domicile, que les clients prennent du temps pour la préparation de leurs vacances.C’est tellement facile de mettre en place une rubrique spécifique qui permet aux clients de retrouver ses réservations, à tout moment, en dehors des horaires d’ouverture.
+
+                                            Dans l'activite du transport,le service est un critère important.
+                                        </div>
+                                        </div>
+                                    </div>
+
+                                    
+                            
+                                </div>
+                                <div class="blog-slider__pagination"></div>
+                            </div>
+                        </div>
+                        <div class="card"> 
                             <div class="card-body">
                                 <div class="media">
                                     <div class="media-body">
@@ -202,31 +318,32 @@
 
     <section class="section p-1 sectionCompteDesktope card-first" id="whileAgence">
 
+        <div class="blog-slider">
+            <div class="blog-slider__wrp swiper-wrapper">
 
-        <div class="projcard-container">
-            <div class="projcard projcard-blue">
-                <div class="projcard-innerbox">
-                    <img class="projcard-img" src="{{('user/assets/images/dowload/compteClient.svg')}}" />
-                    <div class="projcard-textbox">
-                        <h4 class="mb-4">Pour quoi avoir un compte TouCki ?</h4>
-                        <div class="projcard-bar"></div>
-                        <div class="projcard-description text-muted">
+                    <div class="blog-slider__item swiper-slide">
+                        <div class="blog-slider__img">
+                        <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759871/alessandro-capuzzi-799180-unsplash.webp" alt="">
+                        </div>
+                        <div class="blog-slider__content">
+                        <div class="blog-slider__title">Pour quoi avoir un compte TouCki ?</div>
+                        <div class="blog-slider__text">
                             Nous sommes convaincus que le digital est un facteur de croissance et de survie pour toutes entreprises quels que soient la taille et le secteur, c’est pourquoi nous nous engageons à vous accompagner à maximiser votre performance et vos résultats grâce à la digitalisation. 
                             
                             Nous méttons à votre disposition une multitude d'agences de transport. Des mises à jour de bus en direct aux billets mobiles, notre application innovante est le moyen idéal pour planifier et suivre votre voyage.
                         </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-		    {{--
-                <div class="projcard projcard-blue">
-                    <div class="projcard-innerbox">
-                        <img class="projcard-img" src="https://picsum.photos/800/600?image=1041" />
-                        <div class="projcard-textbox">
-                            <div class="projcard-title">Votre identité</div>
-                            <div class="projcard-subtitle">This explains the card in more detail</div>
-                            <div class="projcard-bar"></div>
-                            <div class="projcard-description">
+
+
+                    <div class="blog-slider__item swiper-slide">
+                        <div class="blog-slider__img">
+                            
+                            <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759872/kuldar-kalvik-799168-unsplash.webp" alt="">
+                        </div>
+                        <div class="blog-slider__content">
+                            <div class="blog-slider__title">Votre identité</div>
+                            <div class="blog-slider__text">
                                 Le site de votre agence est votre identité.
 
                                 Donner un visage à celui-ci : photos des vendeurs, du chef d’agence, des langues que vous parlez, des outils dont vous disposez.
@@ -235,237 +352,85 @@
 
                                 Votre site est un moyen d’en apporter la preuve.
                             </div>
-                            <div class="projcard-tagbox">
-                                <span class="projcard-tag">HTML</span>
-                                <span class="projcard-tag">CSS</span>
-                            </div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="projcard projcard-red">
-                    <div class="projcard-innerbox">
-                        <img class="projcard-img" src="https://picsum.photos/800/600?image=1080" />
-                        <div class="projcard-textbox">
-                            <div class="projcard-title">Avoir une vitrine en ligne</div>
-                            <div class="projcard-subtitle">C’est gratuit !</div>
-                            <div class="projcard-bar"></div>
-                            <div class="projcard-description">
-                                Avoir un site permet, à tout internaute qui cherche une agence de voyages à proximité de son domicile ou de son travail, d’apparaitre sur Google qui devient, par la force des choses, une sorte d’annuaire universel.
-                            </div>
-                            <div class="projcard-tagbox">
-                                <span class="projcard-tag">PHP</span>
-                                <span class="projcard-tag">SQL</span>
-                                <span class="projcard-tag">Database</span>
-                            </div>
+
+                    <div class="blog-slider__item swiper-slide">
+                        <div class="blog-slider__img">
+                        <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759871/jason-leung-798979-unsplash.webp" alt="">
+                        </div>
+                        <div class="blog-slider__content">
+                        <div class="blog-slider__title">Avoir une vitrine en ligne</div>
+                        <div class="blog-slider__text">
+                            Avoir un site permet, à tout internaute qui cherche une agence de voyages à proximité de son domicile ou de son travail, d’apparaitre sur Google qui devient, par la force des choses, une sorte d’annuaire universel.
+                        </div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="projcard projcard-green">
-                    <div class="projcard-innerbox">
-                        <img class="projcard-img" src="https://picsum.photos/800/600?image=1039" />
-                        <div class="projcard-textbox">
-                            <div class="projcard-title">Être informé sur sa clientèle</div>
-                            <div class="projcard-subtitle">You know what this is by now</div>
-                            <div class="projcard-bar"></div>
-                            <div class="projcard-description">
-                                La formule est connue : "un homme informé en vaut deux’".
+                    
+                    <div class="blog-slider__item swiper-slide">
+                        <div class="blog-slider__img">
+                        <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759871/alessandro-capuzzi-799180-unsplash.webp" alt="">
+                        </div>
+                        <div class="blog-slider__content">
+                        <div class="blog-slider__title">Être informé sur sa clientèle</div>
+                        <div class="blog-slider__text">
+                            La formule est connue : "un homme informé en vaut deux’".
 
-                                C’est transposable dans le commerce. Connaître ses clients apporte de meilleures chances de conclure des ventes.
-                                "grâce aux statistiques fournies par le site, l’agence de voyages accède à de multiples informations.
-                            </div>
-                            <div class="projcard-tagbox">
-                                <span class="projcard-tag">Excel</span>
-                                <span class="projcard-tag">VBA</span>
-                            </div>
+                            C’est transposable dans le commerce. Connaître ses clients apporte de meilleures chances de conclure des ventes.
+                            "grâce aux statistiques fournies par le site, l’agence de voyages accède à de multiples informations.
+                        </div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="projcard projcard-customcolor" style="--projcard-color: #F5AF41;">
-                    <div class="projcard-innerbox">
-                        <img class="projcard-img" src="https://picsum.photos/800/600?image=943" />
-                        <div class="projcard-textbox">
-                            <div class="projcard-title">Interactivité</div>
-                            <div class="projcard-subtitle">That's the last one. Have a nice day!</div>
-                            <div class="projcard-bar"></div>
-                            <div class="projcard-description">
-                                Penser interactivité. Vos clients s’expriment sur la Toile.
-                                Accompagnez cette tendance avec un simple formulaire de contact, un espace témoignage, un forum, etc. 
-                                Les personnes et pas seulement les jeunes ont pris l’habitude de partager leurs impressions et leurs opinions sur le net. 
-                                Récupérez, pour le profit de votre commerce, ces habitudes qui sont aujourd’hui ancrées dans notre culture.
-                            </div>
-                            <div class="projcard-tagbox">
-                                <span class="projcard-tag">iOS</span>
-                                <span class="projcard-tag">Android</span>
-                                <span class="projcard-tag">Cordova</span>
-                            </div>
+
+                    <div class="blog-slider__item swiper-slide">
+                        <div class="blog-slider__img">
+                        <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759871/alessandro-capuzzi-799180-unsplash.webp" alt="">
+                        </div>
+                        <div class="blog-slider__content">
+                        <div class="blog-slider__title">Interactivité</div>
+                        <div class="blog-slider__text">
+                            Penser interactivité. Vos clients s’expriment sur la Toile.
+                            Accompagnez cette tendance avec un simple formulaire de contact, un espace témoignage, un forum, etc. 
+                            Les personnes et pas seulement les jeunes ont pris l’habitude de partager leurs impressions et leurs opinions sur le net. 
+                            Récupérez, pour le profit de votre commerce, ces habitudes qui sont aujourd’hui ancrées dans notre culture.
+                        </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="projcard projcard-green">
-                    <div class="projcard-innerbox">
-                        <img class="projcard-img" src="https://picsum.photos/800/600?image=1039" />
-                        <div class="projcard-textbox">
-                            <div class="projcard-title">Avis</div>
-                            <div class="projcard-subtitle">You know what this is by now</div>
-                            <div class="projcard-bar"></div>
-                            <div class="projcard-description">
-                                La dernière enquête Ebay/Médiamétrie nous informe que les avis sur internet continuent à bien se porter : +8% de consultation et + 7% d’avis publiés.
+                    <div class="blog-slider__item swiper-slide">
+                        <div class="blog-slider__img">
+                        <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759871/alessandro-capuzzi-799180-unsplash.webp" alt="">
+                        </div>
+                        <div class="blog-slider__content">
+                        <div class="blog-slider__title">Avis</div>
+                        <div class="blog-slider__text">
+                            La dernière enquête Ebay/Médiamétrie nous informe que les avis sur internet continuent à bien se porter : +8% de consultation et + 7% d’avis publiés.
 
-                                C’est une tendance lourde. Pourtant on peut dénoncer l’existence de faux avis. Justement les avis de vos clients sont authentiques et permettent de crédibiliser votre rôle tout en valorisant l’excellence de votre profession.
-                            </div>
-                            <div class="projcard-tagbox">
-                                <span class="projcard-tag">Excel</span>
-                                <span class="projcard-tag">VBA</span>
-                            </div>
+                            C’est une tendance lourde. Pourtant on peut dénoncer l’existence de faux avis. Justement les avis de vos clients sont authentiques et permettent de crédibiliser votre rôle tout en valorisant l’excellence de votre profession.
+                        </div>
                         </div>
                     </div>
-                </div>
-                
-                <div class="projcard projcard-customcolor" style="--projcard-color: #F5AF41;">
-                    <div class="projcard-innerbox">
-                        <img class="projcard-img" src="https://picsum.photos/800/600?image=943" />
-                        <div class="projcard-textbox">
-                            <div class="projcard-title">Maintenir le contact avec le client</div>
-                            <div class="projcard-subtitle">That's the last one. Have a nice day!</div>
-                            <div class="projcard-bar"></div>
-                            <div class="projcard-description">
-                                À partir de 19 heures, en général, l’agence est fermée.
 
-                                Pourtant, c’est le soir, à leur domicile, que les clients prennent du temps pour la préparation de leurs vacances.C’est tellement facile de mettre en place une rubrique spécifique qui permet aux clients de retrouver ses réservations, à tout moment, en dehors des horaires d’ouverture.
+                    <div class="blog-slider__item swiper-slide">
+                        <div class="blog-slider__img">
+                        <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759871/alessandro-capuzzi-799180-unsplash.webp" alt="">
+                        </div>
+                        <div class="blog-slider__content">
+                        <div class="blog-slider__title">Maintenir le contact avec le client</div>
+                        <div class="blog-slider__text">
+                            À partir de 19 heures, en général, l’agence est fermée.
 
-                                Dans l'activite du transport,le service est un critère important.
-                            </div>
-                            <div class="projcard-tagbox">
-                                <span class="projcard-tag">iOS</span>
-                                <span class="projcard-tag">Android</span>
-                                <span class="projcard-tag">Cordova</span>
-                            </div>
+                            Pourtant, c’est le soir, à leur domicile, que les clients prennent du temps pour la préparation de leurs vacances.C’est tellement facile de mettre en place une rubrique spécifique qui permet aux clients de retrouver ses réservations, à tout moment, en dehors des horaires d’ouverture.
+
+                            Dans l'activite du transport,le service est un critère important.
+                        </div>
                         </div>
                     </div>
+
+                    
+            
                 </div>
-            --}}
-        </div>
-
-        <div class="section_our_solution p-1 mt-5">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    <div class="our_solution_category">
-                        <div class="solution_cards_box">
-                            <div class="solution_card">
-                                <div class="hover_color_bubble"></div>
-                                <div class="so_top_icon">
-                                    <img src="https://picsum.photos/800/600?image=943" id="Layer_1" height="50" viewBox="0 0 512 512" width="40" alt="" srcset="">
-                                </div>
-                                <div class="solu_title text-muted">
-                                    <h4>Votre identité</h4>
-                                </div>
-                                <div class="solu_description text-muted">
-                                    <p>
-                                        Le site de votre agence est votre identité.
-
-                                        Donner un visage à celui-ci : photos des vendeurs, du chef d’agence, des langues que vous parlez, des outils dont vous disposez.
-
-                                        Les agences, avec les nouvelles technologies ont changé depuis 10 ans. Les clients ne le savent pas toujours.
-
-                                        Votre site est un moyen d’en apporter la preuve.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="solution_card">
-                                <div class="hover_color_bubble"></div>
-                                <div class="so_top_icon">
-                                    <img src="https://picsum.photos/800/600?image=943" id="Layer_1" height="50" viewBox="0 0 512 512" width="40" alt="" srcset="">
-                                </div>
-                                <div class="solu_title text-muted">
-                                    <h4>Avoir une vitrine en ligne</h4>
-                                </div>
-                                <div class="solu_description text-muted">
-                                    <p>
-                                    Avoir un site permet, à tout internaute qui cherche une agence de voyages à proximité de son domicile ou de son travail, d’apparaitre sur Google qui devient, par la force des choses, une sorte d’annuaire universel.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="solution_card">
-                                <div class="hover_color_bubble"></div>
-                                <div class="so_top_icon">
-                                    <img src="https://picsum.photos/800/600?image=943" id="Layer_1" height="50" viewBox="0 0 512 512" width="40" alt="" srcset="">
-                                </div>
-                                <div class="solu_title text-muted">
-                                    <h4>Être informé sur sa clientèle</h4>
-                                </div>
-                                <div class="solu_description text-muted">
-                                    <p>
-                                        La formule est connue : "un homme informé en vaut deux’".
-
-                                        C’est transposable dans le commerce. Connaître ses clients apporte de meilleures chances de conclure des ventes.
-                                        "grâce aux statistiques fournies par le site, l’agence de voyages accède à de multiples informations.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <!--  -->
-                        <div class="solution_cards_box sol_card_top_3">
-                            <div class="solution_card">
-                                <div class="hover_color_bubble"></div>
-                                <div class="so_top_icon">
-                                    <img src="https://picsum.photos/800/600?image=943" id="Layer_1" height="50" viewBox="0 0 512 512" width="40" alt="" srcset="">
-                                </div>
-                                <div class="solu_title text-muted">
-                                    <h4>Interactivité</h4>
-                                </div>
-                                <div class="solu_description text-muted">
-                                    <p>
-                                        Penser interactivité. Vos clients s’expriment sur la Toile.
-                                        Accompagnez cette tendance avec un simple formulaire de contact, un espace témoignage, un forum, etc. 
-                                        Les personnes et pas seulement les jeunes ont pris l’habitude de partager leurs impressions et leurs opinions sur le net. 
-                                        Récupérez, pour le profit de votre commerce, ces habitudes qui sont aujourd’hui ancrées dans notre culture.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="solution_card">
-                                <div class="hover_color_bubble"></div>
-                                <div class="so_top_icon">
-                                    <img src="https://picsum.photos/800/600?image=943" id="Layer_1" height="50" viewBox="0 0 512 512" width="40" alt="" srcset="">
-                                </div>
-                                <div class="solu_title text-muted">
-                                    <h4>Avis</h4>
-                                </div>
-                                <div class="solu_description text-muted">
-                                    <p>
-                                        La dernière enquête Ebay/Médiamétrie nous informe que les avis sur internet continuent à bien se porter : +8% de consultation et + 7% d’avis publiés.
-
-                                        C’est une tendance lourde. Pourtant on peut dénoncer l’existence de faux avis. Justement les avis de vos clients sont authentiques et permettent de crédibiliser votre rôle tout en valorisant l’excellence de votre profession.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="solution_card">
-                                <div class="hover_color_bubble"></div>
-                                <div class="so_top_icon">
-                                    <img src="https://picsum.photos/800/600?image=943" id="Layer_1" height="50" viewBox="0 0 512 512" width="40" alt="" srcset="">
-                                </div>
-                                <div class="solu_title text-muted">
-                                    <h4>Maintenir le contact avec le client</h4>
-                                </div>
-                                <div class="solu_description text-muted">
-                                    <p>
-                                        À partir de 19 heures, en général, l’agence est fermée.
-
-                                        Pourtant, c’est le soir, à leur domicile, que les clients prennent du temps pour la préparation de leurs vacances.C’est tellement facile de mettre en place une rubrique spécifique qui permet aux clients de retrouver ses réservations, à tout moment, en dehors des horaires d’ouverture.
-
-                                        Dans l'activite du transport,le service est un critère important.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                        <!--  -->
-                        
-                    </div>
-                </div>
-            </div>
+            <div class="blog-slider__pagination"></div>
         </div>
     </section>
 
@@ -512,42 +477,42 @@
     <!-- Features end -->
 
 
-     <section class="section sectionCompteDesktope" id="features">
-        <div class="container">
-            <div class="row align-items-center mt-5 pt-md-5">
-                <div class="col-md-5">
-                    <div class="mt-4 mt-md-0">
-                        <div class="d-flex align-items-center mb-2">
-                            <div class="features-number font-weight-semibold display-4 me-3">02</div>
-                            <h4 class="mb-0">Pourquoi est-il avantageux de creer un compte client ?</h4>
-                        </div>
-                        <p class="text-muted">
-                            Profitez pleinement de l'expérience TouCki, <br>
-                            Profitez des réservations et des remboursements plus rapides ainsi que d'un accès à des réductions grâce à des agences de transport dans tout le pays.
+    <section class="section sectionCompteDesktope" id="features">
+    <div class="container">
+        <div class="row align-items-center mt-5 pt-md-5">
+            <div class="col-md-5">
+                <div class="mt-4 mt-md-0">
+                    <div class="d-flex align-items-center mb-2">
+                        <div class="features-number font-weight-semibold display-4 me-3">02</div>
+                        <h4 class="mb-0">Pourquoi est-il avantageux de creer un compte client ?</h4>
+                    </div>
+                    <p class="text-muted">
+                        Profitez pleinement de l'expérience TouCki, <br>
+                        Profitez des réservations et des remboursements plus rapides ainsi que d'un accès à des réductions grâce à des agences de transport dans tout le pays.
+                    </p>
+                    <div class="text-muted mt-4">
+                        <p class="mb-2"><i class="mdi mdi-circle-medium text-success me-1"></i>
+                            Horaires et billets pour tous vos déplacements.
                         </p>
-                        <div class="text-muted mt-4">
-                            <p class="mb-2"><i class="mdi mdi-circle-medium text-success me-1"></i>
-                                Horaires et billets pour tous vos déplacements.
-                            </p>
-                            <p><i class="mdi mdi-circle-medium text-success me-1"></i>
-                                Il n'a jamais été aussi simple de réserver un billet de bus au Sénégal.
-                            </p>
-                        </div>
-                        <div class="button-items mb-3">
-                            <a href="{{ route('client.register') }}" class="btn btn-primary btn-block-for-client-create"> <i class="bx bx-user-circle"> </i> Créer votre compte client TouCki</a>
-                        </div> 
+                        <p><i class="mdi mdi-circle-medium text-success me-1"></i>
+                            Il n'a jamais été aussi simple de réserver un billet de bus au Sénégal.
+                        </p>
                     </div>
-                </div>
-                <div class="col-md-6  col-sm-8 ms-md-auto">
-                    <div class="mt-4 me-md-0">
-                        <img src="{{('user/assets/images/dowload/mobile.svg')}}" alt="" class="img-fluid mx-auto d-block" style="width:
-                        70%;height:auto;">
-                    </div>
+                    <div class="button-items mb-3">
+                        <a href="{{ route('client.register') }}" class="btn btn-primary btn-block-for-client-create"> <i class="bx bx-user-circle"> </i> Créer votre compte client TouCki</a>
+                    </div> 
                 </div>
             </div>
-            <!-- end row -->
+            <div class="col-md-6  col-sm-8 ms-md-auto">
+                <div class="mt-4 me-md-0">
+                    <img src="{{('user/assets/images/dowload/mobile.svg')}}" alt="" class="img-fluid mx-auto d-block" style="width:
+                    70%;height:auto;">
+                </div>
+            </div>
         </div>
-     </section>
+        <!-- end row -->
+    </div>
+    </section>
 
     
     
@@ -588,6 +553,8 @@
 @endsection
 
 @section('footerSection')
+<script src="{{asset('admin/assets/js/card_1.js')}}"></script>
+<script src="{{asset('admin/assets/js/card_2.js')}}"></script>
     <script>
         // This adds some nice ellipsis to the description:
         document.querySelectorAll(".projcard-description").forEach(function(box) {
@@ -595,5 +562,21 @@
         });
         
     </script>
+
+<script>
+    var swiper = new Swiper('.blog-slider', {
+      spaceBetween: 30,
+      effect: 'fade',
+      loop: true,
+      mousewheel: {
+        invert: false,
+      },
+      autoHeight: true,
+      pagination: {
+        el: '.blog-slider__pagination',
+        clickable: true,
+      }
+    });
+</script>
 
 @endsection

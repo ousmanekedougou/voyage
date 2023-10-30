@@ -1,7 +1,7 @@
 @extends('user.layouts.app',['title' => 'About'])
-<style>
-
-</style>
+@section('headSection')
+<link rel="stylesheet" href="{{asset('admin/assets/css/card.css')}}">
+@endsection
 @section('main-content')
 <div class="main-content">
     <div class="page-content">
@@ -128,7 +128,7 @@
                     </div>
                 </div>
 
-                 <div class="col-lg-4">
+                <div class="col-lg-4">
                     <div class="card card-body">
                         <h5 class="mt-0 mb-3"><i class="mdi mdi-check-all me-1"></i> Maintenir le contact avec le client</h5>
                         <p class="card-text">
@@ -141,6 +141,123 @@
                     </div>
                 </div>
             </div>
+            <div class="section_our_solution p-1 mt-5">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="our_solution_category">
+                        <div class="solution_cards_box">
+                            <div class="solution_card">
+                                <div class="hover_color_bubble"></div>
+                                <div class="so_top_icon">
+                                    <img src="https://picsum.photos/800/600?image=943" id="Layer_1" height="50" viewBox="0 0 512 512" width="40" alt="" srcset="">
+                                </div>
+                                <div class="solu_title text-muted">
+                                    <h4>Votre identité</h4>
+                                </div>
+                                <div class="solu_description text-muted">
+                                    <p>
+                                        Le site de votre agence est votre identité.
+
+                                        Donner un visage à celui-ci : photos des vendeurs, du chef d’agence, des langues que vous parlez, des outils dont vous disposez.
+
+                                        Les agences, avec les nouvelles technologies ont changé depuis 10 ans. Les clients ne le savent pas toujours.
+
+                                        Votre site est un moyen d’en apporter la preuve.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="solution_card">
+                                <div class="hover_color_bubble"></div>
+                                <div class="so_top_icon">
+                                    <img src="https://picsum.photos/800/600?image=943" id="Layer_1" height="50" viewBox="0 0 512 512" width="40" alt="" srcset="">
+                                </div>
+                                <div class="solu_title text-muted">
+                                    <h4>Avoir une vitrine en ligne</h4>
+                                </div>
+                                <div class="solu_description text-muted">
+                                    <p>
+                                    Avoir un site permet, à tout internaute qui cherche une agence de voyages à proximité de son domicile ou de son travail, d’apparaitre sur Google qui devient, par la force des choses, une sorte d’annuaire universel.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="solution_card">
+                                <div class="hover_color_bubble"></div>
+                                <div class="so_top_icon">
+                                    <img src="https://picsum.photos/800/600?image=943" id="Layer_1" height="50" viewBox="0 0 512 512" width="40" alt="" srcset="">
+                                </div>
+                                <div class="solu_title text-muted">
+                                    <h4>Être informé sur sa clientèle</h4>
+                                </div>
+                                <div class="solu_description text-muted">
+                                    <p>
+                                        La formule est connue : "un homme informé en vaut deux’".
+
+                                        C’est transposable dans le commerce. Connaître ses clients apporte de meilleures chances de conclure des ventes.
+                                        "grâce aux statistiques fournies par le site, l’agence de voyages accède à de multiples informations.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!--  -->
+                        <div class="solution_cards_box sol_card_top_3">
+                            <div class="solution_card">
+                                <div class="hover_color_bubble"></div>
+                                <div class="so_top_icon">
+                                    <img src="https://picsum.photos/800/600?image=943" id="Layer_1" height="50" viewBox="0 0 512 512" width="40" alt="" srcset="">
+                                </div>
+                                <div class="solu_title text-muted">
+                                    <h4>Interactivité</h4>
+                                </div>
+                                <div class="solu_description text-muted">
+                                    <p>
+                                        Penser interactivité. Vos clients s’expriment sur la Toile.
+                                        Accompagnez cette tendance avec un simple formulaire de contact, un espace témoignage, un forum, etc. 
+                                        Les personnes et pas seulement les jeunes ont pris l’habitude de partager leurs impressions et leurs opinions sur le net. 
+                                        Récupérez, pour le profit de votre commerce, ces habitudes qui sont aujourd’hui ancrées dans notre culture.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="solution_card">
+                                <div class="hover_color_bubble"></div>
+                                <div class="so_top_icon">
+                                    <img src="https://picsum.photos/800/600?image=943" id="Layer_1" height="50" viewBox="0 0 512 512" width="40" alt="" srcset="">
+                                </div>
+                                <div class="solu_title text-muted">
+                                    <h4>Avis</h4>
+                                </div>
+                                <div class="solu_description text-muted">
+                                    <p>
+                                        La dernière enquête Ebay/Médiamétrie nous informe que les avis sur internet continuent à bien se porter : +8% de consultation et + 7% d’avis publiés.
+
+                                        C’est une tendance lourde. Pourtant on peut dénoncer l’existence de faux avis. Justement les avis de vos clients sont authentiques et permettent de crédibiliser votre rôle tout en valorisant l’excellence de votre profession.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="solution_card">
+                                <div class="hover_color_bubble"></div>
+                                <div class="so_top_icon">
+                                    <img src="https://picsum.photos/800/600?image=943" id="Layer_1" height="50" viewBox="0 0 512 512" width="40" alt="" srcset="">
+                                </div>
+                                <div class="solu_title text-muted">
+                                    <h4>Maintenir le contact avec le client</h4>
+                                </div>
+                                <div class="solu_description text-muted">
+                                    <p>
+                                        À partir de 19 heures, en général, l’agence est fermée.
+
+                                        Pourtant, c’est le soir, à leur domicile, que les clients prennent du temps pour la préparation de leurs vacances.C’est tellement facile de mettre en place une rubrique spécifique qui permet aux clients de retrouver ses réservations, à tout moment, en dehors des horaires d’ouverture.
+
+                                        Dans l'activite du transport,le service est un critère important.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <!--  -->
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
             <!-- end row -->
         </div>
     </div>
