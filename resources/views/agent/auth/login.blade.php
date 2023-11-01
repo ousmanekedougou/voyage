@@ -1,4 +1,18 @@
 @extends('user.layouts.app',['title' => 'Connexion'])
+@section('headSection')
+<style>
+    .navbar-expand-lg{
+        background:#586ce4 !important;
+    }
+    @media only screen and (max-width:1000px) {
+        .navbar-expand-lg{background:white !important;
+            z-index: 20;
+        }
+        .account-pages{
+        }
+    }
+</style>
+@endsection
 @section('main-content')
         <div class="account-pages my-5 pt-sm-5">
             <div class="container">
