@@ -42,6 +42,46 @@
                                 </ul>
                             </main>
                         </div>
+
+                        <div class="right-bar">
+                            <div data-simplebar class="h-100">
+                                <div class="rightbar-title d-flex align-items-center px-3 py-4">
+
+                                    <h5 class="m-0 me-2">Autres regions</h5>
+
+                                    <a href="javascript:void(0);" class="right-bar-toggle ms-auto">
+                                        <i class="mdi mdi-close noti-icon"></i>
+                                    </a>
+                                </div>
+
+                                <div class="tab-content py-4">
+                                            <div class="tab-pane show active" id="chat">
+                                                <div>
+                                                    <ul class="list-unstyled chat-list" data-simplebar>
+                                                        @foreach(region() as $region)
+                                                            <li class="">
+                                                                <a href="{{ route('customer.agence.region',$region->slug) }}">
+                                                                    <div class="media">
+                                                                        <div class="align-self-center me-3">
+                                                                            <img src="{{asset('admin/assets/images/bus.svg')}}" class="rounded-circle avatar-xs" alt="">
+                                                                        </div>
+                                                                        
+                                                                        <div class="media-body overflow-hidden">
+                                                                            <h5 class="text-truncate font-size-14 mb-1">{{$region->name}}</h5>
+                                                                            <p class="text-truncate mb-0">{{$region->agences->count()}} agences</p>
+                                                                        </div>
+                                                                        {{--<div class="font-size-11">05 min</div>--}}
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                            </div> <!-- end slimscroll-menu-->
+                        </div>
                         
                         @else
 
@@ -58,29 +98,7 @@
                     </div>
                 </div>
 
-                <div class="right-bar">
-                    <div data-simplebar class="h-100">
-                        <div class="rightbar-title d-flex align-items-center px-3 py-4">
-
-                            <h5 class="m-0 me-2">Agences d'autres regions</h5>
-
-                            <a href="javascript:void(0);" class="right-bar-toggle ms-auto">
-                                <i class="mdi mdi-close noti-icon"></i>
-                            </a>
-                        </div>
-
-                        <!-- Settings -->
-                        @foreach(region() as $region)
-                        <hr class="" />
-                        <div class="p-1">
-                            <a href="{{ route('customer.agence.region',$region->slug) }}" class="region-list">
-                                <i class="bx bx-map align-middle me-2"></i> {{$region->name}}
-                            </a>
-                        </div>
-                        @endforeach
-
-                    </div> <!-- end slimscroll-menu-->
-                </div>
+                
 
             </footer>
 

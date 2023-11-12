@@ -126,7 +126,8 @@
 
                                     <div class="blog-slider__item swiper-slide">
                                         <div class="blog-slider__img">
-                                        <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759871/alessandro-capuzzi-799180-unsplash.webp" alt="">
+                                        <!-- <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759871/alessandro-capuzzi-799180-unsplash.webp" alt=""> -->
+                                        <i class="fa-solid fa-clipboard-question"></i>
                                         </div>
                                         <div class="blog-slider__content">
                                         <div class="blog-slider__title">Pour quoi avoir un compte TouCki ?</div>
@@ -323,7 +324,8 @@
 
                     <div class="blog-slider__item swiper-slide">
                         <div class="blog-slider__img">
-                        <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759871/alessandro-capuzzi-799180-unsplash.webp" alt="">
+                        <!-- <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759871/alessandro-capuzzi-799180-unsplash.webp" alt=""> -->
+                        <i class="fa fa-clipboard-question fa-item"></i>
                         </div>
                         <div class="blog-slider__content">
                         <div class="blog-slider__title">Pour quoi avoir un compte TouCki ?</div>
