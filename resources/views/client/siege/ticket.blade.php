@@ -282,11 +282,11 @@
                                             <div class="screen-bus__payment">
                                                 <span class="@if($ticket->voyage_status == 1) bg-success text-white @endif">
                                                     @if($ticket->payment_methode == 1)
-                                                        <i class="fab fa-cc-mastercard font-size-24 text-primary align-middle me-2"></i>Wave
+                                                        <img src="{{asset('user/assets/images/wave.png')}}" alt="" class="image-methode-payment align-middle me-2"> Wave
                                                     @elseif($ticket->payment_methode == 2)
-                                                        <i class="fab fa-cc-paypal font-size-24 text-primary align-middle me-2"></i>Orange Money
+                                                        <img src="{{asset('user/assets/images/orange-money.png')}}" alt="" class="image-methode-payment align-middle me-2"> Orange Money
                                                     @else
-                                                        <i class="mdi mdi-bitcoin font-size-24 text-warning align-middle me-2"></i>Methode
+                                                        <img src="{{asset('user/assets/images/image.png')}}" alt="" class="image-methode-payment align-middle me-2"> Non payé
                                                     @endif
                                                 </span>
                                             </div>
@@ -316,9 +316,9 @@
                                                 <div class="screen-bus__price">
                                                     <span class="badge p-1 @if( $ticket->getAmount() == $ticket->ville->getAmount()) bg-success @else bg-warning @endif ">
                                                         @if($ticket->getAmount() == $ticket->ville->getAmount())
-                                                        <a href="{{ route('customer.ticker_pdf',$ticket->id) }}" class="badge bg-success p-1"> Ticket payé : {{$ticket->getAmount()}}  <i class="fa fa-download"></i></a>
+                                                            <a href="{{ route('customer.ticker_pdf',$ticket->id) }}" class="badge bg-success p-1"> {{$ticket->getAmount()}} : Ticket payé <i class="fa fa-download"></i></a>
                                                         @else
-                                                            {{$ticket->getAmount()}} : Ticket non payé
+                                                            {{$ticket->ville->getAmount()}} : Ticket non payé
                                                         @endif
                                                     </span>
                                                 </div>

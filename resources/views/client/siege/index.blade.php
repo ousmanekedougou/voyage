@@ -10,7 +10,7 @@
             
 
             <div class="row">
-                <div class="col-lg-5">
+                <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
@@ -43,18 +43,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-7">
-                    <div class="card">
-                        <div class="card-body">
-                            <h6 style="font-weight: 900;">Informations importantes: </h6>
-                            <p class="mb-1">
-                                <span class="text-warning" style="font-weight: 900;"> <i class="fa fa-exclamation-circle"> </i> Attention : </span> Vous devez choisire une date superieure ou egale a aujourdhuit.
-                            </p>
-                            <p class="mb-1">
-                                <span class="text-warning" style="font-weight: 900;"> <i class="fa fa-exclamation-circle"> </i> Remarque : </span> @if($agence->method_ticket == 0) Votre tiket est remboursable meme apres le depart du bus.@else Votre tiket n'est remboursable @endif
-                            </p>
-                        </div>
-                    </div>
+                <div class="alert alert-warning alert-dismissible fade show " role="alert">
+                    <h6 class="" style="font-weight: 900;"> <i class="fa fa-exclamation-circle"> </i> Remarque: </h6>
+                        @if($agence->method_ticket == 0) Votre tiket est remboursable meme apres le depart du bus.@else Votre tiket n'est remboursable @endif
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             </div>
             <!-- end row -->
@@ -186,13 +178,5 @@
             </div>
         </div>
     @endforeach
-    <!-- Fin du modal de l'ajout -->
-
-
-
-
-
-
-
-           
+    <!-- Fin du modal de l'ajout -->           
 @endsection

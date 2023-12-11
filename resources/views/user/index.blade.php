@@ -480,40 +480,40 @@
 
 
     <section class="section sectionCompteDesktope" id="features">
-    <div class="container">
-        <div class="row align-items-center mt-5 pt-md-5">
-            <div class="col-md-5">
-                <div class="mt-4 mt-md-0">
-                    <div class="d-flex align-items-center mb-2">
-                        <div class="features-number font-weight-semibold display-4 me-3">02</div>
-                        <h4 class="mb-0">Pourquoi est-il avantageux de creer un compte client ?</h4>
-                    </div>
-                    <p class="text-muted">
-                        Profitez pleinement de l'expérience TouCki, <br>
-                        Profitez des réservations et des remboursements plus rapides ainsi que d'un accès à des réductions grâce à des agences de transport dans tout le pays.
-                    </p>
-                    <div class="text-muted mt-4">
-                        <p class="mb-2"><i class="mdi mdi-circle-medium text-success me-1"></i>
-                            Horaires et billets pour tous vos déplacements.
+        <div class="container">
+            <div class="row align-items-center mt-5 pt-md-5">
+                <div class="col-md-5">
+                    <div class="mt-4 mt-md-0">
+                        <div class="d-flex align-items-center mb-2">
+                            <div class="features-number font-weight-semibold display-4 me-3">02</div>
+                            <h4 class="mb-0">Pourquoi est-il avantageux de creer un compte client ?</h4>
+                        </div>
+                        <p class="text-muted">
+                            Profitez pleinement de l'expérience TouCki, <br>
+                            Profitez des réservations et des remboursements plus rapides ainsi que d'un accès à des réductions grâce à des agences de transport dans tout le pays.
                         </p>
-                        <p><i class="mdi mdi-circle-medium text-success me-1"></i>
-                            Il n'a jamais été aussi simple de réserver un billet de bus au Sénégal.
-                        </p>
+                        <div class="text-muted mt-4">
+                            <p class="mb-2"><i class="mdi mdi-circle-medium text-success me-1"></i>
+                                Horaires et billets pour tous vos déplacements.
+                            </p>
+                            <p><i class="mdi mdi-circle-medium text-success me-1"></i>
+                                Il n'a jamais été aussi simple de réserver un billet de bus au Sénégal.
+                            </p>
+                        </div>
+                        <div class="button-items mb-3">
+                            <a href="{{ route('client.register') }}" class="btn btn-primary btn-block-for-client-create"> <i class="bx bx-user-circle"> </i> Créer votre compte client TouCki</a>
+                        </div> 
                     </div>
-                    <div class="button-items mb-3">
-                        <a href="{{ route('client.register') }}" class="btn btn-primary btn-block-for-client-create"> <i class="bx bx-user-circle"> </i> Créer votre compte client TouCki</a>
-                    </div> 
+                </div>
+                <div class="col-md-6  col-sm-8 ms-md-auto">
+                    <div class="mt-4 me-md-0">
+                        <img src="{{('user/assets/images/dowload/mobile.svg')}}" alt="" class="img-fluid mx-auto d-block" style="width:
+                        70%;height:auto;">
+                    </div>
                 </div>
             </div>
-            <div class="col-md-6  col-sm-8 ms-md-auto">
-                <div class="mt-4 me-md-0">
-                    <img src="{{('user/assets/images/dowload/mobile.svg')}}" alt="" class="img-fluid mx-auto d-block" style="width:
-                    70%;height:auto;">
-                </div>
-            </div>
+            <!-- end row -->
         </div>
-        <!-- end row -->
-    </div>
     </section>
 
     

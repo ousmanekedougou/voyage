@@ -184,3 +184,6 @@
     .screen-bus__price{
         padding-top: 3px;
     }
+    .image-methode-payment{
+        width:20px;height:20px; border-radius: 100%;
+    }
