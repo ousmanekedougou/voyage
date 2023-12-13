@@ -550,7 +550,7 @@ main
         height: auto;
         background-color: white;
         left: 50%;
-        margin-left: -228px;
+        margin-left: -223px;
         padding: 0 2em;
         border-radius: 40px;
         box-shadow: rgb(50, 50, 93 / 25%) 0 50px 100px -20px,
@@ -600,6 +600,10 @@ main
     main ul li a span{
         font-size: 10px;
 
+    }
+
+    .footer-user{
+        margin-left: -190px;
     }
 
    

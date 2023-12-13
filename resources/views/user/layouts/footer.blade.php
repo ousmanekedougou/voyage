@@ -130,7 +130,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="container">
-                        <main>
+                        <main class="footer-user">
                             <ul>
                                 <li class="{{ set_active_roote_bottom_bar('index') }} ">
                                     <a href="{{ route('index') }}" id="home">
@@ -139,12 +139,7 @@
                                     </a>
                                 </li>
                             
-                                <li class="{{ set_active_roote_bottom_bar('about.index') }} ">
-                                    <a href="{{ route('about.index') }}" id="drop">
-                                        <span>A Propos</span>
-                                        <i class="bx bxs-file   fa-fa-item"></i>
-                                    </a>
-                                </li>
+                                
 
                                 <li class="{{ set_active_roote_bottom_bar('client.index') }} ">
                                     <a href="{{ route('client.index') }}" id="store">

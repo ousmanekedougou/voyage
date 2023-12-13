@@ -534,7 +534,7 @@
             </div>
             
         </header>
-         {!! Toastr::message() !!}
+        {!! Toastr::message() !!}
 
        
 

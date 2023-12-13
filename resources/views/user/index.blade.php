@@ -46,15 +46,26 @@
         <!-- end container -->
     </section>
     <!-- hero section end -->
-    {{--
+  
     <section class="section p-0 home-section-mobile">
         <div class="container">
             <div class="row">
                 <img class="setting-img" src="{{asset('user/assets/images/bus.svg') }}" alt="" srcset="">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="text-muted">
+                            <h5 class="mb-4">Des options de voyage sur TouCki</h5>
+                            <p class="text-muted mb-4 text-justify">
+                                Grâce à un réseau développé au Sénégal, de nombreux trajets en bus et car pas chers de courte et longue-distance vous sont proposés par des compagnies routières renommées. 
+                                <br> Voyager en bus, c’est choisir des trajets à prix réduits dans tout le Sénégal, comparés au train et à l’avion.
+                                <br> Avec des itinéraires quotidiens vers les villes et capitales du pays, vous pouvez organiser des escapades parfaitement adaptées à tous les budgets.
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
-    --}}
  <!-- currency price section start Version mobile  // section_sm-->
     <section class="section p-0 bg-white section-collumn">
         <div class="container">
@@ -146,7 +157,7 @@
                                             <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759872/kuldar-kalvik-799168-unsplash.webp" alt="">
                                         </div>
                                         <div class="blog-slider__content">
-                                            <div class="blog-slider__title">Votre identité</div>
+                                            <div class="blog-slider__title"> 1) Votre identité</div>
                                             <div class="blog-slider__text">
                                                 Le site de votre agence est votre identité.
 
@@ -164,7 +175,7 @@
                                         <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759871/jason-leung-798979-unsplash.webp" alt="">
                                         </div>
                                         <div class="blog-slider__content">
-                                        <div class="blog-slider__title">Avoir une vitrine en ligne</div>
+                                        <div class="blog-slider__title"> 2) Avoir une vitrine en ligne</div>
                                         <div class="blog-slider__text">
                                             Avoir un site permet, à tout internaute qui cherche une agence de voyages à proximité de son domicile ou de son travail, d’apparaitre sur Google qui devient, par la force des choses, une sorte d’annuaire universel.
                                         </div>
@@ -176,7 +187,7 @@
                                         <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759871/alessandro-capuzzi-799180-unsplash.webp" alt="">
                                         </div>
                                         <div class="blog-slider__content">
-                                        <div class="blog-slider__title">Être informé sur sa clientèle</div>
+                                        <div class="blog-slider__title"> 3) Être informé sur sa clientèle</div>
                                         <div class="blog-slider__text">
                                             La formule est connue : "un homme informé en vaut deux’".
 
@@ -191,7 +202,7 @@
                                         <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759871/alessandro-capuzzi-799180-unsplash.webp" alt="">
                                         </div>
                                         <div class="blog-slider__content">
-                                        <div class="blog-slider__title">Interactivité</div>
+                                        <div class="blog-slider__title"> 4) Interactivité</div>
                                         <div class="blog-slider__text">
                                             Penser interactivité. Vos clients s’expriment sur la Toile.
                                             Accompagnez cette tendance avec un simple formulaire de contact, un espace témoignage, un forum, etc. 
@@ -206,7 +217,7 @@
                                         <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759871/alessandro-capuzzi-799180-unsplash.webp" alt="">
                                         </div>
                                         <div class="blog-slider__content">
-                                        <div class="blog-slider__title">Avis</div>
+                                        <div class="blog-slider__title"> 5) Avis</div>
                                         <div class="blog-slider__text">
                                             La dernière enquête Ebay/Médiamétrie nous informe que les avis sur internet continuent à bien se porter : +8% de consultation et + 7% d’avis publiés.
 
@@ -220,7 +231,7 @@
                                         <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759871/alessandro-capuzzi-799180-unsplash.webp" alt="">
                                         </div>
                                         <div class="blog-slider__content">
-                                        <div class="blog-slider__title">Maintenir le contact avec le client</div>
+                                        <div class="blog-slider__title"> 6) Maintenir le contact avec le client</div>
                                         <div class="blog-slider__text">
                                             À partir de 19 heures, en général, l’agence est fermée.
 
