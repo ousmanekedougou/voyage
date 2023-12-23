@@ -6,13 +6,6 @@
         <div class="container-fluid">
 
             <!-- start page title -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                        <h4 class="mb-sm-0 font-size-18">Tableau de bord</h4>
-                    </div>
-                </div>
-            </div>
 
             <div class="row">
                 <div class="col-lg-12">
@@ -21,17 +14,10 @@
                             <div class="row">
                                 <div class="col-lg-4">
                                     <div class="media">
-                                        <div class="me-3">
-                                            @if(Auth::guard('client')->user()->image != '')
-                                                <img src="{{(Storage::url(Auth::guard('client')->user()->image))}}" alt="" class="avatar-md rounded-circle img-thumbnail">
-                                            @else
-                                                <img src="{{ asset('admin/assets/images/users/profil.jpg') }}" alt="" class="avatar-md rounded-circle img-thumbnail">
-                                            @endif
-                                        </div>
                                         <div class="media-body align-self-center">
                                             <div class="text-muted">
-                                                <p class="mb-2">Bienvenue sur votre compte</p>
-                                                <h5 class="mb-1">TouCki</h5>
+                                                <h5 class="mb-1">Bonjour {{ Auth::guard('client')->user()->name }}</h5>
+                                                <p class="mb-2">Bienvenue sur votre compte TouCki</p>
                                             </div>
                                         </div>
                                     </div>
@@ -93,7 +79,7 @@
                                     <div class="row p-1 text-center show-agence-lg-mobile" >
                                         <ul class="list-inline mb-0 text-center">
                                             <li class="list-inline-item me-3">
-                                                <a href="{{ route('customer.agence.about',$agence->slug) }}" class="badge bg-primary text-center p-2"> <i class="bx bx-file"></i> A Propos</a>
+                                                <a href="{{ route('customer.agence.about',$agence->slug) }}" class="badge bg-primary text-center p-2"> <i class="bx bx-file"></i> Infos</a>
                                             </li>
                                             <li class="list-inline-item me-3">
                                                 <a href="{{ route('customer.agence.show',$agence->slug) }}" class="badge bg-success text-center p-2"> <i class="bx bx-map"></i> Sieges</a>

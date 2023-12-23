@@ -7,51 +7,34 @@
     .navbar-expand-lg{
         background:#586ce4 !important;
     }
+    .row-login{
+        margin-top: 50px;
+    }
     @media only screen and (max-width:1000px) {
         .navbar-expand-lg{background:white !important;
             z-index: 20;
         }
-        .account-pages{
+        .row-login{
+            margin-top: 100px;
         }
+        
     }
 </style>
 @endsection
 @section('main-content')
     <div class="account-pages my-5 pt-sm-5">
         <div class="container">
-            <div class="row justify-content-center">
+            <div class="row justify-content-center row-login">
                 <div class="col-md-8 col-lg-6 col-xl-5">
                     <div class="card overflow-hidden">
                         <div class="bg-primary bg-soft">
                             <div class="row">
-                                <div class="col-7">
-                                    <div class="text-primary p-4">
-                                        <h5 class="text-primary">Compte agence TouCki</h5>
-                                    </div>
-                                </div>
-                                <div class="col-5 align-self-end">
-                                    <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" class="img-fluid">
+                                <div class="text-primary p-4">
+                                    <h5 class="text-primary">Compte agence TouCki</h5>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body pt-0"> 
-                            <div class="auth-logo">
-                                <a href="/" class="auth-logo-light">
-                                    <div class="avatar-md profile-user-wid mb-4">
-                                        <span class="avatar-title rounded-circle bg-light">
-                                            <img src="{{asset('admin/assets/images/logo-light.svg')}}" alt="" class="rounded-circle" height="34">
-                                        </span>
-                                    </div>
-                                </a>
-
-                                <a href="/" class="auth-logo-dark">
-                                    <div class="avatar-md profile-user-wid mb-4">
-                                        <span class="avatar-title rounded-circle bg-light">
-                                            <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" class="rounded-circle" height="34">
-                                        </span>
-                                    </div>
-                                </a>
-                            </div>
                             <div class="p-2">
                                 @if(count($errors) > 0)
                                     @foreach($errors->all() as $error)

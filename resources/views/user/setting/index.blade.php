@@ -695,20 +695,20 @@
 @endsection
 @section('footerSection')
 <script>
-   jQuery(document).ready(function($) {
-  var alterClass = function() {
-    var ww = document.body.clientWidth;
-    if (ww < 600) {
-      $('.setting-mobile').removeClass('flex-column');
-    } else if (ww >= 601) {
-      $('.setting-mobile').addClass('flex-column');
+    jQuery(document).ready(function($) {
+        var alterClass = function() {
+        var ww = document.body.clientWidth;
+        if (ww < 600) {
+            $('.setting-mobile').removeClass('flex-column');
+        } else if (ww >= 601) {
+            $('.setting-mobile').addClass('flex-column');
+        };
     };
-  };
-  $(window).resize(function(){
-    alterClass();
-  });
-  //Fire it when the page first loads:
-  alterClass();
-});
+    $(window).resize(function(){
+        alterClass();
+    });
+        //Fire it when the page first loads:
+        alterClass();
+    });
 </script>
 @endsection

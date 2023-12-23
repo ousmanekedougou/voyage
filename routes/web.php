@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [App\Http\Controllers\User\HomeController::class, 'index'])->name('index');
-Route::get('/about', [App\Http\Controllers\User\AboutController::class, 'index'])->name('about.index');
+// Route::get('/about', [App\Http\Controllers\User\AboutController::class, 'index'])->name('about.index');
 
 Route::get('/agence', [App\Http\Controllers\User\AgenceController::class, 'index'])->name('agence.index');
 Route::get('/agence/a-propos', [App\Http\Controllers\User\AgenceController::class, 'about'])->name('agence.about');

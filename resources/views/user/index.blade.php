@@ -13,14 +13,9 @@
     .section .container .row_pricipal{
         margin-top:-70px;
     }
-    /* .card-first{
-        background-image:url(./admin/assets/images/carte-monde.png) !important;
-        background-size:cover;background-position:center !important;
-    } */
-    
 </style>
 @section('headSection')
-<link rel="stylesheet" href="{{asset('admin/assets/css/card.css')}}">
+    <link rel="stylesheet" href="{{asset('admin/assets/css/card.css')}}">
 @endsection
 @section('main-content')
   <!-- hero section start -->
@@ -255,7 +250,7 @@
                                             <div class="mt-4 me-md-0">
                                             <img src="{{('user/assets/images/dowload/compteClient.svg')}}" alt="" class="img-fluid mx-auto d-block" style="width: 60%;">
                                         </div>
-                                        <h5 class="text-center">Creer votre compte TouCki</h5>
+                                        <h5 class="text-center">créer votre compte TouCki</h5>
                                         <div class="mt-4 mt-md-auto">
                                             <p class="text-muted">
                                                 Profitez de réservations et de remboursements plus rapides ainsi que d'un accès à agences de transport qui repondent à tout vos attentes partout dans le pays .

@@ -230,27 +230,15 @@
         <aside class="app">
             <div class="screen-wrap">
                 <section class="screen-bus">
-                {{--
+
                     <div class="screen-bus__location-filter-wrap">
                         <div class="screen-bus__location-filter-row">
                         <div class="screen-bus__location">
                             <div class="screen-bus__location-row">
-                            <span class="screen-bus__location-col">{{Auth::guard('client')->user()->name}}</span>
-                            <span class="screen-home__rs-arrow"></span>
-                            <span class="screen-bus__location-col"></span>
+                                <span class="screen-bus__location-col">Vos tickets de bus</span>
                             </div>
-                            <div class="screen-bus__date-row">
-                            <span>Wed, 10/ 12/ 2019</span> - <span>Fri, 12/ 12/ 2019</span>
-                            </div>
-                        </div>
-                        <div class="screen-bus__filter">
-                            <figure>
-                                <img src="https://i.ibb.co/ZJt9tkM/filter.png">
-                            </figure>
-                        </div>
                         </div>
                     </div>
-                --}}
 
                     <div class="screen-bus__travels-wrap">
                         <div class="screen-bus__travels-row">

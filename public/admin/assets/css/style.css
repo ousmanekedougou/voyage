@@ -169,7 +169,8 @@
     height: auto;
     opacity: 1;
     visibility: visible;
-    overflow: visible;
+    overflow: hidden;
+    bottom: 0;
 }
 .button-client-bar{
     visibility: visible;
@@ -199,7 +200,7 @@
 .show-agence-lg-mobile{
     margin-top: -20px; 
     margin-bottom:-15px;
-    margin-left: 15px;
+    margin-left: 40px;
 }
 
 @media only screen and (max-width:1000px) {
@@ -513,7 +514,7 @@
         padding: 3px;
     }
     .show-agence-lg-mobile{
-        margin-left: 40px;
+        margin-left: 73px;
     }
     
    
@@ -680,7 +681,6 @@ main
     /* Fin de la partie du ticket en mode mobile responsive */
 
     .login-client{
-
         padding: 5px;
         padding-top: 100px;
     }

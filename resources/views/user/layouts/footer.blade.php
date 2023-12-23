@@ -42,8 +42,59 @@
     </section>
     <!-- Roadmap end -->
      
+    
+
+    
+    <div class="container-fluid">
+        <footer class="footer footer-mobile">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="container">
+                        <main class="footer-user">
+                            <ul>
+                                <li class="{{ set_active_roote_bottom_bar('index') }} ">
+                                    <a href="{{ route('index') }}" id="home">
+                                        <span> Acceuil</span>
+                                        <i class="bx bx-home-circle   fa-fa-item"></i>
+                                    </a>
+                                </li>
+                            
+                                
+
+                                <li class="{{ set_active_roote_bottom_bar('client.index') }} ">
+                                    <a href="{{ route('client.index') }}" id="store">
+                                        <span>Colis</span>
+                                        <i class="bx bx-store-alt  fa-fa-item"></i>
+                                    </a>
+                                </li>
+
+                                <li class="{{ set_active_roote_bottom_bar('setting.index') }} ">
+                                    <a href="{{ route('setting.index') }}" id="wishlist">
+                                        <span>Infos</span>
+                                        <i class="bx bx-cog  fa-fa-item"></i>
+                                    </a>
+                                </li>
+
+                                <li class="{{ set_active_roote_bottom_bar('customer.customer.login') }}">
+                                    <a href="{{ route('customer.customer.login') }}" class="header-item noti-icon right-bar-toggle" id="nav-toggle">
+                                        <span>Connexion</span>
+                                        <i class="bx bx-log-in  fa-item"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </main>
+                    </div>
+
+
+                </div>
+            </div>
+        </footer>
+        <!-- Footer end -->
+    </div>
+
+
      <!-- Footer start -->
-    <footer class="landing-footer footer-desktop">
+     <footer class="landing-footer footer-desktop">
         <div class="container">
             {{--
             <div class="row">
@@ -123,54 +174,6 @@
         </div>
         <!-- end container -->
     </footer>
-
-    
-    <div class="container-fluid">
-        <footer class="footer footer-mobile">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="container">
-                        <main class="footer-user">
-                            <ul>
-                                <li class="{{ set_active_roote_bottom_bar('index') }} ">
-                                    <a href="{{ route('index') }}" id="home">
-                                        <span> Acceuil</span>
-                                        <i class="bx bx-home-circle   fa-fa-item"></i>
-                                    </a>
-                                </li>
-                            
-                                
-
-                                <li class="{{ set_active_roote_bottom_bar('client.index') }} ">
-                                    <a href="{{ route('client.index') }}" id="store">
-                                        <span>Colis</span>
-                                        <i class="bx bx-store-alt  fa-fa-item"></i>
-                                    </a>
-                                </li>
-
-                                <li class="{{ set_active_roote_bottom_bar('setting.index') }} ">
-                                    <a href="{{ route('setting.index') }}" id="wishlist">
-                                        <span>Infos</span>
-                                        <i class="bx bx-cog  fa-fa-item"></i>
-                                    </a>
-                                </li>
-
-                                <li class="{{ set_active_roote_bottom_bar('customer.customer.login') }}">
-                                    <a href="{{ route('customer.customer.login') }}" class="header-item noti-icon right-bar-toggle" id="nav-toggle">
-                                        <span>Connexion</span>
-                                        <i class="bx bx-log-in  fa-item"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </main>
-                    </div>
-
-
-                </div>
-            </div>
-        </footer>
-        <!-- Footer end -->
-    </div>
    
     <!--  Large modal example -->
     <div class="modal fade bs-exampleLogin-modal-lg" tabindex="-1" role="dialog"
