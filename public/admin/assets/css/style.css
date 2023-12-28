@@ -685,6 +685,19 @@ main
         padding-top: 100px;
     }
 
+    /* Span des botton d'inscription pour les sieges du clients */
+    .siege-mobile-top{
+        margin-top: -2rem;
+    }
+    .button-right-siege{
+        display:flex;
+        flex-direction: column;
+        float: right;
+    }
+    .button-right-siege .span-chat1{
+        margin-bottom: 8px;
+    }
+
    
 }
 

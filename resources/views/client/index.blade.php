@@ -1,5 +1,4 @@
 @extends('admin.layouts.app')
-
 @section('main-content')
 
     <div class="page-content">
@@ -7,7 +6,7 @@
 
             <!-- start page title -->
 
-            <div class="row">
+            <div class="row sectionCompteDesktope">
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
@@ -54,7 +53,7 @@
             <!-- end row -->
 
             <!-- Blog start -->
-                <div class="row mb-1">
+                <div class="row mb-1 sectionCompteDesktope">
                     @foreach($agences as $agence)
                         <div class="col-xl-4 col-sm-6">
                             <div class="card" style="box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;">
@@ -144,6 +143,7 @@
                         </div>
                     @endforeach
                     <!-- end container -->
+
                     <div class="row mb-3">
                         <div class="col-12">
                             <div class="" style="margin-right:40%;">
@@ -164,6 +164,99 @@
          
         </div>
         <!-- container-fluid -->
+
+        <div class="tab-pane show active sectionCompteMobile" id="chat">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="media">
+                                <div class="media-body align-self-center">
+                                    <div class="text-muted">
+                                        <h5 class="mb-1">Bonjour {{ Auth::guard('client')->user()->name }}</h5>
+                                        <p class="mb-2">Bienvenue sur votre compte TouCki</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 align-self-center">
+                            <div class="text-lg-center">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div>
+                                            <p class="text-muted text-truncate mb-2">Total Agences</p>
+                                            <h5 class="mb-0">{{ $agenceCount }}</h5>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div>
+                                            <p class="text-muted text-truncate mb-2">Total Sieges</p>
+                                            <h5 class="mb-0">{{ $siege_all->count() }}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end row -->
+                </div>
+            </div>
+            <div>
+                <ul class="list-unstyled chat-list">
+                    {{-- data-simplebar style="max-height: 410px;" --}}
+                @foreach($agences as $agence)
+                    <li class="active">
+                        <a href="{{ route('customer.agence.show',$agence->slug) }}">
+                            <div class="media">
+                                <div class="align-self-center me-3">
+                                    <i class="mdi mdi-arrow-right font-size-10"></i>
+                                </div>
+                                <div class="align-self-center me-3">
+                                    @if($agence->logo != Null)
+                                        <img src="{{Storage::url($agence->logo)}}" class="rounded-circle avatar-xs" alt="">
+                                    @else
+                                        <img src="{{asset('admin/assets/images/users/profil.jpg')}}" class="rounded-circle avatar-xs" alt="">
+                                    @endif
+                                </div>
+                                
+                                <div class="media-body overflow-hidden">
+                                    <h5 class="text-truncate font-size-14 mb-1">{{ $agence->name }}</h5>
+                                    <p class="text-truncate mb-0"> <i class="fa fa-mobile"></i> {{ $agence->phone }}</p>
+                                </div>
+                                <div class="font-size-11">
+                                    {{ $agence->sieges->count() }} Siege(s)
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                    <br>
+                @endforeach
+                    {{--
+                    <li>
+                        <a href="#">
+                            <div class="media">
+                                <div class="align-self-center me-3">
+                                    <i class="mdi mdi-circle font-size-10"></i>
+                                </div>
+
+                                <div class="avatar-xs align-self-center me-3">
+                                    <span class="avatar-title rounded-circle bg-primary bg-soft text-primary">
+                                        M
+                                    </span>
+                                </div>
+                                <div class="media-body overflow-hidden">
+                                    <h5 class="text-truncate font-size-14 mb-1">Mitchel Givens</h5>
+                                    <p class="text-truncate mb-0">Hey! there I'm available</p>
+                                </div>
+                                <div class="font-size-11">3 hrs</div>
+                            </div>
+                        </a>
+                    </li>
+                    --}}
+                </ul>
+            </div>
+        </div>
     </div>
     <!-- End Page-content -->
 

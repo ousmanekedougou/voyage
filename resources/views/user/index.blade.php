@@ -4,7 +4,7 @@
         background-image:url(./user/assets/images/dowload/home.jpg) !important;
         background-size:cover;background-position:top !important;
         height: 100px !important;
-        background:#586ce4 !important;
+        /* background:#586ce4 !important; */
         /* background:#0404d7 !important; */ 
     }
     .btn-block-for-agence-create,.btn-block-for-client-create{
@@ -330,8 +330,7 @@
 
                     <div class="blog-slider__item swiper-slide">
                         <div class="blog-slider__img">
-                        <!-- <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759871/alessandro-capuzzi-799180-unsplash.webp" alt=""> -->
-                        <i class="fa fa-clipboard-question fa-item"></i>
+                            <img src="{{ asset('admin/assets/images/bus.svg') }}" alt="">
                         </div>
                         <div class="blog-slider__content">
                         <div class="blog-slider__title">Pour quoi avoir un compte TouCki ?</div>
@@ -347,7 +346,7 @@
                     <div class="blog-slider__item swiper-slide">
                         <div class="blog-slider__img">
                             
-                            <img src="https://res.cloudinary.com/muhammederdem/image/upload/q_60/v1535759872/kuldar-kalvik-799168-unsplash.webp" alt="">
+                            <img src="{{ asset('admin/assets/images/icone-ticke.png') }}" alt="">
                         </div>
                         <div class="blog-slider__content">
                             <div class="blog-slider__title">Votre identité</div>

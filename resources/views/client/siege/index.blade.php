@@ -1,5 +1,7 @@
 @extends('admin.layouts.app')
-
+@section('headSection')
+    <link href="{{asset('admin/assets/css/style.css')}}" rel="stylesheet" type="text/css" />
+@endsection
 
 @section('main-content')
 
@@ -9,7 +11,7 @@
             <!-- start page title -->
             
 
-            <div class="row">
+            <div class="row sectionCompteDesktope">
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
@@ -28,7 +30,7 @@
                                         <div class="media-body align-self-center">
                                             <div class="text-muted">
                                                 <h5 class="mb-1">Agence {{$agence->name}}</h5>
-                                                <p class="mb-2">Bienvenue sur votre compte client</p>
+
                                                 <p class="mb-0">
                                                     {{$sieges->count()}} sieges
                                                 </p>
@@ -52,7 +54,7 @@
             <!-- end row -->
 
             <!-- currency price section start-->
-            <div class="row mb-4">
+            <div class="row mb-4 sectionCompteDesktope">
                 @foreach($sieges as $siege)
                 <div class="col-xl-4 col-sm-6">
                     <div class="card">
@@ -106,6 +108,67 @@
          
         </div>
         <!-- container-fluid -->
+
+        <div class="tab-pane show active sectionCompteMobile siege-mobile-top" id="chat">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="media">
+                                <div class="media-body align-self-center">
+                                    <div class="text-muted">
+                                        <h5 class="mb-0">Agence {{$agence->name}}</h5>
+
+                                        <p class="mb-0">
+                                            <a href="{{ route('customer.agence.about',$agence->slug) }}" class="badge bg-info mt-1 p-1"> <i class="bx bx-file"></i> A Propos de nous</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end row -->
+                </div>
+            </div>
+            <div>
+                <ul class="list-unstyled chat-list">
+                    {{-- data-simplebar style="max-height: 410px;" --}}
+                    @foreach($sieges as $siege)
+                        <li class="active">
+                            <a href="#">
+                                <div class="media">
+                                    <div class="align-self-center me-3">
+                                        <i class="mdi mdi-arrow-right font-size-10"></i>
+                                    </div>
+                                    <div class="align-self-center me-3">
+                                        @if($agence->logo != Null)
+                                            <img src="{{Storage::url($siege->logo)}}" class="rounded-circle avatar-xs" alt="">
+                                        @else
+                                            <img src="{{asset('admin/assets/images/users/profil.jpg')}}" class="rounded-circle avatar-xs" alt="">
+                                        @endif
+                                    </div>
+                                    
+                                    <div class="media-body overflow-hidden">
+                                        <h5 class="text-truncate font-size-14 mb-1">Siege de {{ $siege->name }}</h5>
+                                        <p class="text-truncate mb-0"> <i class="fa fa-mobile"></i> {{ $siege->phone }}</p>
+                                    </div>
+                                    <div class="font-size-12 button-right-siege">
+                                        <span class="span-chat-siege span-chat1 rounded-circle" data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$siege->id}}">
+                                            S'inscrire <i class="fa fa-user-plus"></i>
+                                        </span>
+                                        
+                                        <span class="span-chat-siege rounded-circle">
+                                            Vos colis <i class="fa fa-suitcase-rolling"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <br>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
     </div>
     <!-- End Page-content -->
 

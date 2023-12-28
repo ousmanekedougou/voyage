@@ -61,7 +61,7 @@
                                             <div class="col-4">
                                                 <div>
                                                     <p class="text-muted text-truncate mb-2">Buses</p>
-                                                    <h5 class="mb-0">{{$busCount->count()}}</h5>
+                                                    <h5 class="mb-0">{{$buses->count()}}</h5>
                                                 </div>
                                             </div>
                                             <div class="col-4">
@@ -108,7 +108,7 @@
                                 
                                 <div class="row">
                                     @foreach($itineraire->buses as $bus)
-                                        @if(getBusToday() > 0)
+                                        @if($bus->clients->count() > 0)
                                             <div class="col-xl-4">
                                                 <div class="card bg-soft bg-white" style="width:100%;">
                                                     <div>

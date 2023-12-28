@@ -126,7 +126,7 @@ if (!function_exists('part')) {
 if (!function_exists('historical_hiere')) {
     function historical_hiere()
     {
-        $historical_hiere = Historical::where('siege_id',  Auth::guard('agent')->user()->siege_id)->where('registered_at', '<', Carbon::yesterday()->format('Y-m-d'))->first();
+        $historical_hiere = Historical::where('siege_id',  Auth::guard('agent')->user()->siege_id)->where('registered_at', '<', carbon_yesterday())->first();
         return $historical_hiere;
     }
 }
@@ -134,7 +134,7 @@ if (!function_exists('historical_hiere')) {
 if (!function_exists('historical_avant_hiere')) {
     function historical_avant_hiere()
     {
-        $historical_avant_hiere = Historical::where('siege_id',  Auth::guard('agent')->user()->siege_id)->where('registered_at', '<', Carbon::yesterday()->format('Y-m-d'))->first();
+        $historical_avant_hiere = Historical::where('siege_id',  Auth::guard('agent')->user()->siege_id)->where('registered_at', '<', carbon_yesterday())->first();
         return $historical_avant_hiere;
     }
 }
@@ -191,21 +191,3 @@ if (!function_exists('region')) {
     }
 }
 
-if (!function_exists('getBusToday')) {
-    function getBusToday()
-    {
-        $getBusToday = '';
-        $buses = Bus::where('siege_id', Auth::guard('agent')->user()->siege_id)->orderBy('id', 'ASC')->get();
-        foreach ($buses as $bus) {
-            foreach ($bus->clients as $client) {
-              if ($client->registered_at == Carbon::today()->format('Y-m-d')) {
-                $getBusToday = 1;
-              }else {
-                $getBusToday = 0;
-              }
-              return $getBusToday;
-            }
-        }
-
-    }
-}

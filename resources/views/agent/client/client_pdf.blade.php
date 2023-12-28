@@ -174,9 +174,9 @@
             <div class="row">
                 <div class="col-6">
                     <h2 class="heading">Matricule Buse: {{$getBuse->matricule}}</h2>
-                    <p class="sub-heading">Date: {{ carbon_today() }} </p>
-                    <p class="sub-heading">Rv : {{ $getBuse->heure_rv }}</p>
-                    <p class="sub-heading">Départ : {{ $getBuse->heure_depart }} </p>
+                    <p class="sub-heading" style="font-weight:600;">Itineraire: {{ $getBuse->itineraire->name }} </p>
+                    <p class="sub-heading">Date: {{ carbon_today() }} / Rv : {{ $getBuse->heure_rv }} / Départ : {{ $getBuse->heure_depart }}</p>
+                    <p class="sub-heading"></p>
                 </div>
                 <div class="col-6 siege">
                     <p class="heading">Siège de {{Auth::guard('agent')->user()->siege->name}} </p>

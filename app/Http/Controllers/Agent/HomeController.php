@@ -47,15 +47,15 @@ class HomeController extends Controller
             ->get();
             
             $clientCount = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)->where('registered_at',carbon_today())->get();
-            $busCount = Bus::where('siege_id',Auth::guard('agent')->user()->siege_id)->get();
+            
 
             // La liste des client du jour
-            $clients = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
-            ->where('registered_at',Carbon::today()->format('Y-m-d'))
-            ->where('status',0)
-            ->where('amount','!=',null)
-            ->orderBy('id','ASC')
-            ->paginate(10);
+            // $clients = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
+            // ->where('registered_at',Carbon::today()->format('Y-m-d'))
+            // ->where('status',0)
+            // ->where('amount','!=',null)
+            // ->orderBy('id','ASC')
+            // ->paginate(10);
 
             // Les client
             
@@ -92,7 +92,7 @@ class HomeController extends Controller
                 Historical::where('registered_at', '<', Carbon::today()->format('Y-m-d'))->where('siege_id', Auth::guard('agent')->user()->siege_id)->delete();
             }
 
-            return view('agent.index',compact('itineraires','clientCount','busCount','clients'));
+            return view('agent.index',compact('itineraires','clientCount','buses'));
 
         }elseif ($this->middleware(['IsAgent']) && Auth::guard('agent')->user()->role == 2 || Auth::guard('agent')->user()->role == 4) {
 

@@ -334,7 +334,7 @@
                     <p>
                         Lorsque vous réservez une connexion via notre site Web, nous collectons les données nécessaires (par exemple, le nom du voyageur, l'adresse e-mail, les informations de paiement) conformément à notre politique de confidentialité. En tant qu'agent commercial du fournisseur de services de voyage, nous soumettons ensuite la réservation au fournisseur de services de voyage concerné. Les billets sont vendus au nom et pour le compte du fournisseur (agences) respectif.
                     </p>
-                    <p style="color:red;">
+                    <p>
                         En cliquant sur le bouton sur notre page de réservation ("Payer maintenant"), vous faites une offre ferme pour conclure un contrat pour le service de transport ou de voyage respectif. Le contrat est conclu une fois que vous recevez une confirmation de réservation par l'agence concerné (déclaration d'acceptation par l'agence). Vous recevrez une confirmation de réservation par e-mail ainsi que les documents de voyage et notre facture. Les documents de voyage sont généralement des billets imprimables émis par le prestataire de services concerné et sont généralement envoyés sous forme de fichier PDF ou dans d'autres formats électroniques courants (tels que des billets mobiles avec codes QR). Dans certains cas et pour certaines correspondances, vous pouvez recevoir un code de réservation ou un bon de billet à la place des billets imprimables. Ceux-ci doivent être remboursés ou échangés contre un billet à la gare ou à l'aéroport avant le départ (au guichet ou à un distributeur automatique de billets).
                     </p>
                     <p>
@@ -378,21 +378,21 @@
                         Lorsque vous réservez directement sur notre site Web, nous facturons des frais de réservation pour notre service qui vous est fourni en vertu des présentes conditions générales d'utilisation. Les frais de service varient et seront affichés au moment de la réservation. Lorsque vous utilisez une devise étrangère, des frais de transaction étrangère peuvent également s'appliquer.
                     </p>
                     <p>
-                        Veuillez noter que nos frais de service ne sont pas remboursables. En effet, Nos Frais sont facturés pour les services d'intermédiation fournis par TouCki, qui sont exécutés lorsque la réservation Vous a été confirmée.
+                        Veuillez noter que nos frais de service ne sont pas remboursables. En effet, Nos Frais sont facturés pour les services d'intermédiation fournis par TouCki, qui sont exécutés lorsque la réservation vous a été confirmée.
                     </p>
                     <h4 class="h4-title">7.2. Frais de traitement des cartes</h4>
-                    {{--
+                    
                     <p>
-                        Nous Vous facturerons également des frais supplémentaires pour l'utilisation de certains modes de paiement conformément aux lois applicables, c'est-à-dire si Vous utilisez une carte d'entreprise ou un système tripartite (American Express ou Diners). Ces frais ne sont pas remboursables. Veuillez noter que nos systèmes détectent automatiquement le mode de paiement que vous utilisez réellement et les frais supplémentaires correspondants sont facturés, le cas échéant.
+                        Nous vous facturerons également des frais supplémentaires pour l'utilisation de certains modes de paiement conformément aux lois applicables, c'est-à-dire si vous utilisez une carte d'entreprise ou un système tripartite (Carte Gabe). Ces frais ne sont pas remboursables. Veuillez noter que nos systèmes détectent automatiquement le mode de paiement que vous utilisez réellement et les frais supplémentaires correspondants sont facturés, le cas échéant.
                     </p>
-                    --}}
+                    
 
                     <h4 class="h4-title">7.3. Frais de service pour les modifications ou les annulations</h4>
                     <p>
-                        Selon le fournisseur (agences) et le type de tarif, vous pouvez soit annuler et obtenir un remboursement de votre billet, soit modifier votre billet en ligne, via le votre profile ou directement auprès du fournisseur (agences). Nous vous informerons généralement des principales conditions lors du processus de réservation, mais nous vous conseillons vivement de lire et de comprendre les conditions générales des (agences) avant de finaliser votre réservation.
+                        Selon le fournisseur (agences) et le type de tarif, vous pouvez soit annuler et obtenir un remboursement de votre billet, soit modifier votre billet en ligne, via votre profile ou directement auprès du fournisseur (agences). Nous vous informerons généralement des principales conditions lors du processus de réservation, mais nous vous conseillons vivement de lire et de comprendre les conditions générales des (agences) avant de finaliser votre réservation.
                     </p>
                     <p>
-                        Noter bien que le remboursement du biellet dependra des conditions de du fournisseur ou du status du biellt.
+                        Noter bien que le remboursement du biellet dependra des conditions du fournisseur ou du status du biellt.
                     </p>
                     <p>
                        Veuillez noter que nos frais de service n'incluent pas les montants éventuellement facturés par les fournisseurs (agences), selon leurs termes et conditions. Les frais de service TouCki ne sont pas remboursables.
@@ -435,10 +435,10 @@
                         Nous nous efforçons de nous assurer que les informations présentées sur notre site Web sont exactes. Lorsque nous fournissons des détails sur les services de voyage et les correspondances, nous nous appuyons sur les informations qui nous sont transmises par les prestataires (agences) concernés. Nous ne sommes pas en mesure de vérifier pleinement l'exactitude ou l'actualité des informations que nous recueillons et affichons. Nos révisions sont effectuées sur une base. Nous vous demandons donc de vérifier vous-même les détails de votre voyage. Nous ne faisons aucune déclaration ni garantie, et nous ne pouvons offrir à nos utilisateurs aucune garantie quant à l'exactitude, l'exhaustivité ou l'actualité des informations de voyage. Il en va de même pour toutes les autres informations présentées sur notre site Web qui sont ou ont été mises à notre disposition par des fournisseurs (agences).
                     </p>
                     <p>
-                        Nous ne participons pas à la présentation ou à la description des prestations de voyage sur les sites Internet de prestataires (agences). Nous ne sommes donc pas responsables du contenu des offres de (agences) ou des éventuels contrats conclus avec des prestataires (agences).
+                        Nous ne participons pas à la présentation ou à la description des prestations de voyage sur les sites Internet de prestataires (agences). Nous ne sommes donc pas responsables du contenu des offres (agences) ou des éventuels contrats conclus avec des prestataires (agences).
                     </p>
                     <p>
-                        Lorsque nous agissons en tant qu'intermédiaire pour des offres de (agences), nous déclinons toute responsabilité quant à la disponibilité des services ou des correspondances de voyage au moment de la réservation (sur les sites Web des fournisseurs (agences)) ou quant à la livraison effective et à la bonne exécution des services réservés auprès de (agences). prestataires du parti. Ni nous ni nos sociétés affiliées ne faisons de déclaration ou de garantie concernant les informations, produits, services ou logiciels fournis sur ou contenus dans notre site Web, en particulier en ce qui concerne l'adéquation à un usage spécifique - à moins que cela n'ait été expressément et individuellement convenu. avec nos utilisateurs. Toute demande de garantie ou demande de dommages-intérêts doit être intentée directement contre le fournisseur (agences) concerné.
+                        Lorsque nous agissons en tant qu'intermédiaire pour des offres (agences), nous déclinons toute responsabilité quant à la disponibilité des services ou des correspondances de voyage au moment de la réservation (sur les sites Web des fournisseurs agences) ou quant à la livraison effective et à la bonne exécution des services réservés auprès de (agences). prestataires du parti. Ni nous ni nos sociétés affiliées ne faisons de déclaration ou de garantie concernant les informations, produits, services ou logiciels fournis sur ou contenus dans notre site Web, en particulier en ce qui concerne l'adéquation à un usage spécifique - à moins que cela n'ait été expressément et individuellement convenu. avec nos utilisateurs. Toute demande de garantie ou demande de dommages-intérêts doit être intentée directement contre le fournisseur (agences) concerné.
                     </p>
                     <p>
                         Nous ne sommes pas responsables de toute perturbation ou interférence dans le réseau qui n'a pas été causée par nous. Nous nous efforçons d'assurer le fonctionnement technique irréprochable et ininterrompu de notre service. Nous ne pouvons cependant assumer aucune responsabilité quant à l'accessibilité ou la disponibilité ininterrompue et rapide de notre service. Ceci s'applique en particulier aux retards et pannes techniques et aux dommages qui en résultent.

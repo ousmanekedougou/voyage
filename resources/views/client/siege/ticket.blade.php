@@ -272,7 +272,7 @@
                                                     @if($ticket->payment_methode == 1)
                                                         <img src="{{asset('user/assets/images/wave.png')}}" alt="" class="image-methode-payment align-middle me-2"> Wave
                                                     @elseif($ticket->payment_methode == 2)
-                                                        <img src="{{asset('user/assets/images/orange-money.png')}}" alt="" class="image-methode-payment align-middle me-2"> Orange Money
+                                                        <img src="{{asset('user/assets/images/orange-money.png')}}" alt="" class="image-methode-payment align-middle me-2"> OM
                                                     @else
                                                         <img src="{{asset('user/assets/images/image.png')}}" alt="" class="image-methode-payment align-middle me-2"> Non payé
                                                     @endif
@@ -314,8 +314,8 @@
                                                 <div class="screen-bus__rating">
                                                     <ul class="screen-bus__rating-row ul_fomat_mobile">
                                                         <li class="li_fomat_mobile"><figure><a href="#" title="Details ticket" class="p-1 @if($ticket->voyage_status == 1) bg-success text-white @endif text-success " data-bs-toggle="modal" data-bs-target="#staticBackdropView-{{$ticket->id}}"> <i class="fa fa-eye"></i></a></figure></li>
-                                                        <li class="li_fomat_mobile text-center"><figure class="badge p-1 bg-warning"> Vous avez anuller ce ticket de {{ $ticket->getAmount()}} </figure></li>
-                                                        <li class="li_fomat_mobile text-center"><figure class="badge p-1 bg-primary"> Ticket payé </figure></li>
+                                                        <li class="li_fomat_mobile text-center"><figure class="badge p-1 bg-warning">Votre ticket de {{ $ticket->getAmount()}} est annule </figure></li>
+                                                        <li class="li_fomat_mobile text-center"><figure class="badge p-1 bg-success"> Ticket payé </figure></li>
                                                     </ul>
                                                 </div>
                                             @endif
