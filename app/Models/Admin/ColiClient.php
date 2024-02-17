@@ -11,6 +11,7 @@ use App\Models\User\Customer;
 class ColiClient extends Model
 {
     use HasFactory;
+    protected $fillable = ['recu','recepteurPay','recepteurPayAmount','code_validation','recepteur_info'];
 
     public function getAmount(){
         return number_format($this->prix,2, ',','.'). ' CFA';

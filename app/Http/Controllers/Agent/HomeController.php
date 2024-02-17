@@ -48,58 +48,55 @@ class HomeController extends Controller
             
             $clientCount = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)->where('registered_at',carbon_today())->get();
             
-
-            // La liste des client du jour
-            // $clients = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
-            // ->where('registered_at',Carbon::today()->format('Y-m-d'))
-            // ->where('status',0)
-            // ->where('amount','!=',null)
-            // ->orderBy('id','ASC')
-            // ->paginate(10);
-
-            // Les client
-            
             // Suppression des clients qui n'ont pas payer dans les 24h
-            $clientDelais = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
-            ->where('registered_at','<',Carbon::today()->format('Y-m-d'))
-            ->where('status',0)
-            ->where('amount',null)
-            ->get();
+            // $clientDelais = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
+            //     ->where('registered_at','<',Carbon::yesterday()->format('Y-m-d'))
+            //     ->where('status',0)
+            //     ->where('amount',null)
+            // ->get();
 
-            foreach ($clientDelais as $clientDelai) {
-                $buseClientDelai = Bus::where('itineraire_id',$clientDelai->ville->itineraire_id)->first();
-                $buseClientDelai->update(['inscrit' => $buseClientDelai->inscrit - 1]);
-                $clientDelai->delete();
-            }
+            // foreach ($clientDelais as $clientDelai) {
+            //     $buseClientDelai = Bus::where('itineraire_id',$clientDelai->ville->itineraire_id)->first();
+            //     $buseClientDelai->update(['inscrit' => $buseClientDelai->inscrit - 1]);
+            //     $clientDelai->delete();
+            // }
 
             // Suppresion des clients dont le voyage est effectuer avec success
-            $clientSuccessVoyages = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
-            ->where('registered_at','<',Carbon::today()->format('Y-m-d'))
-            ->where('status',0)
-            ->where('voyage_status',1)
-            ->where('amount','!=',null)
-            ->get();
+            // $clientSuccessVoyages = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
+            //     ->where('registered_at','<',Carbon::yesterday()->format('Y-m-d'))
+            //     ->where('status',0)
+            //     ->where('voyage_status',1)
+            //     ->where('amount','!=',null)
+            // ->get();
 
-            foreach ($clientSuccessVoyages as $clientSuccessVoyage) {
-                $buseClientSuccess = Bus::where('itineraire_id',$clientSuccessVoyage->ville->itineraire_id)->first();
-                $buseClientSuccess->update(['inscrit' => $buseClientSuccess->inscrit - 1]);
-                $clientSuccessVoyage->delete();
-            }
+            // foreach ($clientSuccessVoyages as $clientSuccessVoyage) {
+            //     $buseClientSuccess = Bus::where('itineraire_id',$clientSuccessVoyage->ville->itineraire_id)->first();
+            //     $buseClientSuccess->update(['inscrit' => $buseClientSuccess->inscrit - 1]);
+            //     $clientSuccessVoyage->delete();
+            // }
            
-            $date_today = Carbon::today();
-            $dayOfweek = $date_today->dayOfWeek;
-            if ($dayOfweek == 1) {
-                Historical::where('registered_at', '<', Carbon::today()->format('Y-m-d'))->where('siege_id', Auth::guard('agent')->user()->siege_id)->delete();
-            }
+            // $date_today = Carbon::today();
+            // $dayOfweek = $date_today->dayOfWeek;
+            // if ($dayOfweek == 1) {
+            //     Historical::where('registered_at', '<', Carbon::today()->format('Y-m-d'))->where('siege_id', Auth::guard('agent')->user()->siege_id)->delete();
+            // }
+            
+            // La listes des clients qui on ratere le bus
+            $clients =  Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
+                ->where('status','>',0)
+                ->where('voyage_status',0)
+                ->where('amount','!=',null)
+                ->orderBy('id','ASC')
+            ->paginate(10);
 
-            return view('agent.index',compact('itineraires','clientCount','buses'));
+            return view('agent.index',compact('itineraires','clientCount','buses','clients'));
 
         }elseif ($this->middleware(['IsAgent']) && Auth::guard('agent')->user()->role == 2 || Auth::guard('agent')->user()->role == 4) {
 
             $clients = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
-            ->where('registered_at',Carbon::today()->format('Y-m-d'))
-            ->where('amount','!=',null)
-            ->paginate(15);
+                ->where('registered_at',Carbon::today()->format('Y-m-d'))
+                ->where('amount','!=',null)
+            ->get();
             return view('agent.bagage.index',compact('clients'));
 
         }elseif ($this->middleware(['IsAgent']) && Auth::guard('agent')->user()->role == 3 || Auth::guard('agent')->user()->role == 4) {

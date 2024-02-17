@@ -23,117 +23,94 @@
                 </div>
             </div>
 
+
             <div class="row">
-                @foreach($itineraires as $itineraire)
-                    <div class="col-lg-12">
-                        <div class="p-0">
-                            <div class="">
-                                <h5 class="btn btn-soft-white bg-white text-center" style="width: 100%;font-weight:bold;"> <i class="fa fa-arrow-down"></i> Itineraire de {{ $itineraire->name }}</h5>
-                                
-                                <div class="row">
-                                    @foreach($itineraire->buses as $bus)
-                                        <div class="col-xl-4">
-                                            <div class="card bg-soft bg-white" style="width:100%;">
-                                                <div>
-                                                    <div class="row">
-                                                        <div class="col-7">
-                                                            <div class="text-primary p-3">
-                                                                <h6 class="text-default font-size-13">Bus {{$bus->number}} | {{ $bus->matricule }} </h6>
-
-                                                                <ul class="ps-0 mb-0">
-                                                                    <li class="py-1 text-muted" style="list-style: none;"><i class="fa fa-user-plus"></i> Inscrits : 
-                                                                        @if($bus->inscrit == 0)
-                                                                            <span class="badge bg-primary font-size-10"></i>0 / {{ $bus->place }}</span>
-                                                                        @else
-                                                                            <span class="badge bg-success font-size-10"></i>{{ $bus->inscrit }} / {{ $bus->place }}</span>
-                                                                        @endif
-                                                                    </li>
-                                                                    <li class="py-1 text-success" style="list-style: none;"><i class="mdi mdi-clock me-1"></i> R-V : {{ $bus->heure_rv }}</li>
-                                                                    <li class="py-1 text-primary" style="list-style: none;"><i class="mdi mdi-clock me-1"></i> Depart : {{ $bus->heure_depart }}</li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-5 align-self-start">
-                                                            <img src="{{asset('admin/assets/images/bus.svg')}}" alt="" class="img-fluid">
-                                                        </div>
-                                                    </div>
-                                                    <div class="px-1 py-1 border-top text-center">
-                                                        <ul class="list-inline mb-0">
-                                                            <li class="list-inline-item me-2">
-                                                                @if($bus->plein == 1)
-                                                                    <span class="badge bg-success">Plein</span>
-                                                                @else
-                                                                    <span class="badge bg-warning">En cours</span>
-                                                                @endif
-                                                            </li>
-                                                            <li class="list-inline-item me-2">
-                                                            <a href="{{ route('agent.client.show',$bus->id) }}" class="text-primary"><i class="fas fa-users font-size-18"></i></a>
-                                                            </li>
-                                                            <li class="list-inline-item me-2">
-                                                                <a href="javascript:void(0);" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-primary" data-bs-target="#staticBackdropeditbus-{{$bus->id}}"><i class="bx bx-edit font-size-18"></i></a>
-                                                            </li>
-                                                            
-                                                            <li class="list-inline-item me-2">
-                                                                <span data-bs-toggle="modal" data-bs-target="#staticBackdropVille-{{$bus->id}}" class="badge text-primary font-size-18"><i class="fas fa-building me-1"></i></span>
-                                                            </li>
-                                                            
-                                                            <li class="list-inline-item me-2">
-                                                                <a href="javascript:void(0);" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-danger" data-bs-target="#subscribeModalbus-{{ $bus->id }}"><i class="mdi mdi-delete font-size-18"></i></a>
-                                                                <div class="modal modal-xs fade" id="subscribeModalbus-{{ $bus->id }}" tabindex="-1" aria-labelledby="subscribeModalLabel" aria-hidden="true">
-                                                                    <div class="modal-dialog modal-dialog-centered">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header border-bottom-0">
-                                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                            </div>
-                                                                            <div class="modal-body">
-                                                                                <div class="text-center mb-4">
-                                                                                    <div class="avatar-md mx-auto mb-4">
-                                                                                        <div class="avatar-title bg-warning rounded-circle text-white h1">
-                                                                                            <i class="fa fa-exclamation-circle"></i>
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <div class="row justify-content-center">
-                                                                                        <div class="col-xl-10">
-                                                                                            <h4 class="text-danger">Attention !</h4>
-                                                                                            <p class="text-muted font-size-14 mb-4">Etes vous sure de bien vouloire supprimer ce bus</p>
-
-                                                                                            <div class="input-group bg-white rounded text-center" style="text-align:center;">
-                                                                                                <form method="post" action="{{ route('agent.bus.destroy',$bus->id) }}"  style="display:flex;text-align:center;width:100%;">
-                                                                                                    {{csrf_field()}}
-                                                                                                    {{method_field('delete')}}
-                                                                                                    <button type="submit" class="btn btn-danger btn-xs" style="margin-left: 70px;margin-right:20px;"> Oui je veux bient </button> 
-                                                                                                    <button type="button" class="btn btn-success btn-xs" data-bs-dismiss="modal" aria-label="Close"> x Anuller</button>
-                                                                                                </form>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div> 
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
+                 <h5 class="btn btn-soft-white bg-white text-center" style="width: 100%;font-weight:bold;"> <i class="fa fa-road"></i> Itineraire de {{ $itineraire->name }}</h5>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table align-middle table-nowrap mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th style="width: 20px;">
+                                            <div class="form-check font-size-16 align-middle">
+                                                <input class="form-check-input" type="checkbox" id="transactionCheck01">
+                                                <label class="form-check-label" for="transactionCheck01"></label>
                                             </div>
-                                        </div>
+                                        </th>
+                                        <th class="align-middle">Images</th>
+                                        <th class="align-middle">Matricule </th>
+                                        <th class="align-middle">Rendez-Vous</th>
+                                        <th class="align-middle">Depart</th>
+                                        <th class="align-middle">Clients</th>
+                                        <th class="align-middle">Inscrits</th>
+                                        <th class="align-middle">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($itineraire->buses as $bus)
+                                    <tr>
+                                        <td>
+                                            <div class="form-check font-size-16">
+                                                <input class="form-check-input" type="checkbox" id="transactionCheck02">
+                                                <label class="form-check-label" for="transactionCheck02"></label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <i class="fa fa-bus font-size-20"></i>
+                                        </td>
+                                        
+                                        <td><a href="javascript: void(0);" class="text-body fw-bold">Bus {{$bus->number}} | {{ $bus->matricule }}</a> </td>
+                                        
+                                        <td class="text-success">
+                                            <i class="mdi mdi-clock me-1"></i> R-V : {{ $bus->heure_rv }}
+                                        </td>
+                                        <td class="text-primary">
+                                            <i class="mdi mdi-clock me-1"></i> Depart : {{ $bus->heure_depart }}
+                                        </td>
+                                        
+                                        <td>
+                                            <a href="{{ route('agent.client.show',$bus->id) }}" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light">
+                                                <i class="fa fa-users font-size-11"></i> Voire
+                                            </a>
+                                        </td>
+                                        <td>
+                                            @if($bus->inscrit == 0)
+                                                <span class="badge bg-primary font-size-10"></i>0 / {{ $bus->place }}</span>
+                                            @else
+                                                <span class="badge bg-success font-size-10"></i>{{ $bus->inscrit }} / {{ $bus->place }}</span>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <ul class="list-inline mb-0">
+                                                <li class="list-inline-item me-2">
+                                                    <a href="javascript:void(0);" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-primary" data-bs-target="#staticBackdropeditbus-{{$bus->id}}"><i class="bx bx-edit mt-1 font-size-18"></i></a>
+                                                </li>
+                                                <li class="list-inline-item me-3">
+                                                    <a href="" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-danger" data-bs-target="#subscribeModalbus-{{ $bus->id }}"><i class="mdi mdi-delete font-size-18"></i></a>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
                                     @endforeach
-                                </div>
-                            </div>
+                                </tbody>
+                            </table>
                         </div>
+                        <!-- end table-responsive -->
                     </div>
-                @endforeach
+                </div>
             </div>
-        
+
+            
+            <!-- end row -->
 
         </div> <!-- container-fluid -->
+
     </div>
         <!-- End Page-content -->
 
     <!-- Modal de la modification -->
-    @foreach($buses as $edit_bus)
+    @foreach($itineraire->buses as $edit_bus)
         <div class="modal fade" id="staticBackdropeditbus-{{$edit_bus->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-md modal-dialog-centered" role="document">
                 <div class="modal-content ">
@@ -147,6 +124,7 @@
                                 @csrf
                                 {{Method_field('PUT')}}
                                 <div class="row">
+                                    <input type="hidden" name="itineraire" value="{{ $edit_bus->itineraire->id }}">
                                     <div class="col-xl-12">
                                         <div class="mb-3">
                                             <label class="form-label">Numero du bus</label>
@@ -181,25 +159,6 @@
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <label class="form-label">Selectionner un itineraire</label>
-                                            <div class="col-md-12">
-                                                <select class="form-select" class="form-control @error('itineraire') is-invalid @enderror" name="itineraire" required autocomplete="itineraire" required>
-                                                        @foreach($itineraires as $itineraire)
-                                                            <option value="{{ $itineraire->id }}"
-                                                                @foreach($buses as $bus)
-                                                                    @if($bus->itineraire_id == $itineraire->id) selected @endif
-                                                                @endforeach    
-                                                            >{{ $itineraire->name }}</option>
-                                                        @endforeach
-                                                </select>
-                                                @error('itineraire')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
                                             </div>
                                         </div>
                                         <div class="mb-3 row">
@@ -248,31 +207,48 @@
     @endforeach
     <!-- Fin du modal de la modification -->
 
+
     
 
 
-    <!-- Static Backdrop Modal de la liste des ville -->
-    @foreach($buses as $bus)
-    <div class="modal fade" id="staticBackdropVille-{{$bus->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-sm modal-dialog-scrollable" role="document">
-            <div class="modal-content ">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Itineraire de {{ $bus->itineraire->name }}</h5>
+    @foreach($itineraire->buses as $bus)
+
+    <div class="modal modal-xs fade" id="subscribeModalbus-{{ $bus->id }}" tabindex="-1" aria-labelledby="subscribeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-bottom-0">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                    <div class="modal-body">
-                        @foreach($bus->itineraire->villes as $ville)
-                        <p class="bg-primary text-white mt-1 p-2 text-center">
-                            {{$ville->name}} <span class="ml-3 mr-2">  <i class="fas fa-arrow-right ml-1"></i>  {{$ville->amount}}</span> f
-                        </p>
-                        @endforeach
-                        
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <div class="avatar-md mx-auto mb-4">
+                            <div class="avatar-title bg-warning rounded-circle text-white h1">
+                                <i class="fa fa-exclamation-circle"></i>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-center">
+                            <div class="col-xl-10">
+                                <h4 class="text-danger">Attention !</h4>
+                                <p class="text-muted font-size-14 mb-4">Etes vous sure de bien vouloire supprimer ce bus</p>
+
+                                <div class="input-group bg-white rounded text-center" style="text-align:center;">
+                                    <form method="post" action="{{ route('agent.bus.destroy',$bus->id) }}"  style="display:flex;text-align:center;width:100%;">
+                                        {{csrf_field()}}
+                                        {{method_field('delete')}}
+                                        <button type="submit" class="btn btn-danger btn-xs" style="margin-left: 70px;margin-right:20px;"> Oui je veux bient </button> 
+                                        <button type="button" class="btn btn-success btn-xs" data-bs-dismiss="modal" aria-label="Close"> x Anuller</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                </div>
             </div>
         </div>
-    </div>
+    </div> 
+
     @endforeach
-    <!-- Fin du modal de la liste des ville -->
     
 
 
@@ -289,6 +265,7 @@
                             <form class="custom-validation" action="{{ route('agent.bus.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
+                                    <input type="hidden" name="itineraire" value="{{ $itineraire->id }}">
                                     <div class="col-xl-12">
                                         <div class="mb-3">
                                             <label class="form-label">Numero du bus</label>
@@ -323,21 +300,6 @@
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
-                                            </div>
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <label class="form-label">Selectionner une itineraire</label>
-                                            <div class="col-md-12">
-                                                <select class="form-select" class="form-control @error('itineraire') is-invalid @enderror" name="itineraire" required autocomplete="itineraire" required>
-                                                    @foreach($itineraires as $itineraire)
-                                                        <option value="{{ $itineraire->id }}">{{ $itineraire->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                                @error('itineraire')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
                                             </div>
                                         </div>
                                         <div class="mb-3 row">

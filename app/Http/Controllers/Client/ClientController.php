@@ -31,7 +31,6 @@ class ClientController extends Controller
      */
     public function index()
     {
-        
         $agences = User::where('is_admin',2)->where('is_active',1)->get();
         $sieges = Siege::all();
         return view('user.client.index',compact('agences','sieges'));

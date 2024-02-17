@@ -16,12 +16,13 @@
     <link href="{{asset('admin/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
     <!-- App Css-->
     <link href="{{asset('admin/assets/css/app.min.css')}}"  rel="stylesheet" type="text/css" />
+    <link href="{{asset('admin/assets/css/style.css')}}" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('main-content')
 
     <div class="page-content">
-        <div class="container-fluid">
+        <div class="container-fluid sectionCompteDesktope">
 
 
             <div class="row">
@@ -40,17 +41,7 @@
                                                 <p class="mb-2">Itineraire de {{ $getBuse->itineraire->name }}</p>
                                             </div>
                                         </div>
-                                        <div class="page-title-right ajout-client-lg">
-                                            <ol class="breadcrumb m-0">
-                                                <li class="breadcrumb-item">
-                                                    <a data-bs-toggle="modal" data-bs-target="#staticBackdropAjoutClient" class="btn btn-success text-white btn-rounded waves-effect waves-light mb-2 me-2"><i
-                                                        class="mdi mdi-plus me-1"></i> Ajouter un client</a>
-                                                </li>
-                                            </ol>
-                                        </div>
                                     </div>
-                                    <a  data-bs-toggle="modal" data-bs-target="#staticBackdropAjoutClient" class="btn btn-success ajout-client-xs text-white btn-rounded waves-effect waves-light mb-2 me-2"><i
-                                                        class="mdi mdi-plus me-1"></i> Ajouter un client</a>
                                 </div>
                             </div>
                             <!-- end row -->
@@ -66,11 +57,10 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title text-center"> La liste des clients du jour </h4>
+                            <h4 class="card-title text-center"> La liste des clients du jour pour le bus {{$getBuse->matricule}} </h4>
                             <p class="card-title-desc">
                                 <div class="button-items">
-                                    <button type="button" class="btn btn-primary waves-effect btn-label waves-light"><i class="fa fa-file-excel label-icon"></i> EXCEL <i class="mdi mdi-download font-size-16"></i></button>
-                                    <button type="button" class="btn btn-success waves-effect btn-label waves-light"><i class="fa fa-file-pdf label-icon"></i> PDF <i class="mdi mdi-download font-size-16"></i></button>
+                                    <a target="_blank" href="{{ route('agent.client.pdf',$getBuse->id) }}" class="btn btn-success waves-effect btn-label waves-light"><i class="fa fa-file-pdf label-icon"></i> Télécharger le PDF <i class="mdi mdi-download font-size-16"></i></a>
                                 </div>
                             </p>
                             <table id="datatable"
@@ -171,6 +161,94 @@
             --}}
 
         </div> <!-- container-fluid -->
+
+
+        <div class="tab-pane show active sectionCompteMobile" id="chat">
+            <div>
+                <ul class="list-unstyled chat-list">
+                    <li class="mb-4">
+                        <div class="media">
+                            <div class="align-self-center me-3">
+                                <div class="align-self-center me-3">
+                                    <i class="fa fa-road" style="font-size: 25px;"></i>
+                                </div>
+                            </div>
+                            <div class="media-body overflow-hidden">
+                                <h5 class="text-truncate font-size-14 mb-1">{{$getBuse->itineraire->name}}</h5>
+                                <p class="text-truncate mb-0">{{ $getBuse->number }} {{ $getBuse->number == 1 ? 'er' : 'em' }} Buse | Matricule: {{ $getBuse->matricule }}</p>
+                            </div>
+                            <div class="font-size-11">
+                                <span>{{ $clients->count() }} Client(s)</span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <div class="form-check font-size-16">
+                    <input class="form-check-input" type="checkbox" id="checkAll">
+                    <label class="form-check-label" for="checkAll">Tous</label>
+                    <span style="float:right;" class="font-size-14"> Client(s) d'aujourdhui</span>
+                </div>
+                <ul class="list-unstyled chat-list" data-simplebar style="max-height: 410px;">
+                    <form action="" method="post">
+                        @foreach($clients as $client)
+                            <li class="" >
+                                <a onclick="onclick().event.preventDefault()">
+                                    <div class="media">
+                                        <div class="form-check form-check-primary mb-3 client-list-mobile">
+                                            <input class="form-check-input" type="checkbox"
+                                                id="orderidcheck0-{{ $client->id }}" checked>
+                                        </div>
+                                        <div class="align-self-center me-3">
+                                            @if($client->image != Null)
+                                                <img src="{{Storage::url($client->image)}}" class="rounded-circle avatar-xs" alt="">
+                                            @else
+                                                <img src="{{asset('admin/assets/images/users/profil.jpg')}}" class="rounded-circle avatar-xs" alt="">
+                                            @endif
+                                        </div>
+                                        
+                                        <div class="media-body overflow-hidden">
+                                            <h5 class="text-truncate font-size-14 mb-1">
+                                                @if($client->name == null)
+                                                    {{ $client->customer->name }}
+                                                @else
+                                                    {{ $client->name }}
+                                                @endif
+                                            </h5>
+                                            <p class="text-truncate mb-0"> <i class="fa fa-mobile font-size-10"></i>
+                                                @if($client->name == null)
+                                                    {{ $client->customer->phone }}
+                                                @else
+                                                    {{ $client->phone }}
+                                                @endif
+                                            </p>
+                                        </div>
+                                        <div class="font-size-12 button-right-siege">
+                                        @if($client->amount == $client->ville->amount)
+                                            <span class="span-chat-siege span-chat1 badge bg-success">
+                                                {{ $client->amount }} f Payé
+                                            </span>
+                                        @else
+                                            <span class="span-chat-siege span-chat1 badge bg-warning">
+                                                {{ $client->amount }} f Non payé
+                                            </span>
+                                        @endif
+                                            
+                                            <span class="span-chat-siege badge bg-info" data-bs-toggle="modal" data-bs-target="#subscribeModalagenceDetails-{{$client->id}}">
+                                                <i class="fa fa-eye"></i> Voire
+                                            </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        @endforeach
+                        <a href="{{ route('agent.send_sms') }}" class="btn btn-primary text-white mt-5" style="width:100%;"> <i class="bx bxs-chat"> </i> Un message au absent du jour</a>
+                    </form>
+                </ul>
+            </div>
+        </div>
+
+
+
     </div>
     <!-- End Page-content -->
 

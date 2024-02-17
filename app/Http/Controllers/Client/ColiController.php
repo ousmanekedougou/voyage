@@ -57,6 +57,7 @@ class ColiController extends Controller
         $getColi = Colie::where('id',$id)->where('customer_id',Auth::guard('client')->user()->id)->first();
         $colis = ColiClient::where('colie_id',$getColi->id)
         ->where('siege_id',$getColi->siege_id)
+        ->where('status',0)
         ->get();
         if ($colis->count() > 0) {
             return view('client.colis.show',compact('colis','getColi'));
@@ -74,23 +75,25 @@ class ColiController extends Controller
      */
     public function edit($id)
     {
-        $getColi = Colie::where('siege_id',$id)->where('customer_id',Auth::guard('client')->user()->id)->first();
-        if ($getColi) {
-            $colis = ColiClient::where('siege_id',$id)
-            ->where('customer_id',Auth::guard('client')->user()->id)
-            ->where('phone_recept',Auth::guard('client')->user()->phone)
-            ->get();
-            if ($colis->count() > 0) {
-                return view('client.colis.recue',compact('colis','getColi'));
-            }else {
-                Toastr::warning('Vous n\'aviez pas de colis enregistre', 'Error Colis', ["positionClass" => "toast-top-right"]);
-                return back();
-            }
+        $getColi = Colie::where('siege_id',$id)->first();
+        
+        $colis = ColiClient::where('siege_id',$id)
+        ->where('customer_id',Auth::guard('client')->user()->id)
+        ->where('phone_recept',Auth::guard('client')->user()->phone)
+        ->where('status',0)
+        ->get();
+        $Onpayer = ColiClient::where('siege_id',$id)
+        ->where('customer_id',Auth::guard('client')->user()->id)
+        ->where('phone_recept',Auth::guard('client')->user()->phone)
+        ->where('status',0)
+        ->where('recepteurPay',1)
+        ->get();
+        if ($colis->count() > 0) {
+            return view('client.colis.recue',compact('colis','getColi','Onpayer'));
         }else {
-            Toastr::warning('vous n\'aviez pas recue de colis sur ce siege', 'Absence de colis', ["positionClass" => "toast-top-right"]);
+            Toastr::warning('Vous n\'aviez pas reçue de colis enregistre', 'Error Colis', ["positionClass" => "toast-top-right"]);
             return back();
         }
-        
         
     }
 }

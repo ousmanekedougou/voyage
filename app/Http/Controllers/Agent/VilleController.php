@@ -7,6 +7,7 @@ use App\Models\Admin\Ville;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Admin\Itineraire;
 class VilleController extends Controller
 {
     /**
@@ -63,7 +64,9 @@ class VilleController extends Controller
      */
     public function show($id)
     {
-        //
+        $itineraire = Itineraire::Where('id',$id)->first();
+        $villes = Ville::Where('itineraire_id',$itineraire->id)->get();
+        return view('agent.ville.ville_mobile',compact('villes','itineraire'));
     }
 
     /**

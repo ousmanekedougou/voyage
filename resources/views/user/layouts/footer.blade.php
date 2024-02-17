@@ -63,7 +63,7 @@
 
                                 <li class="{{ set_active_roote_bottom_bar('client.index') }} ">
                                     <a href="{{ route('client.index') }}" id="store">
-                                        <span>Colis</span>
+                                        <span>Reservation</span>
                                         <i class="bx bx-store-alt  fa-fa-item"></i>
                                     </a>
                                 </li>
@@ -76,10 +76,21 @@
                                 </li>
 
                                 <li class="{{ set_active_roote_bottom_bar('customer.customer.login') }}">
-                                    <a href="{{ route('customer.customer.login') }}" class="header-item noti-icon right-bar-toggle" id="nav-toggle">
-                                        <span>Connexion</span>
-                                        <i class="bx bx-log-in  fa-item"></i>
-                                    </a>
+                                    <div class="btn-group dropup">
+                                        
+                                        <a href="" class="header-item noti-icon right-bar-toggle dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" id="nav-toggle">
+                                            <span>Connexion</span>
+                                            <i class="bx bx-log-in  fa-item"></i>
+                                        </a>
+                                        
+                                        <div class="dropdown-menu">
+                                            <a class="dropdown-item" href="{{ route('customer.customer.login') }}">Client</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="{{ route('agent.agent.login') }}">Agent</a>
+                                            <div class="dropdown-divider"></div>
+                                            <a class="dropdown-item" href="{{ route('agence.agence.login') }}">Agence</a>
+                                        </div>
+                                    </div>
                                 </li>
                             </ul>
                         </main>
@@ -164,7 +175,7 @@
                          Grâce à un réseau développé au Sénégal, de nombreux trajets en bus et car pas chers de courte et longue-distance vous sont proposés par des compagnies routières renommées. 
                     </p>
                      <p class="mb-2">
-                        2021 - <script>document.write(new Date().getFullYear())</script> © TouCki. Développé par
+                        2023 - <script>document.write(new Date().getFullYear())</script> © TouCki. Développé par
                          <a href="{{ route('login') }}" target="_blank" rel="noopener noreferrer" class="text-white-50">KdgWeb</a>
                     </p>
                 </div>

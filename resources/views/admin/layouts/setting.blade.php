@@ -38,7 +38,7 @@
                 alert('Votre numero de telephone est invalide');
                 return false;
             }else if(phone.value.length != 9){
-                alert('Votre numero de telphone doit etre de 9 caracter exp: 77xxxxxxx');
+                alert('Votre numero de telphone doit etre de 9 caracter exp: xx xxx xx xx');
                 return false;
             }else if(first_num != 77 & first_num != 78 & first_num != 76 & first_num != 70 & first_num != 75  ){
                 alert('Votre numero de telphone doit commencer par un (77 ou 78 ou 76 ou 70 ou 75)')
@@ -57,7 +57,7 @@
         }
     </script>
 
-      <script>
+    <script>
         $(document).ready(function(){
 
             $(window).scroll(function(){
@@ -73,6 +73,7 @@
             });
         });
     </script>
+
 
         <script src="{{asset('admin/assets/toastr/jquery.min.js')}}"></script>
         <script src="{{asset('admin/assets/toastr/toastr.min.js')}}"></script>

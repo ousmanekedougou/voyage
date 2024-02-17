@@ -50,7 +50,9 @@ class ClientController extends Controller
         ]);
        
         $ville = Ville::where('id',$request->ville)->first();
-        $buse = Bus::where('itineraire_id',$ville->itineraire_id)->where('plein',0)->first();
+        $buse = Bus::where('id',request('getBus'))
+        ->where('siege_id',Auth::guard('agent')->user()->siege_id)
+        ->where('plein',0)->first();
 
         $date=date_create($request->date);
         $datef = (date_format($date,'Y-m-d H:i:s'));
@@ -90,7 +92,7 @@ class ClientController extends Controller
                         $add_client->cni = $request->cni;
                         $add_client->ville_id = $request->ville;
                         $add_client->bus_id = $buse->id;
-                        $add_client->siege_id = $buse->siege->id;
+                        $add_client->siege_id = Auth::guard('agent')->user()->siege_id;
                         $add_client->position = $buse->inscrit;
                         $add_client->registered_at = $request->date;
                         // $add_client->registered_at = date_format($date,'d-m-y');
@@ -175,9 +177,8 @@ class ClientController extends Controller
         $getBuse = Bus::where('id',$id)->where('siege_id',Auth::guard('agent')->user()->siege_id)->first();
         $clients = Client::where('bus_id',$getBuse->id)
             ->where('siege_id',Auth::guard('agent')->user()->siege_id)
-            // ->where('registered_at','>=',Carbon::today()->format('Y-m-d'))
-            // ->where('status',0)
-            // ->where('amount','!=',null)
+            ->where('registered_at','>=',Carbon::today()->format('Y-m-d'))
+            ->where('status',0)
             ->orderBy('id','ASC')
             ->paginate(10);
         return view('agent.client.show',compact('clients','getBuse'));
@@ -214,7 +215,9 @@ class ClientController extends Controller
         ]);
 
         $ville = Ville::where('id',$request->ville)->first();
-        $buse = Bus::where('itineraire_id',$ville->itineraire_id)->where('plein',0)->first();
+        $buse = Bus::where('id',request('getBus'))
+        ->where('siege_id',Auth::guard('agent')->user()->siege_id)
+        ->where('itineraire_id',$ville->itineraire_id)->where('plein',0)->first();
 
         $date=date_create($request->date);
         $datef = (date_format($date,'Y-m-d H:i:s'));
@@ -227,11 +230,11 @@ class ClientController extends Controller
         $clients = Client::where('bus_id',$buse->id)->where('registered_at',$request->date)->where('amount','!=',null)->get();
         
         $info_user = Client::where('id',$id)
-        ->where('voyage_status',0)
-        ->where('phone',$request->phone)
-        ->where('customer_id',null)
-        ->where('amount',null)
-        ->first();
+            ->where('voyage_status',0)
+            ->where('phone',$request->phone)
+            ->where('customer_id',null)
+            ->where('amount',null)
+            ->first();
         if ($info_user) {
             if ($clients->count() < $buse->place) {
                 if (in_array($date_input['wday'] , $userialize_buse)) {
@@ -328,36 +331,37 @@ class ClientController extends Controller
             ->where('status',0)
             ->where('amount','!=',null)
             ->get();
-            if ($clients->count() > 0) {
-                foreach ($clients as $client){
+        if ($clients->count() > 0) {
+            foreach ($clients as $client){
 
-                    if (Auth::guard('agent')->user()->agence->method_ticket == 0) {
-                        $client->update(['status' => 1]);
-                        // Partie sms et notification sur son compte toucki
-                    }elseif(Auth::guard('agent')->user()->agence->method_ticket == 1) {
-                        $client->update(['status' => 2]);
-                        // Partie sms et notification sur son compte toucki
-                    }
-
-                    Notification::route('mail',Auth::guard('agent')->user()->siege->email)
-                    ->notify(new ClientAbsent($client));
-                    Toastr::success('Vos messages ont bien ete envoye', 'Error lien', ["positionClass" => "toast-top-right"]);
-                    return back();
+                if (Auth::guard('agent')->user()->agence->method_ticket == 0) {
+                    $client->update(['status' => 1]);
+                    // Partie sms et notification sur son compte toucki
+                }elseif(Auth::guard('agent')->user()->agence->method_ticket == 1) {
+                    $client->update(['status' => 2]);
+                    // Partie sms et notification sur son compte toucki
                 }
-            }else {
-                Toastr::warning('Vous n\'aviez pas de clients absent', 'Error lien', ["positionClass" => "toast-top-right"]);
+
+                Notification::route('mail',Auth::guard('agent')->user()->siege->email)
+                ->notify(new ClientAbsent($client));
+                Toastr::success('Vos messages ont bien ete envoye', 'Error lien', ["positionClass" => "toast-top-right"]);
                 return back();
             }
+        }else {
+            Toastr::warning('Vous n\'aviez pas de clients absent', 'Error lien', ["positionClass" => "toast-top-right"]);
+            return back();
+        }
     }
 
     
 
     public function annuler(){
-        $clients = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
-            ->where('status','>',0)
-            ->where('voyage_status',0)
-            ->where('amount','!=',null)
-            ->orderBy('id','ASC')
+        $clients = 
+            Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
+                ->where('status','>',0)
+                ->where('voyage_status',0)
+                ->where('amount','!=',null)
+                ->orderBy('id','ASC')
             ->paginate(10);
         return view('agent.client.annuler',compact('clients'));
     }
@@ -380,16 +384,11 @@ class ClientController extends Controller
 
         $clients = Client::where('bus_id',$getBuse->id)
             ->where('siege_id',Auth::guard('agent')->user()->siege_id)
-            // ->where('registered_at','>=',Carbon::today()->format('Y-m-d'))
+            ->where('registered_at','>=',Carbon::today()->format('Y-m-d'))
             ->where('status',0)
             ->where('amount','!=',null)
             ->orderBy('id','ASC')->get();
         if ($clients->count() > 0) {
-            $pdf = PDF::loadView('agent.client.client_pdf', compact('clients', 'getBuse'))
-            ->setPaper('a4', 'landscape')
-            ->setWarnings(false);
-            // return $pdf->stream();
-            // return $pdf->download('client.pdf');
             return view('agent.client.client_pdf', compact('clients', 'getBuse'));
         }else{
             Toastr::warning('Vous n\'aviez pas de clients', 'Pas de clients', ["positionClass" => "toast-top-right"]);

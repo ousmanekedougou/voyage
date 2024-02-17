@@ -35,6 +35,7 @@ class ColiController extends Controller
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
+     * Ajouter un client colis qui est a un compte toucki
      */
     public function customer(Request $request)
     {
@@ -71,7 +72,7 @@ class ColiController extends Controller
             'phone' => 'required|numeric|unique:colies',
             'cni' => 'required|numeric|unique:colies',
         ]);
-        // dd($request->all());
+        
         $cni_final = '';
         $r_cni = intval($request->cni);
 
@@ -106,6 +107,38 @@ class ColiController extends Controller
         }
     }
 
+     /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     * Modification du client colis
+     */
+    public function update(Request $request, $id)
+    {
+          $cni_final = '';
+        $r_cni = intval($request->cni);
+
+        if (strlen($r_cni) == 13) {
+            $cni_final = $r_cni;
+        }else{
+            Toastr::error('Votre numero d\'identite est invalide', 'Error phone', ["positionClass" => "toast-top-right"]);
+            return back();
+        }
+
+        Colie::where('id',$id)->update([
+            'name' => $request->name,
+            'phone' => $request->phone,
+            'cni' => $cni_final,
+            'siege_id' => Auth::guard('agent')->user()->siege_id
+        ]);
+        Toastr::success('Votre client a bien ete modifier', 'Modification Client', ["positionClass" => "toast-top-right"]);
+        return back();
+    }
+
+
+
     /**
      * Display the specified resource.
      *
@@ -114,10 +147,14 @@ class ColiController extends Controller
      */
     public function show($id)
     {
-        // dd('jduud');
         $coli = Colie::where('id',$id)->where('siege_id',Auth::guard('agent')->user()->siege_id)->first();
         if ($coli) {
-            return view('agent.coli.show',compact('coli'));
+            if ($coli->coli_clients->count() > 0) {
+                return view('agent.coli.show',compact('coli'));
+            }else{
+                Toastr::warning('Ce client n\'a pas de colis', 'Error Client', ["positionClass" => "toast-top-right"]);
+                return back();
+            }
         }else {
             Toastr::warning('Ce client n\'existe pas', 'Error Client', ["positionClass" => "toast-top-right"]);
             return back();
@@ -137,12 +174,14 @@ class ColiController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
             'name' => 'required|string|max:255',
             'prix' => 'required|numeric',
-            'ville' => 'required|string|max:255',
+            'ville' => 'required|numeric',
             'desc' => 'required|string|max:255',
             'name_recept' => 'required|string|max:255',
-            'phone_recept' => 'required|numeric|unique:coli_clients',
+            'phone_recept' => 'required|numeric',
         ]);
+        
         $imageName = '';
+        $recepteur = '';
         if($request->hasFile('image'))
         {
             $imageName = $request->image->store('public/Colis');
@@ -157,6 +196,7 @@ class ColiController extends Controller
         $newColie->colie_id = $request->clientId;
         $newColie->ville_id = $request->ville; 
         $newColie->siege_id = Auth::guard('agent')->user()->siege_id;
+        $newColie->code_validation  = coliClientRefe(); 
         if ($getCustomer) {
             $newColie->name_recept = $getCustomer->name;
             $newColie->phone_recept = $getCustomer->phone;
@@ -165,6 +205,14 @@ class ColiController extends Controller
             $newColie->name_recept = $request->name_recept;
             $newColie->phone_recept = $request->phone_recept;
         }
+        if ($request->arriver == 1) {
+            $recepteur = 1;
+        }else{
+            $recepteur = 0;
+        }
+
+        $newColie->recepteurPay = $recepteur;
+
         $newColie->save();
 
         // $sendPhone = User::where('');
@@ -194,10 +242,14 @@ class ColiController extends Controller
         // );
 
         $client_p_t = Colie::where('id',$request->clientId)->first();
-        if ($client_p_t->prix_total == 0) {
-            $client_p_t->prix_total = $request->prix;
-        }elseif ($client_p_t->prix_total > 0) {
-            $client_p_t->prix_total = $client_p_t->prix_total + $request->prix;
+        if ($newColie->recepteurPay == 0) {
+            if ($client_p_t->prix_total == 0) {
+                $client_p_t->prix_total = $request->prix;
+            }elseif ($client_p_t->prix_total > 0) {
+                $client_p_t->prix_total = $client_p_t->prix_total + $request->prix;
+            }
+        }elseif($newColie->recepteurPay == 1){
+            $client_p_t->prix_total = $client_p_t->prix_total;
         }
         $client_p_t->save();
 
@@ -208,6 +260,22 @@ class ColiController extends Controller
     public function updateColi(Request $request, $id)
     {
         $coliClient = ColiClient::where('id',$id)->first();
+
+        $client_p_t = Colie::where('id',$request->coliId)->first();
+        if ($coliClient->recepteurPay == 0) {
+            if ($request->prix != $coliClient->prix) {
+                $prixMoins = $client_p_t->prix_total - $coliClient->prix;
+                $client_p_t->prix_total = $prixMoins + $request->prix;
+            }else {
+                $client_p_t->prix_total = $client_p_t->prix_total;
+            }
+        }elseif($coliClient->recepteurPay == 1){
+            $client_p_t->prix_total = $client_p_t->prix_total - $coliClient->prix;
+        }
+
+        $client_p_t->save();
+
+
         $imageName = '';
         if ($request->image == '') {
             $imageName = $coliClient->image;
@@ -219,14 +287,6 @@ class ColiController extends Controller
             }
         }
 
-        $client_p_t = Colie::where('id',$request->coliId)->first();
-        if ($request->prix != $coliClient->prix) {
-            $prixMoins = $client_p_t->prix_total - $coliClient->prix;
-            $client_p_t->prix_total = $prixMoins + $request->prix;
-        }else {
-           $client_p_t->prix_total = $client_p_t->prix_total;
-        }
-
         $coliClient->image = $imageName;
         $coliClient->name = $request->name;
         $coliClient->prix = $request->prix;
@@ -236,6 +296,12 @@ class ColiController extends Controller
         $coliClient->siege_id = Auth::guard('agent')->user()->siege_id;
         $coliClient->name_recept = $request->name_recept;
         $coliClient->phone_recept = $request->phone_recept;
+
+        if ($request->arriver == 1) {
+            $coliClient->recepteurPay = 1;
+        }else{
+            $coliClient->recepteurPay = 0;
+        }
 
        
         $coliClient->save();
@@ -266,41 +332,99 @@ class ColiController extends Controller
         //     'TouCki'
         // );
 
-       
+        
 
-        $client_p_t->save();
-
-        Toastr::success('Vos colies ont bien ete ajouter', 'Ajout Bagages', ["positionClass" => "toast-top-right"]);
+        Toastr::success('Votre colies a bien ete modifier', 'Modification colis', ["positionClass" => "toast-top-right"]);
         return back();
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-          $cni_final = '';
-        $r_cni = intval($request->cni);
+   
 
-        if (strlen($r_cni) == 13) {
-            $cni_final = $r_cni;
-        }else{
-            Toastr::error('Votre numero d\'identite est invalide', 'Error phone', ["positionClass" => "toast-top-right"]);
-            return back();
+    public function reception(Request $request,$id)
+    {
+        $this->validate($request,[
+            'name_recept' => 'required|string',
+            'phone_recept' => 'required|numeric',
+            'code_ref' => 'required|numeric',
+        ]);
+
+        $coli_client = ColiClient::where('id',$id)
+        ->where('siege_id',Auth::guard('agent')->user()->siege_id)
+        ->where('code_validation',$request->code_ref)
+        ->where('status',0)
+        ->first();
+
+        // dd($coli_client->phone_recept .' | '. $request->phone_recept);
+
+        $infos = '';
+        $name = $request->name_recept;
+        $phone = intval($request->phone_recept);
+        $infos = $name.' : '.$phone;
+        if ($coli_client->recepteurPay == 0) {
+            if($coli_client->code_validation == $request->code_ref){
+                if($coli_client->phone_recept == $request->phone_recept){
+
+                    $coli_client->status = 1;
+                    $coli_client->save();
+
+                    Toastr::success('Colis reçu avec success', 'Reception colis', ["positionClass" => "toast-top-right"]);
+                    return back();
+
+                }else{
+
+                    $coli_client->status = 1;
+                    $coli_client->recepteur_info = $infos;
+                    $coli_client->save();
+
+                    // dd($coli_client);
+
+                    Toastr::success('Colis reçu avec success', 'Reception colis', ["positionClass" => "toast-top-right"]);
+                    return back();
+                }
+            }else{
+                Toastr::error('Mauvaise code de reference', 'Error code', ["positionClass" => "toast-top-right"]);
+                return back();
+            }
+            
+        }elseif($coli_client->recepteurPay == 1){
+
+            $this->validate($request,[
+                'canal' => 'required|numeric',
+            ]);
+            if($coli_client->code_validation == $request->code_ref){
+                if($request->canal == 1){
+                    return back();
+                }elseif($request->canal == 2){
+                    return back();
+                }elseif($request->canal == 3){
+                    if($coli_client->phone_recept == $request->phone_recept){
+
+                        $coli_client->recepteurPayAmount = $coli_client->prix;
+                        $coli_client->status = 1;
+                        $coli_client->save();
+
+                        Toastr::success('Colis reçu avec success', 'Reception colis', ["positionClass" => "toast-top-right"]);
+                        return back();
+                    }else{
+                        $coli_client->recepteurPayAmount = $coli_client->prix;
+                        $coli_client->status = 1;
+                        $coli_client->recepteur_info = $infos;
+                        $coli_client->recepteurPay = 0;
+                        $coli_client->save();
+
+                        Toastr::success('Colis reçu avec success', 'Reception colis', ["positionClass" => "toast-top-right"]);
+                        return back();
+                    }
+                }
+            }else{
+                Toastr::error('Mauvaise code de reference', 'Error code', ["positionClass" => "toast-top-right"]);
+                return back();
+            }
+            
+            
         }
 
-        Colie::where('id',$id)->update([
-            'name' => $request->name,
-            'phone' => $request->phone,
-            'cni' => $cni_final,
-            'siege_id' => Auth::guard('agent')->user()->siege_id
-        ]);
-        Toastr::success('Votre client a bien ete modifier', 'Modification Client', ["positionClass" => "toast-top-right"]);
-        return back();
+        // dd($request->all());
     }
 
     /**
@@ -326,11 +450,26 @@ class ColiController extends Controller
     public function delete($id)
     {
         $coliDelete = ColiClient::where('id',$id)->first();
-        Storage::delete($coliDelete->image);
         $Coliprix = Colie::where('id',request()->colId)->where('siege_id',Auth::guard('agent')->user()->siege_id)->first();
-        $Coliprix->prix_total = $Coliprix->prix_total - $coliDelete->prix;
-        $Coliprix->save();
+        
+        if ($coliDelete->recepteurPay == 0) {
+            $Coliprix->prix_total = $Coliprix->prix_total - $coliDelete->prix;
+        }elseif($coliDelete->recepteurPay == 1){
+            $Coliprix->prix_total = $Coliprix->prix_total;
+        }
+
+        Storage::delete($coliDelete->image);
         $coliDelete->delete();
+
+        $Coliprix->save();
+
+        if ($Coliprix->coli_clients->count() == 0) {
+
+            $Coliprix->prix_total = 0;
+            $Coliprix->save();
+            Toastr::success('Votre client et ses colies ont ete supprimer', 'Suppression Bagages', ["positionClass" => "toast-top-right"]);
+            return redirect()->route('agent.home');
+        }
         Toastr::success('Votre client et ses colies ont ete supprimer', 'Suppression Bagages', ["positionClass" => "toast-top-right"]);
         return back();
     }

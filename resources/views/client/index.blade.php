@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 @section('main-content')
 
-    <div class="page-content">
+    <div class="page-content bg-white" id="page-content">
         <div class="container-fluid">
 
             <!-- start page title -->
@@ -62,9 +62,9 @@
                                         <div class="avatar-md me-4">
                                             <span class="avatar-title rounded-circle bg-light text-danger font-size-16">
                                                 @if($agence->logo != Null)
-                                                <img src="{{Storage::url($agence->logo)}}" alt="">
+                                                    <img src="{{Storage::url($agence->logo)}}" alt="">
                                                 @else
-                                                <i class="fa fa-bus"></i>
+                                                    <img src="{{asset('admin/assets/images/bus_agence.jpg')}}" alt="">
                                                 @endif
                                             </span>
                                         </div>
@@ -154,59 +154,34 @@
                     <!-- end row -->
                 </div>
             <!-- end row -->
-
-            <div class="row">
-                <div class="col-lg-12">
-                   
-                </div>
-            </div>
-            <!-- end row -->
          
         </div>
         <!-- container-fluid -->
 
-        <div class="tab-pane show active sectionCompteMobile" id="chat">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="media">
-                                <div class="media-body align-self-center">
-                                    <div class="text-muted">
-                                        <h5 class="mb-1">Bonjour {{ Auth::guard('client')->user()->name }}</h5>
-                                        <p class="mb-2">Bienvenue sur votre compte TouCki</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-4 align-self-center">
-                            <div class="text-lg-center">
-                                <div class="row">
-                                    <div class="col-4">
-                                        <div>
-                                            <p class="text-muted text-truncate mb-2">Total Agences</p>
-                                            <h5 class="mb-0">{{ $agenceCount }}</h5>
-                                        </div>
-                                    </div>
-                                    <div class="col-4">
-                                        <div>
-                                            <p class="text-muted text-truncate mb-2">Total Sieges</p>
-                                            <h5 class="mb-0">{{ $siege_all->count() }}</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end row -->
-                </div>
-            </div>
+        <div class="tab-pane show active sectionCompteMobile mb-4" id="chat">
             <div>
+                <ul class="list-unstyled chat-list ">
+                    <li class="active">
+                        <a href="#">
+                            <div class="media">
+
+                                <div class="align-self-center me-3">
+                                    <img src="{{asset('admin/assets/images/icone-ticke.png')}}" class="rounded-circle avatar-xs" alt="">
+                                </div>
+                                <div class="media-body overflow-hidden">
+                                    <h5 class="text-truncate font-size-14 mb-1">Bonjour {{ Auth::guard('client')->user()->name }}</h5>
+                                    <p class="text-truncate mb-0">Bienvenue sur TouCki</p>
+                                </div>
+                                <div class="font-size-11">Agences ({{ $agences->count() }}) </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            
                 <ul class="list-unstyled chat-list">
                     {{-- data-simplebar style="max-height: 410px;" --}}
                 @foreach($agences as $agence)
-                    <li class="active">
+                    <li class="">
                         <a href="{{ route('customer.agence.show',$agence->slug) }}">
                             <div class="media">
                                 <div class="align-self-center me-3">
@@ -216,7 +191,7 @@
                                     @if($agence->logo != Null)
                                         <img src="{{Storage::url($agence->logo)}}" class="rounded-circle avatar-xs" alt="">
                                     @else
-                                        <img src="{{asset('admin/assets/images/users/profil.jpg')}}" class="rounded-circle avatar-xs" alt="">
+                                        <img src="{{asset('admin/assets/images/bus_agence.jpg')}}" class="rounded-circle avatar-xs" alt="">
                                     @endif
                                 </div>
                                 
@@ -259,9 +234,4 @@
         </div>
     </div>
     <!-- End Page-content -->
-
-
-
-
-           
 @endsection

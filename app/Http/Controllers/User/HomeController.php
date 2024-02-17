@@ -5,6 +5,8 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Agence;
 use App\Models\Admin\Siege;
+use App\Models\Admin\Part;
+use App\Models\User\Customer;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -14,10 +16,11 @@ class HomeController extends Controller
     public function index(){
 
         $agences = Agence::where('is_admin',0)
-        ->where('is_active',1)
-        ->orderBy('id','ASC')->get();
+        ->where('is_active',1)->get();
         $sieges = Siege::all();
-        return view('user.index',compact('agences','sieges'));
+        $users = Customer::where('is_active',1)->get();
+        $partenaires = Part::where('is_active', 1)->get();
+        return view('user.index',compact('agences','sieges','users','partenaires'));
     }
 
      public function store(Request $request)

@@ -1,13 +1,14 @@
 @extends('admin.layouts.app')
 
-@section('headsection')
-
-@endsection
+    @section('headSection')
+        <link href="{{asset('admin/assets/css/style.css')}}" rel="stylesheet" type="text/css" />
+        
+    @endsection
 
 @section('main-content')
 
                 <div class="page-content">
-                    <div class="container-fluid">
+                    <div class="container-fluid sectionCompteDesktope">
 
                         <!-- start page title -->
                         <div class="row">
@@ -29,70 +30,70 @@
                         <!-- end page title -->
 
                         <div class="row">
-                            @foreach($admins as $admin)
-                                <div class="col-xl-3 col-sm-6">
-                                    <div class="card text-center">
-                                        <div class="card-body">
-                                            <div class="mb-4">
-                                                <img class="rounded-circle avatar-sm" src="{{ Storage::url($admin->logo) }}" alt="">
-                                            </div>
-                                            <h5 class="font-size-15 mb-1"><a href="#" class="text-dark">{{$admin->name}}</a></h5>
-                                            <p class="text-muted">{{$admin->email}}</p>
-
-                                            <div>
-                                                <a href="" class="badge bg-success font-size-11 m-1">{{$admin->phone}}</a>
-                                                <a href="#" class="badge bg-primary font-size-11 m-1">{{$admin->adress}}</a>
-                                                <!-- <a href="#" class="badge bg-primary font-size-11 m-1">2 + more</a> -->
-                                            </div>
-                                        </div>
-                                        <div class="card-footer bg-transparent border-top">
-                                            <div class="contact-links d-flex font-size-20">
-                                                <div class="flex-fill">
-                                                    <a data-bs-toggle="modal" data-bs-target=".orderdetailsModal-{{$admin->id}}" class="text-success"><i class="bx bx-edit"></i></a>
-                                                </div>
-                                                <div class="flex-fill">
-                                                    <a href="javascript:void(0);" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-danger" data-bs-target="#subscribeModalAdmin-{{ $admin->id }}"><i class="bx bx-trash"></i></a>
-
-                                                    <div class="modal modal-xs fade" id="subscribeModalAdmin-{{ $admin->id }}" tabindex="-1" aria-labelledby="subscribeModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog modal-dialog-centered">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header border-bottom-0">
-                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <div class="text-center mb-4">
-                                                                        <div class="avatar-md mx-auto mb-4">
-                                                                            <div class="avatar-title bg-warning rounded-circle text-white h1">
-                                                                                <i class="fa fa-exclamation-circle"></i>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="row justify-content-center">
-                                                                            <div class="col-xl-10">
-                                                                                <h4 class="text-danger">Attention !</h4>
-                                                                                <p class="text-muted font-size-14 mb-4">Etes vous sure de bien vouloire supprimer cet administrateur</p>
-
-                                                                                <div class="input-group bg-white rounded text-center" style="text-align:center;">
-                                                                                    <form method="post" action="{{ route('admin.admin.destroy',$admin->id) }}"  style="display:flex;text-align:center;width:100%;">
-                                                                                        {{csrf_field()}}
-                                                                                        {{method_field('delete')}}
-                                                                                        <button type="submit" class="btn btn-danger btn-xs" style="margin-left: 70px;margin-right:20px;"> Oui je veux bient </button> 
-                                                                                        <button type="button" class="btn btn-success btn-xs" data-bs-dismiss="modal" aria-label="Close"> x Anuller</button>
-                                                                                    </form>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table align-middle table-nowrap mb-0">
+                                            <thead class="table-light">
+                                                <tr>
+                                                    <th style="width: 20px;">
+                                                        <div class="form-check font-size-16 align-middle">
+                                                            <input class="form-check-input" type="checkbox" id="transactionCheck01">
+                                                            <label class="form-check-label" for="transactionCheck01"></label>
                                                         </div>
-                                                    </div> 
-                                                </div>
-                                            </div>
-                                        </div>
+                                                    </th>
+                                                    <th class="align-middle">Images</th>
+                                                    <th class="align-middle">Nom de l'admin </th>
+                                                    <th class="align-middle">Email</th>
+                                                    <th class="align-middle">Phone</th>
+                                                    <th class="align-middle">Status compte</th>
+                                                    <th class="align-middle">Actions</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach($admins as $admin)
+                                                <tr>
+                                                    <td>
+                                                        <div class="form-check font-size-16">
+                                                            <input class="form-check-input" type="checkbox" id="transactionCheck02">
+                                                            <label class="form-check-label" for="transactionCheck02"></label>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        @if($admin->image != null)
+                                                            <img src="{{Storage::url($admin->customer->image)}}" style="width: 40px;height:40px;" alt=""
+                                                                class="avatar-sm rounded-circle header-profile-user">
+                                                        @else
+                                                            <img src="{{ asset('admin/assets/images/users/profil.jpg') }}" style="width: 40px;height:40px;" alt=""
+                                                                class="avatar-sm rounded-circle header-profile-user">
+                                                        @endif
+                                                    </td>
+                                                    <td><a href="javascript: void(0);" class="text-body fw-bold">{{ $admin->name }}</a> </td>
+                                                    <td>
+                                                        {{ $admin->email }}
+                                                    </td>
+                                                    <td>{{ $admin->phone }}</td>
+                                                    <td>
+                                                        <span class="badge badge-pill @if($admin->is_active == 1) badge-soft-success @else badge-soft-success  @endif font-size-11">@if($admin->is_active == 1) Compte Actif @else Non actif  @endif</span>
+                                                    </td>
+                                                    <td>
+                                                        <ul class="list-inline mb-0">
+                                                            <li class="list-inline-item me-3">
+                                                            <a data-bs-toggle="modal" data-bs-target=".orderdetailsModal-{{$admin->id}}" class="text-success"><i class="bx bx-edit"></i></a>
+                                                            </li>
+                                                                <li class="list-inline-item me-3">
+                                                                <a href="" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-danger" data-bs-target="#subscribeModalAdmin-{{ $admin->id }}"><i class="mdi mdi-delete font-size-18"></i></a>
+                                                            </li>
+                                                        </ul>
+                                                    </td>
+                                                </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
                                     </div>
+                                    <!-- end table-responsive -->
                                 </div>
-                            @endforeach
+                            </div>
                             
                         </div>
 
@@ -106,6 +107,66 @@
                         <!-- end row -->
 
                     </div> <!-- container-fluid -->
+
+
+                    <div class="tab-pane show active sectionCompteMobile" id="chat">
+                        <div>
+                            <ul class="list-unstyled chat-list">
+                                <li class="mb-4">
+                                    <div class="media">
+                                        <div class="align-self-center me-3">
+                                            <div class="align-self-center me-3">
+                                                <img src="{{asset('admin/assets/images/users/profil.jpg')}}" class="rounded-circle avatar-xs" alt="">
+                                            </div>
+                                        </div>
+                                        <div class="media-body overflow-hidden">
+                                            <h5 class="text-truncate font-size-14 mb-1">{{Auth::guard('web')->user()->name}}</h5>
+                                            <p class="text-truncate mb-0">Admins</p>
+                                        </div>
+                                        <div class="font-size-11 button-right-siege">
+                                            <span>{{ $admins->count() }} Admins(s)</span>
+                                            <span class="badge bg-info mt-2 font-size-10" data-bs-toggle="modal" data-bs-target=".orderdetailsModal"><i class="fa fa-users"></i> Ajouter</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul class="list-unstyled chat-list">
+                                @foreach($admins as $admin)
+                                    <li class="" >
+                                        <a onclick="onclick().event.preventDefault()">
+                                            <div class="media">
+                                                <div class="align-self-center me-3">
+                                                    @if($admin->image != Null)
+                                                        <img src="{{Storage::url($admin->image)}}" class="rounded-circle avatar-xs" alt="">
+                                                    @else
+                                                        <img src="{{asset('admin/assets/images/users/profil.jpg')}}" class="rounded-circle avatar-xs" alt="">
+                                                    @endif
+                                                </div>
+                                                
+                                                <div class="media-body overflow-hidden">
+                                                    <h5 class="text-truncate font-size-14 mb-1">
+                                                        {{ $admin->name }}
+                                                    </h5>
+                                                    <p class="text-truncate mb-0"> <i class="fa fa-mobile font-size-10"></i>
+                                                        {{ $admin->phone }}
+                                                    </p>
+                                                </div>
+                                                <div class="font-size-12 button-right-siege">
+                                                    <span class="span-chat-siege span-chat1">
+                                                        <span  data-bs-toggle="modal" data-bs-target=".orderdetailsModal-{{$admin->id}}" class="text-success action-button mr-3"><i class="bx bx-edit font-size-18"></i></span>
+                                                        <span  aria-disabled="true" data-bs-toggle="modal" data-bs-target="#subscribeModalAdmin-{{ $admin->id }}" class="text-danger action-button ml-3"><i class="mdi mdi-delete font-size-18"></i></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+
+
+
                 </div>
                 <!-- End Page-content -->
 
@@ -274,6 +335,45 @@
                     </div>
                 @endforeach
                 <!-- end modal -->
+
+                @foreach($admins as $admin)
+
+                    <div class="modal modal-xs fade" id="subscribeModalAdmin-{{ $admin->id }}" tabindex="-1" aria-labelledby="subscribeModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header border-bottom-0">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="text-center mb-4">
+                                        <div class="avatar-md mx-auto mb-4">
+                                            <div class="avatar-title bg-warning rounded-circle text-white h1">
+                                                <i class="fa fa-exclamation-circle"></i>
+                                            </div>
+                                        </div>
+
+                                        <div class="row justify-content-center">
+                                            <div class="col-xl-10">
+                                                <h4 class="text-danger">Attention !</h4>
+                                                <p class="text-muted font-size-14 mb-4">Etes vous sure de bien vouloire supprimer cet administrateur</p>
+
+                                                <div class="input-group bg-white rounded text-center" style="text-align:center;">
+                                                    <form method="post" action="{{ route('admin.admin.destroy',$admin->id) }}"  style="display:flex;text-align:center;width:100%;">
+                                                        {{csrf_field()}}
+                                                        {{method_field('delete')}}
+                                                        <button type="submit" class="btn btn-danger btn-xs" style="margin-left: 70px;margin-right:20px;"> Oui je veux bient </button> 
+                                                        <button type="button" class="btn btn-success btn-xs" data-bs-dismiss="modal" aria-label="Close"> x Anuller</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+
+                @endforeach
 
 @endsection
 

@@ -26,8 +26,10 @@ class BagageController extends Controller
     public function index()
     {
         $clients = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
-        ->where('registered_at',Carbon::today()->format('Y-m-d'))
-        ->paginate(15);
+        // ->where('registered_at',Carbon::today()->format('Y-m-d'))
+        // ->where('amount','!=',null)
+        // ->where('status',0)
+        ->get();
         // dd($clients);
         return view('agent.bagage.index',compact('clients'));
     }
@@ -121,6 +123,19 @@ class BagageController extends Controller
             ->where('siege_id',Auth::guard('agent')->user()->siege_id)
             ->where('client_id',request()->clientId)
             ->first();
+
+        $client_p_t = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
+            ->where('id',request()->clientId)
+            ->first();
+            if ($request->prix != $bagUpdate->prix) {
+                $prixMoins = $client_p_t->prix_total - $bagUpdate->prix;
+                $client_p_t->prix_total = $prixMoins + $request->prix;
+            }else {
+                $client_p_t->prix_total = $client_p_t->prix_total;
+            }
+
+        $client_p_t->save();
+
         $imageName = '';
         if ($request->image == '') {
             $imageName = $bagUpdate->image;
@@ -137,6 +152,7 @@ class BagageController extends Controller
         $bagUpdate->prix = $request->prix;
         $bagUpdate->detail = $request->desc;
         $bagUpdate->save();
+
         Toastr::success('Ce bagage a bien ete modifier', 'Modification Bagages', ["positionClass" => "toast-top-right"]);
         return back();
         
@@ -163,8 +179,15 @@ class BagageController extends Controller
         $clientPrix->save();
         
         $bagedDelete->delete();
-        Toastr::success('Ce bagages a bien ete supprimer', 'Suppression Bagages', ["positionClass" => "toast-top-right"]);
-        return back();
+        if($bagedDelete->count() == 0){
+            $clientPrix->prix_total = 0;
+            $clientPrix->save();
+            Toastr::success('Ce bagages a bien ete supprimer', 'Suppression Bagages', ["positionClass" => "toast-top-right"]);
+            return redirect()->route('agent.home');
+        }else{
+            Toastr::success('Votre client n\'a plus de bagages', 'Suppression Bagages', ["positionClass" => "toast-top-right"]);
+            return back();
+        }
     }
 }
 

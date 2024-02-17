@@ -42,7 +42,7 @@ Route::get('/client-create', [App\Http\Controllers\User\ClientController::class,
 Route::post('/client/store', [App\Http\Controllers\User\ClientController::class, 'store'])->name('client.store');
 Route::get('/token/confirm/{id}/{token}', [App\Http\Controllers\User\ClientController::class, 'confirm'])->name('customer.confirm');
 Route::post('/client/colis', [App\Http\Controllers\User\ClientController::class, 'colis'])->name('client.colis');
-Route::put('/client/confirme/{id}', [App\Http\Controllers\User\ClientController::class, 'confirme'])->name('colis.confirme');
+Route::put('/client/confirme', [App\Http\Controllers\User\ClientController::class, 'confirmeReception'])->name('colis.confirmeReception');
 
 Route::get('/store', [App\Http\Controllers\User\HomeController::class, 'store'])->name('store');
 
@@ -110,7 +110,7 @@ Route::prefix('/agent')->name('agent.')->group(function()
     Route::get('/client/jour/{id}', [App\Http\Controllers\Agent\ClientController::class, 'jour'])->name('client.jour');
     Route::get('/createPDF/{id}', [App\Http\Controllers\Agent\ClientController::class, 'createPDF'])->name('client.pdf');
     Route::put('/presence', [App\Http\Controllers\Agent\ClientController::class,'presence'])->name('client.presence'); 
-    Route::get('/annuler', [App\Http\Controllers\Agent\ClientController::class, 'annuler'])->name('renoncer');
+    Route::get('/annuler', [App\Http\Controllers\Agent\ClientController::class, 'annuler'])->name('client.renoncer');
     Route::post('/remboursement', [App\Http\Controllers\Agent\ClientController::class, 'rembourser'])->name('rembourser');
     // Route::get('/absent', [App\Http\Controllers\Agent\ClientController::class, 'absent'])->name('absent');
     Route::get('/send-message', [App\Http\Controllers\Agent\ClientController::class, 'send_sms'])->name('send_sms');
@@ -124,6 +124,7 @@ Route::prefix('/agent')->name('agent.')->group(function()
     Route::resource('/colis', App\Http\Controllers\Agent\ColiController::class);
     Route::post('/colis/post', [App\Http\Controllers\Agent\ColiController::class,'post'])->name('colis.post');
     Route::post('/colis/cutomer', [App\Http\Controllers\Agent\ColiController::class,'customer'])->name('colis.customer');
+    Route::put('/colis/reception/{id}', [App\Http\Controllers\Agent\ColiController::class,'reception'])->name('colis.reception');
     Route::put('/colis/updateColi/{id}', [App\Http\Controllers\Agent\ColiController::class,'updateColi'])->name('colis.updateColi');
     Route::delete('/colis/delete/{id}', [App\Http\Controllers\Agent\ColiController::class,'delete'])->name('colis.delete');
 

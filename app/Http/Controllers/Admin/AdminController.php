@@ -36,7 +36,7 @@ class AdminController extends Controller
     public function create()
     {
         $users = Customer::paginate(9);
-        return view('admin.admin.customer',compact('users'));
+        return view('admin.customer.index',compact('users'));
     }
 
     /**

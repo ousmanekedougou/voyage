@@ -1,13 +1,13 @@
 @extends('admin.layouts.app')
 
 @section('headsection')
-
+<link href="{{asset('admin/assets/css/style.css')}}" rel="stylesheet" type="text/css" />
 @endsection
 
 @section('main-content')
 
             <div class="page-content">
-                <div class="container-fluid">
+                <div class="container-fluid sectionCompteDesktope">
 
                     <!-- start page title -->
                     <div class="row">
@@ -113,6 +113,83 @@
                     <!-- end row -->
 
                 </div> <!-- container-fluid -->
+
+
+                <div class="tab-pane show active sectionCompteMobile" id="chat">
+                    <div>
+                        <ul class="list-unstyled chat-list">
+                            <li class="mb-4">
+                                <div class="media">
+                                    <div class="align-self-center me-3">
+                                        @if(Auth::guard('agence')->user()->logo != Null)
+                                            <img src="{{Storage::url(Auth::guard('agence')->user()->logo)}}" class="rounded-circle avatar-xs" alt="">
+                                        @else
+                                            <img src="{{asset('admin/assets/images/bus_agence.jpg')}}" class="rounded-circle avatar-xs" alt="">
+                                        @endif
+                                    </div>
+                                    <div class="media-body overflow-hidden">
+                                        <h5 class="text-truncate font-size-14 mb-1">{{Auth::guard('agence')->user()->name}}</h5>
+                                        <p class="text-truncate mb-0">Siege de {{$siege->name}}</p>
+                                    </div>
+                                    <div class="font-size-11 button-right-siege">
+                                        <span>{{ $agents->count() }} Agent(s)</span>
+                                        <span data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="badge bg-info mt-2 font-size-10"><i class="fa fa-users"></i> Ajouter</span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                        <ul class="list-unstyled chat-list">
+                            @foreach($agents as $agent)
+                                <li class="" >
+                                    <a onclick="onclick().event.preventDefault()">
+                                        <div class="media">
+                                            <div class="align-self-center me-3">
+                                                @if($agent->image != Null)
+                                                    <img src="{{Storage::url($agent->image)}}" class="rounded-circle avatar-xs" alt="">
+                                                @else
+                                                    <img src="{{asset('admin/assets/images/users/profil.jpg')}}" class="rounded-circle avatar-xs" alt="">
+                                                @endif
+                                            </div>
+                                            
+                                            <div class="media-body overflow-hidden">
+                                                <h5 class="text-truncate font-size-14 mb-1">
+                                                    {{ $agent->name }}
+                                                </h5>
+                                                <p class="text-truncate mb-0"> <i class="fa fa-mobile font-size-10"></i>
+                                                    {{ $agent->phone }}
+                                                </p>
+                                                <span class="badge bg-warning">
+                                                    @if($agent->role == 1)
+                                                        Gestion Clients
+                                                    @elseif($agent->role == 2)
+                                                        Gestion Bagages
+                                                    @elseif($agent->role == 3)
+                                                        Gestion Colis
+                                                    @elseif($agent->role == 4)
+                                                        Tous les roles
+                                                    @endif
+                                                </span>
+                                            </div>
+                                            <div class="font-size-12 button-right-siege">
+                                                <span class="span-chat-siege span-chat1 form-check form-switch">
+                                                    <input class="form-check-input" type="checkbox" 
+                                                    role="button" aria-disabled="true" data-bs-toggle="modal" data-bs-target="#subscribeModalRoleActivationAgent-{{ $agent->id }}"
+                                                        id="SwitchCheckSizesm" @if($agent->is_active == 1) checked @endif  data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$agent->id}}">
+                                                    <label class="form-check-label" for="SwitchCheckSizesm">@if($agent->is_active == 1) Actif @else Desactive @endif </label>
+                                                </span>
+
+                                                <span class="span-chat-siege span-chat1" onclick="event.preventDefault();">
+                                                    <span  role="button" aria-disabled="true" data-bs-toggle="modal" data-bs-target="#subscribeModalRole-{{ $agent->id }}" class="text-success mr-2"><i class="fa fa-pencil-ruler me-1 text-warning"></i></span>
+                                                    <span  role="button" aria-disabled="true" data-bs-toggle="modal" class="text-danger" data-bs-target="#subscribeModalagence-{{ $agent->id }}"><i class="mdi mdi-delete font-size-18"></i></span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
             </div>
             <!-- End Page-content -->
 

@@ -24,9 +24,7 @@ class BusController extends Controller
 
     public function index()
     {
-        $itineraires = Itineraire::where('siege_id',Auth::guard('agent')->user()->siege_id)->orderBy('id','ASC')->get();
-        $buses = Bus::where('siege_id',Auth::guard('agent')->user()->siege_id)->orderBy('id','ASC')->get();
-        return view('agent.bus.index',compact('buses','itineraires'));
+       
     }
 
     /**
@@ -77,7 +75,9 @@ class BusController extends Controller
      */
     public function show($id)
     {
-        //
+        $itineraires = Itineraire::where('siege_id',Auth::guard('agent')->user()->siege_id)->orderBy('id','ASC')->get();
+        $itineraire = Itineraire::where('id',$id)->where('siege_id',Auth::guard('agent')->user()->siege_id)->first();
+        return view('agent.bus.index',compact('itineraires','itineraire'));
     }
 
     /**

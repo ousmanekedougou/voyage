@@ -7,6 +7,7 @@ use App\Models\Admin\Historical;
 use App\Models\Admin\Itineraire;
 use App\Models\Admin\Part;
 use App\Models\Admin\Siege;
+use App\Models\Admin\ColiClient;
 use App\Models\User\Client;
 use App\Models\User\Region;
 use Carbon\Carbon;
@@ -161,23 +162,33 @@ if (!function_exists('reference')) {
     }
 }
 
-// if (!function_exists('montant_today')) {
-//     function montant_today()
-//     {
-//         $itineraires = Itineraire::where('siege_id',Auth::guard('agent')->user()->siege_id)->orderBy('id', 'ASC')->get();
-//         foreach ($itineraires as $itineraire) {
-//             foreach ($itineraire->date_departs as $iti_date) {
-//                 $somme_buse = Bus::where('itineraire_id', $iti_date->itineraire_id)->get();
-//                 foreach ($somme_buse as $buse_som) {
-//                     if ($buse_som->date_depart->depart_at == Carbon::today()->format('Y-m-d')) {
-//                         $somme_total_today =  Bus::where('id', $buse_som->id)->sum('montant');
-//                         return $somme_total_today;
-//                     }
-//                 }
-//             }
-//         }
-//     }
-// }
+if (!function_exists('coliClientRefe')) {
+    function coliClientRefe()
+    {
+        $codeValidation = random_int(0000, 9999);
+        $receptCode = '';
+        $coli_client_ref = coliClient::where('code_validation', $codeValidation)->first();
+        if ($coli_client_ref) {
+            $receptCode = random_int(0000, 9999);
+        } else {
+            $receptCode = $codeValidation;
+        }
+        return $receptCode;
+    }
+}
+
+if (!function_exists('montant_today')) {
+    function montant_today()
+    {
+        $montant = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
+            ->where('registered_at',carbon_today())
+            ->where('amount','!=',null)
+            ->get();
+        $montant = $montant->sum('amount');
+
+        return $montant;
+    }
+}
 
 if (!function_exists('region')) {
     function region()
@@ -190,4 +201,6 @@ if (!function_exists('region')) {
 
     }
 }
+
+
 

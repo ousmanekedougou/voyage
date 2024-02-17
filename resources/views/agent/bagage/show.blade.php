@@ -2,12 +2,24 @@
 @section('headsection')
 <link href="{{asset('admin/assets/css/table.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{asset('admin/assets/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css')}}" rel="stylesheet" />
+<link href="{{asset('admin/assets/css/style.css')}}" rel="stylesheet" type="text/css" />
+<style>
+    .td-mobile{
+        width:100%;
+    }
+    .btn-recept-mobile{
+        margin-right:5px;
+    }
+    .btn-delete-mobile{
+        margin-left:8px;
+    }
+</style>
 @endsection
 
 @section('main-content')
 
             <div class="page-content">
-                <div class="container-fluid">
+                <div class="container-fluid sectionCompteDesktope">
 
                       <!-- start page title -->
                         <div class="row">
@@ -24,8 +36,19 @@
                         </div>
                         <!-- end page title -->
                         <div class="row">
-                           
-                            <div class="col-xl-8">
+                        <div class="col-xl-12">
+                            <p class="mb-2 text-center font-size-15 btn bnt-block btn-light btn-xs" style="width: 100%;">
+                                Auteur des bagages
+                                @if($client->name == null)
+                                    {{ $client->customer->name }}
+                                    {{ $client->customer->phone }}
+                                @else
+                                    {{ $client->name }}
+                                    {{ $client->phone }}
+                                @endif
+                            </p>
+                            </div>
+                            <div class="col-xl-12">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="table-responsive">
@@ -55,41 +78,7 @@
                                                         <td>
                                                             <a href="javascript:void(0);" class="action-icon text-primary" data-bs-toggle="modal" data-bs-target="#EditBagage-{{$bag->id}}"> <i class="bx bx-edit font-size-18"></i></a>
                                                             <a href="javascript:void(0);" class="action-icon text-danger" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-danger" data-bs-target="#subscribeModalBag-{{ $bag->id }}"> <i class="mdi mdi-trash-can font-size-18"></i></a>
-                                                            <div class="modal modal-xs fade" id="subscribeModalBag-{{ $bag->id }}" tabindex="-1" aria-labelledby="subscribeModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog modal-dialog-centered modal-xs">
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header border-bottom-0">
-                                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <div class="text-center mb-4">
-                                                                                <div class="avatar-md mx-auto mb-4">
-                                                                                    <div class="avatar-title bg-danger rounded-circle text-white h1">
-                                                                                        <i class="fa fa-trash"></i>
-                                                                                    </div>
-                                                                                </div>
-
-                                                                                <div class="row justify-content-center">
-                                                                                    <div class="col-xl-10">
-                                                                                        <h4 class="text-danger text-uppercase">Attention !</h4>
-                                                                                        <p class="text-muted font-size-14 mb-4">Etes vous sure de bien vouloire supprimer {{ $bag->name }}</p>
-
-                                                                                        <div class="input-group bg-white rounded text-center" style="text-align:center;">
-                                                                                            <form method="post" action="{{ route('agent.bagage.destroy',$bag->id) }}"  style="display:flex;text-align:center;width:100%;">
-                                                                                                <input type="hidden" name="clientId" value="{{ $bag->client->id }}">
-                                                                                                {{csrf_field()}}
-                                                                                                {{method_field('delete')}}
-                                                                                                <button type="submit" class="btn btn-danger btn-xs" style="margin-left: 70px;margin-right:20px;"> Oui je veux bien </button> 
-                                                                                                <button type="button" class="btn btn-success btn-xs" data-bs-dismiss="modal" aria-label="Close"> x Anuller</button>
-                                                                                            </form>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                            
                                                         </td>
                                                     </tr>
                                                     @endforeach
@@ -97,50 +86,136 @@
                                             </table>
                                         </div>
                                         <div class="row mt-4">
-                                            <div class="col-sm-6">
+                                            <div class="col-sm-3">
                                                 <a href="{{ route('agent.bagage.index') }}" class="btn btn-secondary">
                                                     <i class="mdi mdi-arrow-left me-1"></i> Retoure </a>
                                             </div> <!-- end col -->
-                                        </div> <!-- end row-->
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4">
-                                 <div class="card">
-                                    <div class="card-body">
-                                        <h4 class="card-title mb-3">Récapitulatif de la commande</h4>
-
-                                        <div class="table-responsive">
-                                            <table class="table mb-0">
-                                                <tbody>
-                                                    <tr>
-                                                        <td>Quantite :</td>
-                                                        <td>{{ $bagages->count() }}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Total :</th>
-                                                        <th>{{$client->getAmountTotal()}}</th>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                        <!-- end table-responsive -->
-                                         <div class="row mt-4">
-                                            <div class="col-sm-12">
-                                                <div class="text-sm-end mt-2 mt-sm-0">
-                                                    <a href="" class="btn btn-success btn-block" style="width: 100%;">
-                                                        <i class="mdi mdi-cart-arrow-right me-1"></i> Payer </a>
+                                            <div class="col-sm-9">
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr>
+                                                                
+                                                                <th> Quantite : {{ $bagages->count() }}</th>
+                                                            
+                                                                
+                                                                <th> Total :   {{$client->getAmountTotal()}}</th>
+                                                                <th>
+                                                                    <span class="btn btn-success btn-block" style="width: 100%;margin-top:-10px;">
+                                                                    <i class="mdi mdi-cart-arrow-right me-1"></i> Payer </span>
+                                                                </th>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
                                                 </div>
-                                            </div> <!-- end col -->
+                                            </div>
                                         </div> <!-- end row-->
                                     </div>
                                 </div>
-                                <!-- end card -->
                             </div>
                         </div>
                         <!-- end row -->
 
                 </div> <!-- container-fluid -->
+
+                <div class="table-responsive sectionCompteMobile">
+                    <ul class="list-unstyled chat-list">
+                        <li class="mb-4">
+                            <div class="media">
+                                <div class="align-self-center me-3">
+                                    <div class="align-self-center me-3">
+                                        @if(Auth::guard('agent')->user()->agence->logo != Null)
+                                            <img src="{{Storage::url(Auth::guard('agent')->user()->agence->logo)}}" class="rounded-circle avatar-xs" alt="">
+                                        @else
+                                            <img src="{{asset('admin/assets/images/bus_agence.jpg')}}" class="rounded-circle avatar-xs" alt="">
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="media-body overflow-hidden">
+                                    <h5 class="text-truncate font-size-14 mb-1">{{Auth::guard('agent')->user()->agence->name}}</h5>
+                                    <p class="text-truncate mb-0">Siege de {{Auth::guard('agent')->user()->siege->name}}</p>
+                                </div>
+                                <div class="font-size-11 button-right-siege">
+                                    <span>{{ $bagages->count() }} Bagage(s)</span>
+                                    <span class="badge bg-info mt-2 font-size-10" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa fa-suitcase-rolling"></i> Ajouter</span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <table class="table align-middle mb-0 table-nowrap">
+                        <div class="row">
+                        <p>
+                            Auteur des bagages
+                            @if($client->name == null)
+                                {{ $client->customer->name }}
+                                {{ $client->customer->phone }}
+                            @else
+                                {{ $client->name }}
+                                {{ $client->phone }}
+                            @endif
+                        </p>
+                        @foreach($bagages as $bag)
+                            <tbody class="card col-lg-4">
+                                <tr>
+                                    <td class="">
+                                        <img src="{{asset('admin/assets/images/product/img-1.png')}}" alt="product-img"
+                                            title="product-img" class="avatar-md" />
+                                    </td>
+                                    <td class="">
+                                        <h5 class="font-size-14 text-truncate">{{ $bag->name }}</h5><span class="action-icon badge bg-primary" data-bs-toggle="modal" data-bs-target="#EditBagage-{{$bag->id}}"> <i class="bx bx-edit font-size-11"></i> Modifier</span>
+                                        <span class="action-icon badge bg-danger btn-delete-mobile" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-danger" data-bs-target="#subscribeModalBag-{{ $bag->id }}"> <i class="mdi mdi-trash-can font-size-11"></i> Archiver</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="td-mobile">Désc :</td>
+                                    <td class="td-mobile">
+                                        {{ $bag->detail }} 
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="td-mobile">Prix : </td>
+                                    <td class="td-mobile">{{$bag->getAmount()}}</td>
+                                </tr>
+                                
+                            </tbody>
+                        @endforeach
+                        </div>
+                    </table>
+
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title mb-3">Résumé de la reservation</h4>
+
+                                <div class="table-responsive">
+                                    <table class="table mb-0">
+                                        <tbody>
+                                            <tr>
+                                                <td>Quantite :</td>
+                                                <td>{{ $bagages->count() }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Total : {{$client->getAmountTotal()}}</th>
+                                                <th></th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- end table-responsive -->
+                                    <div class="row mt-4">
+                                    <div class="col-sm-12">
+                                        <div class="text-sm-end mt-2 mt-sm-0">
+                                            <span class="btn btn-success btn-block" style="width: 100%;">
+                                                <i class="mdi mdi-cart-arrow-right me-1"></i> Payer 
+                                            </span>
+                                        </div>
+                                    </div> <!-- end col -->
+                                </div> <!-- end row-->
+                            </div>
+                        </div>
+                        <!-- end card -->
+                    </div>
+                </div>
             </div>
                 <!-- End Page-content -->
 
@@ -232,6 +307,47 @@
                     </div>
                 </div>
                 <!-- Fin du modal de l'ajout -->
+                @endforeach
+
+
+                @foreach($bagages as $bag)
+
+                    <div class="modal modal-xs fade" id="subscribeModalBag-{{ $bag->id }}" tabindex="-1" aria-labelledby="subscribeModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-xs">
+                            <div class="modal-content">
+                                <div class="modal-header border-bottom-0">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="text-center mb-4">
+                                        <div class="avatar-md mx-auto mb-4">
+                                            <div class="avatar-title bg-danger rounded-circle text-white h1">
+                                                <i class="fa fa-trash"></i>
+                                            </div>
+                                        </div>
+
+                                        <div class="row justify-content-center">
+                                            <div class="col-xl-10">
+                                                <h4 class="text-danger text-uppercase">Attention !</h4>
+                                                <p class="text-muted font-size-14 mb-4">Etes vous sure de bien vouloire supprimer {{ $bag->name }}</p>
+
+                                                <div class="input-group bg-white rounded text-center" style="text-align:center;">
+                                                    <form method="post" action="{{ route('agent.bagage.destroy',$bag->id) }}"  style="display:flex;text-align:center;width:100%;">
+                                                        <input type="hidden" name="clientId" value="{{ $bag->client->id }}">
+                                                        {{csrf_field()}}
+                                                        {{method_field('delete')}}
+                                                        <button type="submit" class="btn btn-danger btn-xs" style="margin-left: 70px;margin-right:20px;"> Oui je veux bien </button> 
+                                                        <button type="button" class="btn btn-success btn-xs" data-bs-dismiss="modal" aria-label="Close"> x Anuller</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 @endforeach
 
                  <!-- Static Backdrop Modal de l'ajout -->

@@ -1,9 +1,16 @@
 @extends('admin.layouts.app')
-
+    @section('headSection')
+        <link href="{{asset('admin/assets/css/style.css')}}" rel="stylesheet" type="text/css" />
+        <style>
+            .action-button{
+                float:right;
+            }
+        </style>
+    @endsection
 @section('main-content')
 
     <div class="page-content">
-        <div class="container-fluid">
+        <div class="container-fluid sectionCompteDesktope">
 
             <!-- start page title -->
             <div class="row">
@@ -51,12 +58,6 @@
                                             </div>
                                             <div class="col-3">
                                                 <div>
-                                                    <p class="text-muted text-truncate mb-2">Total Sieges</p>
-                                                    <h5 class="mb-0">{{$siegeCount->count()}}</h5>
-                                                </div>
-                                            </div>
-                                            <div class="col-3">
-                                                <div>
                                                     <p class="text-muted text-truncate mb-2">Utilisateurs</p>
                                                     <h5 class="mb-0">{{$customerCount->count()}}</h5>
                                                     
@@ -66,7 +67,6 @@
                                                 <div>
                                                     <p class="text-muted text-truncate mb-2">Abones</p>
                                                     <h5 class="mb-0">{{$newCount->count()}}</h5>
-                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -80,86 +80,178 @@
             </div>
             <!-- end row -->
 
-                    <div class="row">
-                        @foreach($agences as $agence)
-                            <div class="col-xl-4 col-sm-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="media">
-                                            <div class="avatar-md me-4">
-                                                <span class="avatar-title rounded-circle bg-light text-danger font-size-16">
-                                                    <img src="{{Storage::url($agence->image_agence)}}" alt="" height="30">
-                                                </span>
+            <div class="row">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table align-middle table-nowrap mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th style="width: 20px;">
+                                            <div class="form-check font-size-16 align-middle">
+                                                <input class="form-check-input" type="checkbox" id="transactionCheck01">
+                                                <label class="form-check-label" for="transactionCheck01"></label>
                                             </div>
-
-                                            <div class="media-body overflow-hidden">
-                                                <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">{{ $agence->name }}</a></h5>
-                                                <p class="text-muted mb-1"> <i class="fa fa-envelope"></i> {{ $agence->email }}</p>
-                                                <p class="text-muted mb-4 font-size-10"><i class="fa fa-mobile"></i> {{ $agence->phone }}</p>
-                                                
-                                                <div class="avatar-group">
-                                                    <div class="avatar-group-item font-size-11">
-                                                        {{$agence->slogan}}
-                                                    </div>
-                                                </div>
-                                                
+                                        </th>
+                                        <th class="align-middle">Images</th>
+                                        <th class="align-middle">Nom de l'agence </th>
+                                        <th class="align-middle">Email</th>
+                                        <th class="align-middle">Phone</th>
+                                        <th class="align-middle">Methode</th>
+                                        <th class="align-middle">Orders</th>
+                                        <th class="align-middle">Status compte</th>
+                                        <th class="align-middle">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($agences as $agence)
+                                    <tr>
+                                        <td>
+                                            <div class="form-check font-size-16">
+                                                <input class="form-check-input" type="checkbox" id="transactionCheck02">
+                                                <label class="form-check-label" for="transactionCheck02"></label>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="px-4 py-3 border-top">
-                                        <ul class="list-inline mb-0">
-                                            <li class="list-inline-item me-3">
-                                                @if($agence->is_active == 1)
-                                                <span class="badge bg-success"><i class="bx bxs-check-circle me-1"></i>
-                                                        Active
-                                                </span>
-                                                @else
-                                                 <span class="badge bg-danger"><i class="bx bxs-x-square me-1"></i>
-                                                        Desactive
-                                                </span>
-                                                @endif
-                                                
-                                            </li>
-                                            <li class="list-inline-item me-3">
-                                                <!-- <a href=""><i class="bx bx-edit me-1"></i></a> -->
-                                            </li>
-                                            <li class="list-inline-item me-3">
-                                                <a href="" data-bs-toggle="modal" data-bs-target="#edit-agence-{{$agence->id}}"><i class="bx bx-show me-1"></i></a>
-                                            </li>
-                                            @if(Auth::user()->is_admin == 0)
-                                                <li class="list-inline-item me-3">
-                                                    <a href="{{ route('admin.agence.show',$agence->id) }}"><i class="fa fa-file-invoice me-1"></i></a>
-                                                </li>
+                                        </td>
+                                        <td>
+                                            @if($agence->image != null)
+                                                <img src="{{Storage::url($agence->customer->image)}}" style="width: 40px;height:40px;" alt=""
+                                                    class="avatar-sm rounded-circle header-profile-user">
+                                            @else
+                                                <img src="{{ asset('admin/assets/images/users/profil.jpg') }}" style="width: 40px;height:40px;" alt=""
+                                                    class="avatar-sm rounded-circle header-profile-user">
                                             @endif
-                                            <li class="list-inline-item me-3">
-                                                <!-- <a href=""><i class="bx bx-block me-1"></i></a> -->
-                                                <div class="form-check form-switch mb-3" dir="ltr">
-                                                    <input class="form-check-input" type="checkbox"
-                                                        id="SwitchCheckSizesm" @if($agence->is_active == 1) checked @endif  data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$agence->id}}">
-                                                    <label class="form-check-label" for="SwitchCheckSizesm"></label>
-                                                </div>
-                                            </li>
-                                             <li class="list-inline-item me-3">
-                                                <a href="" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-danger" data-bs-target="#subscribeModalagence-{{ $agence->id }}"><i class="bx bx-trash me-1 text-danger"></i></a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                        @endforeach
-                    </div>
-                    <!-- end row -->
-
-                    <div class="row">
-                        <div class="col-lg-12">
-                           {{$agences->links()}}
+                                        </td>
+                                        
+                                        <td><a href="javascript: void(0);" class="text-body fw-bold">{{ $agence->name }}</a> </td>
+                                        <td>
+                                            {{ $agence->email }}
+                                        </td>
+                                        <td>{{ $agence->phone }}</td>
+                                        <td>
+                                            <span class="badge badge-pill badge-soft-success font-size-11">Paid</span>
+                                        </td>
+                                        <td>
+                                            <button type="button" class="btn btn-primary btn-sm btn-rounded waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".transaction-detailModal">
+                                                View Details
+                                            </button>
+                                        </td>
+                                        <td>
+                                            <span class="badge badge-pill @if($agence->is_active == 1) badge-soft-success @else badge-soft-success  @endif font-size-11">@if($agence->is_active == 1) Compte Actif @else Non actif  @endif</span>
+                                        </td>
+                                        <td>
+                                            <ul class="list-inline mb-0">
+                                                <li class="list-inline-item me-3">
+                                                    <!-- <a href=""><i class="bx bx-block me-1"></i></a> -->
+                                                    <div class="form-check form-switch mb-3" dir="ltr">
+                                                        <input class="form-check-input" type="checkbox"
+                                                            id="SwitchCheckSizesm" @if($agence->is_active == 1) checked @endif  data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$agence->id}}">
+                                                        <label class="form-check-label" for="SwitchCheckSizesm"></label>
+                                                    </div>
+                                                </li>
+                                                    <li class="list-inline-item me-3">
+                                                    <a href="" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-danger" data-bs-target="#subscribeModalagence-{{ $agence->id }}"><i class="mdi mdi-delete font-size-18"></i></a>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
+                        <!-- end table-responsive -->
                     </div>
-                    <!-- end row -->
+                </div>
+            </div>
+            <!-- end row -->
+
+            <div class="row">
+                <div class="col-lg-12">
+                    {{$agences->links()}}
+                </div>
+            </div>
+            <!-- end row -->
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="text-center my-3">
+                        <a href="javascript:void(0);" class="text-success"><i class="bx bx-hourglass bx-spin me-2"></i> Load more </a>
+                    </div>
+                </div> <!-- end col-->
+            </div>
+            <!-- end row -->
          
         </div>
         <!-- container-fluid -->
+
+        <div class="tab-pane show active sectionCompteMobile mb-4" id="chat">
+            <div>
+                <ul class="list-unstyled chat-list ">
+                    <li class="active">
+                        <a href="#">
+                            <div class="media">
+
+                                <div class="align-self-center me-3">
+                                    <img src="{{asset('admin/assets/images/icone-ticke.png')}}" class="rounded-circle avatar-xs" alt="">
+                                </div>
+                                <div class="media-body overflow-hidden">
+                                    <h5 class="text-truncate font-size-14 mb-1">Bonjour {{ Auth::guard('web')->user()->name }}</h5>
+                                    <p class="text-truncate mb-0">Bienvenue sur TouCki</p>
+                                </div>
+                                <div class="font-size-11">Agences ({{ $agences->count() }}) </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            
+                <ul class="list-unstyled chat-list">
+                    {{-- data-simplebar style="max-height: 410px;" --}}
+                    @foreach($agences as $agence)
+                        <li class="">
+                            <a onclick="event.preventDefault();">
+                                <div class="media">
+                                    <div class="align-self-center me-3">
+                                        <i class="mdi mdi-arrow-right font-size-10"></i>
+                                    </div>
+                                    <div class="align-self-center me-3">
+                                        @if($agence->logo != Null)
+                                            <img src="{{Storage::url($agence->logo)}}" class="rounded-circle avatar-xs" alt="">
+                                        @else
+                                            <img src="{{asset('admin/assets/images/bus_agence.jpg')}}" class="rounded-circle avatar-xs" alt="">
+                                        @endif
+                                    </div>
+                                    
+                                    <div class="media-body overflow-hidden">
+                                        <h5 class="text-truncate font-size-14 mb-1">{{ $agence->name }}</h5>
+                                        <p class="text-truncate mb-0"> <i class="fa fa-mobile"></i> {{ $agence->phone }}</p>
+                                    </div>
+                                    <div class="font-size-12 button-right-siege">
+                                        <span class="span-chat-siege span-chat1 rounded-circle">
+                                            <span class="badge @if($agence->is_active == 1) bg-success @else bg-danger @endif"><i class=" @if($agence->is_active == 1) bx bxs-check-circle @else bx bxs-x-square @endif"></i>
+                                                @if($agence->is_active == 1)
+                                                    Active
+                                                @else
+                                                    Desactive
+                                                @endif
+                                            </span>
+                                        {{ $agence->sieges->count() }} Siege(s)
+                                        </span>
+                                        
+                                        <span class="span-chat-siege span-chat1 form-check form-switch ">
+                                            <input class="form-check-input mt-1 action-button" type="checkbox"
+                                                id="SwitchCheckSizesm" @if($agence->is_active == 1) checked @endif  data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$agence->id}}">
+                                            
+                                            <span  data-bs-toggle="modal" data-bs-target="#subscribeModalagence-{{ $agence->id }}" class="text-danger action-button ml-3"><i class="mdi mdi-delete font-size-18"></i></span>
+                                            <span  data-bs-toggle="modal" data-bs-target="#edit-agence-{{ $agence->id }}" class="text-success action-button mr-3"><i class="mdi mdi-eye font-size-18"></i></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <br>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
     </div>
     <!-- End Page-content -->
 

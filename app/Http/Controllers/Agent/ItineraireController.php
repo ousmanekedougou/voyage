@@ -55,7 +55,7 @@ class ItineraireController extends Controller
         ]);
         $add_itineraire = new Itineraire();
         $add_itineraire->name = $request->name;
-        $add_itineraire->user_id = Auth::guard('agent')->user()->id;
+        // $add_itineraire->user_id = Auth::guard('agent')->user()->id;
         $add_itineraire->siege_id = Auth::guard('agent')->user()->siege_id;
         $add_itineraire->save();
         Toastr::success('Votre itineraire a bien ete creer', 'Ajout Itineraire', ["positionClass" => "toast-top-right"]);
@@ -72,7 +72,8 @@ class ItineraireController extends Controller
      */
     public function show($id)
     {
-       
+        $itineraire = Itineraire::where('id',$id)->where('siege_id',Auth::guard('agent')->user()->siege_id)->first();
+        return view('agent.bus.mobile_bus',compact('itineraire'));
     }
 
     /**

@@ -17,9 +17,7 @@
 
                                 <div class="page-title-right">
                                     <ol class="breadcrumb m-0">
-                                        <!-- <li class="breadcrumb-item"><a href="javascript: void(0);">Contacts</a></li>
-                                        <li class="breadcrumb-item active">Users Grid</li> -->
-                                        <li class="breadcrumb-item active"> <button type="button" class="btn btn-success btn-rounded waves-effect waves-light btn-xs " data-bs-toggle="modal" data-bs-target=".orderdetailsModal"><i class="mdi mdi-plus me-1"></i> Ajouter un membre</button></li>
+                                        <li class="breadcrumb-item active" style="float:right;"> <button type="button" class="btn btn-success btn-rounded waves-effect waves-light btn-xs" data-bs-toggle="modal" data-bs-target=".orderdetailsModal"><i class="mdi mdi-plus me-1"></i> Ajouter</button></li>
                                     </ol>
                                 </div>
 
@@ -101,15 +99,6 @@
                         @endforeach
                         
                     </div>
-
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="text-center my-3">
-                                <a href="javascript:void(0);" class="text-success"><i class="bx bx-hourglass bx-spin me-2"></i> Load more </a>
-                            </div>
-                        </div> <!-- end col-->
-                    </div>
-                    <!-- end row -->
 
                 </div> <!-- container-fluid -->
             </div>

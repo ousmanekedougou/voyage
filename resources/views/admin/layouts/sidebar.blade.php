@@ -46,6 +46,14 @@
                                     <span key="t-file-manager">Presentation</span>
                                 </a>
                             </li>
+
+                            <li>
+                                <a href="" class="waves-effect">
+                                    <i class="bx bx-file"></i>
+                                    <span key="t-file-manager">Factures</span>
+                                </a>
+                            </li>
+
                             <!-- La partie des agence -->
                             <li>
                                 <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -86,14 +94,9 @@
                                 --}}
                                 <hr>
                                 <li>
-                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                        <i class="fa fa-road"></i>
-                                        <span key="t-contacts">Itineraires & Buses</span>
-                                    </a>
-                                    <ul class="sub-menu" aria-expanded="false">
-                                        <li><a href="{{ route('agent.itineraire.index') }}" key="t-products"> <i class="fa fa-road"></i>Vos Itineraires</a></li>
-                                        <li><a href="{{ route('agent.bus.index') }}" key="t-products"><i class="fa fa-bus"></i>Vos Buses</a></li>
-                                    </ul>
+                                    <a href="{{ route('agent.itineraire.index') }}" key="t-products"> <i class="fa fa-road"></i>Vos Itineraires</a>
+                                    {{--<li><a href="{{ route('agent.bus.index') }}" key="t-products"><i class="fa fa-bus"></i>Vos Buses</a></li>--}}
+                                    
                                 </li>
                                 {{--
                                  <li>
@@ -122,11 +125,11 @@
                                         </ul>
                                     </li>
                                 @endforeach
+                                {{--
                                 <hr>
                                 <li>
                                     <a href="{{ route('agent.renoncer') }}" key="t-products" class=""> <i class="fas fa-money-bill "></i> Ticket annuler</a>
                                 </li>
-                                {{--
                                 @if(Auth::guard('agent')->user()->agence->method_ticket == 0)
                                     <hr>
                                     <li>

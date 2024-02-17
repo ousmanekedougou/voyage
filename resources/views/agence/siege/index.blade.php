@@ -56,7 +56,7 @@
                                                 <td><span class="badge bg-success">{{$siege->adress}}</span></td>
                                                 <td>
                                                     <a href="{{ route('agence.agent.show',$siege->id) }}">
-                                                        <span class="badge bg-success">Agents</span>
+                                                        <span class="badge bg-success">{{ $siege->agents->count() }} Agents</span>
                                                     </a>
                                                 </td>
                                                 <td>

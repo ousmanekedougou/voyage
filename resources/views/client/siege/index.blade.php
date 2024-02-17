@@ -5,7 +5,7 @@
 
 @section('main-content')
 
-    <div class="page-content">
+    <div class="page-content bg-white">
         <div class="container-fluid">
 
             <!-- start page title -->
@@ -98,53 +98,45 @@
             </div>
             <!-- end row -->
             <!-- currency price section end -->
-
-            <div class="row">
-                <div class="col-lg-12">
-                   
-                </div>
-            </div>
-            <!-- end row -->
          
         </div>
         <!-- container-fluid -->
 
         <div class="tab-pane show active sectionCompteMobile siege-mobile-top" id="chat">
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="media">
-                                <div class="media-body align-self-center">
-                                    <div class="text-muted">
-                                        <h5 class="mb-0">Agence {{$agence->name}}</h5>
-
-                                        <p class="mb-0">
-                                            <a href="{{ route('customer.agence.about',$agence->slug) }}" class="badge bg-info mt-1 p-1"> <i class="bx bx-file"></i> A Propos de nous</a>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end row -->
-                </div>
-            </div>
             <div>
                 <ul class="list-unstyled chat-list">
+                    <li class="mb-4">
+                        <div class="media">
+                            <div class="align-self-center me-3">
+                                @if($agence->logo != Null)
+                                <img src="{{Storage::url($agence->logo)}}" class="rounded-circle avatar-xs" alt="">
+                                @else
+                                <img src="{{asset('admin/assets/images/bus_agence.jpg')}}" class="rounded-circle avatar-xs" alt="">
+                                @endif
+                            </div>
+                            <div class="media-body overflow-hidden">
+                                <h5 class="text-truncate font-size-14 mb-1">{{$agence->name}}</h5>
+                                <p class="text-truncate mb-0">{{$agence->slogan}}</p>
+                            </div>
+                            <div class="font-size-11">
+                                <a href="{{ route('customer.agence.about',$agence->slug) }}" class="btn btn-xs btn-primary text-white mt-1 p-1 "> <i class="bx bx-file"></i> Infos</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                    
+                <ul class="list-unstyled chat-list">
                     {{-- data-simplebar style="max-height: 410px;" --}}
+
                     @foreach($sieges as $siege)
-                        <li class="active">
+                        <li class="" >
                             <a href="#">
                                 <div class="media">
                                     <div class="align-self-center me-3">
-                                        <i class="mdi mdi-arrow-right font-size-10"></i>
-                                    </div>
-                                    <div class="align-self-center me-3">
-                                        @if($agence->logo != Null)
+                                        @if($siege->logo != Null)
                                             <img src="{{Storage::url($siege->logo)}}" class="rounded-circle avatar-xs" alt="">
                                         @else
-                                            <img src="{{asset('admin/assets/images/users/profil.jpg')}}" class="rounded-circle avatar-xs" alt="">
+                                            <img src="{{asset('admin/assets/images/map_siege.jpg')}}" class="rounded-circle avatar-xs" alt="">
                                         @endif
                                     </div>
                                     
@@ -153,19 +145,19 @@
                                         <p class="text-truncate mb-0"> <i class="fa fa-mobile"></i> {{ $siege->phone }}</p>
                                     </div>
                                     <div class="font-size-12 button-right-siege">
-                                        <span class="span-chat-siege span-chat1 rounded-circle" data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$siege->id}}">
+                                        <span class="span-chat-siege span-chat1 rounded-circle" onclick="onclick().event.preventDefault()" data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$siege->id}}">
                                             S'inscrire <i class="fa fa-user-plus"></i>
                                         </span>
                                         
-                                        <span class="span-chat-siege rounded-circle">
-                                            Vos colis <i class="fa fa-suitcase-rolling"></i>
+                                        <span class="span-chat-siege rounded-circle" onclick="location.href='{{route('customer.colis.edit',$siege->id)}}'">
+                                            Colis reçue <i class="fa fa-suitcase-rolling"></i>
                                         </span>
                                     </div>
                                 </div>
                             </a>
                         </li>
-                        <br>
                     @endforeach
+                    
                 </ul>
             </div>
         </div>
@@ -198,7 +190,7 @@
                                                         @foreach($siege->itineraires as $itineraire)
                                                             <optgroup label="{{$itineraire->name}}">
                                                                 @foreach($itineraire->villes as $ville)
-                                                                    <option value="{{ $ville->id }}">{{$ville->name}}</option>
+                                                                    <option value="{{ $ville->id }}">{{$ville->name}} | {{ $ville->getAmount() }}</option>
                                                                 @endforeach
                                                             </optgroup>
                                                         @endforeach

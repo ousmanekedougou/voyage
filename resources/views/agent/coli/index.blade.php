@@ -1,13 +1,22 @@
 @extends('admin.layouts.app')
 
-@section('headsection')
+@section('headSection')
     <link href="{{asset('admin/assets/css/table.css')}}" rel="stylesheet" type="text/css" />
+    <style>
+        .button-client-add{
+            margin-right:13px
+        }
+
+        .button-client-delete{
+            margin-left:13px
+        }
+    </style>
 @endsection
 
 @section('main-content')
 
                 <div class="page-content">
-                    <div class="container-fluid">
+                    <div class="container-fluid sectionCompteDesktope">
 
                         <!-- start page title -->
                             <div class="row">
@@ -23,101 +32,212 @@
                                 </div>
                             </div>
                             <!-- end page title -->
-
                             <div class="row">
-                        @foreach($clients as $client)
-                            <div class="col-xl-4 col-sm-6">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="media">
-                                            <div class="avatar-md me-4">
-                                                @if($client->customer_id == null)
-                                                    <span class="avatar-title rounded-circle bg-light text-danger font-size-16">
-                                                        <img src="{{ asset('admin/assets/images/users/profil.jpg') }}" alt="" height="30">
-                                                    </span>
-                                                @else
-                                                    <span class="avatar-title rounded-circle bg-light text-danger font-size-16">
-                                                        <img src="{{Storage::url($client->customer->image)}}" alt="" height="30">
-                                                    </span>
-                                                @endif
-                                            </div>
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h4 class="card-title text-center"> Clients Colis </h4>
+                                            <table id="datatable"
+                                                class="table table-bordered dt-responsive nowrap w-100">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Image</th>
+                                                        <th>Prenom & nom</th>
+                                                        <th>Telephone</th>
+                                                        <th>CNI</th>
+                                                        <th>Colis</th>
+                                                        <th>Actions</th>
+                                                    </tr>
+                                                </thead>
 
-                                            <div class="media-body overflow-hidden">
-                                                <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">{{ $client->name }}</a></h5>
-                                                <p class="text-muted mb-1"> <i class="fa fa-mobile"></i> {{ $client->phone }}</p>
-                                                
-                                                <p class="text-muted mb-1 font-size-10"><i class="bx bxs-wallet-alt"></i> {{ $client->cni }} </p>
-                                              
-                                            </div>
-                                        </div>
-                                        <div class="row mt-1">
-                                            <div class="font-size-11 text-center">
-                                                    <span class="badge bg-primary font-size-12">{{ $client->coli_clients->count() }} Colies</span>
-                                            </div>
+
+                                                <tbody>
+                                                    @foreach($clients as $client)
+                                                        <tr>
+                                                            <td>
+                                                                @if($client->image != null)
+                                                                    <img src="{{Storage::url($client->customer->image)}}" style="width: 40px;height:40px;" alt=""
+                                                                        class="avatar-sm rounded-circle header-profile-user">
+                                                                @else
+                                                                    <img src="{{ asset('admin/assets/images/users/profil.jpg') }}" style="width: 40px;height:40px;" alt=""
+                                                                        class="avatar-sm rounded-circle header-profile-user">
+                                                                @endif
+                                                            </td>
+                                                            @if($client->name == null)
+                                                            <td>{{ $client->customer->name }}</td>
+                                                            <td>{{ $client->customer->phone }}</td>
+                                                            @else
+                                                            <td>{{ $client->name }}</td>
+                                                            <td>{{ $client->phone }}</td>
+                                                            @endif
+                                                            <td>
+                                                            {{ $client->cni }}
+                                                            </td>
+                                                            <td>
+                                                                <!-- Button trigger modal -->
+                                                                <a data-bs-toggle="modal" data-bs-target="#AddBagage-{{$client->id}}" class="btn btn-success btn-sm btn-rounded">
+                                                                    Ajouter
+                                                                </a>
+                                                            </td>
+                                                            <td>
+                                                                <!-- Button trigger modal -->
+                                                                <a href="{{ route('agent.colis.show',$client->id) }}" class="btn btn-primary btn-sm btn-rounded">
+                                                                <i class="fa fa-eye font-size-12"></i> Voire
+                                                                </a>
+                                                            </td>
+                                                            <td>
+                                                                <ul class="list-inline mb-0">
+                                                                    
+                                                                    <li class="list-inline-item me-3">
+                                                                        <a href="" data-bs-toggle="modal" data-bs-target="#EditClientColie-{{$client->id}}"><i class="fa fa-edit font-size-12"></i></a>
+                                                                    </li>
+                                                                    <li class="list-inline-item me-3">
+                                                                        <a href="javascript:void(0);" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-danger" data-bs-target="#subscribeModalclient-{{ $client->id }}"><i class="bx bx-trash me-1 text-danger font-size-12"></i></a>
+                                                                    </li>
+                                                                </ul>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
-                                    <div class="px-4 py-3 border-top text-center">
-                                        <ul class="list-inline mb-0">
-                                            <li class="list-inline-item me-3">
-                                                <a href="" data-bs-toggle="modal" data-bs-target="#AddBagage-{{$client->id}}"> <i class="fa fa-suitcase-rolling font-size-12"></i></a>
-                                            </li>
-                                            <li class="list-inline-item me-3">
-                                                <a href="{{ route('agent.colis.show',$client->id) }}"><i class="fa fa-eye font-size-12"></i></a>
-                                            </li>
-                                            
-                                            <li class="list-inline-item me-3">
-                                                <a href="" data-bs-toggle="modal" data-bs-target="#EditClientColie-{{$client->id}}"><i class="fa fa-edit font-size-12"></i></a>
-                                            </li>
-                                            <li class="list-inline-item me-3">
-                                                <a href="javascript:void(0);" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-danger" data-bs-target="#subscribeModalclient-{{ $client->id }}"><i class="bx bx-trash me-1 text-danger font-size-12"></i></a>
-                                                <div class="modal modal-xs fade" id="subscribeModalclient-{{ $client->id }}" tabindex="-1" aria-labelledby="subscribeModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog modal-dialog-centered">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header border-bottom-0">
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="text-center mb-4">
-                                                                    <div class="avatar-md mx-auto mb-4">
-                                                                        <div class="avatar-title bg-danger rounded-circle text-white h1">
-                                                                            <i class="fa fa-trash"></i>
-                                                                        </div>
-                                                                    </div>
+                                </div> <!-- end col -->
+                            </div> <!-- end row -->
 
-                                                                    <div class="row justify-content-center">
-                                                                        <div class="col-xl-10">
-                                                                            <h4 class="text-danger text-uppercase">Attention !</h4>
-                                                                            <p class="text-muted font-size-14 mb-4">Etes vous sure de bien vouloire supprimer {{ $client->name }}</p>
-
-                                                                            <div class="input-group bg-white rounded text-center" style="text-align:center;">
-                                                                                <form method="post" action="{{ route('agent.colis.destroy',$client->id) }}"  style="display:flex;text-align:center;width:100%;">
-                                                                                    {{csrf_field()}}
-                                                                                    {{method_field('delete')}}
-                                                                                    <button type="submit" class="btn btn-danger btn-xs" style="margin-left: 70px;margin-right:20px;"> Oui je veux bien </button> 
-                                                                                    <button type="button" class="btn btn-success btn-xs" data-bs-dismiss="modal" aria-label="Close"> x Anuller</button>
-                                                                                </form>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
+                    <div class="row">
+                        <div class="col-lg-12">
+                           {{$clients->links()}}
+                        </div>
+                    </div>
+                    <!-- end row -->
 
                     </div> <!-- container-fluid -->
+
+                    <!-- show client colis en modal -->
+                    <div class="tab-pane show active sectionCompteMobile" id="chat">
+                        <div>
+                            <ul class="list-unstyled chat-list">
+                                <li class="mb-4">
+                                    <div class="media">
+                                        <div class="align-self-center me-3">
+                                            <div class="align-self-center me-3">
+                                                @if(Auth::guard('agent')->user()->agence->logo != Null)
+                                                    <img src="{{Storage::url(Auth::guard('agent')->user()->agence->logo)}}" class="rounded-circle avatar-xs" alt="">
+                                                @else
+                                                    <img src="{{asset('admin/assets/images/bus_agence.jpg')}}" class="rounded-circle avatar-xs" alt="">
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="media-body overflow-hidden">
+                                            <h5 class="text-truncate font-size-14 mb-1">{{Auth::guard('agent')->user()->agence->name}}</h5>
+                                            <p class="text-truncate mb-0">{{Auth::guard('agent')->user()->siege->name}}</p>
+                                        </div>
+                                        <div class="font-size-11 button-right-siege">
+                                            <span>{{ $clients->count() }} Client(s)</span>
+
+                                            <span class="badge bg-info mt-2 font-size-10" data-bs-toggle="modal" data-bs-target="#NewClientBagage"><i class="fa fa-user"></i> Ajouter</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul class="list-unstyled chat-list">
+                                @foreach($clients as $client)
+                                    <li class="" >
+                                        <a onclick="onclick().event.preventDefault()">
+                                            <div class="media">
+                                                <div class="align-self-center me-3" onclick="location.href='{{route('agent.colis.show',$client->id)}}'">
+                                                    @if($client->image != Null)
+                                                        <img src="{{Storage::url($client->image)}}" class="rounded-circle avatar-xs" alt="">
+                                                    @else
+                                                        <img src="{{asset('admin/assets/images/users/profil.jpg')}}" class="rounded-circle avatar-xs" alt="">
+                                                    @endif
+                                                </div>
+                                                
+                                                <div class="media-body overflow-hidden" onclick="location.href='{{route('agent.colis.show',$client->id)}}'">
+                                                    <h5 class="text-truncate font-size-14 mb-1">
+                                                        @if($client->name == null)
+                                                            {{ $client->customer->name }}
+                                                        @else
+                                                            {{ $client->name }}
+                                                        @endif
+                                                    </h5>
+                                                    <p class="text-truncate mb-0"> <i class="fa fa-mobile font-size-10"></i>
+                                                        @if($client->name == null)
+                                                            {{ $client->customer->phone }}
+                                                        @else
+                                                            {{ $client->phone }}
+                                                        @endif
+                                                    </p>
+                                                </div>
+                                                <div class="font-size-12 button-right-siege">
+                                                    <span class="span-chat-siege span-chat1" onclick="onclick().event.preventDefault()">
+                                                        <span data-bs-toggle="modal" data-bs-target="#AddBagage-{{$client->id}}" class="text-success button-client-add"> <i class="fa fa-suitcase-rolling font-size-12"></i></span>
+                                                        <span data-bs-toggle="modal" data-bs-target="#EditClientColie-{{$client->id}}" class="text-primary"> <i class="fa fa-edit font-size-12"></i></span>
+                                                        
+                                                        <span class="span-chat-siege span-chat1 text-danger button-client-delete" data-bs-toggle="modal" data-bs-target="#subscribeModalclient-{{ $client->id }}">
+                                                            <i class="fa fa-trash font-size-12"> </i>
+                                                        </span>  
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
                 </div>
                 <!-- End Page-content -->
 
                 <!-- Modal -->
                 
                 
+
+                 <!-- Static Backdrop Modal de l'ajout -->
+                <div class="modal fade" id="NewClientCustomer" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="NewClientBagageLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
+                        <div class="modal-content ">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="NewClientBagageLabel">Ajouter un client confirme</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                                <div class="modal-body">
+                                    <p>
+                                       <form class="custom-validation" action="{{ route('agent.colis.customer') }}" method="POST" enctype="multipart/form-data" >
+                                        @csrf
+                                        <div class="row">
+                                            <div class="col-xl-12">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Numero de telephone</label>
+                                                    <div>
+                                                        <input data-parsley-type="number" type="number" id="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" autocomplete="phone"
+                                                            required placeholder="Numero de telephone" />
+                                                            @error('phone')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex flex-wrap gap-2">
+                                                <button type="submit" class="btn btn-primary waves-effect waves-light btn-block">
+                                                    Enregistrer Ce Client Confirmer
+                                                </button>
+                                                <button type="reset" class="btn btn-secondary waves-effect btn-block">
+                                                    Anuller
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    </p>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fin du modal de l'ajout -->
+
 
                 <!-- Static Backdrop Modal de l'ajout -->
                 <div class="modal fade" id="NewClientBagage" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="NewClientBagageLabel" aria-hidden="true">
@@ -187,49 +307,8 @@
                 </div>
                 <!-- Fin du modal de l'ajout -->
 
-                 <!-- Static Backdrop Modal de l'ajout -->
-                <div class="modal fade" id="NewClientCustomer" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="NewClientBagageLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-md modal-dialog-centered" role="document">
-                        <div class="modal-content ">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="NewClientBagageLabel">Ajouter un client confirme</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                                <div class="modal-body">
-                                    <p>
-                                       <form class="custom-validation" action="{{ route('agent.colis.customer') }}" method="POST" enctype="multipart/form-data" >
-                                        @csrf
-                                        <div class="row">
-                                            <div class="col-xl-12">
-                                                <div class="mb-3">
-                                                    <label class="form-label">Numero de telephone</label>
-                                                    <div>
-                                                        <input data-parsley-type="number" type="number" id="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" autocomplete="phone"
-                                                            required placeholder="Numero de telephone" />
-                                                            @error('phone')
-                                                                <span class="invalid-feedback" role="alert">
-                                                                    <strong>{{ $message }}</strong>
-                                                                </span>
-                                                            @enderror
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex flex-wrap gap-2">
-                                                <button type="submit" class="btn btn-primary waves-effect waves-light btn-block">
-                                                    Enregistrer Ce Client Confirmer
-                                                </button>
-                                                <button type="reset" class="btn btn-secondary waves-effect btn-block">
-                                                    Anuller
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                    </p>
-                                </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Fin du modal de l'ajout -->
+
+
 
                 @foreach($clients as $clientEdit)
                  <div class="modal fade" id="EditClientColie-{{$clientEdit->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="NewClientBagageLabel" aria-hidden="true">
@@ -406,6 +485,13 @@
                                                                     @enderror
                                                             </div>
                                                         </div>
+
+                                                        <div class="form-check mb-3">
+                                                            <input class="form-check-input" type="checkbox" id="formCheck1" value="1" name="arriver">
+                                                            <label class="form-check-label" for="formCheck1">
+                                                                Arriver payer
+                                                            </label>
+                                                        </div>
                                                         
 
                                                     </div>
@@ -426,12 +512,49 @@
                     </div>
                     <!-- Fin du modal de l'ajout -->
                 @endforeach
+
+                @foreach($clients as $client)
+                    <div class="modal modal-xs fade" id="subscribeModalclient-{{ $client->id }}" tabindex="-1" aria-labelledby="subscribeModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header border-bottom-0">
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="text-center mb-4">
+                                        <div class="avatar-md mx-auto mb-4">
+                                            <div class="avatar-title bg-danger rounded-circle text-white h1">
+                                                <i class="fa fa-trash"></i>
+                                            </div>
+                                        </div>
+
+                                        <div class="row justify-content-center">
+                                            <div class="col-xl-10">
+                                                <h4 class="text-danger text-uppercase">Attention !</h4>
+                                                <p class="text-muted font-size-14 mb-4">Etes vous sure de bien vouloire supprimer {{ $client->name }}</p>
+
+                                                <div class="input-group bg-white rounded text-center" style="text-align:center;">
+                                                    <form method="post" action="{{ route('agent.colis.destroy',$client->id) }}"  style="display:flex;text-align:center;width:100%;">
+                                                        {{csrf_field()}}
+                                                        {{method_field('delete')}}
+                                                        <button type="submit" class="btn btn-danger btn-xs" style="margin-left: 70px;margin-right:20px;"> Oui je veux bien </button> 
+                                                        <button type="button" class="btn btn-success btn-xs" data-bs-dismiss="modal" aria-label="Close"> x Anuller</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
                 
 
 
 @endsection
 
 
-@section('footersection')
+@section('footerSection')
 <script src="{{asset('admin/assets/js/table.js')}}"></script>
 @endsection

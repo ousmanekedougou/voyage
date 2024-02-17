@@ -115,9 +115,10 @@ class ClientController extends Controller
         $verify = request()->input('verify');
         if ($verify == 1) {
 
-            $coli_clients = ColiClient::where('phone_recept',$phone)->where('siege_id',$siege)->get();
+            $coli_clients = ColiClient::where('phone_recept',$phone)->where('siege_id',$siege)->where('status',0)->get();
+            $getClientColie = ColiClient::where('phone_recept',$phone)->where('siege_id',$siege)->where('status',0)->first();
             if ($coli_clients->count() > 0) {
-                return view('user.client.colie',compact('coli_clients'));
+                return view('user.client.colie',compact('coli_clients','phone','siege','getClientColie'));
             }else {
                 Toastr::error('Vous n\'aviez pas de colie sur ce siege', 'Error Colie', ["positionClass" => "toast-top-right"]);
                 return back();
@@ -142,10 +143,16 @@ class ClientController extends Controller
     }
 
    
-    public function confirme($id){
-        Colie::where('id',$id)->update([
-            'status' => 1
-        ]);
+    public function confirmeReception(){
+        dd('yes');
+        $phone = request()->input('phone');
+        $coli_clients = ColiClient::where('phone_recept',$phone)->where('siege_id',$siege)->get();
+        foreach ($coli_clients as $confirm) {
+            
+        }
+        // Colie::where('id',$id)->update([
+        //     'status' => 1
+        // ]);
         Toastr::success('Votre confirmation de reception a bien ete enregistre', 'Reception Colie', ["positionClass" => "toast-top-right"]);
         return redirect()->route('client.index');
     }

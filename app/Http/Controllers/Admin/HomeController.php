@@ -13,7 +13,6 @@ use App\Models\Admin\Colie;
 use App\Models\Admin\DateDepart;
 use App\Models\Admin\Historical;
 use App\Models\Admin\Itineraire;
-use App\Models\Admin\Siege;
 use App\Models\User;
 use App\Models\User\Customer;
 use App\Models\User\Notify;
@@ -44,11 +43,10 @@ class HomeController extends Controller
         if ($this->middleware(['IsAdmin'])) {
             $agences = Agence::orderBy('id','DESC')->paginate(9);
             $user = Auth::guard('web')->user();
-            $siegeCount = Siege::all();
             $newCount = Notify::all();
             $customerCount = Customer::all();
             $regions = Region::where('status',1)->get();
-            return view('admin.home',compact('agences','user','siegeCount','newCount','regions','customerCount'));
+            return view('admin.home',compact('agences','user','newCount','regions','customerCount'));
         }else {
             Toastr::error('Vous n\'aviez pas le droit d\'acces sur cette page', 'Resultat Recherche', ["positionClass" => "toast-top-right"]);
             return back();

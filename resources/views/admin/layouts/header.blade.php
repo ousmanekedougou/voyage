@@ -1,5 +1,6 @@
         <header id="page-topbar">
             <div class="navbar-header">
+                
                 <div class="d-flex">
                     <!-- LOGO -->
                     <div class="navbar-brand-box @if(Auth::guard('client')->user()) show-brand-box-bg @endif">
@@ -52,10 +53,11 @@
                                         <img src="{{Storage::url(Auth::guard('agent')->user()->agence->logo)}}" alt="" height="22">
                                     @endif
                                 </span>
+
                                 <span class="logo-lg">
                                      <span class="text-bold text-uppercase text-white" style="font-size: 14px;margin-left:-25px;">{{Auth::guard('agent')->user()->agence->name}}</span>
                                     
-                                    @if(Auth::guard('agent')->user()->agence->logo == 'null')
+                                    @if(Auth::guard('agent')->user()->agence->logo == null)
                                         <img src="{{asset('admin/assets/images/bus.svg')}}" alt=""  style="width: 50px;height:50px;border-radius:100%;">
                                     @else
                                         <img src="{{Storage::url(Auth::guard('agent')->user()->agence->logo)}}" alt="" style="width: 50px;height:50px;border-radius:100%;">
@@ -151,7 +153,7 @@
                             </span>
                         </a>
                     @else
-                        <button type="button" class="btn btn-sm px-3 font-size-16 mr-3 header-item waves-effect"
+                        <button type="button" class="btn btn-sm px-3 font-size-16 mr-3 header-item waves-effect button-client-bar"
                             id="vertical-menu-btn">
                             <i class="fa fa-fw fa-bars"></i>
                         </button>
@@ -437,8 +439,8 @@
                             @endif
 
                              @if(Auth::guard('agent')->user())
-                                @if(Auth::guard('agent')->user()->logo != null)
-                                    <img class="rounded-circle header-profile-user" src="{{ Storage::url(Auth::guard('agent')->user()->logo) }}"
+                                @if(Auth::guard('agent')->user()->image != null)
+                                    <img class="rounded-circle header-profile-user" src="{{ Storage::url(Auth::guard('agent')->user()->image) }}"
                                     alt="Header Avatar">
                                     <span class="d-none d-xl-inline-block ms-1" key="t-henry"> {{ Auth::guard('agent')->user()->name }}</span>
                                     <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
