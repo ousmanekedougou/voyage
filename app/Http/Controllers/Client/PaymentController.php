@@ -63,7 +63,7 @@ class PaymentController extends Controller
         // return redirect($orangePayment->payment_url);
         $user = Client::where('id',$id)->where('customer_id',Auth::guard('client')->user()->id)->first();
         if ($user) {
-            if ($user->registered_at >= carbon_today()) {
+            if ($user->registered_at->format('m-d-Y') >= carbon_today()) {
                 $user->update([
                     'amount' =>  $user->ville->amount,
                     'payment_at' => new DateTime(),
@@ -101,7 +101,7 @@ class PaymentController extends Controller
         // return redirect($orangePayment->payment_url);
         $user = Client::where('id',$id)->where('customer_id',Auth::guard('client')->user()->id)->first();
         if ($user) {
-            if ($user->registered_at >= carbon_today()) {
+            if ($user->registered_at->format('m-d-Y') >= carbon_today()) {
                 $user->update([
                     'amount' =>  $user->ville->amount,
                     'payment_at' => new DateTime(),

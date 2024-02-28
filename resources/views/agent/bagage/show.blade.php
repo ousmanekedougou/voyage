@@ -56,8 +56,11 @@
                                                 <thead class="table-light">
                                                     <tr>
                                                         <th>Images</th>
-                                                        <th>Nom & Detail</th>
-                                                        <th>Prix</th>
+                                                        <th>Nom & Details</th>
+                                                        <th>Quantites</th>
+                                                        <th>Prix Unitaire</th>
+                                                        <th>Prix Total</th>
+                                                        <th>References</th>
                                                         <th colspan="2">Actions</th>
                                                     </tr>
                                                 </thead>
@@ -73,7 +76,17 @@
                                                             <p class="mb-0">{{$bag->detail}} : <span class="fw-medium">Maroon</span></p>
                                                         </td>
                                                         <td>
+                                                            {{$bag->quantity}}
+                                                        </td>
+                                                        <td>
+                                                            {{$bag->getAmountUnitaire()}}
+                                                        </td>
+                                                        <td>
                                                             {{$bag->getAmount()}}
+                                                        </td>
+                                                        
+                                                        <td class="text-uppercase">
+                                                            {{$bag->client->ville->name}}_{{$bag->reference}}
                                                         </td>
                                                         <td>
                                                             <a href="javascript:void(0);" class="action-icon text-primary" data-bs-toggle="modal" data-bs-target="#EditBagage-{{$bag->id}}"> <i class="bx bx-edit font-size-18"></i></a>
@@ -96,10 +109,10 @@
                                                         <tbody>
                                                             <tr>
                                                                 
-                                                                <th> Quantite : {{ $bagages->count() }}</th>
+                                                                <th> Quantite total : {{ $quantiteTotalBagage }}</th>
                                                             
                                                                 
-                                                                <th> Total :   {{$client->getAmountTotal()}}</th>
+                                                                <th>Prix total de tous les bagage :   {{$amountTotalClient}} CFA</th>
                                                                 <th>
                                                                     <span class="btn btn-success btn-block" style="width: 100%;margin-top:-10px;">
                                                                     <i class="mdi mdi-cart-arrow-right me-1"></i> Payer </span>
@@ -124,15 +137,17 @@
                             <div class="media">
                                 <div class="align-self-center me-3">
                                     <div class="align-self-center me-3">
-                                        @if(Auth::guard('agent')->user()->agence->logo != Null)
-                                            <img src="{{Storage::url(Auth::guard('agent')->user()->agence->logo)}}" class="rounded-circle avatar-xs" alt="">
-                                        @else
-                                            <img src="{{asset('admin/assets/images/bus_agence.jpg')}}" class="rounded-circle avatar-xs" alt="">
-                                        @endif
+                                        <img src="
+                                            @if(Auth::guard('agent')->user()->agence->logo != Null)
+                                                {{Storage::url(Auth::guard('agent')->user()->agence->logo)}}
+                                            @else
+                                                https://ui-avatars.com/api/?name={{Auth::guard('agent')->user()->agence->name}}
+                                            @endif
+                                            " class="rounded-circle avatar-sm" alt="">
                                     </div>
                                 </div>
                                 <div class="media-body overflow-hidden">
-                                    <h5 class="text-truncate font-size-14 mb-1">{{Auth::guard('agent')->user()->agence->name}}</h5>
+                                    <h5 class="text-truncate font-size-14 mb-1" style="font-weight:600;">{{Auth::guard('agent')->user()->agence->name}}</h5>
                                     <p class="text-truncate mb-0">Siege de {{Auth::guard('agent')->user()->siege->name}}</p>
                                 </div>
                                 <div class="font-size-11 button-right-siege">
@@ -142,10 +157,8 @@
                             </div>
                         </li>
                     </ul>
-                    <table class="table align-middle mb-0 table-nowrap">
-                        <div class="row">
-                        <p>
-                            Auteur des bagages
+                        <span class="mb-3 font-size-14 badge badge-soft-info p-2 " style="width:100%;">
+                            Bagages de
                             @if($client->name == null)
                                 {{ $client->customer->name }}
                                 {{ $client->customer->phone }}
@@ -153,7 +166,10 @@
                                 {{ $client->name }}
                                 {{ $client->phone }}
                             @endif
-                        </p>
+                        </span>
+                    <table class="table align-middle mt-3 mb-0 table-nowrap">
+                        <div class="row">
+                        
                         @foreach($bagages as $bag)
                             <tbody class="card col-lg-4">
                                 <tr>
@@ -167,13 +183,25 @@
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td class="td-mobile">Reference : </td>
+                                    <td class="td-mobile text-uppercase">{{$bag->client->ville->name}}_{{$bag->reference}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="td-mobile">Quantite : </td>
+                                    <td class="td-mobile">{{$bag->quantity}}</td>
+                                </tr>
+                                <tr>
                                     <td class="td-mobile">Désc :</td>
                                     <td class="td-mobile">
                                         {{ $bag->detail }} 
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="td-mobile">Prix : </td>
+                                    <td class="td-mobile">Prix unitaire : </td>
+                                    <td class="td-mobile">{{$bag->getAmountUnitaire()}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="td-mobile">Prix Total: </td>
                                     <td class="td-mobile">{{$bag->getAmount()}}</td>
                                 </tr>
                                 
@@ -191,11 +219,11 @@
                                     <table class="table mb-0">
                                         <tbody>
                                             <tr>
-                                                <td>Quantite :</td>
-                                                <td>{{ $bagages->count() }}</td>
+                                                <td>Quantite total :</td>
+                                                <td>{{ $quantiteTotalBagage }}</td>
                                             </tr>
                                             <tr>
-                                                <th>Total : {{$client->getAmountTotal()}}</th>
+                                                <th>Prix total de tous les bagage  : {{$amountTotalClient}} CFA </th>
                                                 <th></th>
                                             </tr>
                                         </tbody>
@@ -250,6 +278,18 @@
                                                                 <strong>{{ $message }}</strong>
                                                             </span>
                                                         @enderror
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Quantite </label>
+                                                        <div>
+                                                            <input data-parsley-type="number" type="number" id="quantity" class="form-control @error('quantity') is-invalid @enderror" name="quantity" value="{{ old('quantity') ?? $client_bagage->quantity }}" autocomplete="quantity"
+                                                                required placeholder="" />
+                                                                @error('quantity')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
+                                                        </div>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label class="form-label">Nom du bagage</label>
@@ -378,6 +418,18 @@
                                                                 <strong>{{ $message }}</strong>
                                                             </span>
                                                         @enderror
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Quantite </label>
+                                                        <div>
+                                                            <input data-parsley-type="number" type="number" id="quantity" class="form-control @error('quantity') is-invalid @enderror" name="quantity" value="{{ old('quantity') }}" autocomplete="quantity"
+                                                                required placeholder="" />
+                                                                @error('quantity')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
+                                                        </div>
                                                     </div>
                                                     <div class="mb-3">
                                                         <label class="form-label">Nom du bagage</label>

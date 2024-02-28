@@ -1,6 +1,13 @@
 @extends('admin.layouts.app')
 @section('headsection')
  <link href="{{asset('admin/assets/css/table.css')}}" rel="stylesheet" type="text/css" />
+ <script src="https://cdn.ckeditor.com/ckeditor5/38.1.1/classic/ckeditor.js"></script>
+ <style>
+    label{
+        font-weight:900;
+        text-transform:uppercase;
+    }
+ </style>
 @endsection
 @section('main-content')
 
@@ -27,9 +34,9 @@
                             <div data-repeater-list="outer-group" class="outer">
                                 <div data-repeater-item class="outer">
                                     <div class="mb-3">
-                                        <label for="formmessage">Presentation :</label>
-                                        <textarea id="formmessage" name="abaout" class="form-control text-left @error('abaout') is-invalid @enderror" value="{{ old('abaout') ?? $agence->abaout }}" rows="3">
-                                        {{ $agence->abaout }}
+                                        <label for="presentation">Presentation :</label>
+                                        <textarea name="abaout" id="presentation" class="form-control text-left @error('abaout') is-invalid @enderror" value="{{ old('abaout') ?? $agence->abaout }}" rows="3">
+                                            {{ $agence->abaout }}
                                         </textarea>
                                         @error('abaout')
                                             <span class="invalid-feedback" role="alert">
@@ -60,8 +67,8 @@
                             <div data-repeater-list="outer-group" class="outer">
                                 <div data-repeater-item class="outer">
                                     <div class="mb-3">
-                                        <label for="formmessage">Votre texte de motivation :</label>
-                                        <textarea id="formmessage" name="motivation" class="form-control text-left @error('motivation') is-invalid @enderror" value="{{ old('motivation') ?? $agence->motivation }}" rows="3">
+                                        <label for="motivation">Votre texte de motivation :</label>
+                                        <textarea id="motivation" name="motivation" class="form-control text-left @error('motivation') is-invalid @enderror" value="{{ old('motivation') ?? $agence->motivation }}" rows="3">
                                         {{ $agence->motivation }}
                                         </textarea>
                                         @error('motivation')
@@ -95,8 +102,8 @@
                             <div data-repeater-list="outer-group" class="outer">
                                 <div data-repeater-item class="outer">
                                     <div class="mb-3">
-                                        <label for="formmessage">Systeme de tickets : @if(Auth::guard('agence')->user()->method_ticket == 0) <span class="text-success">Ticket remboursable apres depart du bus</span> @else <span class="text-warning">Ticket non remboursable apres depart du bus</span> @endif</label>
-                                        <textarea id="formmessage" name="politic_ticket" class="form-control text-left @error('politic_ticket') is-invalid @enderror" value="{{ old('politic_ticket') ?? $agence->politic_ticket }}" rows="3">
+                                        <label for="ticket">Systeme de tickets : @if(Auth::guard('agence')->user()->method_ticket == 0) <span class="text-success">Ticket remboursable apres depart du bus</span> @else <span class="text-warning">Ticket non remboursable apres depart du bus</span> @endif</label>
+                                        <textarea id="ticket" name="politic_ticket" class="form-control text-left @error('politic_ticket') is-invalid @enderror" value="{{ old('politic_ticket') ?? $agence->politic_ticket }}" rows="3">
                                         {{ $agence->politic_ticket }}
                                         </textarea>
                                         @error('politic_ticket')
@@ -130,8 +137,8 @@
                             <div data-repeater-list="outer-group" class="outer">
                                 <div data-repeater-item class="outer">
                                     <div class="mb-3">
-                                        <label for="formmessage">Votre texte de pour les bagages et colis :</label>
-                                        <textarea id="formmessage" name="politic_bc" class="form-control text-left @error('politic_bc') is-invalid @enderror" value="{{ old('politic_bc') ?? $agence->politic_bc }}" rows="3">
+                                        <label for="bagage">Votre texte de pour les bagages et colis :</label>
+                                        <textarea id="bagage" name="politic_bc" class="form-control text-left @error('politic_bc') is-invalid @enderror" value="{{ old('politic_bc') ?? $agence->politic_bc }}" rows="3">
                                         {{ $agence->politic_bc }}
                                         </textarea>
                                         @error('politic_bc')
@@ -165,8 +172,8 @@
                             <div data-repeater-list="outer-group" class="outer">
                                 <div data-repeater-item class="outer">
                                     <div class="mb-3">
-                                        <label for="formmessage">Personnes aptent de voyager :</label>
-                                        <textarea id="formmessage" name="politic_apte" class="form-control text-left @error('politic_apte') is-invalid @enderror" value="{{ old('politic_apte') ?? $agence->politic_apte }}" rows="3">
+                                        <label for="apte">Personnes aptent de voyager :</label>
+                                        <textarea id="apte" name="politic_apte" class="form-control text-left @error('politic_apte') is-invalid @enderror" value="{{ old('politic_apte') ?? $agence->politic_apte }}" rows="3">
                                         {{ $agence->politic_apte }}
                                         </textarea>
                                         @error('politic_apte')
@@ -200,8 +207,8 @@
                             <div data-repeater-list="outer-group" class="outer">
                                 <div data-repeater-item class="outer">
                                     <div class="mb-3">
-                                        <label for="formmessage">Villes arrets et objectifs :</label>
-                                         <textarea id="formmessage" name="ville_arret" class="form-control text-left @error('ville_arret') is-invalid @enderror" value="{{ old('ville_arret') ?? $agence->ville_arret }}" rows="3">
+                                        <label for="ville">Villes arrets et objectifs :</label>
+                                         <textarea id="ville" name="ville_arret" class="form-control text-left @error('ville_arret') is-invalid @enderror" value="{{ old('ville_arret') ?? $agence->ville_arret }}" rows="3">
                                         {{ $agence->ville_arret }}
                                         </textarea>
                                         @error('ville_arret')
@@ -323,4 +330,41 @@
         
         <!-- Saas dashboard init -->
         <script src="{{asset('admin/assets/js/pages/saas-dashboard.init.js')}}"></script>
+        <script>
+            ClassicEditor
+                .create( document.querySelector( '#presentation' ) )
+                .catch( error => {
+                    console.error( error );
+                } );
+
+            ClassicEditor
+            .create( document.querySelector( '#motivation' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+
+            ClassicEditor
+            .create( document.querySelector( '#ticket' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+
+            ClassicEditor
+            .create( document.querySelector( '#bagage' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+
+            ClassicEditor
+            .create( document.querySelector( '#apte' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+
+            ClassicEditor
+            .create( document.querySelector( '#ville' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+        </script>
 @endsection

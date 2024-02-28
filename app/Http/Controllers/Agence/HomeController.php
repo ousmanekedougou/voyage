@@ -34,7 +34,21 @@ class HomeController extends Controller
         $jours = Jour::all();
         $agents = Agent::where('agence_id',Auth::guard('agence')->user()->id)->orderBy('id','DESC')->get();
         $sieges = Siege::where('agence_id', Auth::guard('agence')->user()->id)->get();
-        return view('agence.index',compact('agents','sieges','jours'));
+
+        $paimentNotification = null;
+        $today = date('d');
+        $isPaymentDay = false;
+        if (Carbon::now()->day <= Auth::guard('agence')->user()->payment_at) {
+            $paimentNotification = "le paiment de vos agents doit ce faire le " .Auth::guard('agence')->user()->payment_at ." de ce mois";
+        }else {
+            $nextMonth = Carbon::now()->addMonth();
+            $nextMonthName = $nextMonth->format('F');
+            $paimentNotification = "le paiment de vos agents doit avoir lieu " .Auth::guard('agence')->user()->payment_at ." du mois de " .$nextMonthName;
+        }
+        if ($today == Auth::guard('agence')->user()->payment_at) {
+            $isPaymentDay = true;
+        }
+        return view('agence.index',compact('agents','sieges','jours','paimentNotification','isPaymentDay'));
     }
     
 

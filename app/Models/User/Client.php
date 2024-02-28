@@ -15,6 +15,7 @@ class Client extends Model
 {
     use HasFactory,Notifiable;
       protected $fillable = [
+        'reference',
         'name',
         'email',
         'phone',

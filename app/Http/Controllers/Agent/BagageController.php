@@ -55,6 +55,7 @@ class BagageController extends Controller
         $this->validate($request,[
             'name' => 'required|string',
             'prix' => 'required|numeric',
+            'quantity' => 'required|numeric',
             'desc' => 'required|string',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
         ]);
@@ -63,22 +64,32 @@ class BagageController extends Controller
         {
             $imageName = $request->image->store('public/Bagages');
         }
-         $client = new Bagage();
-         $client->image = $imageName;
-         $client->name = $request->name;
-         $client->prix = $request->prix;
-         $client->detail = $request->desc;
-         $client->client_id = $request->clientId;
-         $client->siege_id = Auth::guard('agent')->user()->siege_id;
-         $client->save();
 
         $clientPrix = Client::where('id',$request->clientId)
         ->where('siege_id',Auth::guard('agent')->user()->siege_id)
         ->first();
-        $clientPrix->prix_total = $clientPrix->prix_total + $request->prix;
-        $clientPrix->save();
-        Toastr::success('Vos bagages ont bien ete ajouter', 'Ajout Bagages', ["positionClass" => "toast-top-right"]);
-        return back();
+        
+        if($clientPrix->registered_at == Carbon::today()){
+            Toastr::error('Ce client n\'est pas de d\'aujourduit', 'Ajout Bagages', ["positionClass" => "toast-top-right"]);
+            return back();
+        }else {
+            $clientBagage = new Bagage();
+            $clientBagage->image = $imageName;
+            $clientBagage->name = $request->name;
+            $clientBagage->quantity = $request->quantity;
+            $clientBagage->prix = $request->prix;
+            $clientBagage->prix_total = $request->prix * $request->quantity;
+            $clientBagage->detail = $request->desc;
+            $clientBagage->client_id = $clientPrix->id;
+            $clientBagage->reference =  bagageClientRefe();
+            $clientBagage->siege_id = Auth::guard('agent')->user()->siege_id;
+            $clientBagage->save();
+            
+            
+            
+            Toastr::success('Vos bagages ont bien ete ajouter', 'Ajout Bagages', ["positionClass" => "toast-top-right"]);
+            return back();
+        }
     }
 
     /**
@@ -91,8 +102,10 @@ class BagageController extends Controller
     {
         $client = Client::where('id',$id)->where('siege_id',Auth::guard('agent')->user()->siege_id)->first();
         $bagages = Bagage::where('client_id',$client->id)->where('siege_id',Auth::guard('agent')->user()->siege_id)->get();
+        $amountTotalClient = Bagage::where('client_id',$client->id)->where('siege_id',Auth::guard('agent')->user()->siege_id)->sum('prix_total');
+        $quantiteTotalBagage = Bagage::where('client_id',$client->id)->where('siege_id',Auth::guard('agent')->user()->siege_id)->sum('quantity');
         if ($bagages->count() > 0) {
-            return view('agent.bagage.show',compact('bagages','client'));
+            return view('agent.bagage.show',compact('bagages','client','amountTotalClient','quantiteTotalBagage'));
         }else {
             Toastr::error('Ce client n\'a pas de bagages', 'Error Bagages', ["positionClass" => "toast-top-right"]);
             return back();
@@ -124,18 +137,6 @@ class BagageController extends Controller
             ->where('client_id',request()->clientId)
             ->first();
 
-        $client_p_t = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
-            ->where('id',request()->clientId)
-            ->first();
-            if ($request->prix != $bagUpdate->prix) {
-                $prixMoins = $client_p_t->prix_total - $bagUpdate->prix;
-                $client_p_t->prix_total = $prixMoins + $request->prix;
-            }else {
-                $client_p_t->prix_total = $client_p_t->prix_total;
-            }
-
-        $client_p_t->save();
-
         $imageName = '';
         if ($request->image == '') {
             $imageName = $bagUpdate->image;
@@ -149,7 +150,9 @@ class BagageController extends Controller
 
         $bagUpdate->image = $imageName;
         $bagUpdate->name = $request->name;
+        $bagUpdate->quantity = $request->quantity;
         $bagUpdate->prix = $request->prix;
+        $bagUpdate->prix_total = $request->prix * $request->quantity;
         $bagUpdate->detail = $request->desc;
         $bagUpdate->save();
 
@@ -170,24 +173,17 @@ class BagageController extends Controller
             ->where('siege_id',Auth::guard('agent')->user()->siege_id)
             ->where('client_id',request()->clientId)
             ->first();
-        Storage::delete($bagedDelete->image);
+            
+            
+        $bagedDelete->prix_total = $bagedDelete->prix_total - $bagedDelete->prix;
+        $bagedDelete->save();
 
-        $clientPrix = Client::where('id',request()->clientId)
-        ->where('siege_id',Auth::guard('agent')->user()->siege_id)
-        ->first();
-        $clientPrix->prix_total = $clientPrix->prix_total - $bagedDelete->prix;
-        $clientPrix->save();
+        Storage::delete($bagedDelete->image);
         
         $bagedDelete->delete();
-        if($bagedDelete->count() == 0){
-            $clientPrix->prix_total = 0;
-            $clientPrix->save();
-            Toastr::success('Ce bagages a bien ete supprimer', 'Suppression Bagages', ["positionClass" => "toast-top-right"]);
-            return redirect()->route('agent.home');
-        }else{
-            Toastr::success('Votre client n\'a plus de bagages', 'Suppression Bagages', ["positionClass" => "toast-top-right"]);
-            return back();
-        }
+
+        Toastr::success('Ce bagages a bien ete supprimer', 'Suppression Bagages', ["positionClass" => "toast-top-right"]);
+        return back();
     }
 }
 

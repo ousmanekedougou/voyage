@@ -89,11 +89,11 @@ class ProfilController extends Controller
                     'email' => 'required|string',
                     'phone' => 'required|string',
                 ]);
-                
                 $update_admin = Agence::Where('slug',Auth::guard('agence')->user()->slug)->first();
                 $update_admin->name = $request->name;
                 $update_admin->email = $request->email;
                 $update_admin->phone = $request->phone;
+                
                 $update_admin->save();
                 Toastr::success('Vos informations ont bien ete mise a jour', 'Modifier Profile', ["positionClass" => "toast-top-right"]);
                 return back();
@@ -132,11 +132,13 @@ class ProfilController extends Controller
                     'slogan' => 'required|string',
                     'adress' => 'required|string',
                     'method_ticket' => 'required|boolean',
+                    'payment_at' => 'required|numeric',
                 ]);
                 $update_admin = Agence::Where('slug',Auth::guard('agence')->user()->slug)->first();
                 $update_admin->slogan = $request->slogan;
                 $update_admin->adress = $request->adress;
                 $update_admin->method_ticket = $request->method_ticket;
+                $update_admin->payment_at = $request->payment_at;
                 $update_admin->save();
                 Toastr::success('Vos informations ont bien ete mise a jour', 'Modifier Profile', ["positionClass" => "toast-top-right"]);
                 return back();

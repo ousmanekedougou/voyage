@@ -14,15 +14,7 @@
                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                         <h4 class="mb-sm-0 font-size-18">Tableau de bord</h4>
                     </div>
-                    @if($paimentNotification)
-                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                            <i class="mdi mdi-alert-outline me-2"></i>
-                               <b>Attention : </b>  {{$paimentNotification}}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
                 </div>
-                
             </div>
 
 
@@ -298,44 +290,34 @@
                         </div>
                     </li>
                 </ul>
-
-                    @if($paimentNotification)
-                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                            <i class="mdi mdi-alert-outline me-2"></i>
-                               <b>Attention : </b>  {{$paimentNotification}}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    @endif
-
-                    @if($isPaymentDay)
-                        <span onclick="location.href='{{ route('agence.paiement.init') }}'"  class="mb-3 badge bg-success font-size-11 p-2" style="width:100%;">Effectuer un nouveau paiment de salaire</span>
-                    @endif
                     
                 <ul class="list-unstyled chat-list">
                     {{-- data-simplebar style="max-height: 410px;" --}}
 
                     @foreach($sieges as $siege)
-                        <li class="mb-3" >
-                            <div class="media">
-                                <div class="align-self-center me-3">
-                                    <img src="https://ui-avatars.com/api/?name=Siege+{{$siege->name}}" class="rounded-circle avatar-sm" alt="">
-                                </div>
-                                
-                                <div class="media-body overflow-hidden">
-                                    <h5 class="text-truncate font-size-14 mt-2" style="font-weight:600;">Siege de {{ $siege->name }}</h5>
-                                    <p class="text-truncate mb-0"> <i class="fa fa-mobile"></i> {{ $siege->phone }}</p>
-                                </div>
-                                <div class="font-size-12 button-right-siege">
-                                    <span class="span-chat-siege span-chat1">
-                                        <span class="badge bg-primary" onclick="location.href='{{ route('agence.agent.show',$siege->id) }}'"> {{ $siege->agents->count() }} Agent(s)</span>
-                                    </span>
+                        <li class="" >
+                            <a href="#">
+                                <div class="media">
+                                    <div class="align-self-center me-3">
+                                        <img src="https://ui-avatars.com/api/?name=Siege+{{$siege->name}}" class="rounded-circle avatar-sm" alt="">
+                                    </div>
+                                    
+                                    <div class="media-body overflow-hidden">
+                                        <h5 class="text-truncate font-size-14 mb-1">Siege de {{ $siege->name }}</h5>
+                                        <p class="text-truncate mb-0"> <i class="fa fa-mobile"></i> {{ $siege->phone }}</p>
+                                    </div>
+                                    <div class="font-size-12 button-right-siege">
+                                        <span class="span-chat-siege span-chat1">
+                                            <span class="badge bg-primary" onclick="location.href='{{ route('agence.agent.show',$siege->id) }}'"> {{ $siege->agents->count() }} Agent(s)</span>
+                                        </span>
 
-                                    <span class="span-chat-siege span-chat1" onclick="event.preventDefault();">
-                                        <span  data-bs-toggle="modal" data-bs-target="#editmodalsiege-{{ $siege->id }}" class="text-success mr-2"><i class="mdi mdi-pencil font-size-18"></i></span>
-                                        <span  data-bs-toggle="modal" data-bs-target="#subscribeModalagence-{{ $siege->id }}" class="text-danger"><i class="mdi mdi-delete font-size-18"></i></span>
-                                    </span>
+                                        <span class="span-chat-siege span-chat1" onclick="event.preventDefault();">
+                                            <span  data-bs-toggle="modal" data-bs-target="#editmodalsiege-{{ $siege->id }}" class="text-success mr-2"><i class="mdi mdi-pencil font-size-18"></i></span>
+                                            <span  data-bs-toggle="modal" data-bs-target="#subscribeModalagence-{{ $siege->id }}" class="text-danger"><i class="mdi mdi-delete font-size-18"></i></span>
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
+                            </a>
                         </li>
                     @endforeach
                     

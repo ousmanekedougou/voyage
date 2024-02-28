@@ -17,6 +17,7 @@
         "laravel/ui": "^3.2",
         "maatwebsite/excel": "^1.1",
         "mercuryseries/flashy": "^1.0",
+        "milon/barcode": "^10.0",
         "torann/geoip": "^3.0"
     },
     "require-dev": {

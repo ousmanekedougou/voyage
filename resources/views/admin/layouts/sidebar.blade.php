@@ -46,12 +46,15 @@
                                     <span key="t-file-manager">Presentation</span>
                                 </a>
                             </li>
-
                             <li>
-                                <a href="" class="waves-effect">
-                                    <i class="bx bx-file"></i>
-                                    <span key="t-file-manager">Factures</span>
+                                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                    <i class="bx bx-store"></i>
+                                    <span key="t-ecommerce">Paiments</span>
                                 </a>
+                                <ul class="sub-menu" aria-expanded="false">
+                                    <li><a href="{{ route('agence.paiement.agent') }}" key="t-products"> <i class="bx bx-file"></i>Paiement Agents</a></li>
+                                    <li><a href="" key="t-products"> <i class="bx bx-file"></i>Paiement TouCki</a></li>
+                                </ul>
                             </li>
 
                             <!-- La partie des agence -->

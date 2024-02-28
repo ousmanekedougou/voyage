@@ -40,7 +40,6 @@
                 <div class="col-lg-12 card_show">
                     <div class="text-white-50">
                         <h1 class="text-white font-weight-semibold mb-3 hero-title"> Comment marche votre plateforme</h1>
-                        
                     </div>
                 </div>
             </div>
@@ -58,7 +57,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="text-center mb-5">
-                        <img class="setting-img" src="{{asset('user/assets/images/faqs-bus.webp') }}" alt="" srcset="">
+                        <img class="setting-img" src="{{asset('user/assets/images/infos.jpg') }}" alt="" srcset="">
                     </div>
                 </div>
             </div>

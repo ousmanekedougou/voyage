@@ -24,14 +24,9 @@
                             <div class="bg-primary bg-soft">
                                 <div class="row">
                                     <div class="col-7">
-                                        <div class="text-primary p-3">
-                                            <h5 class="text-primary">
-                                                Client
-                                            </h5>
-                                        </div>
                                     </div>
-                                    <div class="col-5 align-self-end">
-                                        <img src="{{ Storage::url($admin->image) }}" alt="" class="img-fluid">
+                                    <div class="col-5">
+                                        <span class="avatar-sm p-1 sectionCompteMobile" data-bs-toggle="modal" data-bs-target=".QrcodeModal-{{ $admin->id }}">{!! DNS2D::getBarcodeHTML("Auth::gurad('client')->user()->qrcode",'QRCODE',2,2)  !!}</span>
                                     </div>
                                 </div>
                             </div>
@@ -39,11 +34,22 @@
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <div class="avatar-md profile-user-wid mb-4">
-                                            <img src="{{ Storage::url($admin->image) }}" alt="" class="img-thumbnail rounded-circle" data-bs-toggle="modal" data-bs-target=".orderEditModal-{{ $admin->id }}">
+                                            <img src=" 
+                                                    @if($admin->image != null)
+                                                        {{Storage::url($admin->customer->image)}}
+                                                    @else
+                                                        @if($admin->name == null)
+                                                            https://ui-avatars.com/api/?name={{$admin->customer->name}}
+                                                        @else
+                                                            https://ui-avatars.com/api/?name={{$admin->name}}
+                                                        @endif
+                                                    @endif
+                                                    " style="width: 100%;height:auto;" alt=""
+                                                        class="avatar-sm rounded-circle header-profile-user img-thumbnail" data-bs-toggle="modal" data-bs-target=".orderEditModal-{{ $admin->id }}">
                                         </div>
                                         <h5 class="font-size-15 text-truncate">{{$admin->name}}</h5>
                                         <p class="text-muted mb-0 text-truncate">
-                                            Client
+                                            Utilisateur
                                         </p>
                                     </div>
 
@@ -203,7 +209,19 @@
                         <div class="text-center mb-4">
                             <div class="avatar-md mx-auto mb-4">
                                 <div class="avatar-title bg-light rounded-circle text-primary h1">
-                                        <img src="{{ Storage::url($admin->logo) }}" alt="" class="img-thumbnail rounded-circle">
+                                        <img src="
+
+                                        @if($admin->image != null)
+                                            {{Storage::url($admin->customer->image)}}
+                                        @else
+                                            @if($admin->name == null)
+                                                https://ui-avatars.com/api/?name={{$admin->customer->name}}
+                                            @else
+                                                https://ui-avatars.com/api/?name={{$admin->name}}
+                                            @endif
+                                        @endif
+                                        
+                                        " alt="" class="img-thumbnail rounded-circle">
                                 </div>
                             </div>
 
@@ -236,6 +254,22 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade QrcodeModal-{{ $admin->id }}" tabindex="-1" role="dialog" aria-labelledby="orderdetailsModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header border-bottom-0">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                            <span class="" data-bs-toggle="modal" data-bs-target=".QrcodeModal-{{ $admin->id }}">{!! DNS2D::getBarcodeHTML("Auth::gurad('client')->user()->qrcode",'QRCODE',11,10)  !!}</span>
+                            
+                            <h4 class="text-muted mt-3">QRCODE</h4>
                     </div>
                 </div>
             </div>

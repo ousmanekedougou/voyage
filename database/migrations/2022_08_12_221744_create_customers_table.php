@@ -18,6 +18,7 @@ class CreateCustomersTable extends Migration
             $table->string('name');
             $table->string('email')->unique()->nullable();
             $table->string('phone')->unique();
+            $table->string('qrcode')->unique();
             $table->string('cni')->nullable()->unique();
             $table->string('confirmation_token')->nullable();
             $table->integer('region_id');

@@ -14,16 +14,20 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="media">
-                                <div class="me-3">
-                                    @if($agence->logo != '' )
-                                        <img src="{{Storage::url($agence->logo)}}" alt="" class="avatar-md rounded-circle img-thumbnail">
-                                    @else
-                                        <img src="{{asset('user/assets/images/dowload/setting2.png')}}" alt="" class="avatar-md rounded-circle img-thumbnail">
-                                    @endif
+                                <div class="avatar-md me-4">
+                                    <span class="avatar-title rounded-circle bg-light text-danger font-size-16">
+                                            <img src="
+                                                @if($agence->image != null)
+                                                    {{Storage::url($agence->logo)}}
+                                                @else
+                                                        https://ui-avatars.com/api/?name={{$agence->name}}
+                                                @endif
+                                            " alt="">
+                                        
+                                    </span>
                                 </div>
                                 <div class="media-body align-self-center">
                                     <div class="text-muted">
-                                        <p class="mb-2">Bienvenue sur votre compte client</p>
                                         <h5 class="mb-1">{{$agence->name}}</h5>
                                         <p class="mb-0">
                                             Une agence de la region de {{ $agence->region->name }} - {{ $agence->adress }}
@@ -76,18 +80,6 @@
                 <!-- end col -->
                     <div class="">
                         <div class="">
-                            <div class="media">
-                                @if($agence->logo != '' )
-                                    <img src="{{Storage::url($agence->logo)}}" alt="" class="avatar-sm me-4">
-                                @else
-                                    <img src="{{asset('user/assets/images/dowload/setting2.png')}}" alt="" class="avatar-sm me-4">
-                                @endif
-
-                                <div class="media-body overflow-hidden">
-                                    <h5 class="text-truncate font-size-15">{{$agence->name}}</h5>
-                                    <p class="text-muted">Une agence de la region de {{ $agence->region->name }} - {{ $agence->adress }}</p>
-                                </div>
-                            </div>
 
                             <div class="row">
 
@@ -104,11 +96,7 @@
                                 </div>
 
                                 <div class="col-sm-5 ">
-                                    @if($agence->logo != '' )
-                                        <img src="{{Storage::url($agence->logo)}}" alt="" class="avatar-sm me-4"  style="width: 100%; height:auto;">
-                                    @else
-                                        <img src="{{asset('user/assets/images/dowload/setting2.png')}}" alt="" style="width: 100%; height:auto;">
-                                    @endif
+                                    <img src="{{Storage::url($agence->logo)}}" alt="" class="avatar-sm me-4"  style="width: 100%; height:auto;">
                                 </div>
 
                             </div>

@@ -29,38 +29,36 @@
                 <br>
                 <ul class="list-unstyled chat-list" data-simplebar style="max-height: 410px;">
                     @foreach($itineraire->buses as $bus)
-                        <li class="" >
-                            <a onclick="event.preventDefault();">
-                                <div class="media">
-                                    <div class="align-self-center me-3" onclick="location.href='{{ route('agent.client.show',$bus->id) }}'">
-                                        @if($bus->logo != Null)
-                                            <img src="{{Storage::url($bus->logo)}}" class="rounded-circle avatar-xs" alt="">
-                                        @else
-                                            <img src="{{asset('admin/assets/images/bus_agence.jpg')}}" class="rounded-circle avatar-xs" alt="">
-                                        @endif
-                                    </div>
-                                    
-                                    <div class="media-body overflow-hidden">
-                                        <h5 class="text-truncate font-size-14 mb-1">Bus {{ $bus->matricule }}</h5>
-                                        <p class="text-truncate mb-0"> <i class="mdi mdi-arrow-right font-size-10"></i> {{ $bus->number }} {{ $bus->number == 1 ? 'er' : 'em' }} Buse | {{ $bus->inscrit }} Inscrit(s)</p>
-                                        <span class="span-chat-siege span-chat1">
-                                            <span onclick="location.href='{{ route('agent.client.show',$bus->id) }}'"  class="badge bg-primary  mr-3"><i class="fa fa-users"></i> Tous</span>
-                                            <span onclick="location.href='{{route('agent.client.jour',$bus->id)}}'"  class="badge bg-success ml-3"><i class=""></i> Aujourdhu</span>
-                                        </span>
-                                    </div>
-
-                                    <div class="font-size-12 button-right-siege">
-                                        <span class="span-chat-siege span-chat1 rounded-circle">
-                                            {{ $bus->place }} place(s)
-                                        </span>
-                                        
-                                        <span class="span-chat-siege span-chat1">
-                                            <span  data-bs-toggle="modal" data-bs-target="#staticBackdropeditbus-{{ $bus->id }}" class="text-success mr-2"><i class="mdi mdi-pencil font-size-18"></i></span>
-                                            <span  data-bs-toggle="modal" data-bs-target="#subscribeModalDeletebus-{{ $bus->id }}" class="text-danger"><i class="mdi mdi-delete font-size-18"></i></span>
-                                        </span>
-                                    </div>
+                        <li class="mb-4" >
+                            <div class="media">
+                                <div class="align-self-center me-3" onclick="location.href='{{ route('agent.client.show',$bus->id) }}'">
+                                    @if($bus->logo != Null)
+                                        <img src="{{Storage::url($bus->logo)}}" class="rounded-circle avatar-xs" alt="">
+                                    @else
+                                        <img src="{{asset('admin/assets/images/bus_agence.jpg')}}" class="rounded-circle avatar-xs" alt="">
+                                    @endif
                                 </div>
-                            </a>
+                                
+                                <div class="media-body overflow-hidden">
+                                    <h5 class="text-truncate font-size-14 mt-2" style="font-weight:600;">Bus {{ $bus->matricule }}</h5>
+                                    <p class="text-truncate mb-0" style="margin-top:-4px;"> <i class="mdi mdi-arrow-right font-size-10"></i> {{ $bus->number }} {{ $bus->number == 1 ? 'er' : 'em' }} Buse | {{ $bus->inscrit }} Inscrit(s)</p>
+                                    <span class="span-chat-siege span-chat1">
+                                        <span onclick="location.href='{{ route('agent.client.show',$bus->id) }}'"  class="badge bg-primary  mr-3"><i class="fa fa-users"></i> Tous</span>
+                                        <span onclick="location.href='{{route('agent.client.jour',$bus->id)}}'"  class="badge bg-success ml-3"><i class=""></i> Aujourdhu</span>
+                                    </span>
+                                </div>
+
+                                <div class="font-size-12 button-right-siege">
+                                    <span class="span-chat-siege span-chat1 rounded-circle">
+                                        {{ $bus->place }} place(s)
+                                    </span>
+                                    
+                                    <span class="span-chat-siege span-chat1">
+                                        <span  data-bs-toggle="modal" data-bs-target="#staticBackdropeditbus-{{ $bus->id }}" class="text-success mr-2"><i class="mdi mdi-pencil font-size-18"></i></span>
+                                        <span  data-bs-toggle="modal" data-bs-target="#subscribeModalDeletebus-{{ $bus->id }}" class="text-danger"><i class="mdi mdi-delete font-size-18"></i></span>
+                                    </span>
+                                </div>
+                            </div>
                         </li>
                     @endforeach
                 </ul>

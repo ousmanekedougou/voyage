@@ -58,7 +58,9 @@ class ClientController extends Controller
             'ville' => 'required|numeric',
             'date' => 'required|date',
         ]);
+
         $ville = Ville::where('id',$request->ville)->first();
+       
         $buse = Bus::where('itineraire_id',$ville->itineraire_id)->where('plein',0)->first();
 
         $date=date_create($request->date);
@@ -86,13 +88,12 @@ class ClientController extends Controller
 
                         $buse->update(['inscrit' => $buse->inscrit + 1]);
                         $add_client = new Client();
-                        $add_client->ville_id = $request->ville;
+                        $add_client->ville_id = $ville->id;
                         $add_client->bus_id = $buse->id;
                         $add_client->siege_id = $buse->siege->id;
                         $add_client->customer_id = Auth::guard('client')->user()->id;
                         $add_client->position = $buse->inscrit;
-                        // $add_client->registered_at = date_format($date,'d-m-y');
-                        $add_client->registered_at = $request->date;
+                        $add_client->registered_at = date('d-m-y',strtotime($request->date));
                         $add_client->voyage_status = 0;
                         $add_client->save();
 
@@ -181,11 +182,11 @@ class ClientController extends Controller
             if ($clients->count() < $buse->place) {
                 if (in_array($date_input['wday'] , $userialize_buse)) {
 
-                    if ($request->date == Carbon::today() || $request->date > Carbon::today()) {
+                    if ($date->format('d-m-Y') >= carbon_today()) {
 
                         Client::where('id',$id)->update([
                             'ville_id' => $request->ville,
-                            'registered_at' => $request->date,
+                            'registered_at' => date('d-m-y',strtotime($request->date)),
                             // 'heure' => $buse->date_depart->rendez_vous
                         ]);
                         Toastr::success('Votre ticket a bien ete modifier', 'Modification Ticket', ["positionClass" => "toast-top-right"]);
@@ -238,10 +239,10 @@ class ClientController extends Controller
             if ($clients->count() < $buse->place) {
                 if (in_array($date_input['wday'] , $userialize_buse)) {
 
-                    if ($request->date == Carbon::today() || $request->date > Carbon::today()) {
+                    if ($date->format('d-m-Y') >= carbon_today()) {
 
                         $client->update([
-                            'registered_at' => $request->date,
+                            'registered_at' => $date->format('d-m-Y'),
                             'voyage_status' => 0,
                             'status' => 0
                         ]);
@@ -293,7 +294,7 @@ class ClientController extends Controller
 
             if ($ticket) {
 
-                if ($current_date >= carbon_today()) {
+                if ($current_date->format('d-m-Y') >= carbon_today()) {
 
                     $ticket->name = $customer->name;
                     $ticket->phone = $customer->phone;
@@ -343,7 +344,7 @@ class ClientController extends Controller
                 if ($client->siege->agence->method_ticket == 0) {
                     $client->status = 1;
                     $client->voyage_status = 0;
-                    $client->canceled_at = $mytime->format('Y-m-d H:i:s');
+                    $client->canceled_at = $mytime->format('d-m-Y H:i:s');
                     $client->canceled_time = $time;
                     $client->save();
                     $buseDecrementeInscrit = Bus::where('itineraire_id',$client->ville->itineraire_id)->first();
@@ -356,7 +357,7 @@ class ClientController extends Controller
                     if ($client->bus->heure_depart > $time ) {
                         $client->status = 1;
                         $client->voyage_status = 0;
-                        $client->canceled_at = $mytime->format('Y-m-d H:i:s');
+                        $client->canceled_at = $mytime->format('d-m-Y H:i:s');
                         $client->canceled_time = $time;
                         $client->save();
                         $buseDecrementeInscrit = Bus::where('itineraire_id',$client->ville->itineraire_id)->first();
@@ -367,7 +368,7 @@ class ClientController extends Controller
                     }else {
                         $client->status = 2;
                         $client->voyage_status = 0;
-                        $client->canceled_at = $mytime->format('Y-m-d H:i:s');
+                        $client->canceled_at = $mytime->format('d-m-Y H:i:s');
                         $client->canceled_time = $time;
                         $client->save();
                         $buseDecrementeInscrit = Bus::where('itineraire_id',$client->ville->itineraire_id)->first();

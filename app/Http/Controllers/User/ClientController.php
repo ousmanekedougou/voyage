@@ -54,11 +54,10 @@ class ClientController extends Controller
     }
 
     public function store(Request $request){
-
         $this->validate($request,[
             'name' => 'required|string',
-            'email' => 'required|string|email|max:255',
-            'phone' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:customers',
+            'phone' => 'required|numeric|unique:customers',
             'password' => 'required|string|min:6|confirmed',
             'region' => 'required|numeric',
             'cni' => 'required|numeric',
@@ -71,11 +70,30 @@ class ClientController extends Controller
         {
             $imageName = $request->image->store('public/Customers');
         }
-        // dd($request->all());
+
+        $number = null;
+        $numberExist = null;
+        $qrcode = null;
+
+        $number = random_int(0000, 9999);
+
+        $qrcode = $request->phone.''.$number;
+
+        $numberExist = Customer::whereQrcode($qrcode)->exists();
+
+        
+        if($numberExist){
+            $qrcode = $request->phone.''.$number;
+        }
+
+
+        
+        
         $Customer = Customer::create([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
+            'qrcode' => $qrcode,
             'password' => Hash::make($request->password),
             'confirmation_token' => str_replace('/', '', Hash::make(Str::random(40))),
             'slug' => str_replace('/','',Hash::make(Str::random(20).'customers'.$request->email)),
@@ -85,6 +103,7 @@ class ClientController extends Controller
             'is_admin' => 1,
             'terme' => 1 
         ]);
+
          Notification::route('mail','ousmanelaravel@gmail.com')
         ->notify(new CustomerRegister($Customer));
         Toastr::success('Votre compte client a bien ete creer', 'Inscription', ["positionClass" => "toast-top-right"]);
@@ -117,8 +136,11 @@ class ClientController extends Controller
 
             $coli_clients = ColiClient::where('phone_recept',$phone)->where('siege_id',$siege)->where('status',0)->get();
             $getClientColie = ColiClient::where('phone_recept',$phone)->where('siege_id',$siege)->where('status',0)->first();
+
+            $amountTotalColi =$getClientColie->sum('prix_total');
+            $quantiteTotalColi = $getClientColie->sum('quantity');
             if ($coli_clients->count() > 0) {
-                return view('user.client.colie',compact('coli_clients','phone','siege','getClientColie'));
+                return view('user.client.colie',compact('coli_clients','phone','siege','getClientColie','amountTotalColi','quantiteTotalColi'));
             }else {
                 Toastr::error('Vous n\'aviez pas de colie sur ce siege', 'Error Colie', ["positionClass" => "toast-top-right"]);
                 return back();

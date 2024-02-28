@@ -33,7 +33,7 @@
                                 <div class="col-lg-12">
                                     <div class="media">
                                         <div class="me-3">
-                                            <img src="{{(Storage::url(Auth::guard('agent')->user()->agence->logo))}}" alt="" class="avatar-md rounded-circle img-thumbnail">
+                                            <img src=" @if(Auth::guard('agent')->user()->agence->logo == '') https://ui-avatars.com/api/?name={{Auth::guard('agent')->user()->agence->name}} @else {{(Storage::url(Auth::guard('agent')->user()->agence->logo))}} @endif" alt="" class="avatar-md rounded-circle img-thumbnail">
                                         </div>
                                         <div class="media-body align-self-center">
                                             <div class="text-muted">
@@ -64,7 +64,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title text-center"> La liste de tout les client du buse {{ $getBuse->matricule }} </h4>
+                            <h4 class="btn btn-light text-center" style="width:100%;"> La liste de tout les client du buse {{ $getBuse->matricule }} </h4>
                             <p class="card-title-desc">
                                 <div class="button-items">
                                     <a target="_blank" href="{{ route('agent.client.jour',$getBuse->id) }}" class="btn btn-primary waves-effect btn-label waves-light"><i class="fa fa-users label-icon"></i> Clients du jour <i class="mdi mdi-eye font-size-16"></i></a>
@@ -92,13 +92,18 @@
                                     @foreach($clients as $client)
                                         <tr>
                                             <td>
-                                                @if($client->image != null)
-                                                    <img src="{{Storage::url($client->customer->image)}}" style="width: 40px;height:40px;" alt=""
+                                                    <img src=" 
+                                                    @if($client->image != null)
+                                                        {{Storage::url($client->customer->image)}}
+                                                    @else
+                                                        @if($client->name == null)
+                                                            https://ui-avatars.com/api/?name={{$client->customer->name}}
+                                                        @else
+                                                            https://ui-avatars.com/api/?name={{$client->name}}
+                                                        @endif
+                                                    @endif
+                                                    " style="width: 40px;height:40px;" alt=""
                                                         class="avatar-sm rounded-circle header-profile-user">
-                                                @else
-                                                    <img src="{{ asset('admin/assets/images/users/profil.jpg') }}" style="width: 40px;height:40px;" alt=""
-                                                        class="avatar-sm rounded-circle header-profile-user">
-                                                @endif
                                             </td>
                                             @if($client->name == null)
                                             <td>{{ $client->customer->name }}</td>
@@ -111,7 +116,7 @@
                                             {{ $client->ville->name }}
                                             </td>
                                             <td>
-                                                {{$client->registered_at}}
+                                                {{date('d/m/y',strtotime($client->registered_at))}}
                                             </td>
                                             <td>
                                                 @if($client->amount == $client->ville->amount)
@@ -215,49 +220,53 @@
                         </div>
                     <br>
                     @foreach($clients as $client)
-                        <li class="" >
-                            <a onclick="onclick().event.preventDefault()">
-                                <div class="media">
-                                    <div class="align-self-center me-3">
-                                        @if($client->image != Null)
-                                            <img src="{{Storage::url($client->image)}}" class="rounded-circle avatar-xs" alt="">
+                        <li class="mb-4" >
+                            <div class="media">
+                                <div class="align-self-center me-3">
+                                    <img src="
+                                        @if($client->image != null)
+                                            {{Storage::url($client->customer->image)}}
                                         @else
-                                            <img src="{{asset('admin/assets/images/users/profil.jpg')}}" class="rounded-circle avatar-xs" alt="">
-                                        @endif
-                                    </div>
-                                    
-                                    <div class="media-body overflow-hidden">
-                                        <h5 class="text-truncate font-size-14 mb-1">
                                             @if($client->name == null)
-                                                {{ $client->customer->name }}
+                                                https://ui-avatars.com/api/?name={{$client->customer->name}}
                                             @else
-                                                {{ $client->name }}
+                                                https://ui-avatars.com/api/?name={{$client->name}}
                                             @endif
-                                        </h5>
-                                        <p class="text-truncate mb-0"> <i class="fa fa-mobile font-size-10"></i>
-                                            @if($client->name == null)
-                                                {{ $client->customer->phone }}
-                                            @else
-                                                {{ $client->phone }}
-                                            @endif
-                                        </p>
-                                    </div>
-                                    <div class="font-size-12 button-right-siege">
-                                        @if($client->amount == $client->ville->amount)
-                                            <span class="span-chat-siege span-chat1 badge bg-success">
-                                                {{ $client->amount }} f Payé
-                                            </span>
-                                        @else
-                                            <span class="span-chat-siege span-chat1 badge bg-warning">
-                                                {{ $client->amount }} f Non payé
-                                            </span>
                                         @endif
-                                        <span class="span-chat-siege badge bg-info" data-bs-toggle="modal" data-bs-target="#subscribeModalagenceDetails-{{$client->id}}">
-                                            <i class="fa fa-eye"></i> Voire
-                                        </span>
-                                    </div>
+                                    " class="rounded-circle avatar-xs" alt="">
                                 </div>
-                            </a>
+                                
+                                <div class="media-body overflow-hidden">
+                                    <h5 class="text-truncate font-size-14 mt-2" style="font-weight:600;">
+                                        @if($client->name == null)
+                                            {{ $client->customer->name }}
+                                        @else
+                                            {{ $client->name }}
+                                        @endif
+                                    </h5>
+                                    <p class="text-truncate mb-0"> <i class="fa fa-mobile font-size-10"></i>
+                                        @if($client->name == null)
+                                            {{ $client->customer->phone }}
+                                        @else
+                                            {{ $client->phone }}
+                                        @endif
+                                    </p>
+                                </div>
+                                <div class="font-size-12 button-right-siege">
+                                    @if($client->amount == $client->ville->amount)
+                                        <span class="span-chat-siege span-chat1 badge bg-success">
+                                            {{ $client->amount }} f Payé
+                                        </span>
+                                    @else
+                                        <span class="span-chat-siege span-chat1 badge bg-warning">
+                                            {{ $client->amount }} f Non payé
+                                        </span>
+                                    @endif
+                                    <span class="span-chat-siege badge bg-info" data-bs-toggle="modal" data-bs-target="#subscribeModalagenceDetails-{{$client->id}}">
+                                        <i class="fa fa-eye"></i> Voire
+                                    </span>
+                                </div>
+                            </div>
                         </li>
                     @endforeach
                 </ul>
@@ -315,7 +324,7 @@
                                                                             <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;"
                                                                                 valign="top">
                                                                                 <br style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif,;font-weight:bold; box-sizing: border-box; font-size: 14px; margin: 0;" />
-                                                                                <span style="float: left;">Destination : {{ $client_presence->ville->name }}</span> <span style="float: right;">Date : {{$client_presence->registered_at}}</span>
+                                                                                <span style="float: left;">Destination : {{ $client_presence->ville->name }}</span> <span style="float: right;">Date : {{date('d/m/y',strtotime($client_presence->registered_at))}}</span>
                                                                             </td>
                                                                         </tr>
                                                                         <tr
@@ -579,9 +588,9 @@
                                             </div>
                                         
                                             <div class="mb-3 row">
-                                                <label class="form-label" for="example-date-input" >Votre date de voyage</label>
+                                                <label class="form-label" for="example-date-input" >Votre date de voyage du ( {{date('d/m/y',strtotime($client->registered_at))}} )</label>
                                                 <div class="col-md-12">
-                                                    <input name="date" class="form-control @error('date') is-invalid @enderror " type="date" value="{{ old('date') ?? $client->registered_at }}"
+                                                    <input name="date" class="form-control @error('date') is-invalid @enderror " type="date" value="{{ old('date') ?? date('d/m/y',strtotime($client->registered_at)) }}"
                                                         id="example-date-input">
                                                 </div>
                                                 @error('date')
@@ -657,7 +666,6 @@
                     <p>
                         <form class="custom-validation" action="{{ route('agent.client.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
-                            <input type="hidden" name="getBus" value="{{$getBuse->id}}">
                             <div class="row">
                                 <div class="col-xl-12">
                                     <div class="mb-3">

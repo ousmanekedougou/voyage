@@ -15,27 +15,25 @@ class CreateClientsTable extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
+            $table->integer('reference')->unique()->nullable();
             $table->string('name')->nullable();
             $table->string('email')->unique()->nullable();
             $table->integer('phone')->unique()->nullable();
+            $table->string('cni')->unique()->nullable();
+            $table->integer('siege_id');
+            $table->integer('customer_id')->nullable();
             $table->integer('ville_id')->nullable();
             $table->integer('bus_id')->nullable();
             $table->integer('position')->nullable();
             $table->integer('amount')->nullable();
-            $table->date('registered_at')->nullable();
-            $table->date('payment_at')->nullable();
             $table->integer('remboursement')->nullable();
-            $table->boolean('voyage_status')->default(0);
-            $table->integer('siege_id');
-            $table->string('cni')->unique()->nullable();
-            $table->integer('customer_id')->nullable();
-            $table->integer('prix_total')->nullable();
+            $table->integer('payment_methode')->nullable();
             $table->integer('status')->default(0);
+            $table->boolean('voyage_status')->default(0);
+            $table->dateTime('registered_at')->nullable();
+            $table->date('payment_at')->nullable();
             $table->date('canceled_at')->nullable();
             $table->time('canceled_time')->nullable();
-            $table->integer('payment_methode')->nullable();
-            // $table->integer('reference')->unique()->nullable();
-            // $table->string('image')->nullable();
             $table->timestamps();
         });
     }

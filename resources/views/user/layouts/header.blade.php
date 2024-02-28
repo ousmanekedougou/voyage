@@ -16,7 +16,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link  " href="#features"><i class="fa fa-at"></i> comptes</a>
+                        <a class="nav-link  " href="#comptes"><i class="fa fa-at"></i> comptes</a>
                     </li>
 
                     <li class="nav-item">

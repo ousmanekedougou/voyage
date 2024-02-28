@@ -1,4 +1,5 @@
 @extends('user.layouts.app',['title' => 'Acceuil'])
+@section('headSection')
 <style>
      .bg-ico-hero{
         background-image:url(./user/assets/images/dowload/home.jpg) !important;
@@ -20,8 +21,6 @@
         width: 70%;
     }
 </style>
-@section('headSection')
-    <link rel="stylesheet" href="{{asset('admin/assets/css/card.css')}}">
 @endsection
 @section('main-content')
   <!-- hero section start -->
@@ -136,12 +135,10 @@
                             </div>
                         </div>
                     </div>
-
-                    
                 </div>
                 <!-- end row -->
-                <div class="row">
-                    <div class="col-md-12 sectionCompteMobile">
+                <div class="row sectionCompteMobile">
+                    <div class="col-md-12 ">
                         <div class="card"> 
                             <div class="card-body">
                                 <div class="media">
@@ -286,7 +283,7 @@
     <!-- about section end -->
 
     <!-- Features start -->
-    <section class="section sectionCompteDesktope" id="features">
+    <section class="section sectionCompteDesktope" id="comptes">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -378,7 +375,7 @@
                 <div class="col-lg-12">
                     <div class="text-center mb-5">
                         <div class="small-title">Reservation</div>
-                        <h4>Vérifiez toutes vos résérvations Tickets , Bagages & Colis</h4>
+                        <h4>Vérifiez toutes vos résérvations Tickets et Colis</h4>
                     </div>
                 </div>
             </div>
@@ -503,7 +500,7 @@
                                     </a>
                                     <a class="nav-link" id="v-pills-token-sale-tab" data-bs-toggle="pill"
                                         href="#v-pills-token-sale" role="tab">
-                                        <i class="bx bx-receipt nav-icon d-block mb-2"></i>
+                                        <i class="fa fa-users nav-icon d-block mb-2"></i>
                                         <p class="font-weight-bold mb-0">Clients</p>
                                     </a>
                                 </div>
@@ -1199,31 +1196,3 @@
 
 @endsection
 
-@section('footerSection')
-<script src="{{asset('admin/assets/js/card_1.js')}}"></script>
-<script src="{{asset('admin/assets/js/card_2.js')}}"></script>
-    <script>
-        // This adds some nice ellipsis to the description:
-        document.querySelectorAll(".projcard-description").forEach(function(box) {
-            $clamp(box, {clamp: 6});
-        });
-        
-    </script>
-
-<script>
-    var swiper = new Swiper('.blog-slider', {
-      spaceBetween: 30,
-      effect: 'fade',
-      loop: true,
-      mousewheel: {
-        invert: false,
-      },
-      autoHeight: true,
-      pagination: {
-        el: '.blog-slider__pagination',
-        clickable: true,
-      }
-    });
-</script>
-
-@endsection

@@ -22,7 +22,8 @@ class VilleController extends Controller
 
     public function index()
     {
-        //
+        $villes = Ville::all();
+        return view('agent.ville.index',compact('villes'));
     }
 
     /**
@@ -77,7 +78,9 @@ class VilleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $itineraire = Itineraire::Where('id',$id)->first();
+        $villes = Ville::Where('itineraire_id',$itineraire->id)->get();
+        return view('agent.ville.index',compact('villes','itineraire'));
     }
 
     /**

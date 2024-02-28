@@ -40,7 +40,8 @@ class Customer extends Authenticatable
         'image',
         'region_id',
         'role',
-        'terme'
+        'terme',
+        'qrcode'
     ];
 
     public function siege()

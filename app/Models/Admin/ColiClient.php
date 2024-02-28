@@ -11,10 +11,14 @@ use App\Models\User\Customer;
 class ColiClient extends Model
 {
     use HasFactory;
-    protected $fillable = ['recu','recepteurPay','recepteurPayAmount','code_validation','recepteur_info'];
+    protected $fillable = ['recu','recepteurPay','recepteurPayAmount','code_validation','recepteur_info','quantity'];
+
+    public function getAmountUnitaire(){
+        return number_format($this->prix,2, ',','.'). ' CFA';
+    }
 
     public function getAmount(){
-        return number_format($this->prix,2, ',','.'). ' CFA';
+        return number_format($this->prix_total,2, ',','.'). ' CFA';
     }
 
     

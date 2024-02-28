@@ -48,14 +48,14 @@ class ClientController extends Controller
             'ville' => 'required|numeric',
             'date' => 'required|date',
         ]);
-       
         $ville = Ville::where('id',$request->ville)->first();
-        $buse = Bus::where('id',request('getBus'))
-        ->where('siege_id',Auth::guard('agent')->user()->siege_id)
+
+        $buse = Bus::where('siege_id',Auth::guard('agent')->user()->siege_id)
+        ->where('itineraire_id',$ville->itineraire_id)
         ->where('plein',0)->first();
 
         $date=date_create($request->date);
-        $datef = (date_format($date,'Y-m-d H:i:s'));
+        $datef = (date_format($date,'d-m-Y H:i:s'));
         $time_input = strtotime($datef) ; 
         $date_input = getDate($time_input); 
         // dd($date_input['wday']); 
@@ -94,8 +94,7 @@ class ClientController extends Controller
                         $add_client->bus_id = $buse->id;
                         $add_client->siege_id = Auth::guard('agent')->user()->siege_id;
                         $add_client->position = $buse->inscrit;
-                        $add_client->registered_at = $request->date;
-                        // $add_client->registered_at = date_format($date,'d-m-y');
+                        $add_client->registered_at = date('d-m-y',strtotime($request->date));
                         $add_client->voyage_status = 0;
                         $add_client->status = 0;
                         $add_client->save();
@@ -177,10 +176,10 @@ class ClientController extends Controller
         $getBuse = Bus::where('id',$id)->where('siege_id',Auth::guard('agent')->user()->siege_id)->first();
         $clients = Client::where('bus_id',$getBuse->id)
             ->where('siege_id',Auth::guard('agent')->user()->siege_id)
-            ->where('registered_at','>=',Carbon::today()->format('Y-m-d'))
+            // ->where('registered_at','>=',Carbon::today()->format('d-m-Y'))
             ->where('status',0)
             ->orderBy('id','ASC')
-            ->paginate(10);
+            ->get();
         return view('agent.client.show',compact('clients','getBuse'));
     }
 
@@ -195,7 +194,7 @@ class ClientController extends Controller
        $getBuse = Bus::where('id',$id)->where('siege_id',Auth::guard('agent')->user()->siege_id)->first();
         $clients = Client::where('bus_id',$getBuse->id)
             ->where('siege_id',Auth::guard('agent')->user()->siege_id)
-            ->where('registered_at',Carbon::today()->format('Y-m-d'))
+            ->where('registered_at',carbon_today())
             ->where('status',0)
             ->where('amount','!=',null)
             ->orderBy('id','ASC')
@@ -211,20 +210,19 @@ class ClientController extends Controller
             'phone' => 'required|numeric',
             'cni' => 'required|numeric',
             'ville' => 'required|numeric',
-            'date' => 'required|date',
         ]);
-
+        
         $ville = Ville::where('id',$request->ville)->first();
-        $buse = Bus::where('id',request('getBus'))
-        ->where('siege_id',Auth::guard('agent')->user()->siege_id)
-        ->where('itineraire_id',$ville->itineraire_id)->where('plein',0)->first();
+        $buse = Bus::where('siege_id',Auth::guard('agent')->user()->siege_id)
+        ->where('itineraire_id',$ville->itineraire_id)
+        ->where('plein',0)->first();
+        
 
         $date=date_create($request->date);
-        $datef = (date_format($date,'Y-m-d H:i:s'));
+        $datef = (date_format($date,'d-m-Y H:i:s'));
         $time_input = strtotime($datef) ; 
         $date_input = getDate($time_input); 
         // dd($date_input['wday']); 
-        
         $userialize_buse = unserialize($buse->siege->jours);
 
         $clients = Client::where('bus_id',$buse->id)->where('registered_at',$request->date)->where('amount','!=',null)->get();
@@ -239,16 +237,22 @@ class ClientController extends Controller
             if ($clients->count() < $buse->place) {
                 if (in_array($date_input['wday'] , $userialize_buse)) {
 
-                    if ($request->date == Carbon::today() || $request->date > Carbon::today()) {
-
+                    if ($date->format('d-m-Y') >= carbon_today()) {
+                        $client = Client::where('id',$id)->first();
+                        $registered_at = null;
+                        if($request->date != $client->registered_at){
+                            $registered_at = $request->date;
+                        }else{
+                            $registered_at =  $client->registered_at;
+                        }
                         Client::where('id',$id)->update([
                             'name' => $request->name,
                             'email' => $request->email,
                             'phone' => $request->phone,
+                            'siege_id' => Auth::guard('agent')->user()->siege_id,
                             'cni' => $request->cni,
                             'ville_id' => $request->ville,
-                            'registered_at' => $request->date,
-                            // 'heure' => $buse->date_depart->rendez_vous
+                            'registered_at' =>  $registered_at,
                         ]);
                         Toastr::success('Votre ticket a bien ete modifier', 'Modification Ticket', ["positionClass" => "toast-top-right"]);
                         return back();
@@ -290,7 +294,7 @@ class ClientController extends Controller
     public function presence(Request $request){
         $client = Client::where('id',$request->client_id)
             ->where('siege_id',Auth::guard('agent')->user()->siege_id)
-            ->where('registered_at',Carbon::today()->format('Y-m-d'))
+            ->where('registered_at',Carbon::today()->format('d-m-Y'))
             ->where('status',0)
             ->where('amount',$request->amount)
             ->first();
@@ -326,7 +330,7 @@ class ClientController extends Controller
 
     public function send_sms(){
         $clients = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
-            ->where('registered_at',Carbon::today()->format('Y-m-d'))
+            ->where('registered_at',Carbon::today()->format('d-m-Y'))
             ->where('voyage_status',0)
             ->where('status',0)
             ->where('amount','!=',null)
@@ -368,7 +372,7 @@ class ClientController extends Controller
 
     //  public function absent(){
     //     $clients = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
-    //         ->where('registered_at','<',Carbon::today()->format('Y-m-d'))
+    //         ->where('registered_at','<',Carbon::today()->format('d-m-Y'))
     //         ->where('status',1)
     //         ->where('voyage_status',0)
     //         ->where('amount','!=',null)
@@ -384,12 +388,14 @@ class ClientController extends Controller
 
         $clients = Client::where('bus_id',$getBuse->id)
             ->where('siege_id',Auth::guard('agent')->user()->siege_id)
-            ->where('registered_at','>=',Carbon::today()->format('Y-m-d'))
+            ->where('registered_at','>=',Carbon::today()->format('d-m-Y'))
             ->where('status',0)
             ->where('amount','!=',null)
             ->orderBy('id','ASC')->get();
         if ($clients->count() > 0) {
             return view('agent.client.client_pdf', compact('clients', 'getBuse'));
+            // $pdf = PDF::loadView('agent.client.client_pdf',compact('clients', 'getBuse'));
+            // return $pdf->download('facture_' . Auth::guard('agent')->user()->agence->name . '.pdf');
         }else{
             Toastr::warning('Vous n\'aviez pas de clients', 'Pas de clients', ["positionClass" => "toast-top-right"]);
             return back();

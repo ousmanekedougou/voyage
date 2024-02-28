@@ -78,7 +78,7 @@
                                             @if($bus->inscrit == 0)
                                                 <span class="badge bg-primary font-size-10"></i>0 / {{ $bus->place }}</span>
                                             @else
-                                                <span class="badge bg-success font-size-10"></i>{{ $bus->inscrit }} / {{ $bus->place }}</span>
+                                                <span class="badge bg-success font-size-10"></i>{{ $bus->clients->count() }} / {{ $bus->place }}</span>
                                             @endif
                                         </td>
                                         <td>

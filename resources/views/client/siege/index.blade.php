@@ -19,13 +19,15 @@
                                 <div class="col-lg-12">
                                     <div class="media">
                                         <div class="me-2">
-                                            @if($agence->logo != '')
-                                                <img src="{{(Storage::url($agence->logo))}}" alt="" class="avatar-md rounded-circle img-thumbnail">
-                                            @else
-                                                <span class="avatar-md rounded-circle text-muted font-size-16">
-                                                    <i class="fa fa-bus"></i>
-                                                </span>
-                                            @endif
+                                                <img src="
+
+                                                    @if($agence->image != null)
+                                                            {{Storage::url($agence->logo)}}
+                                                        @else
+                                                                https://ui-avatars.com/api/?name={{$agence->name}}
+                                                        @endif
+                                                
+                                                " alt="" class="avatar-md rounded-circle img-thumbnail">
                                         </div>
                                         <div class="media-body align-self-center">
                                             <div class="text-muted">
@@ -108,53 +110,53 @@
                     <li class="mb-4">
                         <div class="media">
                             <div class="align-self-center me-3">
-                                @if($agence->logo != Null)
-                                <img src="{{Storage::url($agence->logo)}}" class="rounded-circle avatar-xs" alt="">
-                                @else
-                                <img src="{{asset('admin/assets/images/bus_agence.jpg')}}" class="rounded-circle avatar-xs" alt="">
-                                @endif
+                                    <img src="
+                                        @if($agence->image != null)
+                                            {{Storage::url($agence->logo)}}
+                                        @else
+                                                https://ui-avatars.com/api/?name={{$agence->name}}
+                                        @endif" class="rounded-circle avatar-sm" alt="">
                             </div>
                             <div class="media-body overflow-hidden">
                                 <h5 class="text-truncate font-size-14 mb-1">{{$agence->name}}</h5>
                                 <p class="text-truncate mb-0">{{$agence->slogan}}</p>
                             </div>
                             <div class="font-size-11">
-                                <a href="{{ route('customer.agence.about',$agence->slug) }}" class="btn btn-xs btn-primary text-white mt-1 p-1 "> <i class="bx bx-file"></i> Infos</a>
+                                <a href="{{ route('customer.agence.about',$agence->slug) }}" class="badge bg-primary font-size-13 text-white mt-1 p-1 "> <i class="bx bx-file"></i> A Propos</a>
                             </div>
                         </div>
                     </li>
                 </ul>
-                    
+                    <hr>
                 <ul class="list-unstyled chat-list">
                     {{-- data-simplebar style="max-height: 410px;" --}}
 
                     @foreach($sieges as $siege)
-                        <li class="" >
-                            <a href="#">
-                                <div class="media">
-                                    <div class="align-self-center me-3">
+                        <li class="mb-4">
+                            <div class="media">
+                                <div class="align-self-center me-3">
+                                    <img src="
                                         @if($siege->logo != Null)
-                                            <img src="{{Storage::url($siege->logo)}}" class="rounded-circle avatar-xs" alt="">
+                                            {{Storage::url($siege->logo)}}
                                         @else
-                                            <img src="{{asset('admin/assets/images/map_siege.jpg')}}" class="rounded-circle avatar-xs" alt="">
-                                        @endif
-                                    </div>
-                                    
-                                    <div class="media-body overflow-hidden">
-                                        <h5 class="text-truncate font-size-14 mb-1">Siege de {{ $siege->name }}</h5>
-                                        <p class="text-truncate mb-0"> <i class="fa fa-mobile"></i> {{ $siege->phone }}</p>
-                                    </div>
-                                    <div class="font-size-12 button-right-siege">
-                                        <span class="span-chat-siege span-chat1 rounded-circle" onclick="onclick().event.preventDefault()" data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$siege->id}}">
-                                            S'inscrire <i class="fa fa-user-plus"></i>
-                                        </span>
-                                        
-                                        <span class="span-chat-siege rounded-circle" onclick="location.href='{{route('customer.colis.edit',$siege->id)}}'">
-                                            Colis reçue <i class="fa fa-suitcase-rolling"></i>
-                                        </span>
-                                    </div>
+                                                https://ui-avatars.com/api/?name=Siege+{{$siege->name}}
+                                        @endif" class="rounded-circle avatar-sm" alt="">
                                 </div>
-                            </a>
+                                
+                                <div class="media-body overflow-hidden">
+                                    <h5 class="text-truncate font-size-14 mb-1">Siege de {{ $siege->name }}</h5>
+                                    <p class="text-truncate mb-0"> <i class="fa fa-mobile"></i> {{ $siege->phone }}</p>
+                                </div>
+                                <div class="font-size-12 button-right-siege">
+                                    <span class="span-chat-siege span-chat1 badge bg-success mb-2" onclick="onclick().event.preventDefault()" data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$siege->id}}">
+                                        S'inscrire <i class="fa fa-user-plus"></i>
+                                    </span>
+                                    
+                                    <span class="span-chat-siege badge bg-primary" onclick="location.href='{{route('customer.colis.edit',$siege->id)}}'">
+                                        Colis reçue <i class="fa fa-suitcase-rolling"></i>
+                                    </span>
+                                </div>
+                            </div>
                         </li>
                     @endforeach
                     
@@ -185,7 +187,7 @@
                                             <label class="form-label">Selectionner votre ville de voyage</label>
                                             <div class="col-md-12">
                                                 <select class="form-control select2 @error('ville') is-invalid @enderror" name="ville" required autocomplete="ville" required>
-                                                    <option>Select</option>
+                                                    <option>Selectionner</option>
                                                     
                                                         @foreach($siege->itineraires as $itineraire)
                                                             <optgroup label="{{$itineraire->name}}">

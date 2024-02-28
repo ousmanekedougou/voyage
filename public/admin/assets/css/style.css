@@ -98,6 +98,7 @@
 
  .home-section-mobile{
     visibility: hidden;
+    overflow: hidden;
     width: 0px;
     height: 0px;
  }

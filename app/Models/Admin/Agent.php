@@ -3,6 +3,7 @@
 namespace App\Models\Admin;
 use App\Models\Admin\Siege;
 use App\Models\Admin\Agence;
+use App\Models\Admin\Payment;
 // use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -25,8 +26,13 @@ class Agent extends Authenticatable
         'confirmation_token',
         'agence_id',
         'siege_id',
-        'logo'
+        'logo',
+        'montant_journaliere'
     ];
+
+    public function getAmount(){
+        return number_format($this->montant_journaliere,2, ',','.'). ' CFA';
+    }
 
      public function siege()
     {
@@ -36,5 +42,10 @@ class Agent extends Authenticatable
     public function agence()
     {
         return $this->belongsTo(Agence::class);
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
     }
 }

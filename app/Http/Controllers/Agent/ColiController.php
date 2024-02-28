@@ -148,9 +148,11 @@ class ColiController extends Controller
     public function show($id)
     {
         $coli = Colie::where('id',$id)->where('siege_id',Auth::guard('agent')->user()->siege_id)->first();
+        $amountTotalColi = ColiClient::where('colie_id',$coli->id)->where('siege_id',Auth::guard('agent')->user()->siege_id)->sum('prix_total');
+        $quantiteTotalColi = ColiClient::where('colie_id',$coli->id)->where('siege_id',Auth::guard('agent')->user()->siege_id)->sum('quantity');
         if ($coli) {
             if ($coli->coli_clients->count() > 0) {
-                return view('agent.coli.show',compact('coli'));
+                return view('agent.coli.show',compact('coli','amountTotalColi','quantiteTotalColi'));
             }else{
                 Toastr::warning('Ce client n\'a pas de colis', 'Error Client', ["positionClass" => "toast-top-right"]);
                 return back();
@@ -174,6 +176,7 @@ class ColiController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp',
             'name' => 'required|string|max:255',
             'prix' => 'required|numeric',
+            'quantity' => 'required|numeric',
             'ville' => 'required|numeric',
             'desc' => 'required|string|max:255',
             'name_recept' => 'required|string|max:255',
@@ -191,7 +194,9 @@ class ColiController extends Controller
         $newColie = new ColiClient();
         $newColie->image = $imageName;
         $newColie->name = $request->name;
+        $newColie->quantity = $request->quantity;
         $newColie->prix = $request->prix;
+        $newColie->prix_total = $request->prix * $request->quantity;
         $newColie->detail = $request->desc;
         $newColie->colie_id = $request->clientId;
         $newColie->ville_id = $request->ville; 
@@ -241,17 +246,6 @@ class ColiController extends Controller
         //     'TouCki'
         // );
 
-        $client_p_t = Colie::where('id',$request->clientId)->first();
-        if ($newColie->recepteurPay == 0) {
-            if ($client_p_t->prix_total == 0) {
-                $client_p_t->prix_total = $request->prix;
-            }elseif ($client_p_t->prix_total > 0) {
-                $client_p_t->prix_total = $client_p_t->prix_total + $request->prix;
-            }
-        }elseif($newColie->recepteurPay == 1){
-            $client_p_t->prix_total = $client_p_t->prix_total;
-        }
-        $client_p_t->save();
 
         Toastr::success('Vos colies ont bien ete ajouter', 'Ajout Bagages', ["positionClass" => "toast-top-right"]);
         return back();
@@ -260,21 +254,6 @@ class ColiController extends Controller
     public function updateColi(Request $request, $id)
     {
         $coliClient = ColiClient::where('id',$id)->first();
-
-        $client_p_t = Colie::where('id',$request->coliId)->first();
-        if ($coliClient->recepteurPay == 0) {
-            if ($request->prix != $coliClient->prix) {
-                $prixMoins = $client_p_t->prix_total - $coliClient->prix;
-                $client_p_t->prix_total = $prixMoins + $request->prix;
-            }else {
-                $client_p_t->prix_total = $client_p_t->prix_total;
-            }
-        }elseif($coliClient->recepteurPay == 1){
-            $client_p_t->prix_total = $client_p_t->prix_total - $coliClient->prix;
-        }
-
-        $client_p_t->save();
-
 
         $imageName = '';
         if ($request->image == '') {
@@ -290,6 +269,8 @@ class ColiController extends Controller
         $coliClient->image = $imageName;
         $coliClient->name = $request->name;
         $coliClient->prix = $request->prix;
+        $coliClient->quantity = $request->quantity;
+        $coliClient->prix_total = $request->prix * $request->quantity;
         $coliClient->detail = $request->desc;
         $coliClient->colie_id = $request->coliId;
         $coliClient->ville_id = $request->ville; 

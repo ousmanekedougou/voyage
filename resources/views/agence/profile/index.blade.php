@@ -72,8 +72,7 @@
 
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title mb-4">Informations Personnel</h4>
-                                <p class="text-muted mb-4">{!! $admin->slogan !!}</p>
+                                <h4 class="card-title mb-4">Informations de l'agence</h4>
                                 <div class="table-responsive">
                                     <table class="table table-nowrap mb-0">
                                         <tbody>
@@ -197,6 +196,17 @@
                                             </div>
                                         </div>
 
+                                        <div class="mb-3">
+                                            <label for="" class="form-label">Configurer la date paiement de vos agents</label>
+                                            <input type="number" class="form-control" required id="payment_at" class="form-control @error('payment_at') is-invalid @enderror" name="payment_at" value="{{ Auth::guard('agence')->user()->payment_at ?? old('payment_at')}}" autocomplete="{{ Auth::guard('agence')->user()->payment_at }}"
+                                             />
+                                            @error('payment_at')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+
                                             
                                         </div>
                                         <div class="modal-footer">
@@ -207,6 +217,7 @@
                                 </div>
                             </div>
                         </div>
+
 
 
                             <!-- Les seconds informations -->

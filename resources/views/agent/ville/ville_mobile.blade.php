@@ -29,22 +29,24 @@
                 <br>
                 <ul class="list-unstyled chat-list">
                     @foreach($villes as $ville)
-                        <li class="" >
-                            <a onclick="event.preventDefault();">
-                                <div class="media">
-                                    
-                                    <div class="media-body overflow-hidden">
-                                        <h5 class="text-truncate font-size-14 mb-1"> {{ $ville->name }}</h5>
-                                        <p class="text-truncate mb-0"> <i class="mdi mdi-arrow-right font-size-10"></i> {{ $ville->getAmount() }}</p>
+                        <li class="mb-4" >
+                            <div class="media">
+
+                                    <div class="align-self-center me-3">
+                                        <img src="https://ui-avatars.com/api/?name={{$ville->name}}" class="rounded-circle avatar-xs" alt="">
                                     </div>
-                                    <div class="font-size-12 button-right-siege">
-                                        <span class="span-chat-siege span-chat1 rounded-circle">
-                                            <span  data-bs-toggle="modal" data-bs-target="#staticBackdropeditville-{{ $ville->id }}" class="text-success mr-2"><i class="mdi mdi-pencil font-size-18"></i></span>
-                                            <span  data-bs-toggle="modal" data-bs-target="#subscribeModaDeletelville-{{ $ville->id }}" class="text-danger"><i class="mdi mdi-delete font-size-18"></i></span>
-                                        </span>
-                                    </div>
+                                
+                                <div class="media-body overflow-hidden">
+                                    <h5 class="text-truncate font-size-14 mt-2" style="font-weight:600;"> {{ $ville->name }}</h5>
+                                    <p class="text-truncate mb-0"> <i class="mdi mdi-arrow-right font-size-10"></i> {{ $ville->getAmount() }}</p>
                                 </div>
-                            </a>
+                                <div class="font-size-12 button-right-siege">
+                                    <span class="span-chat-siege span-chat1 rounded-circle">
+                                        <span  data-bs-toggle="modal" data-bs-target="#staticBackdropeditville-{{ $ville->id }}" class="text-success mr-2"><i class="mdi mdi-pencil font-size-18"></i></span>
+                                        <span  data-bs-toggle="modal" data-bs-target="#subscribeModaDeletelville-{{ $ville->id }}" class="text-danger"><i class="mdi mdi-delete font-size-18"></i></span>
+                                    </span>
+                                </div>
+                            </div>
                         </li>
                     @endforeach
                 </ul>

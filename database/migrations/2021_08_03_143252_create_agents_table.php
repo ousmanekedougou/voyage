@@ -28,13 +28,11 @@ class CreateAgentsTable extends Migration
             $table->integer('siege_id');
             $table->integer('agence_id');
             $table->integer('role');
+            $table->integer('montant_journaliere')->nullable();
             $table->string('confirmation_token')->unique()->nullable();
             $table->string('image')->nullable();
             $table->string('logo')->nullable();
             $table->timestamps();
-
-            
-           
         });
     }
 

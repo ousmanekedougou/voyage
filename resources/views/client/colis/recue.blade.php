@@ -47,45 +47,60 @@
                                                         <th>Nom & Detail</th>
                                                         <th>Envoyer Par</th>
                                                         <th>Ville</th>
-                                                        <th>Prix</th>
+                                                        <th>Quantites</th>
+                                                        <th>Prix Unitaire</th>
+                                                        <th>Prix Total</th>
                                                         <th>Status</th>
                                                         <th>Reçu</th>
-                                                        <th>Code</th>
+                                                        <th>References</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach($colis as $bag)
+                                                    @foreach($colis as $coliClient)
                                                     <tr>
                                                         <td>
-                                                            <img src="{{Storage::url($bag->image)}}" alt="product-img"
+                                                            <img src="{{Storage::url($coliClient->image)}}" alt="product-img"
                                                                 title="product-img" class="avatar-md" />
                                                         </td>
                                                        <td>
-                                                            <h5 class="font-size-14 text-truncate"><a href="ecommerce-product-detail.html" class="text-dark">{{$bag->name}}</a></h5>
-                                                            <p class="mb-0">{{$bag->detail}} </span></p>
+                                                            <h5 class="font-size-14 text-truncate"><a href="ecommerce-product-detail.html" class="text-dark">{{$coliClient->name}}</a></h5>
+                                                            <p class="mb-0">{{$coliClient->detail}} </span></p>
                                                         </td>
                                                         <td>
-                                                            <h5 class="font-size-14 text-truncate"><a href="ecommerce-product-detail.html" class="text-dark">{{$bag->customer->name}}</a></h5>
-                                                            <p class="mb-0"> {{$bag->customer->phone}}</span></p>
+                                                            @if($coliClient->customer_id != null)
+                                                                <h5 class="font-size-14 text-truncate"><a href="ecommerce-product-detail.html" class="text-dark">{{$coliClient->name_recept}}</a></h5>
+                                                                <p class="mb-0"> {{$coliClient->phone_recept}}</span></p>
+                                                            @else
+                                                                <h5 class="font-size-14 text-truncate"><a href="ecommerce-product-detail.html" class="text-dark">{{$coliClient->customer->name}}</a></h5>
+                                                                <p class="mb-0"> {{$coliClient->customer->phone}}</span></p>
+                                                            @endif
                                                         </td>
                                                         <td class="text-center">
-                                                            {{ $bag->ville->name }}
+                                                            {{ $coliClient->ville->name }}
                                                         </td>
                                                         <td>
-                                                            {{$bag->getAmount()}}
+                                                            {{$coliClient->quantity}}
                                                         </td>
                                                         <td>
-                                                            @if($bag->recepteurPay == 1)
+                                                            {{$coliClient->getAmountUnitaire()}}
+                                                        </td>
+                                                        <td>
+                                                            {{$coliClient->getAmount()}}
+                                                        </td>
+                                                        
+                                                        
+                                                        <td>
+                                                            @if($coliClient->recepteurPay == 1)
                                                                 <span class="badge bg-info">Arriver Payer</span>
                                                             @else
                                                                 <span class="badge bg-success">Payer</span>
                                                             @endif
                                                         </td>
                                                         <td>
-                                                            @if($bag->status == 1)
+                                                            @if($coliClient->status == 1)
                                                                 <span class="text-success">Par
-                                                                    @if($bag->recepteur_info != null)
-                                                                        {{$bag->recepteur_info}}</span>
+                                                                    @if($coliClient->recepteur_info != null)
+                                                                        {{$coliClient->recepteur_info}}</span>
                                                                     @else
                                                                         Vous
                                                                     @endif
@@ -93,8 +108,8 @@
                                                                 <span class="text-warning">Colis non reçu</span>
                                                             @endif
                                                         </td>
-                                                        <td>
-                                                            {{$bag->code_validation}}
+                                                        <td class="text-uppercase">
+                                                            {{$coliClient->ville->name}}_{{$coliClient->code_validation}}
                                                         </td>
                                                     </tr>
                                                     @endforeach
@@ -112,10 +127,11 @@
                                                         <tbody>
                                                             <tr>
                                                                 
-                                                                <th> Quantite : {{ $getColi->coli_clients->count() }}</th>
+                                                                <th> Quantite total : {{ $quantiteTotalColi }}</th>
                                                             
                                                                 
-                                                                <th> Total : {{$getColi->getAmountTotal()}}</th>
+                                                                <th>Prix total de tous les bagage :   {{$amountTotalColi}} CFA</th>
+                                                                
                                                                 {{--
                                                                 <th>
                                                                     <span class="btn btn-success btn-block" style="width: 100%;margin-top:-10px;">
@@ -143,16 +159,18 @@
                         <li class="mb-4">
                             <div class="media">
                                 <div class="align-self-center me-3">
-                                    <div class="align-self-center me-3">
-                                        @if($getColi->siege->agence->image != Null)
-                                            <img src="{{Storage::url($getColi->siege->agence->image)}}" class="rounded-circle avatar-xs" alt="">
-                                        @else
-                                            <img src="{{asset('admin/assets/images/users/profil.jpg')}}" class="rounded-circle avatar-xs" alt="">
-                                        @endif
+                                    <div class="align-self-center">
+                                        <img src="
+                                            @if($getColi->siege->agence->image != Null)
+                                                {{Storage::url($getColi->siege->agence->image)}}
+                                            @else
+                                                https://ui-avatars.com/api/?name={{$getColi->siege->agence->name}}
+                                            @endif
+                                            " class="rounded-circle avatar-sm" alt="">
                                     </div>
                                 </div>
                                 <div class="media-body overflow-hidden">
-                                    <h5 class="text-truncate font-size-14 mb-1">
+                                    <h5 class="text-truncate font-size-14 mb-1" style="font-weight:600;">
                                         {{ $getColi->siege->agence->name }}
                                     </h5>
                                     <p class="text-truncate mb-0">{{ $getColi->siege->name }}</p>
@@ -165,7 +183,7 @@
                     </ul>
                     <table class="table align-middle mb-0 table-nowrap">
                         <div class="row">
-                        @foreach($colis as $bag)
+                        @foreach($colis as $coliClient)
                             <tbody class="card col-lg-4">
                                 <tr>
                                     <td class="">
@@ -173,49 +191,58 @@
                                             title="product-img" class="avatar-md" />
                                     </td>
                                     <td class="">
-                                        <h5 class="font-size-14 text-truncate">{{ $bag->name }}</h5>
+                                        <h5 class="font-size-14 text-truncate">{{ $coliClient->name }}</h5>
                                         {{--
-                                            @if($bag->recepteurPay == 1)
-                                                <span class="action-icon badge bg-success btn-recept-mobile" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-danger" data-bs-target="#ColiRecue-{{ $bag->id }}"> <i class="mdi mdi-cart-arrow-right me-1"></i> Payer </span>
+                                            @if($coliClient->recepteurPay == 1)
+                                                <span class="action-icon badge bg-success btn-recept-mobile" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-danger" data-bs-target="#ColiRecue-{{ $coliClient->id }}"> <i class="mdi mdi-cart-arrow-right me-1"></i> Payer </span>
                                             @endif
                                         --}}
                                     </td>
                                 </tr>
                                 <tr>
+                                    <td class="td-mobile">Reference : </td>
+                                    <td class="td-mobile text-uppercase">{{$coliClient->ville->name}}_{{$coliClient->code_validation}}</td>
+                                </tr>
+                                
+                                <tr>
                                     <td class="td-mobile">Désc :</td>
                                     <td class="td-mobile">
-                                        {{ $bag->detail }} 
+                                        {{ $coliClient->detail }} 
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="td-mobile">Envoyer par :</td>
                                     <td class="td-mobile">
-                                        @if($bag->name == null)
-                                            {{ $bag->customer->name }} | {{ $bag->customer->phone  }}
+                                        @if($coliClient->customer_id != null)
+                                            {{ $coliClient->customer->name }} | {{ $coliClient->customer->phone  }}
                                         @else
-                                            {{ $bag->colie->name }} | {{ $bag->colie->phone }}
+                                            {{ $coliClient->name_recept }} | {{ $coliClient->phone_recept }}
                                         @endif
                                     </td>
                                 </tr>
                                 
                                 <tr>
                                     <td class="td-mobile">Ville :</td>
-                                    <td class="td-mobile">{{ $bag->ville->name }} </td>
+                                    <td class="td-mobile">{{ $coliClient->ville->name }} </td>
                                 </tr>
                                 <tr>
-                                    <td class="td-mobile">Prix : </td>
-                                    <td class="td-mobile">{{$bag->getAmount()}}</td>
+                                    <td class="td-mobile">Quantite : </td>
+                                    <td class="td-mobile">{{$coliClient->quantity}}</td>
                                 </tr>
                                 <tr>
-                                    <td class="td-mobile">Code : </td>
-                                    <td class="td-mobile">{{ $bag->code_validation }}</td>
+                                    <td class="td-mobile">Prix unitaire : </td>
+                                    <td class="td-mobile">{{$coliClient->getAmountUnitaire()}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="td-mobile">Prix Total: </td>
+                                    <td class="td-mobile">{{$coliClient->getAmount()}}</td>
                                 </tr>
                                 <tr>
                                 <th class="td-mobile">Reçu :
-                                        @if($bag->status == 1)
+                                        @if($coliClient->status == 1)
                                             <span class="text-success">Par
-                                                @if($bag->recepteur_info != null)
-                                                    {{$bag->recepteur_info}}</span>
+                                                @if($coliClient->recepteur_info != null)
+                                                    {{$coliClient->recepteur_info}}</span>
                                                 @else
                                                     Vous
                                                 @endif
@@ -223,7 +250,7 @@
                                             <span class="text-warning">Colis non reçu</span>
                                         @endif
                                     </th>
-                                    @if($bag->recepteurPay == 1)
+                                    @if($coliClient->recepteurPay == 1)
                                         <td class="td-mobile">
                                             <span class="badge bg-info">Arriver Payer</span>
                                         </td>
@@ -245,11 +272,11 @@
                                         <tbody>
                                             <tr>
                                                 <td>Quantite :</td>
-                                                <td>{{ $colis->count() }}</td>
+                                                <td>{{ $quantiteTotalColi }}</td>
                                             </tr>
                                             <tr>
                                                 <th>Total :</th>
-                                                <th>{{$getColi->getAmountTotal()}}</th>
+                                                <th>{{$amountTotalColi}} CFA</th>
                                             </tr>
                                         </tbody>
                                     </table>

@@ -43,7 +43,7 @@
                                     </div>
                                 </div>
                                 <div class="col-5 align-self-end">
-                                    <img src="@if(Auth::guard('agent')->user()->agence->logo !== null) {{ Storage::url(Auth::guard('agence')->user()->logo) }} @else {{ asset('admin/assets/images/bus.svg') }} @endif" alt="" class="img-fluid">
+                                    <img style="width:100px;height:100px;border-radius:50%;" src="@if(Auth::guard('agent')->user()->agence->logo == '') https://ui-avatars.com/api/?name={{Auth::guard('agent')->user()->agence->name}} @else {{(Storage::url(Auth::guard('agent')->user()->agence->logo))}} @endif" alt="" class="img-fluid">
                                 </div>
                             </div>
                         </div>
@@ -51,7 +51,7 @@
                             <div class="row">
                                 <div class="col-sm-7">
                                     <div class="avatar-md profile-user-wid mb-4">
-                                        <img src="@if(Auth::guard('agent')->user()->image != null) {{ Storage::url(Auth::guard('agent')->user()->image) }} @else {{ asset('admin/assets/images/users/profil.jpg') }} @endif" alt=""
+                                        <img src="@if(Auth::guard('agent')->user()->image == null) https://ui-avatars.com/api/?name={{Auth::guard('agent')->user()->name}} @else {{(Storage::url(Auth::guard('agent')->user()->image))}} @endif" alt=""
                                             class="img-thumbnail rounded-circle">
                                     </div>
                                     <h5 class="font-size-15 text-truncate">{{ Auth::guard('agent')->user()->name }}</h5>
@@ -255,11 +255,7 @@
                         <li class="mb-4">
                             <div class="media">
                                 <div class="align-self-center me-3">
-                                    @if(Auth::guard('agent')->user()->agence->logo != Null)
-                                        <img src="{{Storage::url(Auth::guard('agent')->user()->agence->logo)}}" class="rounded-circle avatar-xs" alt="">
-                                    @else
-                                        <img src="{{asset('admin/assets/images/bus_agence.jpg')}}" class="rounded-circle avatar-xs" alt="">
-                                    @endif
+                                    <img src="@if(Auth::guard('agent')->user()->agence->logo == '') https://ui-avatars.com/api/?name={{Auth::guard('agent')->user()->agence->name}} @else {{(Storage::url(Auth::guard('agent')->user()->agence->logo))}} @endif" class="rounded-circle avatar-sm" alt="">
                                 </div>
                                 <div class="media-body overflow-hidden">
                                     <h5 class="text-truncate font-size-14 mb-1">{{Auth::guard('agent')->user()->agence->name}}</h5>
@@ -273,33 +269,38 @@
                         </li>
                     </ul>
                     <ul class="list-unstyled chat-list">
-                        <span onclick="location.href='{{route('agent.client.renoncer')}}'" class="mt-3 badge bg-primary font-size-11 mb-4" style="width:100%;"><i class="fa fa-users fa-item me-1"></i>Archives Clients</span>
+                        @if(Auth::guard('agent')->user()->role == 4)
+                            <div class="text-center">
+                                <span onclick="location.href='{{route('agent.client.renoncer')}}'" class="mt-2 badge bg-primary font-size-11 mb-4"><i class="fa fa-users fa-item me-1"></i>Archives Clients</span>
+                                <span onclick="location.href='{{route('agent.bagage.index')}}'" class="mt-2 badge bg-success font-size-11 mb-4">Bagages</span>
+                                <span onclick="location.href='{{route('agent.colis.index')}}'" class="mt-2 badge bg-info font-size-11 mb-4">Colies</span>
+                            </div>
+                            @else
+                            <span onclick="location.href='{{route('agent.client.renoncer')}}'" class="mt-3 badge bg-primary font-size-11 mb-4" style="width:100%;"><i class="fa fa-users fa-item me-1"></i>Archives Clients</span>
+                        @endif
                         @foreach($itineraires as $itineraire)
-                            <li class="" >
-                                <a onclick="event.preventDefault();">
-                                    <div class="media">
-                                        <div onclick="location.href='{{route('agent.itineraire.show',$itineraire->id)}}'" class="align-self-center me-3">
-                                            <i class="fa fa-road" style="font-size: 25px;"></i>
-                                        </div>
-                                        
-                                        <div onclick="location.href='{{route('agent.itineraire.show',$itineraire->id)}}'" class="media-body overflow-hidden">
-                                            <h5 class="text-truncate font-size-14 mb-1">{{ $itineraire->name }}</h5>
-                                            <p class="text-truncate mb-0"> <i class="mdi mdi-arrow-right font-size-10"></i> {{ $itineraire->buses->count() }} buse(s)</p>
-                                        </div>
-                                        
-                                        <div class="font-size-12 button-right-siege" onclick="event.preventDefault();">
-                                            <span class="span-chat-siege span-chat1">
-                                                <span class="badge bg-primary" onclick="location.href='{{ route('agent.ville.show',$itineraire->id) }}'"> {{ $itineraire->villes->count() }} Ville(s)</span>
-                                            </span>
-
-                                            <span class="span-chat-siege span-chat1">
-                                                <span  data-bs-toggle="modal" data-bs-target="#staticBackdropedititineraire-{{ $itineraire->id }}" class="text-success mr-2"><i class="mdi mdi-pencil font-size-18"></i></span>
-                                                <span  data-bs-toggle="modal" data-bs-target="#subscribeModalDeleteitineraire-{{ $itineraire->id }}" class="text-danger"><i class="mdi mdi-delete font-size-18"></i></span>
-                                            </span>
-                                        </div>
+                            <li class="mb-3" >
+                                <div class="media">
+                                    <div onclick="location.href='{{route('agent.itineraire.show',$itineraire->id)}}'" class="align-self-center me-3">
+                                        <i class="fa fa-road avatar-xs" style="font-size: 25px;"></i>
                                     </div>
-                                        
-                                </a>
+                                    
+                                    <div onclick="location.href='{{route('agent.itineraire.show',$itineraire->id)}}'" class="media-body overflow-hidden">
+                                        <h5 class="text-truncate font-size-14 mt-2" style="font-weight:600;">{{ $itineraire->name }}</h5>
+                                        <p class="text-truncate mb-0"> <i class="mdi mdi-arrow-right font-size-10"></i> {{ $itineraire->buses->count() }} buse(s)</p>
+                                    </div>
+                                    
+                                    <div class="font-size-12 button-right-siege" onclick="event.preventDefault();">
+                                        <span class="span-chat-siege span-chat1">
+                                            <span class="badge bg-primary" onclick="location.href='{{ route('agent.ville.show',$itineraire->id) }}'"> {{ $itineraire->villes->count() }} Ville(s)</span>
+                                        </span>
+
+                                        <span class="span-chat-siege span-chat1">
+                                            <span  data-bs-toggle="modal" data-bs-target="#staticBackdropedititineraire-{{ $itineraire->id }}" class="text-success mr-2"><i class="mdi mdi-pencil font-size-18"></i></span>
+                                            <span  data-bs-toggle="modal" data-bs-target="#subscribeModalDeleteitineraire-{{ $itineraire->id }}" class="text-danger"><i class="mdi mdi-delete font-size-18"></i></span>
+                                        </span>
+                                    </div>
+                                </div>
                             </li>
                         @endforeach
                     </ul>

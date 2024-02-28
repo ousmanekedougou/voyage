@@ -88,7 +88,7 @@
                                 <ul>
                                     <li class="{{ set_active_roote_bottom_bar('admin.home') }} ">
                                         <a href="{{ route('admin.home') }}" id="home">
-                                            <span> Home</span>
+                                            <span> Acceuil</span>
                                             <i class="bx bx-home-circle   fa-fa-item"></i>
                                         </a>
                                     </li>

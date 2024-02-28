@@ -46,6 +46,7 @@
                                                         <th>Telephone</th>
                                                         <th>CNI</th>
                                                         <th>Colis</th>
+                                                        <th>Afficher</th>
                                                         <th>Actions</th>
                                                     </tr>
                                                 </thead>
@@ -55,20 +56,25 @@
                                                     @foreach($clients as $client)
                                                         <tr>
                                                             <td>
-                                                                @if($client->image != null)
-                                                                    <img src="{{Storage::url($client->customer->image)}}" style="width: 40px;height:40px;" alt=""
-                                                                        class="avatar-sm rounded-circle header-profile-user">
+                                                            <img src="
+                                                                @if($client->image != Null)
+                                                                    {{Storage::url($client->image)}}
                                                                 @else
-                                                                    <img src="{{ asset('admin/assets/images/users/profil.jpg') }}" style="width: 40px;height:40px;" alt=""
-                                                                        class="avatar-sm rounded-circle header-profile-user">
-                                                                @endif
+                                                                    @if($client->name == null)
+                                                                        https://ui-avatars.com/api/?name={{$client->customer->name}}
+                                                                    @else
+                                                                        https://ui-avatars.com/api/?name={{$client->name}}
+                                                                    @endif
+                                                                @endif" 
+                                                            style="width: 40px;height:40px;" alt=""
+                                                                    class="avatar-sm rounded-circle header-profile-user">
                                                             </td>
                                                             @if($client->name == null)
-                                                            <td>{{ $client->customer->name }}</td>
-                                                            <td>{{ $client->customer->phone }}</td>
+                                                                <td>{{ $client->customer->name }}</td>
+                                                                <td>{{ $client->customer->phone }}</td>
                                                             @else
-                                                            <td>{{ $client->name }}</td>
-                                                            <td>{{ $client->phone }}</td>
+                                                                <td>{{ $client->name }}</td>
+                                                                <td>{{ $client->phone }}</td>
                                                             @endif
                                                             <td>
                                                             {{ $client->cni }}
@@ -82,7 +88,7 @@
                                                             <td>
                                                                 <!-- Button trigger modal -->
                                                                 <a href="{{ route('agent.colis.show',$client->id) }}" class="btn btn-primary btn-sm btn-rounded">
-                                                                <i class="fa fa-eye font-size-12"></i> Voire
+                                                                <i class="fa fa-eye font-size-12"></i> {{$client->coli_clients->count()}} Colie(s)
                                                                 </a>
                                                             </td>
                                                             <td>
@@ -121,16 +127,18 @@
                                 <li class="mb-4">
                                     <div class="media">
                                         <div class="align-self-center me-3">
-                                            <div class="align-self-center me-3">
+                                            <div class="align-self-center">
+                                            <img src="
                                                 @if(Auth::guard('agent')->user()->agence->logo != Null)
-                                                    <img src="{{Storage::url(Auth::guard('agent')->user()->agence->logo)}}" class="rounded-circle avatar-xs" alt="">
+                                                    {{Storage::url(Auth::guard('agent')->user()->agence->logo)}}
                                                 @else
-                                                    <img src="{{asset('admin/assets/images/bus_agence.jpg')}}" class="rounded-circle avatar-xs" alt="">
+                                                    https://ui-avatars.com/api/?name={{Auth::guard('agent')->user()->agence->name}}
                                                 @endif
+                                                " class="rounded-circle avatar-sm" alt="">
                                             </div>
                                         </div>
                                         <div class="media-body overflow-hidden">
-                                            <h5 class="text-truncate font-size-14 mb-1">{{Auth::guard('agent')->user()->agence->name}}</h5>
+                                            <h5 class="text-truncate font-size-14 mb-1" style="font-weight:600;">{{Auth::guard('agent')->user()->agence->name}}</h5>
                                             <p class="text-truncate mb-0">{{Auth::guard('agent')->user()->siege->name}}</p>
                                         </div>
                                         <div class="font-size-11 button-right-siege">
@@ -141,47 +149,52 @@
                                     </div>
                                 </li>
                             </ul>
+                            <hr>
                             <ul class="list-unstyled chat-list">
                                 @foreach($clients as $client)
-                                    <li class="" >
-                                        <a onclick="onclick().event.preventDefault()">
-                                            <div class="media">
-                                                <div class="align-self-center me-3" onclick="location.href='{{route('agent.colis.show',$client->id)}}'">
+                                    <li class="mb-4" >
+                                        <div class="media">
+                                            <div class="align-self-center me-3" onclick="location.href='{{route('agent.colis.show',$client->id)}}'">
+                                                <img src="
                                                     @if($client->image != Null)
-                                                        <img src="{{Storage::url($client->image)}}" class="rounded-circle avatar-xs" alt="">
+                                                        {{Storage::url($client->image)}}
                                                     @else
-                                                        <img src="{{asset('admin/assets/images/users/profil.jpg')}}" class="rounded-circle avatar-xs" alt="">
+                                                        @if($client->name == null)
+                                                            https://ui-avatars.com/api/?name={{$client->customer->name}}
+                                                        @else
+                                                            https://ui-avatars.com/api/?name={{$client->name}}
+                                                        @endif
                                                     @endif
-                                                </div>
-                                                
-                                                <div class="media-body overflow-hidden" onclick="location.href='{{route('agent.colis.show',$client->id)}}'">
-                                                    <h5 class="text-truncate font-size-14 mb-1">
-                                                        @if($client->name == null)
-                                                            {{ $client->customer->name }}
-                                                        @else
-                                                            {{ $client->name }}
-                                                        @endif
-                                                    </h5>
-                                                    <p class="text-truncate mb-0"> <i class="fa fa-mobile font-size-10"></i>
-                                                        @if($client->name == null)
-                                                            {{ $client->customer->phone }}
-                                                        @else
-                                                            {{ $client->phone }}
-                                                        @endif
-                                                    </p>
-                                                </div>
-                                                <div class="font-size-12 button-right-siege">
-                                                    <span class="span-chat-siege span-chat1" onclick="onclick().event.preventDefault()">
-                                                        <span data-bs-toggle="modal" data-bs-target="#AddBagage-{{$client->id}}" class="text-success button-client-add"> <i class="fa fa-suitcase-rolling font-size-12"></i></span>
-                                                        <span data-bs-toggle="modal" data-bs-target="#EditClientColie-{{$client->id}}" class="text-primary"> <i class="fa fa-edit font-size-12"></i></span>
-                                                        
-                                                        <span class="span-chat-siege span-chat1 text-danger button-client-delete" data-bs-toggle="modal" data-bs-target="#subscribeModalclient-{{ $client->id }}">
-                                                            <i class="fa fa-trash font-size-12"> </i>
-                                                        </span>  
-                                                    </span>
-                                                </div>
+                                                " class="rounded-circle avatar-sm" alt="">
                                             </div>
-                                        </a>
+                                            
+                                            <div class="media-body overflow-hidden" onclick="location.href='{{route('agent.colis.show',$client->id)}}'">
+                                                <h5 class="text-truncate font-size-14" style="font-weight:600;">
+                                                    @if($client->name == null)
+                                                        {{ $client->customer->name }}
+                                                    @else
+                                                        {{ $client->name }}
+                                                    @endif
+                                                </h5>
+                                                <p class="text-truncate mb-0"> <i class="fa fa-mobile font-size-10"></i>
+                                                    @if($client->name == null)
+                                                        {{ $client->customer->phone }}
+                                                    @else
+                                                        {{ $client->phone }}
+                                                    @endif
+                                                </p>
+                                            </div>
+                                            <div class="font-size-12 button-right-siege">
+                                                <span class="span-chat-siege span-chat1" onclick="onclick().event.preventDefault()">
+                                                    <span data-bs-toggle="modal" data-bs-target="#AddBagage-{{$client->id}}" class="text-success button-client-add"> <i class="fa fa-suitcase-rolling font-size-12"></i></span>
+                                                    <span data-bs-toggle="modal" data-bs-target="#EditClientColie-{{$client->id}}" class="text-primary"> <i class="fa fa-edit font-size-12"></i></span>
+                                                    
+                                                    <span class="span-chat-siege span-chat1 text-danger button-client-delete" data-bs-toggle="modal" data-bs-target="#subscribeModalclient-{{ $client->id }}">
+                                                        <i class="fa fa-trash font-size-12"> </i>
+                                                    </span>  
+                                                </span>
+                                            </div>
+                                        </div>
                                     </li>
                                 @endforeach
                             </ul>
@@ -419,7 +432,19 @@
                                                             </div>
                                                         </div>
                                                         <div class="mb-3">
-                                                            <label class="form-label">Prix</label>
+                                                            <label class="form-label">Quantite </label>
+                                                            <div>
+                                                                <input data-parsley-type="number" type="number" id="quantity" class="form-control @error('quantity') is-invalid @enderror" name="quantity" value="{{ old('quantity') }}" autocomplete="quantity"
+                                                                    required placeholder="" />
+                                                                    @error('quantity')
+                                                                        <span class="invalid-feedback" role="alert">
+                                                                            <strong>{{ $message }}</strong>
+                                                                        </span>
+                                                                    @enderror
+                                                            </div>
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Prix Unitaire</label>
                                                             <div>
                                                                 <input data-parsley-type="number" type="number" id="prix" class="form-control @error('prix') is-invalid @enderror" name="prix" value="{{ old('prix') }}" autocomplete="prix"
                                                                     required placeholder="" />

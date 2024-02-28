@@ -33,7 +33,7 @@
                                 <div class="col-lg-12">
                                     <div class="media">
                                         <div class="me-3">
-                                            <img src="{{(Storage::url(Auth::guard('agent')->user()->agence->logo))}}" alt="" class="avatar-md rounded-circle img-thumbnail">
+                                            <img src="@if(Auth::guard('agent')->user()->agence->logo == '') https://ui-avatars.com/api/?name={{Auth::guard('agent')->user()->agence->name}} @else {{(Storage::url(Auth::guard('agent')->user()->agence->logo))}} @endif" alt="" class="avatar-md rounded-circle img-thumbnail">
                                         </div>
                                         <div class="media-body align-self-center">
                                             <div class="text-muted">
@@ -57,7 +57,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title text-center"> La liste des clients du jour pour le bus {{$getBuse->matricule}} </h4>
+                            <h4 class="text-center btn btn-light" style="width:100%;"> La liste des clients du jour {{ carbon_today() }} pour le bus {{$getBuse->matricule}} </h4>
                             <p class="card-title-desc">
                                 <div class="button-items">
                                     <a target="_blank" href="{{ route('agent.client.pdf',$getBuse->id) }}" class="btn btn-success waves-effect btn-label waves-light"><i class="fa fa-file-pdf label-icon"></i> Télécharger le PDF <i class="mdi mdi-download font-size-16"></i></a>
@@ -84,13 +84,18 @@
                                     @foreach($clients as $client)
                                         <tr>
                                             <td>
-                                                @if($client->image != null)
-                                                    <img src="{{Storage::url($client->customer->image)}}" style="width: 40px;height:40px;" alt=""
-                                                        class="avatar-sm rounded-circle header-profile-user">
-                                                @else
-                                                    <img src="{{ asset('admin/assets/images/users/profil.jpg') }}" style="width: 40px;height:40px;" alt=""
-                                                        class="avatar-sm rounded-circle header-profile-user">
-                                                @endif
+                                                <img src="
+                                                    @if($client->image != null)
+                                                        {{Storage::url($client->customer->image)}}
+                                                    @else
+                                                        @if($client->name == null)
+                                                            https://ui-avatars.com/api/?name={{$client->customer->name}}
+                                                        @else
+                                                            https://ui-avatars.com/api/?name={{$client->name}}
+                                                        @endif
+                                                    @endif
+                                                " style="width: 40px;height:40px;" alt=""
+                                                    class="avatar-sm rounded-circle header-profile-user">
                                             </td>
                                             @if($client->name == null)
                                             <td>{{ $client->customer->name }}</td>
@@ -103,7 +108,7 @@
                                             {{ $client->ville->name }}
                                             </td>
                                             <td>
-                                                {{$client->registered_at}}
+                                                {{date('d/m/y',strtotime($client->registered_at))}}
                                             </td>
                                             <td>
                                                 <span class="badge badge-pill badge-soft-info font-size-12">{{ $client->ville->getAmount() }}</span>
@@ -191,54 +196,57 @@
                 <ul class="list-unstyled chat-list" data-simplebar style="max-height: 410px;">
                     <form action="" method="post">
                         @foreach($clients as $client)
-                            <li class="" >
-                                <a onclick="onclick().event.preventDefault()">
-                                    <div class="media">
-                                        <div class="form-check form-check-primary mb-3 client-list-mobile">
-                                            <input class="form-check-input" type="checkbox"
-                                                id="orderidcheck0-{{ $client->id }}" checked>
-                                        </div>
-                                        <div class="align-self-center me-3">
-                                            @if($client->image != Null)
-                                                <img src="{{Storage::url($client->image)}}" class="rounded-circle avatar-xs" alt="">
-                                            @else
-                                                <img src="{{asset('admin/assets/images/users/profil.jpg')}}" class="rounded-circle avatar-xs" alt="">
-                                            @endif
-                                        </div>
-                                        
-                                        <div class="media-body overflow-hidden">
-                                            <h5 class="text-truncate font-size-14 mb-1">
-                                                @if($client->name == null)
-                                                    {{ $client->customer->name }}
-                                                @else
-                                                    {{ $client->name }}
-                                                @endif
-                                            </h5>
-                                            <p class="text-truncate mb-0"> <i class="fa fa-mobile font-size-10"></i>
-                                                @if($client->name == null)
-                                                    {{ $client->customer->phone }}
-                                                @else
-                                                    {{ $client->phone }}
-                                                @endif
-                                            </p>
-                                        </div>
-                                        <div class="font-size-12 button-right-siege">
-                                        @if($client->amount == $client->ville->amount)
-                                            <span class="span-chat-siege span-chat1 badge bg-success">
-                                                {{ $client->amount }} f Payé
-                                            </span>
-                                        @else
-                                            <span class="span-chat-siege span-chat1 badge bg-warning">
-                                                {{ $client->amount }} f Non payé
-                                            </span>
-                                        @endif
-                                            
-                                            <span class="span-chat-siege badge bg-info" data-bs-toggle="modal" data-bs-target="#subscribeModalagenceDetails-{{$client->id}}">
-                                                <i class="fa fa-eye"></i> Voire
-                                            </span>
-                                        </div>
+                            <li class="mb-4" >
+                                <div class="media">
+                                    <div class="form-check form-check-primary mb-3 client-list-mobile">
+                                        <input class="form-check-input" type="checkbox"
+                                            id="orderidcheck0-{{ $client->id }}" checked>
                                     </div>
-                                </a>
+                                    <div class="align-self-center me-3">
+                                        <img src="
+                                            @if($client->image != null)
+                                                {{Storage::url($client->customer->image)}}
+                                            @else
+                                                @if($client->name == null)
+                                                    https://ui-avatars.com/api/?name={{$client->customer->name}}
+                                                @else
+                                                    https://ui-avatars.com/api/?name={{$client->name}}
+                                                @endif
+                                            @endif" class="rounded-circle avatar-xs" alt="">
+                                    </div>
+                                    
+                                    <div class="media-body overflow-hidden">
+                                        <h5 class="text-truncate font-size-14 mt-2" style="font-weight:600;">
+                                            @if($client->name == null)
+                                                {{ $client->customer->name }}
+                                            @else
+                                                {{ $client->name }}
+                                            @endif
+                                        </h5>
+                                        <p class="text-truncate mb-0"> <i class="fa fa-mobile font-size-10"></i>
+                                            @if($client->name == null)
+                                                {{ $client->customer->phone }}
+                                            @else
+                                                {{ $client->phone }}
+                                            @endif
+                                        </p>
+                                    </div>
+                                    <div class="font-size-12 button-right-siege">
+                                    @if($client->amount == $client->ville->amount)
+                                        <span class="span-chat-siege span-chat1 badge bg-success">
+                                            {{ $client->amount }} f Payé
+                                        </span>
+                                    @else
+                                        <span class="span-chat-siege span-chat1 badge bg-warning">
+                                            {{ $client->amount }} f Non payé
+                                        </span>
+                                    @endif
+                                        
+                                        <span class="span-chat-siege badge bg-info" data-bs-toggle="modal" data-bs-target="#subscribeModalagenceDetails-{{$client->id}}">
+                                            <i class="fa fa-eye"></i> Voire
+                                        </span>
+                                    </div>
+                                </div>
                             </li>
                         @endforeach
                         <a href="{{ route('agent.send_sms') }}" class="btn btn-primary text-white mt-5" style="width:100%;"> <i class="bx bxs-chat"> </i> Un message au absent du jour</a>

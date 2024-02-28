@@ -83,6 +83,10 @@ Route::prefix('/agence')->name('agence.')->group(function()
     Route::put('/agent/edite/{id}', [App\Http\Controllers\Agence\AgentController::class,'edite'])->name('agent.edite');
     // Route::get('/paiment/{id}/{token}', [App\Http\Controllers\Agence\ClientController::class, 'paiment']);
 
+    // Gestion des salaire des agents et de l'entreprise toucki
+    Route::get('/payment', [App\Http\Controllers\Agence\PaiementController::class, 'index'])->name('paiement.agent');
+    Route::get('/make', [App\Http\Controllers\Agence\PaiementController::class, 'initPayment'])->name('paiement.init');
+
     Route::get('/profil/show/{slug}', [App\Http\Controllers\Agence\ProfilController::class,'show'])->name('profil.show'); 
     Route::put('/profil/update/{slug}', [App\Http\Controllers\Agence\ProfilController::class,'update'])->name('profil.update');
     

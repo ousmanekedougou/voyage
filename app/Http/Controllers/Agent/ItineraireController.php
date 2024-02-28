@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Agent;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Itineraire;
 use App\Models\Admin\Jour;
-use App\Models\Admin\Ville;
 use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -26,9 +25,9 @@ class ItineraireController extends Controller
 
     public function index()
     {
-        $villes = Ville::all();
+        
         $itineraires = Itineraire::where('siege_id',Auth::guard('agent')->user()->siege_id)->orderBy('id','ASC')->paginate(5);
-        return view('agent.itineraire.index',compact('itineraires','villes'));
+        return view('agent.itineraire.index',compact('itineraires'));
     }
 
     /**

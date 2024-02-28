@@ -56,6 +56,7 @@ class AgentController extends Controller
             'phone' => 'required|string|max:255|unique:users',
             'siege' => 'required|numeric',
             'role' => 'required|numeric',
+            'montant' => 'required|numeric',
         ]);
         // dd($request->all());
         $add_agent = new Agent();
@@ -66,6 +67,7 @@ class AgentController extends Controller
         $add_agent->is_admin = 0;
         $add_agent->is_active = 0;
         $add_agent->role = $request->role;
+        $add_agent->montant_journaliere = $request->montant;
         $add_agent->confirmation_token = str_replace('/','',Hash::make(Str::random(40)));
         $add_agent->slug = str_replace('/','',Hash::make(Str::random(20).'agent'.$request->email));
         $add_agent->siege_id = $request->siege;
@@ -87,9 +89,9 @@ class AgentController extends Controller
      */
     public function show($id)
     {
-         $siege = Siege::where('id',$id)->where('agence_id',Auth::guard('agence')->user()->id)->first();
-         $sieges = Siege::where('agence_id',Auth::guard('agence')->user()->id)->get();;
-         $agents = Agent::where('siege_id',$id)->where('agence_id',Auth::guard('agence')->user()->id)->get();
+        $siege = Siege::where('id',$id)->where('agence_id',Auth::guard('agence')->user()->id)->first();
+        $sieges = Siege::where('agence_id',Auth::guard('agence')->user()->id)->get();;
+        $agents = Agent::where('siege_id',$id)->where('agence_id',Auth::guard('agence')->user()->id)->get();
         return view('agence.agent.index',compact('agents','siege','sieges'));
     }
 

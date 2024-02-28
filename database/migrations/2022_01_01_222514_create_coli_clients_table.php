@@ -20,6 +20,7 @@ class CreateColiClientsTable extends Migration
             $table->string('name_recept')->nullable();
             $table->integer('phone_recept')->nullable();
             $table->integer('prix');
+            $table->integer('prix_total');
             $table->text('detail');
             $table->integer('colie_id');
             $table->integer('siege_id');

@@ -8,6 +8,7 @@ use App\Models\Admin\Itineraire;
 use App\Models\Admin\Part;
 use App\Models\Admin\Siege;
 use App\Models\Admin\ColiClient;
+use App\Models\Admin\Bagage;
 use App\Models\User\Client;
 use App\Models\User\Region;
 use Carbon\Carbon;
@@ -85,7 +86,7 @@ if (!function_exists('buse_all')) {
 if (!function_exists('carbon_today')) {
     function carbon_today()
     {
-        $today = Carbon::today()->format('Y-m-d');
+        $today = Carbon::today()->format('d-m-Y');
         return $today;
     }
 }
@@ -93,7 +94,7 @@ if (!function_exists('carbon_today')) {
 if (!function_exists('carbon_tomorrow')) {
     function carbon_tomorrow()
     {
-        $tomorrow = Carbon::tomorrow()->format('Y-m-d');
+        $tomorrow = Carbon::tomorrow()->format('d-m-Y');
         return $tomorrow;
     }
 }
@@ -101,7 +102,7 @@ if (!function_exists('carbon_tomorrow')) {
 if (!function_exists('carbon_after_tomorrow')) {
     function carbon_after_tomorrow()
     {
-        $after_tomorrow = Carbon::tomorrow()->addDay(1)->format('Y-m-d');
+        $after_tomorrow = Carbon::tomorrow()->addDay(1)->format('d-m-Y');
         return $after_tomorrow;
     }
 }
@@ -110,7 +111,7 @@ if (!function_exists('carbon_after_tomorrow')) {
 if (!function_exists('carbon_yesterday')) {
     function carbon_yesterday()
     {
-        $yesterday = Carbon::yesterday()->format('Y-m-d');
+        $yesterday = Carbon::yesterday()->format('d-m-Y');
         return $yesterday;
     }
 }
@@ -142,7 +143,7 @@ if (!function_exists('historical_avant_hiere')) {
 
 // if (! function_exists('historical')) {
 //     function historical(){
-//         $historical = Historical::where('siege_id',Auth::user()->siege_id)->where('registered_at','<',Carbon::today()->format('Y-m-d'))->get();
+//         $historical = Historical::where('siege_id',Auth::user()->siege_id)->where('registered_at','<',Carbon::today()->format('d-m-Y'))->get();
 //         return $historical;
 //     }
 // }
@@ -177,6 +178,21 @@ if (!function_exists('coliClientRefe')) {
     }
 }
 
+if (!function_exists('bagageClientRefe')) {
+    function bagageClientRefe()
+    {
+        $codeValidationBagage = random_int(0000, 9999);
+        $receptCodeBagage = '';
+        $coli_client_ref = Bagage::where('reference', $codeValidationBagage)->first();
+        if ($coli_client_ref) {
+            $receptCodeBagage = random_int(0000, 9999);
+        } else {
+            $receptCodeBagage = $codeValidationBagage;
+        }
+        return $receptCodeBagage;
+    }
+}
+
 if (!function_exists('montant_today')) {
     function montant_today()
     {
@@ -199,6 +215,48 @@ if (!function_exists('region')) {
         $autre_regions = Region::where('name','!=',$get_user_geo->city)->orWhere('slug','!=',$get_user_geo->state_name)->get();
         return $autre_regions;
 
+    }
+}
+
+
+
+if (!function_exists('logoutUser')) {
+    function logoutUser()
+    {
+        $redirect = '';
+        if(Auth::guard('web')->user()){
+            $redirect = route('logout') ;
+        }
+        elseif(Auth::guard('agence')->user()){
+            $redirect = route('agence.agence.logout');
+        }
+        elseif(Auth::guard('agent')->user()){
+            $redirect = route('agent.agent.logout');
+        }
+        elseif(Auth::guard('client')->user()){
+            $redirect = route('customer.customer.logout');
+        }
+        return $redirect;
+    }
+}
+
+if (!function_exists('UserProfile')) {
+    function UserProfile()
+    {
+        $redirectUserProfile = '';
+        if(Auth::guard('web')->user()){
+            $redirectUserProfile = route('admin.profil.show',Auth::guard('web')->user()->slug) ;
+        }
+        elseif(Auth::guard('agence')->user()){
+            $redirectUserProfile = route('agence.profil.show',Auth::guard('agence')->user()->slug);
+        }
+        elseif(Auth::guard('agent')->user()){
+            $redirectUserProfile = route('agent.profil.show',Auth::guard('agent')->user()->slug);
+        }
+        elseif(Auth::guard('client')->user()){
+            $redirectUserProfile = route('customer.profil.show',Auth::guard('client')->user()->slug);
+        }
+        return $redirectUserProfile;
     }
 }
 

@@ -61,11 +61,14 @@
                                     <div class="media">
                                         <div class="avatar-md me-4">
                                             <span class="avatar-title rounded-circle bg-light text-danger font-size-16">
-                                                @if($agence->logo != Null)
-                                                    <img src="{{Storage::url($agence->logo)}}" alt="">
-                                                @else
-                                                    <img src="{{asset('admin/assets/images/bus_agence.jpg')}}" alt="">
-                                                @endif
+                                                    <img src="
+                                                        @if($agence->image != null)
+                                                            {{Storage::url($agence->logo)}}
+                                                        @else
+                                                                https://ui-avatars.com/api/?name={{$agence->name}}
+                                                        @endif
+                                                    " alt="">
+                                                
                                             </span>
                                         </div>
 
@@ -158,9 +161,9 @@
         </div>
         <!-- container-fluid -->
 
-        <div class="tab-pane show active sectionCompteMobile mb-4" id="chat">
+        <div class="tab-pane show active sectionCompteMobile mb-4" id="chat" style="margin-top:-2rem;">
             <div>
-                <ul class="list-unstyled chat-list ">
+                <ul class="list-unstyled chat-list mb-4">
                     <li class="active">
                         <a href="#">
                             <div class="media">
@@ -181,29 +184,33 @@
                 <ul class="list-unstyled chat-list">
                     {{-- data-simplebar style="max-height: 410px;" --}}
                 @foreach($agences as $agence)
-                    <li class="">
-                        <a href="{{ route('customer.agence.show',$agence->slug) }}">
-                            <div class="media">
-                                <div class="align-self-center me-3">
-                                    <i class="mdi mdi-arrow-right font-size-10"></i>
-                                </div>
-                                <div class="align-self-center me-3">
-                                    @if($agence->logo != Null)
-                                        <img src="{{Storage::url($agence->logo)}}" class="rounded-circle avatar-xs" alt="">
+                    <li class="mb-2">
+                        <div class="media" onclick="location.href='{{route('customer.agence.show',$agence->slug)}}'">
+                            <div class="align-self-center me-3">
+                                    <img src="
+
+                                    @if($agence->image != null)
+                                        {{Storage::url($agence->logo)}}
                                     @else
-                                        <img src="{{asset('admin/assets/images/bus_agence.jpg')}}" class="rounded-circle avatar-xs" alt="">
+                                            https://ui-avatars.com/api/?name={{$agence->name}}
                                     @endif
-                                </div>
-                                
-                                <div class="media-body overflow-hidden">
-                                    <h5 class="text-truncate font-size-14 mb-1">{{ $agence->name }}</h5>
-                                    <p class="text-truncate mb-0"> <i class="fa fa-mobile"></i> {{ $agence->phone }}</p>
-                                </div>
-                                <div class="font-size-11">
-                                    {{ $agence->sieges->count() }} Siege(s)
-                                </div>
+                                    
+                                    " class="rounded-circle avatar-sm" alt="">
                             </div>
-                        </a>
+                            
+                            <div class="media-body overflow-hidden">
+                                <h5 class="text-truncate font-size-14 mb-1" style="font-weight:600;">{{ $agence->name }}</h5>
+                                <p class="text-truncate mb-0"> <i class="fa fa-mobile"></i> {{ $agence->phone }}</p>
+                            </div>
+                            <div class="font-size-11 button-right-siege">
+                                <span class="span-chat-siege span-chat1 rounded-circle">
+                                    {{ $agence->sieges->count() }} Siege(s)
+                                </span>
+                                <span class="span-chat-siege span-chat1 font-size-11 badge badge-soft-primary" onclick="location.href='{{route('customer.agence.about',$agence->slug)}}'">
+                                    <i class="bx bx-file"></i>A Propos
+                                </span>
+                            </div>
+                        </div>
                     </li>
                     <br>
                 @endforeach
