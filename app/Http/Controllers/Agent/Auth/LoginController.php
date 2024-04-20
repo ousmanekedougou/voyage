@@ -69,14 +69,18 @@ class LoginController extends Controller
          $admin = Agent::where('email',$request->email)->first(); 
          if($admin)
          {
-             if($admin->is_active == 0 || $admin->confirmation_token != null)
-             {
-                 return ['email' => 'inactive','password' => 'Votre Compte n\'est pas actif veillez confirmer votre inscription via le message email que vous avez reçue de TouCki'];
-             }
-             else
+            if ($admin->agence->is_active == 0 || $admin->agence->confirmation_token != null) {
+                return ['email' => 'inactive','password' => 'Votre agence n\'est pas actif'];
+            }else{
+                if($admin->is_active == 0 || $admin->confirmation_token != null)
+                {
+                    return ['email' => 'inactive','password' => 'Votre Compte n\'est pas actif veillez confirmer votre inscription via le message email que vous avez reçue de TouCki'];
+                }
+                else
                 {
                     return ['email' => $request->email,'password' => $request->password,'is_active' => 1,'confirmation_token' => null];
                 }
+            }
         }
         return $request->only($this->username(), 'password');
      }

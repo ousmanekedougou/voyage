@@ -16,7 +16,7 @@
                                     <div class="text-sm-end">
                                                 <button type="button" data-bs-toggle="modal" data-bs-target="#staticBackdropAjouteVille" class="btn btn-primary text-white button_ajout_client"
                                                     class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2 "><i
-                                                        class="mdi mdi-plus me-1"></i>Ajouter un itineraire</button>
+                                                        class="mdi mdi-plus me-1"></i>Ajouter une ville</button>
                                             </div> 
                             </div>
                         </div>

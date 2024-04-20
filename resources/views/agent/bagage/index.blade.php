@@ -117,7 +117,9 @@
                                 </div>
                             </li>
                         </ul>
-                        <hr>
+                        <span class="mb-3 font-size-14 badge badge-soft-info p-2 " style="width:100%;">
+                            Clients pour les bagages
+                        </span>
                         <ul class="list-unstyled chat-list">
                             @foreach($clients as $client)
                                 <li class="mb-4">

@@ -61,7 +61,9 @@
                             <p class="card-title-desc">
                                 <div class="button-items">
                                     <a target="_blank" href="{{ route('agent.client.pdf',$getBuse->id) }}" class="btn btn-success waves-effect btn-label waves-light"><i class="fa fa-file-pdf label-icon"></i> Télécharger le PDF <i class="mdi mdi-download font-size-16"></i></a>
+                                    <a target="_blank" style="float:right" href="#" class="btn btn-primary waves-effect btn-label waves-light"><i class="mdi mdi-barcode-scan label-icon"></i> Presence Scanner</a>
                                 </div>
+                                
                             </p>
                             <table id="datatable"
                                 class="table table-bordered dt-responsive nowrap w-100">
@@ -182,16 +184,20 @@
                                 <h5 class="text-truncate font-size-14 mb-1">{{$getBuse->itineraire->name}}</h5>
                                 <p class="text-truncate mb-0">{{ $getBuse->number }} {{ $getBuse->number == 1 ? 'er' : 'em' }} Buse | Matricule: {{ $getBuse->matricule }}</p>
                             </div>
-                            <div class="font-size-11">
-                                <span>{{ $clients->count() }} Client(s)</span>
+                            <div class="font-size-11 button-right-siege">
+                                <span  class="noti-icon waves-effect text-center">
+                                    <i class="mdi mdi-barcode-scan" style="font-size: 30px;"></i>
+                                </span>
                             </div>
                         </div>
                     </li>
                 </ul>
+                <span class="mb-3 font-size-14 badge badge-soft-info p-2 " style="width:100%;">
+                    {{ $clients->count() }} Client(s) pour d'aujourdhui
+                </span>
                 <div class="form-check font-size-16">
                     <input class="form-check-input" type="checkbox" id="checkAll">
                     <label class="form-check-label" for="checkAll">Tous</label>
-                    <span style="float:right;" class="font-size-14"> Client(s) d'aujourdhui</span>
                 </div>
                 <ul class="list-unstyled chat-list" data-simplebar style="max-height: 410px;">
                     <form action="" method="post">

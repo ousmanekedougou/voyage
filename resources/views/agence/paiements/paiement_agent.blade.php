@@ -65,6 +65,7 @@
 
             <div class="row">
                 <div class="col-12">
+                    <h1 class="btn btn-primary btn-xs" style="width:100%;">Liste des paiemnets effectuer pour ce mois</h1>
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive">
@@ -77,6 +78,7 @@
                                                     <label class="form-check-label" for="checkAll"></label>
                                                 </div>
                                             </th>
+                                            <th>Images</th>
                                             <th class="align-middle">References</th>
                                             <th class="align-middle">Agents</th>
                                             <th class="align-middle">Montant Paye</th>
@@ -96,6 +98,15 @@
                                                             <input class="form-check-input" type="checkbox" id="orderidcheck01">
                                                             <label class="form-check-label" for="orderidcheck01"></label>
                                                         </div>
+                                                    </td>
+                                                    <td>
+                                                    <img src="
+                                                        @if($payment->agent->image != Null)
+                                                            {{Storage::url($payment->image)}}
+                                                        @else
+                                                            https://ui-avatars.com/api/?name={{$payment->agent->name}}
+                                                        @endif
+                                                        " class="rounded-circle avatar-xs" alt="">
                                                     </td>
                                                     <td><a href="javascript: void(0);" class="text-body fw-bold">#{{$payment->reference}}</a> </td>
                                                     <td>{{$payment->agent->name}}</td>

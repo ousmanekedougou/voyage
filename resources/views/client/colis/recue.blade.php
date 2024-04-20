@@ -67,12 +67,12 @@
                                                             <p class="mb-0">{{$coliClient->detail}} </span></p>
                                                         </td>
                                                         <td>
-                                                            @if($coliClient->customer_id != null)
-                                                                <h5 class="font-size-14 text-truncate"><a href="ecommerce-product-detail.html" class="text-dark">{{$coliClient->name_recept}}</a></h5>
-                                                                <p class="mb-0"> {{$coliClient->phone_recept}}</span></p>
+                                                            @if($coliClient->colie->customer_id != null)
+                                                                <h5 class="font-size-14 text-truncate"><a href="ecommerce-product-detail.html" class="text-dark">{{$coliClient->colie->customer->name}}</a></h5>
+                                                                <p class="mb-0"> {{$coliClient->colie->customer->phone}}</span></p>
                                                             @else
-                                                                <h5 class="font-size-14 text-truncate"><a href="ecommerce-product-detail.html" class="text-dark">{{$coliClient->customer->name}}</a></h5>
-                                                                <p class="mb-0"> {{$coliClient->customer->phone}}</span></p>
+                                                                <h5 class="font-size-14 text-truncate"><a href="ecommerce-product-detail.html" class="text-dark">{{$coliClient->colie->name}}</a></h5>
+                                                                <p class="mb-0"> {{$coliClient->colie->phone}}</span></p>
                                                             @endif
                                                         </td>
                                                         <td class="text-center">
@@ -213,10 +213,10 @@
                                 <tr>
                                     <td class="td-mobile">Envoyer par :</td>
                                     <td class="td-mobile">
-                                        @if($coliClient->customer_id != null)
-                                            {{ $coliClient->customer->name }} | {{ $coliClient->customer->phone  }}
+                                        @if($coliClient->colie->customer_id != null)
+                                            {{ $coliClient->colie->customer->name }} | {{ $coliClient->colie->customer->phone  }}
                                         @else
-                                            {{ $coliClient->name_recept }} | {{ $coliClient->phone_recept }}
+                                            {{ $coliClient->colie->name }} | {{ $coliClient->colie->phone }}
                                         @endif
                                     </td>
                                 </tr>

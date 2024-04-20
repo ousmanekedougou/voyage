@@ -60,7 +60,32 @@ class HomeController extends Controller
         $newsletters = Notify::all();
 
         $siege_all = Siege::all();
-        return view('client.index',compact('agences','agenceCount','autre_regions','newsletters','siege_all'));
+
+        $NotificationTravelDay = null;
+
+        $getClientDate = Client::where('customer_id',Auth::guard('client')->user()->id)
+            // ->where('amount','!=',null)
+            // ->where('status',0)
+            ->first();
+        if (!$getClientDate) {
+            $NotificationTravelDay = null;
+        }else {
+            $getClientregistered_at =  date( 'd-m-Y', strtotime( $getClientDate->registered_at ) );
+
+            if (date( 'd-m-Y', strtotime( 'today' ) ) == $getClientregistered_at) {
+                $NotificationTravelDay = "aujourdhui";
+            }elseif (date( 'd-m-Y', strtotime( '+1 day')) == $getClientregistered_at ) {
+                $NotificationTravelDay = "demain";
+            }elseif (date( 'd-m-Y', strtotime( '+3 day')) == $getClientregistered_at) {
+                $NotificationTravelDay = "dans 3 jours";
+            }elseif (date( 'd-m-Y', strtotime('+7 day')) == $getClientregistered_at) {
+                $NotificationTravelDay = "dans une semaine";
+            }else{
+                $NotificationTravelDay = null;
+            }
+            
+        }
+        return view('client.index',compact('agences','agenceCount','autre_regions','newsletters','siege_all','getClientDate','NotificationTravelDay'));
     }
     
 

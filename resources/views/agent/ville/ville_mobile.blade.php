@@ -21,7 +21,7 @@
                             </div>
                             <div class="font-size-11 button-right-siege">
                                 <span> {{$villes->count()}} Ville(s)</span>
-                                <span data-bs-toggle="modal" data-bs-target="#staticBackdropAjouteVille"class="mt-3 badge bg-primary font-size-11"><i class="mdi mdi-plus me-1"></i>Ville</span>
+                                <span data-bs-toggle="modal" data-bs-target="#staticBackdropAjouteVille"class="mt-3 badge bg-primary font-size-11"><i class="mdi mdi-plus me-1"></i>Ajouter</span>
                             </div>
                         </div>
                     </li>

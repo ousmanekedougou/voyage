@@ -27,26 +27,33 @@ class ColiController extends Controller
     public function index()
     {
         $getColi = Colie::where('phone',Auth::guard('client')->user()->phone)->OrWhere('customer_id',Auth::guard('client')->user()->id)->first();
-        $colis = ColiClient::where('colie_id',$getColi->id)
-        ->where('siege_id',$getColi->siege_id)
-        ->where('status',0)
-        ->get();
-
-        // dd($getColi);
-
-        $amountTotalColi = ColiClient::where('colie_id',$getColi->id)
-            ->where('siege_id',$getColi->siege_id)
-            ->where('status',0)->sum('prix_total');
-
-        $quantiteTotalColi = ColiClient::where('colie_id',$getColi->id)
-            ->where('siege_id',$getColi->siege_id)
-            ->where('status',0)->sum('quantity');
-
-        if ($colis->count() > 0) {
-            return view('client.colis.index',compact('colis','getColi','amountTotalColi','quantiteTotalColi'));
-        }else {
-            Toastr::warning('Vous n\'aviez pas de colis enregistre', 'Error Colis', ["positionClass" => "toast-top-right"]);
+        
+        if(!$getColi){
+            Toastr::warning('Vous n\'etes pas iscrit pour ce service ', 'Error Colis', ["positionClass" => "toast-top-right"]);
             return back();
+        }else{
+
+            $colis = ColiClient::where('colie_id',$getColi->id)
+            ->where('siege_id',$getColi->siege_id)
+            ->where('status',0)
+            ->get();
+
+            // dd($getColi);
+
+            $amountTotalColi = ColiClient::where('colie_id',$getColi->id)
+                ->where('siege_id',$getColi->siege_id)
+                ->where('status',0)->sum('prix_total');
+
+            $quantiteTotalColi = ColiClient::where('colie_id',$getColi->id)
+                ->where('siege_id',$getColi->siege_id)
+                ->where('status',0)->sum('quantity');
+
+            if ($colis->count() > 0) {
+                return view('client.colis.index',compact('colis','getColi','amountTotalColi','quantiteTotalColi'));
+            }else {
+                Toastr::warning('Vous n\'aviez pas reçu  colis', 'Error Colis', ["positionClass" => "toast-top-right"]);
+                return back();
+            }
         }
     }
 
@@ -71,24 +78,29 @@ class ColiController extends Controller
     public function show($id)
     {
         $getColi = Colie::where('id',$id)->where('customer_id',Auth::guard('client')->user()->id)->first();
-        $colis = ColiClient::where('colie_id',$getColi->id)
-        ->where('siege_id',$getColi->siege_id)
-        ->where('status',0)
-        ->get();
-
-        $amountTotalColi = ColiClient::where('colie_id',$getColi->id)
-            ->where('siege_id',$getColi->siege_id)
-            ->where('status',0)->sum('prix_total');
-
-        $quantiteTotalColi = ColiClient::where('colie_id',$getColi->id)
-            ->where('siege_id',$getColi->siege_id)
-            ->where('status',0)->sum('quantity');
-
-        if ($colis->count() > 0) {
-            return view('client.colis.show',compact('colis','getColi','amountTotalColi','quantiteTotalColi'));
-        }else {
-            Toastr::warning('Vous n\'aviez pas de colis enregistre', 'Error Colis', ["positionClass" => "toast-top-right"]);
+        if(!$getColi){
+            Toastr::warning('Vous n\'etes pas iscrit pour ce service ', 'Error Colis', ["positionClass" => "toast-top-right"]);
             return back();
+        }else{
+            $colis = ColiClient::where('colie_id',$getColi->id)
+            ->where('siege_id',$getColi->siege_id)
+            ->where('status',0)
+            ->get();
+
+            $amountTotalColi = ColiClient::where('colie_id',$getColi->id)
+                ->where('siege_id',$getColi->siege_id)
+                ->where('status',0)->sum('prix_total');
+
+            $quantiteTotalColi = ColiClient::where('colie_id',$getColi->id)
+                ->where('siege_id',$getColi->siege_id)
+                ->where('status',0)->sum('quantity');
+
+            if ($colis->count() > 0) {
+                return view('client.colis.show',compact('colis','getColi','amountTotalColi','quantiteTotalColi'));
+            }else {
+                Toastr::warning('Vous n\'aviez pas envoyer de colis', 'Error Colis', ["positionClass" => "toast-top-right"]);
+                return back();
+            }
         }
     }
 
@@ -108,6 +120,7 @@ class ColiController extends Controller
         ->where('phone_recept',Auth::guard('client')->user()->phone)
         ->where('status',0)
         ->get();
+        
         $Onpayer = ColiClient::where('siege_id',$id)
         ->where('customer_id',Auth::guard('client')->user()->id)
         ->where('phone_recept',Auth::guard('client')->user()->phone)

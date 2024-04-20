@@ -16,7 +16,7 @@ class Bus extends Model
     use HasFactory;
     
     protected $fillable = [
-        'inscrit',
+        'inscrit','heure_depart',
     ];
 
     public function getAmount(){

@@ -48,6 +48,15 @@
                             <!-- end row -->
                         </div>
                     </div>
+                    @if($NotificationTravelDay)
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="mdi mdi-check-all me-2"></i>
+                                Salut <b>{{Auth::guard('client')->user()->name}}</b> vous devez effectuer un voyage <b>{{ $NotificationTravelDay }}</b> pour <b>{{ $getClientDate->ville->name }}</b> a {{ $getClientDate->bus->heure_depart }}
+                                <br>
+                                <b>Agence : {{$getClientDate->siege->agence->name}}</b> , <b>Siege de : {{$getClientDate->siege->name}}</b>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                 </div>
             </div>
             <!-- end row -->
@@ -180,6 +189,16 @@
                         </a>
                     </li>
                 </ul>
+
+                @if($NotificationTravelDay)
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <i class="mdi mdi-check-all me-2"></i>
+                        Salut <b>{{Auth::guard('client')->user()->name}}</b> vous devez effectuer un voyage <b>{{ $NotificationTravelDay }}</b> pour <b>{{ $getClientDate->ville->name }}</b> a {{ $getClientDate->bus->heure_depart }}
+                        <br>
+                        <b>Agence : {{$getClientDate->siege->agence->name}}</b> <br> <b>Siege de : {{$getClientDate->siege->name}}</b>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
             
                 <ul class="list-unstyled chat-list">
                     {{-- data-simplebar style="max-height: 410px;" --}}

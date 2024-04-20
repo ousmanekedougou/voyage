@@ -25,6 +25,7 @@ class CreateColiClientsTable extends Migration
             $table->integer('colie_id');
             $table->integer('siege_id');
             $table->integer('ville_id');
+            $table->integer('quantity')->nullable();
             $table->integer('customer_id')->nullable();
             $table->boolean('status')->default(false)->nullable();
             $table->integer('recepteurPay')->default(0);
