@@ -81,11 +81,9 @@ class HomeController extends Controller
             //     Historical::where('registered_at', '<', Carbon::today()->format('Y-m-d'))->where('siege_id', Auth::guard('agent')->user()->siege_id)->delete();
             // }
             
-            // La listes des clients qui on ratere le bus
+            // La listes des clients recents
             $clients =  Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
-                ->where('status','>',0)
-                ->where('voyage_status',0)
-                ->where('amount','!=',null)
+                ->where('registered_at','>', Carbon::today()->format('Y-m-d'))
                 ->orderBy('id','ASC')
             ->paginate(10);
 

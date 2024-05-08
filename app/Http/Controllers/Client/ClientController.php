@@ -93,7 +93,7 @@ class ClientController extends Controller
                         $add_client->siege_id = $buse->siege->id;
                         $add_client->customer_id = Auth::guard('client')->user()->id;
                         $add_client->position = $buse->inscrit;
-                        $add_client->registered_at = date('d-m-Y',strtotime($request->date));
+                        $add_client->registered_at = date('Y-m-d',strtotime($request->date));
                         $add_client->voyage_status = 0;
                         $add_client->save();
 
@@ -186,7 +186,7 @@ class ClientController extends Controller
 
                         Client::where('id',$id)->update([
                             'ville_id' => $request->ville,
-                            'registered_at' => date('d-m-Y',strtotime($request->date)),
+                            'registered_at' => date('Y-m-d',strtotime($request->date)),
                             // 'heure' => $buse->date_depart->rendez_vous
                         ]);
                         Toastr::success('Votre ticket a bien ete modifier', 'Modification Ticket', ["positionClass" => "toast-top-right"]);

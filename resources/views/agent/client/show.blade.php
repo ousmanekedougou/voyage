@@ -116,7 +116,7 @@
                                             {{ $client->ville->name }}
                                             </td>
                                             <td>
-                                                {{date('d/m/y',strtotime($client->registered_at))}}
+                                                {{date('d-m-Y',strtotime($client->registered_at))}}
                                             </td>
                                             <td>
                                                 @if($client->amount == $client->ville->amount)

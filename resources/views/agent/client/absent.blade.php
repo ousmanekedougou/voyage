@@ -35,7 +35,7 @@
                                                 <h5 class="mb-1">Agence {{Auth::guard('agent')->user()->agence->name}}</h5>
                                                 <p class="mb-2">Itineraire de </p>
                                                 <p class="mb-0">
-                                                    La liste des clients qui ont annuler leurs tickets
+                                                    La liste des clients qui ont rates le bus
                                                 </p>
                                             </div>
                                         </div>
@@ -49,66 +49,84 @@
             </div>
             <!-- end row -->
             
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title text-center mb-2"> La liste des clients qui ont rates le bus</h4>
+                            <table id="datatable"
+                                class="table table-bordered dt-responsive nowrap w-100">
+                                <thead>
+                                    <tr>
+                                        <th>Image</th>
+                                        <th>Prenom & nom</th>
+                                        <th>Telephone</th>
+                                        <th>Prix</th>
+                                        <th>Methode</th>
+                                        <th>Date</th>
+                                        <th>Detail</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
 
 
-
-            <div class="row" id="member_row">
-                @foreach($clients as $client)
-                    <div class="col-xl-4 col-sm-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="media">
-                                    @if($client->image == null)
-                                        <div class="avatar-md me-4">
-                                            <span class="avatar-title rounded-circle bg-light text-danger">
-                                                <img src="{{Storage::url($client->customer->image)}}" alt="">
-                                            </span>
-                                        </div>
-                                    @else
-                                        <div class="avatar-md me-4">
-                                            <span class="avatar-title rounded-circle bg-light text-danger font-size-16">
-                                                <img src="{{Storage::url($client->image)}}" alt="" height="30">
-                                            </span>
-                                        </div>
-                                    @endif
-
-                                    <div class="media-body overflow-hidden">
-                                        @if($client->name == null)
-                                            <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">{{ $client->customer->name }}</a></h5>
-                                            <p class="text-muted mb-1"> <i class="fa fa-mobile"></i> {{ $client->customer->phone }}</p>
-                                        @else
-                                            <h5 class="text-truncate font-size-15"><a href="#" class="text-dark">{{ $client->name }}</a></h5>
-                                            <p class="text-muted mb-1"> <i class="fa fa-mobile"></i> {{ $client->phone }}</p>
-                                            <p class="text-muted mb-1"> <i class="fa fa-mobile"></i> {{ $client->cni }}</p>
-                                        @endif
-                                        <p class="text-muted mb-1 font-size-12"><i class="bx bxs-map"></i> Destination : {{ $client->ville->name }} </p> 
-                                        <p class="text-muted mb-1 font-size-12"><i class="fa fa-clock"></i> Date : {{ $client->registered_at }} </p> 
-                                        <p class="text-muted mb-1 font-size-12"><i class="fas fa-money-bill "></i> Prix : {{$client->ville->amount}} f </p> 
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="px-4 py-3 border-top">
-                                <ul class="list-inline mb-0 text-center">
-
-                                    <li class="list-inline-item">
-                                        <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdropPayer-{{$client->id}}" class="text-muted"><span class="badge bg-success"><i class="fas fa-money-bill me-1"></i>
-                                                Rembourser le ticket
-                                            </span></a>
-                                    </li>
-
-                                    @error('presence')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </ul>
-                            </div>
+                                <tbody>
+                                    @foreach($clients as $client)
+                                        <tr>
+                                            <td>
+                                                <img src="@if($client->image == '') https://ui-avatars.com/api/?name={{$client->name}} @else {{Storage::url($client->customer->image)}} @endif" class="rounded-circle avatar-sm header-profile-use" alt="">
+                                            </td>
+                                            @if($client->name == null)
+                                                <td>{{ $client->customer->name }}</td>
+                                                <td>{{ $client->customer->phone }}</td>
+                                            @else
+                                                <td>{{ $client->name }}</td>
+                                                <td>{{ $client->phone }}</td>
+                                            @endif
+                                            <td>
+                                                <span class="badge badge-pill badge-soft-info font-size-12">{{ $client->getAmount() }}</span>
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-pill badge-soft-primary font-size-12">
+                                                    @if($client->payment_methode == 1)
+                                                        <img src="{{asset('user/assets/images/wave.png')}}" alt="" class="image-methode-payment align-middle me-2"> Wave
+                                                    @elseif($client->payment_methode == 2)
+                                                        <img src="{{asset('user/assets/images/orange-money.png')}}" alt="" class="image-methode-payment align-middle me-2"> OM
+                                                    @else
+                                                        Non payer
+                                                    @endif
+                                                </span>
+                                            </td>
+                                            <td>{{ $client->registered_at }}</td>
+                                            <td>
+                                                <!-- Button trigger modal -->
+                                                <button type="button" class="btn btn-primary btn-sm btn-rounded" data-bs-toggle="modal" data-bs-target="#subscribeModalagenceDetails-{{$client->id}}">
+                                                    Details
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex gap-3 text-center">
+                                                    @if(Auth::guard('agent')->user()->agence->mathod_tiket == 0)
+                                                        @if($client->status == 1)
+                                                            <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdropPayer-{{$client->id}}" class="btn btn-success btn-sm btn-block"><i class="fas fa-money-bill me-1"></i> Rembourser le ticket de {{$client->ville->amount}} f </a>
+                                                        @elseif($client->status == 2)
+                                                            <p class="text-primary mb-1 font-size-15">Le ticket n'est plus remboursable</p> 
+                                                        @else
+                                                            <p class="text-warning mb-1 font-size-15">En cours</p> 
+                                                        @endif
+                                                    @else
+                                                            <p class="text-primary mb-1 font-size-15">Le ticket n'est plus remboursable</p> 
+                                                    @endif
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                @endforeach
-            </div>
-            <!-- end row -->
+                </div> <!-- end col -->
+            </div> <!-- end row -->
 
             <div class="row">
                 <div class="col-lg-12">
@@ -414,6 +432,7 @@
 
 @section('footersection')
 <!-- Responsive Table js -->
+
     <script src="{{asset('admin/assets/libs/admin-resources/rwd-table/rwd-table.min.js')}}"></script>
     <script src="{{asset('admin/assets/libs/select2/js/select2.min.js')}}"></script>
     <!-- Init js -->

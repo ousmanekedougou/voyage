@@ -116,7 +116,7 @@ Route::prefix('/agent')->name('agent.')->group(function()
     Route::put('/presence', [App\Http\Controllers\Agent\ClientController::class,'presence'])->name('client.presence'); 
     Route::get('/annuler', [App\Http\Controllers\Agent\ClientController::class, 'annuler'])->name('client.renoncer');
     Route::post('/remboursement', [App\Http\Controllers\Agent\ClientController::class, 'rembourser'])->name('rembourser');
-    // Route::get('/absent', [App\Http\Controllers\Agent\ClientController::class, 'absent'])->name('absent');
+    Route::get('/absent', [App\Http\Controllers\Agent\ClientController::class, 'absent'])->name('absent');
     Route::get('/send-message', [App\Http\Controllers\Agent\ClientController::class, 'send_sms'])->name('send_sms');
     
 

@@ -274,7 +274,7 @@
                                         </div>
                                         <div class="screen-bus__seat-wrap">
                                             <div>
-                                                {{ $ticket->registered_at }}
+                                            {{date('d-m-Y',strtotime($ticket->registered_at))}}
                                             </div>
                                             <div class="screen-bus__payment">
                                                 <span class="@if($ticket->voyage_status == 1) bg-success text-white @endif">

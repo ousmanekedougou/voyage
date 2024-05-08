@@ -160,89 +160,92 @@
             
             <div class="row">
                 <div class="col-12">
-                    <h5 class="btn btn-soft text-white bg-primary" style="width: 100%;font-weight:bold;"> <i class="fa fa-users"></i> La liste des clients qui ont rates leurs bus</h5>
                     
                     <div class="card">
                         <div class="card-body">
-                            <table id=""
-                                class="table table-bordered dt-responsive nowrap w-100">
-                                <thead>
-                                    <tr>
-                                        <th>Image</th>
-                                        <th>Prenom & nom</th>
-                                        <th>Telephone</th>
-                                        <th>Prix</th>
-                                        <th>Methode</th>
-                                        <th>Date</th>
-                                        <th>Detail</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-
-
-                                <tbody>
-                                    @foreach($clients as $client)
+                            <h4 class="card-title mb-4">Inscription recentes</h4>
+                            <div class="table-responsive">
+                                <table id="datatable"
+                                    class="table align-middle table-nowrap table-bordered dt-responsive nowrap w-100">
+                                    <thead class="table-light">
                                         <tr>
-                                            <td>
-                                                @if($client->image != null)
-                                                    <img src="{{Storage::url($client->customer->image)}}" style="width: 40px;height:40px;" alt=""
-                                                        class="avatar-sm rounded-circle header-profile-user">
-                                                @else
-                                                    <img src="{{ asset('admin/assets/images/users/profil.jpg') }}" style="width: 40px;height:40px;" alt=""
-                                                        class="avatar-sm rounded-circle header-profile-user">
-                                                @endif
-                                            </td>
-                                            @if($client->name == null)
-                                            <td>{{ $client->customer->name }}</td>
-                                            <td>{{ $client->customer->phone }}</td>
-                                            @else
-                                            <td>{{ $client->name }}</td>
-                                            <td>{{ $client->phone }}</td>
-                                            @endif
-                                            <td>
-                                                <span class="badge badge-pill badge-soft-info font-size-12">{{ $client->getAmount() }}</span>
-                                            </td>
-                                            <td>
-                                                <span class="badge badge-pill badge-soft-primary font-size-12">
-                                                    @if($client->payment_methode == 1)
-                                                        <img src="{{asset('user/assets/images/wave.png')}}" alt="" class="image-methode-payment align-middle me-2"> Wave
-                                                    @elseif($client->payment_methode == 2)
-                                                        <img src="{{asset('user/assets/images/orange-money.png')}}" alt="" class="image-methode-payment align-middle me-2"> OM
-                                                    @else
-                                                        Non payer
-                                                    @endif
-                                                </span>
-                                            </td>
-                                            <td>{{ $client->registered_at }}</td>
-                                            <td>
-                                                <!-- Button trigger modal -->
-                                                <button type="button" class="btn btn-primary btn-sm btn-rounded" data-bs-toggle="modal" data-bs-target="#subscribeModalagenceDetails-{{$client->id}}">
-                                                    Details
-                                                </button>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex gap-3 text-center">
-                                                    @if(Auth::guard('agent')->user()->agence->mathod_tiket == 0)
-                                                        @if($client->status == 1)
-                                                            <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdropPayer-{{$client->id}}" class="btn btn-success btn-sm btn-block"><i class="fas fa-money-bill me-1"></i> Rembourser le ticket de {{$client->ville->amount}} f </a>
-                                                        @elseif($client->status == 2)
-                                                            <p class="text-primary mb-1 font-size-15">Le ticket n'est plus remboursable</p> 
-                                                        @else
-                                                            <p class="text-warning mb-1 font-size-15">En cours</p> 
-                                                        @endif
-                                                    @else
-                                                            <p class="text-primary mb-1 font-size-15">Le ticket n'est plus remboursable</p> 
-                                                    @endif
-                                                </div>
-                                            </td>
+                                            <th class="align-middle">Image</th>
+                                            <th class="align-middle">Prenom & nom</th>
+                                            <th class="align-middle">Telephone</th>
+                                            <th class="align-middle">Prix</th>
+                                            <th class="align-middle">Methode</th>
+                                            <th class="align-middle">Date</th>
+                                            <th class="align-middle">Detail</th>
+                                            <th class="align-middle">Actions</th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                    </thead>
+
+
+                                    <tbody>
+                                        @foreach($clients as $client)
+                                            <tr>
+                                                <td>
+                                                    @if($client->image != null)
+                                                        <img src="{{Storage::url($client->customer->image)}}" style="width: 40px;height:40px;" alt=""
+                                                            class="avatar-sm rounded-circle header-profile-user">
+                                                    @else
+                                                        <img src="{{ asset('admin/assets/images/users/profil.jpg') }}" style="width: 40px;height:40px;" alt=""
+                                                            class="avatar-sm rounded-circle header-profile-user">
+                                                    @endif
+                                                </td>
+                                                @if($client->name == null)
+                                                <td>{{ $client->customer->name }}</td>
+                                                <td>{{ $client->customer->phone }}</td>
+                                                @else
+                                                <td>{{ $client->name }}</td>
+                                                <td>{{ $client->phone }}</td>
+                                                @endif
+                                                <td>
+                                                    <span class="badge badge-pill badge-soft-info font-size-12">{{ $client->getAmount() }}</span>
+                                                </td>
+                                                <td>
+                                                    <span class="badge badge-pill badge-soft-primary font-size-12">
+                                                        @if($client->payment_methode == 1)
+                                                            <img src="{{asset('user/assets/images/wave.png')}}" alt="" class="image-methode-payment align-middle me-2"> Wave
+                                                        @elseif($client->payment_methode == 2)
+                                                            <img src="{{asset('user/assets/images/orange-money.png')}}" alt="" class="image-methode-payment align-middle me-2"> OM
+                                                        @else
+                                                            Non payer
+                                                        @endif
+                                                    </span>
+                                                </td>
+                                                <td>{{date('d-m-Y',strtotime($client->registered_at))}}</td>
+                                                <td>
+                                                    <!-- Button trigger modal -->
+                                                    <button type="button" class="btn btn-primary btn-sm btn-rounded" data-bs-toggle="modal" data-bs-target="#subscribeModalagenceDetails-{{$client->id}}">
+                                                        Details
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <div class="d-flex gap-3 text-center">
+                                                        @if(Auth::guard('agent')->user()->agence->mathod_tiket == 0)
+                                                            @if($client->status == 1)
+                                                                <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdropPayer-{{$client->id}}" class="btn btn-success btn-sm btn-block"><i class="fas fa-money-bill me-1"></i> Rembourser le ticket de {{$client->ville->amount}} f </a>
+                                                            @elseif($client->status == 2)
+                                                                <p class="text-primary mb-1 font-size-15">Le ticket n'est plus remboursable</p> 
+                                                            @else
+                                                                <p class="text-warning mb-1 font-size-15">En cours</p> 
+                                                            @endif
+                                                        @else
+                                                                <p class="text-primary mb-1 font-size-15">Le ticket n'est plus remboursable</p> 
+                                                        @endif
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div> <!-- end col -->
             </div>
+
             
          
         </div>

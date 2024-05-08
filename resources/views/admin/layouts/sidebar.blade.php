@@ -128,18 +128,22 @@
                                         </ul>
                                     </li>
                                 @endforeach
-                                {{--
-                                <hr>
                                 <li>
-                                    <a href="{{ route('agent.renoncer') }}" key="t-products" class=""> <i class="fas fa-money-bill "></i> Ticket annuler</a>
+                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                                        <i class="fa fa-road"></i>
+                                        <span key="t-email">Tickets</span>
+                                    </a>
+                                    <ul class="sub-menu" aria-expanded="false">
+                                        <li>
+                                            <a href="{{ route('agent.client.renoncer') }}" key="t-products" class=""> <i class="fas fa-money-bill "></i> Ticket annuler</a>
+                                        </li>
+                                        @if(Auth::guard('agent')->user()->agence->method_ticket == 0)
+                                            <li>
+                                                <a href="{{ route('agent.absent') }}" key="t-products" class=""> <i class="fas fa-users "></i>Clients absents</a>
+                                            </li>
+                                        @endif
+                                    <ul>
                                 </li>
-                                @if(Auth::guard('agent')->user()->agence->method_ticket == 0)
-                                    <hr>
-                                    <li>
-                                        <a href="{{ route('agent.absent') }}" key="t-products" class=""> <i class="fas fa-users "></i>Clients absents</a>
-                                    </li>
-                                @endif
-                                --}}
                                 
                             @endif
 

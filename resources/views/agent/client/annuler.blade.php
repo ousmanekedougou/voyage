@@ -55,7 +55,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title text-center mb-2"> La liste des clients qui ont annuler leurs tickets</h4>
-                            <table id=""
+                            <table id="datatable"
                                 class="table table-bordered dt-responsive nowrap w-100">
                                 <thead>
                                     <tr>
@@ -75,13 +75,7 @@
                                     @foreach($clients as $client)
                                         <tr>
                                             <td>
-                                                @if($client->image != null)
-                                                    <img src="{{Storage::url($client->customer->image)}}" style="width: 40px;height:40px;" alt=""
-                                                        class="avatar-sm rounded-circle header-profile-user">
-                                                @else
-                                                    <img src="{{ asset('admin/assets/images/users/profil.jpg') }}" style="width: 40px;height:40px;" alt=""
-                                                        class="avatar-sm rounded-circle header-profile-user">
-                                                @endif
+                                                <img src="@if($client->image == '') https://ui-avatars.com/api/?name={{$client->name}} @else {{Storage::url($client->customer->image)}} @endif" class="rounded-circle avatar-sm header-profile-use" alt="">
                                             </td>
                                             @if($client->name == null)
                                             <td>{{ $client->customer->name }}</td>

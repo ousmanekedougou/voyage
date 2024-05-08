@@ -72,6 +72,7 @@ class ClientController extends Controller
             Toastr::error('Vous etes deja inscrit pour cette date sur ce siege', 'Error date de voyage', ["positionClass" => "toast-top-right"]);
             return back();
         }else {
+            // dd(date('d-m-Y H:i:s' ,strtotime($request->date)));
             if ($clients->count() < $buse->place) {
                 if (in_array($date_input['wday'] , $userialize_buse)) {
 
@@ -94,7 +95,7 @@ class ClientController extends Controller
                         $add_client->bus_id = $buse->id;
                         $add_client->siege_id = Auth::guard('agent')->user()->siege_id;
                         $add_client->position = $buse->inscrit;
-                        $add_client->registered_at = date('d-m-Y',strtotime($request->date));
+                        $add_client->registered_at = date('Y-m-d',strtotime($request->date));
                         $add_client->voyage_status = 0;
                         $add_client->status = 0;
                         $add_client->save();
@@ -370,16 +371,16 @@ class ClientController extends Controller
         return view('agent.client.annuler',compact('clients'));
     }
 
-    //  public function absent(){
-    //     $clients = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
-    //         ->where('registered_at','<',Carbon::today()->format('d-m-Y'))
-    //         ->where('status',1)
-    //         ->where('voyage_status',0)
-    //         ->where('amount','!=',null)
-    //         ->orderBy('id','ASC')
-    //         ->paginate(10);
-    //     return view('agent.client.absent',compact('clients'));
-    // }
+    public function absent(){
+        $clients = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
+            ->where('registered_at','<',Carbon::today()->format('d-m-Y'))
+            ->where('status',1)
+            ->where('voyage_status',0)
+            ->where('amount','!=',null)
+            ->orderBy('id','ASC')
+            ->paginate(10);
+        return view('agent.client.absent',compact('clients'));
+    }
 
     public function createPDF($id){
 
