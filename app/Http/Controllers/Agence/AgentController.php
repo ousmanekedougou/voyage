@@ -143,6 +143,19 @@ class AgentController extends Controller
         }
     }
 
+    public function updateAmount(Request $request, $id){
+        $this->validate($request,[
+            'montant' => 'required|numeric',
+        ]);
+
+        Agent::where('id',$id)->where('agence_id',Auth::guard('agence')->user()->id)->update([
+            'montant_journaliere' => $request->montant
+        ]);
+
+        Toastr::success('le montant journaliere de votre agent a ete modifier avec success', 'Activation', ["positionClass" => "toast-top-right"]);
+        return back();
+    }
+
     /**
      * Remove the specified resource from storage.
      *

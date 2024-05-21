@@ -144,6 +144,7 @@ class ClientController extends Controller
      */
     public function edit(Request $request,$id)
     {
+        
     }
 
 
@@ -273,56 +274,6 @@ class ClientController extends Controller
         
     }
 
-
-    public function revente($ticket_id){
-        
-        $phone  = request('phone');
-        $amount = request('amount');
-        $ville = request('ville');
-        $current_date = request('current_date');
-        $customer = Customer::where('phone',$phone)->where('is_active',1)->first();
-
-        $ticket = Client::where('id',$ticket_id)
-
-            ->where('amount',$amount)
-            ->where('ville_id',$ville)
-            ->where('voyage_status',0)
-            ->where('customer_id',Auth::guard('client')->user()->id)
-            ->first();
-
-        if ($customer) {
-
-            if ($ticket) {
-
-                if ($current_date->format('d-m-Y') >= carbon_today()) {
-
-                    $ticket->name = $customer->name;
-                    $ticket->phone = $customer->phone;
-                    $ticket->customer_id = $customer->id;
-                    $ticket->cni = $customer->cni;
-                    $ticket->save();
-
-                    Toastr::success('Salut cher client votre ticket a ete revendu ', 'Vente de Ticket', ["positionClass" => "toast-top-right"]);
-                    return back();
-                }else {
-                    Toastr::error('Salut cher client votre ticket n\'est pas a jour ', 'Ticket invalide', ["positionClass" => "toast-top-right"]);
-                    return back();
-                }
-                
-            }else {
-                Toastr::error('Salut cher client il semble que votre ticket n\'est pas valide ', 'Ticket invalide', ["positionClass" => "toast-top-right"]);
-                return back();
-            }
-
-        }else {
-            Toastr::error('Salut cher client il semble que votre camarade n\'a pas de compte client toucki ', 'Client inexistant', ["positionClass" => "toast-top-right"]);
-            return back();
-        }
-
-    }
-
-  
-   
 
     public function confirme($id){
         Colie::where('id',$id)->update([

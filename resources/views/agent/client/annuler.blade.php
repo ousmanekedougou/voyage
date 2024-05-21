@@ -52,9 +52,9 @@
             
             <div class="row">
                 <div class="col-12">
+                    <h4 class="text-center mb-2 btn btn-xs btn-primary" style="width: 100%;"> La liste des clients qui ont annuler leurs tickets</h4>
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title text-center mb-2"> La liste des clients qui ont annuler leurs tickets</h4>
                             <table id="datatable"
                                 class="table table-bordered dt-responsive nowrap w-100">
                                 <thead>
@@ -98,7 +98,7 @@
                                                     @endif
                                                 </span>
                                             </td>
-                                            <td>{{ $client->registered_at }}</td>
+                                            <td>{{date('d-m-Y',strtotime($client->registered_at))}}</td>
                                             <td>
                                                 <!-- Button trigger modal -->
                                                 <button type="button" class="btn btn-primary btn-sm btn-rounded" data-bs-toggle="modal" data-bs-target="#subscribeModalagenceDetails-{{$client->id}}">
@@ -138,11 +138,7 @@
                         <div class="media">
                             <div class="align-self-center me-3">
                                 <div class="align-self-center me-3">
-                                    @if(Auth::guard('agent')->user()->agence->logo != Null)
-                                        <img src="{{Storage::url(Auth::guard('agent')->user()->agence->logo)}}" class="rounded-circle avatar-xs" alt="">
-                                    @else
-                                        <img src="{{asset('admin/assets/images/bus_agence.jpg')}}" class="rounded-circle avatar-xs" alt="">
-                                    @endif
+                                    <img src="@if(Auth::guard('agent')->user()->agence->logo == '') https://ui-avatars.com/api/?name={{Auth::guard('agent')->user()->agence->name}} @else {{(Storage::url(Auth::guard('agent')->user()->agence->logo))}} @endif" class="rounded-circle avatar-sm" alt="">
                                 </div>
                             </div>
                             <div class="media-body overflow-hidden">
@@ -161,11 +157,16 @@
                             <a onclick="onclick().event.preventDefault()">
                                 <div class="media">
                                     <div class="align-self-center me-3">
-                                        @if($client->image != Null)
-                                            <img src="{{Storage::url($client->image)}}" class="rounded-circle avatar-xs" alt="">
-                                        @else
-                                            <img src="{{asset('admin/assets/images/users/profil.jpg')}}" class="rounded-circle avatar-xs" alt="">
-                                        @endif
+                                        <img src="
+                                            @if($client->image != null)
+                                                {{Storage::url($client->customer->image)}}
+                                            @else
+                                                @if($client->name == null)
+                                                    https://ui-avatars.com/api/?name={{$client->customer->name}}
+                                                @else
+                                                    https://ui-avatars.com/api/?name={{$client->name}}
+                                                @endif
+                                            @endif" class="rounded-circle avatar-xs" alt="">
                                     </div>
                                     
                                     <div class="media-body overflow-hidden">

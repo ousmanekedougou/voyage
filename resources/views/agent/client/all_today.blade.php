@@ -38,7 +38,7 @@
                                         <div class="media-body align-self-center">
                                             <div class="text-muted">
                                                 <h5 class="mb-1">Agence {{Auth::guard('agent')->user()->agence->name}}</h5>
-                                                <p class="mb-2">Itineraire de {{ $getBuse->itineraire->name }}</p>
+                                                <p class="mb-2">Siege de {{ Auth::guard('agent')->user()->siege->name }}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -119,15 +119,9 @@
                 </div>
                 <!-- end col -->
                 <div class="col-12">
-                    <h5 class="text-center btn btn-xs btn-primary" style="width:100%;">Vos clients du jours : Bus {{ $getBuse->matricule }} </h5>
+                    <h5 class="text-center btn btn-xs btn-primary" style="width:100%;">Tous les clients du jours </h5>
                     <div class="card">
                         <div class="card-body">
-                            <p class="card-title-desc">
-                                <div class="button-items">
-                                    <a  href="{{ route('agent.client.pdf',$getBuse->id) }}" class="btn btn-success waves-effect btn-label waves-light"><i class="fa fa-file-pdf label-icon"></i> Télécharger le PDF <i class="mdi mdi-download font-size-16"></i></a>
-                                </div>
-                                
-                            </p>
                             <table id="datatable"
                                 class="table table-bordered dt-responsive nowrap w-100">
                                 <thead>
@@ -240,12 +234,12 @@
                         <div class="media">
                             <div class="align-self-center me-3">
                                 <div class="align-self-center me-3">
-                                    <i class="fa fa-road" style="font-size: 25px;"></i>
+                                    <img src="@if(Auth::guard('agent')->user()->agence->logo == '') https://ui-avatars.com/api/?name={{Auth::guard('agent')->user()->agence->name}} @else {{(Storage::url(Auth::guard('agent')->user()->agence->logo))}} @endif" class="rounded-circle avatar-sm" alt="">
                                 </div>
                             </div>
                             <div class="media-body overflow-hidden">
-                                <h5 class="text-truncate font-size-14 mb-1">{{$getBuse->itineraire->name}}</h5>
-                                <p class="text-truncate mb-0">{{ $getBuse->number }} {{ $getBuse->number == 1 ? 'er' : 'em' }} Buse | Matricule: {{ $getBuse->matricule }}</p>
+                                <h5 class="text-truncate font-size-14 mb-1">{{Auth::guard('agent')->user()->agence->name}}</h5>
+                                <p class="text-truncate mb-0">Siege de {{Auth::guard('agent')->user()->siege->name}}</p>
                             </div>
                             <div class="font-size-11 button-right-siege">
                                 <span  class="noti-icon waves-effect text-center">
@@ -623,7 +617,7 @@
                                                 <div class="col-md-12">
                                                     <select class="form-control select2 @error('ville') is-invalid @enderror" name="ville" required autocomplete="ville" required>
                                                         <option>Entre une ville</option>
-                                                            @foreach($getBuse->siege->itineraires as $itineraire)
+                                                            @foreach($itineraires as $itineraire)
                                                                 <optgroup label="{{$itineraire->name}}">
                                                                     @foreach($itineraire->villes as $ville)
                                                                         <option value="{{ $ville->id }}" @if($ville->id == $client->ville->id) selected @endif>{{$ville->name}}</option>
@@ -738,7 +732,7 @@
                                             <div class="col-md-12">
                                                 <select class="form-control select2 @error('ville') is-invalid @enderror" name="ville" required autocomplete="ville" required>
                                                     <option>Entre une ville</option>
-                                                        @foreach($getBuse->siege->itineraires as $itineraire)
+                                                        @foreach($itineraires as $itineraire)
                                                             <optgroup label="{{$itineraire->name}}">
                                                                 @foreach($itineraire->villes as $ville)
                                                                     <option value="{{ $ville->id }}">{{$ville->name}}</option>

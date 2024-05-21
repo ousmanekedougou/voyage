@@ -6,7 +6,7 @@
 
 @section('main-content')
         <div class="page-content">
-            <div class="container-fluid">
+            <div class="">
 
                 <!-- start page title -->
                 <div class="row">

@@ -149,6 +149,7 @@ class ColiController extends Controller
     {
         $coli = Colie::where('id',$id)->where('siege_id',Auth::guard('agent')->user()->siege_id)->first();
         $amountTotalColi = ColiClient::where('colie_id',$coli->id)->where('siege_id',Auth::guard('agent')->user()->siege_id)->sum('prix_total');
+        $amountTotalColi = number_format($amountTotalColi,2, ',','.'). ' CFA';
         $quantiteTotalColi = ColiClient::where('colie_id',$coli->id)->where('siege_id',Auth::guard('agent')->user()->siege_id)->sum('quantity');
         if ($coli) {
             if ($coli->coli_clients->count() > 0) {

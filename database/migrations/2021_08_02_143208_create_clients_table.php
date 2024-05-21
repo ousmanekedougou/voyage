@@ -30,6 +30,7 @@ class CreateClientsTable extends Migration
             $table->integer('payment_methode')->nullable();
             $table->integer('status')->default(0);
             $table->boolean('voyage_status')->default(0);
+            $table->boolean('has_bagage')->default(0);
             $table->dateTime('registered_at')->nullable();
             $table->date('payment_at')->nullable();
             $table->date('canceled_at')->nullable();

@@ -23,6 +23,7 @@ class Client extends Model
         'bus_id',
         'position',
         'amount',
+        'customer_id',
         'registered_at',
         'payment_at',
         'payment_methode',

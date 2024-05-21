@@ -65,7 +65,7 @@
 
             <div class="row">
                 <div class="col-12">
-                    <h1 class="btn btn-primary btn-xs" style="width:100%;">Liste des paiemnets effectuer pour ce mois</h1>
+                    <h1 class="btn btn-primary btn-xs" style="width:100%;">Liste des paiements effectuer pour ce mois</h1>
                     <div class="card">
                         <div class="card-body">
                             <div class="table-responsive">

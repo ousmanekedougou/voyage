@@ -29,7 +29,7 @@
                 <br>
                 <ul class="list-unstyled chat-list" data-simplebar style="max-height: 410px;">
                     @foreach($itineraire->buses as $bus)
-                        <li class="mb-4" >
+                        <li class="mb-2" >
                             <div class="media">
                                 <div class="align-self-center me-3" onclick="location.href='{{ route('agent.client.show',$bus->id) }}'">
                                     @if($bus->logo != Null)
@@ -39,16 +39,16 @@
                                     @endif
                                 </div>
                                 
-                                <div class="media-body overflow-hidden">
-                                    <h5 class="text-truncate font-size-14 mt-2" style="font-weight:600;">Bus {{ $bus->matricule }}</h5>
-                                    <p class="text-truncate mb-0" style="margin-top:-4px;"> <i class="mdi mdi-arrow-right font-size-10"></i> {{ $bus->number }} {{ $bus->number == 1 ? 'er' : 'em' }} Buse | {{ $bus->inscrit }} Inscrit(s)</p>
+                                <div class="media-body overflow-hidden mt-2">
                                     <span class="span-chat-siege span-chat1">
-                                        <span onclick="location.href='{{ route('agent.client.show',$bus->id) }}'"  class="badge bg-primary  mr-3"><i class="fa fa-users"></i> Tous</span>
-                                        <span onclick="location.href='{{route('agent.client.jour',$bus->id)}}'"  class="badge bg-success ml-3"><i class=""></i> Aujourdhu</span>
+                                        <span class="text-truncate font-size-14" style="font-weight:600;">Bus {{ $bus->matricule }}</span>
+                                        <span onclick="location.href='{{ route('agent.client.show',$bus->id) }}'"  class="badge badge-pill badge-soft-primary mr-3"><i class="fa fa-users"></i> Tous</span>
+                                        <span onclick="location.href='{{route('agent.client.jour',$bus->id)}}'"  class="badge badge-pill badge-soft-success ml-3"><i class=""></i> Aujourdhuit</span>
                                     </span>
+                                    <p class="text-truncate mb-0 mt-2"> <i class="mdi mdi-arrow-right font-size-10"></i> {{ $bus->number }} {{ $bus->number == 1 ? 'er' : 'em' }} Buse | {{ $bus->inscrit }} Inscrit(s)</p>
                                 </div>
 
-                                <div class="font-size-12 button-right-siege">
+                                <div class="font-size-12 button-right-siege mt-2">
                                     <span class="span-chat-siege span-chat1 rounded-circle">
                                         {{ $bus->place }} place(s)
                                     </span>
@@ -180,6 +180,7 @@
                             @csrf
                             {{Method_field('PUT')}}
                             <div class="row">
+                                <input type="hidden" name="itineraire" value="{{ $edit_bus->itineraire->id }}">
                                 <div class="col-xl-12">
                                     <div class="mb-3">
                                         <label class="form-label">Numero du bus</label>

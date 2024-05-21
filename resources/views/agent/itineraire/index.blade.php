@@ -7,7 +7,7 @@
 @section('main-content')
 
                 <div class="page-content">
-                    <div class="container-fluid">
+                    <div class="container-fluid sectionCompteDesktope">
 
                         <!-- start page title -->
                         <div class="row">
@@ -71,7 +71,7 @@
                                                                 <a href="javascript:void(0);" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-primary" data-bs-target="#staticBackdropedititineraire-{{$itineraire->id}}"><i class="bx bx-edit mt-1 font-size-18"></i></a>
                                                             </li>
                                                             <li class="list-inline-item me-3">
-                                                                <a href="" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-danger" data-bs-target="#subscribeModalitineraire-{{ $itineraire->id }}"><i class="mdi mdi-delete font-size-18"></i></a>
+                                                                <a href="" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-danger" data-bs-target="#subscribeModalDeleteitineraire-{{ $itineraire->id }}"><i class="mdi mdi-delete font-size-18"></i></a>
                                                             </li>
                                                         </ul>
                                                     </td>
@@ -93,6 +93,65 @@
                         <!-- end row -->
 
                     </div> <!-- container-fluid -->
+
+
+                    <div class="tab-pane show active sectionCompteMobile" id="chat">
+                        <div>
+                                <ul class="list-unstyled chat-list">
+                                    <li class="mb-4">
+                                        <div class="media">
+                                            <div class="align-self-center me-3">
+                                                <img src="@if(Auth::guard('agent')->user()->agence->logo == '') https://ui-avatars.com/api/?name={{Auth::guard('agent')->user()->agence->name}} @else {{(Storage::url(Auth::guard('agent')->user()->agence->logo))}} @endif" class="rounded-circle avatar-sm" alt="">
+                                            </div>
+                                            <div class="media-body overflow-hidden">
+                                                <h5 class="text-truncate font-size-14 mb-1">{{Auth::guard('agent')->user()->agence->name}}</h5>
+                                                <p class="text-truncate mb-0">{{Auth::guard('agent')->user()->agence->slogan}}</p>
+                                            </div>
+                                            <div class="font-size-11 button-right-siege">
+                                                <span> {{$itineraires->count()}} Itineraire(s)</span>
+                                                <span data-bs-toggle="modal" data-bs-target="#staticBackdrop"class="mt-3 badge badge-pill badge-soft-success font-size-11"><i class="mdi mdi-plus me-1"></i>Ajouter</span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <ul class="list-unstyled chat-list">
+                                    @if(Auth::guard('agent')->user()->role == 4)
+                                        <div class="text-center">
+                                            <span onclick="location.href='{{route('agent.client.renoncer')}}'" class="mt-2 badge badge-pill badge-soft-primary font-size-11 mb-4"><i class="fa fa-users fa-item me-1"></i>Archives Clients</span>
+                                            <span onclick="location.href='{{route('agent.bagage.index')}}'" class="mt-2 badge badge-pill badge-soft-success font-size-11 mb-4">Bagages</span>
+                                            <span onclick="location.href='{{route('agent.colis.index')}}'" class="mt-2 badge badge-pill badge-soft-info font-size-11 mb-4">Colies</span>
+                                        </div>
+                                        @else
+                                        <span onclick="location.href='{{route('agent.client.renoncer')}}'" class="mt-3 badge badge-pill badge-soft-primary font-size-11 mb-4" style="width:100%;"><i class="fa fa-users fa-item me-1"></i>Tickets annuler</span>
+                                    @endif
+                                    @foreach($itineraires as $itineraire)
+                                        <li class="mb-3" >
+                                            <div class="media">
+                                                <div onclick="location.href='{{route('agent.itineraire.show',$itineraire->id)}}'" class="align-self-center me-3">
+                                                    <i class="fa fa-road avatar-xs" style="font-size: 25px;"></i>
+                                                </div>
+                                                
+                                                <div onclick="location.href='{{route('agent.itineraire.show',$itineraire->id)}}'" class="media-body overflow-hidden">
+                                                    <h5 class="text-truncate font-size-14 mt-2" style="font-weight:600;">{{ $itineraire->name }}</h5>
+                                                    <p class="text-truncate mb-0"> <i class="mdi mdi-arrow-right font-size-10"></i> {{ $itineraire->buses->count() }} buse(s)</p>
+                                                </div>
+                                                
+                                                <div class="font-size-12 button-right-siege" onclick="event.preventDefault();">
+                                                    <span class="span-chat-siege span-chat1">
+                                                        <span class="badge badge-pill badge-soft-primary" onclick="location.href='{{ route('agent.ville.show',$itineraire->id) }}'"> {{ $itineraire->villes->count() }} Ville(s)</span>
+                                                    </span>
+
+                                                    <span class="span-chat-siege span-chat1">
+                                                        <span  data-bs-toggle="modal" data-bs-target="#staticBackdropedititineraire-{{ $itineraire->id }}" class="text-success mr-2"><i class="mdi mdi-pencil font-size-18"></i></span>
+                                                        <span  data-bs-toggle="modal" data-bs-target="#subscribeModalDeleteitineraire-{{ $itineraire->id }}" class="text-danger"><i class="mdi mdi-delete font-size-18"></i></span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                        </div>
+                    </div>
                 </div>
                 <!-- End Page-content -->
 
@@ -100,51 +159,6 @@
 
              
 
-
-                 <!-- Static Backdrop Modal de la liste des ville -->
-                  @foreach($itineraires as $itineraire_ville)
-                    <div class="modal fade" id="staticBackdropprenicpaleVille-{{$itineraire_ville->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-md modal-dialog-scrollable" role="document">
-                            <div class="modal-content ">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel">Villes de {{ $itineraire_ville->name }}</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                    <div class="modal-body">
-                                        <div class="table-rep-plugin">
-                                            <div class="table-responsive mb-0" data-pattern="priority-columns">
-                                                <table id="tech-companies-1" class="table table-striped">
-                                                    <thead>
-                                                        <tr>
-                                                            <th data-priority="1">Nom de la ville</th>
-                                                            <th data-priority="3">Prix</th>
-                                                            <th data-priority="1">Action</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @foreach($itineraire_ville->villes as $ville)
-                                                            <tr>
-                                                                <th> {{$ville->name}} </th>
-                                                                <td> {{ $ville->amount }} f</td>
-                                                                <td>
-                                                                    <a href="javascript:void(0);" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-primary" data-bs-target="#staticBackdropeditville-{{$ville->id}}"><i class="bx bx-edit mt-1 font-size-18"></i></a>
-                                                                    <a href="javascript:void(0);" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-danger" data-bs-target="#subscribeModalville-{{ $ville->id }}"><i class="mdi mdi-delete font-size-18"></i></a>
-
-                                                                </td>
-                                                            </tr>
-                                                                
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                            </div>
-                        </div>
-                    </div>
-                 @endforeach
-                <!-- Fin du modal de la liste des ville -->
                 
 
 
@@ -242,7 +256,7 @@
 
                 @foreach($itineraires as $itineraire)
 
-                <div class="modal modal-xs fade" id="subscribeModalitineraire-{{ $itineraire->id }}" tabindex="-1" aria-labelledby="subscribeModalLabel" aria-hidden="true">
+                <div class="modal modal-xs fade" id="subscribeModalDeleteitineraire-{{ $itineraire->id }}" tabindex="-1" aria-labelledby="subscribeModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header border-bottom-0">

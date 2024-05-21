@@ -6,7 +6,7 @@
     <link href="{{asset('admin/assets/css/table.css')}}" rel="stylesheet" type="text/css" />
     <script src="{{asset('admin/assets/js/bootstrap-toggle.min.js')}}" ></script>
     <link rel="stylesheet" href="{{asset('admin/assets/css/bootstrap-toggle.css')}}" />
-     <style>
+    <style>
         /* .invoice-container{
             padding: 2mm;
             margin: 0 auto;
@@ -18,7 +18,7 @@
 @section('main-content')
 
     <div class="page-content">
-        <div class="container-fluid">
+        <div class="container-fluid sectionCompteDesktope">
 
             <div class="row">
                 <div class="col-lg-12">
@@ -51,9 +51,9 @@
             
             <div class="row">
                 <div class="col-12">
+                    <h4 class="text-center mb-2 btn btn-xs btn-primary" style="width: 100%;"> La liste des clients qui ont rates le bus</h4>
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title text-center mb-2"> La liste des clients qui ont rates le bus</h4>
                             <table id="datatable"
                                 class="table table-bordered dt-responsive nowrap w-100">
                                 <thead>
@@ -136,6 +136,93 @@
             <!-- end row -->
 
         </div> <!-- container-fluid -->
+
+
+        <div class="tab-pane show active sectionCompteMobile" id="chat">
+            <div>
+                <ul class="list-unstyled chat-list">
+                    <li class="mb-4">
+                        <div class="media">
+                            <div class="align-self-center me-3">
+                                <div class="align-self-center me-3">
+                                    <img src="@if(Auth::guard('agent')->user()->agence->logo == '') https://ui-avatars.com/api/?name={{Auth::guard('agent')->user()->agence->name}} @else {{(Storage::url(Auth::guard('agent')->user()->agence->logo))}} @endif" class="rounded-circle avatar-sm" alt="">
+                                </div>
+                            </div>
+                            <div class="media-body overflow-hidden">
+                                <h5 class="text-truncate font-size-14 mb-1">{{Auth::guard('agent')->user()->agence->name}}</h5>
+                                <p class="text-truncate mb-0">Siege de {{Auth::guard('agent')->user()->siege->name}}</p>
+                            </div>
+                            <div class="font-size-11 button-right-siege">
+                                <span>{{ $clients->count() }} Client(s)</span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="list-unstyled chat-list">
+                    @foreach($clients as $client)
+                        <li class="">
+                            <a onclick="onclick().event.preventDefault()">
+                                <div class="media">
+                                    <div class="align-self-center me-3">
+                                        <img src="
+                                            @if($client->image != null)
+                                                {{Storage::url($client->customer->image)}}
+                                            @else
+                                                @if($client->name == null)
+                                                    https://ui-avatars.com/api/?name={{$client->customer->name}}
+                                                @else
+                                                    https://ui-avatars.com/api/?name={{$client->name}}
+                                                @endif
+                                            @endif" class="rounded-circle avatar-xs" alt="">
+                                    </div>
+                                    
+                                    <div class="media-body overflow-hidden">
+                                        <h5 class="text-truncate font-size-14 mb-1">
+                                            @if($client->name == null)
+                                                {{ $client->customer->name }}
+                                            @else
+                                                {{ $client->name }}
+                                            @endif
+                                        </h5>
+                                        <p class="text-truncate mb-0"> <i class="fa fa-mobile font-size-10"></i>
+                                            @if($client->name == null)
+                                                {{ $client->customer->phone }}
+                                            @else
+                                                {{ $client->phone }}
+                                            @endif
+                                        </p>
+                                    </div>
+                                    <div class="font-size-12 button-right-siege">
+                                        @if(Auth::guard('agent')->user()->agence->mathod_tiket == 0)
+                                            @if($client->status == 1)
+                                                <span class="span-chat-siege span-chat1 badge badge badge-pill badge-soft-success"  data-bs-toggle="modal" data-bs-target="#staticBackdropPayer-{{$client->id}}" class="btn btn-success btn-sm btn-block">
+                                                    @if($client->payment_methode == 1)
+                                                        <img src="{{asset('user/assets/images/wave.png')}}" alt="" class="image-methode-payment align-middle me-2"> Wave
+                                                    @elseif($client->payment_methode == 2)
+                                                        <img src="{{asset('user/assets/images/orange-money.png')}}" alt="" class="image-methode-payment align-middle me-2"> OM
+                                                    @endif
+
+                                                    Rembourser {{$client->ville->getAmount}} 
+                                                </span>
+                                                
+                                            @elseif($client->status == 2)
+                                                <span class="span-chat-siege span-chat1 badge bg-warning">Non remboursable</span> 
+                                            @endif
+                                        @else
+                                                <span class="span-chat-siege span-chat1 badge bg-warning">Non remboursable</span> 
+                                        @endif
+
+                                        <span class="span-chat-siege badge bg-info" data-bs-toggle="modal" data-bs-target="#subscribeModalagenceDetails-{{$client->id}}">
+                                            <i class="fa fa-eye"></i> Voire
+                                        </span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
     </div>
     <!-- End Page-content -->
 

@@ -1,7 +1,92 @@
             <footer class="footer">
                 <div class="container-fluid">
                     <div class="row">
-                        @if(Auth::guard('client')->user())
+                        @if(Auth::guard('web')->user())
+                            <div class="container">
+                                <main>
+                                    <ul>
+                                        <li class="{{ set_active_roote_bottom_bar('admin.home') }} ">
+                                            <a href="{{ route('admin.home') }}" id="home">
+                                                <span> Acceuil</span>
+                                                <i class="bx bx-home-circle   fa-fa-item"></i>
+                                            </a>
+                                        </li>
+                                        
+                                        @if(Auth::guard('web')->user()->is_admin == 0)
+                                            <li class="{{ set_active_roote_bottom_bar('admin.admin.index') }} ">
+                                                <a href="{{ route('admin.admin.index') }}" id="drop">
+                                                    <span>Admins</span>
+                                                    <i class="bx bx-user fa-fa-item"></i>
+                                                </a>
+                                            </li>
+
+                                            <li class="{{ set_active_roote_bottom_bar('admin.partenaire.index') }} ">
+                                                <a href="{{ route('admin.partenaire.index') }}" id="store">
+                                                    <span>Partenaires</span>
+                                                    <i class="bx bx-store-alt  fa-fa-item"></i>
+                                                </a>
+                                            </li>
+
+                                            <li class="{{ set_active_roote_bottom_bar('admin.admin.create') }} ">
+                                                <a href="{{ route('admin.admin.create') }}" id="wishlist">
+                                                    <span>Users</span>
+                                                    <i class="bx bx-user  fa-fa-item"></i>
+                                                </a>
+                                            </li>
+
+                                        @endif
+                                        <li class="{{ set_active_roote_bottom_bar('admin.contact.index') }}">
+                                            <a href="{{ route('admin.contact.index') }}" class="">
+                                                <span>Contacts</span>
+                                                <i class="bx bxs-user-detail fa-item"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </main>
+                            </div>
+                        @elseif(Auth::guard('agent')->user())
+                            @if(Auth::guard('agent')->user()->role == 1)
+                                <div class="container">
+                                    <main>
+                                        <ul>
+                                            <li class="{{ set_active_roote_bottom_bar('agent.home') }} ">
+                                                <a href="{{ route('agent.home') }}" id="home">
+                                                    <span> Acceuil</span>
+                                                    <i class="bx bx-home-circle   fa-fa-item"></i>
+                                                </a>
+                                            </li>
+                                            <li class="{{ set_active_roote_bottom_bar('agent.itineraire.index') }} ">
+                                                <a href="{{ route('agent.itineraire.index') }}" id="drop">
+                                                    <span>Itineraires</span>
+                                                    <i class="bx bx-map-pin fa-fa-item"></i>
+                                                </a>
+                                            </li>
+
+                                            <li class="{{ set_active_roote_bottom_bar('agent.client.index') }} ">
+                                                <a href="{{ route('agent.client.index') }}" id="store">
+                                                    <span>Clients</span>
+                                                    <i class="bx bxs-group fa-fa-item"></i>
+                                                </a>
+                                            </li>
+
+                                            <li class="{{ set_active_roote_bottom_bar('agent.client.renoncer') }} ">
+                                                <a href="{{ route('agent.client.renoncer') }}" id="wishlist">
+                                                    <span>Anuller</span>
+                                                    <i class="bx bx-error-circle fa-fa-item"></i>
+                                                </a>
+                                            </li>
+
+                                            <li class="{{ set_active_roote_bottom_bar('agent.absent') }} ">
+                                                <a href="{{ route('agent.absent') }}" id="wishlist">
+                                                    <span>Absences</span>
+                                                    <i class="bx bxs-hide fa-fa-item"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </main>
+                                </div>
+                            @endif
+                        @elseif(Auth::guard('client')->user())
                             <div class="container">
                                 <main>
                                     <ul>
@@ -81,49 +166,6 @@
                                     </div>
 
                                 </div> <!-- end slimscroll-menu-->
-                            </div>
-                        @elseif(Auth::guard('web')->user())
-                        <div class="container">
-                            <main>
-                                <ul>
-                                    <li class="{{ set_active_roote_bottom_bar('admin.home') }} ">
-                                        <a href="{{ route('admin.home') }}" id="home">
-                                            <span> Acceuil</span>
-                                            <i class="bx bx-home-circle   fa-fa-item"></i>
-                                        </a>
-                                    </li>
-                                    
-                                    @if(Auth::guard('web')->user()->is_admin == 0)
-                                        <li class="{{ set_active_roote_bottom_bar('admin.admin.index') }} ">
-                                            <a href="{{ route('admin.admin.index') }}" id="drop">
-                                                <span>Admins</span>
-                                                <i class="bx bx-user fa-fa-item"></i>
-                                            </a>
-                                        </li>
-
-                                        <li class="{{ set_active_roote_bottom_bar('admin.partenaire.index') }} ">
-                                            <a href="{{ route('admin.partenaire.index') }}" id="store">
-                                                <span>Partenaires</span>
-                                                <i class="bx bx-store-alt  fa-fa-item"></i>
-                                            </a>
-                                        </li>
-
-                                        <li class="{{ set_active_roote_bottom_bar('admin.admin.create') }} ">
-                                            <a href="{{ route('admin.admin.create') }}" id="wishlist">
-                                                <span>Users</span>
-                                                <i class="bx bx-user  fa-fa-item"></i>
-                                            </a>
-                                        </li>
-
-                                    @endif
-                                    <li class="{{ set_active_roote_bottom_bar('admin.contact.index') }}">
-                                        <a href="{{ route('admin.contact.index') }}" class="">
-                                            <span>Contacts</span>
-                                            <i class="bx bxs-user-detail fa-item"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                                </main>
                             </div>
                         @else
                             <div class="col-sm-4 footer-info-mobile">

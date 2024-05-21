@@ -57,9 +57,6 @@ class HomeController extends Controller
         $agence = Agence::where('id',$id)->where('confirmation_token',$token)->first();
         if ($agence) {
             $agence->update(['confirmation_token' => null , 'is_active' => ACTIVE]);
-            // $this->guard('agence')->login($agence);
-            // Toastr::success('Votre compte a bien ete confirmer', 'Confirmation de compte', ["positionClass" => "toast-top-right"]);
-            // return redirect($this->redirectPath());
             Toastr::success('Votre compte a bien ete confirmer', 'Compte Confirmer', ["positionClass" => "toast-top-right"]);
             return view('agence.auth.login');
         }else {

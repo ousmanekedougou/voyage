@@ -20,7 +20,7 @@
 @section('main-content')
 
     <div class="page-content">
-        <div class="container-fluid sectionCompteDesktope">
+        <div class="">
 
             <!-- start page title -->
             <div class="row">
@@ -36,14 +36,14 @@
                     <div class="card overflow-hidden">
                         <div class="bg-primary bg-soft">
                             <div class="row">
-                                <div class="col-7">
+                                <div class="col-8">
                                     <div class="text-primary p-3">
                                         <h5 class="text-primary">{{Auth::guard('agent')->user()->agence->name}}</h5>
                                         <p>Siege de {{Auth::guard('agent')->user()->siege->name}}</p>
                                     </div>
                                 </div>
-                                <div class="col-5 align-self-end">
-                                    <img style="width:100px;height:100px;border-radius:50%;" src="@if(Auth::guard('agent')->user()->agence->logo == '') https://ui-avatars.com/api/?name={{Auth::guard('agent')->user()->agence->name}} @else {{(Storage::url(Auth::guard('agent')->user()->agence->logo))}} @endif" alt="" class="img-fluid">
+                                <div class="col-4  logo-agence-home">
+                                    <img  src="@if(Auth::guard('agent')->user()->agence->logo == '') https://ui-avatars.com/api/?name={{Auth::guard('agent')->user()->agence->name}} @else {{(Storage::url(Auth::guard('agent')->user()->agence->logo))}} @endif" alt="" class="img-fluid">
                                 </div>
                             </div>
                         </div>
@@ -56,7 +56,16 @@
                                     </div>
                                     <h5 class="font-size-15 text-truncate">{{ Auth::guard('agent')->user()->name }}</h5>
                                     <p class="text-muted mb-0 text-truncate">
-                                        Gestionaire @if(Auth::guard('agent')->user()->role == 1) Client @endif
+                                         
+                                        @if(Auth::guard('agent')->user()->role == 1)
+                                            Gestionaire client
+                                        @elseif(Auth::guard('agent')->user()->role == 2) 
+                                            Gestionaire bagages
+                                        @elseif(Auth::guard('agent')->user()->role == 3)
+                                            Gestionaire colis
+                                        @elseif(Auth::guard('agent')->user()->role == 3)
+                                            Administrateur du siege
+                                        @endif
                                     </p>
                                 </div>
 
@@ -65,110 +74,322 @@
                                         <div class="mt-4">
                                             <a href="{{ route('agent.profil.show',Auth::guard('agent')->user()->slug) }}"
                                                 class="btn btn-primary waves-effect waves-light btn-sm">Votre Profile<i class="mdi mdi-arrow-right ms-1"></i></a>
+                                            @if(Auth::guard('agent')->user()->role == 2)
+                                                <a href="{{ route('agent.bagage.index') }}"
+                                                class="btn btn-success waves-effect waves-light btn-sm button-itineraire-mobile">Vos bagages<i class="mdi mdi-arrow-right ms-1"></i></a>
+                                            @elseif(Auth::guard('agent')->user()->role == 3)
+                                                <a href="{{ route('agent.colis.index') }}"
+                                                class="btn btn-success waves-effect waves-light btn-sm button-itineraire-mobile">Vos colis<i class="mdi mdi-arrow-right ms-1"></i></a>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title mb-4">Monthly Earning</h4>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <p class="text-muted">This month</p>
+                                    <h3>$34,252</h3>
+                                    <p class="text-muted"><span class="text-success me-2"> 12% <i
+                                                class="mdi mdi-arrow-up"></i> </span> From previous period</p>
+
+                                    <div class="mt-4">
+                                        <a href="#" class="btn btn-primary waves-effect waves-light btn-sm">View
+                                            More <i class="mdi mdi-arrow-right ms-1"></i></a>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="mt-4 mt-sm-0">
+                                        <div id="radialBar-chart" class="apex-charts"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-muted mb-0">We craft digital, graphic and dimensional thinking.</p>
+                        </div>
+                    </div>
+                    
                 </div>
                 <div class="col-xl-8">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-lg-4">
                             <div class="card mini-stats-wid">
                                 <div class="card-body">
-                                    <div class="media">
-                                        <div class="media-body">
-                                            <p class="text-muted fw-medium">Itineraires</p>
-                                            <h4 class="mb-0">{{ $itineraires->count() }}</h4>
+                                    
+                                    <div class="d-flex flex-wrap">
+                                        <div class="me-3">
+                                            <p class="text-muted mb-2">Itineraires</p>
+                                            <h5 class="mb-0">{{ $itineraires->count() }}</h5>
                                         </div>
 
-                                        <div
-                                            class="mini-stat-icon avatar-sm rounded-circle bg-primary align-self-center">
-                                            <span class="avatar-title">
-                                                <i class="fa fa-road font-size-24"></i>
-                                            </span>
+                                        <div class="avatar-sm ms-auto">
+                                            <div class="avatar-title bg-light rounded-circle text-primary font-size-20">
+                                                <i class="fa fa-road"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4">
+                            <div class="card blog-stats-wid">
+                                <div class="card-body">
+
+                                    <div class="d-flex flex-wrap">
+                                        <div class="me-3">
+                                            <p class="text-muted mb-2">Buses</p>
+                                            <h5 class="mb-0">{{$buses->count()}}</h5>
+                                        </div>
+
+                                        <div class="avatar-sm ms-auto">
+                                            <div class="avatar-title bg-light rounded-circle text-primary font-size-20">
+                                                <i class="fa fa-bus"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="card blog-stats-wid">
+                                <div class="card-body">
+                                    <div class="d-flex flex-wrap">
+                                        <div class="me-3">
+                                            <p class="text-muted mb-2">Clients du jours</p>
+                                            <h5 class="mb-0">{{ $clientToday->count() }}</h5>
+                                        </div>
+
+                                        <div class="avatar-sm ms-auto">
+                                            <div class="avatar-title bg-light rounded-circle text-primary font-size-20">
+                                                <i class="fa fa-users"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <div class="card mini-stats-wid">
+                        <div class="col-lg-4">
+                            <div class="card blog-stats-wid">
                                 <div class="card-body">
-                                    <div class="media">
-                                        <div class="media-body">
-                                            <p class="text-muted fw-medium">Buses</p>
-                                            <h4 class="mb-0">{{$buses->count()}}</h4>
+                                    <div class="d-flex flex-wrap">
+                                        <div class="me-3">
+                                            <p class="text-muted mb-2">Montant du jours</p>
+                                            <h5 class="mb-0">{{ $AmountToday }} </h5>
                                         </div>
 
-                                        <div
-                                            class="avatar-sm rounded-circle bg-primary align-self-center mini-stat-icon">
-                                            <span class="avatar-title rounded-circle bg-primary">
-                                                <i class="fa fa-bus font-size-24"></i>
-                                            </span>
+                                        <div class="avatar-sm ms-auto">
+                                            <div class="avatar-title bg-light rounded-circle text-primary font-size-20">
+                                                <i class="bx bxs-book-bookmark"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="card mini-stats-wid">
+                        <div class="col-lg-4">
+                            <div class="card blog-stats-wid">
                                 <div class="card-body">
-                                    <div class="media">
-                                        <div class="media-body">
-                                            <p class="text-muted fw-medium">Clients du jours</p>
-                                            <h4 class="mb-0">{{ $clientCount->count() }}</h4>
+                                    <div class="d-flex flex-wrap">
+                                        <div class="me-3">
+                                            <p class="text-muted mb-2">Tickets annuler</p>
+                                            <h5 class="mb-0">{{ $ticketAnnuler->count() }} </h5>
                                         </div>
 
-                                        <div
-                                            class="avatar-sm rounded-circle bg-primary align-self-center mini-stat-icon">
-                                            <span class="avatar-title rounded-circle bg-primary">
-                                                <i class="fa fa-users font-size-24"></i>
-                                            </span>
+                                        <div class="avatar-sm ms-auto">
+                                            <div class="avatar-title bg-light rounded-circle text-primary font-size-20">
+                                                <i class="bx bxs-book-bookmark"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="card mini-stats-wid">
+                        <div class="col-lg-4">
+                            <div class="card blog-stats-wid">
                                 <div class="card-body">
-                                    <div class="media">
-                                        <div class="media-body">
-                                            <p class="text-muted fw-medium">Montant du jours</p>
-                                            <h4 class="mb-0">{{ montant_today() }} f</h4>
+                                    <div class="d-flex flex-wrap">
+                                        <div class="me-3">
+                                            <p class="text-muted mb-2">Clients absents</p>
+                                            <h5 class="mb-0">{{ $clientAbsent->count() }} </h5>
                                         </div>
 
-                                        <div
-                                            class="avatar-sm rounded-circle bg-primary align-self-center mini-stat-icon">
-                                            <span class="avatar-title rounded-circle bg-primary">
-                                                <i class="fa fa-coins font-size-24"></i>
-                                            </span>
+                                        <div class="avatar-sm ms-auto">
+                                            <div class="avatar-title bg-light rounded-circle text-primary font-size-20">
+                                                <i class="bx bxs-book-bookmark"></i>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <div class="row" style="padding-top:35px;">
+                        <div class="col-xl-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex flex-wrap">
+                                        <div class="me-2">
+                                            <h5 class="card-title mb-3">Colies</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row text-center">
+                                        <div class="col-6">
+                                            <div class="mt-3">
+                                                <p class="text-muted mb-1">Clients aujourd'huit</p>
+                                                <h5>{{ $clientColie->count() }}</h5>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-6">
+                                            <div class="mt-3">
+                                                <p class="text-muted mb-1">Montant total</p>
+                                                <h5>{{ $amountTotalColie }} </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <hr>
+
+                                    <div>
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item">
+                                                <div class="py-2">
+                                                    <h5 class="font-size-14">Total colies <span class="float-end">{{$clientColieProduct->count()}}</span></h5>
+                                                    <div class="progress animated-progess progress-sm">
+                                                        <div class="progress-bar" role="progressbar" style="width: 78%" aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </li>    
+                                            <li class="list-group-item">
+                                                <div class="py-2">
+                                                    <h5 class="font-size-14">Colies paye <span class="float-end">{{$clientColieProductPaye->count()}}</span></h5>
+                                                    <div class="progress animated-progess progress-sm">
+                                                        <div class="progress-bar bg-success" role="progressbar" style="width: 69%" aria-valuenow="69" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <div class="py-2">
+                                                    <h5 class="font-size-14">Arriver paye <span class="float-end">{{$clientColieProductNonPaye->count()}}</span></h5>
+                                                    <div class="progress animated-progess progress-sm">
+                                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 61%" aria-valuenow="61" aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
+                                                </div>
+                                            </li>   
+                                            
+                                        </ul>
+                                        
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end col -->
+                        <div class="col-xl-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h4 class="card-title mb-4">Clients bagages </h4>
+                                    <div class="text-center">
+                                        <div class="mb-2">
+                                            <i class="bx bx-user text-primary display-4"></i>
+                                        </div>
+                                    </div>
+                                    <div class="row text-center">
+                                        <div class="col-6">
+                                            <div class="mt-3">
+                                                <p class="text-muted mb-1">Total clients bagages</p>
+                                                <h5>{{$clientBagages->count()}}</h5>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-6">
+                                            <div class="mt-3">
+                                                <p class="text-muted mb-1">Montant total</p>
+                                                <h5>{{ $amountBagageTotal }} </h5>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="table-responsive mt-4">
+                                        <table class="table align-middle table-nowrap">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="width: 30%">
+                                                        <p class="mb-0">Total</p>
+                                                    </td>
+                                                    <td style="width: 25%">
+                                                        <h5 class="mb-0">{{$clientBagageCount->count()}}</h5>
+                                                    </td>
+                                                    <td>
+                                                        <div class="progress bg-transparent progress-sm">
+                                                            <div class="progress-bar bg-primary rounded"
+                                                                role="progressbar" style="width: 94%" aria-valuenow="94"
+                                                                aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <p class="mb-0">Paye</p>
+                                                    </td>
+                                                    <td>
+                                                        <h5 class="mb-0">{{$clientBagagePaye->count()}}</h5>
+                                                    </td>
+                                                    <td>
+                                                        <div class="progress bg-transparent progress-sm">
+                                                            <div class="progress-bar bg-success rounded"
+                                                                role="progressbar" style="width: 82%" aria-valuenow="82"
+                                                                aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <p class="mb-0">Non paye</p>
+                                                    </td>
+                                                    <td>
+                                                        <h5 class="mb-0">{{$clientBagageNonPaye->count()}}</h5>
+                                                    </td>
+                                                    <td>
+                                                        <div class="progress bg-transparent progress-sm">
+                                                            <div class="progress-bar bg-warning rounded"
+                                                                role="progressbar" style="width: 70%" aria-valuenow="70"
+                                                                aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end col -->
+                    </div>
                     <!-- end row -->
+
                 </div>
             </div>
             <!-- end row -->
-            
 
-            
-            <div class="row">
-                <div class="col-12">
-                    
+
+            <div class="row sectionCompteDesktope">
+                <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title mb-4">Inscription recentes</h4>
+                            <h4 class="card-title mb-4">Les dernieres inscriptions</h4>
                             <div class="table-responsive">
-                                <table id="datatable"
-                                    class="table align-middle table-nowrap table-bordered dt-responsive nowrap w-100">
+                                <table id="datatable" class="table align-middle table-nowrap mb-0">
                                     <thead class="table-light">
                                         <tr>
+                                            <th class="align-middle">Ref</th>
                                             <th class="align-middle">Image</th>
                                             <th class="align-middle">Prenom & nom</th>
                                             <th class="align-middle">Telephone</th>
@@ -176,29 +397,21 @@
                                             <th class="align-middle">Methode</th>
                                             <th class="align-middle">Date</th>
                                             <th class="align-middle">Detail</th>
-                                            <th class="align-middle">Actions</th>
                                         </tr>
                                     </thead>
-
-
                                     <tbody>
                                         @foreach($clients as $client)
                                             <tr>
+                                                <td>#{{ $client->reference }}</td>
                                                 <td>
-                                                    @if($client->image != null)
-                                                        <img src="{{Storage::url($client->customer->image)}}" style="width: 40px;height:40px;" alt=""
-                                                            class="avatar-sm rounded-circle header-profile-user">
-                                                    @else
-                                                        <img src="{{ asset('admin/assets/images/users/profil.jpg') }}" style="width: 40px;height:40px;" alt=""
-                                                            class="avatar-sm rounded-circle header-profile-user">
-                                                    @endif
+                                                    <img src="@if($client->image == '')https://ui-avatars.com/api/?name={{$client->name}} @else {{Storage::url($client->customer->image)}} @endif" class="avatar-sm rounded-circle header-profile-user" alt="">
                                                 </td>
                                                 @if($client->name == null)
-                                                <td>{{ $client->customer->name }}</td>
-                                                <td>{{ $client->customer->phone }}</td>
+                                                    <td>{{ $client->customer->name }}</td>
+                                                    <td>{{ $client->customer->phone }}</td>
                                                 @else
-                                                <td>{{ $client->name }}</td>
-                                                <td>{{ $client->phone }}</td>
+                                                    <td>{{ $client->name }}</td>
+                                                    <td>{{ $client->phone }}</td>
                                                 @endif
                                                 <td>
                                                     <span class="badge badge-pill badge-soft-info font-size-12">{{ $client->getAmount() }}</span>
@@ -221,94 +434,20 @@
                                                         Details
                                                     </button>
                                                 </td>
-                                                <td>
-                                                    <div class="d-flex gap-3 text-center">
-                                                        @if(Auth::guard('agent')->user()->agence->mathod_tiket == 0)
-                                                            @if($client->status == 1)
-                                                                <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdropPayer-{{$client->id}}" class="btn btn-success btn-sm btn-block"><i class="fas fa-money-bill me-1"></i> Rembourser le ticket de {{$client->ville->amount}} f </a>
-                                                            @elseif($client->status == 2)
-                                                                <p class="text-primary mb-1 font-size-15">Le ticket n'est plus remboursable</p> 
-                                                            @else
-                                                                <p class="text-warning mb-1 font-size-15">En cours</p> 
-                                                            @endif
-                                                        @else
-                                                                <p class="text-primary mb-1 font-size-15">Le ticket n'est plus remboursable</p> 
-                                                        @endif
-                                                    </div>
-                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
                             </div>
+                            <!-- end table-responsive -->
                         </div>
                     </div>
-                </div> <!-- end col -->
+                </div>
             </div>
+            <!-- end row -->
 
-            
-         
         </div>
         <!-- container-fluid -->
-
-
-        <div class="tab-pane show active sectionCompteMobile" id="chat">
-            <div>
-                    <ul class="list-unstyled chat-list">
-                        <li class="mb-4">
-                            <div class="media">
-                                <div class="align-self-center me-3">
-                                    <img src="@if(Auth::guard('agent')->user()->agence->logo == '') https://ui-avatars.com/api/?name={{Auth::guard('agent')->user()->agence->name}} @else {{(Storage::url(Auth::guard('agent')->user()->agence->logo))}} @endif" class="rounded-circle avatar-sm" alt="">
-                                </div>
-                                <div class="media-body overflow-hidden">
-                                    <h5 class="text-truncate font-size-14 mb-1">{{Auth::guard('agent')->user()->agence->name}}</h5>
-                                    <p class="text-truncate mb-0">{{Auth::guard('agent')->user()->agence->slogan}}</p>
-                                </div>
-                                <div class="font-size-11 button-right-siege">
-                                    <span> {{$itineraires->count()}} Itineraire(s)</span>
-                                    <span data-bs-toggle="modal" data-bs-target="#staticBackdrop"class="mt-3 badge bg-primary font-size-11"><i class="mdi mdi-plus me-1"></i>Ajouter</span>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                    <ul class="list-unstyled chat-list">
-                        @if(Auth::guard('agent')->user()->role == 4)
-                            <div class="text-center">
-                                <span onclick="location.href='{{route('agent.client.renoncer')}}'" class="mt-2 badge bg-primary font-size-11 mb-4"><i class="fa fa-users fa-item me-1"></i>Archives Clients</span>
-                                <span onclick="location.href='{{route('agent.bagage.index')}}'" class="mt-2 badge bg-success font-size-11 mb-4">Bagages</span>
-                                <span onclick="location.href='{{route('agent.colis.index')}}'" class="mt-2 badge bg-info font-size-11 mb-4">Colies</span>
-                            </div>
-                            @else
-                            <span onclick="location.href='{{route('agent.client.renoncer')}}'" class="mt-3 badge bg-primary font-size-11 mb-4" style="width:100%;"><i class="fa fa-users fa-item me-1"></i>Archives Clients</span>
-                        @endif
-                        @foreach($itineraires as $itineraire)
-                            <li class="mb-3" >
-                                <div class="media">
-                                    <div onclick="location.href='{{route('agent.itineraire.show',$itineraire->id)}}'" class="align-self-center me-3">
-                                        <i class="fa fa-road avatar-xs" style="font-size: 25px;"></i>
-                                    </div>
-                                    
-                                    <div onclick="location.href='{{route('agent.itineraire.show',$itineraire->id)}}'" class="media-body overflow-hidden">
-                                        <h5 class="text-truncate font-size-14 mt-2" style="font-weight:600;">{{ $itineraire->name }}</h5>
-                                        <p class="text-truncate mb-0"> <i class="mdi mdi-arrow-right font-size-10"></i> {{ $itineraire->buses->count() }} buse(s)</p>
-                                    </div>
-                                    
-                                    <div class="font-size-12 button-right-siege" onclick="event.preventDefault();">
-                                        <span class="span-chat-siege span-chat1">
-                                            <span class="badge bg-primary" onclick="location.href='{{ route('agent.ville.show',$itineraire->id) }}'"> {{ $itineraire->villes->count() }} Ville(s)</span>
-                                        </span>
-
-                                        <span class="span-chat-siege span-chat1">
-                                            <span  data-bs-toggle="modal" data-bs-target="#staticBackdropedititineraire-{{ $itineraire->id }}" class="text-success mr-2"><i class="mdi mdi-pencil font-size-18"></i></span>
-                                            <span  data-bs-toggle="modal" data-bs-target="#subscribeModalDeleteitineraire-{{ $itineraire->id }}" class="text-danger"><i class="mdi mdi-delete font-size-18"></i></span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </li>
-                        @endforeach
-                    </ul>
-            </div>
-        </div>
     </div>
     <!-- End Page-content -->
 
@@ -505,6 +644,192 @@
 
     <!-- Fin du moda de delete des itineraire -->
 
+
+    @foreach($clients as $client_presence)
+        <div class="modal fade modal-xs modal-center" id="subscribeModalagenceDetails-{{$client_presence->id}}" data-bs-backdrop="static"
+            data-bs-keyboard="false" tabindex="-1" role="dialog"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">
+                                <span class="text-muted">Detail du ticket de @if($client_presence->name == null) {{ $client_presence->customer->name }} @else {{ $client_presence->name }} @endif</span>
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="row">
+                            <table class="body-wrap"
+                                style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; background-color: transparent; margin: 0;">
+                                <tr
+                                    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                    <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;"
+                                        valign="top"></td>
+                                    <td class="container" width="600"
+                                        style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; display: block !important; max-width: 600px !important; clear: both !important; margin: 0 auto;"
+                                        valign="top">
+                                        <div class="content"
+                                            style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; max-width: 600px; display: block; margin: 0 auto;">
+                                            <table class="main" width="100%" cellpadding="0" cellspacing="0"
+                                                style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; border-radius: 3px;  margin: 0; border: none;">
+                                                <tr
+                                                    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;
+                                                    ">
+                                                    <td class="content-wrap aligncenter"
+                                                        style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; color: #495057;background-color: #fff;"
+                                                        align="center" valign="top">
+                                                        <table width="100%" cellpadding="0" cellspacing="0"
+                                                            style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                           
+                                                            <tr
+                                                                style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                                <td class="content-block aligncenter"
+                                                                    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: center; margin: 0;"
+                                                                    align="center" valign="top">
+                                                                    <table class="invoice"
+                                                                        style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;  box-sizing: border-box; font-size: 14px; text-align: left; width: 90%; margin: -15px auto;margin-left:-4px;">
+                                                                        <tr
+                                                                            style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                                            <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;"
+                                                                                valign="top">
+                                                                                <br style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif,;font-weight:bold; box-sizing: border-box; font-size: 14px; margin: 0;" />
+                                                                                <span style="float: left;">Destination : {{ $client_presence->ville->name }}</span> <span style="float: right;">Date : {{date('d-m-Y',strtotime($client_presence->registered_at))}}</span>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr
+                                                                            style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                                            <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 5px 0;"
+                                                                                valign="top">
+                                                                                <table class="invoice-items"
+                                                                                    cellpadding="0" cellspacing="0"
+                                                                                    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; margin: 0;">
+                                                                                    <tr
+                                                                                        style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                                                        <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                                            valign="top">Email
+                                                                                        </td>
+                                                                                        <td class="alignright"
+                                                                                            style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                                            align="right" valign="top">
+                                                                                            @if($client_presence->email == null)
+                                                                                                {{$client_presence->customer->email}}
+                                                                                            @else
+                                                                                                {{$client_presence->email}}
+                                                                                            @endif
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr
+                                                                                        style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                                                        <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                                            valign="top">Telephone
+                                                                                        </td>
+                                                                                        <td class="alignright"
+                                                                                            style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                                            align="right" valign="top">
+                                                                                            @if($client_presence->phone == null)
+                                                                                                {{$client_presence->customer->phone}}
+                                                                                            @else
+                                                                                                {{$client_presence->phone}}
+                                                                                            @endif
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr
+                                                                                        style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                                                        <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                                            valign="top">CNI
+                                                                                        </td>
+                                                                                        <td class="alignright"
+                                                                                            style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                                            align="right" valign="top">
+                                                                                            @if($client_presence->cni == null)
+                                                                                                {{$client_presence->customer->cni}}
+                                                                                            @else
+                                                                                                {{$client_presence->cni}}
+                                                                                            @endif
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr
+                                                                                        style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                                                        <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                                            valign="top">Voyage
+                                                                                        </td>
+                                                                                        <td class="alignright"
+                                                                                            style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                                            align="right" valign="top">
+                                                                                            @if($client_presence->voyage_status == 1)
+                                                                                                Effectuer
+                                                                                            @else
+                                                                                                Non effectuer
+                                                                                            @endif
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr
+                                                                                        style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                                                        <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                                            valign="top">Ticket
+                                                                                        </td>
+                                                                                        <td class="alignright"
+                                                                                            style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                                            align="right" valign="top">
+                                                                                            @if($client_presence->amount == $client_presence->ville->amount)
+                                                                                                {{$client_presence->getAmount()}}
+                                                                                            @else
+                                                                                                0.000
+                                                                                            @endif
+                                                                                            f
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                    <tr
+                                                                                        style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                                                        <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                                            valign="top">Bus
+                                                                                        </td>
+                                                                                        <td class="alignright"
+                                                                                            style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                                            align="right" valign="top">
+                                                                                            {{$client_presence->bus->matricule}}
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </table>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                            <tr
+                                                                style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                                <td class="content-block aligncenter"
+                                                                    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: center; margin: 0; padding: 0 0 20px;"
+                                                                    align="center" valign="top">
+                                                                    @if($client_presence->voyage_status == 2 && $client_presence->amount == $client_presence->ville->amount)
+                                                                        <a class="badge bg-primary font-size-12" role="button" aria-disabled="true" data-bs-toggle="modal" class="text-warning" data-bs-target="#staticBackdroppaiment-{{ $client_presence->id }}">
+                                                                        <i class="bx bx-money  me-1 text-white text-bold">Rembourser</i></a>
+                                                                    @endif
+                                                                </td>
+                                                            </tr>
+
+                                                            <tr
+                                                                style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                                <td class="content-block"
+                                                                    style="text-align: center;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0;"
+                                                                    valign="top">
+                                                                    <script>document.write(new Date().getFullYear())</script> © TouCki
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <!-- end table -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
     
 
 

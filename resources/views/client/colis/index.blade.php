@@ -71,8 +71,8 @@
                                                                 <h5 class="font-size-14 text-truncate"><a href="ecommerce-product-detail.html" class="text-dark">{{$coliClient->name_recept}}</a></h5>
                                                                 <p class="mb-0"> {{$coliClient->phone_recept}}</span></p>
                                                             @else
-                                                                <h5 class="font-size-14 text-truncate"><a href="ecommerce-product-detail.html" class="text-dark">{{$coliClient->customer->name}}</a></h5>
-                                                                <p class="mb-0"> {{$coliClient->customer->phone}}</span></p>
+                                                                <h5 class="font-size-14 text-truncate"><a href="ecommerce-product-detail.html" class="text-dark">{{ $coliClient->colie->customer->name }}</a></h5>
+                                                                <p class="mb-0"> {{ $coliClient->colie->customer->phone  }}</span></p>
                                                             @endif
                                                         </td>
                                                         <td class="text-center">
@@ -108,7 +108,7 @@
                                                                 <span class="text-warning">Colis non reçu</span>
                                                             @endif
                                                         </td>
-                                                        <td class="text-uppercase">
+                                                        <td class="">
                                                             {{$coliClient->ville->name}}_{{$coliClient->code_validation}}
                                                         </td>
                                                     </tr>
@@ -206,7 +206,7 @@
                                 
                                 <tr>
                                     <td class="td-mobile">Désc :</td>
-                                    <td class="td-mobile">
+                                    <td class="td-mobile" style="overflow: hidden;">
                                         {{ $coliClient->detail }} 
                                     </td>
                                 </tr>

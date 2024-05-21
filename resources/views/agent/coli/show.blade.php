@@ -52,11 +52,11 @@
                                                         <th>Nom & Detail</th>
                                                         <th>Récepteur</th>
                                                         <th>Destination</th>
-                                                        <th>Quantites</th>
-                                                        <th>Prix</th>
-                                                        <th>Prix Total</th>
+                                                        <th>Qts</th>
+                                                        <th>Prix unitaire</th>
+                                                        <th>Total</th>
                                                         <th>Status</th>
-                                                        <th>Reçu</th>
+                                                        <th>Reception</th>
                                                         <th colspan="2">Actions</th>
                                                     </tr>
                                                 </thead>
@@ -137,7 +137,7 @@
                                                                 <th> Quantite total : {{ $quantiteTotalColi }}</th>
                                                             
                                                                 
-                                                                <th>Prix total de tous les bagage :   {{$amountTotalColi}} CFA</th>
+                                                                <th>Prix total :   {{$amountTotalColi}} </th>
                                                                 <th>
                                                                     <span class="btn btn-success btn-block" style="width: 100%;margin-top:-10px;">
                                                                     <i class="mdi mdi-cart-arrow-right me-1"></i> Payer </span>

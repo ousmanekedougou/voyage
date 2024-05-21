@@ -14,7 +14,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-lg-4">
+                                <div class="col-lg-12">
                                     <div class="media">
                                         <div class="me-3">
                                             <img src="{{(Storage::url(Auth::guard('client')->user()->image))}}" alt="" class="avatar-md rounded-circle img-thumbnail">
@@ -29,16 +29,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-    
-                                <div class="col-lg-4 align-self-center">
-                                    <div class="text-lg-center mt-4 mt-lg-0">
-                                        
-                                    </div>
-                                </div>
-    
-                                <div class="col-lg-4 d-lg-block">
-                                    
                                 </div>
                             </div>
                             <!-- end row -->
@@ -56,17 +46,18 @@
                             <div class="card-body ">
                                 <div class="media">
                                     <div class="avatar-md me-4">
-                                        <span class="avatar-title rounded-circle bg-light text-danger">
-                                            @if($ticket->siege->agence->logo != '')
-                                                <!-- height="30" pour l'image -->
-                                                <img src="{{Storage::url($ticket->siege->agence->logo)}}"  alt="" class="avatar-md rounded-circle img-thumbnail">
-                                            @else
-                                                <i class="fa fa-bus"></i>
-                                            @endif
+                                        <span class="avatar-title rounded-circle bg-light">
+                                            <img src="
+                                                @if($ticket->siege->agence->logo != null)
+                                                    {{Storage::url($ticket->siege->agence->logo)}}
+                                                @else
+                                                        https://ui-avatars.com/api/?name={{$ticket->siege->agence->name}}
+                                                @endif
+                                            " alt="">
                                         </span>
                                     </div>
 
-                                    <div class="media-body overflow-hidden">
+                                    <div class="media-body overflow-hidden mt-2">
                                         <h5 class="text-truncate font-size-15"><a href="#" class="@if($ticket->status == 1) text-white @else text-muted @endif">
                                             {{$ticket->siege->agence->name}}</a>
                                         </h5>
@@ -82,7 +73,7 @@
                                                 valign="top">
                                                 <br style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif,;font-weight:bold; box-sizing: border-box; font-size: 14px; margin: 0;" />
                                                 <span style="float:left;font-weight:600;">{{ $ticket->customer->name }}</span>
-                                                <span style="float:right;font-weight:600;">Date : {{$ticket->registered_at}}</span>
+                                                <span style="float:right;font-weight:600;">Date : {{date('d-m-Y',strtotime($ticket->registered_at))}}</span>
                                             </td>
                                         </tr>
                                         <tr
@@ -131,7 +122,7 @@
                                                     <tr
                                                         style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                                         <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
-                                                            valign="top">Status Voyage
+                                                            valign="top">Status du voyage
                                                         </td>
                                                         <td class="alignright"
                                                             style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
@@ -146,18 +137,18 @@
                                                     <tr
                                                         style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                                         <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
-                                                            valign="top">Status Ticket
+                                                            valign="top">Status ticket
                                                         </td>
                                                         <td class="alignright"
                                                             style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
                                                             align="right" valign="top">
                                                             @if($ticket->amount == $ticket->ville->amount)
-                                                                <span class="badge bg-success">Ticket Paye</span>
+                                                                <span class="badge bg-success">Ticket paye</span>
                                                                 @if($ticket->status > 0)
-                                                                    <span class="badge bg-danger">Anuller</span>
+                                                                    <span class="badge bg-danger">Ticket anuller</span>
                                                                 @endif
                                                             @else
-                                                                <span class="badge bg-warning">Tiket Non Paye</span>
+                                                                <span class="badge bg-warning">Tiket non paye</span>
                                                             @endif
                                                         </td>
                                                         
@@ -189,9 +180,6 @@
                                             @if($ticket->voyage_status == 0)
                                                 <li class="list-inline-item me-3">
                                                     <a href="#" class="badge bg-info p-1" data-bs-toggle="modal" data-bs-target="#staticBackdropDate-{{$ticket->id}}"> <i class="fa fa-calendar-alt"></i> Repporter</a>
-                                                </li>
-                                                <li class="list-inline-item me-3">
-                                                    <a href="#" class="badge bg-primary p-1" data-bs-toggle="modal" data-bs-target="#staticBackdropRevendre-{{$ticket->id}}"> <i class="fa fa-reply-all "></i> Revendre</a>
                                                 </li>
                                                 <li class="list-inline-item me-3">
                                                     <a href="#" class="badge bg-warning p-1" data-bs-toggle="modal" data-bs-target="#staticBackdropArchiver-{{$ticket->id}}"> <i class="fa fa-trash-restore-alt "></i> Annuler</a>
@@ -298,7 +286,6 @@
                                                         @if($ticket->amount == $ticket->ville->amount)
                                                             @if($ticket->voyage_status == 0)
                                                                 <li class="li_fomat_mobile"><figure><a href="#" title="Renouvellement date" class="p-1 text-info" data-bs-toggle="modal" data-bs-target="#staticBackdropDate-{{$ticket->id}}"> <i class="fa fa-calendar-alt"></i></a></figure></li>
-                                                                <li class="li_fomat_mobile"><figure><a href="#" title="Transferer ticket" class="p-1 text-primary" data-bs-toggle="modal" data-bs-target="#staticBackdropRevendre-{{$ticket->id}}"> <i class="fa fa-reply-all"></i></a></figure></li>
                                                                 <li class="li_fomat_mobile"><figure><a href="#" title="Anuller ticket" class="p-1 text-warning" data-bs-toggle="modal" data-bs-target="#staticBackdropArchiver-{{$ticket->id}}"> <i class="fa fa-trash-restore-alt "></i></a></figure></li>
                                                             @elseif($ticket->voyage_status == 1)
                                                                 <li class="li_fomat_mobile"><figure><a href="#" class="p-1 text-primary" data-bs-toggle="modal" data-bs-target="#staticBackdropDate-{{$ticket->id}}"> <i class="fa fa-edit"></i></a></figure></li>
@@ -465,56 +452,7 @@
         <!-- Fin du modal de l'ajout -->
     @endforeach
 
-    @foreach($tickets as $ticket)
-    <!-- Static Backdrop Modal de l'ajout -->
-        <div class="modal fade" id="staticBackdropRevendre-{{$ticket->id}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog modal-md modal-dialog-centered" role="document">
-                <div class="modal-content ">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel text-center">Vente d'un ticket </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                        <div class="modal-body">
-                            <p class="text-bold text-center">
-                                <span class="text-warning">Attention:</span> etes vous sur de vouloire revendre ce ticket
-                            </p>
-                            <p>
-                                <form class="custom-validation" action="{{ route('customer.client.revente',$ticket->id) }}" method="POST" enctype="multipart/form-data" name="myform" onsubmit="return validation()">
-                                    {{csrf_field()}}
-                                    {{method_field('PUT')}}
-                                    <div class="row">
-                                        <input type="hidden" name="current_date" value="{{ $ticket->registered_at }}">
-                                        <input type="hidden" name="amount" value="{{ $ticket->amount }}">
-                                        <input type="hidden" name="ville" value="{{ $ticket->ville->id }}">
-                                        <div class="col-xl-12">
-                                            <div class="mb-3">
-                                                <label class="form-label" for="example-phone-input" >Entrez le numero de telephone du client a revendre</label>
-                                                <input type="number" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone"
-                                                     id="example-phone-input" />
-                                                @error('phone')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                        <div class="d-flex flex-wrap gap-2">
-                                            <button type="submit" class="btn btn-primary waves-effect waves-light btn-block">
-                                                Validez la vente de votre ticket
-                                            </button>
-                                            <button type="reset" class="btn btn-secondary waves-effect btn-block">
-                                                Anuller
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </p>
-                        </div>
-                </div>
-            </div>
-        </div>
-    <!-- Fin du modal de l'ajout -->
-    @endforeach
+    
   
 
     @foreach($tickets as $ticket)
@@ -613,32 +551,34 @@
                                     <div class="row" id="ticket-body-{{ $ticket->id }}">
                                         <div class="media mt-3">
                                             <div class="avatar-md me-4">
-                                                <span class="avatar-title rounded-circle bg-light text-danger">
-                                                    @if($ticket->siege->agence->logo != '')
-                                                        <!-- height="30" pour l'image -->
-                                                        <img src="{{Storage::url($ticket->siege->agence->logo)}}"  alt="" class="avatar-md rounded-circle img-thumbnail">
-                                                    @else
-                                                        <img src="{{asset('admin/assets/images/bus_agence.jpg')}}" class="rounded-circle avatar-xs" alt="">
-                                                    @endif
+                                                <span class="avatar-title rounded-circle bg-light">
+                                                    <img src="
+                                                        @if($ticket->siege->agence->logo != null)
+                                                            {{Storage::url($ticket->siege->agence->logo)}}
+                                                        @else
+                                                                https://ui-avatars.com/api/?name={{$ticket->siege->agence->name}}
+                                                        @endif
+                                                    " alt="">
                                                 </span>
                                             </div>
 
-                                            <div class="media-body overflow-hidden mt-3">
-                                                <h5 class="text-truncate font-size-15"><a href="#" class="@if($ticket->status == 1) text-white @else text-muted @endif">
+                                            <div class="media-body overflow-hidden mt-2">
+                                                <h4 class="text-truncate font-size-18"><a href="#" class="@if($ticket->status == 1) text-white @else text-muted @endif">
                                                     {{$ticket->siege->agence->name}}</a>
-                                                </h5>
+                                                </h4>
                                                 <p class="@if($ticket->status == 1) text-white @else text-muted @endif mb-1"> Siege de {{ $ticket->siege->name }}</p>
                                                 
                                             </div>
                                         </div>
-                                        <table class="invoice " style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; text-align: left; width: 90%; margin: 10px auto;">
+                                        <h5 class="text-center text-uppercase mt-3" style="margin-bottom: -1px;text-decoration: underline;"> Ticket voyage </h5>
+                                        <table class="invoice" style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; text-align: left; width: 90%; margin: 10px auto;">
                                             <tr
                                                 style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                                 <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; width:100%;"
                                                     valign="top">
                                                     <br style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif,;font-weight:bold; box-sizing: border-box; font-size: 14px; margin: 0;" />
                                                     <span style="float:left;font-weight:600;">{{ $ticket->customer->name }}</span>
-                                                    <span style="float:right;font-weight:600;">Date : {{$ticket->registered_at}}</span>
+                                                    <span style="float:right;font-weight:600;">{{date('d-m-Y',strtotime($ticket->registered_at))}}</span>
                                                 </td>
                                             </tr>
                                             <tr
@@ -660,8 +600,19 @@
                                                                 {{ $ticket->ville->name }}
                                                             </td>
                                                         </tr>
+
+                                                        <tr
+                                                            style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                            <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                valign="top">Tarif
+                                                            </td>
+                                                            <td class="alignright"
+                                                                style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                align="right" valign="top">
+                                                                {{$ticket->ville->getAmount()}}
+                                                            </td>
+                                                        </tr>
                                                         
-                                                    
                                                         <tr
                                                             style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                                             <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
@@ -678,52 +629,79 @@
                                                         <tr
                                                             style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                                             <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
-                                                                valign="top">Prix
-                                                            </td>
-                                                            <td class="alignright"
-                                                                style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
-                                                                align="right" valign="top">
-                                                                {{$ticket->ville->getAmount()}}
-                                                            </td>
-                                                        </tr>
-                                                        <tr
-                                                            style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
-                                                            <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
-                                                                valign="top">Status Voyage
+                                                                valign="top">Statut du voyage
                                                             </td>
                                                             <td class="alignright"
                                                                 style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
                                                                 align="right" valign="top">
                                                                 @if($ticket->voyage_status == 1)
-                                                                    <span class="badge bg-success">Effectue</span>
+                                                                    <span class="badge bg-success">Efféctué</span>
                                                                 @elseif($ticket->voyage_status == 0)
-                                                                    <span class="badge bg-warning">Non effectue</span>
+                                                                    <span class="badge bg-warning">Non éfféctué</span>
                                                                 @endif
                                                             </td>
                                                         </tr>
                                                         <tr
                                                             style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                                             <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
-                                                                valign="top">Status Ticket
+                                                                valign="top">Statut ticket
                                                             </td>
                                                             <td class="alignright"
                                                                 style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
                                                                 align="right" valign="top">
                                                                 @if($ticket->amount == $ticket->ville->amount)
-                                                                    <span class="badge bg-success">Ticket Paye</span>
+                                                                    <span class="badge bg-success">Ticket paye</span>
                                                                     @if($ticket->status > 0)
-                                                                        <span class="badge bg-danger">Anuller</span>
+                                                                        <span class="badge bg-danger">Ticket anuller</span>
                                                                     @endif
                                                                 @else
-                                                                    <span class="badge bg-warning">Tiket Non Paye</span>
+                                                                    <span class="badge bg-warning">Tiket non paye</span>
                                                                 @endif
                                                             </td>
                                                             
                                                         </tr>
-                                                        
+
+                                                        <tr
+                                                            style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                            <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                valign="top">RV : {{$ticket->bus->heure_rv}}
+                                                            </td>
+                                                            <td class="alignright"
+                                                                style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                align="right" valign="top">
+                                                                Départ : {{$ticket->bus->heure_depart}}
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr
+                                                            style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                            <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                valign="top">Contact
+                                                            </td>
+                                                            <td class="alignright"
+                                                                style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; text-align: right; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                                align="right" valign="top">
+                                                                {{$ticket->siege->phone}}
+                                                            </td>
+                                                        </tr>
                                                     </table>
                                                 </td>
                                             </tr>
+                                            @if($ticket->siege->agence->method_ticket == 0)
+                                                <tr
+                                                    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                    <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;text-align:center; box-sizing: border-box; font-size: 9px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                        valign="top">Remarque : Votre tickét est remboursable si vous n'aviez pas éfféctué le voyage
+                                                    </td>
+                                                </tr>
+                                            @elseif($ticket->siege->agence->method_ticket == 1)
+                                            <tr
+                                                    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
+                                                    <td style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;text-align:center; box-sizing: border-box; font-size: 9px; vertical-align: top; border-top-width: 1px; border-top-color: #eee; border-top-style: solid; margin: 0; padding: 5px 0;"
+                                                        valign="top">Nous portons a votre connaissance qu'auccun remoursement n'est admin aprés le départ du véhicule
+                                                    </td>
+                                                </tr>
+                                            @endif
                                         </table>
                                     </div>
                                 </div>

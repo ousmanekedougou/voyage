@@ -29,13 +29,32 @@ class ClientController extends Controller
         $this->middleware(['isAgent']);
     }
 
-    // public function index()
-    // {
-    //     $client_todays = Client::all();
-    //     $itineraires  = Itineraire::where('user_id',Auth::guard('agent')->user()->id)->where('siege_id',Auth::guard('agent')->user()->siege_id)->orderBy('id','ASC')->get();
-    //     $buses  = Bus::where('user_id',Auth::guard('agent')->user()->id)->where('siege_id',Auth::guard('agent')->user()->siege_id)->orderBy('id','ASC')->get();
-    //     return view('agent.client.index',compact('client_todays','itineraires','buses'));
-    // }
+    public function index()
+    {
+        $itineraires = Itineraire::where('siege_id', Auth::guard('agent')->user()->siege_id)->get();
+
+        $clients = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
+            ->where('registered_at',Carbon::today()->format('d-m-Y'))->get();
+
+        $clientCount = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
+        ->where('registered_at',carbon_today())
+        ->count();
+
+        $ticketPaye = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
+            ->where('registered_at',carbon_today())
+            ->count();
+
+        $ticketNonPaye = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
+            ->where('registered_at',carbon_today())
+            ->count();
+        
+        $montant = Client::where('siege_id',Auth::guard('agent')->user()->siege_id)
+            ->where('registered_at',carbon_today())
+            ->sum('amount');
+
+        $montant = number_format($montant,2, ',','.'). ' CFA';
+        return view('agent.client.all_today',compact('clients','clientCount','ticketPaye','ticketNonPaye','montant','itineraires'));
+    }
 
 
     public function store(Request $request)
@@ -179,9 +198,28 @@ class ClientController extends Controller
             ->where('siege_id',Auth::guard('agent')->user()->siege_id)
             // ->where('registered_at','>=',Carbon::today()->format('d-m-Y'))
             ->where('status',0)
-            ->orderBy('id','ASC')
+            ->orderBy('id','DESC')
             ->get();
-        return view('agent.client.show',compact('clients','getBuse'));
+
+        $ticketPaye = Client::where('bus_id',$getBuse->id)
+            ->where('siege_id',Auth::guard('agent')->user()->siege_id)
+            ->where('status',0)
+            ->where('amount','!=',null)
+            ->count();
+
+        $ticketNonPaye = Client::where('bus_id',$getBuse->id)
+            ->where('siege_id',Auth::guard('agent')->user()->siege_id)
+            ->where('status',0)
+            ->where('amount',null)
+            ->count();
+        
+        $montant = Client::where('bus_id',$getBuse->id)
+            ->where('siege_id',Auth::guard('agent')->user()->siege_id)
+            ->where('status',0)
+            ->sum('amount');
+        $montant = number_format($montant,2, ',','.'). ' CFA';
+
+        return view('agent.client.show',compact('clients','getBuse','ticketPaye','ticketNonPaye','montant'));
     }
 
     /**
@@ -193,14 +231,44 @@ class ClientController extends Controller
     public function jour($id)
     {
        $getBuse = Bus::where('id',$id)->where('siege_id',Auth::guard('agent')->user()->siege_id)->first();
+
         $clients = Client::where('bus_id',$getBuse->id)
             ->where('siege_id',Auth::guard('agent')->user()->siege_id)
             ->where('registered_at',carbon_today())
             ->where('status',0)
             ->where('amount','!=',null)
-            ->orderBy('id','ASC')
+            ->orderBy('id','DESC')
             ->paginate(10);
-        return view('agent.client.jour',compact('clients','getBuse'));
+
+        $clientCount = Client::where('bus_id',$getBuse->id)
+            ->where('siege_id',Auth::guard('agent')->user()->siege_id)
+            ->where('registered_at',carbon_today())
+            ->where('status',0)
+            ->where('amount','!=',null)
+            ->count();
+
+        $ticketPaye = Client::where('bus_id',$getBuse->id)
+            ->where('siege_id',Auth::guard('agent')->user()->siege_id)
+            ->where('registered_at',carbon_today())
+            ->where('status',0)
+            ->where('amount','!=',null)
+            ->count();
+
+        $ticketNonPaye = Client::where('bus_id',$getBuse->id)
+            ->where('siege_id',Auth::guard('agent')->user()->siege_id)
+            ->where('registered_at',carbon_today())
+            ->where('status',0)
+            ->where('amount',null)
+            ->count();
+        
+        $montant = Client::where('bus_id',$getBuse->id)
+            ->where('siege_id',Auth::guard('agent')->user()->siege_id)
+            ->where('registered_at',carbon_today())
+            ->where('status',0)
+            ->sum('amount');
+
+        $montant = number_format($montant,2, ',','.'). ' CFA';
+        return view('agent.client.jour',compact('clients','clientCount','getBuse','ticketPaye','ticketNonPaye','montant'));
     }
 
 

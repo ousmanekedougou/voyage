@@ -122,7 +122,7 @@
                                 <p class="text-truncate mb-0">{{$agence->slogan}}</p>
                             </div>
                             <div class="font-size-11">
-                                <a href="{{ route('customer.agence.about',$agence->slug) }}" class="badge bg-primary font-size-13 text-white mt-1 p-1 "> <i class="bx bx-file"></i> A Propos</a>
+                                <a href="{{ route('customer.agence.about',$agence->slug) }}" class="badge badge-pill badge-soft-secondary font-size-10 mt-1 p-1 "> <i class="bx bx-file"></i> A propos</a>
                             </div>
                         </div>
                     </li>
@@ -148,11 +148,11 @@
                                     <p class="text-truncate mb-0"> <i class="fa fa-mobile"></i> {{ $siege->phone }}</p>
                                 </div>
                                 <div class="font-size-12 button-right-siege">
-                                    <span class="span-chat-siege span-chat1 badge bg-success mb-2" onclick="onclick().event.preventDefault()" data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$siege->id}}">
+                                    <span class="span-chat-siege span-chat1 badge badge-pill badge-soft-success mb-2" onclick="onclick().event.preventDefault()" data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$siege->id}}">
                                         S'inscrire <i class="fa fa-user-plus"></i>
                                     </span>
                                     
-                                    <span class="span-chat-siege badge bg-primary" onclick="location.href='{{route('customer.colis.edit',$siege->id)}}'">
+                                    <span class="span-chat-siege badge badge-pill badge-soft-primary" onclick="location.href='{{route('customer.colis.edit',$siege->id)}}'">
                                         Colis reçue <i class="fa fa-suitcase-rolling"></i>
                                     </span>
                                 </div>

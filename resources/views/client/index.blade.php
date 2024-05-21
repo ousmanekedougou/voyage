@@ -225,8 +225,8 @@
                                 <span class="span-chat-siege span-chat1 rounded-circle">
                                     {{ $agence->sieges->count() }} Siege(s)
                                 </span>
-                                <span class="span-chat-siege span-chat1 font-size-11 badge badge-soft-primary" onclick="location.href='{{route('customer.agence.about',$agence->slug)}}'">
-                                    <i class="bx bx-file"></i>A Propos
+                                <span class="span-chat-siege span-chat1 font-size-11 badge badge-pill badge-soft-secondary" onclick="location.href='{{route('customer.agence.about',$agence->slug)}}'">
+                                    <i class="bx bx-file"></i>Infos
                                 </span>
                             </div>
                         </div>

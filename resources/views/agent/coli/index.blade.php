@@ -24,9 +24,7 @@
                                     <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                                         <h4 class="mb-sm-0 font-size-18">Clients Colis</h4>
                                         <div class="text-sm-end">
-                                            <button type="button" class="btn btn-primary btn-rounded waves-effect waves-light mb-2 me-2" data-bs-toggle="modal" data-bs-target="#NewClientBagage"><i class="fa fa-user"></i> Ajouter</button>
-                                        
-                                            {{--<button type="button" class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2" data-bs-toggle="modal" data-bs-target="#NewClientCustomer"><i class="fa fa-user-plus"></i> Ajouter un client confirme</button>--}}
+                                            <button type="button" class="btn btn-primary btn-rounded waves-effect waves-light mb-2 me-2" data-bs-toggle="modal" data-bs-target="#NewClientBagage"><i class="fa fa-user"></i> Ajouter un client</button>
                                         </div>
                                     </div>
                                 </div>
@@ -45,7 +43,6 @@
                                                         <th>Prenom & nom</th>
                                                         <th>Telephone</th>
                                                         <th>CNI</th>
-                                                        <th>Colis</th>
                                                         <th>Afficher</th>
                                                         <th>Actions</th>
                                                     </tr>
@@ -81,12 +78,6 @@
                                                             </td>
                                                             <td>
                                                                 <!-- Button trigger modal -->
-                                                                <a data-bs-toggle="modal" data-bs-target="#AddBagage-{{$client->id}}" class="btn btn-success btn-sm btn-rounded">
-                                                                    Ajouter
-                                                                </a>
-                                                            </td>
-                                                            <td>
-                                                                <!-- Button trigger modal -->
                                                                 <a href="{{ route('agent.colis.show',$client->id) }}" class="btn btn-primary btn-sm btn-rounded">
                                                                 <i class="fa fa-eye font-size-12"></i> {{$client->coli_clients->count()}} Colie(s)
                                                                 </a>
@@ -94,6 +85,9 @@
                                                             <td>
                                                                 <ul class="list-inline mb-0">
                                                                     
+                                                                    <li class="list-inline-item me-3">
+                                                                        <a href="" data-bs-toggle="modal" data-bs-target="#AddBagage-{{$client->id}}"><i class="fa fa-plus font-size-12"></i> Ajouter</a>
+                                                                    </li>
                                                                     <li class="list-inline-item me-3">
                                                                         <a href="" data-bs-toggle="modal" data-bs-target="#EditClientColie-{{$client->id}}"><i class="fa fa-edit font-size-12"></i></a>
                                                                     </li>

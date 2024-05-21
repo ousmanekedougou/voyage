@@ -291,8 +291,8 @@
                                 <p class="text-truncate mb-0">{{Auth::guard('agence')->user()->slogan}}</p>
                             </div>
                             <div class="font-size-11 button-right-siege">
-                                <span onclick="location.href='{{ route('agence.about.index') }}'" class="badge bg-info font-size-11"> Presentation</span>
-                                <span data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="mt-3 badge bg-primary font-size-11"><i class="mdi mdi-plus me-1"></i>Ajouter</span>
+                                <span onclick="location.href='{{ route('agence.about.index') }}'" class="badge badge-pill badge-soft-secondary font-size-11"> Presentation</span>
+                                <span data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="mt-3 badge badge-pill badge-soft-success font-size-11"><i class="mdi mdi-plus me-1"></i>Ajouter</span>
                                 
                             </div>
                         </div>
@@ -327,7 +327,7 @@
                                 </div>
                                 <div class="font-size-12 button-right-siege">
                                     <span class="span-chat-siege span-chat1">
-                                        <span class="badge bg-primary" onclick="location.href='{{ route('agence.agent.show',$siege->id) }}'"> {{ $siege->agents->count() }} Agent(s)</span>
+                                        <span class="badge badge-pill badge-soft-secondary" onclick="location.href='{{ route('agence.agent.show',$siege->id) }}'"> {{ $siege->agents->count() }} Agent(s)</span>
                                     </span>
 
                                     <span class="span-chat-siege span-chat1" onclick="event.preventDefault();">

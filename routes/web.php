@@ -81,6 +81,7 @@ Route::prefix('/agence')->name('agence.')->group(function()
     Route::resource('/siege', App\Http\Controllers\Agence\SiegeController::class);
     Route::resource('/agent', App\Http\Controllers\Agence\AgentController::class);
     Route::put('/agent/edite/{id}', [App\Http\Controllers\Agence\AgentController::class,'edite'])->name('agent.edite');
+    Route::put('/agent/amount/{id}', [App\Http\Controllers\Agence\AgentController::class,'updateAmount'])->name('agent.updateAmount');
     // Route::get('/paiment/{id}/{token}', [App\Http\Controllers\Agence\ClientController::class, 'paiment']);
 
     // Gestion des salaire des agents et de l'entreprise toucki
@@ -175,7 +176,6 @@ Route::prefix('/customer')->name('customer.')->group(function()
     // Route::get('client/paiment', [App\Http\Controllers\Client\ClientController::class, 'paiment'])->name('client.paiment');
     Route::put('/client/annuler/{id}', [App\Http\Controllers\Client\ClientController::class, 'annuler'])->name('client.annuler');
     Route::put('/client/renew/{id}', [App\Http\Controllers\Client\ClientController::class, 'renew'])->name('client.renew');
-    Route::put('/client/revente/{id}', [App\Http\Controllers\Client\ClientController::class, 'revente'])->name('client.revente');
     Route::delete('/client/destroy/{id}', [App\Http\Controllers\Client\ClientController::class, 'destroy'])->name('client.destroy');
     Route::get('/client/ticker/{id}', [App\Http\Controllers\Client\ClientController::class, 'download'])->name('ticker_pdf');
     // Controller de payment des ticket

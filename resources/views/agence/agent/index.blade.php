@@ -80,7 +80,7 @@
                                                         <td>{{$agent->email}}</td>
                                                         <td>{{$agent->phone}}</td>
                                                         <td>
-                                                            <i class="fa fa-money me-1"></i> {{$agent->getAmount()}}
+                                                             {{$agent->getAmount()}} <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#subscribeModalEditAmout-{{ $agent->id }}" class="text-success"><i class="bx bx-edit  font-size-17"></i></a>
                                                         </td>
                                                         <td >
                                                             <span class="badge badge-pill badge-soft-primary">
@@ -198,7 +198,8 @@
                                             </span>
 
                                             <span class="span-chat-siege span-chat1" onclick="event.preventDefault();">
-                                                <span  role="button" aria-disabled="true" data-bs-toggle="modal" data-bs-target="#subscribeModalRole-{{ $agent->id }}" class="text-success mr-2"><i class="fa fa-pencil-ruler me-1 text-warning"></i></span>
+                                                <span  role="button" aria-disabled="true" data-bs-toggle="modal" data-bs-target="#subscribeModalEditAmout-{{ $agent->id }}" class="text-success mr-2"><i class="mdi mdi-book-edit font-size-18  text-success"></i></span>
+                                                <span  role="button" aria-disabled="true" data-bs-toggle="modal" data-bs-target="#subscribeModalRole-{{ $agent->id }}" class="text-success mr-2"><i class="mdi mdi-pencil-ruler font-size-18  text-warning"></i></span>
                                                 <span  role="button" aria-disabled="true" data-bs-toggle="modal" class="text-danger" data-bs-target="#subscribeModalagence-{{ $agent->id }}"><i class="mdi mdi-delete font-size-18"></i></span>
                                             </span>
                                         </div>
@@ -379,6 +380,55 @@
                 </div>
             </div> 
             @endforeach
+
+
+             <!-- Modal pour la modification du montant journalier de l'agent -->
+             @foreach($agents as $agent_role)
+                <div class="modal modal-xs fade" id="subscribeModalEditAmout-{{ $agent_role->id }}" tabindex="-1" aria-labelledby="subscribeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header border-bottom-0">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="text-center mb-4">
+
+                                    <div class="row justify-content-center">
+                                        <div class="col-xl-10">
+                                            <h5 class="text-primary">Modifier le montant journaliere de {{ $agent_role->name }}</h5>
+                                            <div class="input-group bg-white rounded text-center" style="text-align:center;">
+                                                <form method="post" action="{{ route('agence.agent.updateAmount',$agent_role->id) }}"  style="display:block;text-align:center;width:100%;">
+                                                    {{csrf_field()}}
+                                                    {{method_field('PUT')}}
+
+                                                    <div class="mb-3 row">
+                                                        <div class="mb-3">
+                                                            <div>
+                                                                <input data-parsley-type="number" type="number" id="montant" class="form-control @error('montant') is-invalid @enderror" name="montant" value="{{ old('montant') ?? $agent->montant_journaliere }}" autocomplete="montant"
+                                                                    required placeholder="Montant journaliere" />
+                                                                    @error('montant')
+                                                                        <span class="invalid-feedback" role="alert">
+                                                                            <strong>{{ $message }}</strong>
+                                                                        </span>
+                                                                    @enderror
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+
+                                                    <button type="submit" class="btn btn-success btn-xs" style="margin-left: 20px;margin-right:20px;"> Enregistre </button> 
+                                                    <button type="button" class="btn btn-danger btn-xs" data-bs-dismiss="modal" aria-label="Close"> x Anuller</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            @endforeach
+            <!-- Fin du modal pour la modification du montant journalier de l'agent -->
 
              
 

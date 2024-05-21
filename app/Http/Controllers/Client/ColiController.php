@@ -26,10 +26,11 @@ class ColiController extends Controller
      */
     public function index()
     {
-        $getColi = Colie::where('phone',Auth::guard('client')->user()->phone)->OrWhere('customer_id',Auth::guard('client')->user()->id)->first();
+        $getColi = Colie::where('phone',Auth::guard('client')->user()->phone)
+            ->OrWhere('customer_id',Auth::guard('client')->user()->id)->first();
         
         if(!$getColi){
-            Toastr::warning('Vous n\'etes pas iscrit pour ce service ', 'Error Colis', ["positionClass" => "toast-top-right"]);
+            Toastr::warning('Vous n\'etes pas inscrit pour ce service ', 'Error Colis', ["positionClass" => "toast-top-right"]);
             return back();
         }else{
 

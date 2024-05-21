@@ -128,40 +128,27 @@
                                         </ul>
                                     </li>
                                 @endforeach
+                                <hr>
                                 <li>
-                                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                        <i class="fa fa-road"></i>
-                                        <span key="t-email">Tickets</span>
-                                    </a>
-                                    <ul class="sub-menu" aria-expanded="false">
-                                        <li>
-                                            <a href="{{ route('agent.client.renoncer') }}" key="t-products" class=""> <i class="fas fa-money-bill "></i> Ticket annuler</a>
-                                        </li>
-                                        @if(Auth::guard('agent')->user()->agence->method_ticket == 0)
-                                            <li>
-                                                <a href="{{ route('agent.absent') }}" key="t-products" class=""> <i class="fas fa-users "></i>Clients absents</a>
-                                            </li>
-                                        @endif
-                                    <ul>
+                                    <a href="{{ route('agent.client.renoncer') }}" key="t-products" class=""> <i class="fa fa-money-bill "></i> Ticket annuler</a>
                                 </li>
+                                @if(Auth::guard('agent')->user()->agence->method_ticket == 0)
+                                    <li>
+                                        <a href="{{ route('agent.absent') }}" key="t-products" class=""> <i class="fa fa-users "></i>Clients absents</a>
+                                    </li>
+                                @endif
                                 
                             @endif
 
                             @if(Auth::guard('agent')->user()->role != 1 || Auth::guard('agent')->user()->role == 4 )
-                            <li>
-                                <a href="javascript: void(0);" class="has-arrow waves-effect">
-                                    <i class="fa fa-store-alt"></i>
-                                    <span key="t-ecommerce">Bagages et Colis</span>
-                                </a>
-                                <ul class="sub-menu" aria-expanded="false">
-                                    @if(Auth::guard('agent')->user()->role == 2 || Auth::guard('agent')->user()->role == 4 )
-                                        <li><a href="{{route('agent.bagage.index')}}" key="t-products"> <i class="fa fa-luggage-cart"></i>Bagages</a></li>
-                                    @endif
-                                    @if(Auth::guard('agent')->user()->role == 3 || Auth::guard('agent')->user()->role == 4 )
-                                        <li><a href="{{route('agent.colis.index')}}" key="t-products"> <i class="fa fa-suitcase-rolling"></i>Colis</a></li>
-                                    @endif
-                                </ul>
-                            </li>
+                            
+                                @if(Auth::guard('agent')->user()->role == 2 || Auth::guard('agent')->user()->role == 4 )
+                                    <li><a href="{{route('agent.bagage.index')}}" key="t-products"> <i class="fa fa-luggage-cart"></i>Clients bagages</a></li>
+                                @endif
+
+                                @if(Auth::guard('agent')->user()->role == 3 || Auth::guard('agent')->user()->role == 4 )
+                                    <li><a href="{{route('agent.colis.index')}}" key="t-products"> <i class="fa fa-suitcase-rolling"></i>Clients colis</a></li>
+                                @endif
                             @endif
                         @endif
 

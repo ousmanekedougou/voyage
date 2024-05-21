@@ -61,13 +61,77 @@
 
 
             <div class="row">
+                <div class="col-xl-3 col-sm-4">
+                    <div class="mb-3">
+                        <label class="card-radio-label mb-2">
+                            <input type="radio" name="currency" id="buycurrencyoption1" class="card-radio-input" >
+
+                            <div class="card-radio">
+                                <div>
+                                    <i class="mdi mdi-bitcoin font-size-24 text-warning align-middle me-2"></i>
+                                    <span>Total clients : {{ $getBuse->clients->count() }}</span>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <!-- end col -->
+
+                <div class="col-xl-3 col-sm-4">
+                    <div class="mb-3">
+                        <label class="card-radio-label mb-2">
+                            <input type="radio" name="currency" id="buycurrencyoption2" class="card-radio-input">
+
+                            <div class="card-radio">
+                                <div>
+                                    <i class="mdi mdi-ethereum font-size-24 text-primary align-middle me-2"></i>
+                                    <span>Tickets payes : {{$ticketPaye}}</span>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <!-- end col -->
+
+                <div class="col-xl-3 col-sm-4">
+                    <div class="mb-3">
+                        <label class="card-radio-label mb-2">
+                            <input type="radio" name="currency" id="buycurrencyoption3" class="card-radio-input">
+
+                            <div class="card-radio">
+                                <div>
+                                    <i class="mdi mdi-litecoin font-size-24 text-info align-middle me-2"></i>
+                                    <span>Tickets non payes : {{$ticketPaye}}</span>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <!-- end col -->
+                
+                <div class="col-xl-3 col-sm-4">
+                    <div class="mb-3">
+                        <label class="card-radio-label mb-2">
+                            <input type="radio" name="currency" id="buycurrencyoption4" class="card-radio-input" >
+
+                            <div class="card-radio">
+                                <div>
+                                    <i class="mdi mdi-bitcoin font-size-24 text-warning align-middle me-2"></i>
+                                    <span>Montant total : {{$montant}}</span>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <!-- end col -->
+
                 <div class="col-12">
+                    <h5 class="text-left"> Bus {{ $getBuse->matricule }} </h5>
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="btn btn-light text-center" style="width:100%;"> La liste de tout les client du buse {{ $getBuse->matricule }} </h4>
                             <p class="card-title-desc">
                                 <div class="button-items">
-                                    <a target="_blank" href="{{ route('agent.client.jour',$getBuse->id) }}" class="btn btn-primary waves-effect btn-label waves-light"><i class="fa fa-users label-icon"></i> Clients du jour <i class="mdi mdi-eye font-size-16"></i></a>
+                                    <a  href="{{ route('agent.client.jour',$getBuse->id) }}" class="btn btn-primary waves-effect btn-label waves-light"><i class="fa fa-users label-icon"></i> Clients du jour <i class="mdi mdi-eye font-size-16"></i></a>
                                 </div>
                             </p>
                             <table id="datatable"
@@ -77,7 +141,7 @@
                                         <th>Images</th>
                                         <th>Prenom & nom</th>
                                         <th>Telephone</th>
-                                        <th>Ville</th>
+                                        <th>Destination</th>
                                         <th>Date</th>
                                         <th>Prix</th>
                                         <th>Methode</th>
@@ -188,7 +252,8 @@
                         <a href="{{ route('agent.send_sms') }}" class="btn btn-primary text-white mt-2" style="width:100%;"> <i class="bx bxs-chat"> </i> Un message au absent du jour</a>
                         --}}
                     </div>
-                </div> <!-- end col -->
+                </div> 
+                <!-- end col -->
             </div> <!-- end row -->
 
         </div> <!-- container-fluid -->
