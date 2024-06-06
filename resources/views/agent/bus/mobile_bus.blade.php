@@ -10,18 +10,18 @@
                 <ul class="list-unstyled chat-list">
                     <li class="mb-4">
                         <div class="media">
-                            <div class="align-self-center me-3">
+                            <div class="align-self-center me-1">
                                 <div class="align-self-center me-3">
                                     <i class="fa fa-road" style="font-size: 25px;"></i>
                                 </div>
                             </div>
                             <div class="media-body overflow-hidden">
-                                <h5 class="text-truncate font-size-14 mb-1">{{$itineraire->name}}</h5>
-                                <p class="text-truncate mb-0">{{Auth::guard('agent')->user()->agence->slogan}}</p>
+                                <h5 class="text-truncate font-size-14 mb-1" style="font-weight: 600;">{{$itineraire->name}}</h5>
+                                <p class="text-truncate mb-0 font-size-11">{{Auth::guard('agent')->user()->agence->slogan}}</p>
                             </div>
-                            <div class="font-size-11 button-right-siege">
+                            <div class="font-size-11 button-right-siege font-size-10">
                                 <span> {{$itineraire->buses->count()}} Buse(s)</span>
-                                <span data-bs-toggle="modal" data-bs-target="#staticBackdrop"class="mt-3 badge bg-primary font-size-11"><i class="mdi mdi-plus me-1"></i>Ajouter</span>
+                                <span data-bs-toggle="modal" data-bs-target="#staticBackdrop"class="mt-2 badge badge-pill badge-soft-primary"><i class="bx bx-user-plus me-1"></i>Ajouter</span>
                             </div>
                         </div>
                     </li>
@@ -29,33 +29,25 @@
                 <br>
                 <ul class="list-unstyled chat-list" data-simplebar style="max-height: 410px;">
                     @foreach($itineraire->buses as $bus)
-                        <li class="mb-2" >
+                        <li class="mb-4" >
                             <div class="media">
-                                <div class="align-self-center me-3" onclick="location.href='{{ route('agent.client.show',$bus->id) }}'">
-                                    @if($bus->logo != Null)
-                                        <img src="{{Storage::url($bus->logo)}}" class="rounded-circle avatar-xs" alt="">
-                                    @else
-                                        <img src="{{asset('admin/assets/images/bus_agence.jpg')}}" class="rounded-circle avatar-xs" alt="">
-                                    @endif
+                                <div class="align-self-center me-1 mt-2" onclick="location.href='{{ route('agent.client.show',$bus->id) }}'">
+                                    <i class="bx bxs-bus font-size-20 avatar-xs"></i> 
                                 </div>
                                 
-                                <div class="media-body overflow-hidden mt-2">
+                                <div class="media-body overflow-hidden">
                                     <span class="span-chat-siege span-chat1">
-                                        <span class="text-truncate font-size-14" style="font-weight:600;">Bus {{ $bus->matricule }}</span>
-                                        <span onclick="location.href='{{ route('agent.client.show',$bus->id) }}'"  class="badge badge-pill badge-soft-primary mr-3"><i class="fa fa-users"></i> Tous</span>
-                                        <span onclick="location.href='{{route('agent.client.jour',$bus->id)}}'"  class="badge badge-pill badge-soft-success ml-3"><i class=""></i> Aujourdhuit</span>
+                                        <span class="text-truncate font-size-11" style="font-weight:600;">Bus {{ $bus->matricule }}</span>
                                     </span>
-                                    <p class="text-truncate mb-0 mt-2"> <i class="mdi mdi-arrow-right font-size-10"></i> {{ $bus->number }} {{ $bus->number == 1 ? 'er' : 'em' }} Buse | {{ $bus->inscrit }} Inscrit(s)</p>
+                                    <p class="text-truncate mb-0 font-size-10"> {{ $bus->number }} {{ $bus->number == 1 ? 'er' : 'em' }} Buse | {{ $bus->place }} place(s) | {{ $bus->inscrit }} Inscrit(s)</p>
                                 </div>
 
                                 <div class="font-size-12 button-right-siege mt-2">
-                                    <span class="span-chat-siege span-chat1 rounded-circle">
-                                        {{ $bus->place }} place(s)
-                                    </span>
-                                    
-                                    <span class="span-chat-siege span-chat1">
-                                        <span  data-bs-toggle="modal" data-bs-target="#staticBackdropeditbus-{{ $bus->id }}" class="text-success mr-2"><i class="mdi mdi-pencil font-size-18"></i></span>
-                                        <span  data-bs-toggle="modal" data-bs-target="#subscribeModalDeletebus-{{ $bus->id }}" class="text-danger"><i class="mdi mdi-delete font-size-18"></i></span>
+                                    <span class="span-chat-siege span-chat1 rounded-circle font-size-10">
+                                        <span onclick="location.href='{{ route('agent.client.show',$bus->id) }}'"  class="" style="margin-right:15px;"><i class="bx bx-border-all font-size-12"></i></span>
+                                        <span onclick="location.href='{{route('agent.client.jour',$bus->id)}}'"  class="" style="margin-right:15px;"><i class="bx bx-map-pin font-size-13"></i></span>
+                                        <span  data-bs-toggle="modal" data-bs-target="#staticBackdropeditbus-{{ $bus->id }}" class="text-success" style="margin-right:15px;"><i class="bx bx bx-edit font-size-13"></i></span>
+                                        <span  data-bs-toggle="modal" data-bs-target="#subscribeModalDeletebus-{{ $bus->id }}" class="text-danger"><i class="bx bx bx-trash-alt font-size-13"></i></span>
                                     </span>
                                 </div>
                             </div>

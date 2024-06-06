@@ -274,14 +274,14 @@
                             </div>
                             <div class="font-size-11 button-right-siege">
                                 <span>{{ $clients->count() }} Client(s)</span>
-                                <span data-bs-toggle="modal" data-bs-target="#staticBackdropAjoutClient" class="badge bg-primary mt-2 font-size-10"><i class="fa fa-plus"></i> Ajouter</span>
+                                <span data-bs-toggle="modal" data-bs-target="#staticBackdropAjoutClient" class="badge badge-pill badge-soft-primary mt-2 font-size-10"><i class="bx bx-user-plus"></i> Ajouter</span>
                             </div>
                         </div>
                     </li>
                 </ul>
                 <ul class="list-unstyled chat-list">
                         <div class="font-size-14 mb-2">
-                            <span onclick="location.href='{{route('agent.client.jour',$getBuse->id)}}'" class="badge bg-info btn btn-block" style="width:100%;"><i class="fa fa-users"></i> Clients du Jour</span>
+                            <span onclick="location.href='{{route('agent.client.jour',$getBuse->id)}}'" class="badge badge-pill badge-soft-info" style="width:100%;"><i class="bx bx-user"></i> Clients du Jour</span>
                         </div>
                     <br>
                     @foreach($clients as $client)
@@ -302,33 +302,37 @@
                                 </div>
                                 
                                 <div class="media-body overflow-hidden">
-                                    <h5 class="text-truncate font-size-14 mt-2" style="font-weight:600;">
+                                    <h5 class="text-truncate font-size-11" style="font-weight:600;">
                                         @if($client->name == null)
                                             {{ $client->customer->name }}
                                         @else
                                             {{ $client->name }}
                                         @endif
                                     </h5>
-                                    <p class="text-truncate mb-0"> <i class="fa fa-mobile font-size-10"></i>
-                                        @if($client->name == null)
-                                            {{ $client->customer->phone }}
-                                        @else
-                                            {{ $client->phone }}
-                                        @endif
+                                    <p class="text-truncate mb-0 font-size-10">
+                                        <span>
+                                            <i class="bx bx-mobile-alt"></i>
+                                            @if($client->name == null)
+                                                {{ $client->customer->phone }}
+                                            @else
+                                                {{ $client->phone }}
+                                            @endif
+                                        </span>
+                                        |
+                                        <span> <i class="bx bx-map"></i> {{$client->ville->name}}</span>
                                     </p>
                                 </div>
                                 <div class="font-size-12 button-right-siege">
-                                    @if($client->amount == $client->ville->amount)
-                                        <span class="span-chat-siege span-chat1 badge bg-success">
-                                            {{ $client->amount }} f Payé
-                                        </span>
-                                    @else
-                                        <span class="span-chat-siege span-chat1 badge bg-warning">
-                                            {{ $client->amount }} f Non payé
-                                        </span>
-                                    @endif
-                                    <span class="span-chat-siege badge bg-info" data-bs-toggle="modal" data-bs-target="#subscribeModalagenceDetails-{{$client->id}}">
-                                        <i class="fa fa-eye"></i> Voire
+                                    <span class="span-chat-siege span-chat1 font-size-10">
+                                        {{ $client->getAmount() }} |
+                                        @if($client->amount == $client->ville->amount)
+                                            <span class="text-success ml-3">Tickét payé</span>
+                                        @else
+                                            <span class="text-warning ml-3">Tickét non payé</span>
+                                        @endif
+                                    </span>
+                                    <span class="span-chat-siege font-size-10" data-bs-toggle="modal" data-bs-target="#subscribeModalagenceDetails-{{$client->id}}">
+                                        <span class="badge badge-pill badge-soft-info">Details <i class="bx bx-show"></i></span> 
                                     </span>
                                 </div>
                             </div>

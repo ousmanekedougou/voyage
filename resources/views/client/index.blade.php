@@ -176,12 +176,11 @@
                     <li class="active">
                         <a href="#">
                             <div class="media">
-
                                 <div class="align-self-center me-3">
                                     <img src="{{asset('admin/assets/images/icone-ticke.png')}}" class="rounded-circle avatar-xs" alt="">
                                 </div>
                                 <div class="media-body overflow-hidden">
-                                    <h5 class="text-truncate font-size-14 mb-1">Bonjour {{ Auth::guard('client')->user()->name }}</h5>
+                                    <h5 class="text-truncate font-size-14 mb-1">{{ Auth::guard('client')->user()->name }}</h5>
                                     <p class="text-truncate mb-0">Bienvenue sur TouCki</p>
                                 </div>
                                 <div class="font-size-11">Agences ({{ $agences->count() }}) </div>
@@ -204,8 +203,8 @@
                     {{-- data-simplebar style="max-height: 410px;" --}}
                 @foreach($agences as $agence)
                     <li class="mb-2">
-                        <div class="media" onclick="location.href='{{route('customer.agence.show',$agence->slug)}}'">
-                            <div class="align-self-center me-3">
+                        <div class="media">
+                            <div class="align-self-center me-3" onclick="location.href='{{route('customer.agence.show',$agence->slug)}}'">
                                     <img src="
 
                                     @if($agence->image != null)
@@ -214,19 +213,20 @@
                                             https://ui-avatars.com/api/?name={{$agence->name}}
                                     @endif
                                     
-                                    " class="rounded-circle avatar-sm" alt="">
+                                    " class="rounded-circle avatar-xs" alt="">
                             </div>
                             
-                            <div class="media-body overflow-hidden">
-                                <h5 class="text-truncate font-size-14 mb-1" style="font-weight:600;">{{ $agence->name }}</h5>
-                                <p class="text-truncate mb-0"> <i class="fa fa-mobile"></i> {{ $agence->phone }}</p>
+                            <div class="media-body overflow-hidden" onclick="location.href='{{route('customer.agence.show',$agence->slug)}}'">
+                                <h5 class="text-truncate font-size-11 mb-1" style="font-weight:600;">{{ $agence->name }}</h5>
+                                <p class="text-truncate mb-0 font-size-10"> <i class="bx bx-mobile-alt "></i> {{ $agence->phone }}</p>
                             </div>
-                            <div class="font-size-11 button-right-siege">
-                                <span class="span-chat-siege span-chat1 rounded-circle">
+                            
+                            <div class="">
+                                <span class="span-chat-siege span-chat1 rounded-circle font-size-10" style="margin-right: 5px;">
                                     {{ $agence->sieges->count() }} Siege(s)
                                 </span>
-                                <span class="span-chat-siege span-chat1 font-size-11 badge badge-pill badge-soft-secondary" onclick="location.href='{{route('customer.agence.about',$agence->slug)}}'">
-                                    <i class="bx bx-file"></i>Infos
+                                <span class="span-chat-siege span-chat1 text-info font-size-13" onclick="location.href='{{route('customer.agence.about',$agence->slug)}}'">
+                                    <i class="bx bx-info-circle"></i>
                                 </span>
                             </div>
                         </div>

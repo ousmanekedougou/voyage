@@ -121,9 +121,8 @@
                                 <h5 class="text-truncate font-size-14 mb-1">{{$agence->name}}</h5>
                                 <p class="text-truncate mb-0">{{$agence->slogan}}</p>
                             </div>
-                            <div class="font-size-11">
-                                <a href="{{ route('customer.agence.about',$agence->slug) }}" class="badge badge-pill badge-soft-secondary font-size-10 mt-1 p-1 "> <i class="bx bx-file"></i> A propos</a>
-                            </div>
+                            <a href="{{ route('customer.agence.about',$agence->slug) }}" class="badge badge-pill badge-soft-secondary font-size-10 p-1 "> <i class="bx bx-info-circle"></i>Infos</a>
+                            
                         </div>
                     </li>
                 </ul>
@@ -140,20 +139,20 @@
                                             {{Storage::url($siege->logo)}}
                                         @else
                                                 https://ui-avatars.com/api/?name=Siege+{{$siege->name}}
-                                        @endif" class="rounded-circle avatar-sm" alt="">
+                                        @endif" class="rounded-circle avatar-xs" alt="">
                                 </div>
                                 
                                 <div class="media-body overflow-hidden">
-                                    <h5 class="text-truncate font-size-14 mb-1">Siege de {{ $siege->name }}</h5>
-                                    <p class="text-truncate mb-0"> <i class="fa fa-mobile"></i> {{ $siege->phone }}</p>
+                                    <h5 class="text-truncate font-size-11 mb-1">Siege de {{ $siege->name }}</h5>
+                                    <p class="mb-0 font-size-10"> <i class="bx bx-mobile-alt"></i> {{ $siege->phone }}</p>
                                 </div>
-                                <div class="font-size-12 button-right-siege">
-                                    <span class="span-chat-siege span-chat1 badge badge-pill badge-soft-success mb-2" onclick="onclick().event.preventDefault()" data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$siege->id}}">
-                                        S'inscrire <i class="fa fa-user-plus"></i>
+                                <div class="font-size-12">
+                                    <span style="margin-right: 5px;" class="span-chat-siege span-chat1 badge badge-pill badge-soft-success" onclick="onclick().event.preventDefault()" data-bs-toggle="modal" data-bs-target="#staticBackdrop-{{$siege->id}}">
+                                         <i class="bx bx-user-plus"></i>
                                     </span>
                                     
                                     <span class="span-chat-siege badge badge-pill badge-soft-primary" onclick="location.href='{{route('customer.colis.edit',$siege->id)}}'">
-                                        Colis reçue <i class="fa fa-suitcase-rolling"></i>
+                                         <i class="bx bx-shopping-bag"></i>
                                     </span>
                                 </div>
                             </div>

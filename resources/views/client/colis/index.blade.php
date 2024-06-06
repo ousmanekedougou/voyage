@@ -201,14 +201,16 @@
                                 </tr>
                                 <tr>
                                     <td class="td-mobile">Reference : </td>
-                                    <td class="td-mobile text-uppercase">{{$coliClient->ville->name}}_{{$coliClient->code_validation}}</td>
+                                    <td class="td-mobile">{{$coliClient->ville->name}}-{{$coliClient->code_validation}}</td>
                                 </tr>
                                 
                                 <tr>
-                                    <td class="td-mobile">Désc :</td>
-                                    <td class="td-mobile" style="overflow: hidden;">
-                                        {{ $coliClient->detail }} 
-                                    </td>
+                                    <td class="td-mobile">Déscription :</td>
+                                    <tr>
+                                        <td class="td-mobile" style="overflow: hidden;">
+                                            {{ $coliClient->detail }} 
+                                        </td>
+                                    </tr>
                                 </tr>
                                 <tr>
                                     <td class="td-mobile">Envoyer a :</td>

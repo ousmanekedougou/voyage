@@ -223,7 +223,6 @@
                         <li class="active">
                             <a href="#">
                                 <div class="media">
-
                                     <div class="align-self-center me-3">
                                         <img src="{{asset('admin/assets/images/icone-ticke.png')}}" class="rounded-circle avatar-xs" alt="">
                                     </div>
